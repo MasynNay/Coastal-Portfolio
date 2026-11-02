@@ -1,0 +1,68 @@
+[
+  {
+    "key": "SideRun1",
+    "rows": [
+      {
+        "asset": "masyn-run",
+        "row": 2
+      },
+      {
+        "asset": "mi-shell-run",
+        "row": 2
+      },
+      {
+        "asset": "ezra-run",
+        "row": 2
+      },
+      {
+        "asset": "fallyn-run",
+        "row": 2
+      },
+      {
+        "asset": "fitzgerald-run",
+        "row": 2
+      },
+      {
+        "asset": "costume-skills-run",
+        "row": 2
+      },
+      {
+        "asset": "costume-portfolio-run",
+        "row": 2
+      }
+    ],
+    "reference": "/home/lotus/Projects/masynnay.com/docs/source-assets/animation/references/SideRun1.png",
+    "prompt": "Use case: identity-preserve. NEW production eight-frame RUN animation atlas. Input is an IDENTITY/COSTUME/STYLE reference only: its legs are wrong and must be REDRAWN. Preserve each row's character face, hair, clothing, proportions, adult beard where shown, glasses and colors. EXACTLY 8 COLUMNS and 7 ROWS. All characters face WEST / LEFT profile throughout. Same polished detailed shaded pixel art, clean transparent background. DO NOT repeat the same stretched-leg silhouette across the row. This is the essential correction: an actual run needs both widely split legs AND tightly gathered passing legs, with heel kick, knee lift, bent opposing elbows and two airborne phases. Columns in order: 1 LEFT foot forward contacting, right leg trailing; 2 LEFT knee compresses under hip, RIGHT heel curls up behind; 3 RIGHT knee drives forward, LEFT foot directly under hip (legs CLOSE TOGETHER); 4 RIGHT leg extending forward, LEFT heel high behind, airborne; 5 RIGHT foot forward contacting, LEFT leg trailing; 6 RIGHT knee compresses under hip, LEFT heel curls up behind; 7 LEFT knee drives forward, RIGHT foot under hip (legs CLOSE TOGETHER); 8 LEFT leg extends forward, RIGHT heel high behind, airborne. In columns3 and7 the silhouette must be visibly narrower than columns1/5. Hands alternate forward/back opposite legs. Torso leans forward, head stable, slight cloth/hair follow-through. Stable equal body size/feet baseline and generous margins. No scenery, text, grid, floor shadows, stray particles, no 3D, no new costume changes. Row identities in exact supplied order: masyn-run, mi-shell-run, ezra-run, fallyn-run, fitzgerald-run, costume-skills-run, costume-portfolio-run. 3072x2048 sheet."
+  },
+  {
+    "key": "SideRun2",
+    "rows": [
+      {
+        "asset": "costume-resume-run",
+        "row": 2
+      },
+      {
+        "asset": "costume-contact-run",
+        "row": 2
+      },
+      {
+        "asset": "costume-airbender-run",
+        "row": 2
+      },
+      {
+        "asset": "costume-ezra-spider-run",
+        "row": 2
+      },
+      {
+        "asset": "costume-fallyn-ladybug-run",
+        "row": 2
+      },
+      {
+        "asset": "costume-fitzgerald-spider-run",
+        "row": 2
+      }
+    ],
+    "reference": "/home/lotus/Projects/masynnay.com/docs/source-assets/animation/references/SideRun2.png",
+    "prompt": "Use case: identity-preserve. NEW production eight-frame RUN animation atlas. Input is an IDENTITY/COSTUME/STYLE reference only: its legs are wrong and must be REDRAWN. Preserve each row's character face, hair, clothing, proportions, adult beard where shown, glasses and colors. EXACTLY 8 COLUMNS and 6 ROWS. All characters face WEST / LEFT profile throughout. Same polished detailed shaded pixel art, clean transparent background. DO NOT repeat the same stretched-leg silhouette across the row. This is the essential correction: an actual run needs both widely split legs AND tightly gathered passing legs, with heel kick, knee lift, bent opposing elbows and two airborne phases. Columns in order: 1 LEFT foot forward contacting, right leg trailing; 2 LEFT knee compresses under hip, RIGHT heel curls up behind; 3 RIGHT knee drives forward, LEFT foot directly under hip (legs CLOSE TOGETHER); 4 RIGHT leg extending forward, LEFT heel high behind, airborne; 5 RIGHT foot forward contacting, LEFT leg trailing; 6 RIGHT knee compresses under hip, LEFT heel curls up behind; 7 LEFT knee drives forward, RIGHT foot under hip (legs CLOSE TOGETHER); 8 LEFT leg extends forward, RIGHT heel high behind, airborne. In columns3 and7 the silhouette must be visibly narrower than columns1/5. Hands alternate forward/back opposite legs. Torso leans forward, head stable, slight cloth/hair follow-through. Stable equal body size/feet baseline and generous margins. No scenery, text, grid, floor shadows, stray particles, no 3D, no new costume changes. Row identities in exact supplied order: costume-resume-run, costume-contact-run, costume-airbender-run, costume-ezra-spider-run, costume-fallyn-ladybug-run, costume-fitzgerald-spider-run. 3072x2048 sheet."
+  }
+]

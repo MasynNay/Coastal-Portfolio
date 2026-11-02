@@ -1,0 +1,1837 @@
+{
+  "masyn": {
+    "type": "drawn",
+    "action": "walk",
+    "views": {
+      "0": "south",
+      "1": "southwest",
+      "2": "west",
+      "3": "northwest",
+      "4": "north"
+    }
+  },
+  "masyn-run": {
+    "type": "drawn",
+    "action": "run",
+    "views": {
+      "0": "south",
+      "1": "southwest",
+      "2": "west",
+      "3": "northwest",
+      "4": "north"
+    }
+  },
+  "masyn-surf": {
+    "type": "drawn",
+    "file": "people/masyn/exploring.png",
+    "group": "exploring",
+    "action": "surf"
+  },
+  "masyn-fish": {
+    "type": "drawn",
+    "file": "people/masyn/fishing.png",
+    "group": "fishing",
+    "action": "fish"
+  },
+  "masyn-fish-surf": {
+    "type": "drawn",
+    "file": "people/masyn/fishing.png",
+    "group": "fishing",
+    "action": "fish-surf"
+  },
+  "masyn-call": {
+    "file": "actions/Details-masyn.png",
+    "rows": 4,
+    "select": [
+      0
+    ],
+    "inbetweens": {
+      "0": {
+        "file": "animation/Travel1.png",
+        "rows": 10,
+        "row": 0
+      }
+    },
+    "frameMs": 50.0
+  },
+  "masyn-ride": {
+    "file": "actions/Details-masyn.png",
+    "rows": 4,
+    "select": [
+      1
+    ],
+    "inbetweens": {
+      "0": {
+        "file": "animation/Travel1.png",
+        "rows": 10,
+        "row": 1
+      }
+    },
+    "frameMs": 50.0
+  },
+  "masyn-land": {
+    "file": "actions/Details-masyn.png",
+    "rows": 4,
+    "select": [
+      2
+    ],
+    "inbetweens": {
+      "0": {
+        "file": "animation/Travel1.png",
+        "rows": 10,
+        "row": 2
+      }
+    },
+    "frameMs": 50.0
+  },
+  "masyn-emote": {
+    "file": "actions/Details-masyn.png",
+    "rows": 4,
+    "select": [
+      3
+    ],
+    "inbetweens": {
+      "0": {
+        "file": "animation/Travel1.png",
+        "rows": 10,
+        "row": 3
+      }
+    },
+    "frameMs": 80.0
+  },
+  "masyn-bike-acro": {
+    "type": "drawn",
+    "file": "people/masyn/exploring.png",
+    "group": "exploring",
+    "action": "bike-acro"
+  },
+  "masyn-bike-mach": {
+    "type": "drawn",
+    "file": "people/masyn/exploring.png",
+    "group": "exploring",
+    "action": "bike-mach"
+  },
+  "mi-shell": {
+    "type": "drawn",
+    "action": "walk",
+    "views": {
+      "0": "south",
+      "1": "southwest",
+      "2": "west",
+      "3": "northwest",
+      "4": "north"
+    }
+  },
+  "mi-shell-run": {
+    "type": "drawn",
+    "action": "run",
+    "views": {
+      "0": "south",
+      "1": "southwest",
+      "2": "west",
+      "3": "northwest",
+      "4": "north"
+    }
+  },
+  "mi-shell-surf": {
+    "type": "drawn",
+    "file": "people/mi-shell/exploring.png",
+    "group": "exploring",
+    "action": "surf"
+  },
+  "mi-shell-fish": {
+    "type": "drawn",
+    "file": "people/mi-shell/fishing.png",
+    "group": "fishing",
+    "action": "fish"
+  },
+  "mi-shell-fish-surf": {
+    "type": "drawn",
+    "file": "people/mi-shell/fishing.png",
+    "group": "fishing",
+    "action": "fish-surf"
+  },
+  "mi-shell-call": {
+    "file": "actions/Details-mi-shell.png",
+    "rows": 4,
+    "select": [
+      0
+    ],
+    "inbetweens": {
+      "0": {
+        "file": "animation/Travel1.png",
+        "rows": 10,
+        "row": 4
+      }
+    },
+    "frameMs": 50.0
+  },
+  "mi-shell-ride": {
+    "file": "actions/Details-mi-shell.png",
+    "rows": 4,
+    "select": [
+      1
+    ],
+    "inbetweens": {
+      "0": {
+        "file": "animation/Travel1.png",
+        "rows": 10,
+        "row": 5
+      }
+    },
+    "frameMs": 50.0
+  },
+  "mi-shell-land": {
+    "file": "actions/Details-mi-shell.png",
+    "rows": 4,
+    "select": [
+      2
+    ],
+    "inbetweens": {
+      "0": {
+        "file": "animation/Travel1.png",
+        "rows": 10,
+        "row": 6
+      }
+    },
+    "frameMs": 50.0
+  },
+  "mi-shell-emote": {
+    "file": "actions/Details-mi-shell.png",
+    "rows": 4,
+    "select": [
+      3
+    ],
+    "inbetweens": {
+      "0": {
+        "file": "animation/Travel1.png",
+        "rows": 10,
+        "row": 7
+      }
+    },
+    "frameMs": 80.0
+  },
+  "mi-shell-bike-acro": {
+    "type": "drawn",
+    "file": "people/mi-shell/exploring.png",
+    "group": "exploring",
+    "action": "bike-acro"
+  },
+  "mi-shell-bike-mach": {
+    "type": "drawn",
+    "file": "people/mi-shell/exploring.png",
+    "group": "exploring",
+    "action": "bike-mach"
+  },
+  "ezra": {
+    "type": "drawn",
+    "action": "walk",
+    "views": {
+      "0": "south",
+      "1": "southwest",
+      "2": "west",
+      "3": "northwest",
+      "4": "north"
+    }
+  },
+  "ezra-run": {
+    "type": "drawn",
+    "action": "run",
+    "views": {
+      "0": "south",
+      "1": "southwest",
+      "2": "west",
+      "3": "northwest",
+      "4": "north"
+    }
+  },
+  "ezra-surf": {
+    "type": "drawn",
+    "file": "people/ezra/exploring.png",
+    "group": "exploring",
+    "action": "surf"
+  },
+  "ezra-fish": {
+    "type": "drawn",
+    "file": "people/ezra/fishing.png",
+    "group": "fishing",
+    "action": "fish"
+  },
+  "ezra-fish-surf": {
+    "type": "drawn",
+    "file": "people/ezra/fishing.png",
+    "group": "fishing",
+    "action": "fish-surf"
+  },
+  "ezra-call": {
+    "file": "actions/Details-ezra.png",
+    "rows": 4,
+    "select": [
+      0
+    ],
+    "inbetweens": {
+      "0": {
+        "file": "animation/Travel1.png",
+        "rows": 10,
+        "row": 8
+      }
+    },
+    "frameMs": 50.0
+  },
+  "ezra-ride": {
+    "file": "actions/Details-ezra.png",
+    "rows": 4,
+    "select": [
+      1
+    ],
+    "inbetweens": {
+      "0": {
+        "file": "animation/Travel1.png",
+        "rows": 10,
+        "row": 9
+      }
+    },
+    "frameMs": 50.0
+  },
+  "ezra-land": {
+    "file": "actions/Details-ezra.png",
+    "rows": 4,
+    "select": [
+      2
+    ],
+    "inbetweens": {
+      "0": {
+        "file": "animation/Travel2.png",
+        "rows": 10,
+        "row": 0
+      }
+    },
+    "frameMs": 50.0
+  },
+  "ezra-emote": {
+    "file": "actions/Details-ezra.png",
+    "rows": 4,
+    "select": [
+      3
+    ],
+    "inbetweens": {
+      "0": {
+        "file": "animation/Travel2.png",
+        "rows": 10,
+        "row": 1
+      }
+    },
+    "frameMs": 80.0
+  },
+  "ezra-bike-acro": {
+    "type": "drawn",
+    "file": "people/ezra/exploring.png",
+    "group": "exploring",
+    "action": "bike-acro"
+  },
+  "ezra-bike-mach": {
+    "type": "drawn",
+    "file": "people/ezra/exploring.png",
+    "group": "exploring",
+    "action": "bike-mach"
+  },
+  "fallyn": {
+    "type": "drawn",
+    "action": "walk",
+    "views": {
+      "0": "south",
+      "1": "southwest",
+      "2": "west",
+      "3": "northwest",
+      "4": "north"
+    }
+  },
+  "fallyn-run": {
+    "type": "drawn",
+    "action": "run",
+    "views": {
+      "0": "south",
+      "1": "southwest",
+      "2": "west",
+      "3": "northwest",
+      "4": "north"
+    }
+  },
+  "fallyn-surf": {
+    "type": "drawn",
+    "file": "people/fallyn/exploring.png",
+    "group": "exploring",
+    "action": "surf"
+  },
+  "fallyn-fish": {
+    "type": "drawn",
+    "file": "people/fallyn/fishing.png",
+    "group": "fishing",
+    "action": "fish"
+  },
+  "fallyn-fish-surf": {
+    "type": "drawn",
+    "file": "people/fallyn/fishing.png",
+    "group": "fishing",
+    "action": "fish-surf"
+  },
+  "fallyn-call": {
+    "file": "actions/Details-fallyn.png",
+    "rows": 4,
+    "select": [
+      0
+    ],
+    "inbetweens": {
+      "0": {
+        "file": "animation/Travel2.png",
+        "rows": 10,
+        "row": 2
+      }
+    },
+    "frameMs": 50.0
+  },
+  "fallyn-ride": {
+    "file": "actions/Details-fallyn.png",
+    "rows": 4,
+    "select": [
+      1
+    ],
+    "inbetweens": {
+      "0": {
+        "file": "animation/Travel2.png",
+        "rows": 10,
+        "row": 3
+      }
+    },
+    "frameMs": 50.0
+  },
+  "fallyn-land": {
+    "file": "actions/Details-fallyn.png",
+    "rows": 4,
+    "select": [
+      2
+    ],
+    "inbetweens": {
+      "0": {
+        "file": "animation/Travel2.png",
+        "rows": 10,
+        "row": 4
+      }
+    },
+    "frameMs": 50.0
+  },
+  "fallyn-emote": {
+    "file": "actions/Details-fallyn.png",
+    "rows": 4,
+    "select": [
+      3
+    ],
+    "inbetweens": {
+      "0": {
+        "file": "animation/Travel2.png",
+        "rows": 10,
+        "row": 5
+      }
+    },
+    "frameMs": 80.0
+  },
+  "fallyn-bike-acro": {
+    "type": "drawn",
+    "file": "people/fallyn/exploring.png",
+    "group": "exploring",
+    "action": "bike-acro"
+  },
+  "fallyn-bike-mach": {
+    "type": "drawn",
+    "file": "people/fallyn/exploring.png",
+    "group": "exploring",
+    "action": "bike-mach"
+  },
+  "fitzgerald": {
+    "type": "drawn",
+    "action": "walk",
+    "views": {
+      "0": "south",
+      "1": "southwest",
+      "2": "west",
+      "3": "northwest",
+      "4": "north"
+    }
+  },
+  "fitzgerald-run": {
+    "type": "drawn",
+    "action": "run",
+    "views": {
+      "0": "south",
+      "1": "southwest",
+      "2": "west",
+      "3": "northwest",
+      "4": "north"
+    }
+  },
+  "fitzgerald-surf": {
+    "type": "drawn",
+    "file": "people/fitzgerald/exploring.png",
+    "group": "exploring",
+    "action": "surf"
+  },
+  "fitzgerald-fish": {
+    "type": "drawn",
+    "file": "people/fitzgerald/fishing.png",
+    "group": "fishing",
+    "action": "fish"
+  },
+  "fitzgerald-fish-surf": {
+    "type": "drawn",
+    "file": "people/fitzgerald/fishing.png",
+    "group": "fishing",
+    "action": "fish-surf"
+  },
+  "fitzgerald-call": {
+    "file": "actions/Details-fitzgerald.png",
+    "rows": 4,
+    "select": [
+      0
+    ],
+    "inbetweens": {
+      "0": {
+        "file": "animation/Travel2.png",
+        "rows": 10,
+        "row": 6
+      }
+    },
+    "frameMs": 50.0
+  },
+  "fitzgerald-ride": {
+    "file": "actions/Details-fitzgerald.png",
+    "rows": 4,
+    "select": [
+      1
+    ],
+    "inbetweens": {
+      "0": {
+        "file": "animation/Travel2.png",
+        "rows": 10,
+        "row": 7
+      }
+    },
+    "frameMs": 50.0
+  },
+  "fitzgerald-land": {
+    "file": "actions/Details-fitzgerald.png",
+    "rows": 4,
+    "select": [
+      2
+    ],
+    "inbetweens": {
+      "0": {
+        "file": "animation/Travel2.png",
+        "rows": 10,
+        "row": 8
+      }
+    },
+    "frameMs": 50.0
+  },
+  "fitzgerald-emote": {
+    "file": "actions/Details-fitzgerald.png",
+    "rows": 4,
+    "select": [
+      3
+    ],
+    "inbetweens": {
+      "0": {
+        "file": "animation/Travel2.png",
+        "rows": 10,
+        "row": 9
+      }
+    },
+    "frameMs": 80.0
+  },
+  "fitzgerald-bike-acro": {
+    "type": "drawn",
+    "file": "people/fitzgerald/exploring.png",
+    "group": "exploring",
+    "action": "bike-acro"
+  },
+  "fitzgerald-bike-mach": {
+    "type": "drawn",
+    "file": "people/fitzgerald/exploring.png",
+    "group": "exploring",
+    "action": "bike-mach"
+  },
+  "costume-skills": {
+    "type": "drawn",
+    "action": "walk",
+    "views": {
+      "0": "south",
+      "1": "southwest",
+      "2": "west",
+      "3": "northwest",
+      "4": "north"
+    }
+  },
+  "costume-portfolio": {
+    "type": "drawn",
+    "action": "walk",
+    "views": {
+      "0": "south",
+      "1": "southwest",
+      "2": "west",
+      "3": "northwest",
+      "4": "north"
+    }
+  },
+  "costume-resume": {
+    "type": "drawn",
+    "action": "walk",
+    "views": {
+      "0": "south",
+      "1": "southwest",
+      "2": "west",
+      "3": "northwest",
+      "4": "north"
+    }
+  },
+  "costume-contact": {
+    "type": "drawn",
+    "action": "walk",
+    "views": {
+      "0": "south",
+      "1": "southwest",
+      "2": "west",
+      "3": "northwest",
+      "4": "north"
+    }
+  },
+  "costume-airbender": {
+    "type": "drawn",
+    "action": "walk",
+    "views": {
+      "0": "south",
+      "1": "southwest",
+      "2": "west",
+      "3": "northwest",
+      "4": "north"
+    }
+  },
+  "link": {
+    "type": "drawn",
+    "action": "walk",
+    "views": {
+      "0": "south",
+      "1": "southwest",
+      "2": "west",
+      "3": "northwest",
+      "4": "north"
+    }
+  },
+  "costume-ezra-spider": {
+    "type": "drawn",
+    "action": "walk",
+    "views": {
+      "0": "south",
+      "1": "southwest",
+      "2": "west",
+      "3": "northwest",
+      "4": "north"
+    }
+  },
+  "costume-fallyn-ladybug": {
+    "type": "drawn",
+    "action": "walk",
+    "views": {
+      "0": "south",
+      "1": "southwest",
+      "2": "west",
+      "3": "northwest",
+      "4": "north"
+    }
+  },
+  "costume-fitzgerald-spider": {
+    "type": "drawn",
+    "action": "walk",
+    "views": {
+      "0": "south",
+      "1": "southwest",
+      "2": "west",
+      "3": "northwest",
+      "4": "north"
+    }
+  },
+  "ability-ocarina": {
+    "file": "people/link/ability.png",
+    "rows": 4,
+    "columns": 8,
+    "frameMs": 80,
+    "appearance": "link"
+  },
+  "ability-trident": {
+    "file": "actions/Action-trident.png",
+    "rows": 4,
+    "inbetweens": {
+      "0": {
+        "file": "animation/Abilities1.png",
+        "rows": 10,
+        "row": 0
+      },
+      "1": {
+        "file": "animation/Abilities1.png",
+        "rows": 10,
+        "row": 1
+      },
+      "2": {
+        "file": "animation/Abilities1.png",
+        "rows": 10,
+        "row": 2
+      }
+    },
+    "frameMs": 50.0
+  },
+  "ability-spell": {
+    "file": "actions/Action-spell.png",
+    "rows": 4,
+    "inbetweens": {
+      "0": {
+        "file": "animation/Abilities1.png",
+        "rows": 10,
+        "row": 3
+      },
+      "1": {
+        "file": "animation/Abilities1.png",
+        "rows": 10,
+        "row": 4
+      },
+      "2": {
+        "file": "animation/Abilities1.png",
+        "rows": 10,
+        "row": 5
+      }
+    },
+    "frameMs": 50.0
+  },
+  "ability-pokeball": {
+    "file": "people/costume-portfolio/ability.png",
+    "rows": 4,
+    "columns": 8,
+    "frameMs": 50,
+    "appearance": "costume-portfolio"
+  },
+  "ability-arrow": {
+    "file": "actions/Action-arrow.png",
+    "rows": 4,
+    "inbetweens": {
+      "0": {
+        "file": "animation/Abilities1.png",
+        "rows": 10,
+        "row": 9
+      },
+      "1": {
+        "file": "animation/Abilities2.png",
+        "rows": 5,
+        "row": 0
+      },
+      "2": {
+        "file": "animation/Abilities2.png",
+        "rows": 5,
+        "row": 1
+      }
+    },
+    "frameMs": 50.0,
+    "replacements": {
+      "0": {
+        "file": "actions/ArcherVertical.png",
+        "rows": 2,
+        "row": 0,
+        "columns": 8
+      },
+      "1": {
+        "file": "actions/ArcherVertical.png",
+        "rows": 2,
+        "row": 1,
+        "columns": 8
+      }
+    }
+  },
+  "ability-money": {
+    "file": "actions/Action-money.png",
+    "rows": 4,
+    "inbetweens": {
+      "0": {
+        "file": "animation/Abilities2.png",
+        "rows": 5,
+        "row": 2
+      },
+      "1": {
+        "file": "animation/Abilities2.png",
+        "rows": 5,
+        "row": 3
+      },
+      "2": {
+        "file": "animation/Abilities2.png",
+        "rows": 5,
+        "row": 4
+      }
+    },
+    "frameMs": 50.0
+  },
+  "ability-glide": {
+    "file": "actions/Gliding.png",
+    "rows": 8,
+    "inbetweens": {
+      "0": {
+        "file": "animation/Glider1.png",
+        "rows": 5,
+        "row": 0
+      },
+      "1": {
+        "file": "animation/Glider1.png",
+        "rows": 5,
+        "row": 1
+      },
+      "2": {
+        "file": "animation/Glider1.png",
+        "rows": 5,
+        "row": 2
+      },
+      "3": {
+        "file": "animation/Glider1.png",
+        "rows": 5,
+        "row": 3
+      },
+      "4": {
+        "file": "animation/Glider1.png",
+        "rows": 5,
+        "row": 4
+      }
+    },
+    "frameMs": 60.0
+  },
+  "glide-launch": {
+    "file": "actions/GliderTransitions.png",
+    "rows": 8,
+    "select": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "inbetweens": {
+      "0": {
+        "file": "animation/GliderLanding1.png",
+        "rows": 6,
+        "row": 0
+      },
+      "1": {
+        "file": "animation/GliderLanding1.png",
+        "rows": 6,
+        "row": 1
+      },
+      "2": {
+        "file": "animation/GliderLanding1.png",
+        "rows": 6,
+        "row": 2
+      }
+    },
+    "frameMs": 50.0
+  },
+  "glide-land": {
+    "file": "actions/GliderTransitions.png",
+    "rows": 8,
+    "select": [
+      4,
+      5,
+      6,
+      7
+    ],
+    "inbetweens": {
+      "0": {
+        "file": "animation/GliderLanding1.png",
+        "rows": 6,
+        "row": 3
+      },
+      "1": {
+        "file": "animation/GliderLanding1.png",
+        "rows": 6,
+        "row": 4
+      },
+      "2": {
+        "file": "animation/GliderLanding1.png",
+        "rows": 6,
+        "row": 5
+      }
+    },
+    "frameMs": 50.0
+  },
+  "costume-skills-run": {
+    "type": "drawn",
+    "action": "run",
+    "views": {
+      "0": "south",
+      "1": "southwest",
+      "2": "west",
+      "3": "northwest",
+      "4": "north"
+    }
+  },
+  "costume-portfolio-run": {
+    "type": "drawn",
+    "action": "run",
+    "views": {
+      "0": "south",
+      "1": "southwest",
+      "2": "west",
+      "3": "northwest",
+      "4": "north"
+    }
+  },
+  "costume-resume-run": {
+    "type": "drawn",
+    "action": "run",
+    "views": {
+      "0": "south",
+      "1": "southwest",
+      "2": "west",
+      "3": "northwest",
+      "4": "north"
+    }
+  },
+  "costume-contact-run": {
+    "type": "drawn",
+    "action": "run",
+    "views": {
+      "0": "south",
+      "1": "southwest",
+      "2": "west",
+      "3": "northwest",
+      "4": "north"
+    }
+  },
+  "costume-airbender-run": {
+    "type": "drawn",
+    "action": "run",
+    "views": {
+      "0": "south",
+      "1": "southwest",
+      "2": "west",
+      "3": "northwest",
+      "4": "north"
+    }
+  },
+  "link-run": {
+    "type": "drawn",
+    "action": "run",
+    "views": {
+      "0": "south",
+      "1": "southwest",
+      "2": "west",
+      "3": "northwest",
+      "4": "north"
+    }
+  },
+  "costume-ezra-spider-run": {
+    "type": "drawn",
+    "action": "run",
+    "views": {
+      "0": "south",
+      "1": "southwest",
+      "2": "west",
+      "3": "northwest",
+      "4": "north"
+    }
+  },
+  "costume-fallyn-ladybug-run": {
+    "type": "drawn",
+    "action": "run",
+    "views": {
+      "0": "south",
+      "1": "southwest",
+      "2": "west",
+      "3": "northwest",
+      "4": "north"
+    }
+  },
+  "costume-fitzgerald-spider-run": {
+    "type": "drawn",
+    "action": "run",
+    "views": {
+      "0": "south",
+      "1": "southwest",
+      "2": "west",
+      "3": "northwest",
+      "4": "north"
+    }
+  },
+  "masyn-wave": {
+    "file": "actions/WelcomeWave12.png",
+    "rows": 3,
+    "template": "masyn",
+    "action": "wave",
+    "frameMs": 130,
+    "sequence": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11
+    ]
+  },
+  "masyn-water-ride": {
+    "type": "drawn",
+    "file": "people/masyn/water.png",
+    "group": "water",
+    "action": "water-ride"
+  },
+  "mi-shell-water-ride": {
+    "type": "drawn",
+    "file": "people/mi-shell/water.png",
+    "group": "water",
+    "action": "water-ride"
+  },
+  "ezra-water-ride": {
+    "type": "drawn",
+    "file": "people/ezra/water.png",
+    "group": "water",
+    "action": "water-ride"
+  },
+  "fallyn-water-ride": {
+    "type": "drawn",
+    "file": "people/fallyn/water.png",
+    "group": "water",
+    "action": "water-ride"
+  },
+  "fitzgerald-water-ride": {
+    "type": "drawn",
+    "file": "people/fitzgerald/water.png",
+    "group": "water",
+    "action": "water-ride"
+  },
+  "masyn-board-ride": {
+    "type": "drawn",
+    "file": "people/masyn/balancing.png",
+    "group": "skating",
+    "action": "board-ride"
+  },
+  "mi-shell-board-ride": {
+    "type": "drawn",
+    "file": "people/mi-shell/balancing.png",
+    "group": "skating",
+    "action": "board-ride"
+  },
+  "ezra-board-ride": {
+    "type": "drawn",
+    "file": "people/ezra/balancing.png",
+    "group": "skating",
+    "action": "board-ride"
+  },
+  "fallyn-board-ride": {
+    "type": "drawn",
+    "file": "people/fallyn/balancing.png",
+    "group": "skating",
+    "action": "board-ride"
+  },
+  "fitzgerald-board-ride": {
+    "type": "drawn",
+    "file": "people/fitzgerald/balancing.png",
+    "group": "skating",
+    "action": "board-ride"
+  },
+  "masyn-board-trick": {
+    "type": "drawn",
+    "file": "people/masyn/skating.png",
+    "group": "skating",
+    "action": "board-trick"
+  },
+  "masyn-wake-ride": {
+    "type": "drawn",
+    "file": "people/masyn/water.png",
+    "group": "water",
+    "action": "wake-ride"
+  },
+  "mi-shell-board-trick": {
+    "type": "drawn",
+    "file": "people/mi-shell/skating.png",
+    "group": "skating",
+    "action": "board-trick"
+  },
+  "mi-shell-wake-ride": {
+    "type": "drawn",
+    "file": "people/mi-shell/water.png",
+    "group": "water",
+    "action": "wake-ride"
+  },
+  "ezra-board-trick": {
+    "type": "drawn",
+    "file": "people/ezra/skating.png",
+    "group": "skating",
+    "action": "board-trick"
+  },
+  "ezra-wake-ride": {
+    "type": "drawn",
+    "file": "people/ezra/water.png",
+    "group": "water",
+    "action": "wake-ride"
+  },
+  "fallyn-board-trick": {
+    "type": "drawn",
+    "file": "people/fallyn/skating.png",
+    "group": "skating",
+    "action": "board-trick"
+  },
+  "fallyn-wake-ride": {
+    "type": "drawn",
+    "file": "people/fallyn/water.png",
+    "group": "water",
+    "action": "wake-ride"
+  },
+  "fitzgerald-board-trick": {
+    "type": "drawn",
+    "file": "people/fitzgerald/skating.png",
+    "group": "skating",
+    "action": "board-trick"
+  },
+  "fitzgerald-wake-ride": {
+    "type": "drawn",
+    "file": "people/fitzgerald/water.png",
+    "group": "water",
+    "action": "wake-ride"
+  },
+  "costume-airbender-board-ride": {
+    "type": "drawn",
+    "file": "people/costume-airbender/balancing.png",
+    "group": "skating",
+    "action": "board-ride"
+  },
+  "costume-airbender-board-trick": {
+    "type": "drawn",
+    "file": "people/costume-airbender/skating.png",
+    "group": "skating",
+    "action": "board-trick"
+  },
+  "costume-airbender-wake-ride": {
+    "type": "drawn",
+    "file": "people/costume-airbender/water.png",
+    "group": "water",
+    "action": "wake-ride"
+  },
+  "costume-airbender-water-ride": {
+    "type": "drawn",
+    "file": "people/costume-airbender/water.png",
+    "group": "water",
+    "action": "water-ride"
+  },
+  "costume-airbender-bike-acro": {
+    "type": "drawn",
+    "file": "people/costume-airbender/exploring.png",
+    "group": "exploring",
+    "action": "bike-acro"
+  },
+  "costume-airbender-bike-mach": {
+    "type": "drawn",
+    "file": "people/costume-airbender/exploring.png",
+    "group": "exploring",
+    "action": "bike-mach"
+  },
+  "costume-airbender-surf": {
+    "type": "drawn",
+    "file": "people/costume-airbender/exploring.png",
+    "group": "exploring",
+    "action": "surf"
+  },
+  "costume-airbender-fish": {
+    "type": "drawn",
+    "file": "people/costume-airbender/fishing.png",
+    "group": "fishing",
+    "action": "fish"
+  },
+  "costume-airbender-fish-surf": {
+    "type": "drawn",
+    "file": "people/costume-airbender/fishing.png",
+    "group": "fishing",
+    "action": "fish-surf"
+  },
+  "costume-skills-board-ride": {
+    "type": "drawn",
+    "file": "people/costume-skills/balancing.png",
+    "group": "skating",
+    "action": "board-ride"
+  },
+  "costume-skills-board-trick": {
+    "type": "drawn",
+    "file": "people/costume-skills/skating.png",
+    "group": "skating",
+    "action": "board-trick"
+  },
+  "costume-skills-wake-ride": {
+    "type": "drawn",
+    "file": "people/costume-skills/water.png",
+    "group": "water",
+    "action": "wake-ride"
+  },
+  "costume-skills-water-ride": {
+    "type": "drawn",
+    "file": "people/costume-skills/water.png",
+    "group": "water",
+    "action": "water-ride"
+  },
+  "costume-skills-bike-acro": {
+    "type": "drawn",
+    "file": "people/costume-skills/exploring.png",
+    "group": "exploring",
+    "action": "bike-acro"
+  },
+  "costume-skills-bike-mach": {
+    "type": "drawn",
+    "file": "people/costume-skills/exploring.png",
+    "group": "exploring",
+    "action": "bike-mach"
+  },
+  "costume-skills-surf": {
+    "type": "drawn",
+    "file": "people/costume-skills/exploring.png",
+    "group": "exploring",
+    "action": "surf"
+  },
+  "costume-skills-fish": {
+    "type": "drawn",
+    "file": "people/costume-skills/fishing.png",
+    "group": "fishing",
+    "action": "fish"
+  },
+  "costume-skills-fish-surf": {
+    "type": "drawn",
+    "file": "people/costume-skills/fishing.png",
+    "group": "fishing",
+    "action": "fish-surf"
+  },
+  "costume-portfolio-board-ride": {
+    "type": "drawn",
+    "file": "people/costume-portfolio/balancing.png",
+    "group": "skating",
+    "action": "board-ride"
+  },
+  "costume-portfolio-board-trick": {
+    "type": "drawn",
+    "file": "people/costume-portfolio/skating.png",
+    "group": "skating",
+    "action": "board-trick"
+  },
+  "costume-portfolio-wake-ride": {
+    "type": "drawn",
+    "file": "people/costume-portfolio/water.png",
+    "group": "water",
+    "action": "wake-ride"
+  },
+  "costume-portfolio-water-ride": {
+    "type": "drawn",
+    "file": "people/costume-portfolio/water.png",
+    "group": "water",
+    "action": "water-ride"
+  },
+  "costume-portfolio-bike-acro": {
+    "type": "drawn",
+    "file": "people/costume-portfolio/exploring.png",
+    "group": "exploring",
+    "action": "bike-acro"
+  },
+  "costume-portfolio-bike-mach": {
+    "type": "drawn",
+    "file": "people/costume-portfolio/exploring.png",
+    "group": "exploring",
+    "action": "bike-mach"
+  },
+  "costume-portfolio-surf": {
+    "type": "drawn",
+    "file": "people/costume-portfolio/exploring.png",
+    "group": "exploring",
+    "action": "surf"
+  },
+  "costume-portfolio-fish": {
+    "type": "drawn",
+    "file": "people/costume-portfolio/fishing.png",
+    "group": "fishing",
+    "action": "fish"
+  },
+  "costume-portfolio-fish-surf": {
+    "type": "drawn",
+    "file": "people/costume-portfolio/fishing.png",
+    "group": "fishing",
+    "action": "fish-surf"
+  },
+  "costume-resume-board-ride": {
+    "type": "drawn",
+    "file": "people/costume-resume/balancing.png",
+    "group": "skating",
+    "action": "board-ride"
+  },
+  "costume-resume-board-trick": {
+    "type": "drawn",
+    "file": "people/costume-resume/skating.png",
+    "group": "skating",
+    "action": "board-trick"
+  },
+  "costume-resume-wake-ride": {
+    "type": "drawn",
+    "file": "people/costume-resume/water.png",
+    "group": "water",
+    "action": "wake-ride"
+  },
+  "costume-resume-water-ride": {
+    "type": "drawn",
+    "file": "people/costume-resume/water.png",
+    "group": "water",
+    "action": "water-ride"
+  },
+  "costume-resume-bike-acro": {
+    "type": "drawn",
+    "file": "people/costume-resume/exploring.png",
+    "group": "exploring",
+    "action": "bike-acro"
+  },
+  "costume-resume-bike-mach": {
+    "type": "drawn",
+    "file": "people/costume-resume/exploring.png",
+    "group": "exploring",
+    "action": "bike-mach"
+  },
+  "costume-resume-surf": {
+    "type": "drawn",
+    "file": "people/costume-resume/exploring.png",
+    "group": "exploring",
+    "action": "surf"
+  },
+  "costume-resume-fish": {
+    "type": "drawn",
+    "file": "people/costume-resume/fishing.png",
+    "group": "fishing",
+    "action": "fish"
+  },
+  "costume-resume-fish-surf": {
+    "type": "drawn",
+    "file": "people/costume-resume/fishing.png",
+    "group": "fishing",
+    "action": "fish-surf"
+  },
+  "costume-contact-board-ride": {
+    "type": "drawn",
+    "file": "people/costume-contact/balancing.png",
+    "group": "skating",
+    "action": "board-ride"
+  },
+  "costume-contact-board-trick": {
+    "type": "drawn",
+    "file": "people/costume-contact/skating.png",
+    "group": "skating",
+    "action": "board-trick"
+  },
+  "costume-contact-wake-ride": {
+    "type": "drawn",
+    "file": "people/costume-contact/water.png",
+    "group": "water",
+    "action": "wake-ride"
+  },
+  "costume-contact-water-ride": {
+    "type": "drawn",
+    "file": "people/costume-contact/water.png",
+    "group": "water",
+    "action": "water-ride"
+  },
+  "costume-contact-bike-acro": {
+    "type": "drawn",
+    "file": "people/costume-contact/exploring.png",
+    "group": "exploring",
+    "action": "bike-acro"
+  },
+  "costume-contact-bike-mach": {
+    "type": "drawn",
+    "file": "people/costume-contact/exploring.png",
+    "group": "exploring",
+    "action": "bike-mach"
+  },
+  "costume-contact-surf": {
+    "type": "drawn",
+    "file": "people/costume-contact/exploring.png",
+    "group": "exploring",
+    "action": "surf"
+  },
+  "costume-contact-fish": {
+    "type": "drawn",
+    "file": "people/costume-contact/fishing.png",
+    "group": "fishing",
+    "action": "fish"
+  },
+  "costume-contact-fish-surf": {
+    "type": "drawn",
+    "file": "people/costume-contact/fishing.png",
+    "group": "fishing",
+    "action": "fish-surf"
+  },
+  "link-board-ride": {
+    "type": "drawn",
+    "file": "people/link/balancing.png",
+    "group": "skating",
+    "action": "board-ride"
+  },
+  "link-board-trick": {
+    "type": "drawn",
+    "file": "people/link/skating.png",
+    "group": "skating",
+    "action": "board-trick"
+  },
+  "link-wake-ride": {
+    "type": "drawn",
+    "file": "people/link/water.png",
+    "group": "water",
+    "action": "wake-ride"
+  },
+  "link-water-ride": {
+    "type": "drawn",
+    "file": "people/link/water.png",
+    "group": "water",
+    "action": "water-ride"
+  },
+  "link-bike-acro": {
+    "type": "drawn",
+    "file": "people/link/exploring.png",
+    "group": "exploring",
+    "action": "bike-acro"
+  },
+  "link-bike-mach": {
+    "type": "drawn",
+    "file": "people/link/exploring.png",
+    "group": "exploring",
+    "action": "bike-mach"
+  },
+  "link-surf": {
+    "type": "drawn",
+    "file": "people/link/exploring.png",
+    "group": "exploring",
+    "action": "surf"
+  },
+  "link-fish": {
+    "type": "drawn",
+    "file": "people/link/fishing.png",
+    "group": "fishing",
+    "action": "fish"
+  },
+  "link-fish-surf": {
+    "type": "drawn",
+    "file": "people/link/fishing.png",
+    "group": "fishing",
+    "action": "fish-surf"
+  },
+  "costume-ezra-spider-board-ride": {
+    "type": "drawn",
+    "file": "people/costume-ezra-spider/balancing.png",
+    "group": "skating",
+    "action": "board-ride"
+  },
+  "costume-ezra-spider-board-trick": {
+    "type": "drawn",
+    "file": "people/costume-ezra-spider/skating.png",
+    "group": "skating",
+    "action": "board-trick"
+  },
+  "costume-ezra-spider-wake-ride": {
+    "type": "drawn",
+    "file": "people/costume-ezra-spider/water.png",
+    "group": "water",
+    "action": "wake-ride"
+  },
+  "costume-ezra-spider-water-ride": {
+    "type": "drawn",
+    "file": "people/costume-ezra-spider/water.png",
+    "group": "water",
+    "action": "water-ride"
+  },
+  "costume-ezra-spider-bike-acro": {
+    "type": "drawn",
+    "file": "people/costume-ezra-spider/exploring.png",
+    "group": "exploring",
+    "action": "bike-acro"
+  },
+  "costume-ezra-spider-bike-mach": {
+    "type": "drawn",
+    "file": "people/costume-ezra-spider/exploring.png",
+    "group": "exploring",
+    "action": "bike-mach"
+  },
+  "costume-ezra-spider-surf": {
+    "type": "drawn",
+    "file": "people/costume-ezra-spider/exploring.png",
+    "group": "exploring",
+    "action": "surf"
+  },
+  "costume-ezra-spider-fish": {
+    "type": "drawn",
+    "file": "people/costume-ezra-spider/fishing.png",
+    "group": "fishing",
+    "action": "fish"
+  },
+  "costume-ezra-spider-fish-surf": {
+    "type": "drawn",
+    "file": "people/costume-ezra-spider/fishing.png",
+    "group": "fishing",
+    "action": "fish-surf"
+  },
+  "costume-fallyn-ladybug-board-ride": {
+    "type": "drawn",
+    "file": "people/costume-fallyn-ladybug/balancing.png",
+    "group": "skating",
+    "action": "board-ride"
+  },
+  "costume-fallyn-ladybug-board-trick": {
+    "type": "drawn",
+    "file": "people/costume-fallyn-ladybug/skating.png",
+    "group": "skating",
+    "action": "board-trick"
+  },
+  "costume-fallyn-ladybug-wake-ride": {
+    "type": "drawn",
+    "file": "people/costume-fallyn-ladybug/water.png",
+    "group": "water",
+    "action": "wake-ride"
+  },
+  "costume-fallyn-ladybug-water-ride": {
+    "type": "drawn",
+    "file": "people/costume-fallyn-ladybug/water.png",
+    "group": "water",
+    "action": "water-ride"
+  },
+  "costume-fallyn-ladybug-bike-acro": {
+    "type": "drawn",
+    "file": "people/costume-fallyn-ladybug/exploring.png",
+    "group": "exploring",
+    "action": "bike-acro"
+  },
+  "costume-fallyn-ladybug-bike-mach": {
+    "type": "drawn",
+    "file": "people/costume-fallyn-ladybug/exploring.png",
+    "group": "exploring",
+    "action": "bike-mach"
+  },
+  "costume-fallyn-ladybug-surf": {
+    "type": "drawn",
+    "file": "people/costume-fallyn-ladybug/exploring.png",
+    "group": "exploring",
+    "action": "surf"
+  },
+  "costume-fallyn-ladybug-fish": {
+    "type": "drawn",
+    "file": "people/costume-fallyn-ladybug/fishing.png",
+    "group": "fishing",
+    "action": "fish"
+  },
+  "costume-fallyn-ladybug-fish-surf": {
+    "type": "drawn",
+    "file": "people/costume-fallyn-ladybug/fishing.png",
+    "group": "fishing",
+    "action": "fish-surf"
+  },
+  "costume-fitzgerald-spider-board-ride": {
+    "type": "drawn",
+    "file": "people/costume-fitzgerald-spider/balancing.png",
+    "group": "skating",
+    "action": "board-ride"
+  },
+  "costume-fitzgerald-spider-board-trick": {
+    "type": "drawn",
+    "file": "people/costume-fitzgerald-spider/skating.png",
+    "group": "skating",
+    "action": "board-trick"
+  },
+  "costume-fitzgerald-spider-wake-ride": {
+    "type": "drawn",
+    "file": "people/costume-fitzgerald-spider/water.png",
+    "group": "water",
+    "action": "wake-ride"
+  },
+  "costume-fitzgerald-spider-water-ride": {
+    "type": "drawn",
+    "file": "people/costume-fitzgerald-spider/water.png",
+    "group": "water",
+    "action": "water-ride"
+  },
+  "costume-fitzgerald-spider-bike-acro": {
+    "type": "drawn",
+    "file": "people/costume-fitzgerald-spider/exploring.png",
+    "group": "exploring",
+    "action": "bike-acro"
+  },
+  "costume-fitzgerald-spider-bike-mach": {
+    "type": "drawn",
+    "file": "people/costume-fitzgerald-spider/exploring.png",
+    "group": "exploring",
+    "action": "bike-mach"
+  },
+  "costume-fitzgerald-spider-surf": {
+    "type": "drawn",
+    "file": "people/costume-fitzgerald-spider/exploring.png",
+    "group": "exploring",
+    "action": "surf"
+  },
+  "costume-fitzgerald-spider-fish": {
+    "type": "drawn",
+    "file": "people/costume-fitzgerald-spider/fishing.png",
+    "group": "fishing",
+    "action": "fish"
+  },
+  "costume-fitzgerald-spider-fish-surf": {
+    "type": "drawn",
+    "file": "people/costume-fitzgerald-spider/fishing.png",
+    "group": "fishing",
+    "action": "fish-surf"
+  },
+  "masyn-conduct": {
+    "type": "drawn",
+    "file": "people/masyn/conduct.png",
+    "action": "conduct"
+  },
+  "mi-shell-conduct": {
+    "type": "drawn",
+    "file": "people/mi-shell/conduct.png",
+    "action": "conduct"
+  },
+  "ezra-conduct": {
+    "type": "drawn",
+    "file": "people/ezra/conduct.png",
+    "action": "conduct"
+  },
+  "fallyn-conduct": {
+    "type": "drawn",
+    "file": "people/fallyn/conduct.png",
+    "action": "conduct"
+  },
+  "fitzgerald-conduct": {
+    "type": "drawn",
+    "file": "people/fitzgerald/conduct.png",
+    "action": "conduct"
+  },
+  "costume-airbender-conduct": {
+    "type": "drawn",
+    "file": "people/costume-airbender/conduct.png",
+    "action": "conduct"
+  },
+  "costume-skills-conduct": {
+    "type": "drawn",
+    "file": "people/costume-skills/conduct.png",
+    "action": "conduct"
+  },
+  "costume-portfolio-conduct": {
+    "type": "drawn",
+    "file": "people/costume-portfolio/conduct.png",
+    "action": "conduct"
+  },
+  "costume-resume-conduct": {
+    "type": "drawn",
+    "file": "people/costume-resume/conduct.png",
+    "action": "conduct"
+  },
+  "costume-contact-conduct": {
+    "type": "drawn",
+    "file": "people/costume-contact/conduct.png",
+    "action": "conduct"
+  },
+  "link-conduct": {
+    "type": "drawn",
+    "file": "people/link/conduct.png",
+    "action": "conduct"
+  },
+  "costume-ezra-spider-conduct": {
+    "type": "drawn",
+    "file": "people/costume-ezra-spider/conduct.png",
+    "action": "conduct"
+  },
+  "costume-fallyn-ladybug-conduct": {
+    "type": "drawn",
+    "file": "people/costume-fallyn-ladybug/conduct.png",
+    "action": "conduct"
+  },
+  "costume-fitzgerald-spider-conduct": {
+    "type": "drawn",
+    "file": "people/costume-fitzgerald-spider/conduct.png",
+    "action": "conduct"
+  },
+  "masyn-salute": {
+    "type": "drawn",
+    "file": "people/masyn/salute.png",
+    "action": "salute"
+  },
+  "mi-shell-salute": {
+    "type": "drawn",
+    "file": "people/mi-shell/salute.png",
+    "action": "salute"
+  },
+  "ezra-salute": {
+    "type": "drawn",
+    "file": "people/ezra/salute.png",
+    "action": "salute"
+  },
+  "fallyn-salute": {
+    "type": "drawn",
+    "file": "people/fallyn/salute.png",
+    "action": "salute"
+  },
+  "fitzgerald-salute": {
+    "type": "drawn",
+    "file": "people/fitzgerald/salute.png",
+    "action": "salute"
+  },
+  "costume-airbender-salute": {
+    "type": "drawn",
+    "file": "people/costume-airbender/salute.png",
+    "action": "salute"
+  },
+  "costume-skills-salute": {
+    "type": "drawn",
+    "file": "people/costume-skills/salute.png",
+    "action": "salute"
+  },
+  "costume-portfolio-salute": {
+    "type": "drawn",
+    "file": "people/costume-portfolio/salute.png",
+    "action": "salute"
+  },
+  "costume-resume-salute": {
+    "type": "drawn",
+    "file": "people/costume-resume/salute.png",
+    "action": "salute"
+  },
+  "costume-contact-salute": {
+    "type": "drawn",
+    "file": "people/costume-contact/salute.png",
+    "action": "salute"
+  },
+  "link-salute": {
+    "type": "drawn",
+    "file": "people/link/salute.png",
+    "action": "salute"
+  },
+  "costume-ezra-spider-salute": {
+    "type": "drawn",
+    "file": "people/costume-ezra-spider/salute.png",
+    "action": "salute"
+  },
+  "costume-fallyn-ladybug-salute": {
+    "type": "drawn",
+    "file": "people/costume-fallyn-ladybug/salute.png",
+    "action": "salute"
+  },
+  "costume-fitzgerald-spider-salute": {
+    "type": "drawn",
+    "file": "people/costume-fitzgerald-spider/salute.png",
+    "action": "salute"
+  },
+  "costume-panem": {
+    "type": "drawn",
+    "action": "walk",
+    "views": {
+      "0": "south",
+      "1": "southwest",
+      "2": "west",
+      "3": "northwest",
+      "4": "north"
+    }
+  },
+  "costume-panem-run": {
+    "type": "drawn",
+    "action": "run",
+    "views": {
+      "0": "south",
+      "1": "southwest",
+      "2": "west",
+      "3": "northwest",
+      "4": "north"
+    }
+  },
+  "costume-panem-board-ride": {
+    "type": "drawn",
+    "file": "people/costume-panem/balancing.png",
+    "group": "skating",
+    "action": "board-ride"
+  },
+  "costume-panem-board-trick": {
+    "type": "drawn",
+    "file": "people/costume-panem/skating.png",
+    "group": "skating",
+    "action": "board-trick"
+  },
+  "costume-panem-wake-ride": {
+    "type": "drawn",
+    "file": "people/costume-panem/water.png",
+    "group": "water",
+    "action": "wake-ride"
+  },
+  "costume-panem-water-ride": {
+    "type": "drawn",
+    "file": "people/costume-panem/water.png",
+    "group": "water",
+    "action": "water-ride"
+  },
+  "costume-panem-bike-acro": {
+    "type": "drawn",
+    "file": "people/costume-panem/exploring.png",
+    "group": "exploring",
+    "action": "bike-acro"
+  },
+  "costume-panem-bike-mach": {
+    "type": "drawn",
+    "file": "people/costume-panem/exploring.png",
+    "group": "exploring",
+    "action": "bike-mach"
+  },
+  "costume-panem-surf": {
+    "type": "drawn",
+    "file": "people/costume-panem/exploring.png",
+    "group": "exploring",
+    "action": "surf"
+  },
+  "costume-panem-fish": {
+    "type": "drawn",
+    "file": "people/costume-panem/fishing.png",
+    "group": "fishing",
+    "action": "fish"
+  },
+  "costume-panem-fish-surf": {
+    "type": "drawn",
+    "file": "people/costume-panem/fishing.png",
+    "group": "fishing",
+    "action": "fish-surf"
+  },
+  "costume-panem-call": {
+    "type": "drawn",
+    "file": "people/costume-panem/call.png",
+    "action": "call"
+  },
+  "costume-panem-ride": {
+    "type": "drawn",
+    "file": "people/costume-panem/ride.png",
+    "action": "ride"
+  },
+  "costume-panem-land": {
+    "type": "drawn",
+    "file": "people/costume-panem/land.png",
+    "action": "land"
+  },
+  "costume-panem-emote": {
+    "type": "drawn",
+    "file": "people/costume-panem/emote.png",
+    "action": "emote"
+  },
+  "costume-panem-conduct": {
+    "type": "drawn",
+    "file": "people/costume-panem/conduct.png",
+    "action": "conduct"
+  },
+  "costume-panem-salute": {
+    "type": "drawn",
+    "file": "people/costume-panem/salute.png",
+    "action": "salute"
+  }
+}

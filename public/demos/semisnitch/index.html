@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>SemiSnitch · Project demo</title>
+    <link rel="stylesheet" href="./original.css" />
+    <link rel="stylesheet" href="./demo.css" />
+  </head>
+  <body>
+    <header class="w-full bg-gray-800">
+      <nav
+        class="container mx-auto px-4 py-3 flex items-center justify-between"
+      >
+        <a href="#" aria-label="Saved reports"
+          ><img
+            src="./logo.png"
+            alt="SemiSnitch"
+            style="height: 72px; width: auto" /></a
+        ><span class="text-gray-300">Interactive demo</span>
+      </nav>
+    </header>
+    <div class="demo-notice">
+      Fictional sample fleet · Reports and coaching changes stay in this
+      browser. No account required.
+    </div>
+    <main class="container mx-auto">
+      <div class="toolbar bg-gray-700 text-white">
+        <h1 class="text-xl font-bold">Saved Reports</h1>
+        <label class="upload"
+          >Import JSON report<input
+            id="upload"
+            type="file"
+            accept=".json,application/json" /></label
+        ><button id="sample">Download sample JSON</button>
+      </div>
+      <p id="message" role="status"></p>
+      <div id="reports"></div>
+    </main>
+    <footer>
+      Original group project by Colton M, Greg K, Jonathan H, Kole D, Masyn N
+      &amp; Riley A.
+    </footer>
+    <script src="./app.js"></script>
+  </body>
+</html>

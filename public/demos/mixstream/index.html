@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MixStream</title>
+    <link rel="stylesheet" href="./assets/css/foundation.min.css" />
+    <link rel="stylesheet" href="./assets/css/style.css" />
+    <link rel="stylesheet" href="./demo.css" />
+  </head>
+
+  <body>
+    <div class="demo-notice">
+      Search movies and shows, save favorites, and check where to watch.
+    </div>
+    <main class="holy-grail-grid">
+      <div class="holy-grail-header"></div>
+
+      <div class="holy-grail-left text-center">
+        <h4>Find a Movie or Show</h4>
+        <div class="input-group input-group-rounded">
+          <input
+            class="input-group-field"
+            id="textInput"
+            type="search"
+            aria-label="Search movies and shows"
+            placeholder="Movie or show title"
+          />
+          <div class="input-group-button">
+            <input
+              type="submit"
+              class="button secondary"
+              value="Search"
+              id="search-button"
+            />
+          </div>
+        </div>
+
+        <div class="search-options">
+          <label
+            >Search in<select id="search-kind">
+              <option value="all">Movies &amp; shows</option>
+              <option value="movies">Movies</option>
+              <option value="shows">TV shows</option>
+            </select></label
+          ><label
+            >Watch region<select id="search-region">
+              <option value="us">United States</option>
+              <option value="gb">United Kingdom</option>
+              <option value="ca">Canada</option>
+              <option value="au">Australia</option>
+            </select></label
+          >
+        </div>
+        <p id="search-status" role="status" aria-live="polite">
+          Choose a sample below or search for any title.
+        </p>
+        <div class="card" id="favorite-card">
+          <div class="card-section">
+            <h5 id="favorite-header">Favorites</h5>
+            <div class="search-history"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="holy-grail-middle large-8 columns">
+        <div class="favorites">
+          <h3>Find something worth watching</h3>
+        </div>
+        <div
+          id="search-results"
+          class="search-results"
+          aria-label="Search results"
+        ></div>
+        <div class="marketing-site-content-section">
+          <div
+            class="marketing-site-content-section-block"
+            style="border: 4px solid #858383"
+          >
+            <h5 class="marketing-site-content-section-block-header text-center">
+              Where to Watch:
+            </h5>
+            <div class="streaming-results" id="naptime"></div>
+          </div>
+          <div
+            class="marketing-site-content-section-block"
+            style="border: 4px solid #858383"
+          >
+            <h5 class="marketing-site-content-section-block-header">
+              Movie &amp; show details:
+            </h5>
+            <div id="imdb-container">
+              <div id="imdb-poster"></div>
+              <div>
+                <ul id="imdb-cast"></ul>
+              </div>
+              <div id="imdb-ratings"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="holy-grail-footer text-center">
+        <h6>Made With 💚 By: Brandon, Charles, Eva & Masyn ---- ©️2023</h6>
+        <p>
+          Search data:
+          <a
+            href="https://www.tvmaze.com/api"
+            target="_blank"
+            rel="noopener noreferrer"
+            >TVmaze</a
+          >
+          (<a
+            href="https://creativecommons.org/licenses/by-sa/4.0/"
+            target="_blank"
+            rel="noopener noreferrer"
+            >CC BY-SA</a
+          >) and
+          <a
+            href="https://en.wikipedia.org/"
+            target="_blank"
+            rel="noopener noreferrer"
+            >Wikipedia</a
+          >. Check each title’s source for credits and details.
+        </p>
+      </div>
+    </main>
+    <script src="./app.js"></script>
+  </body>
+</html>

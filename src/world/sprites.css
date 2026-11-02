@@ -1,0 +1,124 @@
+/* SpriteStudio.js previews the same published atlases used by PixelScene.
+   SpritePose supplies frame coordinates; this CSS owns the workshop layout only. */
+.sprite-studio {
+  min-height: 100dvh;
+  background: #102e2b;
+  color: #e7ead6;
+  padding: 28px clamp(22px, 6vw, 100px);
+  font-family: Arial, sans-serif;
+}
+.sprite-studio header {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  border-bottom: 1px solid #abc1a32b;
+  padding-bottom: 22px;
+}
+.sprite-studio a {
+  color: #c3d6b6;
+}
+.sprite-studio header span,
+.sprite-eyebrow {
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  color: #a9c0a4;
+}
+.sprite-studio-main {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  max-width: 1100px;
+  margin: 55px auto;
+}
+.sprite-studio h1 {
+  font-family: Georgia, serif;
+  font-size: clamp(40px, 5.5vw, 76px);
+  line-height: 1.04;
+  margin: 20px 0;
+}
+.sprite-studio p {
+  line-height: 1.7;
+  color: #b6c7b2;
+  max-width: 480px;
+}
+.sprite-studio label {
+  display: block;
+  margin: 20px 0;
+}
+.sprite-studio select {
+  display: block;
+  background: #22443e;
+  color: #f0edda;
+  padding: 12px;
+  border: 1px solid #7e9a78;
+  border-radius: 9px;
+  width: 100%;
+  margin-top: 8px;
+}
+.sprite-studio button {
+  border: 1px solid #71937e;
+  background: #284d43;
+  color: #eef0df;
+  padding: 9px 13px;
+  border-radius: 9px;
+  cursor: pointer;
+}
+.sprite-studio button[aria-pressed="true"] {
+  background: #cfdaaf;
+  color: #163930;
+}
+.sprite-action-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.sprite-studio-main a {
+  display: inline-block;
+  margin-left: 20px;
+}
+.sprite-display {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background: radial-gradient(
+    ellipse at 50% 65%,
+    #536f48,
+    #294a39 58%,
+    #193c35
+  );
+  border: 1px solid #9ab18a45;
+  border-radius: 24px;
+  min-height: 450px;
+  overflow: hidden;
+}
+.sprite-family {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 30px 0;
+}
+.sprite-family button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 110px;
+  background: #173b32;
+}
+.sprite-family span:last-child {
+  font-size: 12px;
+  margin-bottom: 8px;
+}
+@media (max-width: 760px) {
+  .sprite-studio-main {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  .sprite-display {
+    min-height: 350px;
+  }
+  .sprite-studio header span {
+    display: none;
+  }
+}

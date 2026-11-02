@@ -1,0 +1,235 @@
+{
+  "tool": "built-in imagegen",
+  "purpose": "Keep Hyrulian Adventurer and trainer as Masyn in costume; correct Ezra north run.",
+  "jobs": [
+    {
+      "name": "link-reference",
+      "prompt": "Use case: identity-preserve. Edit target: attached five-view Masyn sheet, single column of five complete figures (south, southwest, west, northwest, north). Change CLOTHES ONLY. Preserve exactly this adult man's face, green eyes, short side-parted brown hair, full trimmed brown beard, rounded human ears, head/body proportions, adult age, stance, identical scale and positions. Keep five complete figures in one column, same directions and margins, transparent background, no text or scenery. Same detailed outlined handheld-RPG sprite rendering; not a different chibi boy. Dress Masyn as Hyrulian Adventurer: deep green long pointed cloth cap worn behind his existing short brown swept hair, green belted tunic over cream long sleeves, brown leather gloves and brown knee boots over opaque tan trousers, small round wooden shield on his back. Retain Masyn's adult facial likeness exactly; do NOT change his face into Link, do not add elf ears, blond hair, bigger eyes or a younger head. The clothes should fit his existing adult body, not shrink it.",
+      "input": "people/references/wardrobe/Masyn.png",
+      "selected": "people/references/wardrobe/Hyrulian.png"
+    },
+    {
+      "name": "trainer-reference",
+      "prompt": "Use case: identity-preserve. Edit target: attached five-view Masyn sheet, single column of five complete figures (south, southwest, west, northwest, north). Change CLOTHES ONLY. Preserve exactly this adult man's face, green eyes, short side-parted brown hair, full trimmed brown beard, rounded human ears, head/body proportions, adult age, stance, identical scale and positions. Keep five complete figures in one column, same directions and margins, transparent background, no text or scenery. Same detailed outlined handheld-RPG sprite rendering; not a different chibi boy. Dress Masyn as a monster-catching adventurer: red and white baseball cap on existing brown swept hair, dark navy open utility vest with gold piping over white short sleeves, blue jeans, black fingerless gloves, dark sneakers with cream soles, compact backpack. Preserve the adult Masyn face and full brown beard, green eyes, hairline, head width, leg length. No youthful anime trainer face, no giant head, no child proportions. No letters on cap.",
+      "input": "people/references/wardrobe/Masyn.png",
+      "selected": "people/references/wardrobe/Trainer.png"
+    },
+    {
+      "name": "ezra-north",
+      "prompt": "Use case: precise-object-edit. Edit this transparent nine-row four-column 36-pose sheet of Ezra facing NORTH away from viewer. Preserve ALL first five rows (idle then walking) exactly. Correct ONLY the last four rows, the sixteen running frames: the back-running figure currently looks unnaturally thin and tiny. Make his curly long brown hair silhouette, shoulder width, cream sweater, hips and legs visibly fuller and proportionate to his own standing/walking figure above. Keep the exact same overall figure height, same head height/foot origins, same leg positions per cell, same NORTH-facing running cycle, four columns nine rows. He is a child with long curly brown hair, cream sweater, dark trousers, light shoes. Hair/head should be about ten percent broader and shoulders similarly broader, keep knee bend and alternating arms/feet. No front-facing face, no new costume, no scenery, no text, no shadows, no duplicates. Same original detailed pixel-RPG drawing style and all transparent margins. Every figure complete with clear gutters.",
+      "input": "people/references/corrections/EzraNorth.png",
+      "selected": "people/ezra/north.png",
+      "note": "Only the sixteen north-running poses were selected; original idle and walking figures retained."
+    },
+    {
+      "look": "link",
+      "name": "south",
+      "target": "people/link/south.png",
+      "inputs": [
+        "people/references/wardrobe/south.png",
+        "people/references/wardrobe/Hyrulian.png"
+      ],
+      "prompt": "Use case: identity-preserve. Image 1 is the EDIT TARGET: complete Masyn action sheet. Image 2 is the supporting CORRECTED COSTUME/IDENTITY reference. Change ONLY CLOTHING on image 1 to image 2, maintaining Masyn's exact adult face, green eyes, brown hair and full trimmed beard, head width and relative body proportions. Hyrulian Adventurer clothes from image 2: deep forest-green tunic, cream long sleeves, leather belt/diagonal strap, opaque tan trousers, brown knee-high boots and gloves, long green cloth cap behind his swept BROWN hair, small wooden round shield on his back. NO blond hair, elf ears, bare thighs, young Link face or bigger eyes. Every cell must remain a complete drawing of the SAME ADULT MAN Masyn, wearing these clothes. Lock all body poses, directions, hand/foot positions, anatomy and scale to image 1. ALL 36 cells face SOUTH ONLY. For west and southwest the nose points LEFT; for northwest show his back angled LEFT, north shows back only; south faces viewer. EXACTLY four columns and nine rows: first row four neutral poses, next four rows sixteen WALK poses, last four rows sixteen RUN poses, row-major cycle order. Keep both feet complete and clear transparent gutters. Keep every pose in original cell, same row count, unchanged framing; no guides, labels, scenery, ground shadows or extra objects. Handheld pixel RPG detailed outlined rendering, clean transparent background. Do not simplify or redesign his face into chibi art."
+    },
+    {
+      "look": "link",
+      "name": "southwest",
+      "target": "people/link/southwest.png",
+      "inputs": [
+        "people/references/wardrobe/southwest.png",
+        "people/references/wardrobe/Hyrulian.png"
+      ],
+      "prompt": "Use case: identity-preserve. Image 1 is the EDIT TARGET: complete Masyn action sheet. Image 2 is the supporting CORRECTED COSTUME/IDENTITY reference. Change ONLY CLOTHING on image 1 to image 2, maintaining Masyn's exact adult face, green eyes, brown hair and full trimmed beard, head width and relative body proportions. Hyrulian Adventurer clothes from image 2: deep forest-green tunic, cream long sleeves, leather belt/diagonal strap, opaque tan trousers, brown knee-high boots and gloves, long green cloth cap behind his swept BROWN hair, small wooden round shield on his back. NO blond hair, elf ears, bare thighs, young Link face or bigger eyes. Every cell must remain a complete drawing of the SAME ADULT MAN Masyn, wearing these clothes. Lock all body poses, directions, hand/foot positions, anatomy and scale to image 1. ALL 36 cells face SOUTHWEST ONLY. For west and southwest the nose points LEFT; for northwest show his back angled LEFT, north shows back only; south faces viewer. EXACTLY four columns and nine rows: first row four neutral poses, next four rows sixteen WALK poses, last four rows sixteen RUN poses, row-major cycle order. Keep both feet complete and clear transparent gutters. Keep every pose in original cell, same row count, unchanged framing; no guides, labels, scenery, ground shadows or extra objects. Handheld pixel RPG detailed outlined rendering, clean transparent background. Do not simplify or redesign his face into chibi art."
+    },
+    {
+      "look": "link",
+      "name": "west",
+      "target": "people/link/west.png",
+      "inputs": [
+        "people/references/wardrobe/west.png",
+        "people/references/wardrobe/Hyrulian.png"
+      ],
+      "prompt": "Use case: identity-preserve. Image 1 is the EDIT TARGET: complete Masyn action sheet. Image 2 is the supporting CORRECTED COSTUME/IDENTITY reference. Change ONLY CLOTHING on image 1 to image 2, maintaining Masyn's exact adult face, green eyes, brown hair and full trimmed beard, head width and relative body proportions. Hyrulian Adventurer clothes from image 2: deep forest-green tunic, cream long sleeves, leather belt/diagonal strap, opaque tan trousers, brown knee-high boots and gloves, long green cloth cap behind his swept BROWN hair, small wooden round shield on his back. NO blond hair, elf ears, bare thighs, young Link face or bigger eyes. Every cell must remain a complete drawing of the SAME ADULT MAN Masyn, wearing these clothes. Lock all body poses, directions, hand/foot positions, anatomy and scale to image 1. ALL 36 cells face WEST ONLY. For west and southwest the nose points LEFT; for northwest show his back angled LEFT, north shows back only; south faces viewer. EXACTLY four columns and nine rows: first row four neutral poses, next four rows sixteen WALK poses, last four rows sixteen RUN poses, row-major cycle order. Keep both feet complete and clear transparent gutters. Keep every pose in original cell, same row count, unchanged framing; no guides, labels, scenery, ground shadows or extra objects. Handheld pixel RPG detailed outlined rendering, clean transparent background. Do not simplify or redesign his face into chibi art."
+    },
+    {
+      "look": "link",
+      "name": "northwest",
+      "target": "people/link/northwest.png",
+      "inputs": [
+        "people/references/wardrobe/northwest.png",
+        "people/references/wardrobe/Hyrulian.png"
+      ],
+      "prompt": "Use case: identity-preserve. Image 1 is the EDIT TARGET: complete Masyn action sheet. Image 2 is the supporting CORRECTED COSTUME/IDENTITY reference. Change ONLY CLOTHING on image 1 to image 2, maintaining Masyn's exact adult face, green eyes, brown hair and full trimmed beard, head width and relative body proportions. Hyrulian Adventurer clothes from image 2: deep forest-green tunic, cream long sleeves, leather belt/diagonal strap, opaque tan trousers, brown knee-high boots and gloves, long green cloth cap behind his swept BROWN hair, small wooden round shield on his back. NO blond hair, elf ears, bare thighs, young Link face or bigger eyes. Every cell must remain a complete drawing of the SAME ADULT MAN Masyn, wearing these clothes. Lock all body poses, directions, hand/foot positions, anatomy and scale to image 1. ALL 36 cells face NORTHWEST ONLY. For west and southwest the nose points LEFT; for northwest show his back angled LEFT, north shows back only; south faces viewer. EXACTLY four columns and nine rows: first row four neutral poses, next four rows sixteen WALK poses, last four rows sixteen RUN poses, row-major cycle order. Keep both feet complete and clear transparent gutters. Keep every pose in original cell, same row count, unchanged framing; no guides, labels, scenery, ground shadows or extra objects. Handheld pixel RPG detailed outlined rendering, clean transparent background. Do not simplify or redesign his face into chibi art."
+    },
+    {
+      "look": "link",
+      "name": "north",
+      "target": "people/link/north.png",
+      "inputs": [
+        "people/references/wardrobe/north.png",
+        "people/references/wardrobe/Hyrulian.png"
+      ],
+      "prompt": "Use case: identity-preserve. Image 1 is the EDIT TARGET: complete Masyn action sheet. Image 2 is the supporting CORRECTED COSTUME/IDENTITY reference. Change ONLY CLOTHING on image 1 to image 2, maintaining Masyn's exact adult face, green eyes, brown hair and full trimmed beard, head width and relative body proportions. Hyrulian Adventurer clothes from image 2: deep forest-green tunic, cream long sleeves, leather belt/diagonal strap, opaque tan trousers, brown knee-high boots and gloves, long green cloth cap behind his swept BROWN hair, small wooden round shield on his back. NO blond hair, elf ears, bare thighs, young Link face or bigger eyes. Every cell must remain a complete drawing of the SAME ADULT MAN Masyn, wearing these clothes. Lock all body poses, directions, hand/foot positions, anatomy and scale to image 1. ALL 36 cells face NORTH ONLY. For west and southwest the nose points LEFT; for northwest show his back angled LEFT, north shows back only; south faces viewer. EXACTLY four columns and nine rows: first row four neutral poses, next four rows sixteen WALK poses, last four rows sixteen RUN poses, row-major cycle order. Keep both feet complete and clear transparent gutters. Keep every pose in original cell, same row count, unchanged framing; no guides, labels, scenery, ground shadows or extra objects. Handheld pixel RPG detailed outlined rendering, clean transparent background. Do not simplify or redesign his face into chibi art."
+    },
+    {
+      "look": "link",
+      "name": "skating",
+      "target": "people/link/skating.png",
+      "inputs": [
+        "people/masyn/skating.png",
+        "people/references/wardrobe/Hyrulian.png"
+      ],
+      "prompt": "Use case: identity-preserve. Image 1 EDIT TARGET has 80 complete Masyn ACTIVITY poses. Image 2 supplies new outfit. Change CLOTHES ONLY on all 80 drawings to image 2. Keep the adult Masyn identity from image 1 AND 2: brown swept hair, green eyes, full brown beard, human ears, same adult body/head proportions, NOT childlike anime/chibi. Hyrulian Adventurer clothes from image 2: deep forest-green tunic, cream long sleeves, leather belt/diagonal strap, opaque tan trousers, brown knee-high boots and gloves, long green cloth cap behind his swept BROWN hair, small wooden round shield on his back. NO blond hair, elf ears, bare thighs, young Link face or bigger eyes. EXACTLY TEN rows of EIGHT complete people, same original pose in every cell, same scale, margins and foot/head position. Rows 1-5 are skateboard riding/pushing and rows 6-10 are crouching/hopping tricks. No board drawn; game supplies it. Within BOTH five-row action groups, order is SOUTH front, SOUTHWEST nose points LEFT, WEST profile nose points LEFT, NORTHWEST back tilted LEFT (show back of head), NORTH pure back. Do not swap or mirror these directions. Each row eight different frames from the unchanged movement sequence; preserve elbows, ankles, hands, knees and silhouettes. Clear gutters around every complete figure. Outfit only; no illustrated vehicles or animals, no text, no environmental background, no floor/shadow. Transparent PNG in same polished outlined handheld-RPG rendering as image 1. Do not delete, merge or duplicate any row. Final must contain 10 rows by 8 columns."
+    },
+    {
+      "look": "link",
+      "name": "water",
+      "target": "people/link/water.png",
+      "inputs": [
+        "people/masyn/water.png",
+        "people/references/wardrobe/Hyrulian.png"
+      ],
+      "prompt": "Use case: identity-preserve. Image 1 EDIT TARGET has 80 complete Masyn ACTIVITY poses. Image 2 supplies new outfit. Change CLOTHES ONLY on all 80 drawings to image 2. Keep the adult Masyn identity from image 1 AND 2: brown swept hair, green eyes, full brown beard, human ears, same adult body/head proportions, NOT childlike anime/chibi. Hyrulian Adventurer clothes from image 2: deep forest-green tunic, cream long sleeves, leather belt/diagonal strap, opaque tan trousers, brown knee-high boots and gloves, long green cloth cap behind his swept BROWN hair, small wooden round shield on his back. NO blond hair, elf ears, bare thighs, young Link face or bigger eyes. EXACTLY TEN rows of EIGHT complete people, same original pose in every cell, same scale, margins and foot/head position. Rows 1-5 are wakeboarding holding tow rope handle; rows 6-10 are seated boat/jetski driving with both hands steering and visibly bent knees. No board or vehicle drawn. Within BOTH five-row action groups, order is SOUTH front, SOUTHWEST nose points LEFT, WEST profile nose points LEFT, NORTHWEST back tilted LEFT (show back of head), NORTH pure back. Do not swap or mirror these directions. Each row eight different frames from the unchanged movement sequence; preserve elbows, ankles, hands, knees and silhouettes. Clear gutters around every complete figure. Outfit only; no illustrated vehicles or animals, no text, no environmental background, no floor/shadow. Transparent PNG in same polished outlined handheld-RPG rendering as image 1. Do not delete, merge or duplicate any row. Final must contain 10 rows by 8 columns."
+    },
+    {
+      "look": "link",
+      "name": "exploring",
+      "target": "people/link/exploring.png",
+      "inputs": [
+        "people/masyn/exploring.png",
+        "people/references/wardrobe/Hyrulian.png"
+      ],
+      "prompt": "Use case: identity-preserve. Image 1 EDIT TARGET has 80 complete Masyn ACTIVITY poses. Image 2 supplies new outfit. Change CLOTHES ONLY on all 80 drawings to image 2. Keep the adult Masyn identity from image 1 AND 2: brown swept hair, green eyes, full brown beard, human ears, same adult body/head proportions, NOT childlike anime/chibi. Hyrulian Adventurer clothes from image 2: deep forest-green tunic, cream long sleeves, leather belt/diagonal strap, opaque tan trousers, brown knee-high boots and gloves, long green cloth cap behind his swept BROWN hair, small wooden round shield on his back. NO blond hair, elf ears, bare thighs, young Link face or bigger eyes. EXACTLY TEN rows of EIGHT complete people, same original pose in every cell, same scale, margins and foot/head position. Rows 1-5 are seated cycling with hands forward holding invisible handlebars and feet pedaling; rows 6-10 are seated axolotl riding, with naturally bent knees. No bicycle or animal drawn. Within BOTH five-row action groups, order is SOUTH front, SOUTHWEST nose points LEFT, WEST profile nose points LEFT, NORTHWEST back tilted LEFT (show back of head), NORTH pure back. Do not swap or mirror these directions. Each row eight different frames from the unchanged movement sequence; preserve elbows, ankles, hands, knees and silhouettes. Clear gutters around every complete figure. Outfit only; no illustrated vehicles or animals, no text, no environmental background, no floor/shadow. Transparent PNG in same polished outlined handheld-RPG rendering as image 1. Do not delete, merge or duplicate any row. Final must contain 10 rows by 8 columns."
+    },
+    {
+      "look": "link",
+      "name": "fishing",
+      "target": "people/link/fishing.png",
+      "inputs": [
+        "people/masyn/fishing.png",
+        "people/references/wardrobe/Hyrulian.png"
+      ],
+      "prompt": "Use case: identity-preserve. Image 1 EDIT TARGET has 80 complete Masyn ACTIVITY poses. Image 2 supplies new outfit. Change CLOTHES ONLY on all 80 drawings to image 2. Keep the adult Masyn identity from image 1 AND 2: brown swept hair, green eyes, full brown beard, human ears, same adult body/head proportions, NOT childlike anime/chibi. Hyrulian Adventurer clothes from image 2: deep forest-green tunic, cream long sleeves, leather belt/diagonal strap, opaque tan trousers, brown knee-high boots and gloves, long green cloth cap behind his swept BROWN hair, small wooden round shield on his back. NO blond hair, elf ears, bare thighs, young Link face or bigger eyes. EXACTLY TEN rows of EIGHT complete people, same original pose in every cell, same scale, margins and foot/head position. Rows 1-5 are standing fishing casts, rows 6-10 are seated casts while riding. Preserve exact arm/cast stages but NO fishing rod or fishing line drawn; those are supplied separately by game. Show both hands in existing grip. Within BOTH five-row action groups, order is SOUTH front, SOUTHWEST nose points LEFT, WEST profile nose points LEFT, NORTHWEST back tilted LEFT (show back of head), NORTH pure back. Do not swap or mirror these directions. Each row eight different frames from the unchanged movement sequence; preserve elbows, ankles, hands, knees and silhouettes. Clear gutters around every complete figure. Outfit only; no illustrated vehicles or animals, no text, no environmental background, no floor/shadow. Transparent PNG in same polished outlined handheld-RPG rendering as image 1. Do not delete, merge or duplicate any row. Final must contain 10 rows by 8 columns."
+    },
+    {
+      "look": "link",
+      "name": "ability",
+      "target": "people/link/ability.png",
+      "inputs": [
+        "people/references/wardrobe/ability-ocarina.png",
+        "people/references/wardrobe/Hyrulian.png"
+      ],
+      "prompt": "Use case: identity-preserve. Image 1 EDIT TARGET is the existing FOUR-ROW EIGHT-COLUMN ability sheet, complete 32 poses. Image 2 is corrected Masyn in this costume. Correct the PERSON'S identity and clothes to exactly image 2, on ALL 32 poses, keeping identical action poses and exact held prop stages. Hyrulian Adventurer clothes from image 2: deep forest-green tunic, cream long sleeves, leather belt/diagonal strap, opaque tan trousers, brown knee-high boots and gloves, long green cloth cap behind his swept BROWN hair, small wooden round shield on his back. NO blond hair, elf ears, bare thighs, young Link face or bigger eyes. Preserve same adult face, full brown beard, GREEN eyes, short BROWN swept hair, same head/body proportions as image 2. No young Link/trainer face. Rows MUST face SOUTH/viewer, NORTH/back, WEST/left profile (nose LEFT), EAST/right profile, respectively. First 8 frames front, next8 back, next8 left, last8 right. Preserve every unique hand position and action stage from image1. He lifts a small BLUE OCARINA to his mouth, plays, and puts it away. Preserve ocarina and playing arms in all four directions. Exactly FOUR rows by EIGHT columns, complete body and prop in every cell with clear gutters. Clean detailed outlined handheld-RPG artwork, fully transparent background, no text/shadows/scenery."
+    },
+    {
+      "look": "costume-portfolio",
+      "name": "south",
+      "target": "people/costume-portfolio/south.png",
+      "inputs": [
+        "people/references/wardrobe/south.png",
+        "people/references/wardrobe/Trainer.png"
+      ],
+      "prompt": "Use case: identity-preserve. Image 1 is the EDIT TARGET: complete Masyn action sheet. Image 2 is the supporting CORRECTED COSTUME/IDENTITY reference. Change ONLY CLOTHING on image 1 to image 2, maintaining Masyn's exact adult face, green eyes, brown hair and full trimmed beard, head width and relative body proportions. Monster trainer clothes from image 2: red and white blank baseball cap over Masyn's BROWN swept hair, navy sleeveless utility vest with golden piping over white tee, blue full-length jeans, black fingerless gloves, cream-soled sneakers, small dark/red backpack. Retain his full trimmed brown beard and ADULT Masyn face, NOT a young anime trainer. Every cell must remain a complete drawing of the SAME ADULT MAN Masyn, wearing these clothes. Lock all body poses, directions, hand/foot positions, anatomy and scale to image 1. ALL 36 cells face SOUTH ONLY. For west and southwest the nose points LEFT; for northwest show his back angled LEFT, north shows back only; south faces viewer. EXACTLY four columns and nine rows: first row four neutral poses, next four rows sixteen WALK poses, last four rows sixteen RUN poses, row-major cycle order. Keep both feet complete and clear transparent gutters. Keep every pose in original cell, same row count, unchanged framing; no guides, labels, scenery, ground shadows or extra objects. Handheld pixel RPG detailed outlined rendering, clean transparent background. Do not simplify or redesign his face into chibi art."
+    },
+    {
+      "look": "costume-portfolio",
+      "name": "southwest",
+      "target": "people/costume-portfolio/southwest.png",
+      "inputs": [
+        "people/references/wardrobe/southwest.png",
+        "people/references/wardrobe/Trainer.png"
+      ],
+      "prompt": "Use case: identity-preserve. Image 1 is the EDIT TARGET: complete Masyn action sheet. Image 2 is the supporting CORRECTED COSTUME/IDENTITY reference. Change ONLY CLOTHING on image 1 to image 2, maintaining Masyn's exact adult face, green eyes, brown hair and full trimmed beard, head width and relative body proportions. Monster trainer clothes from image 2: red and white blank baseball cap over Masyn's BROWN swept hair, navy sleeveless utility vest with golden piping over white tee, blue full-length jeans, black fingerless gloves, cream-soled sneakers, small dark/red backpack. Retain his full trimmed brown beard and ADULT Masyn face, NOT a young anime trainer. Every cell must remain a complete drawing of the SAME ADULT MAN Masyn, wearing these clothes. Lock all body poses, directions, hand/foot positions, anatomy and scale to image 1. ALL 36 cells face SOUTHWEST ONLY. For west and southwest the nose points LEFT; for northwest show his back angled LEFT, north shows back only; south faces viewer. EXACTLY four columns and nine rows: first row four neutral poses, next four rows sixteen WALK poses, last four rows sixteen RUN poses, row-major cycle order. Keep both feet complete and clear transparent gutters. Keep every pose in original cell, same row count, unchanged framing; no guides, labels, scenery, ground shadows or extra objects. Handheld pixel RPG detailed outlined rendering, clean transparent background. Do not simplify or redesign his face into chibi art."
+    },
+    {
+      "look": "costume-portfolio",
+      "name": "west",
+      "target": "people/costume-portfolio/west.png",
+      "inputs": [
+        "people/references/wardrobe/west.png",
+        "people/references/wardrobe/Trainer.png"
+      ],
+      "prompt": "Use case: identity-preserve. Image 1 is the EDIT TARGET: complete Masyn action sheet. Image 2 is the supporting CORRECTED COSTUME/IDENTITY reference. Change ONLY CLOTHING on image 1 to image 2, maintaining Masyn's exact adult face, green eyes, brown hair and full trimmed beard, head width and relative body proportions. Monster trainer clothes from image 2: red and white blank baseball cap over Masyn's BROWN swept hair, navy sleeveless utility vest with golden piping over white tee, blue full-length jeans, black fingerless gloves, cream-soled sneakers, small dark/red backpack. Retain his full trimmed brown beard and ADULT Masyn face, NOT a young anime trainer. Every cell must remain a complete drawing of the SAME ADULT MAN Masyn, wearing these clothes. Lock all body poses, directions, hand/foot positions, anatomy and scale to image 1. ALL 36 cells face WEST ONLY. For west and southwest the nose points LEFT; for northwest show his back angled LEFT, north shows back only; south faces viewer. EXACTLY four columns and nine rows: first row four neutral poses, next four rows sixteen WALK poses, last four rows sixteen RUN poses, row-major cycle order. Keep both feet complete and clear transparent gutters. Keep every pose in original cell, same row count, unchanged framing; no guides, labels, scenery, ground shadows or extra objects. Handheld pixel RPG detailed outlined rendering, clean transparent background. Do not simplify or redesign his face into chibi art."
+    },
+    {
+      "look": "costume-portfolio",
+      "name": "northwest",
+      "target": "people/costume-portfolio/northwest.png",
+      "inputs": [
+        "people/references/wardrobe/northwest.png",
+        "people/references/wardrobe/Trainer.png"
+      ],
+      "prompt": "Use case: identity-preserve. Image 1 is the EDIT TARGET: complete Masyn action sheet. Image 2 is the supporting CORRECTED COSTUME/IDENTITY reference. Change ONLY CLOTHING on image 1 to image 2, maintaining Masyn's exact adult face, green eyes, brown hair and full trimmed beard, head width and relative body proportions. Monster trainer clothes from image 2: red and white blank baseball cap over Masyn's BROWN swept hair, navy sleeveless utility vest with golden piping over white tee, blue full-length jeans, black fingerless gloves, cream-soled sneakers, small dark/red backpack. Retain his full trimmed brown beard and ADULT Masyn face, NOT a young anime trainer. Every cell must remain a complete drawing of the SAME ADULT MAN Masyn, wearing these clothes. Lock all body poses, directions, hand/foot positions, anatomy and scale to image 1. ALL 36 cells face NORTHWEST ONLY. For west and southwest the nose points LEFT; for northwest show his back angled LEFT, north shows back only; south faces viewer. EXACTLY four columns and nine rows: first row four neutral poses, next four rows sixteen WALK poses, last four rows sixteen RUN poses, row-major cycle order. Keep both feet complete and clear transparent gutters. Keep every pose in original cell, same row count, unchanged framing; no guides, labels, scenery, ground shadows or extra objects. Handheld pixel RPG detailed outlined rendering, clean transparent background. Do not simplify or redesign his face into chibi art."
+    },
+    {
+      "look": "costume-portfolio",
+      "name": "north",
+      "target": "people/costume-portfolio/north.png",
+      "inputs": [
+        "people/references/wardrobe/north.png",
+        "people/references/wardrobe/Trainer.png"
+      ],
+      "prompt": "Use case: identity-preserve. Image 1 is the EDIT TARGET: complete Masyn action sheet. Image 2 is the supporting CORRECTED COSTUME/IDENTITY reference. Change ONLY CLOTHING on image 1 to image 2, maintaining Masyn's exact adult face, green eyes, brown hair and full trimmed beard, head width and relative body proportions. Monster trainer clothes from image 2: red and white blank baseball cap over Masyn's BROWN swept hair, navy sleeveless utility vest with golden piping over white tee, blue full-length jeans, black fingerless gloves, cream-soled sneakers, small dark/red backpack. Retain his full trimmed brown beard and ADULT Masyn face, NOT a young anime trainer. Every cell must remain a complete drawing of the SAME ADULT MAN Masyn, wearing these clothes. Lock all body poses, directions, hand/foot positions, anatomy and scale to image 1. ALL 36 cells face NORTH ONLY. For west and southwest the nose points LEFT; for northwest show his back angled LEFT, north shows back only; south faces viewer. EXACTLY four columns and nine rows: first row four neutral poses, next four rows sixteen WALK poses, last four rows sixteen RUN poses, row-major cycle order. Keep both feet complete and clear transparent gutters. Keep every pose in original cell, same row count, unchanged framing; no guides, labels, scenery, ground shadows or extra objects. Handheld pixel RPG detailed outlined rendering, clean transparent background. Do not simplify or redesign his face into chibi art."
+    },
+    {
+      "look": "costume-portfolio",
+      "name": "skating",
+      "target": "people/costume-portfolio/skating.png",
+      "inputs": [
+        "people/masyn/skating.png",
+        "people/references/wardrobe/Trainer.png"
+      ],
+      "prompt": "Use case: identity-preserve. Image 1 EDIT TARGET has 80 complete Masyn ACTIVITY poses. Image 2 supplies new outfit. Change CLOTHES ONLY on all 80 drawings to image 2. Keep the adult Masyn identity from image 1 AND 2: brown swept hair, green eyes, full brown beard, human ears, same adult body/head proportions, NOT childlike anime/chibi. Monster trainer clothes from image 2: red and white blank baseball cap over Masyn's BROWN swept hair, navy sleeveless utility vest with golden piping over white tee, blue full-length jeans, black fingerless gloves, cream-soled sneakers, small dark/red backpack. Retain his full trimmed brown beard and ADULT Masyn face, NOT a young anime trainer. EXACTLY TEN rows of EIGHT complete people, same original pose in every cell, same scale, margins and foot/head position. Rows 1-5 are skateboard riding/pushing and rows 6-10 are crouching/hopping tricks. No board drawn; game supplies it. Within BOTH five-row action groups, order is SOUTH front, SOUTHWEST nose points LEFT, WEST profile nose points LEFT, NORTHWEST back tilted LEFT (show back of head), NORTH pure back. Do not swap or mirror these directions. Each row eight different frames from the unchanged movement sequence; preserve elbows, ankles, hands, knees and silhouettes. Clear gutters around every complete figure. Outfit only; no illustrated vehicles or animals, no text, no environmental background, no floor/shadow. Transparent PNG in same polished outlined handheld-RPG rendering as image 1. Do not delete, merge or duplicate any row. Final must contain 10 rows by 8 columns."
+    },
+    {
+      "look": "costume-portfolio",
+      "name": "water",
+      "target": "people/costume-portfolio/water.png",
+      "inputs": [
+        "people/masyn/water.png",
+        "people/references/wardrobe/Trainer.png"
+      ],
+      "prompt": "Use case: identity-preserve. Image 1 EDIT TARGET has 80 complete Masyn ACTIVITY poses. Image 2 supplies new outfit. Change CLOTHES ONLY on all 80 drawings to image 2. Keep the adult Masyn identity from image 1 AND 2: brown swept hair, green eyes, full brown beard, human ears, same adult body/head proportions, NOT childlike anime/chibi. Monster trainer clothes from image 2: red and white blank baseball cap over Masyn's BROWN swept hair, navy sleeveless utility vest with golden piping over white tee, blue full-length jeans, black fingerless gloves, cream-soled sneakers, small dark/red backpack. Retain his full trimmed brown beard and ADULT Masyn face, NOT a young anime trainer. EXACTLY TEN rows of EIGHT complete people, same original pose in every cell, same scale, margins and foot/head position. Rows 1-5 are wakeboarding holding tow rope handle; rows 6-10 are seated boat/jetski driving with both hands steering and visibly bent knees. No board or vehicle drawn. Within BOTH five-row action groups, order is SOUTH front, SOUTHWEST nose points LEFT, WEST profile nose points LEFT, NORTHWEST back tilted LEFT (show back of head), NORTH pure back. Do not swap or mirror these directions. Each row eight different frames from the unchanged movement sequence; preserve elbows, ankles, hands, knees and silhouettes. Clear gutters around every complete figure. Outfit only; no illustrated vehicles or animals, no text, no environmental background, no floor/shadow. Transparent PNG in same polished outlined handheld-RPG rendering as image 1. Do not delete, merge or duplicate any row. Final must contain 10 rows by 8 columns."
+    },
+    {
+      "look": "costume-portfolio",
+      "name": "exploring",
+      "target": "people/costume-portfolio/exploring.png",
+      "inputs": [
+        "people/masyn/exploring.png",
+        "people/references/wardrobe/Trainer.png"
+      ],
+      "prompt": "Use case: identity-preserve. Image 1 EDIT TARGET has 80 complete Masyn ACTIVITY poses. Image 2 supplies new outfit. Change CLOTHES ONLY on all 80 drawings to image 2. Keep the adult Masyn identity from image 1 AND 2: brown swept hair, green eyes, full brown beard, human ears, same adult body/head proportions, NOT childlike anime/chibi. Monster trainer clothes from image 2: red and white blank baseball cap over Masyn's BROWN swept hair, navy sleeveless utility vest with golden piping over white tee, blue full-length jeans, black fingerless gloves, cream-soled sneakers, small dark/red backpack. Retain his full trimmed brown beard and ADULT Masyn face, NOT a young anime trainer. EXACTLY TEN rows of EIGHT complete people, same original pose in every cell, same scale, margins and foot/head position. Rows 1-5 are seated cycling with hands forward holding invisible handlebars and feet pedaling; rows 6-10 are seated axolotl riding, with naturally bent knees. No bicycle or animal drawn. Within BOTH five-row action groups, order is SOUTH front, SOUTHWEST nose points LEFT, WEST profile nose points LEFT, NORTHWEST back tilted LEFT (show back of head), NORTH pure back. Do not swap or mirror these directions. Each row eight different frames from the unchanged movement sequence; preserve elbows, ankles, hands, knees and silhouettes. Clear gutters around every complete figure. Outfit only; no illustrated vehicles or animals, no text, no environmental background, no floor/shadow. Transparent PNG in same polished outlined handheld-RPG rendering as image 1. Do not delete, merge or duplicate any row. Final must contain 10 rows by 8 columns."
+    },
+    {
+      "look": "costume-portfolio",
+      "name": "fishing",
+      "target": "people/costume-portfolio/fishing.png",
+      "inputs": [
+        "people/masyn/fishing.png",
+        "people/references/wardrobe/Trainer.png"
+      ],
+      "prompt": "Use case: identity-preserve. Image 1 EDIT TARGET has 80 complete Masyn ACTIVITY poses. Image 2 supplies new outfit. Change CLOTHES ONLY on all 80 drawings to image 2. Keep the adult Masyn identity from image 1 AND 2: brown swept hair, green eyes, full brown beard, human ears, same adult body/head proportions, NOT childlike anime/chibi. Monster trainer clothes from image 2: red and white blank baseball cap over Masyn's BROWN swept hair, navy sleeveless utility vest with golden piping over white tee, blue full-length jeans, black fingerless gloves, cream-soled sneakers, small dark/red backpack. Retain his full trimmed brown beard and ADULT Masyn face, NOT a young anime trainer. EXACTLY TEN rows of EIGHT complete people, same original pose in every cell, same scale, margins and foot/head position. Rows 1-5 are standing fishing casts, rows 6-10 are seated casts while riding. Preserve exact arm/cast stages but NO fishing rod or fishing line drawn; those are supplied separately by game. Show both hands in existing grip. Within BOTH five-row action groups, order is SOUTH front, SOUTHWEST nose points LEFT, WEST profile nose points LEFT, NORTHWEST back tilted LEFT (show back of head), NORTH pure back. Do not swap or mirror these directions. Each row eight different frames from the unchanged movement sequence; preserve elbows, ankles, hands, knees and silhouettes. Clear gutters around every complete figure. Outfit only; no illustrated vehicles or animals, no text, no environmental background, no floor/shadow. Transparent PNG in same polished outlined handheld-RPG rendering as image 1. Do not delete, merge or duplicate any row. Final must contain 10 rows by 8 columns."
+    },
+    {
+      "look": "costume-portfolio",
+      "name": "ability",
+      "target": "people/costume-portfolio/ability.png",
+      "inputs": [
+        "people/references/wardrobe/ability-pokeball.png",
+        "people/references/wardrobe/Trainer.png"
+      ],
+      "prompt": "Use case: identity-preserve. Image 1 EDIT TARGET is the existing FOUR-ROW EIGHT-COLUMN ability sheet, complete 32 poses. Image 2 is corrected Masyn in this costume. Correct the PERSON'S identity and clothes to exactly image 2, on ALL 32 poses, keeping identical action poses and exact held prop stages. Monster trainer clothes from image 2: red and white blank baseball cap over Masyn's BROWN swept hair, navy sleeveless utility vest with golden piping over white tee, blue full-length jeans, black fingerless gloves, cream-soled sneakers, small dark/red backpack. Retain his full trimmed brown beard and ADULT Masyn face, NOT a young anime trainer. Preserve same adult face, full brown beard, GREEN eyes, short BROWN swept hair, same head/body proportions as image 2. No young Link/trainer face. Rows MUST face SOUTH/viewer, NORTH/back, WEST/left profile (nose LEFT), EAST/right profile, respectively. First 8 frames front, next8 back, next8 left, last8 right. Preserve every unique hand position and action stage from image1. He draws, winds up, throws and recovers a red and white capture ball. Preserve every throwing pose in all four directions. Exactly FOUR rows by EIGHT columns, complete body and prop in every cell with clear gutters. Clean detailed outlined handheld-RPG artwork, fully transparent background, no text/shadows/scenery."
+    },
+    {
+      "look": "costume-portfolio",
+      "name": "walk-south",
+      "target": "people/costume-portfolio/walk-south.png",
+      "inputs": [
+        "people/references/wardrobe/walk-south.png",
+        "people/references/wardrobe/Trainer.png"
+      ],
+      "prompt": "Use case: identity-preserve. Image 1 is the EDIT TARGET: complete Masyn action sheet. Image 2 is the supporting CORRECTED COSTUME/IDENTITY reference. Change ONLY CLOTHING on image 1 to image 2, maintaining Masyn's exact adult face, green eyes, brown hair and full trimmed beard, head width and relative body proportions. Monster trainer clothes from image 2: red and white blank baseball cap over Masyn's BROWN swept hair, navy sleeveless utility vest with golden piping over white tee, blue full-length jeans, black fingerless gloves, cream-soled sneakers, small dark/red backpack. Retain his full trimmed brown beard and ADULT Masyn face, NOT a young anime trainer. Every cell must remain a complete drawing of the SAME ADULT MAN Masyn, wearing these clothes. Lock all body poses, directions, hand/foot positions, anatomy and scale to image 1. ALL 16 cells face SOUTH ONLY. For west and southwest the nose points LEFT; for northwest show his back angled LEFT, north shows back only; south faces viewer. EXACTLY FOUR columns and FOUR rows: SIXTEEN WALK poses only, in unchanged row-major cycle order. All are WALKING south; no idle or running rows. Keep both feet complete and clear transparent gutters. Keep every pose in original cell, same row count, unchanged framing; no guides, labels, scenery, ground shadows or extra objects. Handheld pixel RPG detailed outlined rendering, clean transparent background. Do not simplify or redesign his face into chibi art."
+    }
+  ]
+}

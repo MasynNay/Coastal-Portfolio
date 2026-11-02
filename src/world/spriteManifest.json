@@ -1,0 +1,40 @@
+{
+  "duck": {
+    "src": "/world/sprites/duck.webp",
+    "cw": 96,
+    "ch": 80,
+    "family": false,
+    "costume": false,
+    "revision": "1fce62993a01"
+  },
+  "goose": {
+    "src": "/world/sprites/goose.webp",
+    "cw": 180,
+    "ch": 140,
+    "revision": "225f6aa48e11"
+  },
+  "axolotl": {
+    "src": "/world/sprites/axolotl.webp",
+    "cw": 180,
+    "ch": 140,
+    "revision": "5fb8b53227ca"
+  },
+  "axolotl-blue": {
+    "src": "/world/sprites/axolotl-blue.webp",
+    "cw": 180,
+    "ch": 140,
+    "revision": "07a0fc41b2c7"
+  },
+  "fish": {
+    "src": "/world/sprites/fish.webp",
+    "cw": 180,
+    "ch": 140,
+    "revision": "b563db3bd901"
+  },
+  "koi": {
+    "src": "/world/sprites/koi.webp",
+    "cw": 180,
+    "ch": 140,
+    "revision": "94677acd852b"
+  }
+}

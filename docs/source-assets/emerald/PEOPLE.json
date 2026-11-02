@@ -1,0 +1,7 @@
+[
+  {
+    "id": "MiShellMoney",
+    "reference": "/home/lotus/Projects/masynnay.com/docs/source-assets/emerald/MiShellWalk.png",
+    "prompt": "Use case: identity-preserve. Reference is Mi Shell's identity and clothing, keep her straight shoulder length black hair, glasses, warm tan skin, white dotted dress with black neck bow and sandals, friendly face and chibi proportions. Detailed clean GBA/HeartGold-style pixel-art sprite atlas of her playfully tossing dollar bills. FOUR columns x FOUR rows, real transparent background, full body, equal clear cells. Row1 SOUTH/front, row2 NORTH/back, row3 WEST/left, row4 EAST/right. Four action poses each: reaches into tiny purse, holds a small fan of green bills, extends arm and flicks bills away with open hand, relaxed hand returns to purse. Bills only IN HAND in frame2, airborne bills are rendered by the game separately; do not draw particles outside the body. Fixed feet baseline and scale. Rich fabric/hair detail and intentional smooth pixel contours matching a cozy detailed JRPG town, no shadows, text, grid or scenery."
+  }
+]

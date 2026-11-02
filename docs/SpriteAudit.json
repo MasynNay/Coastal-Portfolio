@@ -1,0 +1,4668 @@
+{
+  "filesScanned": 184,
+  "framesScanned": 13372,
+  "noisePixels": 7754,
+  "files": [
+    {
+      "asset": "masyn-emote",
+      "src": "/world/sprites/emerald/masyn-emote.png",
+      "pixels": 3
+    },
+    {
+      "asset": "ezra-emote",
+      "src": "/world/sprites/emerald/ezra-emote.png",
+      "pixels": 1
+    },
+    {
+      "asset": "fallyn-surf",
+      "src": "/world/sprites/emerald/fallyn-surf.png",
+      "pixels": 4
+    },
+    {
+      "asset": "fallyn-land",
+      "src": "/world/sprites/emerald/fallyn-land.png",
+      "pixels": 1
+    },
+    {
+      "asset": "fitzgerald-surf",
+      "src": "/world/sprites/emerald/fitzgerald-surf.png",
+      "pixels": 1
+    },
+    {
+      "asset": "fitzgerald-land",
+      "src": "/world/sprites/emerald/fitzgerald-land.png",
+      "pixels": 6
+    },
+    {
+      "asset": "fish-cory",
+      "src": "/world/sprites/emerald/fish-cory.png",
+      "pixels": 1
+    },
+    {
+      "asset": "fish-carp",
+      "src": "/world/sprites/emerald/fish-carp.png",
+      "pixels": 1
+    },
+    {
+      "asset": "fish-gourami",
+      "src": "/world/sprites/emerald/fish-gourami.png",
+      "pixels": 13
+    },
+    {
+      "asset": "fish-ray",
+      "src": "/world/sprites/emerald/fish-ray.png",
+      "pixels": 1
+    },
+    {
+      "asset": "fish-aurora",
+      "src": "/world/sprites/emerald/fish-aurora.png",
+      "pixels": 9
+    },
+    {
+      "asset": "koi",
+      "src": "/world/sprites/koi.webp",
+      "pixels": 63
+    },
+    {
+      "asset": "spider-fern",
+      "src": "/world/collections/spider-fern.webp",
+      "pixels": 1
+    },
+    {
+      "asset": "spider-copper",
+      "src": "/world/collections/spider-copper.webp",
+      "pixels": 2
+    },
+    {
+      "asset": "spider-slate",
+      "src": "/world/collections/spider-slate.webp",
+      "pixels": 1
+    },
+    {
+      "asset": "fish-bluegill",
+      "src": "/world/collections/fish-bluegill.webp",
+      "pixels": 1
+    },
+    {
+      "asset": "fish-epaulette-shark",
+      "src": "/world/sprites/emerald/fish-epaulette-shark.png",
+      "pixels": 6
+    },
+    {
+      "asset": "fish-catshark",
+      "src": "/world/sprites/emerald/fish-catshark.png",
+      "pixels": 2
+    },
+    {
+      "asset": "fish-leopard-shark",
+      "src": "/world/sprites/emerald/fish-leopard-shark.png",
+      "pixels": 3
+    },
+    {
+      "asset": "fish-cherry-shrimp",
+      "src": "/world/sprites/emerald/fish-cherry-shrimp.png",
+      "pixels": 9
+    },
+    {
+      "asset": "fish-crystal-shrimp",
+      "src": "/world/sprites/emerald/fish-crystal-shrimp.png",
+      "pixels": 1
+    },
+    {
+      "asset": "fish-blue-shrimp",
+      "src": "/world/sprites/emerald/fish-blue-shrimp.png",
+      "pixels": 8
+    },
+    {
+      "asset": "fish-amano-shrimp",
+      "src": "/world/sprites/emerald/fish-amano-shrimp.png",
+      "pixels": 1
+    },
+    {
+      "asset": "fish-ghost-shrimp",
+      "src": "/world/sprites/emerald/fish-ghost-shrimp.png",
+      "pixels": 5
+    },
+    {
+      "asset": "fish-blue-crayfish",
+      "src": "/world/sprites/emerald/fish-blue-crayfish.png",
+      "pixels": 17
+    },
+    {
+      "asset": "fish-orange-crayfish",
+      "src": "/world/sprites/emerald/fish-orange-crayfish.png",
+      "pixels": 29
+    },
+    {
+      "asset": "fish-spiny-lobster",
+      "src": "/world/sprites/emerald/fish-spiny-lobster.png",
+      "pixels": 18
+    },
+    {
+      "asset": "fish-cardinalfish",
+      "src": "/world/sprites/emerald/fish-cardinalfish.png",
+      "pixels": 2
+    },
+    {
+      "asset": "fish-swordtail",
+      "src": "/world/sprites/emerald/fish-swordtail.png",
+      "pixels": 4
+    },
+    {
+      "asset": "spider-fern",
+      "src": "/world/collections/spider-fern.webp",
+      "pixels": 1
+    },
+    {
+      "asset": "spider-copper",
+      "src": "/world/collections/spider-copper.webp",
+      "pixels": 2
+    },
+    {
+      "asset": "spider-slate",
+      "src": "/world/collections/spider-slate.webp",
+      "pixels": 1
+    },
+    {
+      "asset": "fish-bluegill",
+      "src": "/world/collections/fish-bluegill.webp",
+      "pixels": 1
+    },
+    {
+      "asset": "spider-garnet",
+      "src": "/world/collections/spider-garnet.webp",
+      "pixels": 1
+    },
+    {
+      "asset": "spider-topaz",
+      "src": "/world/collections/spider-topaz.webp",
+      "pixels": 1
+    },
+    {
+      "asset": "spider-obsidian",
+      "src": "/world/collections/spider-obsidian.webp",
+      "pixels": 1
+    },
+    {
+      "asset": "spider-sandstone",
+      "src": "/world/collections/spider-sandstone.webp",
+      "pixels": 1
+    },
+    {
+      "asset": "spider-basalt",
+      "src": "/world/collections/spider-basalt.webp",
+      "pixels": 1
+    },
+    {
+      "asset": "spider-poppy",
+      "src": "/world/collections/spider-poppy.webp",
+      "pixels": 1
+    },
+    {
+      "asset": "spider-bromeliad",
+      "src": "/world/collections/spider-bromeliad.webp",
+      "pixels": 2
+    },
+    {
+      "asset": "spider-geranium",
+      "src": "/world/collections/spider-geranium.webp",
+      "pixels": 1
+    },
+    {
+      "asset": "spider-jasmine",
+      "src": "/world/collections/spider-jasmine.webp",
+      "pixels": 1
+    },
+    {
+      "asset": "spider-willow",
+      "src": "/world/collections/spider-willow.webp",
+      "pixels": 2
+    },
+    {
+      "asset": "spider-sequoia",
+      "src": "/world/collections/spider-sequoia.webp",
+      "pixels": 1
+    },
+    {
+      "asset": "spider-cranberry",
+      "src": "/world/collections/spider-cranberry.webp",
+      "pixels": 2
+    },
+    {
+      "asset": "spider-starfruit",
+      "src": "/world/collections/spider-starfruit.webp",
+      "pixels": 3
+    },
+    {
+      "asset": "spider-coconut",
+      "src": "/world/collections/spider-coconut.webp",
+      "pixels": 3
+    },
+    {
+      "asset": "spider-glacier",
+      "src": "/world/collections/spider-glacier.webp",
+      "pixels": 1
+    },
+    {
+      "asset": "fish-painted-turtle",
+      "src": "/world/collections/fish-painted-turtle.webp",
+      "pixels": 2
+    },
+    {
+      "asset": "fish-cherry-shrimp",
+      "src": "/world/collections/fish-cherry-shrimp.webp",
+      "pixels": 9
+    },
+    {
+      "asset": "fish-crystal-shrimp",
+      "src": "/world/collections/fish-crystal-shrimp.webp",
+      "pixels": 7
+    },
+    {
+      "asset": "fish-blue-shrimp",
+      "src": "/world/collections/fish-blue-shrimp.webp",
+      "pixels": 4
+    },
+    {
+      "asset": "fish-amano-shrimp",
+      "src": "/world/collections/fish-amano-shrimp.webp",
+      "pixels": 20
+    },
+    {
+      "asset": "fish-ghost-shrimp",
+      "src": "/world/collections/fish-ghost-shrimp.webp",
+      "pixels": 2
+    },
+    {
+      "asset": "fish-coconut-octopus",
+      "src": "/world/collections/fish-coconut-octopus.webp",
+      "pixels": 1
+    },
+    {
+      "asset": "fish-dartfish",
+      "src": "/world/collections/fish-dartfish.webp",
+      "pixels": 2
+    },
+    {
+      "asset": "ezra-emote",
+      "src": "/world/sprites/emerald/ezra-emote.png",
+      "pixels": 3
+    },
+    {
+      "asset": "fitzgerald-surf",
+      "src": "/world/sprites/emerald/fitzgerald-surf.png",
+      "pixels": 11
+    },
+    {
+      "asset": "mantis-leaf",
+      "src": "/world/sprites/emerald/mantis-leaf.png",
+      "pixels": 10
+    },
+    {
+      "asset": "mantis-orchid",
+      "src": "/world/sprites/emerald/mantis-orchid.png",
+      "pixels": 13
+    },
+    {
+      "asset": "mantis-ghost",
+      "src": "/world/sprites/emerald/mantis-ghost.png",
+      "pixels": 5
+    },
+    {
+      "asset": "mantis-jade",
+      "src": "/world/sprites/emerald/mantis-jade.png",
+      "pixels": 5
+    },
+    {
+      "asset": "mantis-moon",
+      "src": "/world/sprites/emerald/mantis-moon.png",
+      "pixels": 5
+    },
+    {
+      "asset": "butterfly-monarch",
+      "src": "/world/sprites/emerald/butterfly-monarch.png",
+      "pixels": 10
+    },
+    {
+      "asset": "butterfly-swallowtail",
+      "src": "/world/sprites/emerald/butterfly-swallowtail.png",
+      "pixels": 2
+    },
+    {
+      "asset": "butterfly-glasswing",
+      "src": "/world/sprites/emerald/butterfly-glasswing.png",
+      "pixels": 3
+    },
+    {
+      "asset": "butterfly-cabbage",
+      "src": "/world/sprites/emerald/butterfly-cabbage.png",
+      "pixels": 3
+    },
+    {
+      "asset": "butterfly-sunset",
+      "src": "/world/sprites/emerald/butterfly-sunset.png",
+      "pixels": 1
+    },
+    {
+      "asset": "ladybug-ruby",
+      "src": "/world/sprites/emerald/ladybug-ruby.png",
+      "pixels": 3
+    },
+    {
+      "asset": "dragonfly-pond",
+      "src": "/world/sprites/emerald/dragonfly-pond.png",
+      "pixels": 3
+    },
+    {
+      "asset": "dragonfly-scarlet",
+      "src": "/world/sprites/emerald/dragonfly-scarlet.png",
+      "pixels": 1
+    },
+    {
+      "asset": "dragonfly-golden",
+      "src": "/world/sprites/emerald/dragonfly-golden.png",
+      "pixels": 2
+    },
+    {
+      "asset": "dragonfly-violet",
+      "src": "/world/sprites/emerald/dragonfly-violet.png",
+      "pixels": 3
+    },
+    {
+      "asset": "spider-fern",
+      "src": "/world/collections/spider-fern.webp",
+      "pixels": 1
+    },
+    {
+      "asset": "spider-copper",
+      "src": "/world/collections/spider-copper.webp",
+      "pixels": 2
+    },
+    {
+      "asset": "spider-slate",
+      "src": "/world/collections/spider-slate.webp",
+      "pixels": 1
+    },
+    {
+      "asset": "fish-bluegill",
+      "src": "/world/collections/fish-bluegill.webp",
+      "pixels": 1
+    },
+    {
+      "asset": "spider-garnet",
+      "src": "/world/collections/spider-garnet.webp",
+      "pixels": 1
+    },
+    {
+      "asset": "spider-topaz",
+      "src": "/world/collections/spider-topaz.webp",
+      "pixels": 1
+    },
+    {
+      "asset": "spider-obsidian",
+      "src": "/world/collections/spider-obsidian.webp",
+      "pixels": 1
+    },
+    {
+      "asset": "spider-sandstone",
+      "src": "/world/collections/spider-sandstone.webp",
+      "pixels": 1
+    },
+    {
+      "asset": "spider-basalt",
+      "src": "/world/collections/spider-basalt.webp",
+      "pixels": 1
+    },
+    {
+      "asset": "spider-poppy",
+      "src": "/world/collections/spider-poppy.webp",
+      "pixels": 1
+    },
+    {
+      "asset": "spider-bromeliad",
+      "src": "/world/collections/spider-bromeliad.webp",
+      "pixels": 2
+    },
+    {
+      "asset": "spider-geranium",
+      "src": "/world/collections/spider-geranium.webp",
+      "pixels": 1
+    },
+    {
+      "asset": "spider-jasmine",
+      "src": "/world/collections/spider-jasmine.webp",
+      "pixels": 1
+    },
+    {
+      "asset": "spider-willow",
+      "src": "/world/collections/spider-willow.webp",
+      "pixels": 2
+    },
+    {
+      "asset": "spider-sequoia",
+      "src": "/world/collections/spider-sequoia.webp",
+      "pixels": 1
+    },
+    {
+      "asset": "spider-cranberry",
+      "src": "/world/collections/spider-cranberry.webp",
+      "pixels": 2
+    },
+    {
+      "asset": "spider-starfruit",
+      "src": "/world/collections/spider-starfruit.webp",
+      "pixels": 3
+    },
+    {
+      "asset": "spider-coconut",
+      "src": "/world/collections/spider-coconut.webp",
+      "pixels": 3
+    },
+    {
+      "asset": "spider-glacier",
+      "src": "/world/collections/spider-glacier.webp",
+      "pixels": 1
+    },
+    {
+      "asset": "fish-painted-turtle",
+      "src": "/world/collections/fish-painted-turtle.webp",
+      "pixels": 2
+    },
+    {
+      "asset": "fish-cherry-shrimp",
+      "src": "/world/collections/fish-cherry-shrimp.webp",
+      "pixels": 9
+    },
+    {
+      "asset": "fish-crystal-shrimp",
+      "src": "/world/collections/fish-crystal-shrimp.webp",
+      "pixels": 7
+    },
+    {
+      "asset": "fish-blue-shrimp",
+      "src": "/world/collections/fish-blue-shrimp.webp",
+      "pixels": 4
+    },
+    {
+      "asset": "fish-amano-shrimp",
+      "src": "/world/collections/fish-amano-shrimp.webp",
+      "pixels": 20
+    },
+    {
+      "asset": "fish-ghost-shrimp",
+      "src": "/world/collections/fish-ghost-shrimp.webp",
+      "pixels": 2
+    },
+    {
+      "asset": "fish-coconut-octopus",
+      "src": "/world/collections/fish-coconut-octopus.webp",
+      "pixels": 1
+    },
+    {
+      "asset": "fish-dartfish",
+      "src": "/world/collections/fish-dartfish.webp",
+      "pixels": 2
+    },
+    {
+      "asset": "mantis-ghost",
+      "src": "/world/collections/mantis-ghost.webp",
+      "pixels": 1
+    },
+    {
+      "asset": "butterfly-monarch",
+      "src": "/world/collections/butterfly-monarch.webp",
+      "pixels": 5
+    },
+    {
+      "asset": "butterfly-swallowtail",
+      "src": "/world/collections/butterfly-swallowtail.webp",
+      "pixels": 2
+    },
+    {
+      "asset": "butterfly-glasswing",
+      "src": "/world/collections/butterfly-glasswing.webp",
+      "pixels": 6
+    },
+    {
+      "asset": "butterfly-cabbage",
+      "src": "/world/collections/butterfly-cabbage.webp",
+      "pixels": 9
+    },
+    {
+      "asset": "butterfly-sunset",
+      "src": "/world/collections/butterfly-sunset.webp",
+      "pixels": 2
+    },
+    {
+      "asset": "dragonfly-violet",
+      "src": "/world/collections/dragonfly-violet.webp",
+      "pixels": 2
+    },
+    {
+      "asset": "mi-shell",
+      "src": "/world/sprites/emerald/mi-shell.png",
+      "pixels": 18
+    },
+    {
+      "asset": "fallyn",
+      "src": "/world/sprites/emerald/fallyn.png",
+      "pixels": 3
+    },
+    {
+      "asset": "link",
+      "src": "/world/sprites/emerald/link.png",
+      "pixels": 1
+    },
+    {
+      "asset": "costume-home",
+      "src": "/world/sprites/emerald/costume-airbender.png",
+      "pixels": 1
+    },
+    {
+      "asset": "costume-fallyn-ladybug",
+      "src": "/world/sprites/emerald/costume-fallyn-ladybug.png",
+      "pixels": 4
+    },
+    {
+      "asset": "mantis-leaf",
+      "src": "/world/sprites/emerald/mantis-leaf.png",
+      "pixels": 26
+    },
+    {
+      "asset": "mantis-orchid",
+      "src": "/world/sprites/emerald/mantis-orchid.png",
+      "pixels": 15
+    },
+    {
+      "asset": "mantis-ghost",
+      "src": "/world/sprites/emerald/mantis-ghost.png",
+      "pixels": 21
+    },
+    {
+      "asset": "mantis-jade",
+      "src": "/world/sprites/emerald/mantis-jade.png",
+      "pixels": 15
+    },
+    {
+      "asset": "mantis-moon",
+      "src": "/world/sprites/emerald/mantis-moon.png",
+      "pixels": 15
+    },
+    {
+      "asset": "butterfly-monarch",
+      "src": "/world/sprites/emerald/butterfly-monarch.png",
+      "pixels": 13
+    },
+    {
+      "asset": "butterfly-swallowtail",
+      "src": "/world/sprites/emerald/butterfly-swallowtail.png",
+      "pixels": 3
+    },
+    {
+      "asset": "butterfly-glasswing",
+      "src": "/world/sprites/emerald/butterfly-glasswing.png",
+      "pixels": 6
+    },
+    {
+      "asset": "butterfly-cabbage",
+      "src": "/world/sprites/emerald/butterfly-cabbage.png",
+      "pixels": 10
+    },
+    {
+      "asset": "butterfly-sunset",
+      "src": "/world/sprites/emerald/butterfly-sunset.png",
+      "pixels": 4
+    },
+    {
+      "asset": "spider-fern",
+      "src": "/world/collections/spider-fern.webp",
+      "pixels": 1
+    },
+    {
+      "asset": "spider-copper",
+      "src": "/world/collections/spider-copper.webp",
+      "pixels": 2
+    },
+    {
+      "asset": "spider-slate",
+      "src": "/world/collections/spider-slate.webp",
+      "pixels": 1
+    },
+    {
+      "asset": "fish-bluegill",
+      "src": "/world/collections/fish-bluegill.webp",
+      "pixels": 1
+    },
+    {
+      "asset": "spider-garnet",
+      "src": "/world/collections/spider-garnet.webp",
+      "pixels": 1
+    },
+    {
+      "asset": "spider-topaz",
+      "src": "/world/collections/spider-topaz.webp",
+      "pixels": 1
+    },
+    {
+      "asset": "spider-obsidian",
+      "src": "/world/collections/spider-obsidian.webp",
+      "pixels": 1
+    },
+    {
+      "asset": "spider-sandstone",
+      "src": "/world/collections/spider-sandstone.webp",
+      "pixels": 1
+    },
+    {
+      "asset": "spider-basalt",
+      "src": "/world/collections/spider-basalt.webp",
+      "pixels": 1
+    },
+    {
+      "asset": "spider-poppy",
+      "src": "/world/collections/spider-poppy.webp",
+      "pixels": 1
+    },
+    {
+      "asset": "spider-bromeliad",
+      "src": "/world/collections/spider-bromeliad.webp",
+      "pixels": 2
+    },
+    {
+      "asset": "spider-geranium",
+      "src": "/world/collections/spider-geranium.webp",
+      "pixels": 1
+    },
+    {
+      "asset": "spider-jasmine",
+      "src": "/world/collections/spider-jasmine.webp",
+      "pixels": 1
+    },
+    {
+      "asset": "spider-willow",
+      "src": "/world/collections/spider-willow.webp",
+      "pixels": 2
+    },
+    {
+      "asset": "spider-sequoia",
+      "src": "/world/collections/spider-sequoia.webp",
+      "pixels": 1
+    },
+    {
+      "asset": "spider-cranberry",
+      "src": "/world/collections/spider-cranberry.webp",
+      "pixels": 2
+    },
+    {
+      "asset": "spider-starfruit",
+      "src": "/world/collections/spider-starfruit.webp",
+      "pixels": 3
+    },
+    {
+      "asset": "spider-coconut",
+      "src": "/world/collections/spider-coconut.webp",
+      "pixels": 3
+    },
+    {
+      "asset": "spider-glacier",
+      "src": "/world/collections/spider-glacier.webp",
+      "pixels": 1
+    },
+    {
+      "asset": "fish-painted-turtle",
+      "src": "/world/collections/fish-painted-turtle.webp",
+      "pixels": 2
+    },
+    {
+      "asset": "fish-cherry-shrimp",
+      "src": "/world/collections/fish-cherry-shrimp.webp",
+      "pixels": 9
+    },
+    {
+      "asset": "fish-crystal-shrimp",
+      "src": "/world/collections/fish-crystal-shrimp.webp",
+      "pixels": 7
+    },
+    {
+      "asset": "fish-blue-shrimp",
+      "src": "/world/collections/fish-blue-shrimp.webp",
+      "pixels": 4
+    },
+    {
+      "asset": "fish-amano-shrimp",
+      "src": "/world/collections/fish-amano-shrimp.webp",
+      "pixels": 20
+    },
+    {
+      "asset": "fish-ghost-shrimp",
+      "src": "/world/collections/fish-ghost-shrimp.webp",
+      "pixels": 2
+    },
+    {
+      "asset": "fish-coconut-octopus",
+      "src": "/world/collections/fish-coconut-octopus.webp",
+      "pixels": 1
+    },
+    {
+      "asset": "fish-dartfish",
+      "src": "/world/collections/fish-dartfish.webp",
+      "pixels": 2
+    },
+    {
+      "asset": "mantis-leaf",
+      "src": "/world/collections/mantis-leaf.webp",
+      "pixels": 1
+    },
+    {
+      "asset": "mantis-orchid",
+      "src": "/world/collections/mantis-orchid.webp",
+      "pixels": 2
+    },
+    {
+      "asset": "mantis-ghost",
+      "src": "/world/collections/mantis-ghost.webp",
+      "pixels": 1
+    },
+    {
+      "asset": "mantis-jade",
+      "src": "/world/collections/mantis-jade.webp",
+      "pixels": 2
+    },
+    {
+      "asset": "butterfly-glasswing",
+      "src": "/world/collections/butterfly-glasswing.webp",
+      "pixels": 6
+    },
+    {
+      "asset": "butterfly-sunset",
+      "src": "/world/collections/butterfly-sunset.webp",
+      "pixels": 9
+    },
+    {
+      "asset": "ladybug-obsidian",
+      "src": "/world/collections/ladybug-obsidian.webp",
+      "pixels": 1
+    },
+    {
+      "asset": "dragonfly-scarlet",
+      "src": "/world/collections/dragonfly-scarlet.webp",
+      "pixels": 3
+    },
+    {
+      "asset": "dragonfly-violet",
+      "src": "/world/collections/dragonfly-violet.webp",
+      "pixels": 8
+    },
+    {
+      "asset": "masyn",
+      "src": "/world/sprites/emerald/masyn.png",
+      "pixels": 7
+    },
+    {
+      "asset": "ezra",
+      "src": "/world/sprites/emerald/ezra.png",
+      "pixels": 14
+    },
+    {
+      "asset": "fallyn",
+      "src": "/world/sprites/emerald/fallyn.png",
+      "pixels": 1
+    },
+    {
+      "asset": "masyn-run",
+      "src": "/world/sprites/emerald/masyn-run.png",
+      "pixels": 4
+    },
+    {
+      "asset": "ezra-run",
+      "src": "/world/sprites/emerald/ezra-run.png",
+      "pixels": 18
+    },
+    {
+      "asset": "fallyn-run",
+      "src": "/world/sprites/emerald/fallyn-run.png",
+      "pixels": 1
+    },
+    {
+      "asset": "mi-shell-surf",
+      "src": "/world/sprites/emerald/mi-shell-surf.png",
+      "pixels": 1
+    },
+    {
+      "asset": "costume-skills",
+      "src": "/world/sprites/emerald/costume-skills.png",
+      "pixels": 3
+    },
+    {
+      "asset": "costume-portfolio",
+      "src": "/world/sprites/emerald/costume-portfolio.png",
+      "pixels": 4
+    },
+    {
+      "asset": "ability-arrow",
+      "src": "/world/sprites/emerald/ability-arrow.png",
+      "pixels": 3
+    },
+    {
+      "asset": "fallyn",
+      "src": "/world/sprites/emerald/fallyn.png",
+      "pixels": 2
+    },
+    {
+      "asset": "mi-shell-run",
+      "src": "/world/sprites/emerald/mi-shell-run.png",
+      "pixels": 4
+    },
+    {
+      "asset": "ezra-run",
+      "src": "/world/sprites/emerald/ezra-run.png",
+      "pixels": 2
+    },
+    {
+      "asset": "fitzgerald-run",
+      "src": "/world/sprites/emerald/fitzgerald-run.png",
+      "pixels": 2
+    },
+    {
+      "asset": "mantis-bamboo",
+      "src": "/world/sprites/emerald/mantis-bamboo.png",
+      "pixels": 8
+    },
+    {
+      "asset": "mantis-flower",
+      "src": "/world/sprites/emerald/mantis-flower.png",
+      "pixels": 6
+    },
+    {
+      "asset": "mantis-shield",
+      "src": "/world/sprites/emerald/mantis-shield.png",
+      "pixels": 3
+    },
+    {
+      "asset": "mantis-twig",
+      "src": "/world/sprites/emerald/mantis-twig.png",
+      "pixels": 8
+    },
+    {
+      "asset": "mantis-emerald",
+      "src": "/world/sprites/emerald/mantis-emerald.png",
+      "pixels": 2
+    },
+    {
+      "asset": "mantis-peach",
+      "src": "/world/sprites/emerald/mantis-peach.png",
+      "pixels": 4
+    },
+    {
+      "asset": "mantis-moss",
+      "src": "/world/sprites/emerald/mantis-moss.png",
+      "pixels": 3
+    },
+    {
+      "asset": "mantis-copper",
+      "src": "/world/sprites/emerald/mantis-copper.png",
+      "pixels": 2
+    },
+    {
+      "asset": "mantis-lavender",
+      "src": "/world/sprites/emerald/mantis-lavender.png",
+      "pixels": 1
+    },
+    {
+      "asset": "mantis-mint",
+      "src": "/world/sprites/emerald/mantis-mint.png",
+      "pixels": 13
+    },
+    {
+      "asset": "mantis-sunflower",
+      "src": "/world/sprites/emerald/mantis-sunflower.png",
+      "pixels": 6
+    },
+    {
+      "asset": "mantis-ivory",
+      "src": "/world/sprites/emerald/mantis-ivory.png",
+      "pixels": 10
+    },
+    {
+      "asset": "mantis-violet",
+      "src": "/world/sprites/emerald/mantis-violet.png",
+      "pixels": 7
+    },
+    {
+      "asset": "mantis-fern",
+      "src": "/world/sprites/emerald/mantis-fern.png",
+      "pixels": 2
+    },
+    {
+      "asset": "mantis-sand",
+      "src": "/world/sprites/emerald/mantis-sand.png",
+      "pixels": 5
+    },
+    {
+      "asset": "mantis-turquoise",
+      "src": "/world/sprites/emerald/mantis-turquoise.png",
+      "pixels": 2
+    },
+    {
+      "asset": "mantis-ruby",
+      "src": "/world/sprites/emerald/mantis-ruby.png",
+      "pixels": 1
+    },
+    {
+      "asset": "mantis-dew",
+      "src": "/world/sprites/emerald/mantis-dew.png",
+      "pixels": 2
+    },
+    {
+      "asset": "mantis-maple",
+      "src": "/world/sprites/emerald/mantis-maple.png",
+      "pixels": 15
+    },
+    {
+      "asset": "mantis-silver",
+      "src": "/world/sprites/emerald/mantis-silver.png",
+      "pixels": 11
+    },
+    {
+      "asset": "mantis-coral",
+      "src": "/world/sprites/emerald/mantis-coral.png",
+      "pixels": 14
+    },
+    {
+      "asset": "mantis-midnight",
+      "src": "/world/sprites/emerald/mantis-midnight.png",
+      "pixels": 6
+    },
+    {
+      "asset": "mantis-starlight",
+      "src": "/world/sprites/emerald/mantis-starlight.png",
+      "pixels": 5
+    },
+    {
+      "asset": "butterfly-painted",
+      "src": "/world/sprites/emerald/butterfly-painted.png",
+      "pixels": 2
+    },
+    {
+      "asset": "butterfly-tiger",
+      "src": "/world/sprites/emerald/butterfly-tiger.png",
+      "pixels": 5
+    },
+    {
+      "asset": "butterfly-emerald",
+      "src": "/world/sprites/emerald/butterfly-emerald.png",
+      "pixels": 1
+    },
+    {
+      "asset": "butterfly-copper",
+      "src": "/world/sprites/emerald/butterfly-copper.png",
+      "pixels": 6
+    },
+    {
+      "asset": "butterfly-hairstreak",
+      "src": "/world/sprites/emerald/butterfly-hairstreak.png",
+      "pixels": 20
+    },
+    {
+      "asset": "butterfly-redadmiral",
+      "src": "/world/sprites/emerald/butterfly-redadmiral.png",
+      "pixels": 8
+    },
+    {
+      "asset": "butterfly-mourning",
+      "src": "/world/sprites/emerald/butterfly-mourning.png",
+      "pixels": 11
+    },
+    {
+      "asset": "butterfly-orange",
+      "src": "/world/sprites/emerald/butterfly-orange.png",
+      "pixels": 12
+    },
+    {
+      "asset": "butterfly-clouded",
+      "src": "/world/sprites/emerald/butterfly-clouded.png",
+      "pixels": 7
+    },
+    {
+      "asset": "butterfly-purple",
+      "src": "/world/sprites/emerald/butterfly-purple.png",
+      "pixels": 10
+    },
+    {
+      "asset": "butterfly-tortoise",
+      "src": "/world/sprites/emerald/butterfly-tortoise.png",
+      "pixels": 8
+    },
+    {
+      "asset": "butterfly-zebra",
+      "src": "/world/sprites/emerald/butterfly-zebra.png",
+      "pixels": 9
+    },
+    {
+      "asset": "butterfly-malachite",
+      "src": "/world/sprites/emerald/butterfly-malachite.png",
+      "pixels": 6
+    },
+    {
+      "asset": "butterfly-buckeye",
+      "src": "/world/sprites/emerald/butterfly-buckeye.png",
+      "pixels": 6
+    },
+    {
+      "asset": "butterfly-cabbage-island",
+      "src": "/world/sprites/emerald/butterfly-cabbage-island.png",
+      "pixels": 11
+    },
+    {
+      "asset": "butterfly-comma",
+      "src": "/world/sprites/emerald/butterfly-comma.png",
+      "pixels": 5
+    },
+    {
+      "asset": "butterfly-wood",
+      "src": "/world/sprites/emerald/butterfly-wood.png",
+      "pixels": 7
+    },
+    {
+      "asset": "butterfly-sulphur",
+      "src": "/world/sprites/emerald/butterfly-sulphur.png",
+      "pixels": 8
+    },
+    {
+      "asset": "butterfly-azure",
+      "src": "/world/sprites/emerald/butterfly-azure.png",
+      "pixels": 4
+    },
+    {
+      "asset": "butterfly-heath",
+      "src": "/world/sprites/emerald/butterfly-heath.png",
+      "pixels": 5
+    },
+    {
+      "asset": "butterfly-fritillary",
+      "src": "/world/sprites/emerald/butterfly-fritillary.png",
+      "pixels": 4
+    },
+    {
+      "asset": "butterfly-rose",
+      "src": "/world/sprites/emerald/butterfly-rose.png",
+      "pixels": 4
+    },
+    {
+      "asset": "butterfly-moonbow",
+      "src": "/world/sprites/emerald/butterfly-moonbow.png",
+      "pixels": 5
+    },
+    {
+      "asset": "ladybug-seven",
+      "src": "/world/sprites/emerald/ladybug-seven.png",
+      "pixels": 1
+    },
+    {
+      "asset": "ladybug-orange",
+      "src": "/world/sprites/emerald/ladybug-orange.png",
+      "pixels": 1
+    },
+    {
+      "asset": "ladybug-ash",
+      "src": "/world/sprites/emerald/ladybug-ash.png",
+      "pixels": 1
+    },
+    {
+      "asset": "ladybug-harlequin",
+      "src": "/world/sprites/emerald/ladybug-harlequin.png",
+      "pixels": 4
+    },
+    {
+      "asset": "ladybug-kidney",
+      "src": "/world/sprites/emerald/ladybug-kidney.png",
+      "pixels": 1
+    },
+    {
+      "asset": "ladybug-striped",
+      "src": "/world/sprites/emerald/ladybug-striped.png",
+      "pixels": 4
+    },
+    {
+      "asset": "ladybug-peach",
+      "src": "/world/sprites/emerald/ladybug-peach.png",
+      "pixels": 8
+    },
+    {
+      "asset": "ladybug-teal",
+      "src": "/world/sprites/emerald/ladybug-teal.png",
+      "pixels": 11
+    },
+    {
+      "asset": "ladybug-rubystripe",
+      "src": "/world/sprites/emerald/ladybug-rubystripe.png",
+      "pixels": 7
+    },
+    {
+      "asset": "ladybug-dusk",
+      "src": "/world/sprites/emerald/ladybug-dusk.png",
+      "pixels": 7
+    },
+    {
+      "asset": "ladybug-opal",
+      "src": "/world/sprites/emerald/ladybug-opal.png",
+      "pixels": 6
+    },
+    {
+      "asset": "dragonfly-green",
+      "src": "/world/sprites/emerald/dragonfly-green.png",
+      "pixels": 2
+    },
+    {
+      "asset": "dragonfly-flame",
+      "src": "/world/sprites/emerald/dragonfly-flame.png",
+      "pixels": 2
+    },
+    {
+      "asset": "dragonfly-golden-island",
+      "src": "/world/sprites/emerald/dragonfly-golden-island.png",
+      "pixels": 1
+    },
+    {
+      "asset": "dragonfly-emerald",
+      "src": "/world/sprites/emerald/dragonfly-emerald.png",
+      "pixels": 1
+    },
+    {
+      "asset": "dragonfly-hawker",
+      "src": "/world/sprites/emerald/dragonfly-hawker.png",
+      "pixels": 3
+    },
+    {
+      "asset": "dragonfly-ruby",
+      "src": "/world/sprites/emerald/dragonfly-ruby.png",
+      "pixels": 3
+    },
+    {
+      "asset": "dragonfly-sapphire",
+      "src": "/world/sprites/emerald/dragonfly-sapphire.png",
+      "pixels": 10
+    },
+    {
+      "asset": "dragonfly-blacktail",
+      "src": "/world/sprites/emerald/dragonfly-blacktail.png",
+      "pixels": 4
+    },
+    {
+      "asset": "dragonfly-keeled",
+      "src": "/world/sprites/emerald/dragonfly-keeled.png",
+      "pixels": 11
+    },
+    {
+      "asset": "dragonfly-chaser",
+      "src": "/world/sprites/emerald/dragonfly-chaser.png",
+      "pixels": 14
+    },
+    {
+      "asset": "dragonfly-scarlet-island",
+      "src": "/world/sprites/emerald/dragonfly-scarlet-island.png",
+      "pixels": 10
+    },
+    {
+      "asset": "dragonfly-blue",
+      "src": "/world/sprites/emerald/dragonfly-blue.png",
+      "pixels": 3
+    },
+    {
+      "asset": "dragonfly-jade",
+      "src": "/world/sprites/emerald/dragonfly-jade.png",
+      "pixels": 5
+    },
+    {
+      "asset": "dragonfly-rose",
+      "src": "/world/sprites/emerald/dragonfly-rose.png",
+      "pixels": 8
+    },
+    {
+      "asset": "dragonfly-copper",
+      "src": "/world/sprites/emerald/dragonfly-copper.png",
+      "pixels": 7
+    },
+    {
+      "asset": "dragonfly-mint",
+      "src": "/world/sprites/emerald/dragonfly-mint.png",
+      "pixels": 11
+    },
+    {
+      "asset": "dragonfly-azure",
+      "src": "/world/sprites/emerald/dragonfly-azure.png",
+      "pixels": 11
+    },
+    {
+      "asset": "dragonfly-rubywing",
+      "src": "/world/sprites/emerald/dragonfly-rubywing.png",
+      "pixels": 14
+    },
+    {
+      "asset": "dragonfly-silver",
+      "src": "/world/sprites/emerald/dragonfly-silver.png",
+      "pixels": 18
+    },
+    {
+      "asset": "dragonfly-tiger",
+      "src": "/world/sprites/emerald/dragonfly-tiger.png",
+      "pixels": 6
+    },
+    {
+      "asset": "dragonfly-teal",
+      "src": "/world/sprites/emerald/dragonfly-teal.png",
+      "pixels": 16
+    },
+    {
+      "asset": "dragonfly-sunset",
+      "src": "/world/sprites/emerald/dragonfly-sunset.png",
+      "pixels": 14
+    },
+    {
+      "asset": "dragonfly-night",
+      "src": "/world/sprites/emerald/dragonfly-night.png",
+      "pixels": 12
+    },
+    {
+      "asset": "dragonfly-aurora",
+      "src": "/world/sprites/emerald/dragonfly-aurora.png",
+      "pixels": 19
+    },
+    {
+      "asset": "spider-fern",
+      "src": "/world/collections/spider-fern.webp",
+      "pixels": 1
+    },
+    {
+      "asset": "spider-copper",
+      "src": "/world/collections/spider-copper.webp",
+      "pixels": 2
+    },
+    {
+      "asset": "spider-slate",
+      "src": "/world/collections/spider-slate.webp",
+      "pixels": 1
+    },
+    {
+      "asset": "fish-bluegill",
+      "src": "/world/collections/fish-bluegill.webp",
+      "pixels": 1
+    },
+    {
+      "asset": "spider-garnet",
+      "src": "/world/collections/spider-garnet.webp",
+      "pixels": 1
+    },
+    {
+      "asset": "spider-topaz",
+      "src": "/world/collections/spider-topaz.webp",
+      "pixels": 1
+    },
+    {
+      "asset": "spider-obsidian",
+      "src": "/world/collections/spider-obsidian.webp",
+      "pixels": 1
+    },
+    {
+      "asset": "spider-sandstone",
+      "src": "/world/collections/spider-sandstone.webp",
+      "pixels": 1
+    },
+    {
+      "asset": "spider-basalt",
+      "src": "/world/collections/spider-basalt.webp",
+      "pixels": 1
+    },
+    {
+      "asset": "spider-poppy",
+      "src": "/world/collections/spider-poppy.webp",
+      "pixels": 1
+    },
+    {
+      "asset": "spider-bromeliad",
+      "src": "/world/collections/spider-bromeliad.webp",
+      "pixels": 2
+    },
+    {
+      "asset": "spider-geranium",
+      "src": "/world/collections/spider-geranium.webp",
+      "pixels": 1
+    },
+    {
+      "asset": "spider-jasmine",
+      "src": "/world/collections/spider-jasmine.webp",
+      "pixels": 1
+    },
+    {
+      "asset": "spider-willow",
+      "src": "/world/collections/spider-willow.webp",
+      "pixels": 2
+    },
+    {
+      "asset": "spider-sequoia",
+      "src": "/world/collections/spider-sequoia.webp",
+      "pixels": 1
+    },
+    {
+      "asset": "spider-cranberry",
+      "src": "/world/collections/spider-cranberry.webp",
+      "pixels": 2
+    },
+    {
+      "asset": "spider-starfruit",
+      "src": "/world/collections/spider-starfruit.webp",
+      "pixels": 3
+    },
+    {
+      "asset": "spider-coconut",
+      "src": "/world/collections/spider-coconut.webp",
+      "pixels": 3
+    },
+    {
+      "asset": "spider-glacier",
+      "src": "/world/collections/spider-glacier.webp",
+      "pixels": 1
+    },
+    {
+      "asset": "fish-painted-turtle",
+      "src": "/world/collections/fish-painted-turtle.webp",
+      "pixels": 2
+    },
+    {
+      "asset": "fish-cherry-shrimp",
+      "src": "/world/collections/fish-cherry-shrimp.webp",
+      "pixels": 9
+    },
+    {
+      "asset": "fish-crystal-shrimp",
+      "src": "/world/collections/fish-crystal-shrimp.webp",
+      "pixels": 7
+    },
+    {
+      "asset": "fish-blue-shrimp",
+      "src": "/world/collections/fish-blue-shrimp.webp",
+      "pixels": 4
+    },
+    {
+      "asset": "fish-amano-shrimp",
+      "src": "/world/collections/fish-amano-shrimp.webp",
+      "pixels": 20
+    },
+    {
+      "asset": "fish-ghost-shrimp",
+      "src": "/world/collections/fish-ghost-shrimp.webp",
+      "pixels": 2
+    },
+    {
+      "asset": "fish-coconut-octopus",
+      "src": "/world/collections/fish-coconut-octopus.webp",
+      "pixels": 1
+    },
+    {
+      "asset": "fish-dartfish",
+      "src": "/world/collections/fish-dartfish.webp",
+      "pixels": 2
+    },
+    {
+      "asset": "mantis-leaf",
+      "src": "/world/collections/mantis-leaf.webp",
+      "pixels": 1
+    },
+    {
+      "asset": "mantis-orchid",
+      "src": "/world/collections/mantis-orchid.webp",
+      "pixels": 2
+    },
+    {
+      "asset": "mantis-ghost",
+      "src": "/world/collections/mantis-ghost.webp",
+      "pixels": 1
+    },
+    {
+      "asset": "mantis-jade",
+      "src": "/world/collections/mantis-jade.webp",
+      "pixels": 2
+    },
+    {
+      "asset": "butterfly-glasswing",
+      "src": "/world/collections/butterfly-glasswing.webp",
+      "pixels": 6
+    },
+    {
+      "asset": "butterfly-sunset",
+      "src": "/world/collections/butterfly-sunset.webp",
+      "pixels": 9
+    },
+    {
+      "asset": "ladybug-obsidian",
+      "src": "/world/collections/ladybug-obsidian.webp",
+      "pixels": 1
+    },
+    {
+      "asset": "dragonfly-scarlet",
+      "src": "/world/collections/dragonfly-scarlet.webp",
+      "pixels": 3
+    },
+    {
+      "asset": "dragonfly-violet",
+      "src": "/world/collections/dragonfly-violet.webp",
+      "pixels": 8
+    },
+    {
+      "asset": "mantis-maple",
+      "src": "/world/collections/mantis-maple.webp",
+      "pixels": 1
+    },
+    {
+      "asset": "mantis-coral",
+      "src": "/world/collections/mantis-coral.webp",
+      "pixels": 1
+    },
+    {
+      "asset": "butterfly-painted",
+      "src": "/world/collections/butterfly-painted.webp",
+      "pixels": 3
+    },
+    {
+      "asset": "butterfly-morpho",
+      "src": "/world/collections/butterfly-morpho.webp",
+      "pixels": 2
+    },
+    {
+      "asset": "butterfly-peacock",
+      "src": "/world/collections/butterfly-peacock.webp",
+      "pixels": 7
+    },
+    {
+      "asset": "butterfly-tiger",
+      "src": "/world/collections/butterfly-tiger.webp",
+      "pixels": 2
+    },
+    {
+      "asset": "butterfly-emerald",
+      "src": "/world/collections/butterfly-emerald.webp",
+      "pixels": 5
+    },
+    {
+      "asset": "butterfly-copper",
+      "src": "/world/collections/butterfly-copper.webp",
+      "pixels": 1
+    },
+    {
+      "asset": "butterfly-tortoise",
+      "src": "/world/collections/butterfly-tortoise.webp",
+      "pixels": 1
+    },
+    {
+      "asset": "butterfly-buckeye",
+      "src": "/world/collections/butterfly-buckeye.webp",
+      "pixels": 3
+    },
+    {
+      "asset": "butterfly-azure",
+      "src": "/world/collections/butterfly-azure.webp",
+      "pixels": 1
+    },
+    {
+      "asset": "butterfly-fritillary",
+      "src": "/world/collections/butterfly-fritillary.webp",
+      "pixels": 1
+    },
+    {
+      "asset": "ladybug-pink",
+      "src": "/world/collections/ladybug-pink.webp",
+      "pixels": 1
+    },
+    {
+      "asset": "ladybug-orange",
+      "src": "/world/collections/ladybug-orange.webp",
+      "pixels": 1
+    },
+    {
+      "asset": "dragonfly-rubywing",
+      "src": "/world/collections/dragonfly-rubywing.webp",
+      "pixels": 1
+    },
+    {
+      "asset": "dragonfly-silver",
+      "src": "/world/collections/dragonfly-silver.webp",
+      "pixels": 3
+    },
+    {
+      "asset": "mi-shell-run",
+      "src": "/world/sprites/emerald/mi-shell-run.png",
+      "pixels": 4
+    },
+    {
+      "asset": "masyn",
+      "src": "/world/sprites/emerald/masyn.png",
+      "pixels": 4
+    },
+    {
+      "asset": "ezra",
+      "src": "/world/sprites/emerald/ezra.png",
+      "pixels": 21
+    },
+    {
+      "asset": "fallyn",
+      "src": "/world/sprites/emerald/fallyn.png",
+      "pixels": 2
+    },
+    {
+      "asset": "fitzgerald",
+      "src": "/world/sprites/emerald/fitzgerald.png",
+      "pixels": 2
+    },
+    {
+      "asset": "mi-shell-run",
+      "src": "/world/sprites/emerald/mi-shell-run.png",
+      "pixels": 2
+    },
+    {
+      "asset": "ezra-run",
+      "src": "/world/sprites/emerald/ezra-run.png",
+      "pixels": 2
+    },
+    {
+      "asset": "fitzgerald-run",
+      "src": "/world/sprites/emerald/fitzgerald-run.png",
+      "pixels": 2
+    },
+    {
+      "asset": "costume-skills",
+      "src": "/world/sprites/emerald/costume-skills.png",
+      "pixels": 4
+    },
+    {
+      "asset": "costume-portfolio",
+      "src": "/world/sprites/emerald/costume-portfolio.png",
+      "pixels": 6
+    },
+    {
+      "asset": "costume-resume",
+      "src": "/world/sprites/emerald/costume-resume.png",
+      "pixels": 2
+    },
+    {
+      "asset": "costume-contact",
+      "src": "/world/sprites/emerald/costume-contact.png",
+      "pixels": 1
+    },
+    {
+      "asset": "costume-fallyn-ladybug-run",
+      "src": "/world/sprites/emerald/costume-fallyn-ladybug-run.png",
+      "pixels": 2
+    },
+    {
+      "asset": "masyn",
+      "src": "/world/sprites/emerald/masyn.png",
+      "pixels": 4
+    },
+    {
+      "asset": "ezra",
+      "src": "/world/sprites/emerald/ezra.png",
+      "pixels": 33
+    },
+    {
+      "asset": "fallyn",
+      "src": "/world/sprites/emerald/fallyn.png",
+      "pixels": 2
+    },
+    {
+      "asset": "fitzgerald",
+      "src": "/world/sprites/emerald/fitzgerald.png",
+      "pixels": 2
+    },
+    {
+      "asset": "masyn-fish",
+      "src": "/world/sprites/emerald/masyn-fish.png",
+      "pixels": 6
+    },
+    {
+      "asset": "mi-shell-fish",
+      "src": "/world/sprites/emerald/mi-shell-fish.png",
+      "pixels": 9
+    },
+    {
+      "asset": "ezra-run",
+      "src": "/world/sprites/emerald/ezra-run.png",
+      "pixels": 18
+    },
+    {
+      "asset": "ezra-fish",
+      "src": "/world/sprites/emerald/ezra-fish.png",
+      "pixels": 9
+    },
+    {
+      "asset": "fallyn-fish",
+      "src": "/world/sprites/emerald/fallyn-fish.png",
+      "pixels": 3
+    },
+    {
+      "asset": "fitzgerald-run",
+      "src": "/world/sprites/emerald/fitzgerald-run.png",
+      "pixels": 2
+    },
+    {
+      "asset": "masyn-surf",
+      "src": "/world/sprites/emerald/masyn-surf.png",
+      "pixels": 3
+    },
+    {
+      "asset": "mi-shell-surf",
+      "src": "/world/sprites/emerald/mi-shell-surf.png",
+      "pixels": 1
+    },
+    {
+      "asset": "ezra-surf",
+      "src": "/world/sprites/emerald/ezra-surf.png",
+      "pixels": 9
+    },
+    {
+      "asset": "ezra-emote",
+      "src": "/world/sprites/emerald/ezra-emote.png",
+      "pixels": 2
+    },
+    {
+      "asset": "fallyn-land",
+      "src": "/world/sprites/emerald/fallyn-land.png",
+      "pixels": 1
+    },
+    {
+      "asset": "costume-skills",
+      "src": "/world/sprites/emerald/costume-skills.png",
+      "pixels": 4
+    },
+    {
+      "asset": "costume-portfolio",
+      "src": "/world/sprites/emerald/costume-portfolio.png",
+      "pixels": 6
+    },
+    {
+      "asset": "costume-resume",
+      "src": "/world/sprites/emerald/costume-resume.png",
+      "pixels": 2
+    },
+    {
+      "asset": "costume-contact",
+      "src": "/world/sprites/emerald/costume-contact.png",
+      "pixels": 1
+    },
+    {
+      "asset": "masyn-fish-surf",
+      "src": "/world/sprites/emerald/masyn-fish-surf.png",
+      "pixels": 3
+    },
+    {
+      "asset": "mi-shell-fish-surf",
+      "src": "/world/sprites/emerald/mi-shell-fish-surf.png",
+      "pixels": 8
+    },
+    {
+      "asset": "ezra-fish-surf",
+      "src": "/world/sprites/emerald/ezra-fish-surf.png",
+      "pixels": 12
+    },
+    {
+      "asset": "costume-ezra-spider",
+      "src": "/world/sprites/emerald/costume-ezra-spider.png",
+      "pixels": 1
+    },
+    {
+      "asset": "ability-arrow",
+      "src": "/world/sprites/emerald/ability-arrow.png",
+      "pixels": 3
+    },
+    {
+      "asset": "glide-launch",
+      "src": "/world/sprites/emerald/glide-launch.png",
+      "pixels": 1
+    },
+    {
+      "asset": "ezra-bike-acro",
+      "src": "/world/sprites/emerald/ezra-bike-acro.png",
+      "pixels": 1
+    },
+    {
+      "asset": "costume-ezra-spider-run",
+      "src": "/world/sprites/emerald/costume-ezra-spider-run.png",
+      "pixels": 8
+    },
+    {
+      "asset": "costume-fallyn-ladybug-run",
+      "src": "/world/sprites/emerald/costume-fallyn-ladybug-run.png",
+      "pixels": 4
+    },
+    {
+      "asset": "ability-arrow",
+      "src": "/world/sprites/emerald/ability-arrow.png",
+      "pixels": 3
+    },
+    {
+      "asset": "ability-arrow",
+      "src": "/world/sprites/emerald/ability-arrow.png",
+      "pixels": 4
+    },
+    {
+      "asset": "masyn-water-ride",
+      "src": "/world/sprites/emerald/masyn-water-ride.png",
+      "pixels": 1
+    },
+    {
+      "asset": "ezra-water-ride",
+      "src": "/world/sprites/emerald/ezra-water-ride.png",
+      "pixels": 12
+    },
+    {
+      "asset": "masyn-water-ride",
+      "src": "/world/sprites/emerald/masyn-water-ride.png",
+      "pixels": 1
+    },
+    {
+      "asset": "ezra-water-ride",
+      "src": "/world/sprites/emerald/ezra-water-ride.png",
+      "pixels": 12
+    },
+    {
+      "asset": "mi-shell-run",
+      "src": "/world/sprites/emerald/mi-shell-run.png",
+      "pixels": 2
+    },
+    {
+      "asset": "fallyn-run",
+      "src": "/world/sprites/emerald/fallyn-run.png",
+      "pixels": 11
+    },
+    {
+      "asset": "costume-resume",
+      "src": "/world/sprites/emerald/costume-resume.png",
+      "pixels": 4
+    },
+    {
+      "asset": "costume-home",
+      "src": "/world/sprites/emerald/costume-airbender.png",
+      "pixels": 2
+    },
+    {
+      "asset": "costume-fitzgerald-spider-run",
+      "src": "/world/sprites/emerald/costume-fitzgerald-spider-run.png",
+      "pixels": 2
+    },
+    {
+      "asset": "masyn-board-ride",
+      "src": "/world/sprites/emerald/masyn-board-ride.png",
+      "pixels": 1
+    },
+    {
+      "asset": "ezra-board-ride",
+      "src": "/world/sprites/emerald/ezra-board-ride.png",
+      "pixels": 2
+    },
+    {
+      "asset": "mi-shell-run",
+      "src": "/world/sprites/emerald/mi-shell-run.png",
+      "pixels": 2
+    },
+    {
+      "asset": "ezra-run",
+      "src": "/world/sprites/emerald/ezra-run.png",
+      "pixels": 9
+    },
+    {
+      "asset": "costume-skills",
+      "src": "/world/sprites/emerald/costume-skills.png",
+      "pixels": 2
+    },
+    {
+      "asset": "costume-resume-run",
+      "src": "/world/sprites/emerald/costume-resume-run.png",
+      "pixels": 3
+    },
+    {
+      "asset": "costume-fitzgerald-spider-run",
+      "src": "/world/sprites/emerald/costume-fitzgerald-spider-run.png",
+      "pixels": 2
+    },
+    {
+      "asset": "mi-shell-wake-ride",
+      "src": "/world/sprites/emerald/mi-shell-wake-ride.png",
+      "pixels": 1
+    },
+    {
+      "asset": "ezra-board-trick",
+      "src": "/world/sprites/emerald/ezra-board-trick.png",
+      "pixels": 21
+    },
+    {
+      "asset": "ezra-wake-ride",
+      "src": "/world/sprites/emerald/ezra-wake-ride.png",
+      "pixels": 3
+    },
+    {
+      "asset": "fitzgerald-board-trick",
+      "src": "/world/sprites/emerald/fitzgerald-board-trick.png",
+      "pixels": 1
+    },
+    {
+      "asset": "mi-shell-board-ride",
+      "src": "/world/sprites/emerald/mi-shell-board-ride.png",
+      "pixels": 5
+    },
+    {
+      "asset": "ezra-board-ride",
+      "src": "/world/sprites/emerald/ezra-board-ride.png",
+      "pixels": 6
+    },
+    {
+      "asset": "fitzgerald-board-ride",
+      "src": "/world/sprites/emerald/fitzgerald-board-ride.png",
+      "pixels": 1
+    },
+    {
+      "asset": "mi-shell-board-ride",
+      "src": "/world/sprites/emerald/mi-shell-board-ride.png",
+      "pixels": 5
+    },
+    {
+      "asset": "ezra-board-ride",
+      "src": "/world/sprites/emerald/ezra-board-ride.png",
+      "pixels": 4
+    },
+    {
+      "asset": "masyn",
+      "src": "/world/sprites/emerald/masyn.png",
+      "pixels": 3
+    },
+    {
+      "asset": "mi-shell",
+      "src": "/world/sprites/emerald/mi-shell.png",
+      "pixels": 24
+    },
+    {
+      "asset": "ezra",
+      "src": "/world/sprites/emerald/ezra.png",
+      "pixels": 21
+    },
+    {
+      "asset": "fitzgerald",
+      "src": "/world/sprites/emerald/fitzgerald.png",
+      "pixels": 15
+    },
+    {
+      "asset": "masyn-run",
+      "src": "/world/sprites/emerald/masyn-run.png",
+      "pixels": 10
+    },
+    {
+      "asset": "mi-shell-run",
+      "src": "/world/sprites/emerald/mi-shell-run.png",
+      "pixels": 85
+    },
+    {
+      "asset": "ezra-run",
+      "src": "/world/sprites/emerald/ezra-run.png",
+      "pixels": 1
+    },
+    {
+      "asset": "fallyn-run",
+      "src": "/world/sprites/emerald/fallyn-run.png",
+      "pixels": 2
+    },
+    {
+      "asset": "link",
+      "src": "/world/sprites/emerald/link.png",
+      "pixels": 1
+    },
+    {
+      "asset": "costume-contact",
+      "src": "/world/sprites/emerald/costume-contact.png",
+      "pixels": 24
+    },
+    {
+      "asset": "costume-home",
+      "src": "/world/sprites/emerald/costume-airbender.png",
+      "pixels": 4
+    },
+    {
+      "asset": "costume-ezra-spider",
+      "src": "/world/sprites/emerald/costume-ezra-spider.png",
+      "pixels": 24
+    },
+    {
+      "asset": "costume-fitzgerald-spider",
+      "src": "/world/sprites/emerald/costume-fitzgerald-spider.png",
+      "pixels": 5
+    },
+    {
+      "asset": "costume-skills-run",
+      "src": "/world/sprites/emerald/costume-skills-run.png",
+      "pixels": 3
+    },
+    {
+      "asset": "costume-contact-run",
+      "src": "/world/sprites/emerald/costume-contact-run.png",
+      "pixels": 2
+    },
+    {
+      "asset": "costume-airbender-run",
+      "src": "/world/sprites/emerald/costume-airbender-run.png",
+      "pixels": 16
+    },
+    {
+      "asset": "costume-ezra-spider-run",
+      "src": "/world/sprites/emerald/costume-ezra-spider-run.png",
+      "pixels": 19
+    },
+    {
+      "asset": "costume-fitzgerald-spider-run",
+      "src": "/world/sprites/emerald/costume-fitzgerald-spider-run.png",
+      "pixels": 8
+    },
+    {
+      "asset": "mi-shell",
+      "src": "/world/sprites/emerald/mi-shell.png",
+      "pixels": 22
+    },
+    {
+      "asset": "mi-shell-run",
+      "src": "/world/sprites/emerald/mi-shell-run.png",
+      "pixels": 23
+    },
+    {
+      "asset": "mi-shell-fish",
+      "src": "/world/sprites/emerald/mi-shell-fish.png",
+      "pixels": 5
+    },
+    {
+      "asset": "ezra-run",
+      "src": "/world/sprites/emerald/ezra-run.png",
+      "pixels": 4
+    },
+    {
+      "asset": "ezra-fish",
+      "src": "/world/sprites/emerald/ezra-fish.png",
+      "pixels": 4
+    },
+    {
+      "asset": "fitzgerald-fish",
+      "src": "/world/sprites/emerald/fitzgerald-fish.png",
+      "pixels": 9
+    },
+    {
+      "asset": "masyn-surf",
+      "src": "/world/sprites/emerald/masyn-surf.png",
+      "pixels": 27
+    },
+    {
+      "asset": "mi-shell-surf",
+      "src": "/world/sprites/emerald/mi-shell-surf.png",
+      "pixels": 2
+    },
+    {
+      "asset": "ezra-surf",
+      "src": "/world/sprites/emerald/ezra-surf.png",
+      "pixels": 19
+    },
+    {
+      "asset": "costume-resume",
+      "src": "/world/sprites/emerald/costume-resume.png",
+      "pixels": 2
+    },
+    {
+      "asset": "costume-home",
+      "src": "/world/sprites/emerald/costume-airbender.png",
+      "pixels": 2
+    },
+    {
+      "asset": "masyn-fish-surf",
+      "src": "/world/sprites/emerald/masyn-fish-surf.png",
+      "pixels": 27
+    },
+    {
+      "asset": "mi-shell-fish-surf",
+      "src": "/world/sprites/emerald/mi-shell-fish-surf.png",
+      "pixels": 2
+    },
+    {
+      "asset": "ezra-fish-surf",
+      "src": "/world/sprites/emerald/ezra-fish-surf.png",
+      "pixels": 8
+    },
+    {
+      "asset": "fitzgerald-fish-surf",
+      "src": "/world/sprites/emerald/fitzgerald-fish-surf.png",
+      "pixels": 4
+    },
+    {
+      "asset": "costume-ezra-spider",
+      "src": "/world/sprites/emerald/costume-ezra-spider.png",
+      "pixels": 20
+    },
+    {
+      "asset": "costume-fallyn-ladybug",
+      "src": "/world/sprites/emerald/costume-fallyn-ladybug.png",
+      "pixels": 3
+    },
+    {
+      "asset": "masyn-bike-acro",
+      "src": "/world/sprites/emerald/masyn-bike-acro.png",
+      "pixels": 2
+    },
+    {
+      "asset": "masyn-bike-mach",
+      "src": "/world/sprites/emerald/masyn-bike-mach.png",
+      "pixels": 2
+    },
+    {
+      "asset": "mi-shell-bike-acro",
+      "src": "/world/sprites/emerald/mi-shell-bike-acro.png",
+      "pixels": 8
+    },
+    {
+      "asset": "mi-shell-bike-mach",
+      "src": "/world/sprites/emerald/mi-shell-bike-mach.png",
+      "pixels": 8
+    },
+    {
+      "asset": "ezra-bike-acro",
+      "src": "/world/sprites/emerald/ezra-bike-acro.png",
+      "pixels": 18
+    },
+    {
+      "asset": "ezra-bike-mach",
+      "src": "/world/sprites/emerald/ezra-bike-mach.png",
+      "pixels": 18
+    },
+    {
+      "asset": "costume-resume-run",
+      "src": "/world/sprites/emerald/costume-resume-run.png",
+      "pixels": 2
+    },
+    {
+      "asset": "costume-ezra-spider-run",
+      "src": "/world/sprites/emerald/costume-ezra-spider-run.png",
+      "pixels": 61
+    },
+    {
+      "asset": "costume-fallyn-ladybug-run",
+      "src": "/world/sprites/emerald/costume-fallyn-ladybug-run.png",
+      "pixels": 5
+    },
+    {
+      "asset": "costume-fitzgerald-spider-run",
+      "src": "/world/sprites/emerald/costume-fitzgerald-spider-run.png",
+      "pixels": 2
+    },
+    {
+      "asset": "mi-shell-water-ride",
+      "src": "/world/sprites/emerald/mi-shell-water-ride.png",
+      "pixels": 62
+    },
+    {
+      "asset": "ezra-water-ride",
+      "src": "/world/sprites/emerald/ezra-water-ride.png",
+      "pixels": 92
+    },
+    {
+      "asset": "fallyn-water-ride",
+      "src": "/world/sprites/emerald/fallyn-water-ride.png",
+      "pixels": 9
+    },
+    {
+      "asset": "masyn-board-ride",
+      "src": "/world/sprites/emerald/masyn-board-ride.png",
+      "pixels": 2
+    },
+    {
+      "asset": "mi-shell-board-ride",
+      "src": "/world/sprites/emerald/mi-shell-board-ride.png",
+      "pixels": 14
+    },
+    {
+      "asset": "ezra-board-ride",
+      "src": "/world/sprites/emerald/ezra-board-ride.png",
+      "pixels": 70
+    },
+    {
+      "asset": "fallyn-board-ride",
+      "src": "/world/sprites/emerald/fallyn-board-ride.png",
+      "pixels": 7
+    },
+    {
+      "asset": "fitzgerald-board-ride",
+      "src": "/world/sprites/emerald/fitzgerald-board-ride.png",
+      "pixels": 4
+    },
+    {
+      "asset": "mi-shell-board-trick",
+      "src": "/world/sprites/emerald/mi-shell-board-trick.png",
+      "pixels": 10
+    },
+    {
+      "asset": "mi-shell-wake-ride",
+      "src": "/world/sprites/emerald/mi-shell-wake-ride.png",
+      "pixels": 77
+    },
+    {
+      "asset": "ezra-board-trick",
+      "src": "/world/sprites/emerald/ezra-board-trick.png",
+      "pixels": 57
+    },
+    {
+      "asset": "ezra-wake-ride",
+      "src": "/world/sprites/emerald/ezra-wake-ride.png",
+      "pixels": 83
+    },
+    {
+      "asset": "fallyn-board-trick",
+      "src": "/world/sprites/emerald/fallyn-board-trick.png",
+      "pixels": 4
+    },
+    {
+      "asset": "fallyn-wake-ride",
+      "src": "/world/sprites/emerald/fallyn-wake-ride.png",
+      "pixels": 17
+    },
+    {
+      "asset": "fitzgerald-board-trick",
+      "src": "/world/sprites/emerald/fitzgerald-board-trick.png",
+      "pixels": 2
+    },
+    {
+      "asset": "mantis-clover",
+      "src": "/world/sprites/emerald/mantis-clover.png",
+      "pixels": 4
+    },
+    {
+      "asset": "mantis-willow",
+      "src": "/world/sprites/emerald/mantis-willow.png",
+      "pixels": 1
+    },
+    {
+      "asset": "mantis-marigold",
+      "src": "/world/sprites/emerald/mantis-marigold.png",
+      "pixels": 7
+    },
+    {
+      "asset": "mantis-spruce",
+      "src": "/world/sprites/emerald/mantis-spruce.png",
+      "pixels": 6
+    },
+    {
+      "asset": "mantis-dandelion",
+      "src": "/world/sprites/emerald/mantis-dandelion.png",
+      "pixels": 1
+    },
+    {
+      "asset": "mantis-rowan",
+      "src": "/world/sprites/emerald/mantis-rowan.png",
+      "pixels": 28
+    },
+    {
+      "asset": "mantis-poppy",
+      "src": "/world/sprites/emerald/mantis-poppy.png",
+      "pixels": 7
+    },
+    {
+      "asset": "mantis-primrose",
+      "src": "/world/sprites/emerald/mantis-primrose.png",
+      "pixels": 7
+    },
+    {
+      "asset": "mantis-cedar",
+      "src": "/world/sprites/emerald/mantis-cedar.png",
+      "pixels": 5
+    },
+    {
+      "asset": "mantis-sorrel",
+      "src": "/world/sprites/emerald/mantis-sorrel.png",
+      "pixels": 1
+    },
+    {
+      "asset": "mantis-sage",
+      "src": "/world/sprites/emerald/mantis-sage.png",
+      "pixels": 11
+    },
+    {
+      "asset": "mantis-brook",
+      "src": "/world/sprites/emerald/mantis-brook.png",
+      "pixels": 16
+    },
+    {
+      "asset": "mantis-mossbank",
+      "src": "/world/sprites/emerald/mantis-mossbank.png",
+      "pixels": 17
+    },
+    {
+      "asset": "mantis-pebblewood",
+      "src": "/world/sprites/emerald/mantis-pebblewood.png",
+      "pixels": 21
+    },
+    {
+      "asset": "mantis-dewdrop",
+      "src": "/world/sprites/emerald/mantis-dewdrop.png",
+      "pixels": 10
+    },
+    {
+      "asset": "mantis-sunleaf",
+      "src": "/world/sprites/emerald/mantis-sunleaf.png",
+      "pixels": 16
+    },
+    {
+      "asset": "mantis-buttercup",
+      "src": "/world/sprites/emerald/mantis-buttercup.png",
+      "pixels": 6
+    },
+    {
+      "asset": "mantis-rainleaf",
+      "src": "/world/sprites/emerald/mantis-rainleaf.png",
+      "pixels": 1
+    },
+    {
+      "asset": "mantis-applewood",
+      "src": "/world/sprites/emerald/mantis-applewood.png",
+      "pixels": 5
+    },
+    {
+      "asset": "mantis-copperleaf",
+      "src": "/world/sprites/emerald/mantis-copperleaf.png",
+      "pixels": 4
+    },
+    {
+      "asset": "mantis-seaglass",
+      "src": "/world/sprites/emerald/mantis-seaglass.png",
+      "pixels": 9
+    },
+    {
+      "asset": "mantis-orchard",
+      "src": "/world/sprites/emerald/mantis-orchard.png",
+      "pixels": 22
+    },
+    {
+      "asset": "mantis-bayleaf",
+      "src": "/world/sprites/emerald/mantis-bayleaf.png",
+      "pixels": 12
+    },
+    {
+      "asset": "mantis-watermint",
+      "src": "/world/sprites/emerald/mantis-watermint.png",
+      "pixels": 13
+    },
+    {
+      "asset": "mantis-sunstone",
+      "src": "/world/sprites/emerald/mantis-sunstone.png",
+      "pixels": 2
+    },
+    {
+      "asset": "mantis-driftwood",
+      "src": "/world/sprites/emerald/mantis-driftwood.png",
+      "pixels": 22
+    },
+    {
+      "asset": "mantis-moonpetal",
+      "src": "/world/sprites/emerald/mantis-moonpetal.png",
+      "pixels": 4
+    },
+    {
+      "asset": "mantis-rosewood",
+      "src": "/world/sprites/emerald/mantis-rosewood.png",
+      "pixels": 9
+    },
+    {
+      "asset": "mantis-amberleaf",
+      "src": "/world/sprites/emerald/mantis-amberleaf.png",
+      "pixels": 14
+    },
+    {
+      "asset": "mantis-wildmint",
+      "src": "/world/sprites/emerald/mantis-wildmint.png",
+      "pixels": 11
+    },
+    {
+      "asset": "mantis-pinecone",
+      "src": "/world/sprites/emerald/mantis-pinecone.png",
+      "pixels": 5
+    },
+    {
+      "asset": "mantis-sandstone",
+      "src": "/world/sprites/emerald/mantis-sandstone.png",
+      "pixels": 5
+    },
+    {
+      "asset": "mantis-dreamleaf",
+      "src": "/world/sprites/emerald/mantis-dreamleaf.png",
+      "pixels": 1
+    },
+    {
+      "asset": "mantis-nightbloom",
+      "src": "/world/sprites/emerald/mantis-nightbloom.png",
+      "pixels": 11
+    },
+    {
+      "asset": "mantis-moonstone",
+      "src": "/world/sprites/emerald/mantis-moonstone.png",
+      "pixels": 19
+    },
+    {
+      "asset": "mantis-velvetwing",
+      "src": "/world/sprites/emerald/mantis-velvetwing.png",
+      "pixels": 18
+    },
+    {
+      "asset": "mantis-amethyst",
+      "src": "/world/sprites/emerald/mantis-amethyst.png",
+      "pixels": 26
+    },
+    {
+      "asset": "mantis-twilight",
+      "src": "/world/sprites/emerald/mantis-twilight.png",
+      "pixels": 12
+    },
+    {
+      "asset": "mantis-opal",
+      "src": "/world/sprites/emerald/mantis-opal.png",
+      "pixels": 14
+    },
+    {
+      "asset": "mantis-indigo",
+      "src": "/world/sprites/emerald/mantis-indigo.png",
+      "pixels": 17
+    },
+    {
+      "asset": "mantis-lantern",
+      "src": "/world/sprites/emerald/mantis-lantern.png",
+      "pixels": 16
+    },
+    {
+      "asset": "mantis-frostbloom",
+      "src": "/world/sprites/emerald/mantis-frostbloom.png",
+      "pixels": 24
+    },
+    {
+      "asset": "mantis-eclipse",
+      "src": "/world/sprites/emerald/mantis-eclipse.png",
+      "pixels": 3
+    },
+    {
+      "asset": "mantis-silvermist",
+      "src": "/world/sprites/emerald/mantis-silvermist.png",
+      "pixels": 4
+    },
+    {
+      "asset": "mantis-cinder",
+      "src": "/world/sprites/emerald/mantis-cinder.png",
+      "pixels": 1
+    },
+    {
+      "asset": "mantis-aurora",
+      "src": "/world/sprites/emerald/mantis-aurora.png",
+      "pixels": 4
+    },
+    {
+      "asset": "mantis-starlace",
+      "src": "/world/sprites/emerald/mantis-starlace.png",
+      "pixels": 1
+    },
+    {
+      "asset": "mantis-celestial",
+      "src": "/world/sprites/emerald/mantis-celestial.png",
+      "pixels": 11
+    },
+    {
+      "asset": "mantis-rainbow",
+      "src": "/world/sprites/emerald/mantis-rainbow.png",
+      "pixels": 1
+    },
+    {
+      "asset": "butterfly-clover",
+      "src": "/world/sprites/emerald/butterfly-clover.png",
+      "pixels": 14
+    },
+    {
+      "asset": "butterfly-willow",
+      "src": "/world/sprites/emerald/butterfly-willow.png",
+      "pixels": 18
+    },
+    {
+      "asset": "butterfly-acorn",
+      "src": "/world/sprites/emerald/butterfly-acorn.png",
+      "pixels": 14
+    },
+    {
+      "asset": "butterfly-juniper",
+      "src": "/world/sprites/emerald/butterfly-juniper.png",
+      "pixels": 13
+    },
+    {
+      "asset": "butterfly-marigold",
+      "src": "/world/sprites/emerald/butterfly-marigold.png",
+      "pixels": 14
+    },
+    {
+      "asset": "butterfly-thistle",
+      "src": "/world/sprites/emerald/butterfly-thistle.png",
+      "pixels": 14
+    },
+    {
+      "asset": "butterfly-bramble",
+      "src": "/world/sprites/emerald/butterfly-bramble.png",
+      "pixels": 11
+    },
+    {
+      "asset": "butterfly-spruce",
+      "src": "/world/sprites/emerald/butterfly-spruce.png",
+      "pixels": 7
+    },
+    {
+      "asset": "butterfly-dandelion",
+      "src": "/world/sprites/emerald/butterfly-dandelion.png",
+      "pixels": 16
+    },
+    {
+      "asset": "butterfly-hazel",
+      "src": "/world/sprites/emerald/butterfly-hazel.png",
+      "pixels": 12
+    },
+    {
+      "asset": "butterfly-rowan",
+      "src": "/world/sprites/emerald/butterfly-rowan.png",
+      "pixels": 8
+    },
+    {
+      "asset": "butterfly-poppy",
+      "src": "/world/sprites/emerald/butterfly-poppy.png",
+      "pixels": 7
+    },
+    {
+      "asset": "butterfly-primrose",
+      "src": "/world/sprites/emerald/butterfly-primrose.png",
+      "pixels": 10
+    },
+    {
+      "asset": "butterfly-cedar",
+      "src": "/world/sprites/emerald/butterfly-cedar.png",
+      "pixels": 9
+    },
+    {
+      "asset": "butterfly-fernwood",
+      "src": "/world/sprites/emerald/butterfly-fernwood.png",
+      "pixels": 3
+    },
+    {
+      "asset": "butterfly-sorrel",
+      "src": "/world/sprites/emerald/butterfly-sorrel.png",
+      "pixels": 11
+    },
+    {
+      "asset": "butterfly-sage",
+      "src": "/world/sprites/emerald/butterfly-sage.png",
+      "pixels": 2
+    },
+    {
+      "asset": "butterfly-brook",
+      "src": "/world/sprites/emerald/butterfly-brook.png",
+      "pixels": 4
+    },
+    {
+      "asset": "butterfly-mossbank",
+      "src": "/world/sprites/emerald/butterfly-mossbank.png",
+      "pixels": 6
+    },
+    {
+      "asset": "butterfly-pebblewood",
+      "src": "/world/sprites/emerald/butterfly-pebblewood.png",
+      "pixels": 10
+    },
+    {
+      "asset": "butterfly-dewdrop",
+      "src": "/world/sprites/emerald/butterfly-dewdrop.png",
+      "pixels": 8
+    },
+    {
+      "asset": "butterfly-sunleaf",
+      "src": "/world/sprites/emerald/butterfly-sunleaf.png",
+      "pixels": 1
+    },
+    {
+      "asset": "butterfly-honeycomb",
+      "src": "/world/sprites/emerald/butterfly-honeycomb.png",
+      "pixels": 1
+    },
+    {
+      "asset": "butterfly-rainleaf",
+      "src": "/world/sprites/emerald/butterfly-rainleaf.png",
+      "pixels": 2
+    },
+    {
+      "asset": "butterfly-applewood",
+      "src": "/world/sprites/emerald/butterfly-applewood.png",
+      "pixels": 4
+    },
+    {
+      "asset": "butterfly-wildflower",
+      "src": "/world/sprites/emerald/butterfly-wildflower.png",
+      "pixels": 4
+    },
+    {
+      "asset": "butterfly-copperleaf",
+      "src": "/world/sprites/emerald/butterfly-copperleaf.png",
+      "pixels": 3
+    },
+    {
+      "asset": "butterfly-seaglass",
+      "src": "/world/sprites/emerald/butterfly-seaglass.png",
+      "pixels": 4
+    },
+    {
+      "asset": "butterfly-orchard",
+      "src": "/world/sprites/emerald/butterfly-orchard.png",
+      "pixels": 8
+    },
+    {
+      "asset": "butterfly-bayleaf",
+      "src": "/world/sprites/emerald/butterfly-bayleaf.png",
+      "pixels": 4
+    },
+    {
+      "asset": "butterfly-driftwood",
+      "src": "/world/sprites/emerald/butterfly-driftwood.png",
+      "pixels": 1
+    },
+    {
+      "asset": "butterfly-rosewood",
+      "src": "/world/sprites/emerald/butterfly-rosewood.png",
+      "pixels": 2
+    },
+    {
+      "asset": "butterfly-amberleaf",
+      "src": "/world/sprites/emerald/butterfly-amberleaf.png",
+      "pixels": 1
+    },
+    {
+      "asset": "butterfly-lilypond",
+      "src": "/world/sprites/emerald/butterfly-lilypond.png",
+      "pixels": 16
+    },
+    {
+      "asset": "butterfly-meadowmist",
+      "src": "/world/sprites/emerald/butterfly-meadowmist.png",
+      "pixels": 13
+    },
+    {
+      "asset": "butterfly-goldenrod",
+      "src": "/world/sprites/emerald/butterfly-goldenrod.png",
+      "pixels": 9
+    },
+    {
+      "asset": "butterfly-silverfern",
+      "src": "/world/sprites/emerald/butterfly-silverfern.png",
+      "pixels": 16
+    },
+    {
+      "asset": "butterfly-seabreeze",
+      "src": "/world/sprites/emerald/butterfly-seabreeze.png",
+      "pixels": 11
+    },
+    {
+      "asset": "butterfly-sandstone",
+      "src": "/world/sprites/emerald/butterfly-sandstone.png",
+      "pixels": 12
+    },
+    {
+      "asset": "butterfly-snowdrop",
+      "src": "/world/sprites/emerald/butterfly-snowdrop.png",
+      "pixels": 7
+    },
+    {
+      "asset": "butterfly-firelight",
+      "src": "/world/sprites/emerald/butterfly-firelight.png",
+      "pixels": 9
+    },
+    {
+      "asset": "butterfly-stormleaf",
+      "src": "/world/sprites/emerald/butterfly-stormleaf.png",
+      "pixels": 9
+    },
+    {
+      "asset": "butterfly-dreamleaf",
+      "src": "/world/sprites/emerald/butterfly-dreamleaf.png",
+      "pixels": 3
+    },
+    {
+      "asset": "butterfly-nightbloom",
+      "src": "/world/sprites/emerald/butterfly-nightbloom.png",
+      "pixels": 5
+    },
+    {
+      "asset": "butterfly-moonstone",
+      "src": "/world/sprites/emerald/butterfly-moonstone.png",
+      "pixels": 8
+    },
+    {
+      "asset": "butterfly-velvetwing",
+      "src": "/world/sprites/emerald/butterfly-velvetwing.png",
+      "pixels": 8
+    },
+    {
+      "asset": "butterfly-amethyst",
+      "src": "/world/sprites/emerald/butterfly-amethyst.png",
+      "pixels": 2
+    },
+    {
+      "asset": "butterfly-starfall",
+      "src": "/world/sprites/emerald/butterfly-starfall.png",
+      "pixels": 1
+    },
+    {
+      "asset": "butterfly-twilight",
+      "src": "/world/sprites/emerald/butterfly-twilight.png",
+      "pixels": 3
+    },
+    {
+      "asset": "butterfly-indigo",
+      "src": "/world/sprites/emerald/butterfly-indigo.png",
+      "pixels": 5
+    },
+    {
+      "asset": "butterfly-lantern",
+      "src": "/world/sprites/emerald/butterfly-lantern.png",
+      "pixels": 6
+    },
+    {
+      "asset": "butterfly-frostbloom",
+      "src": "/world/sprites/emerald/butterfly-frostbloom.png",
+      "pixels": 2
+    },
+    {
+      "asset": "ladybug-sorrel",
+      "src": "/world/sprites/emerald/ladybug-sorrel.png",
+      "pixels": 1
+    },
+    {
+      "asset": "ladybug-sage",
+      "src": "/world/sprites/emerald/ladybug-sage.png",
+      "pixels": 1
+    },
+    {
+      "asset": "ladybug-brook",
+      "src": "/world/sprites/emerald/ladybug-brook.png",
+      "pixels": 1
+    },
+    {
+      "asset": "ladybug-dewdrop",
+      "src": "/world/sprites/emerald/ladybug-dewdrop.png",
+      "pixels": 1
+    },
+    {
+      "asset": "ladybug-honeycomb",
+      "src": "/world/sprites/emerald/ladybug-honeycomb.png",
+      "pixels": 3
+    },
+    {
+      "asset": "ladybug-rainleaf",
+      "src": "/world/sprites/emerald/ladybug-rainleaf.png",
+      "pixels": 2
+    },
+    {
+      "asset": "ladybug-copperleaf",
+      "src": "/world/sprites/emerald/ladybug-copperleaf.png",
+      "pixels": 2
+    },
+    {
+      "asset": "ladybug-bayleaf",
+      "src": "/world/sprites/emerald/ladybug-bayleaf.png",
+      "pixels": 1
+    },
+    {
+      "asset": "ladybug-sunstone",
+      "src": "/world/sprites/emerald/ladybug-sunstone.png",
+      "pixels": 1
+    },
+    {
+      "asset": "ladybug-driftwood",
+      "src": "/world/sprites/emerald/ladybug-driftwood.png",
+      "pixels": 1
+    },
+    {
+      "asset": "ladybug-lilypond",
+      "src": "/world/sprites/emerald/ladybug-lilypond.png",
+      "pixels": 1
+    },
+    {
+      "asset": "ladybug-meadowmist",
+      "src": "/world/sprites/emerald/ladybug-meadowmist.png",
+      "pixels": 1
+    },
+    {
+      "asset": "ladybug-silverfern",
+      "src": "/world/sprites/emerald/ladybug-silverfern.png",
+      "pixels": 1
+    },
+    {
+      "asset": "ladybug-dreamleaf",
+      "src": "/world/sprites/emerald/ladybug-dreamleaf.png",
+      "pixels": 1
+    },
+    {
+      "asset": "ladybug-nightbloom",
+      "src": "/world/sprites/emerald/ladybug-nightbloom.png",
+      "pixels": 1
+    },
+    {
+      "asset": "ladybug-velvetwing",
+      "src": "/world/sprites/emerald/ladybug-velvetwing.png",
+      "pixels": 5
+    },
+    {
+      "asset": "ladybug-amethyst",
+      "src": "/world/sprites/emerald/ladybug-amethyst.png",
+      "pixels": 1
+    },
+    {
+      "asset": "ladybug-indigo",
+      "src": "/world/sprites/emerald/ladybug-indigo.png",
+      "pixels": 2
+    },
+    {
+      "asset": "ladybug-silvermist",
+      "src": "/world/sprites/emerald/ladybug-silvermist.png",
+      "pixels": 1
+    },
+    {
+      "asset": "ladybug-cinder",
+      "src": "/world/sprites/emerald/ladybug-cinder.png",
+      "pixels": 1
+    },
+    {
+      "asset": "ladybug-aurora",
+      "src": "/world/sprites/emerald/ladybug-aurora.png",
+      "pixels": 2
+    },
+    {
+      "asset": "ladybug-crystal",
+      "src": "/world/sprites/emerald/ladybug-crystal.png",
+      "pixels": 1
+    },
+    {
+      "asset": "ladybug-mistveil",
+      "src": "/world/sprites/emerald/ladybug-mistveil.png",
+      "pixels": 1
+    },
+    {
+      "asset": "ladybug-starlace",
+      "src": "/world/sprites/emerald/ladybug-starlace.png",
+      "pixels": 1
+    },
+    {
+      "asset": "dragonfly-clover",
+      "src": "/world/sprites/emerald/dragonfly-clover.png",
+      "pixels": 8
+    },
+    {
+      "asset": "dragonfly-willow",
+      "src": "/world/sprites/emerald/dragonfly-willow.png",
+      "pixels": 14
+    },
+    {
+      "asset": "dragonfly-juniper",
+      "src": "/world/sprites/emerald/dragonfly-juniper.png",
+      "pixels": 5
+    },
+    {
+      "asset": "dragonfly-marigold",
+      "src": "/world/sprites/emerald/dragonfly-marigold.png",
+      "pixels": 4
+    },
+    {
+      "asset": "dragonfly-thistle",
+      "src": "/world/sprites/emerald/dragonfly-thistle.png",
+      "pixels": 6
+    },
+    {
+      "asset": "dragonfly-bramble",
+      "src": "/world/sprites/emerald/dragonfly-bramble.png",
+      "pixels": 3
+    },
+    {
+      "asset": "dragonfly-spruce",
+      "src": "/world/sprites/emerald/dragonfly-spruce.png",
+      "pixels": 1
+    },
+    {
+      "asset": "dragonfly-dandelion",
+      "src": "/world/sprites/emerald/dragonfly-dandelion.png",
+      "pixels": 11
+    },
+    {
+      "asset": "dragonfly-rowan",
+      "src": "/world/sprites/emerald/dragonfly-rowan.png",
+      "pixels": 12
+    },
+    {
+      "asset": "dragonfly-poppy",
+      "src": "/world/sprites/emerald/dragonfly-poppy.png",
+      "pixels": 6
+    },
+    {
+      "asset": "dragonfly-primrose",
+      "src": "/world/sprites/emerald/dragonfly-primrose.png",
+      "pixels": 4
+    },
+    {
+      "asset": "dragonfly-cedar",
+      "src": "/world/sprites/emerald/dragonfly-cedar.png",
+      "pixels": 5
+    },
+    {
+      "asset": "dragonfly-fernwood",
+      "src": "/world/sprites/emerald/dragonfly-fernwood.png",
+      "pixels": 4
+    },
+    {
+      "asset": "dragonfly-sorrel",
+      "src": "/world/sprites/emerald/dragonfly-sorrel.png",
+      "pixels": 5
+    },
+    {
+      "asset": "dragonfly-sage",
+      "src": "/world/sprites/emerald/dragonfly-sage.png",
+      "pixels": 7
+    },
+    {
+      "asset": "dragonfly-brook",
+      "src": "/world/sprites/emerald/dragonfly-brook.png",
+      "pixels": 11
+    },
+    {
+      "asset": "dragonfly-mossbank",
+      "src": "/world/sprites/emerald/dragonfly-mossbank.png",
+      "pixels": 2
+    },
+    {
+      "asset": "dragonfly-pebblewood",
+      "src": "/world/sprites/emerald/dragonfly-pebblewood.png",
+      "pixels": 4
+    },
+    {
+      "asset": "dragonfly-sunleaf",
+      "src": "/world/sprites/emerald/dragonfly-sunleaf.png",
+      "pixels": 1
+    },
+    {
+      "asset": "dragonfly-buttercup",
+      "src": "/world/sprites/emerald/dragonfly-buttercup.png",
+      "pixels": 2
+    },
+    {
+      "asset": "dragonfly-rainleaf",
+      "src": "/world/sprites/emerald/dragonfly-rainleaf.png",
+      "pixels": 1
+    },
+    {
+      "asset": "dragonfly-seaglass",
+      "src": "/world/sprites/emerald/dragonfly-seaglass.png",
+      "pixels": 1
+    },
+    {
+      "asset": "dragonfly-bluebell",
+      "src": "/world/sprites/emerald/dragonfly-bluebell.png",
+      "pixels": 3
+    },
+    {
+      "asset": "dragonfly-bayleaf",
+      "src": "/world/sprites/emerald/dragonfly-bayleaf.png",
+      "pixels": 2
+    },
+    {
+      "asset": "dragonfly-watermint",
+      "src": "/world/sprites/emerald/dragonfly-watermint.png",
+      "pixels": 1
+    },
+    {
+      "asset": "dragonfly-driftwood",
+      "src": "/world/sprites/emerald/dragonfly-driftwood.png",
+      "pixels": 1
+    },
+    {
+      "asset": "dragonfly-amberleaf",
+      "src": "/world/sprites/emerald/dragonfly-amberleaf.png",
+      "pixels": 3
+    },
+    {
+      "asset": "dragonfly-silverfern",
+      "src": "/world/sprites/emerald/dragonfly-silverfern.png",
+      "pixels": 1
+    },
+    {
+      "asset": "dragonfly-nightbloom",
+      "src": "/world/sprites/emerald/dragonfly-nightbloom.png",
+      "pixels": 1
+    },
+    {
+      "asset": "dragonfly-amethyst",
+      "src": "/world/sprites/emerald/dragonfly-amethyst.png",
+      "pixels": 2
+    },
+    {
+      "asset": "dragonfly-starfall",
+      "src": "/world/sprites/emerald/dragonfly-starfall.png",
+      "pixels": 1
+    },
+    {
+      "asset": "dragonfly-twilight",
+      "src": "/world/sprites/emerald/dragonfly-twilight.png",
+      "pixels": 1
+    },
+    {
+      "asset": "dragonfly-opal",
+      "src": "/world/sprites/emerald/dragonfly-opal.png",
+      "pixels": 1
+    },
+    {
+      "asset": "dragonfly-indigo",
+      "src": "/world/sprites/emerald/dragonfly-indigo.png",
+      "pixels": 1
+    },
+    {
+      "asset": "dragonfly-cinder",
+      "src": "/world/sprites/emerald/dragonfly-cinder.png",
+      "pixels": 3
+    },
+    {
+      "asset": "dragonfly-pearlglow",
+      "src": "/world/sprites/emerald/dragonfly-pearlglow.png",
+      "pixels": 3
+    },
+    {
+      "asset": "dragonfly-mistveil",
+      "src": "/world/sprites/emerald/dragonfly-mistveil.png",
+      "pixels": 4
+    },
+    {
+      "asset": "dragonfly-starlace",
+      "src": "/world/sprites/emerald/dragonfly-starlace.png",
+      "pixels": 1
+    },
+    {
+      "asset": "dragonfly-rainbow",
+      "src": "/world/sprites/emerald/dragonfly-rainbow.png",
+      "pixels": 2
+    },
+    {
+      "asset": "costume-airbender-surf",
+      "src": "/world/sprites/emerald/costume-airbender-surf.png",
+      "pixels": 27
+    },
+    {
+      "asset": "costume-airbender-fish-surf",
+      "src": "/world/sprites/emerald/costume-airbender-fish-surf.png",
+      "pixels": 27
+    },
+    {
+      "asset": "costume-skills-surf",
+      "src": "/world/sprites/emerald/costume-skills-surf.png",
+      "pixels": 27
+    },
+    {
+      "asset": "costume-skills-fish",
+      "src": "/world/sprites/emerald/costume-skills-fish.png",
+      "pixels": 2
+    },
+    {
+      "asset": "costume-skills-fish-surf",
+      "src": "/world/sprites/emerald/costume-skills-fish-surf.png",
+      "pixels": 27
+    },
+    {
+      "asset": "costume-portfolio-surf",
+      "src": "/world/sprites/emerald/costume-portfolio-surf.png",
+      "pixels": 27
+    },
+    {
+      "asset": "costume-portfolio-fish-surf",
+      "src": "/world/sprites/emerald/costume-portfolio-fish-surf.png",
+      "pixels": 27
+    },
+    {
+      "asset": "costume-resume-surf",
+      "src": "/world/sprites/emerald/costume-resume-surf.png",
+      "pixels": 27
+    },
+    {
+      "asset": "costume-resume-fish-surf",
+      "src": "/world/sprites/emerald/costume-resume-fish-surf.png",
+      "pixels": 27
+    },
+    {
+      "asset": "costume-contact-surf",
+      "src": "/world/sprites/emerald/costume-contact-surf.png",
+      "pixels": 27
+    },
+    {
+      "asset": "costume-contact-fish",
+      "src": "/world/sprites/emerald/costume-contact-fish.png",
+      "pixels": 2
+    },
+    {
+      "asset": "costume-contact-fish-surf",
+      "src": "/world/sprites/emerald/costume-contact-fish-surf.png",
+      "pixels": 27
+    },
+    {
+      "asset": "link-board-ride",
+      "src": "/world/sprites/emerald/link-board-ride.png",
+      "pixels": 2
+    },
+    {
+      "asset": "link-board-trick",
+      "src": "/world/sprites/emerald/link-board-trick.png",
+      "pixels": 6
+    },
+    {
+      "asset": "link-surf",
+      "src": "/world/sprites/emerald/link-surf.png",
+      "pixels": 27
+    },
+    {
+      "asset": "link-fish-surf",
+      "src": "/world/sprites/emerald/link-fish-surf.png",
+      "pixels": 50
+    },
+    {
+      "asset": "costume-fallyn-ladybug-surf",
+      "src": "/world/sprites/emerald/costume-fallyn-ladybug-surf.png",
+      "pixels": 50
+    },
+    {
+      "asset": "costume-fallyn-ladybug-fish-surf",
+      "src": "/world/sprites/emerald/costume-fallyn-ladybug-fish-surf.png",
+      "pixels": 50
+    },
+    {
+      "asset": "fish-threadfin-cardinalfish",
+      "src": "/world/sprites/emerald/fish-threadfin-cardinalfish.png",
+      "pixels": 1
+    },
+    {
+      "asset": "fish-bicolor-parrotfish",
+      "src": "/world/sprites/emerald/fish-bicolor-parrotfish.png",
+      "pixels": 2
+    },
+    {
+      "asset": "fish-weedy-dragonet",
+      "src": "/world/sprites/emerald/fish-weedy-dragonet.png",
+      "pixels": 10
+    },
+    {
+      "asset": "fish-congo-tetra",
+      "src": "/world/sprites/emerald/fish-congo-tetra.png",
+      "pixels": 1
+    },
+    {
+      "asset": "fish-yoyo-loach",
+      "src": "/world/sprites/emerald/fish-yoyo-loach.png",
+      "pixels": 1
+    },
+    {
+      "asset": "fish-bronze-corydoras",
+      "src": "/world/sprites/emerald/fish-bronze-corydoras.png",
+      "pixels": 1
+    },
+    {
+      "asset": "fish-honey-gourami",
+      "src": "/world/sprites/emerald/fish-honey-gourami.png",
+      "pixels": 1
+    },
+    {
+      "asset": "fish-threadfin-rainbowfish",
+      "src": "/world/sprites/emerald/fish-threadfin-rainbowfish.png",
+      "pixels": 3
+    },
+    {
+      "asset": "fish-marble-angelfish",
+      "src": "/world/sprites/emerald/fish-marble-angelfish.png",
+      "pixels": 3
+    },
+    {
+      "asset": "fish-silver-arowana",
+      "src": "/world/sprites/emerald/fish-silver-arowana.png",
+      "pixels": 1
+    },
+    {
+      "asset": "fish-ribbon-oarfish",
+      "src": "/world/sprites/emerald/fish-ribbon-oarfish.png",
+      "pixels": 28
+    },
+    {
+      "asset": "fish-baby-whitespotted-bamboo-shark",
+      "src": "/world/sprites/emerald/fish-baby-whitespotted-bamboo-shark.png",
+      "pixels": 1
+    },
+    {
+      "asset": "fish-spotted-eagle-ray",
+      "src": "/world/sprites/emerald/fish-spotted-eagle-ray.png",
+      "pixels": 5
+    },
+    {
+      "asset": "fish-fire-shrimp",
+      "src": "/world/sprites/emerald/fish-fire-shrimp.png",
+      "pixels": 7
+    },
+    {
+      "asset": "fish-orange-rili-shrimp",
+      "src": "/world/sprites/emerald/fish-orange-rili-shrimp.png",
+      "pixels": 4
+    },
+    {
+      "asset": "fish-blue-dwarf-crayfish",
+      "src": "/world/sprites/emerald/fish-blue-dwarf-crayfish.png",
+      "pixels": 1
+    },
+    {
+      "asset": "fish-red-swamp-crayfish",
+      "src": "/world/sprites/emerald/fish-red-swamp-crayfish.png",
+      "pixels": 1
+    },
+    {
+      "asset": "fish-squat-lobster",
+      "src": "/world/sprites/emerald/fish-squat-lobster.png",
+      "pixels": 1
+    },
+    {
+      "asset": "fish-violet-reef-lobster",
+      "src": "/world/sprites/emerald/fish-violet-reef-lobster.png",
+      "pixels": 1
+    },
+    {
+      "asset": "fish-red-reef-prawn",
+      "src": "/world/sprites/emerald/fish-red-reef-prawn.png",
+      "pixels": 2
+    },
+    {
+      "asset": "fish-mimic-octopus",
+      "src": "/world/sprites/emerald/fish-mimic-octopus.png",
+      "pixels": 1
+    },
+    {
+      "asset": "fish-ribbon-sea-dragon",
+      "src": "/world/sprites/emerald/fish-ribbon-sea-dragon.png",
+      "pixels": 2
+    },
+    {
+      "asset": "fish-reed-frog",
+      "src": "/world/sprites/emerald/fish-reed-frog.png",
+      "pixels": 3
+    },
+    {
+      "asset": "mantis-acorn",
+      "src": "/world/collections/mantis-acorn.webp",
+      "pixels": 3
+    },
+    {
+      "asset": "mantis-juniper",
+      "src": "/world/collections/mantis-juniper.webp",
+      "pixels": 1
+    },
+    {
+      "asset": "mantis-spruce",
+      "src": "/world/collections/mantis-spruce.webp",
+      "pixels": 3
+    },
+    {
+      "asset": "mantis-dandelion",
+      "src": "/world/collections/mantis-dandelion.webp",
+      "pixels": 1
+    },
+    {
+      "asset": "mantis-primrose",
+      "src": "/world/collections/mantis-primrose.webp",
+      "pixels": 12
+    },
+    {
+      "asset": "mantis-fernwood",
+      "src": "/world/collections/mantis-fernwood.webp",
+      "pixels": 2
+    },
+    {
+      "asset": "mantis-pebblewood",
+      "src": "/world/collections/mantis-pebblewood.webp",
+      "pixels": 7
+    },
+    {
+      "asset": "mantis-dewdrop",
+      "src": "/world/collections/mantis-dewdrop.webp",
+      "pixels": 3
+    },
+    {
+      "asset": "mantis-rainleaf",
+      "src": "/world/collections/mantis-rainleaf.webp",
+      "pixels": 3
+    },
+    {
+      "asset": "mantis-seaglass",
+      "src": "/world/collections/mantis-seaglass.webp",
+      "pixels": 2
+    },
+    {
+      "asset": "mantis-watermint",
+      "src": "/world/collections/mantis-watermint.webp",
+      "pixels": 1
+    },
+    {
+      "asset": "mantis-moonpetal",
+      "src": "/world/collections/mantis-moonpetal.webp",
+      "pixels": 3
+    },
+    {
+      "asset": "mantis-wildmint",
+      "src": "/world/collections/mantis-wildmint.webp",
+      "pixels": 1
+    },
+    {
+      "asset": "mantis-meadowmist",
+      "src": "/world/collections/mantis-meadowmist.webp",
+      "pixels": 2
+    },
+    {
+      "asset": "mantis-goldenrod",
+      "src": "/world/collections/mantis-goldenrod.webp",
+      "pixels": 2
+    },
+    {
+      "asset": "mantis-nightbloom",
+      "src": "/world/collections/mantis-nightbloom.webp",
+      "pixels": 1
+    },
+    {
+      "asset": "mantis-silvermist",
+      "src": "/world/collections/mantis-silvermist.webp",
+      "pixels": 2
+    },
+    {
+      "asset": "mantis-starlace",
+      "src": "/world/collections/mantis-starlace.webp",
+      "pixels": 3
+    },
+    {
+      "asset": "mantis-celestial",
+      "src": "/world/collections/mantis-celestial.webp",
+      "pixels": 9
+    },
+    {
+      "asset": "butterfly-marigold",
+      "src": "/world/collections/butterfly-marigold.webp",
+      "pixels": 5
+    },
+    {
+      "asset": "butterfly-thistle",
+      "src": "/world/collections/butterfly-thistle.webp",
+      "pixels": 2
+    },
+    {
+      "asset": "butterfly-dandelion",
+      "src": "/world/collections/butterfly-dandelion.webp",
+      "pixels": 5
+    },
+    {
+      "asset": "butterfly-hazel",
+      "src": "/world/collections/butterfly-hazel.webp",
+      "pixels": 3
+    },
+    {
+      "asset": "butterfly-rowan",
+      "src": "/world/collections/butterfly-rowan.webp",
+      "pixels": 1
+    },
+    {
+      "asset": "butterfly-poppy",
+      "src": "/world/collections/butterfly-poppy.webp",
+      "pixels": 6
+    },
+    {
+      "asset": "butterfly-sunleaf",
+      "src": "/world/collections/butterfly-sunleaf.webp",
+      "pixels": 6
+    },
+    {
+      "asset": "butterfly-honeycomb",
+      "src": "/world/collections/butterfly-honeycomb.webp",
+      "pixels": 2
+    },
+    {
+      "asset": "butterfly-applewood",
+      "src": "/world/collections/butterfly-applewood.webp",
+      "pixels": 3
+    },
+    {
+      "asset": "butterfly-bayleaf",
+      "src": "/world/collections/butterfly-bayleaf.webp",
+      "pixels": 1
+    },
+    {
+      "asset": "butterfly-watermint",
+      "src": "/world/collections/butterfly-watermint.webp",
+      "pixels": 2
+    },
+    {
+      "asset": "butterfly-driftwood",
+      "src": "/world/collections/butterfly-driftwood.webp",
+      "pixels": 4
+    },
+    {
+      "asset": "butterfly-rosewood",
+      "src": "/world/collections/butterfly-rosewood.webp",
+      "pixels": 3
+    },
+    {
+      "asset": "butterfly-amberleaf",
+      "src": "/world/collections/butterfly-amberleaf.webp",
+      "pixels": 2
+    },
+    {
+      "asset": "butterfly-goldenrod",
+      "src": "/world/collections/butterfly-goldenrod.webp",
+      "pixels": 3
+    },
+    {
+      "asset": "butterfly-dreamleaf",
+      "src": "/world/collections/butterfly-dreamleaf.webp",
+      "pixels": 3
+    },
+    {
+      "asset": "butterfly-nightbloom",
+      "src": "/world/collections/butterfly-nightbloom.webp",
+      "pixels": 1
+    },
+    {
+      "asset": "butterfly-moonstone",
+      "src": "/world/collections/butterfly-moonstone.webp",
+      "pixels": 4
+    },
+    {
+      "asset": "butterfly-velvetwing",
+      "src": "/world/collections/butterfly-velvetwing.webp",
+      "pixels": 2
+    },
+    {
+      "asset": "butterfly-amethyst",
+      "src": "/world/collections/butterfly-amethyst.webp",
+      "pixels": 10
+    },
+    {
+      "asset": "butterfly-starfall",
+      "src": "/world/collections/butterfly-starfall.webp",
+      "pixels": 3
+    },
+    {
+      "asset": "butterfly-twilight",
+      "src": "/world/collections/butterfly-twilight.webp",
+      "pixels": 5
+    },
+    {
+      "asset": "butterfly-indigo",
+      "src": "/world/collections/butterfly-indigo.webp",
+      "pixels": 3
+    },
+    {
+      "asset": "butterfly-lantern",
+      "src": "/world/collections/butterfly-lantern.webp",
+      "pixels": 4
+    },
+    {
+      "asset": "butterfly-frostbloom",
+      "src": "/world/collections/butterfly-frostbloom.webp",
+      "pixels": 6
+    },
+    {
+      "asset": "butterfly-eclipse",
+      "src": "/world/collections/butterfly-eclipse.webp",
+      "pixels": 16
+    },
+    {
+      "asset": "butterfly-silvermist",
+      "src": "/world/collections/butterfly-silvermist.webp",
+      "pixels": 11
+    },
+    {
+      "asset": "butterfly-cinder",
+      "src": "/world/collections/butterfly-cinder.webp",
+      "pixels": 6
+    },
+    {
+      "asset": "butterfly-aurora",
+      "src": "/world/collections/butterfly-aurora.webp",
+      "pixels": 4
+    },
+    {
+      "asset": "butterfly-pearlglow",
+      "src": "/world/collections/butterfly-pearlglow.webp",
+      "pixels": 17
+    },
+    {
+      "asset": "butterfly-crystal",
+      "src": "/world/collections/butterfly-crystal.webp",
+      "pixels": 5
+    },
+    {
+      "asset": "butterfly-mistveil",
+      "src": "/world/collections/butterfly-mistveil.webp",
+      "pixels": 2
+    },
+    {
+      "asset": "butterfly-starlace",
+      "src": "/world/collections/butterfly-starlace.webp",
+      "pixels": 8
+    },
+    {
+      "asset": "butterfly-celestial",
+      "src": "/world/collections/butterfly-celestial.webp",
+      "pixels": 14
+    },
+    {
+      "asset": "butterfly-rainbow",
+      "src": "/world/collections/butterfly-rainbow.webp",
+      "pixels": 12
+    },
+    {
+      "asset": "dragonfly-thistle",
+      "src": "/world/collections/dragonfly-thistle.webp",
+      "pixels": 4
+    },
+    {
+      "asset": "dragonfly-bramble",
+      "src": "/world/collections/dragonfly-bramble.webp",
+      "pixels": 8
+    },
+    {
+      "asset": "dragonfly-primrose",
+      "src": "/world/collections/dragonfly-primrose.webp",
+      "pixels": 2
+    },
+    {
+      "asset": "dragonfly-cedar",
+      "src": "/world/collections/dragonfly-cedar.webp",
+      "pixels": 4
+    },
+    {
+      "asset": "dragonfly-sorrel",
+      "src": "/world/collections/dragonfly-sorrel.webp",
+      "pixels": 2
+    },
+    {
+      "asset": "dragonfly-sage",
+      "src": "/world/collections/dragonfly-sage.webp",
+      "pixels": 2
+    },
+    {
+      "asset": "dragonfly-pebblewood",
+      "src": "/world/collections/dragonfly-pebblewood.webp",
+      "pixels": 3
+    },
+    {
+      "asset": "dragonfly-dewdrop",
+      "src": "/world/collections/dragonfly-dewdrop.webp",
+      "pixels": 1
+    },
+    {
+      "asset": "dragonfly-applewood",
+      "src": "/world/collections/dragonfly-applewood.webp",
+      "pixels": 2
+    },
+    {
+      "asset": "dragonfly-bluebell",
+      "src": "/world/collections/dragonfly-bluebell.webp",
+      "pixels": 4
+    },
+    {
+      "asset": "dragonfly-amberleaf",
+      "src": "/world/collections/dragonfly-amberleaf.webp",
+      "pixels": 6
+    },
+    {
+      "asset": "dragonfly-wildmint",
+      "src": "/world/collections/dragonfly-wildmint.webp",
+      "pixels": 1
+    },
+    {
+      "asset": "dragonfly-firelight",
+      "src": "/world/collections/dragonfly-firelight.webp",
+      "pixels": 1
+    },
+    {
+      "asset": "dragonfly-lantern",
+      "src": "/world/collections/dragonfly-lantern.webp",
+      "pixels": 3
+    },
+    {
+      "asset": "dragonfly-frostbloom",
+      "src": "/world/collections/dragonfly-frostbloom.webp",
+      "pixels": 11
+    },
+    {
+      "asset": "dragonfly-aurora-meadow",
+      "src": "/world/collections/dragonfly-aurora-meadow.webp",
+      "pixels": 2
+    },
+    {
+      "asset": "dragonfly-rainbow",
+      "src": "/world/collections/dragonfly-rainbow.webp",
+      "pixels": 11
+    },
+    {
+      "asset": "fish-flame-angelfish",
+      "src": "/world/collections/fish-flame-angelfish.webp",
+      "pixels": 2
+    },
+    {
+      "asset": "fish-moorish-idol",
+      "src": "/world/collections/fish-moorish-idol.webp",
+      "pixels": 3
+    },
+    {
+      "asset": "fish-pajama-cardinalfish",
+      "src": "/world/collections/fish-pajama-cardinalfish.webp",
+      "pixels": 1
+    },
+    {
+      "asset": "fish-bicolor-parrotfish",
+      "src": "/world/collections/fish-bicolor-parrotfish.webp",
+      "pixels": 2
+    },
+    {
+      "asset": "fish-weedy-dragonet",
+      "src": "/world/collections/fish-weedy-dragonet.webp",
+      "pixels": 1
+    },
+    {
+      "asset": "fish-honey-gourami",
+      "src": "/world/collections/fish-honey-gourami.webp",
+      "pixels": 2
+    },
+    {
+      "asset": "fish-sparkling-gourami",
+      "src": "/world/collections/fish-sparkling-gourami.webp",
+      "pixels": 2
+    },
+    {
+      "asset": "fish-threadfin-rainbowfish",
+      "src": "/world/collections/fish-threadfin-rainbowfish.webp",
+      "pixels": 4
+    },
+    {
+      "asset": "fish-threadfin-acara",
+      "src": "/world/collections/fish-threadfin-acara.webp",
+      "pixels": 3
+    },
+    {
+      "asset": "fish-platinum-alligator-gar",
+      "src": "/world/collections/fish-platinum-alligator-gar.webp",
+      "pixels": 3
+    },
+    {
+      "asset": "fish-halloween-hermit-crab",
+      "src": "/world/collections/fish-halloween-hermit-crab.webp",
+      "pixels": 1
+    },
+    {
+      "asset": "fish-harlequin-shrimp",
+      "src": "/world/collections/fish-harlequin-shrimp.webp",
+      "pixels": 2
+    },
+    {
+      "asset": "fish-fire-shrimp",
+      "src": "/world/collections/fish-fire-shrimp.webp",
+      "pixels": 4
+    },
+    {
+      "asset": "fish-blue-dwarf-crayfish",
+      "src": "/world/collections/fish-blue-dwarf-crayfish.webp",
+      "pixels": 4
+    },
+    {
+      "asset": "fish-red-swamp-crayfish",
+      "src": "/world/collections/fish-red-swamp-crayfish.webp",
+      "pixels": 2
+    },
+    {
+      "asset": "fish-glass-grass-shrimp",
+      "src": "/world/collections/fish-glass-grass-shrimp.webp",
+      "pixels": 12
+    },
+    {
+      "asset": "fish-glass-frog",
+      "src": "/world/collections/fish-glass-frog.webp",
+      "pixels": 3
+    },
+    {
+      "asset": "fish-river-otter-pup",
+      "src": "/world/collections/fish-river-otter-pup.webp",
+      "pixels": 6
+    },
+    {
+      "asset": "mi-shell-fish",
+      "src": "/world/sprites/emerald/mi-shell-fish.png",
+      "pixels": 5
+    },
+    {
+      "asset": "ezra-fish",
+      "src": "/world/sprites/emerald/ezra-fish.png",
+      "pixels": 4
+    },
+    {
+      "asset": "fitzgerald-fish",
+      "src": "/world/sprites/emerald/fitzgerald-fish.png",
+      "pixels": 9
+    },
+    {
+      "asset": "masyn-surf",
+      "src": "/world/sprites/emerald/masyn-surf.png",
+      "pixels": 27
+    },
+    {
+      "asset": "mi-shell-surf",
+      "src": "/world/sprites/emerald/mi-shell-surf.png",
+      "pixels": 2
+    },
+    {
+      "asset": "ezra-surf",
+      "src": "/world/sprites/emerald/ezra-surf.png",
+      "pixels": 7
+    },
+    {
+      "asset": "masyn-fish-surf",
+      "src": "/world/sprites/emerald/masyn-fish-surf.png",
+      "pixels": 27
+    },
+    {
+      "asset": "mi-shell-fish-surf",
+      "src": "/world/sprites/emerald/mi-shell-fish-surf.png",
+      "pixels": 2
+    },
+    {
+      "asset": "ezra-fish-surf",
+      "src": "/world/sprites/emerald/ezra-fish-surf.png",
+      "pixels": 8
+    },
+    {
+      "asset": "fitzgerald-fish-surf",
+      "src": "/world/sprites/emerald/fitzgerald-fish-surf.png",
+      "pixels": 4
+    },
+    {
+      "asset": "masyn-bike-acro",
+      "src": "/world/sprites/emerald/masyn-bike-acro.png",
+      "pixels": 2
+    },
+    {
+      "asset": "masyn-bike-mach",
+      "src": "/world/sprites/emerald/masyn-bike-mach.png",
+      "pixels": 2
+    },
+    {
+      "asset": "mi-shell-bike-acro",
+      "src": "/world/sprites/emerald/mi-shell-bike-acro.png",
+      "pixels": 8
+    },
+    {
+      "asset": "mi-shell-bike-mach",
+      "src": "/world/sprites/emerald/mi-shell-bike-mach.png",
+      "pixels": 8
+    },
+    {
+      "asset": "ezra-bike-acro",
+      "src": "/world/sprites/emerald/ezra-bike-acro.png",
+      "pixels": 11
+    },
+    {
+      "asset": "ezra-bike-mach",
+      "src": "/world/sprites/emerald/ezra-bike-mach.png",
+      "pixels": 11
+    },
+    {
+      "asset": "mi-shell-water-ride",
+      "src": "/world/sprites/emerald/mi-shell-water-ride.png",
+      "pixels": 68
+    },
+    {
+      "asset": "ezra-water-ride",
+      "src": "/world/sprites/emerald/ezra-water-ride.png",
+      "pixels": 91
+    },
+    {
+      "asset": "fallyn-water-ride",
+      "src": "/world/sprites/emerald/fallyn-water-ride.png",
+      "pixels": 4
+    },
+    {
+      "asset": "masyn-board-ride",
+      "src": "/world/sprites/emerald/masyn-board-ride.png",
+      "pixels": 2
+    },
+    {
+      "asset": "mi-shell-board-ride",
+      "src": "/world/sprites/emerald/mi-shell-board-ride.png",
+      "pixels": 14
+    },
+    {
+      "asset": "ezra-board-ride",
+      "src": "/world/sprites/emerald/ezra-board-ride.png",
+      "pixels": 70
+    },
+    {
+      "asset": "fallyn-board-ride",
+      "src": "/world/sprites/emerald/fallyn-board-ride.png",
+      "pixels": 7
+    },
+    {
+      "asset": "fitzgerald-board-ride",
+      "src": "/world/sprites/emerald/fitzgerald-board-ride.png",
+      "pixels": 4
+    },
+    {
+      "asset": "mi-shell-board-trick",
+      "src": "/world/sprites/emerald/mi-shell-board-trick.png",
+      "pixels": 10
+    },
+    {
+      "asset": "mi-shell-wake-ride",
+      "src": "/world/sprites/emerald/mi-shell-wake-ride.png",
+      "pixels": 77
+    },
+    {
+      "asset": "ezra-board-trick",
+      "src": "/world/sprites/emerald/ezra-board-trick.png",
+      "pixels": 57
+    },
+    {
+      "asset": "ezra-wake-ride",
+      "src": "/world/sprites/emerald/ezra-wake-ride.png",
+      "pixels": 91
+    },
+    {
+      "asset": "fallyn-board-trick",
+      "src": "/world/sprites/emerald/fallyn-board-trick.png",
+      "pixels": 4
+    },
+    {
+      "asset": "fallyn-wake-ride",
+      "src": "/world/sprites/emerald/fallyn-wake-ride.png",
+      "pixels": 17
+    },
+    {
+      "asset": "fitzgerald-board-trick",
+      "src": "/world/sprites/emerald/fitzgerald-board-trick.png",
+      "pixels": 2
+    },
+    {
+      "asset": "costume-airbender-surf",
+      "src": "/world/sprites/emerald/costume-airbender-surf.png",
+      "pixels": 27
+    },
+    {
+      "asset": "costume-airbender-fish-surf",
+      "src": "/world/sprites/emerald/costume-airbender-fish-surf.png",
+      "pixels": 27
+    },
+    {
+      "asset": "costume-skills-water-ride",
+      "src": "/world/sprites/emerald/costume-skills-water-ride.png",
+      "pixels": 2
+    },
+    {
+      "asset": "costume-skills-surf",
+      "src": "/world/sprites/emerald/costume-skills-surf.png",
+      "pixels": 27
+    },
+    {
+      "asset": "costume-skills-fish",
+      "src": "/world/sprites/emerald/costume-skills-fish.png",
+      "pixels": 2
+    },
+    {
+      "asset": "costume-skills-fish-surf",
+      "src": "/world/sprites/emerald/costume-skills-fish-surf.png",
+      "pixels": 27
+    },
+    {
+      "asset": "costume-portfolio-surf",
+      "src": "/world/sprites/emerald/costume-portfolio-surf.png",
+      "pixels": 27
+    },
+    {
+      "asset": "costume-portfolio-fish-surf",
+      "src": "/world/sprites/emerald/costume-portfolio-fish-surf.png",
+      "pixels": 27
+    },
+    {
+      "asset": "costume-resume-surf",
+      "src": "/world/sprites/emerald/costume-resume-surf.png",
+      "pixels": 27
+    },
+    {
+      "asset": "costume-resume-fish-surf",
+      "src": "/world/sprites/emerald/costume-resume-fish-surf.png",
+      "pixels": 27
+    },
+    {
+      "asset": "costume-contact-surf",
+      "src": "/world/sprites/emerald/costume-contact-surf.png",
+      "pixels": 27
+    },
+    {
+      "asset": "costume-contact-fish",
+      "src": "/world/sprites/emerald/costume-contact-fish.png",
+      "pixels": 2
+    },
+    {
+      "asset": "costume-contact-fish-surf",
+      "src": "/world/sprites/emerald/costume-contact-fish-surf.png",
+      "pixels": 27
+    },
+    {
+      "asset": "link-board-ride",
+      "src": "/world/sprites/emerald/link-board-ride.png",
+      "pixels": 2
+    },
+    {
+      "asset": "link-board-trick",
+      "src": "/world/sprites/emerald/link-board-trick.png",
+      "pixels": 6
+    },
+    {
+      "asset": "link-surf",
+      "src": "/world/sprites/emerald/link-surf.png",
+      "pixels": 31
+    },
+    {
+      "asset": "mi-shell-fish",
+      "src": "/world/sprites/emerald/mi-shell-fish.png",
+      "pixels": 5
+    },
+    {
+      "asset": "ezra-fish",
+      "src": "/world/sprites/emerald/ezra-fish.png",
+      "pixels": 4
+    },
+    {
+      "asset": "fitzgerald-fish",
+      "src": "/world/sprites/emerald/fitzgerald-fish.png",
+      "pixels": 9
+    },
+    {
+      "asset": "masyn-surf",
+      "src": "/world/sprites/emerald/masyn-surf.png",
+      "pixels": 27
+    },
+    {
+      "asset": "mi-shell-surf",
+      "src": "/world/sprites/emerald/mi-shell-surf.png",
+      "pixels": 2
+    },
+    {
+      "asset": "ezra-surf",
+      "src": "/world/sprites/emerald/ezra-surf.png",
+      "pixels": 7
+    },
+    {
+      "asset": "masyn-fish-surf",
+      "src": "/world/sprites/emerald/masyn-fish-surf.png",
+      "pixels": 27
+    },
+    {
+      "asset": "mi-shell-fish-surf",
+      "src": "/world/sprites/emerald/mi-shell-fish-surf.png",
+      "pixels": 2
+    },
+    {
+      "asset": "ezra-fish-surf",
+      "src": "/world/sprites/emerald/ezra-fish-surf.png",
+      "pixels": 8
+    },
+    {
+      "asset": "fitzgerald-fish-surf",
+      "src": "/world/sprites/emerald/fitzgerald-fish-surf.png",
+      "pixels": 4
+    },
+    {
+      "asset": "masyn-bike-acro",
+      "src": "/world/sprites/emerald/masyn-bike-acro.png",
+      "pixels": 2
+    },
+    {
+      "asset": "masyn-bike-mach",
+      "src": "/world/sprites/emerald/masyn-bike-mach.png",
+      "pixels": 2
+    },
+    {
+      "asset": "mi-shell-bike-acro",
+      "src": "/world/sprites/emerald/mi-shell-bike-acro.png",
+      "pixels": 8
+    },
+    {
+      "asset": "mi-shell-bike-mach",
+      "src": "/world/sprites/emerald/mi-shell-bike-mach.png",
+      "pixels": 6
+    },
+    {
+      "asset": "ezra-bike-acro",
+      "src": "/world/sprites/emerald/ezra-bike-acro.png",
+      "pixels": 7
+    },
+    {
+      "asset": "ezra-bike-mach",
+      "src": "/world/sprites/emerald/ezra-bike-mach.png",
+      "pixels": 11
+    },
+    {
+      "asset": "mi-shell-water-ride",
+      "src": "/world/sprites/emerald/mi-shell-water-ride.png",
+      "pixels": 68
+    },
+    {
+      "asset": "ezra-water-ride",
+      "src": "/world/sprites/emerald/ezra-water-ride.png",
+      "pixels": 91
+    },
+    {
+      "asset": "fallyn-water-ride",
+      "src": "/world/sprites/emerald/fallyn-water-ride.png",
+      "pixels": 4
+    },
+    {
+      "asset": "masyn-board-ride",
+      "src": "/world/sprites/emerald/masyn-board-ride.png",
+      "pixels": 2
+    },
+    {
+      "asset": "mi-shell-board-ride",
+      "src": "/world/sprites/emerald/mi-shell-board-ride.png",
+      "pixels": 14
+    },
+    {
+      "asset": "ezra-board-ride",
+      "src": "/world/sprites/emerald/ezra-board-ride.png",
+      "pixels": 70
+    },
+    {
+      "asset": "fallyn-board-ride",
+      "src": "/world/sprites/emerald/fallyn-board-ride.png",
+      "pixels": 7
+    },
+    {
+      "asset": "fitzgerald-board-ride",
+      "src": "/world/sprites/emerald/fitzgerald-board-ride.png",
+      "pixels": 4
+    },
+    {
+      "asset": "mi-shell-board-trick",
+      "src": "/world/sprites/emerald/mi-shell-board-trick.png",
+      "pixels": 10
+    },
+    {
+      "asset": "mi-shell-wake-ride",
+      "src": "/world/sprites/emerald/mi-shell-wake-ride.png",
+      "pixels": 77
+    },
+    {
+      "asset": "ezra-board-trick",
+      "src": "/world/sprites/emerald/ezra-board-trick.png",
+      "pixels": 57
+    },
+    {
+      "asset": "ezra-wake-ride",
+      "src": "/world/sprites/emerald/ezra-wake-ride.png",
+      "pixels": 91
+    },
+    {
+      "asset": "fallyn-board-trick",
+      "src": "/world/sprites/emerald/fallyn-board-trick.png",
+      "pixels": 4
+    },
+    {
+      "asset": "fallyn-wake-ride",
+      "src": "/world/sprites/emerald/fallyn-wake-ride.png",
+      "pixels": 17
+    },
+    {
+      "asset": "fitzgerald-board-trick",
+      "src": "/world/sprites/emerald/fitzgerald-board-trick.png",
+      "pixels": 2
+    },
+    {
+      "asset": "costume-airbender-surf",
+      "src": "/world/sprites/emerald/costume-airbender-surf.png",
+      "pixels": 27
+    },
+    {
+      "asset": "costume-airbender-fish-surf",
+      "src": "/world/sprites/emerald/costume-airbender-fish-surf.png",
+      "pixels": 27
+    },
+    {
+      "asset": "costume-skills-water-ride",
+      "src": "/world/sprites/emerald/costume-skills-water-ride.png",
+      "pixels": 2
+    },
+    {
+      "asset": "costume-skills-surf",
+      "src": "/world/sprites/emerald/costume-skills-surf.png",
+      "pixels": 27
+    },
+    {
+      "asset": "costume-skills-fish",
+      "src": "/world/sprites/emerald/costume-skills-fish.png",
+      "pixels": 2
+    },
+    {
+      "asset": "costume-skills-fish-surf",
+      "src": "/world/sprites/emerald/costume-skills-fish-surf.png",
+      "pixels": 27
+    },
+    {
+      "asset": "costume-portfolio-surf",
+      "src": "/world/sprites/emerald/costume-portfolio-surf.png",
+      "pixels": 27
+    },
+    {
+      "asset": "costume-portfolio-fish-surf",
+      "src": "/world/sprites/emerald/costume-portfolio-fish-surf.png",
+      "pixels": 27
+    },
+    {
+      "asset": "costume-resume-surf",
+      "src": "/world/sprites/emerald/costume-resume-surf.png",
+      "pixels": 27
+    },
+    {
+      "asset": "costume-resume-fish-surf",
+      "src": "/world/sprites/emerald/costume-resume-fish-surf.png",
+      "pixels": 27
+    },
+    {
+      "asset": "costume-contact-surf",
+      "src": "/world/sprites/emerald/costume-contact-surf.png",
+      "pixels": 27
+    },
+    {
+      "asset": "costume-contact-fish",
+      "src": "/world/sprites/emerald/costume-contact-fish.png",
+      "pixels": 2
+    },
+    {
+      "asset": "costume-contact-fish-surf",
+      "src": "/world/sprites/emerald/costume-contact-fish-surf.png",
+      "pixels": 27
+    },
+    {
+      "asset": "link-board-ride",
+      "src": "/world/sprites/emerald/link-board-ride.png",
+      "pixels": 2
+    },
+    {
+      "asset": "link-board-trick",
+      "src": "/world/sprites/emerald/link-board-trick.png",
+      "pixels": 6
+    },
+    {
+      "asset": "link-surf",
+      "src": "/world/sprites/emerald/link-surf.png",
+      "pixels": 31
+    },
+    {
+      "asset": "link-fish-surf",
+      "src": "/world/sprites/emerald/link-fish-surf.png",
+      "pixels": 27
+    },
+    {
+      "asset": "costume-ezra-spider-board-ride",
+      "src": "/world/sprites/emerald/costume-ezra-spider-board-ride.png",
+      "pixels": 61
+    },
+    {
+      "asset": "costume-ezra-spider-board-trick",
+      "src": "/world/sprites/emerald/costume-ezra-spider-board-trick.png",
+      "pixels": 40
+    },
+    {
+      "asset": "costume-ezra-spider-wake-ride",
+      "src": "/world/sprites/emerald/costume-ezra-spider-wake-ride.png",
+      "pixels": 85
+    },
+    {
+      "asset": "costume-ezra-spider-water-ride",
+      "src": "/world/sprites/emerald/costume-ezra-spider-water-ride.png",
+      "pixels": 41
+    },
+    {
+      "asset": "costume-ezra-spider-bike-acro",
+      "src": "/world/sprites/emerald/costume-ezra-spider-bike-acro.png",
+      "pixels": 42
+    },
+    {
+      "asset": "costume-ezra-spider-bike-mach",
+      "src": "/world/sprites/emerald/costume-ezra-spider-bike-mach.png",
+      "pixels": 41
+    },
+    {
+      "asset": "costume-ezra-spider-surf",
+      "src": "/world/sprites/emerald/costume-ezra-spider-surf.png",
+      "pixels": 46
+    },
+    {
+      "asset": "costume-ezra-spider-fish",
+      "src": "/world/sprites/emerald/costume-ezra-spider-fish.png",
+      "pixels": 45
+    },
+    {
+      "asset": "costume-ezra-spider-fish-surf",
+      "src": "/world/sprites/emerald/costume-ezra-spider-fish-surf.png",
+      "pixels": 43
+    },
+    {
+      "asset": "costume-fallyn-ladybug-board-ride",
+      "src": "/world/sprites/emerald/costume-fallyn-ladybug-board-ride.png",
+      "pixels": 41
+    },
+    {
+      "asset": "costume-fallyn-ladybug-board-trick",
+      "src": "/world/sprites/emerald/costume-fallyn-ladybug-board-trick.png",
+      "pixels": 30
+    },
+    {
+      "asset": "costume-fallyn-ladybug-wake-ride",
+      "src": "/world/sprites/emerald/costume-fallyn-ladybug-wake-ride.png",
+      "pixels": 42
+    },
+    {
+      "asset": "costume-fallyn-ladybug-water-ride",
+      "src": "/world/sprites/emerald/costume-fallyn-ladybug-water-ride.png",
+      "pixels": 50
+    },
+    {
+      "asset": "costume-fitzgerald-spider-board-ride",
+      "src": "/world/sprites/emerald/costume-fitzgerald-spider-board-ride.png",
+      "pixels": 4
+    },
+    {
+      "asset": "costume-fitzgerald-spider-bike-acro",
+      "src": "/world/sprites/emerald/costume-fitzgerald-spider-bike-acro.png",
+      "pixels": 2
+    },
+    {
+      "asset": "costume-fitzgerald-spider-bike-mach",
+      "src": "/world/sprites/emerald/costume-fitzgerald-spider-bike-mach.png",
+      "pixels": 2
+    },
+    {
+      "asset": "costume-fitzgerald-spider-fish",
+      "src": "/world/sprites/emerald/costume-fitzgerald-spider-fish.png",
+      "pixels": 2
+    },
+    {
+      "asset": "ezra-run",
+      "src": "/world/sprites/emerald/ezra-run.png",
+      "pixels": 4
+    },
+    {
+      "asset": "costume-portfolio-water-ride",
+      "src": "/world/sprites/emerald/costume-portfolio-water-ride.png",
+      "pixels": 4
+    },
+    {
+      "asset": "costume-portfolio-bike-acro",
+      "src": "/world/sprites/emerald/costume-portfolio-bike-acro.png",
+      "pixels": 2
+    },
+    {
+      "asset": "costume-portfolio-bike-mach",
+      "src": "/world/sprites/emerald/costume-portfolio-bike-mach.png",
+      "pixels": 2
+    },
+    {
+      "asset": "costume-portfolio-surf",
+      "src": "/world/sprites/emerald/costume-portfolio-surf.png",
+      "pixels": 27
+    },
+    {
+      "asset": "costume-portfolio-fish-surf",
+      "src": "/world/sprites/emerald/costume-portfolio-fish-surf.png",
+      "pixels": 27
+    },
+    {
+      "asset": "link-surf",
+      "src": "/world/sprites/emerald/link-surf.png",
+      "pixels": 27
+    },
+    {
+      "asset": "link-fish-surf",
+      "src": "/world/sprites/emerald/link-fish-surf.png",
+      "pixels": 27
+    },
+    {
+      "asset": "link-run",
+      "src": "/world/sprites/emerald/link-run.png",
+      "pixels": 2
+    },
+    {
+      "asset": "costume-portfolio-bike-acro",
+      "src": "/world/sprites/emerald/costume-portfolio-bike-acro.png",
+      "pixels": 4
+    },
+    {
+      "asset": "costume-portfolio-bike-mach",
+      "src": "/world/sprites/emerald/costume-portfolio-bike-mach.png",
+      "pixels": 4
+    },
+    {
+      "asset": "costume-portfolio-surf",
+      "src": "/world/sprites/emerald/costume-portfolio-surf.png",
+      "pixels": 27
+    },
+    {
+      "asset": "costume-portfolio-fish-surf",
+      "src": "/world/sprites/emerald/costume-portfolio-fish-surf.png",
+      "pixels": 27
+    },
+    {
+      "asset": "link-surf",
+      "src": "/world/sprites/emerald/link-surf.png",
+      "pixels": 27
+    },
+    {
+      "asset": "link-fish-surf",
+      "src": "/world/sprites/emerald/link-fish-surf.png",
+      "pixels": 27
+    },
+    {
+      "asset": "link-surf",
+      "src": "/world/sprites/emerald/link-surf.png",
+      "pixels": 27
+    },
+    {
+      "asset": "link-fish-surf",
+      "src": "/world/sprites/emerald/link-fish-surf.png",
+      "pixels": 27
+    }
+  ],
+  "aligned": [
+    "costume-airbender",
+    "costume-airbender-run",
+    "costume-contact",
+    "costume-contact-run",
+    "costume-ezra-spider",
+    "costume-ezra-spider-run",
+    "costume-fallyn-ladybug",
+    "costume-fallyn-ladybug-run",
+    "costume-fitzgerald-spider",
+    "costume-fitzgerald-spider-run",
+    "costume-home",
+    "costume-portfolio",
+    "costume-portfolio-run",
+    "costume-resume",
+    "costume-resume-run",
+    "costume-skills",
+    "costume-skills-run",
+    "ezra",
+    "ezra-run",
+    "fallyn",
+    "fallyn-run",
+    "fitzgerald",
+    "fitzgerald-run",
+    "link",
+    "link-run",
+    "masyn",
+    "masyn-run",
+    "mi-shell",
+    "mi-shell-run"
+  ],
+  "realignedFrames": [
+    {
+      "asset": "fitzgerald-land",
+      "row": 0,
+      "column": 2,
+      "shift": 3
+    },
+    {
+      "asset": "fitzgerald-land",
+      "row": 0,
+      "column": 3,
+      "shift": 3
+    },
+    {
+      "asset": "fish-gourami",
+      "row": 0,
+      "column": 0,
+      "shift": 3
+    },
+    {
+      "asset": "fish-gourami",
+      "row": 0,
+      "column": 1,
+      "shift": 2
+    },
+    {
+      "asset": "fish-gourami",
+      "row": 0,
+      "column": 2,
+      "shift": 3
+    },
+    {
+      "asset": "fish-gourami",
+      "row": 0,
+      "column": 3,
+      "shift": 3
+    },
+    {
+      "asset": "fish-crystal-shrimp",
+      "row": 0,
+      "column": 2,
+      "shift": 2
+    },
+    {
+      "asset": "fish-blue-shrimp",
+      "row": 0,
+      "column": 0,
+      "shift": 1
+    },
+    {
+      "asset": "fish-ghost-shrimp",
+      "row": 0,
+      "column": 3,
+      "shift": 1
+    },
+    {
+      "asset": "fish-orange-crayfish",
+      "row": 0,
+      "column": 0,
+      "shift": 4
+    },
+    {
+      "asset": "fish-swordtail",
+      "row": 0,
+      "column": 2,
+      "shift": 2
+    },
+    {
+      "asset": "mantis-orchid",
+      "row": 0,
+      "column": 2,
+      "shift": 1
+    },
+    {
+      "asset": "butterfly-cabbage",
+      "row": 0,
+      "column": 3,
+      "shift": 1
+    },
+    {
+      "asset": "dragonfly-scarlet",
+      "row": 0,
+      "column": 2,
+      "shift": 1
+    },
+    {
+      "asset": "mantis-jade",
+      "row": 0,
+      "column": 3,
+      "shift": 2
+    },
+    {
+      "asset": "butterfly-tiger",
+      "row": 0,
+      "column": 2,
+      "shift": 1
+    },
+    {
+      "asset": "butterfly-zebra",
+      "row": 0,
+      "column": 2,
+      "shift": 1
+    },
+    {
+      "asset": "dragonfly-ruby",
+      "row": 0,
+      "column": 3,
+      "shift": 1
+    },
+    {
+      "asset": "dragonfly-sapphire",
+      "row": 0,
+      "column": 3,
+      "shift": 1
+    },
+    {
+      "asset": "dragonfly-scarlet-island",
+      "row": 0,
+      "column": 0,
+      "shift": 2
+    },
+    {
+      "asset": "dragonfly-mint",
+      "row": 0,
+      "column": 0,
+      "shift": 1
+    },
+    {
+      "asset": "dragonfly-mint",
+      "row": 0,
+      "column": 3,
+      "shift": 1
+    },
+    {
+      "asset": "dragonfly-azure",
+      "row": 0,
+      "column": 0,
+      "shift": 1
+    },
+    {
+      "asset": "dragonfly-silver",
+      "row": 0,
+      "column": 3,
+      "shift": 1
+    },
+    {
+      "asset": "dragonfly-tiger",
+      "row": 0,
+      "column": 2,
+      "shift": 1
+    },
+    {
+      "asset": "dragonfly-sunset",
+      "row": 0,
+      "column": 1,
+      "shift": 2
+    },
+    {
+      "asset": "dragonfly-night",
+      "row": 0,
+      "column": 3,
+      "shift": 1
+    },
+    {
+      "asset": "dragonfly-aurora",
+      "row": 0,
+      "column": 1,
+      "shift": 3
+    },
+    {
+      "asset": "dragonfly-aurora",
+      "row": 0,
+      "column": 2,
+      "shift": 1
+    },
+    {
+      "asset": "costume-resume",
+      "row": 3,
+      "column": 0,
+      "shift": 11
+    },
+    {
+      "asset": "costume-resume",
+      "row": 5,
+      "column": 0,
+      "shift": 11
+    },
+    {
+      "asset": "costume-resume-run",
+      "row": 4,
+      "column": 5,
+      "shift": 5
+    },
+    {
+      "asset": "butterfly-orchard",
+      "row": 0,
+      "column": 2,
+      "shift": 1
+    },
+    {
+      "asset": "dragonfly-clover",
+      "row": 0,
+      "column": 3,
+      "shift": 1
+    },
+    {
+      "asset": "dragonfly-willow",
+      "row": 0,
+      "column": 2,
+      "shift": 2
+    },
+    {
+      "asset": "dragonfly-thistle",
+      "row": 0,
+      "column": 1,
+      "shift": 2
+    },
+    {
+      "asset": "dragonfly-dandelion",
+      "row": 0,
+      "column": 3,
+      "shift": 2
+    },
+    {
+      "asset": "dragonfly-rowan",
+      "row": 0,
+      "column": 0,
+      "shift": 1
+    },
+    {
+      "asset": "dragonfly-rowan",
+      "row": 0,
+      "column": 1,
+      "shift": 1
+    },
+    {
+      "asset": "dragonfly-rowan",
+      "row": 0,
+      "column": 2,
+      "shift": 3
+    },
+    {
+      "asset": "dragonfly-rowan",
+      "row": 0,
+      "column": 3,
+      "shift": 2
+    },
+    {
+      "asset": "dragonfly-primrose",
+      "row": 0,
+      "column": 1,
+      "shift": 2
+    },
+    {
+      "asset": "dragonfly-primrose",
+      "row": 0,
+      "column": 3,
+      "shift": 1
+    },
+    {
+      "asset": "dragonfly-cedar",
+      "row": 0,
+      "column": 2,
+      "shift": 2
+    },
+    {
+      "asset": "dragonfly-fernwood",
+      "row": 0,
+      "column": 1,
+      "shift": 1
+    },
+    {
+      "asset": "dragonfly-sage",
+      "row": 0,
+      "column": 1,
+      "shift": 2
+    },
+    {
+      "asset": "dragonfly-sage",
+      "row": 0,
+      "column": 2,
+      "shift": 2
+    },
+    {
+      "asset": "dragonfly-brook",
+      "row": 0,
+      "column": 0,
+      "shift": 2
+    },
+    {
+      "asset": "dragonfly-brook",
+      "row": 0,
+      "column": 1,
+      "shift": 1
+    },
+    {
+      "asset": "dragonfly-brook",
+      "row": 0,
+      "column": 2,
+      "shift": 2
+    },
+    {
+      "asset": "dragonfly-brook",
+      "row": 0,
+      "column": 3,
+      "shift": 1
+    },
+    {
+      "asset": "dragonfly-pebblewood",
+      "row": 0,
+      "column": 1,
+      "shift": 1
+    },
+    {
+      "asset": "dragonfly-nightbloom",
+      "row": 0,
+      "column": 2,
+      "shift": 2
+    },
+    {
+      "asset": "dragonfly-cinder",
+      "row": 0,
+      "column": 1,
+      "shift": 1
+    },
+    {
+      "asset": "dragonfly-mistveil",
+      "row": 0,
+      "column": 2,
+      "shift": 1
+    },
+    {
+      "asset": "fish-congo-tetra",
+      "row": 0,
+      "column": 3,
+      "shift": 1
+    },
+    {
+      "asset": "fish-threadfin-rainbowfish",
+      "row": 0,
+      "column": 0,
+      "shift": 2
+    },
+    {
+      "asset": "fish-reed-frog",
+      "row": 0,
+      "column": 3,
+      "shift": 2
+    }
+  ]
+}

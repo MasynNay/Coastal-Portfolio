@@ -1,0 +1,74 @@
+{
+  "building-home": {
+    "src": "/world/places/building-home.png",
+    "width": 1152,
+    "height": 1200,
+    "worldHeight": 10,
+    "openingBottom": 0.92
+  },
+  "building-skills": {
+    "src": "/world/places/building-skills.png",
+    "width": 1200,
+    "height": 733,
+    "worldHeight": 8.5,
+    "openingBottom": 0.72
+  },
+  "building-portfolio": {
+    "src": "/world/places/building-portfolio.png",
+    "width": 1200,
+    "height": 978,
+    "worldHeight": 8.5,
+    "openingBottom": 0.93
+  },
+  "building-resume": {
+    "src": "/world/places/building-resume.png",
+    "width": 1015,
+    "height": 1200,
+    "worldHeight": 11,
+    "openingBottom": 0.94
+  },
+  "building-contact": {
+    "src": "/world/places/building-contact.png",
+    "width": 1200,
+    "height": 1129,
+    "worldHeight": 10,
+    "openingBottom": 0.84
+  },
+  "building-lodge": {
+    "src": "/world/places/building-lodge.png",
+    "width": 1200,
+    "height": 1054,
+    "worldHeight": 8,
+    "openingBottom": 0.91
+  },
+  "interior-home": {
+    "src": "/world/places/interior-home.png",
+    "width": 1200,
+    "height": 960
+  },
+  "interior-skills": {
+    "src": "/world/places/interior-skills.png",
+    "width": 1200,
+    "height": 960
+  },
+  "interior-portfolio": {
+    "src": "/world/places/interior-portfolio.png",
+    "width": 1200,
+    "height": 960
+  },
+  "interior-resume": {
+    "src": "/world/places/interior-resume.png",
+    "width": 1200,
+    "height": 960
+  },
+  "interior-contact": {
+    "src": "/world/places/interior-contact.png",
+    "width": 1200,
+    "height": 960
+  },
+  "interior-lodge": {
+    "src": "/world/places/interior-lodge.png",
+    "width": 1200,
+    "height": 960
+  }
+}

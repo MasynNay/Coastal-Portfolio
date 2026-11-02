@@ -1,0 +1,27 @@
+{
+  "tool": "Built-in imagegen",
+  "reference": "people/link/south.png",
+  "description": "Restyle the four non-front movement views to the approved front-facing illustrated style; preserve all 36 chronological idle/walk/run poses and facing. The activity and ocarina sheets were reviewed separately and already use the outlined cartoon style.",
+  "edits": [
+    {
+      "name": "northwest",
+      "file": "people/link/northwest.png",
+      "prompt": "Use case: style-transfer. Image 1 is the APPROVED STYLE AND CHARACTER REFERENCE, the south/front sprite sheet. Image 2 is the EDIT TARGET, a northwest/rear-left animation sheet. Repaint Image 2 in EXACTLY the crisp illustrated handheld RPG style of Image 1: clean dark outlines, simplified cel-shaded colors, warm skin, small adult Masyn with brown hair, a brown beard where visible, green fitted pointed cap covering the crown, emerald tunic over cream sleeves, brown belt, tan trousers, brown boots, small wooden shield on his back. No realistic 3D rendering, no painterly textures or glossy lighting. Match Image 1's body proportions, fabric colors, thick outline and simple shadow treatment, viewed from REAR LEFT. Preserve Image 2's EXACT 9 ROWS x 4 COLUMNS, 36 complete separate figures and their precise chronological poses: row 1 four idle poses, rows 2-5 sixteen walking frames, rows 6-9 sixteen running frames. Every figure faces NORTHWEST/UP-LEFT; see his back and left side, do not rotate toward the viewer or turn in a circle. Preserve all hands/feet positions and complete cap/boots in every cell; generous clear transparent gutters. Exact target portrait canvas proportions. True transparent background. No text, no guides, no shadows outside the bodies, no scenery. The first image is only a style reference; do not copy its front-facing direction or its grid into the output. Output ONLY the edited Image 2 sheet."
+    },
+    {
+      "name": "west",
+      "file": "people/link/west.png",
+      "prompt": "Edit the second image, a LEFT-FACING RPG sprite sheet, to use the first image's clean cartoon outline style. Keep all 36 figures, 9 rows by 4 columns, in exactly their existing poses and positions. The character is an adult bearded adventurer wearing a fitted green cap, green tunic, cream sleeves, tan trousers and brown boots. Use the same simple cel shading, colors, small body proportions and strong outlines as the first image. Every figure must remain a strict LEFT PROFILE, not turn toward the viewer. Preserve all idle, walking and running frame poses, and the complete hat, hands and feet. Transparent background, clear gutters, same portrait aspect ratio, no added text. Output only the restyled second sheet."
+    },
+    {
+      "name": "southwest",
+      "file": "people/link/southwest.png",
+      "prompt": "Edit the second image, an RPG sprite sheet, to match the first image's clean cartoon outline style. Keep all 36 figures, 9 rows by 4 columns, and their exact chronological poses. The adventurer wears a fitted green cap, green tunic, cream sleeves, brown belt, tan trousers and brown boots. Match the first image's crisp dark outlines, restrained cel shading, small adult proportions and warm colors. No realistic rendering or painterly surfaces. Every figure must remain facing DOWN-LEFT three-quarter front; do not rotate toward other directions. Preserve the edit target's foot/hand positions, all four idle poses, sixteen walking and sixteen running poses, fully visible hat and boots, and clear transparent gutters. Exact portrait aspect ratio. Transparent background. No text or new props. Output only the restyled second sheet."
+    },
+    {
+      "name": "north",
+      "file": "people/link/north.png",
+      "prompt": "Restyle image 2 to the clean outlined cartoon art of image 1. This is a fully clothed, nonsexual fantasy videogame character animation sheet. Image 2 must keep its original camera direction: every character is facing away from the camera, showing the green hat, green tunic, cream sleeves, wooden shield, tan trousers and brown boots. Keep exactly 36 complete drawings in 9 rows and 4 columns, same poses, same layout, same foot and hand positions. Change only the rendering style and colors to match image 1: dark outlines, simple flat cel shading, warm colors, clearly illustrated instead of realistic. Preserve the fitted green cap over the head. Do not add a face on the back of the head. Actual transparent background and clear gaps between figures. No text or guides. Output only the edited second sheet."
+    }
+  ]
+}

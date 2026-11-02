@@ -1,0 +1,136 @@
+/* The logical 720 × 480 world scales as a single surface on phones and iPads.
+   Pointer actions never scroll the page or reach the paused town underneath. */
+.axolotl-game {
+  max-width: 850px;
+  margin: 0 auto;
+  text-align: center;
+}
+.axolotl-game-score {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  margin-bottom: 14px;
+  color: #c6ddce;
+}
+.axolotl-game-score strong {
+  display: inline-block;
+  color: #f0e9bf;
+  margin-left: 7px;
+  font-size: 22px;
+}
+.axolotl-game-stage {
+  position: relative;
+  overflow: hidden;
+  border-radius: 18px;
+  border: 1px solid #9dc9ba80;
+  box-shadow: 0 12px 34px #020e1938;
+  background: #174454;
+}
+.axolotl-game canvas {
+  display: block;
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  touch-action: none;
+}
+.axolotl-game canvas:focus-visible {
+  outline: 2px solid #e9dbac;
+  outline-offset: -3px;
+}
+/* Messages float above the game without eating taps intended as a flap. */
+.axolotl-game-message {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 24px;
+  background: #0a2b3c73;
+  pointer-events: none;
+  color: #f2efcf;
+  text-shadow: 0 2px 8px #102d37;
+}
+.axolotl-game-message strong {
+  font-size: clamp(20px, 4vw, 34px);
+  max-width: 440px;
+}
+.axolotl-game-message span {
+  max-width: 380px;
+  font-size: 14px;
+  line-height: 1.6;
+}
+.axolotl-game > button {
+  min-width: 160px;
+  margin-top: 16px;
+}
+@media (max-width: 600px) {
+  .axolotl-game-score {
+    gap: 12px;
+    font-size: 12px;
+    flex-wrap: wrap;
+  }
+  .axolotl-game-message {
+    padding: 14px;
+    gap: 6px;
+  }
+  .axolotl-game-message span {
+    font-size: 12px;
+  }
+}
+/* In landscape on a phone, keep the complete course and close button visible.
+   Tapping the canvas still flaps, so the Rise control can sit over its corner. */
+@media (max-height: 600px) and (orientation: landscape) {
+  .world-arcade-dialog {
+    max-height: 96svh;
+  }
+  .world-arcade-dialog > header {
+    padding: 8px 16px;
+  }
+  .world-arcade-dialog > header small {
+    display: none;
+  }
+  .world-arcade-dialog > header h2 {
+    margin: 0;
+    font-size: 20px;
+  }
+  .world-arcade-dialog .world-dialog-body {
+    padding: 8px 16px;
+  }
+  .axolotl-game {
+    position: relative;
+  }
+  .axolotl-game-score {
+    margin-bottom: 6px;
+    gap: 12px;
+    font-size: 11px;
+  }
+  .axolotl-game-score strong {
+    font-size: 17px;
+  }
+  .world-arcade-dialog .axolotl-game-score button {
+    padding: 4px 10px;
+  }
+  .axolotl-game-stage {
+    max-width: calc((100svh - 135px) * 1.5);
+    margin: 0 auto;
+  }
+  .axolotl-game > button {
+    position: absolute;
+    bottom: 8px;
+    right: 12px;
+    margin: 0;
+    min-width: 80px;
+    padding: 6px 12px;
+  }
+  .axolotl-game .activity-note {
+    display: none;
+  }
+  .axolotl-game-message strong {
+    font-size: 20px;
+  }
+  .axolotl-game-message span {
+    font-size: 11px;
+  }
+}

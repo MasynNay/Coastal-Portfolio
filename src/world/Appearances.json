@@ -1,0 +1,107 @@
+[
+  {
+    "character": "masyn",
+    "id": "everyday",
+    "name": "Masyn",
+    "outfitName": "Everyday hoodie",
+    "asset": "masyn",
+    "default": true,
+    "height": 2.25
+  },
+  {
+    "character": "mi-shell",
+    "name": "Mi Shell",
+    "asset": "mi-shell",
+    "default": true,
+    "height": 2.15
+  },
+  {
+    "character": "ezra",
+    "name": "Ezra",
+    "asset": "ezra",
+    "default": true,
+    "height": 1.7
+  },
+  {
+    "character": "fallyn",
+    "name": "Fallyn",
+    "asset": "fallyn",
+    "default": true,
+    "height": 1.85
+  },
+  {
+    "character": "fitzgerald",
+    "name": "Fitzgerald",
+    "asset": "fitzgerald",
+    "default": true,
+    "height": 1.5
+  },
+  {
+    "character": "masyn",
+    "id": "home",
+    "name": "Airbender",
+    "asset": "costume-airbender"
+  },
+  {
+    "character": "masyn",
+    "id": "skills",
+    "name": "Woodland archer",
+    "asset": "costume-skills"
+  },
+  {
+    "character": "masyn",
+    "id": "portfolio",
+    "name": "Pok\u00e9mon trainer",
+    "asset": "costume-portfolio",
+    "artHeight": 90
+  },
+  {
+    "character": "masyn",
+    "id": "resume",
+    "name": "Wizard",
+    "asset": "costume-resume"
+  },
+  {
+    "character": "masyn",
+    "id": "contact",
+    "name": "Ocean king",
+    "asset": "costume-contact"
+  },
+  {
+    "character": "masyn",
+    "id": "lodge",
+    "name": "Hyrulian Adventurer",
+    "asset": "link",
+    "artHeight": 90,
+    "opaqueBody": true
+  },
+  {
+    "character": "ezra",
+    "id": "spider-ezra",
+    "name": "Ezra \u00b7 Shadow Spider",
+    "asset": "costume-ezra-spider",
+    "hero": true,
+    "webs": true
+  },
+  {
+    "character": "fallyn",
+    "id": "ladybug-fallyn",
+    "name": "Fallyn \u00b7 Ladybug",
+    "asset": "costume-fallyn-ladybug",
+    "hero": true
+  },
+  {
+    "character": "fitzgerald",
+    "id": "spider-fitzgerald",
+    "name": "Fitzgerald \u00b7 Blue Spider",
+    "asset": "costume-fitzgerald-spider",
+    "hero": true,
+    "webs": true
+  },
+  {
+    "character": "masyn",
+    "id": "panem",
+    "name": "Panem Tribute",
+    "asset": "costume-panem"
+  }
+]

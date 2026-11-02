@@ -1,0 +1,51 @@
+{
+  "tool": "built-in imagegen",
+  "jobs": [
+    {
+      "look": "link",
+      "name": "water",
+      "inputs": [
+        "people/masyn/water.png"
+      ],
+      "prompt": "Use case: identity-preserve. Edit the attached complete Masyn sheet, CLOTHES ONLY. Same ADULT Masyn, unchanged body proportions and pose anatomy. Dress him in a green belted tunic over cream sleeves, opaque tan trousers, brown gloves and knee boots, a long pointed GREEN CAP behind his BROWN short swept hair, and a ROUND WOODEN SHIELD centered on his back. Every figure MUST wear this complete outfit, including cap and shield seen from behind. Keep original artist rendering and clean transparent background. No guides/text/scenery/shadows. EXACT 10 rows x8 columns of 80 complete people. Keep the SAME facing and SAME pose in every cell of the input. Rows1-5 hold tow handle wakeboarding; rows6-10 are seated boat/jetski steering. In each five-row group: front SOUTH, front-left SOUTHWEST, left profile WEST, rear-left NORTHWEST, pure back NORTH. ALL EIGHT FIGURES in each row share that row's facing. North rows5 and10 show ONLY back, no eye/nose/beard/face at all; pointed cap and shield visible in all eight cells. Other rear-left rows4 and9 show back tilted LEFT. Leave obvious clear gutters between all 80 people; no figures touching or overlapping rows. Preserve fingers, bent knees, alternating poses and hands exactly. NO vehicles or animals."
+    },
+    {
+      "look": "link",
+      "name": "exploring",
+      "inputs": [
+        "people/masyn/exploring.png"
+      ],
+      "prompt": "Use case: identity-preserve. Edit the attached complete Masyn sheet, CLOTHES ONLY. Same ADULT Masyn, unchanged body proportions and pose anatomy. Dress him in a green belted tunic over cream sleeves, opaque tan trousers, brown gloves and knee boots, a long pointed GREEN CAP behind his BROWN short swept hair, and a ROUND WOODEN SHIELD centered on his back. Every figure MUST wear this complete outfit, including cap and shield seen from behind. Keep original artist rendering and clean transparent background. No guides/text/scenery/shadows. EXACT 10 rows x8 columns of 80 complete people. Keep the SAME facing and SAME pose in every cell of input. Rows1-5 pedal a bicycle (do NOT draw bicycle), rows6-10 seated animal riding (do NOT draw animal). In each five-row group directions: front SOUTH; front-left SOUTHWEST; left profile WEST; rear-left NORTHWEST; pure back NORTH. ALL EIGHT FIGURES in a row MUST share its direction, no frontal figures in north rows. North rows5,10 show ONLY BACK of body/hair/cap/shield. No eyes/nose/face seen there. Pointed green cap visible on ALL eighty figures, wooden shield always remains on back. Preserve bent knees, feet and hands and every changing pose exactly. Give each full figure clear transparent margin ABOVE AND BELOW, large gutters, no figures touching/merging across cells. Complete10 rows."
+    },
+    {
+      "look": "link",
+      "name": "north",
+      "inputs": [
+        "people/references/wardrobe/north.png"
+      ],
+      "prompt": "Use case: identity-preserve. Edit the attached complete Masyn sheet, CLOTHES ONLY. Same ADULT Masyn, unchanged body proportions and pose anatomy. Dress him in a green belted tunic over cream sleeves, opaque tan trousers, brown gloves and knee boots, a long pointed GREEN CAP behind his BROWN short swept hair, and a ROUND WOODEN SHIELD centered on his back. Every figure MUST wear this complete outfit, including cap and shield seen from behind. Keep original artist rendering and clean transparent background. No guides/text/scenery/shadows. EXACT 9rows x4columns, 36 complete Masyn figures ALL FACING STRAIGHT NORTH, away from viewer. Every frame shows the BACK only: no nose, eyes, cheeks or beard visible. Shoulders symmetric around a vertical spine, shield centered on back, pointed cap centered over back of head. He must not tilt left or right or face northwest. Keep ALL poses/feet/arms/timing in the input exactly: 4neutral, then16walking, then16running. Same frame sizes and head/body heights, margins and crop."
+    },
+    {
+      "look": "link",
+      "name": "ability",
+      "inputs": [
+        "people/references/wardrobe/ability-ocarina.png",
+        "people/references/wardrobe/Hyrulian.png"
+      ],
+      "prompt": "Use case: identity-preserve. Image 1 EDIT TARGET is the existing FOUR-ROW EIGHT-COLUMN ability sheet, complete 32 poses. Image 2 is corrected Masyn in this costume. Correct the PERSON'S identity and clothes to exactly image 2, on ALL 32 poses, keeping identical action poses and exact held prop stages. Hyrulian Adventurer clothes from image 2: deep forest-green tunic, cream long sleeves, leather belt/diagonal strap, opaque tan trousers, brown knee-high boots and gloves, long green cloth cap behind his swept BROWN hair, small wooden round shield on his back. NO blond hair, elf ears, bare thighs, young Link face or bigger eyes. Preserve same adult face, full brown beard, GREEN eyes, short BROWN swept hair, same head/body proportions as image 2. No young Link/trainer face. Rows MUST face SOUTH/viewer, NORTH/back, WEST/left profile (nose LEFT), EAST/right profile, respectively. First 8 frames front, next8 back, next8 left, last8 right. Preserve every unique hand position and action stage from image1. He lifts a small BLUE OCARINA to his mouth, plays, and puts it away. Preserve ocarina and playing arms in all four directions. Exactly FOUR rows by EIGHT columns, complete body and prop in every cell with clear gutters. Clean detailed outlined handheld-RPG artwork, fully transparent background, no text/shadows/scenery. IMPORTANT: the whole SECOND ROW (8north poses) is a PURE BACK VIEW, not a side view. NO NOSE/EYES/CHEEKS visible on any north frame. Head looks straight away, shield centered behind shoulders, both ears symmetric. All 8 north figures must face straight up."
+    },
+    {
+      "look": "costume-portfolio",
+      "name": "exploring",
+      "target": "people/costume-portfolio/exploring.png",
+      "inputs": [
+        "people/masyn/exploring.png"
+      ],
+      "prompt": "Use case: identity-preserve. Image 1 EDIT TARGET has 80 complete Masyn ACTIVITY poses. Only this image is an edit target; use the following clothing description. Change CLOTHES ONLY on all 80 drawings to the following costume. Keep the adult Masyn identity from this original image: brown swept hair, green eyes, full brown beard, human ears, same adult body/head proportions, NOT childlike anime/chibi. Monster trainer clothes described here: red and white blank baseball cap over Masyn's BROWN swept hair, navy sleeveless utility vest with golden piping over white tee, blue full-length jeans, black fingerless gloves, cream-soled sneakers, small dark/red backpack. Retain his full trimmed brown beard and ADULT Masyn face, NOT a young anime trainer. EXACTLY TEN rows of EIGHT complete people, same original pose in every cell, same scale, margins and foot/head position. Rows 1-5 are seated cycling with hands forward holding invisible handlebars and feet pedaling; rows 6-10 are seated axolotl riding, with naturally bent knees. No bicycle or animal drawn. Within BOTH five-row action groups, order is SOUTH front, SOUTHWEST nose points LEFT, WEST profile nose points LEFT, NORTHWEST back tilted LEFT (show back of head), NORTH pure back. Do not swap or mirror these directions. Each row eight different frames from the unchanged movement sequence; preserve elbows, ankles, hands, knees and silhouettes. Clear gutters around every complete figure. Outfit only; no illustrated vehicles or animals, no text, no environmental background, no floor/shadow. Transparent PNG in same polished outlined handheld-RPG rendering as image 1. Do not delete, merge or duplicate any row. Final must contain 10 rows by 8 columns. Critical direction lock: NO front-facing figures in NORTH rows 5 and 10. ALL EIGHT figures in those rows must show ONLY the back of the red/white cap, backpack and body. No visible nose or eyes on these rows. All 80 figures need clear margins, no touching across rows."
+    }
+  ],
+  "notes": {
+    "costume-portfolio/exploring.png": "Selected only eight corrected north-facing bicycle figures from the correction. Other seventy-two figures remain from WardrobePrompts.json; full figures repacked with clear gutters.",
+    "ezra/north.png": "Selected only sixteen corrected running figures. The original idle/walking drawings were retained."
+  }
+}

@@ -1,0 +1,8 @@
+Generated with the built-in image generation tool. Reference inputs: Masyn's `costume-contact` walking sheet and the first four-frame action strip. The source preserves four cardinal facing rows; runtime uses 64×72 cells with foot anchors.
+
+Final prompt:
+
+Use case: identity-preserve. Game production art: ONE transparent sprite animation sheet of this clothed adult man, Masyn, matching the provided reference. EXACTLY 4 columns by 4 rows, sixteen separated full-body sprites. Use first reference for his brown hair, green eyes, small beard, clothing and pixel art proportions. Second reference shows the four action poses you must redraw in additional directions. Maintain this adult character's identity and wardrobe. Crisp expressive GBA-inspired pixel art with dark contours.
+Orientation rows in order top to bottom: DOWN (front view directly toward camera), UP (back view away from camera, back of head and clothing, no face), LEFT (left side profile), RIGHT (right side profile).
+Every row contains the same action sequence in columns 1 to 4: wind back held golden three-pronged trident; throw with empty hand (no weapon visible); reach out with empty hand awaiting return (no weapon visible); hold the returned golden trident upright. The whole body, hands, held item and clothing must all turn appropriately to that row's direction. Up/down poses must aim up/down, not sideways.
+Strict 4x4 regular grid, same cell dimensions, same foot baseline and consistent body size in all sixteen cells. Wide clear transparent gutters, generous margins around complete bodies/held objects. No text, labels, grid lines, backgrounds, scenery, detached projectiles, magic particles or notes. No duplicate weapons. Transparent background.

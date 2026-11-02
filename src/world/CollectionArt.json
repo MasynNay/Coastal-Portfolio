@@ -1,0 +1,5252 @@
+{
+  "spider": {
+    "src": "/world/collections/spider.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "9f86018f1278"
+  },
+  "spider-fern": {
+    "src": "/world/collections/spider-fern.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "7d4a710be46a"
+  },
+  "spider-coast": {
+    "src": "/world/collections/spider-coast.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "ead44fe0a7d3"
+  },
+  "spider-gold": {
+    "src": "/world/collections/spider-gold.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "a541875c523e"
+  },
+  "spider-blue": {
+    "src": "/world/collections/spider-blue.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "0db42ca9da95"
+  },
+  "spider-rose": {
+    "src": "/world/collections/spider-rose.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "e22cc12a1ac0"
+  },
+  "spider-copper": {
+    "src": "/world/collections/spider-copper.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "77b00519a07f"
+  },
+  "spider-mint": {
+    "src": "/world/collections/spider-mint.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "952a199bf99f"
+  },
+  "spider-ember": {
+    "src": "/world/collections/spider-ember.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "00011cf29b53"
+  },
+  "spider-lilac": {
+    "src": "/world/collections/spider-lilac.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "1c1ef3e3c5ac"
+  },
+  "spider-ink": {
+    "src": "/world/collections/spider-ink.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "f6665ccfde29"
+  },
+  "spider-sunflower": {
+    "src": "/world/collections/spider-sunflower.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "6d5a1572e100"
+  },
+  "spider-peach": {
+    "src": "/world/collections/spider-peach.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "e5babd92c948"
+  },
+  "spider-panda": {
+    "src": "/world/collections/spider-panda.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "ceebc67af620"
+  },
+  "spider-pistachio": {
+    "src": "/world/collections/spider-pistachio.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "643f09a2b2c0"
+  },
+  "spider-crimson": {
+    "src": "/world/collections/spider-crimson.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "2e4a1cadbb10"
+  },
+  "spider-snow": {
+    "src": "/world/collections/spider-snow.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "5a95375dcf81"
+  },
+  "spider-sunset": {
+    "src": "/world/collections/spider-sunset.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "1fd4647970b4"
+  },
+  "spider-teal": {
+    "src": "/world/collections/spider-teal.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "0097a90a17f5"
+  },
+  "spider-caramel": {
+    "src": "/world/collections/spider-caramel.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "81a4fb675e39"
+  },
+  "spider-orchid": {
+    "src": "/world/collections/spider-orchid.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "318e555d4585"
+  },
+  "spider-slate": {
+    "src": "/world/collections/spider-slate.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "c92b01dc8b07"
+  },
+  "spider-lime": {
+    "src": "/world/collections/spider-lime.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "db8fa304eb9e"
+  },
+  "spider-velvet": {
+    "src": "/world/collections/spider-velvet.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "5886672c81b9"
+  },
+  "spider-cobalt": {
+    "src": "/world/collections/spider-cobalt.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "1fd470f6bc63"
+  },
+  "spider-jade": {
+    "src": "/world/collections/spider-jade.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "ee9ce33f08d9"
+  },
+  "spider-pearl": {
+    "src": "/world/collections/spider-pearl.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "0d0a78027890"
+  },
+  "spider-midnight": {
+    "src": "/world/collections/spider-midnight.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "c90f82807d02"
+  },
+  "spider-rainbow": {
+    "src": "/world/collections/spider-rainbow.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "822405862bf1"
+  },
+  "spider-celestial": {
+    "src": "/world/collections/spider-celestial.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "f76d8e977d20"
+  },
+  "fish-harbor": {
+    "src": "/world/collections/fish-harbor.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "f389d930c74b"
+  },
+  "fish-bluegill": {
+    "src": "/world/collections/fish-bluegill.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "b266a8f1f848"
+  },
+  "fish-perch": {
+    "src": "/world/collections/fish-perch.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "22ffdcf2a76e"
+  },
+  "fish-sunfish": {
+    "src": "/world/collections/fish-sunfish.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "c7598fbdb98d"
+  },
+  "fish-koi": {
+    "src": "/world/collections/fish-koi.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "70e25d7378e4"
+  },
+  "fish-guppy": {
+    "src": "/world/collections/fish-guppy.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "0230855ab053"
+  },
+  "fish-betta": {
+    "src": "/world/collections/fish-betta.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "a8d232b4e244"
+  },
+  "fish-goldfish": {
+    "src": "/world/collections/fish-goldfish.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "99b1b382dd98"
+  },
+  "fish-clown": {
+    "src": "/world/collections/fish-clown.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "d78bc34af0dc"
+  },
+  "fish-neon": {
+    "src": "/world/collections/fish-neon.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "9351cf2f57a9"
+  },
+  "fish-tang": {
+    "src": "/world/collections/fish-tang.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "0a123aa1994a"
+  },
+  "fish-angel": {
+    "src": "/world/collections/fish-angel.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "9d1f9433d092"
+  },
+  "fish-puffer": {
+    "src": "/world/collections/fish-puffer.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "7efac287219e"
+  },
+  "fish-lion": {
+    "src": "/world/collections/fish-lion.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "28117f298b98"
+  },
+  "fish-butterfly": {
+    "src": "/world/collections/fish-butterfly.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "42f910baef0c"
+  },
+  "fish-mandarin": {
+    "src": "/world/collections/fish-mandarin.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "3415a1fbd5e9"
+  },
+  "fish-discus": {
+    "src": "/world/collections/fish-discus.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "efaf392e8175"
+  },
+  "fish-cory": {
+    "src": "/world/collections/fish-cory.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "a09c7e6d7689"
+  },
+  "fish-loach": {
+    "src": "/world/collections/fish-loach.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "54488b5f7905"
+  },
+  "fish-rasbora": {
+    "src": "/world/collections/fish-rasbora.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "83664ad8a0de"
+  },
+  "fish-trout": {
+    "src": "/world/collections/fish-trout.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "957d612036b2"
+  },
+  "fish-salmon": {
+    "src": "/world/collections/fish-salmon.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "e1abf2a89569"
+  },
+  "fish-carp": {
+    "src": "/world/collections/fish-carp.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "e5cf7c88574f"
+  },
+  "fish-gourami": {
+    "src": "/world/collections/fish-gourami.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "81f2dc4736b8"
+  },
+  "fish-seahorse": {
+    "src": "/world/collections/fish-seahorse.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "82a8060a5c4d"
+  },
+  "fish-moonfish": {
+    "src": "/world/collections/fish-moonfish.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "3dcbc81acec1"
+  },
+  "fish-ray": {
+    "src": "/world/collections/fish-ray.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "ff1ebe0c973e"
+  },
+  "fish-arowana": {
+    "src": "/world/collections/fish-arowana.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "32e8dc4a31d3"
+  },
+  "fish-dragon": {
+    "src": "/world/collections/fish-dragon.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "5b5babdb6b5c"
+  },
+  "fish-aurora": {
+    "src": "/world/collections/fish-aurora.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "bfd594a377f3"
+  },
+  "spider-maple": {
+    "src": "/world/collections/spider-maple.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "514e468f3620"
+  },
+  "spider-acorn": {
+    "src": "/world/collections/spider-acorn.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "1841c48a6fc4"
+  },
+  "spider-autumn": {
+    "src": "/world/collections/spider-autumn.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "ec11b9885a21"
+  },
+  "spider-dusk": {
+    "src": "/world/collections/spider-dusk.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "dfc92ebe0852"
+  },
+  "spider-garnet": {
+    "src": "/world/collections/spider-garnet.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "1a6d8f62f946"
+  },
+  "spider-ruby": {
+    "src": "/world/collections/spider-ruby.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "74b56a429e7b"
+  },
+  "spider-topaz": {
+    "src": "/world/collections/spider-topaz.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "0b902f1b227e"
+  },
+  "spider-emerald": {
+    "src": "/world/collections/spider-emerald.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "9a87face1bcc"
+  },
+  "spider-amethyst": {
+    "src": "/world/collections/spider-amethyst.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "a6abd2e344a7"
+  },
+  "spider-sodalite": {
+    "src": "/world/collections/spider-sodalite.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "8fe2d770f9dd"
+  },
+  "spider-turquoise": {
+    "src": "/world/collections/spider-turquoise.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "d4b2b9e67e14"
+  },
+  "spider-opal": {
+    "src": "/world/collections/spider-opal.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "85b6532a9b3e"
+  },
+  "spider-quartz": {
+    "src": "/world/collections/spider-quartz.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "2bae977a859b"
+  },
+  "spider-obsidian": {
+    "src": "/world/collections/spider-obsidian.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "c43633c86df8"
+  },
+  "spider-onyx": {
+    "src": "/world/collections/spider-onyx.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "ecb9040ebb74"
+  },
+  "spider-sandstone": {
+    "src": "/world/collections/spider-sandstone.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "48e19d836db5"
+  },
+  "spider-granite": {
+    "src": "/world/collections/spider-granite.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "d114a4823975"
+  },
+  "spider-basalt": {
+    "src": "/world/collections/spider-basalt.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "58ed74c45964"
+  },
+  "spider-marble": {
+    "src": "/world/collections/spider-marble.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "c20eddc0dcf3"
+  },
+  "spider-travertine": {
+    "src": "/world/collections/spider-travertine.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "8b9f33d39a74"
+  },
+  "spider-poppy": {
+    "src": "/world/collections/spider-poppy.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "1585a94bf761"
+  },
+  "spider-petunia": {
+    "src": "/world/collections/spider-petunia.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "ae4c4add2ef8"
+  },
+  "spider-violet": {
+    "src": "/world/collections/spider-violet.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "d9cb28486824"
+  },
+  "spider-hydrangea": {
+    "src": "/world/collections/spider-hydrangea.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "d82c4618220a"
+  },
+  "spider-magnolia": {
+    "src": "/world/collections/spider-magnolia.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "1ce704fe714c"
+  },
+  "spider-lotus": {
+    "src": "/world/collections/spider-lotus.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "249454ce0f23"
+  },
+  "spider-dahlia": {
+    "src": "/world/collections/spider-dahlia.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "6df286316096"
+  },
+  "spider-azalea": {
+    "src": "/world/collections/spider-azalea.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "460c6193f982"
+  },
+  "spider-bromeliad": {
+    "src": "/world/collections/spider-bromeliad.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "e26613d4e7d1"
+  },
+  "spider-begonia": {
+    "src": "/world/collections/spider-begonia.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "2c02d2aa3ac9"
+  },
+  "spider-geranium": {
+    "src": "/world/collections/spider-geranium.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "acfa4b0f7081"
+  },
+  "spider-jasmine": {
+    "src": "/world/collections/spider-jasmine.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "e17b9edd1c14"
+  },
+  "spider-plumeria": {
+    "src": "/world/collections/spider-plumeria.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "9ae53f830214"
+  },
+  "spider-lily": {
+    "src": "/world/collections/spider-lily.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "b2c0c36f2c86"
+  },
+  "spider-clover": {
+    "src": "/world/collections/spider-clover.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "061e31c5fa59"
+  },
+  "spider-cress": {
+    "src": "/world/collections/spider-cress.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "cf485b76b20c"
+  },
+  "spider-juniper": {
+    "src": "/world/collections/spider-juniper.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "7957d8b579eb"
+  },
+  "spider-cedar": {
+    "src": "/world/collections/spider-cedar.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "cd3816b094ea"
+  },
+  "spider-pine": {
+    "src": "/world/collections/spider-pine.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "403fa88c97e8"
+  },
+  "spider-spruce": {
+    "src": "/world/collections/spider-spruce.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "8b6c1ca0dd7c"
+  },
+  "spider-birch": {
+    "src": "/world/collections/spider-birch.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "4e5d67380159"
+  },
+  "spider-willow": {
+    "src": "/world/collections/spider-willow.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "a3bd60d68050"
+  },
+  "spider-sequoia": {
+    "src": "/world/collections/spider-sequoia.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "42dfe977b518"
+  },
+  "spider-bamboo": {
+    "src": "/world/collections/spider-bamboo.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "353d4b70bb54"
+  },
+  "spider-toffee": {
+    "src": "/world/collections/spider-toffee.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "83bb9d36e058"
+  },
+  "spider-butterscotch": {
+    "src": "/world/collections/spider-butterscotch.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "51024c6bfaee"
+  },
+  "spider-cinnamon": {
+    "src": "/world/collections/spider-cinnamon.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "a5e90e31d536"
+  },
+  "spider-ginger": {
+    "src": "/world/collections/spider-ginger.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "bdbe35a1eae8"
+  },
+  "spider-nutmeg": {
+    "src": "/world/collections/spider-nutmeg.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "ea28f8fc012d"
+  },
+  "spider-vanilla": {
+    "src": "/world/collections/spider-vanilla.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "45aecc69a2e0"
+  },
+  "spider-licorice": {
+    "src": "/world/collections/spider-licorice.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "c0624c4ddb3a"
+  },
+  "spider-truffle": {
+    "src": "/world/collections/spider-truffle.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "10b3a1388056"
+  },
+  "spider-mochi": {
+    "src": "/world/collections/spider-mochi.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "00608046ab16"
+  },
+  "spider-taro": {
+    "src": "/world/collections/spider-taro.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "498f63808a19"
+  },
+  "spider-apricot": {
+    "src": "/world/collections/spider-apricot.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "b16c5b39edcb"
+  },
+  "spider-blackberry": {
+    "src": "/world/collections/spider-blackberry.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "1b42c1d571db"
+  },
+  "spider-raspberry": {
+    "src": "/world/collections/spider-raspberry.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "ad0dabcaf76e"
+  },
+  "spider-blueberry": {
+    "src": "/world/collections/spider-blueberry.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "3e0ed36ea003"
+  },
+  "spider-cranberry": {
+    "src": "/world/collections/spider-cranberry.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "d8844889c556"
+  },
+  "spider-kiwi": {
+    "src": "/world/collections/spider-kiwi.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "bdf013d6023f"
+  },
+  "spider-mango": {
+    "src": "/world/collections/spider-mango.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "d8312bace6aa"
+  },
+  "spider-papaya": {
+    "src": "/world/collections/spider-papaya.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "d288024ca0a1"
+  },
+  "spider-guava": {
+    "src": "/world/collections/spider-guava.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "d84264a0c347"
+  },
+  "spider-pomegranate": {
+    "src": "/world/collections/spider-pomegranate.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "a6b6963e1208"
+  },
+  "spider-dragonfruit": {
+    "src": "/world/collections/spider-dragonfruit.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "9ca8d92f3279"
+  },
+  "spider-starfruit": {
+    "src": "/world/collections/spider-starfruit.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "f2f696050451"
+  },
+  "spider-coconut": {
+    "src": "/world/collections/spider-coconut.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "6c554ed69304"
+  },
+  "spider-iceberg": {
+    "src": "/world/collections/spider-iceberg.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "08eeee4b0b22"
+  },
+  "spider-glacier": {
+    "src": "/world/collections/spider-glacier.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "07cbed37580e"
+  },
+  "spider-comet": {
+    "src": "/world/collections/spider-comet.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "8627284e9270"
+  },
+  "fish-bamboo-shark": {
+    "src": "/world/collections/fish-bamboo-shark.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "2505e1c81462"
+  },
+  "fish-epaulette-shark": {
+    "src": "/world/collections/fish-epaulette-shark.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "27606d2834f9"
+  },
+  "fish-catshark": {
+    "src": "/world/collections/fish-catshark.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "3db2b9e0fdbf"
+  },
+  "fish-reef-shark": {
+    "src": "/world/collections/fish-reef-shark.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "2b3f04531d48"
+  },
+  "fish-horn-shark": {
+    "src": "/world/collections/fish-horn-shark.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "c82a760bdd81"
+  },
+  "fish-leopard-shark": {
+    "src": "/world/collections/fish-leopard-shark.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "19d937c1af05"
+  },
+  "fish-axolotl-pink": {
+    "src": "/world/collections/fish-axolotl-pink.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "335804b71440"
+  },
+  "fish-axolotl-wild": {
+    "src": "/world/collections/fish-axolotl-wild.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "b9e6f9537bb0"
+  },
+  "fish-axolotl-gold": {
+    "src": "/world/collections/fish-axolotl-gold.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "9bc460194c16"
+  },
+  "fish-axolotl-black": {
+    "src": "/world/collections/fish-axolotl-black.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "cda0d74bcc9f"
+  },
+  "fish-slider-turtle": {
+    "src": "/world/collections/fish-slider-turtle.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "727316571994"
+  },
+  "fish-musk-turtle": {
+    "src": "/world/collections/fish-musk-turtle.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "3babfcfc1a34"
+  },
+  "fish-painted-turtle": {
+    "src": "/world/collections/fish-painted-turtle.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "ff4da8eab78e"
+  },
+  "fish-dwarf-frog": {
+    "src": "/world/collections/fish-dwarf-frog.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "fe31c0d25325"
+  },
+  "fish-firebelly-newt": {
+    "src": "/world/collections/fish-firebelly-newt.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "fd71c5d0b3c4"
+  },
+  "fish-cherry-shrimp": {
+    "src": "/world/collections/fish-cherry-shrimp.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "d45664a9b812"
+  },
+  "fish-crystal-shrimp": {
+    "src": "/world/collections/fish-crystal-shrimp.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "5211cb5a2b8e"
+  },
+  "fish-blue-shrimp": {
+    "src": "/world/collections/fish-blue-shrimp.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "156c7c86f08d"
+  },
+  "fish-amano-shrimp": {
+    "src": "/world/collections/fish-amano-shrimp.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "056306113931"
+  },
+  "fish-ghost-shrimp": {
+    "src": "/world/collections/fish-ghost-shrimp.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "8ce7fff0a0e1"
+  },
+  "fish-vampire-crab": {
+    "src": "/world/collections/fish-vampire-crab.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "baa25f7e46cf"
+  },
+  "fish-fiddler-crab": {
+    "src": "/world/collections/fish-fiddler-crab.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "d854b8a8a1d2"
+  },
+  "fish-porcelain-crab": {
+    "src": "/world/collections/fish-porcelain-crab.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "220ce31a4301"
+  },
+  "fish-blue-crayfish": {
+    "src": "/world/collections/fish-blue-crayfish.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "b81d30a9c2a2"
+  },
+  "fish-orange-crayfish": {
+    "src": "/world/collections/fish-orange-crayfish.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "a0c1166e4501"
+  },
+  "fish-spiny-lobster": {
+    "src": "/world/collections/fish-spiny-lobster.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "b57c851e7da3"
+  },
+  "fish-mystery-snail": {
+    "src": "/world/collections/fish-mystery-snail.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "ca2c02b7f582"
+  },
+  "fish-nerite-snail": {
+    "src": "/world/collections/fish-nerite-snail.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "0c9815652157"
+  },
+  "fish-ramshorn-snail": {
+    "src": "/world/collections/fish-ramshorn-snail.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "6266335d9d02"
+  },
+  "fish-dumbo-octopus": {
+    "src": "/world/collections/fish-dumbo-octopus.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "224264b39325"
+  },
+  "fish-coconut-octopus": {
+    "src": "/world/collections/fish-coconut-octopus.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "a3e809ed36c1"
+  },
+  "fish-dwarf-cuttlefish": {
+    "src": "/world/collections/fish-dwarf-cuttlefish.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "b967587c771c"
+  },
+  "fish-bobtail-squid": {
+    "src": "/world/collections/fish-bobtail-squid.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "835145cf19d1"
+  },
+  "fish-moon-jelly": {
+    "src": "/world/collections/fish-moon-jelly.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "aaee3a5a40ac"
+  },
+  "fish-lagoon-jelly": {
+    "src": "/world/collections/fish-lagoon-jelly.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "12c9490600b8"
+  },
+  "fish-cushion-star": {
+    "src": "/world/collections/fish-cushion-star.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "d16ab6576168"
+  },
+  "fish-red-sea-star": {
+    "src": "/world/collections/fish-red-sea-star.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "7a1a9ce901da"
+  },
+  "fish-blue-urchin": {
+    "src": "/world/collections/fish-blue-urchin.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "c039515be5a9"
+  },
+  "fish-giant-clam": {
+    "src": "/world/collections/fish-giant-clam.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "25ca0669f61a"
+  },
+  "fish-bubble-anemone": {
+    "src": "/world/collections/fish-bubble-anemone.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "f9ac06ec3478"
+  },
+  "fish-watchman-goby": {
+    "src": "/world/collections/fish-watchman-goby.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "b1bc5f837744"
+  },
+  "fish-lawnmower-blenny": {
+    "src": "/world/collections/fish-lawnmower-blenny.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "14b4544db9d3"
+  },
+  "fish-pipefish": {
+    "src": "/world/collections/fish-pipefish.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "266404559998"
+  },
+  "fish-dartfish": {
+    "src": "/world/collections/fish-dartfish.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "ec96a3e42748"
+  },
+  "fish-cardinalfish": {
+    "src": "/world/collections/fish-cardinalfish.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "c388f3b4560f"
+  },
+  "fish-wrasse": {
+    "src": "/world/collections/fish-wrasse.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "3cffedcfa943"
+  },
+  "fish-royal-gramma": {
+    "src": "/world/collections/fish-royal-gramma.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "a54e0e787d46"
+  },
+  "fish-firefish": {
+    "src": "/world/collections/fish-firefish.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "16c1c7c998cb"
+  },
+  "fish-damselfish": {
+    "src": "/world/collections/fish-damselfish.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "aa004f8c21b8"
+  },
+  "fish-triggerfish": {
+    "src": "/world/collections/fish-triggerfish.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "f5ae1c1e2a8e"
+  },
+  "fish-cowfish": {
+    "src": "/world/collections/fish-cowfish.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "7b87b105b0cb"
+  },
+  "fish-boxfish": {
+    "src": "/world/collections/fish-boxfish.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "27ce0ed40090"
+  },
+  "fish-batfish": {
+    "src": "/world/collections/fish-batfish.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "da9d9236d66a"
+  },
+  "fish-rainbowfish": {
+    "src": "/world/collections/fish-rainbowfish.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "d2804454c0fa"
+  },
+  "fish-killifish": {
+    "src": "/world/collections/fish-killifish.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "0671c706ca9e"
+  },
+  "fish-medaka": {
+    "src": "/world/collections/fish-medaka.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "8085b6c1de68"
+  },
+  "fish-endler": {
+    "src": "/world/collections/fish-endler.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "812455e5c368"
+  },
+  "fish-platy": {
+    "src": "/world/collections/fish-platy.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "13523d5482d9"
+  },
+  "fish-molly": {
+    "src": "/world/collections/fish-molly.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "3c96b11e611e"
+  },
+  "fish-swordtail": {
+    "src": "/world/collections/fish-swordtail.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "db1be664ddaa"
+  },
+  "fish-zebra-danio": {
+    "src": "/world/collections/fish-zebra-danio.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "1421751e2229"
+  },
+  "fish-cherry-barb": {
+    "src": "/world/collections/fish-cherry-barb.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "b6313132d1b3"
+  },
+  "fish-tiger-barb": {
+    "src": "/world/collections/fish-tiger-barb.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "81e0ab7280ad"
+  },
+  "fish-pearl-danio": {
+    "src": "/world/collections/fish-pearl-danio.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "482ca594de29"
+  },
+  "fish-otocinclus": {
+    "src": "/world/collections/fish-otocinclus.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "0e2274415efb"
+  },
+  "fish-pleco": {
+    "src": "/world/collections/fish-pleco.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "0da47f811937"
+  },
+  "fish-kuhli-loach": {
+    "src": "/world/collections/fish-kuhli-loach.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "3b90676a3a20"
+  },
+  "fish-dwarf-cichlid": {
+    "src": "/world/collections/fish-dwarf-cichlid.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "1470dd407e61"
+  },
+  "fish-oscar": {
+    "src": "/world/collections/fish-oscar.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "a2ae150e5f32"
+  },
+  "fish-silver-dollar": {
+    "src": "/world/collections/fish-silver-dollar.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "7e3a4aa93d71"
+  },
+  "mantis-leaf": {
+    "src": "/world/collections/mantis-leaf.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "1d68b5895e9a"
+  },
+  "mantis-orchid": {
+    "src": "/world/collections/mantis-orchid.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "0ad13173fd1c"
+  },
+  "mantis-ghost": {
+    "src": "/world/collections/mantis-ghost.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "72594200503d"
+  },
+  "mantis-jade": {
+    "src": "/world/collections/mantis-jade.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "99590f4963f9"
+  },
+  "mantis-moon": {
+    "src": "/world/collections/mantis-moon.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "e1b73a3612bf"
+  },
+  "butterfly-monarch": {
+    "src": "/world/collections/butterfly-monarch.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "7970bd0e7512"
+  },
+  "butterfly-swallowtail": {
+    "src": "/world/collections/butterfly-swallowtail.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "7d2f320686f1"
+  },
+  "butterfly-glasswing": {
+    "src": "/world/collections/butterfly-glasswing.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "cf3d66a1c647"
+  },
+  "butterfly-cabbage": {
+    "src": "/world/collections/butterfly-cabbage.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "2223609dc90d"
+  },
+  "butterfly-sunset": {
+    "src": "/world/collections/butterfly-sunset.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "ae41892d8471"
+  },
+  "ladybug-ruby": {
+    "src": "/world/collections/ladybug-ruby.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "27977132b576"
+  },
+  "ladybug-amber": {
+    "src": "/world/collections/ladybug-amber.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "3518dd513357"
+  },
+  "ladybug-lemon": {
+    "src": "/world/collections/ladybug-lemon.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "849bc02f6b92"
+  },
+  "ladybug-obsidian": {
+    "src": "/world/collections/ladybug-obsidian.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "61fb68783fea"
+  },
+  "ladybug-pearl": {
+    "src": "/world/collections/ladybug-pearl.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "65232779f67d"
+  },
+  "dragonfly-pond": {
+    "src": "/world/collections/dragonfly-pond.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "a3ca0323472c"
+  },
+  "dragonfly-scarlet": {
+    "src": "/world/collections/dragonfly-scarlet.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "6a7923144f94"
+  },
+  "dragonfly-emperor": {
+    "src": "/world/collections/dragonfly-emperor.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "1056b4bd2807"
+  },
+  "dragonfly-golden": {
+    "src": "/world/collections/dragonfly-golden.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "120a4e7df39a"
+  },
+  "dragonfly-violet": {
+    "src": "/world/collections/dragonfly-violet.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "0bdbf5f7254f"
+  },
+  "mantis-bamboo": {
+    "src": "/world/collections/mantis-bamboo.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "8b309b4927b3"
+  },
+  "mantis-flower": {
+    "src": "/world/collections/mantis-flower.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "178f287a367a"
+  },
+  "mantis-shield": {
+    "src": "/world/collections/mantis-shield.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "54e3ef20210a"
+  },
+  "mantis-twig": {
+    "src": "/world/collections/mantis-twig.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "a89108043fd6"
+  },
+  "mantis-emerald": {
+    "src": "/world/collections/mantis-emerald.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "94d16cb54b16"
+  },
+  "mantis-peach": {
+    "src": "/world/collections/mantis-peach.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "a3a0fd3f8c2f"
+  },
+  "mantis-moss": {
+    "src": "/world/collections/mantis-moss.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "e20d9ea1d1cd"
+  },
+  "mantis-copper": {
+    "src": "/world/collections/mantis-copper.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "349e1d8e463f"
+  },
+  "mantis-lavender": {
+    "src": "/world/collections/mantis-lavender.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "0dfc506f55d0"
+  },
+  "mantis-autumn": {
+    "src": "/world/collections/mantis-autumn.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "ecac0b197a94"
+  },
+  "mantis-mint": {
+    "src": "/world/collections/mantis-mint.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "b6d3172711b7"
+  },
+  "mantis-sunflower": {
+    "src": "/world/collections/mantis-sunflower.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "4664dd78af4f"
+  },
+  "mantis-ivory": {
+    "src": "/world/collections/mantis-ivory.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "be93d025d91b"
+  },
+  "mantis-violet": {
+    "src": "/world/collections/mantis-violet.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "def2ecba4c5c"
+  },
+  "mantis-fern": {
+    "src": "/world/collections/mantis-fern.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "c846807c7961"
+  },
+  "mantis-sand": {
+    "src": "/world/collections/mantis-sand.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "9f3b9d9655a9"
+  },
+  "mantis-turquoise": {
+    "src": "/world/collections/mantis-turquoise.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "4bba60f9fdbb"
+  },
+  "mantis-ruby": {
+    "src": "/world/collections/mantis-ruby.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "efc7f8e2f391"
+  },
+  "mantis-dew": {
+    "src": "/world/collections/mantis-dew.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "d3dc18dbc3d1"
+  },
+  "mantis-jadeleaf": {
+    "src": "/world/collections/mantis-jadeleaf.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "cb6d8fde4298"
+  },
+  "mantis-maple": {
+    "src": "/world/collections/mantis-maple.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "8fb67e00b39a"
+  },
+  "mantis-silver": {
+    "src": "/world/collections/mantis-silver.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "17f568a0ab2d"
+  },
+  "mantis-coral": {
+    "src": "/world/collections/mantis-coral.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "4c53b2624fef"
+  },
+  "mantis-midnight": {
+    "src": "/world/collections/mantis-midnight.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "e0967060f43c"
+  },
+  "mantis-starlight": {
+    "src": "/world/collections/mantis-starlight.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "a7311697ade5"
+  },
+  "butterfly-painted": {
+    "src": "/world/collections/butterfly-painted.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "822327e9def0"
+  },
+  "butterfly-morpho": {
+    "src": "/world/collections/butterfly-morpho.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "0d4c99a56024"
+  },
+  "butterfly-peacock": {
+    "src": "/world/collections/butterfly-peacock.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "e079bdf4d949"
+  },
+  "butterfly-tiger": {
+    "src": "/world/collections/butterfly-tiger.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "cc21263e824b"
+  },
+  "butterfly-emerald": {
+    "src": "/world/collections/butterfly-emerald.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "35801438580a"
+  },
+  "butterfly-copper": {
+    "src": "/world/collections/butterfly-copper.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "f01068ebe4d8"
+  },
+  "butterfly-hairstreak": {
+    "src": "/world/collections/butterfly-hairstreak.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "38b4bb29d4c7"
+  },
+  "butterfly-redadmiral": {
+    "src": "/world/collections/butterfly-redadmiral.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "6c3a8964c847"
+  },
+  "butterfly-mourning": {
+    "src": "/world/collections/butterfly-mourning.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "694fe948e419"
+  },
+  "butterfly-orange": {
+    "src": "/world/collections/butterfly-orange.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "3f1a6e2b7e62"
+  },
+  "butterfly-clouded": {
+    "src": "/world/collections/butterfly-clouded.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "070eb9fafaac"
+  },
+  "butterfly-purple": {
+    "src": "/world/collections/butterfly-purple.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "c4ec37fd2c2f"
+  },
+  "butterfly-tortoise": {
+    "src": "/world/collections/butterfly-tortoise.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "7a13f4816730"
+  },
+  "butterfly-zebra": {
+    "src": "/world/collections/butterfly-zebra.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "692bf35f931f"
+  },
+  "butterfly-malachite": {
+    "src": "/world/collections/butterfly-malachite.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "7cad95e9a42b"
+  },
+  "butterfly-buckeye": {
+    "src": "/world/collections/butterfly-buckeye.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "071cadadd7e1"
+  },
+  "butterfly-cabbage-island": {
+    "src": "/world/collections/butterfly-cabbage-island.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "b5d32d5f11f9"
+  },
+  "butterfly-comma": {
+    "src": "/world/collections/butterfly-comma.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "0ff92113b786"
+  },
+  "butterfly-wood": {
+    "src": "/world/collections/butterfly-wood.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "d79bc01ca133"
+  },
+  "butterfly-sulphur": {
+    "src": "/world/collections/butterfly-sulphur.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "6cd19e4fc05a"
+  },
+  "butterfly-azure": {
+    "src": "/world/collections/butterfly-azure.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "2dddd1eb6900"
+  },
+  "butterfly-heath": {
+    "src": "/world/collections/butterfly-heath.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "0da4c9983aa5"
+  },
+  "butterfly-fritillary": {
+    "src": "/world/collections/butterfly-fritillary.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "c76b46baeec4"
+  },
+  "butterfly-rose": {
+    "src": "/world/collections/butterfly-rose.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "2015e0ba4441"
+  },
+  "butterfly-moonbow": {
+    "src": "/world/collections/butterfly-moonbow.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "1daffb93e7a8"
+  },
+  "ladybug-seven": {
+    "src": "/world/collections/ladybug-seven.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "96db9cf59cf2"
+  },
+  "ladybug-twice": {
+    "src": "/world/collections/ladybug-twice.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "0dd47feb4681"
+  },
+  "ladybug-pink": {
+    "src": "/world/collections/ladybug-pink.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "d7287b1d05d2"
+  },
+  "ladybug-orange": {
+    "src": "/world/collections/ladybug-orange.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "8613406abba2"
+  },
+  "ladybug-cream": {
+    "src": "/world/collections/ladybug-cream.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "9bcd227ff06f"
+  },
+  "ladybug-ash": {
+    "src": "/world/collections/ladybug-ash.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "4c53587c1606"
+  },
+  "ladybug-pine": {
+    "src": "/world/collections/ladybug-pine.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "832d1e65cce2"
+  },
+  "ladybug-harlequin": {
+    "src": "/world/collections/ladybug-harlequin.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "6b51f6abaa81"
+  },
+  "ladybug-kidney": {
+    "src": "/world/collections/ladybug-kidney.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "47c2c7dadc46"
+  },
+  "ladybug-striped": {
+    "src": "/world/collections/ladybug-striped.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "f9f48ac10265"
+  },
+  "ladybug-eye": {
+    "src": "/world/collections/ladybug-eye.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "4e18b3282808"
+  },
+  "ladybug-larch": {
+    "src": "/world/collections/ladybug-larch.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "62c3cd8bd237"
+  },
+  "ladybug-water": {
+    "src": "/world/collections/ladybug-water.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "d93e1fc3ade5"
+  },
+  "ladybug-meadow": {
+    "src": "/world/collections/ladybug-meadow.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "aad592557783"
+  },
+  "ladybug-cherry": {
+    "src": "/world/collections/ladybug-cherry.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "7bbf96f9f4fe"
+  },
+  "ladybug-mint": {
+    "src": "/world/collections/ladybug-mint.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "4b0931c7515b"
+  },
+  "ladybug-copper": {
+    "src": "/world/collections/ladybug-copper.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "c8370e8d7bf9"
+  },
+  "ladybug-violet": {
+    "src": "/world/collections/ladybug-violet.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "c4468a8522b9"
+  },
+  "ladybug-sky": {
+    "src": "/world/collections/ladybug-sky.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "9bc3a5492fbd"
+  },
+  "ladybug-forest": {
+    "src": "/world/collections/ladybug-forest.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "ebf39a69bfe8"
+  },
+  "ladybug-peach": {
+    "src": "/world/collections/ladybug-peach.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "7f4dfc874704"
+  },
+  "ladybug-teal": {
+    "src": "/world/collections/ladybug-teal.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "df839a9c9482"
+  },
+  "ladybug-rubystripe": {
+    "src": "/world/collections/ladybug-rubystripe.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "9c135097be58"
+  },
+  "ladybug-dusk": {
+    "src": "/world/collections/ladybug-dusk.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "2e59cdb21c09"
+  },
+  "ladybug-opal": {
+    "src": "/world/collections/ladybug-opal.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "884f81cd28d4"
+  },
+  "dragonfly-green": {
+    "src": "/world/collections/dragonfly-green.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "44482b0d42b1"
+  },
+  "dragonfly-flame": {
+    "src": "/world/collections/dragonfly-flame.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "f2493207af18"
+  },
+  "dragonfly-golden-island": {
+    "src": "/world/collections/dragonfly-golden-island.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "f35b9aa2f8ae"
+  },
+  "dragonfly-emerald": {
+    "src": "/world/collections/dragonfly-emerald.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "4f41ca3d1f39"
+  },
+  "dragonfly-hawker": {
+    "src": "/world/collections/dragonfly-hawker.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "68033601e497"
+  },
+  "dragonfly-ruby": {
+    "src": "/world/collections/dragonfly-ruby.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "562ac6f927c8"
+  },
+  "dragonfly-amber": {
+    "src": "/world/collections/dragonfly-amber.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "2934012a8ce8"
+  },
+  "dragonfly-sapphire": {
+    "src": "/world/collections/dragonfly-sapphire.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "f24377820a6e"
+  },
+  "dragonfly-blacktail": {
+    "src": "/world/collections/dragonfly-blacktail.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "204dcff5f73b"
+  },
+  "dragonfly-keeled": {
+    "src": "/world/collections/dragonfly-keeled.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "9815707cc2d8"
+  },
+  "dragonfly-chaser": {
+    "src": "/world/collections/dragonfly-chaser.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "b60ef0ff996a"
+  },
+  "dragonfly-scarlet-island": {
+    "src": "/world/collections/dragonfly-scarlet-island.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "f93cec656233"
+  },
+  "dragonfly-blue": {
+    "src": "/world/collections/dragonfly-blue.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "343062cc1948"
+  },
+  "dragonfly-jade": {
+    "src": "/world/collections/dragonfly-jade.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "ba829f95628b"
+  },
+  "dragonfly-rose": {
+    "src": "/world/collections/dragonfly-rose.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "1dade42e8ed2"
+  },
+  "dragonfly-copper": {
+    "src": "/world/collections/dragonfly-copper.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "9de8055eec9c"
+  },
+  "dragonfly-mint": {
+    "src": "/world/collections/dragonfly-mint.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "93cb41887a68"
+  },
+  "dragonfly-azure": {
+    "src": "/world/collections/dragonfly-azure.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "5de3f3234974"
+  },
+  "dragonfly-rubywing": {
+    "src": "/world/collections/dragonfly-rubywing.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "7726282e897f"
+  },
+  "dragonfly-silver": {
+    "src": "/world/collections/dragonfly-silver.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "21be4712b4de"
+  },
+  "dragonfly-tiger": {
+    "src": "/world/collections/dragonfly-tiger.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "c53aca68795d"
+  },
+  "dragonfly-teal": {
+    "src": "/world/collections/dragonfly-teal.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "597d073acbb2"
+  },
+  "dragonfly-sunset": {
+    "src": "/world/collections/dragonfly-sunset.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "a18ea674770d"
+  },
+  "dragonfly-night": {
+    "src": "/world/collections/dragonfly-night.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "eb406dab56d6"
+  },
+  "dragonfly-aurora": {
+    "src": "/world/collections/dragonfly-aurora.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "8ac060bbc9ce"
+  },
+  "mantis-clover": {
+    "src": "/world/collections/mantis-clover.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "5762e80abef6"
+  },
+  "mantis-willow": {
+    "src": "/world/collections/mantis-willow.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "3b2e60ab8f99"
+  },
+  "mantis-acorn": {
+    "src": "/world/collections/mantis-acorn.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "69c2633e7328"
+  },
+  "mantis-juniper": {
+    "src": "/world/collections/mantis-juniper.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "9726ef8cc71a"
+  },
+  "mantis-marigold": {
+    "src": "/world/collections/mantis-marigold.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "98850ec032b3"
+  },
+  "mantis-thistle": {
+    "src": "/world/collections/mantis-thistle.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "e2e7bb6355d3"
+  },
+  "mantis-bramble": {
+    "src": "/world/collections/mantis-bramble.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "14dbbc138410"
+  },
+  "mantis-spruce": {
+    "src": "/world/collections/mantis-spruce.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "3f15dc4f8f4f"
+  },
+  "mantis-dandelion": {
+    "src": "/world/collections/mantis-dandelion.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "c71515f8fc04"
+  },
+  "mantis-hazel": {
+    "src": "/world/collections/mantis-hazel.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "74fe63b05995"
+  },
+  "mantis-rowan": {
+    "src": "/world/collections/mantis-rowan.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "f0e8dc7fd6a8"
+  },
+  "mantis-poppy": {
+    "src": "/world/collections/mantis-poppy.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "05443bfd967e"
+  },
+  "mantis-primrose": {
+    "src": "/world/collections/mantis-primrose.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "6094a4865513"
+  },
+  "mantis-cedar": {
+    "src": "/world/collections/mantis-cedar.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "77f7ca10d391"
+  },
+  "mantis-fernwood": {
+    "src": "/world/collections/mantis-fernwood.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "a2f3575ffacb"
+  },
+  "mantis-sorrel": {
+    "src": "/world/collections/mantis-sorrel.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "752ca41f2a3e"
+  },
+  "mantis-sage": {
+    "src": "/world/collections/mantis-sage.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "0798bad16d32"
+  },
+  "mantis-brook": {
+    "src": "/world/collections/mantis-brook.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "e2c787f02445"
+  },
+  "mantis-mossbank": {
+    "src": "/world/collections/mantis-mossbank.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "791ba77d355c"
+  },
+  "mantis-pebblewood": {
+    "src": "/world/collections/mantis-pebblewood.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "96b8e15a3e1b"
+  },
+  "mantis-dewdrop": {
+    "src": "/world/collections/mantis-dewdrop.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "4c89f0e17da6"
+  },
+  "mantis-sunleaf": {
+    "src": "/world/collections/mantis-sunleaf.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "a4f3757c73ad"
+  },
+  "mantis-honeycomb": {
+    "src": "/world/collections/mantis-honeycomb.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "57f5b85a7df0"
+  },
+  "mantis-buttercup": {
+    "src": "/world/collections/mantis-buttercup.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "01842324fb53"
+  },
+  "mantis-rainleaf": {
+    "src": "/world/collections/mantis-rainleaf.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "ad0608c30109"
+  },
+  "mantis-applewood": {
+    "src": "/world/collections/mantis-applewood.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "dddf8f84da0b"
+  },
+  "mantis-wildflower": {
+    "src": "/world/collections/mantis-wildflower.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "1a70001e3e4d"
+  },
+  "mantis-copperleaf": {
+    "src": "/world/collections/mantis-copperleaf.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "bf2ca1aeefaa"
+  },
+  "mantis-seaglass": {
+    "src": "/world/collections/mantis-seaglass.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "b4cc78efca3a"
+  },
+  "mantis-bluebell": {
+    "src": "/world/collections/mantis-bluebell.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "044b1cffc80b"
+  },
+  "mantis-orchard": {
+    "src": "/world/collections/mantis-orchard.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "b586c9830359"
+  },
+  "mantis-bayleaf": {
+    "src": "/world/collections/mantis-bayleaf.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "af9c2b9d9c72"
+  },
+  "mantis-watermint": {
+    "src": "/world/collections/mantis-watermint.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "6c703ddf827f"
+  },
+  "mantis-sunstone": {
+    "src": "/world/collections/mantis-sunstone.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "e6cdb82d65a5"
+  },
+  "mantis-driftwood": {
+    "src": "/world/collections/mantis-driftwood.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "e07d1163c2f2"
+  },
+  "mantis-moonpetal": {
+    "src": "/world/collections/mantis-moonpetal.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "9afdf23f63a9"
+  },
+  "mantis-rosewood": {
+    "src": "/world/collections/mantis-rosewood.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "f55d6aee3577"
+  },
+  "mantis-amberleaf": {
+    "src": "/world/collections/mantis-amberleaf.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "57b2444a902f"
+  },
+  "mantis-wildmint": {
+    "src": "/world/collections/mantis-wildmint.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "4628fc1c90d2"
+  },
+  "mantis-pinecone": {
+    "src": "/world/collections/mantis-pinecone.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "d9c4970f4b15"
+  },
+  "mantis-lilypond": {
+    "src": "/world/collections/mantis-lilypond.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "5244ec48e0c0"
+  },
+  "mantis-meadowmist": {
+    "src": "/world/collections/mantis-meadowmist.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "8cf4a953ca98"
+  },
+  "mantis-goldenrod": {
+    "src": "/world/collections/mantis-goldenrod.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "a64cd84a05c8"
+  },
+  "mantis-silverfern": {
+    "src": "/world/collections/mantis-silverfern.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "2a67851a7629"
+  },
+  "mantis-seabreeze": {
+    "src": "/world/collections/mantis-seabreeze.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "a5ebec7e7ffc"
+  },
+  "mantis-sandstone": {
+    "src": "/world/collections/mantis-sandstone.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "ebce9d01c202"
+  },
+  "mantis-snowdrop": {
+    "src": "/world/collections/mantis-snowdrop.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "e92ba216b898"
+  },
+  "mantis-firelight": {
+    "src": "/world/collections/mantis-firelight.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "20b54f45c31f"
+  },
+  "mantis-stormleaf": {
+    "src": "/world/collections/mantis-stormleaf.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "8adfc3d1853c"
+  },
+  "mantis-dreamleaf": {
+    "src": "/world/collections/mantis-dreamleaf.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "babbef605b0e"
+  },
+  "mantis-nightbloom": {
+    "src": "/world/collections/mantis-nightbloom.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "30991af8b7cd"
+  },
+  "mantis-moonstone": {
+    "src": "/world/collections/mantis-moonstone.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "87d2cc22c9af"
+  },
+  "mantis-velvetwing": {
+    "src": "/world/collections/mantis-velvetwing.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "3b56d5943c7d"
+  },
+  "mantis-amethyst": {
+    "src": "/world/collections/mantis-amethyst.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "e6bb6e3e82d2"
+  },
+  "mantis-starfall": {
+    "src": "/world/collections/mantis-starfall.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "e991c8e0ec5e"
+  },
+  "mantis-twilight": {
+    "src": "/world/collections/mantis-twilight.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "a7a7633d8841"
+  },
+  "mantis-opal": {
+    "src": "/world/collections/mantis-opal.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "0bdd0902ff85"
+  },
+  "mantis-indigo": {
+    "src": "/world/collections/mantis-indigo.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "be2c1b9b4a59"
+  },
+  "mantis-lantern": {
+    "src": "/world/collections/mantis-lantern.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "d3fad67390a9"
+  },
+  "mantis-frostbloom": {
+    "src": "/world/collections/mantis-frostbloom.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "fe8b13f9c300"
+  },
+  "mantis-eclipse": {
+    "src": "/world/collections/mantis-eclipse.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "1e61702e2360"
+  },
+  "mantis-silvermist": {
+    "src": "/world/collections/mantis-silvermist.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "27bb62a20222"
+  },
+  "mantis-cinder": {
+    "src": "/world/collections/mantis-cinder.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "454db66d7574"
+  },
+  "mantis-aurora": {
+    "src": "/world/collections/mantis-aurora.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "93deb4af28bf"
+  },
+  "mantis-pearlglow": {
+    "src": "/world/collections/mantis-pearlglow.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "89eac57ed5ed"
+  },
+  "mantis-crystal": {
+    "src": "/world/collections/mantis-crystal.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "9337cfa94c5c"
+  },
+  "mantis-mistveil": {
+    "src": "/world/collections/mantis-mistveil.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "d4c218f1808a"
+  },
+  "mantis-starlace": {
+    "src": "/world/collections/mantis-starlace.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "57cede00e3a3"
+  },
+  "mantis-celestial": {
+    "src": "/world/collections/mantis-celestial.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "645da9f43544"
+  },
+  "mantis-rainbow": {
+    "src": "/world/collections/mantis-rainbow.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "0e4bb263fb5f"
+  },
+  "butterfly-clover": {
+    "src": "/world/collections/butterfly-clover.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "30809bd4e0e7"
+  },
+  "butterfly-willow": {
+    "src": "/world/collections/butterfly-willow.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "d70f08c14bbd"
+  },
+  "butterfly-acorn": {
+    "src": "/world/collections/butterfly-acorn.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "19b66e7842b2"
+  },
+  "butterfly-juniper": {
+    "src": "/world/collections/butterfly-juniper.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "4984df2ba51c"
+  },
+  "butterfly-marigold": {
+    "src": "/world/collections/butterfly-marigold.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "aaa19d01e921"
+  },
+  "butterfly-thistle": {
+    "src": "/world/collections/butterfly-thistle.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "49720eab014a"
+  },
+  "butterfly-bramble": {
+    "src": "/world/collections/butterfly-bramble.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "6f4cba23ccb1"
+  },
+  "butterfly-spruce": {
+    "src": "/world/collections/butterfly-spruce.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "aa9471007f83"
+  },
+  "butterfly-dandelion": {
+    "src": "/world/collections/butterfly-dandelion.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "eab7100592c4"
+  },
+  "butterfly-hazel": {
+    "src": "/world/collections/butterfly-hazel.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "d451e3b3de12"
+  },
+  "butterfly-rowan": {
+    "src": "/world/collections/butterfly-rowan.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "2fb35ea82b83"
+  },
+  "butterfly-poppy": {
+    "src": "/world/collections/butterfly-poppy.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "d7a1845cb86b"
+  },
+  "butterfly-primrose": {
+    "src": "/world/collections/butterfly-primrose.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "edd3155b5b1f"
+  },
+  "butterfly-cedar": {
+    "src": "/world/collections/butterfly-cedar.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "6b72de5e8e57"
+  },
+  "butterfly-fernwood": {
+    "src": "/world/collections/butterfly-fernwood.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "05ab2a1519c6"
+  },
+  "butterfly-sorrel": {
+    "src": "/world/collections/butterfly-sorrel.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "f6ddea45b397"
+  },
+  "butterfly-sage": {
+    "src": "/world/collections/butterfly-sage.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "d9eb3278f77d"
+  },
+  "butterfly-brook": {
+    "src": "/world/collections/butterfly-brook.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "e848aa5e4719"
+  },
+  "butterfly-mossbank": {
+    "src": "/world/collections/butterfly-mossbank.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "f83bde315592"
+  },
+  "butterfly-pebblewood": {
+    "src": "/world/collections/butterfly-pebblewood.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "7342911acaca"
+  },
+  "butterfly-dewdrop": {
+    "src": "/world/collections/butterfly-dewdrop.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "7955e8d914e1"
+  },
+  "butterfly-sunleaf": {
+    "src": "/world/collections/butterfly-sunleaf.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "4840f09e1d35"
+  },
+  "butterfly-honeycomb": {
+    "src": "/world/collections/butterfly-honeycomb.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "6d74472a253a"
+  },
+  "butterfly-buttercup": {
+    "src": "/world/collections/butterfly-buttercup.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "d7213a252bca"
+  },
+  "butterfly-rainleaf": {
+    "src": "/world/collections/butterfly-rainleaf.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "a6a5dc2788f3"
+  },
+  "butterfly-applewood": {
+    "src": "/world/collections/butterfly-applewood.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "c776f180cb46"
+  },
+  "butterfly-wildflower": {
+    "src": "/world/collections/butterfly-wildflower.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "534cb426aa9a"
+  },
+  "butterfly-copperleaf": {
+    "src": "/world/collections/butterfly-copperleaf.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "96078a52bc45"
+  },
+  "butterfly-seaglass": {
+    "src": "/world/collections/butterfly-seaglass.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "4217f84711c4"
+  },
+  "butterfly-bluebell": {
+    "src": "/world/collections/butterfly-bluebell.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "3b9c5bf5e10f"
+  },
+  "butterfly-orchard": {
+    "src": "/world/collections/butterfly-orchard.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "ff8fbb855522"
+  },
+  "butterfly-bayleaf": {
+    "src": "/world/collections/butterfly-bayleaf.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "4492748d5b13"
+  },
+  "butterfly-watermint": {
+    "src": "/world/collections/butterfly-watermint.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "40a23219952a"
+  },
+  "butterfly-sunstone": {
+    "src": "/world/collections/butterfly-sunstone.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "67924481fd62"
+  },
+  "butterfly-driftwood": {
+    "src": "/world/collections/butterfly-driftwood.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "041d558d8009"
+  },
+  "butterfly-moonpetal": {
+    "src": "/world/collections/butterfly-moonpetal.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "d0ab951c8c48"
+  },
+  "butterfly-rosewood": {
+    "src": "/world/collections/butterfly-rosewood.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "191b9bb14ad4"
+  },
+  "butterfly-amberleaf": {
+    "src": "/world/collections/butterfly-amberleaf.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "dfb31a72644d"
+  },
+  "butterfly-wildmint": {
+    "src": "/world/collections/butterfly-wildmint.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "58ff548b1b91"
+  },
+  "butterfly-pinecone": {
+    "src": "/world/collections/butterfly-pinecone.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "20890903a38c"
+  },
+  "butterfly-lilypond": {
+    "src": "/world/collections/butterfly-lilypond.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "2725151cd263"
+  },
+  "butterfly-meadowmist": {
+    "src": "/world/collections/butterfly-meadowmist.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "55d43b6f9ea6"
+  },
+  "butterfly-goldenrod": {
+    "src": "/world/collections/butterfly-goldenrod.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "949b2e8bbcc6"
+  },
+  "butterfly-silverfern": {
+    "src": "/world/collections/butterfly-silverfern.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "c844fc91865f"
+  },
+  "butterfly-seabreeze": {
+    "src": "/world/collections/butterfly-seabreeze.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "4c997e692ab1"
+  },
+  "butterfly-sandstone": {
+    "src": "/world/collections/butterfly-sandstone.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "dc62821d989b"
+  },
+  "butterfly-snowdrop": {
+    "src": "/world/collections/butterfly-snowdrop.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "883979984ee7"
+  },
+  "butterfly-firelight": {
+    "src": "/world/collections/butterfly-firelight.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "9c18c226e80a"
+  },
+  "butterfly-stormleaf": {
+    "src": "/world/collections/butterfly-stormleaf.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "48ee84505ddc"
+  },
+  "butterfly-dreamleaf": {
+    "src": "/world/collections/butterfly-dreamleaf.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "7699f8dfec5d"
+  },
+  "butterfly-nightbloom": {
+    "src": "/world/collections/butterfly-nightbloom.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "07a49e9d4c8e"
+  },
+  "butterfly-moonstone": {
+    "src": "/world/collections/butterfly-moonstone.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "4835080ffff3"
+  },
+  "butterfly-velvetwing": {
+    "src": "/world/collections/butterfly-velvetwing.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "4a09339ce275"
+  },
+  "butterfly-amethyst": {
+    "src": "/world/collections/butterfly-amethyst.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "615a6bed00d1"
+  },
+  "butterfly-starfall": {
+    "src": "/world/collections/butterfly-starfall.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "b1931bd5f55b"
+  },
+  "butterfly-twilight": {
+    "src": "/world/collections/butterfly-twilight.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "0b581318a0b9"
+  },
+  "butterfly-opal": {
+    "src": "/world/collections/butterfly-opal.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "d77d16acd649"
+  },
+  "butterfly-indigo": {
+    "src": "/world/collections/butterfly-indigo.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "6a1e7be9444e"
+  },
+  "butterfly-lantern": {
+    "src": "/world/collections/butterfly-lantern.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "6eab3c49cd6d"
+  },
+  "butterfly-frostbloom": {
+    "src": "/world/collections/butterfly-frostbloom.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "72e89b9d4c8c"
+  },
+  "butterfly-eclipse": {
+    "src": "/world/collections/butterfly-eclipse.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "25321f3699d2"
+  },
+  "butterfly-silvermist": {
+    "src": "/world/collections/butterfly-silvermist.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "347f248539e1"
+  },
+  "butterfly-cinder": {
+    "src": "/world/collections/butterfly-cinder.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "13c149595e1b"
+  },
+  "butterfly-aurora": {
+    "src": "/world/collections/butterfly-aurora.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "b2d7a39da3da"
+  },
+  "butterfly-pearlglow": {
+    "src": "/world/collections/butterfly-pearlglow.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "914bb7f8a0b5"
+  },
+  "butterfly-crystal": {
+    "src": "/world/collections/butterfly-crystal.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "1ba38d5ecf4f"
+  },
+  "butterfly-mistveil": {
+    "src": "/world/collections/butterfly-mistveil.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "fc92976c4fb0"
+  },
+  "butterfly-starlace": {
+    "src": "/world/collections/butterfly-starlace.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "06f348b47582"
+  },
+  "butterfly-celestial": {
+    "src": "/world/collections/butterfly-celestial.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "9ded54c0554e"
+  },
+  "butterfly-rainbow": {
+    "src": "/world/collections/butterfly-rainbow.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "7006355f6e76"
+  },
+  "ladybug-clover": {
+    "src": "/world/collections/ladybug-clover.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "99d5cc580fa6"
+  },
+  "ladybug-willow": {
+    "src": "/world/collections/ladybug-willow.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "93de14fc1190"
+  },
+  "ladybug-acorn": {
+    "src": "/world/collections/ladybug-acorn.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "03b551170022"
+  },
+  "ladybug-juniper": {
+    "src": "/world/collections/ladybug-juniper.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "7c8452b71c58"
+  },
+  "ladybug-marigold": {
+    "src": "/world/collections/ladybug-marigold.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "4a8f5083747b"
+  },
+  "ladybug-thistle": {
+    "src": "/world/collections/ladybug-thistle.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "92183a8c4499"
+  },
+  "ladybug-bramble": {
+    "src": "/world/collections/ladybug-bramble.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "f8f087592d3c"
+  },
+  "ladybug-spruce": {
+    "src": "/world/collections/ladybug-spruce.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "01b7044baa6f"
+  },
+  "ladybug-dandelion": {
+    "src": "/world/collections/ladybug-dandelion.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "c4386be6bc69"
+  },
+  "ladybug-hazel": {
+    "src": "/world/collections/ladybug-hazel.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "557891b204d5"
+  },
+  "ladybug-rowan": {
+    "src": "/world/collections/ladybug-rowan.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "62c7b4aa2267"
+  },
+  "ladybug-poppy": {
+    "src": "/world/collections/ladybug-poppy.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "e1474c2b4ffd"
+  },
+  "ladybug-primrose": {
+    "src": "/world/collections/ladybug-primrose.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "a17fb611c781"
+  },
+  "ladybug-cedar": {
+    "src": "/world/collections/ladybug-cedar.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "2bbaa7690755"
+  },
+  "ladybug-fernwood": {
+    "src": "/world/collections/ladybug-fernwood.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "87ca0adcc758"
+  },
+  "ladybug-sorrel": {
+    "src": "/world/collections/ladybug-sorrel.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "8b45aa8772cc"
+  },
+  "ladybug-sage": {
+    "src": "/world/collections/ladybug-sage.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "28220253ec85"
+  },
+  "ladybug-brook": {
+    "src": "/world/collections/ladybug-brook.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "bc43e6e8bae8"
+  },
+  "ladybug-mossbank": {
+    "src": "/world/collections/ladybug-mossbank.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "e32bb36c0208"
+  },
+  "ladybug-pebblewood": {
+    "src": "/world/collections/ladybug-pebblewood.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "6ecdf7f81963"
+  },
+  "ladybug-dewdrop": {
+    "src": "/world/collections/ladybug-dewdrop.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "d73e47dbf2e0"
+  },
+  "ladybug-sunleaf": {
+    "src": "/world/collections/ladybug-sunleaf.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "0bf5e7c5f77c"
+  },
+  "ladybug-honeycomb": {
+    "src": "/world/collections/ladybug-honeycomb.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "ddd48c375da3"
+  },
+  "ladybug-buttercup": {
+    "src": "/world/collections/ladybug-buttercup.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "03ad4a94e46d"
+  },
+  "ladybug-rainleaf": {
+    "src": "/world/collections/ladybug-rainleaf.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "68d35dd49a08"
+  },
+  "ladybug-applewood": {
+    "src": "/world/collections/ladybug-applewood.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "7a1f65ec5023"
+  },
+  "ladybug-wildflower": {
+    "src": "/world/collections/ladybug-wildflower.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "147ca02b861c"
+  },
+  "ladybug-copperleaf": {
+    "src": "/world/collections/ladybug-copperleaf.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "ed45832f92f0"
+  },
+  "ladybug-seaglass": {
+    "src": "/world/collections/ladybug-seaglass.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "3d334f1697da"
+  },
+  "ladybug-bluebell": {
+    "src": "/world/collections/ladybug-bluebell.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "eb38c0d70f9a"
+  },
+  "ladybug-orchard": {
+    "src": "/world/collections/ladybug-orchard.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "98fb07af6d8e"
+  },
+  "ladybug-bayleaf": {
+    "src": "/world/collections/ladybug-bayleaf.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "dae4b45d0258"
+  },
+  "ladybug-watermint": {
+    "src": "/world/collections/ladybug-watermint.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "0f53869ffcac"
+  },
+  "ladybug-sunstone": {
+    "src": "/world/collections/ladybug-sunstone.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "e6f52a5484a9"
+  },
+  "ladybug-driftwood": {
+    "src": "/world/collections/ladybug-driftwood.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "117c2170ed6d"
+  },
+  "ladybug-moonpetal": {
+    "src": "/world/collections/ladybug-moonpetal.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "c28380c16cc1"
+  },
+  "ladybug-rosewood": {
+    "src": "/world/collections/ladybug-rosewood.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "daecc38cd2cf"
+  },
+  "ladybug-amberleaf": {
+    "src": "/world/collections/ladybug-amberleaf.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "3b611cee5c3d"
+  },
+  "ladybug-wildmint": {
+    "src": "/world/collections/ladybug-wildmint.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "1900e08f0ad8"
+  },
+  "ladybug-pinecone": {
+    "src": "/world/collections/ladybug-pinecone.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "1be7635efd27"
+  },
+  "ladybug-lilypond": {
+    "src": "/world/collections/ladybug-lilypond.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "c703f45f44cc"
+  },
+  "ladybug-meadowmist": {
+    "src": "/world/collections/ladybug-meadowmist.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "63866180cdc4"
+  },
+  "ladybug-goldenrod": {
+    "src": "/world/collections/ladybug-goldenrod.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "2a1bb594cae0"
+  },
+  "ladybug-silverfern": {
+    "src": "/world/collections/ladybug-silverfern.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "7276065ead99"
+  },
+  "ladybug-seabreeze": {
+    "src": "/world/collections/ladybug-seabreeze.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "a8453c9b93db"
+  },
+  "ladybug-sandstone": {
+    "src": "/world/collections/ladybug-sandstone.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "15a76c3512df"
+  },
+  "ladybug-snowdrop": {
+    "src": "/world/collections/ladybug-snowdrop.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "58200ebb4c00"
+  },
+  "ladybug-firelight": {
+    "src": "/world/collections/ladybug-firelight.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "be9c24a5420a"
+  },
+  "ladybug-stormleaf": {
+    "src": "/world/collections/ladybug-stormleaf.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "093ee31af72e"
+  },
+  "ladybug-dreamleaf": {
+    "src": "/world/collections/ladybug-dreamleaf.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "f9ac9add430b"
+  },
+  "ladybug-nightbloom": {
+    "src": "/world/collections/ladybug-nightbloom.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "50e3b31ab8f9"
+  },
+  "ladybug-moonstone": {
+    "src": "/world/collections/ladybug-moonstone.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "4746e3e6f2b7"
+  },
+  "ladybug-velvetwing": {
+    "src": "/world/collections/ladybug-velvetwing.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "845e5f8d02ba"
+  },
+  "ladybug-amethyst": {
+    "src": "/world/collections/ladybug-amethyst.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "dadade133fdf"
+  },
+  "ladybug-starfall": {
+    "src": "/world/collections/ladybug-starfall.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "6020f15d93f4"
+  },
+  "ladybug-twilight": {
+    "src": "/world/collections/ladybug-twilight.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "4f4faf6bcf4f"
+  },
+  "ladybug-opal-meadow": {
+    "src": "/world/collections/ladybug-opal-meadow.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "2812b893232f"
+  },
+  "ladybug-indigo": {
+    "src": "/world/collections/ladybug-indigo.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "1c23f6eff59e"
+  },
+  "ladybug-lantern": {
+    "src": "/world/collections/ladybug-lantern.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "ff068b281a3d"
+  },
+  "ladybug-frostbloom": {
+    "src": "/world/collections/ladybug-frostbloom.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "5542e1b90568"
+  },
+  "ladybug-eclipse": {
+    "src": "/world/collections/ladybug-eclipse.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "7bb1debf4818"
+  },
+  "ladybug-silvermist": {
+    "src": "/world/collections/ladybug-silvermist.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "985d2c60ab84"
+  },
+  "ladybug-cinder": {
+    "src": "/world/collections/ladybug-cinder.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "e5750fb0f9ff"
+  },
+  "ladybug-aurora": {
+    "src": "/world/collections/ladybug-aurora.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "42ff149e8f1f"
+  },
+  "ladybug-pearlglow": {
+    "src": "/world/collections/ladybug-pearlglow.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "aa8cc63181ed"
+  },
+  "ladybug-crystal": {
+    "src": "/world/collections/ladybug-crystal.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "a8df9becabc6"
+  },
+  "ladybug-mistveil": {
+    "src": "/world/collections/ladybug-mistveil.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "13db23d29ac2"
+  },
+  "ladybug-starlace": {
+    "src": "/world/collections/ladybug-starlace.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "dbe1e5ae76c3"
+  },
+  "ladybug-celestial": {
+    "src": "/world/collections/ladybug-celestial.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "1e51c5da342d"
+  },
+  "ladybug-rainbow": {
+    "src": "/world/collections/ladybug-rainbow.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "9ede9a4c9d9f"
+  },
+  "dragonfly-clover": {
+    "src": "/world/collections/dragonfly-clover.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "9a763f0925a8"
+  },
+  "dragonfly-willow": {
+    "src": "/world/collections/dragonfly-willow.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "29dbeed5966a"
+  },
+  "dragonfly-acorn": {
+    "src": "/world/collections/dragonfly-acorn.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "621b118ee878"
+  },
+  "dragonfly-juniper": {
+    "src": "/world/collections/dragonfly-juniper.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "14a7402302b2"
+  },
+  "dragonfly-marigold": {
+    "src": "/world/collections/dragonfly-marigold.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "b5095ef8b7cf"
+  },
+  "dragonfly-thistle": {
+    "src": "/world/collections/dragonfly-thistle.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "7652605f43b6"
+  },
+  "dragonfly-bramble": {
+    "src": "/world/collections/dragonfly-bramble.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "60efc74bb72e"
+  },
+  "dragonfly-spruce": {
+    "src": "/world/collections/dragonfly-spruce.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "1fce006ff3b7"
+  },
+  "dragonfly-dandelion": {
+    "src": "/world/collections/dragonfly-dandelion.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "36775fe293d9"
+  },
+  "dragonfly-hazel": {
+    "src": "/world/collections/dragonfly-hazel.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "594407ad0870"
+  },
+  "dragonfly-rowan": {
+    "src": "/world/collections/dragonfly-rowan.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "1931e228562b"
+  },
+  "dragonfly-poppy": {
+    "src": "/world/collections/dragonfly-poppy.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "531658acd829"
+  },
+  "dragonfly-primrose": {
+    "src": "/world/collections/dragonfly-primrose.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "6aaff94fdd3d"
+  },
+  "dragonfly-cedar": {
+    "src": "/world/collections/dragonfly-cedar.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "d2e6020b4d73"
+  },
+  "dragonfly-fernwood": {
+    "src": "/world/collections/dragonfly-fernwood.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "78b1b9b1557d"
+  },
+  "dragonfly-sorrel": {
+    "src": "/world/collections/dragonfly-sorrel.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "527566bb73cb"
+  },
+  "dragonfly-sage": {
+    "src": "/world/collections/dragonfly-sage.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "eb4fb7f5634c"
+  },
+  "dragonfly-brook": {
+    "src": "/world/collections/dragonfly-brook.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "baba75c6afd5"
+  },
+  "dragonfly-mossbank": {
+    "src": "/world/collections/dragonfly-mossbank.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "60ab208fd60d"
+  },
+  "dragonfly-pebblewood": {
+    "src": "/world/collections/dragonfly-pebblewood.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "62e3a77d608f"
+  },
+  "dragonfly-dewdrop": {
+    "src": "/world/collections/dragonfly-dewdrop.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "db35b315aa0a"
+  },
+  "dragonfly-sunleaf": {
+    "src": "/world/collections/dragonfly-sunleaf.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "40fc21160b48"
+  },
+  "dragonfly-honeycomb": {
+    "src": "/world/collections/dragonfly-honeycomb.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "8fab2b17fada"
+  },
+  "dragonfly-buttercup": {
+    "src": "/world/collections/dragonfly-buttercup.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "b8e54c836293"
+  },
+  "dragonfly-rainleaf": {
+    "src": "/world/collections/dragonfly-rainleaf.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "41c2bad89f0e"
+  },
+  "dragonfly-applewood": {
+    "src": "/world/collections/dragonfly-applewood.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "227f7a98804d"
+  },
+  "dragonfly-wildflower": {
+    "src": "/world/collections/dragonfly-wildflower.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "68f62ab3e1b0"
+  },
+  "dragonfly-copperleaf": {
+    "src": "/world/collections/dragonfly-copperleaf.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "7499aa431a8a"
+  },
+  "dragonfly-seaglass": {
+    "src": "/world/collections/dragonfly-seaglass.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "297f57920c6c"
+  },
+  "dragonfly-bluebell": {
+    "src": "/world/collections/dragonfly-bluebell.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "a58c90c8426f"
+  },
+  "dragonfly-orchard": {
+    "src": "/world/collections/dragonfly-orchard.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "795749b5e397"
+  },
+  "dragonfly-bayleaf": {
+    "src": "/world/collections/dragonfly-bayleaf.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "0dda1b08eca9"
+  },
+  "dragonfly-watermint": {
+    "src": "/world/collections/dragonfly-watermint.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "68ea5d54aeb8"
+  },
+  "dragonfly-sunstone": {
+    "src": "/world/collections/dragonfly-sunstone.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "8799a42b2ba6"
+  },
+  "dragonfly-driftwood": {
+    "src": "/world/collections/dragonfly-driftwood.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "844e33a986ea"
+  },
+  "dragonfly-moonpetal": {
+    "src": "/world/collections/dragonfly-moonpetal.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "5a6d354f7265"
+  },
+  "dragonfly-rosewood": {
+    "src": "/world/collections/dragonfly-rosewood.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "9455c5b511b0"
+  },
+  "dragonfly-amberleaf": {
+    "src": "/world/collections/dragonfly-amberleaf.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "c58bffaf2050"
+  },
+  "dragonfly-wildmint": {
+    "src": "/world/collections/dragonfly-wildmint.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "75cd0570c701"
+  },
+  "dragonfly-pinecone": {
+    "src": "/world/collections/dragonfly-pinecone.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "aaaa475183f8"
+  },
+  "dragonfly-lilypond": {
+    "src": "/world/collections/dragonfly-lilypond.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "309b6c54e7a5"
+  },
+  "dragonfly-meadowmist": {
+    "src": "/world/collections/dragonfly-meadowmist.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "f13673c74ab2"
+  },
+  "dragonfly-goldenrod": {
+    "src": "/world/collections/dragonfly-goldenrod.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "4493a3570af2"
+  },
+  "dragonfly-silverfern": {
+    "src": "/world/collections/dragonfly-silverfern.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "f55aa84c95a2"
+  },
+  "dragonfly-seabreeze": {
+    "src": "/world/collections/dragonfly-seabreeze.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "b7ec7917c6be"
+  },
+  "dragonfly-sandstone": {
+    "src": "/world/collections/dragonfly-sandstone.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "35020b107ec3"
+  },
+  "dragonfly-snowdrop": {
+    "src": "/world/collections/dragonfly-snowdrop.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "f0cdbd24e540"
+  },
+  "dragonfly-firelight": {
+    "src": "/world/collections/dragonfly-firelight.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "c002ded45ad4"
+  },
+  "dragonfly-stormleaf": {
+    "src": "/world/collections/dragonfly-stormleaf.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "b2a60e71e439"
+  },
+  "dragonfly-dreamleaf": {
+    "src": "/world/collections/dragonfly-dreamleaf.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "7a8304bf81fc"
+  },
+  "dragonfly-nightbloom": {
+    "src": "/world/collections/dragonfly-nightbloom.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "79461d797e99"
+  },
+  "dragonfly-moonstone": {
+    "src": "/world/collections/dragonfly-moonstone.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "167d60805ce3"
+  },
+  "dragonfly-velvetwing": {
+    "src": "/world/collections/dragonfly-velvetwing.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "3eb6ecd5224c"
+  },
+  "dragonfly-amethyst": {
+    "src": "/world/collections/dragonfly-amethyst.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "109b3647fd1e"
+  },
+  "dragonfly-starfall": {
+    "src": "/world/collections/dragonfly-starfall.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "d23e382a7d28"
+  },
+  "dragonfly-twilight": {
+    "src": "/world/collections/dragonfly-twilight.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "90613eea76e2"
+  },
+  "dragonfly-opal": {
+    "src": "/world/collections/dragonfly-opal.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "c213f6399db7"
+  },
+  "dragonfly-indigo": {
+    "src": "/world/collections/dragonfly-indigo.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "e442b6690351"
+  },
+  "dragonfly-lantern": {
+    "src": "/world/collections/dragonfly-lantern.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "ecc65dfcd8c8"
+  },
+  "dragonfly-frostbloom": {
+    "src": "/world/collections/dragonfly-frostbloom.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "c8a5095d1101"
+  },
+  "dragonfly-eclipse": {
+    "src": "/world/collections/dragonfly-eclipse.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "9827ec0c0202"
+  },
+  "dragonfly-silvermist": {
+    "src": "/world/collections/dragonfly-silvermist.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "758a0b9703d2"
+  },
+  "dragonfly-cinder": {
+    "src": "/world/collections/dragonfly-cinder.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "dbc96adaca56"
+  },
+  "dragonfly-aurora-meadow": {
+    "src": "/world/collections/dragonfly-aurora-meadow.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "9b1552ff3cee"
+  },
+  "dragonfly-pearlglow": {
+    "src": "/world/collections/dragonfly-pearlglow.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "a617b0ff2d99"
+  },
+  "dragonfly-crystal": {
+    "src": "/world/collections/dragonfly-crystal.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "b6e2dec2a47f"
+  },
+  "dragonfly-mistveil": {
+    "src": "/world/collections/dragonfly-mistveil.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "9ca2ea8d84bb"
+  },
+  "dragonfly-starlace": {
+    "src": "/world/collections/dragonfly-starlace.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "6150ba46f63e"
+  },
+  "dragonfly-celestial": {
+    "src": "/world/collections/dragonfly-celestial.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "08674d8785dc"
+  },
+  "dragonfly-rainbow": {
+    "src": "/world/collections/dragonfly-rainbow.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170,
+    "revision": "7a06eb81edb0"
+  },
+  "fish-tomato-clownfish": {
+    "src": "/world/collections/fish-tomato-clownfish.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "24d48c6bf0f5"
+  },
+  "fish-blackcap-basslet": {
+    "src": "/world/collections/fish-blackcap-basslet.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "d994da0a53c8"
+  },
+  "fish-psychedelic-dragonet": {
+    "src": "/world/collections/fish-psychedelic-dragonet.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "8759340f43fc"
+  },
+  "fish-longnose-hawkfish": {
+    "src": "/world/collections/fish-longnose-hawkfish.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "12164b399c5e"
+  },
+  "fish-threadfin-cardinalfish": {
+    "src": "/world/collections/fish-threadfin-cardinalfish.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "28415047ad77"
+  },
+  "fish-flame-angelfish": {
+    "src": "/world/collections/fish-flame-angelfish.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "2d686694b0dc"
+  },
+  "fish-copperband-butterflyfish": {
+    "src": "/world/collections/fish-copperband-butterflyfish.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "05bb38320e02"
+  },
+  "fish-yellow-boxfish": {
+    "src": "/world/collections/fish-yellow-boxfish.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "9a0c422a9cda"
+  },
+  "fish-moorish-idol": {
+    "src": "/world/collections/fish-moorish-idol.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "1964e38950e9"
+  },
+  "fish-blue-green-chromis": {
+    "src": "/world/collections/fish-blue-green-chromis.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "1a6396792d6a"
+  },
+  "fish-fire-goby": {
+    "src": "/world/collections/fish-fire-goby.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "e5d408504eff"
+  },
+  "fish-scooter-dragonet": {
+    "src": "/world/collections/fish-scooter-dragonet.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "bb76a2e1a109"
+  },
+  "fish-orange-spotted-blenny": {
+    "src": "/world/collections/fish-orange-spotted-blenny.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "ff507b7caf4b"
+  },
+  "fish-pajama-cardinalfish": {
+    "src": "/world/collections/fish-pajama-cardinalfish.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "958ed3a49403"
+  },
+  "fish-clown-triggerfish": {
+    "src": "/world/collections/fish-clown-triggerfish.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "61a855fc2312"
+  },
+  "fish-harlequin-tuskfish": {
+    "src": "/world/collections/fish-harlequin-tuskfish.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "6e578f6e2614"
+  },
+  "fish-regal-angelfish": {
+    "src": "/world/collections/fish-regal-angelfish.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "07f5603587d8"
+  },
+  "fish-sailfin-tang": {
+    "src": "/world/collections/fish-sailfin-tang.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "d049f385fc45"
+  },
+  "fish-gem-tang": {
+    "src": "/world/collections/fish-gem-tang.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "03b20426bbc7"
+  },
+  "fish-blue-ribbon-eel": {
+    "src": "/world/collections/fish-blue-ribbon-eel.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "90baebc4acb6"
+  },
+  "fish-snowflake-moray": {
+    "src": "/world/collections/fish-snowflake-moray.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "2520b8343fe1"
+  },
+  "fish-spotted-garden-eel": {
+    "src": "/world/collections/fish-spotted-garden-eel.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "438b8c7e69cb"
+  },
+  "fish-peacock-wrasse": {
+    "src": "/world/collections/fish-peacock-wrasse.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "39663c6af8fa"
+  },
+  "fish-cleaner-wrasse": {
+    "src": "/world/collections/fish-cleaner-wrasse.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "13129fc517a7"
+  },
+  "fish-bicolor-parrotfish": {
+    "src": "/world/collections/fish-bicolor-parrotfish.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "5d4c956486a2"
+  },
+  "fish-leaf-scorpionfish": {
+    "src": "/world/collections/fish-leaf-scorpionfish.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "5bed6ac28b6d"
+  },
+  "fish-flying-gurnard": {
+    "src": "/world/collections/fish-flying-gurnard.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "3cfe0c818d49"
+  },
+  "fish-weedy-dragonet": {
+    "src": "/world/collections/fish-weedy-dragonet.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "0a9b4746bab6"
+  },
+  "fish-peppermint-angelfish": {
+    "src": "/world/collections/fish-peppermint-angelfish.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "bbdcb8ac7ac5"
+  },
+  "fish-candy-basslet": {
+    "src": "/world/collections/fish-candy-basslet.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "23318d619299"
+  },
+  "fish-cardinal-tetra": {
+    "src": "/world/collections/fish-cardinal-tetra.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "0f1fc8adec84"
+  },
+  "fish-ember-tetra": {
+    "src": "/world/collections/fish-ember-tetra.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "745fe074b05f"
+  },
+  "fish-rummynose-tetra": {
+    "src": "/world/collections/fish-rummynose-tetra.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "f6a2c3c26dca"
+  },
+  "fish-congo-tetra": {
+    "src": "/world/collections/fish-congo-tetra.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "fc1a859beebc"
+  },
+  "fish-galaxy-rasbora": {
+    "src": "/world/collections/fish-galaxy-rasbora.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "03dc91b7a7c2"
+  },
+  "fish-chili-rasbora": {
+    "src": "/world/collections/fish-chili-rasbora.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "3d29912cb07c"
+  },
+  "fish-clown-loach": {
+    "src": "/world/collections/fish-clown-loach.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "aaaa45890cbc"
+  },
+  "fish-yoyo-loach": {
+    "src": "/world/collections/fish-yoyo-loach.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "a654fac6e2ed"
+  },
+  "fish-hillstream-loach": {
+    "src": "/world/collections/fish-hillstream-loach.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "bcca30c11e06"
+  },
+  "fish-panda-corydoras": {
+    "src": "/world/collections/fish-panda-corydoras.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "d00d189e7441"
+  },
+  "fish-bronze-corydoras": {
+    "src": "/world/collections/fish-bronze-corydoras.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "4805bb13bd13"
+  },
+  "fish-green-phantom-pleco": {
+    "src": "/world/collections/fish-green-phantom-pleco.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "22d31fcf8b0e"
+  },
+  "fish-zebra-pleco": {
+    "src": "/world/collections/fish-zebra-pleco.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "817a6610e30a"
+  },
+  "fish-honey-gourami": {
+    "src": "/world/collections/fish-honey-gourami.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "80ed1e82da30"
+  },
+  "fish-sparkling-gourami": {
+    "src": "/world/collections/fish-sparkling-gourami.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "945ec1eec5b9"
+  },
+  "fish-kissing-gourami": {
+    "src": "/world/collections/fish-kissing-gourami.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "a565212211e6"
+  },
+  "fish-dwarf-rainbowfish": {
+    "src": "/world/collections/fish-dwarf-rainbowfish.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "93799977e233"
+  },
+  "fish-threadfin-rainbowfish": {
+    "src": "/world/collections/fish-threadfin-rainbowfish.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "a825f5080553"
+  },
+  "fish-roseline-barb": {
+    "src": "/world/collections/fish-roseline-barb.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "cbe8da08a642"
+  },
+  "fish-golden-dojo-loach": {
+    "src": "/world/collections/fish-golden-dojo-loach.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "4e667451494c"
+  },
+  "fish-peacock-gudgeon": {
+    "src": "/world/collections/fish-peacock-gudgeon.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "19ad44791dc4"
+  },
+  "fish-german-blue-ram": {
+    "src": "/world/collections/fish-german-blue-ram.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "370443c9902b"
+  },
+  "fish-electric-blue-acara": {
+    "src": "/world/collections/fish-electric-blue-acara.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "0a609b37dc62"
+  },
+  "fish-threadfin-acara": {
+    "src": "/world/collections/fish-threadfin-acara.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "31b156c97117"
+  },
+  "fish-red-turquoise-discus": {
+    "src": "/world/collections/fish-red-turquoise-discus.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "1c4fb6f36e64"
+  },
+  "fish-marble-angelfish": {
+    "src": "/world/collections/fish-marble-angelfish.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "816f0f034ba2"
+  },
+  "fish-silver-arowana": {
+    "src": "/world/collections/fish-silver-arowana.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "920be446b94e"
+  },
+  "fish-clown-knifefish": {
+    "src": "/world/collections/fish-clown-knifefish.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "c962479e6719"
+  },
+  "fish-freshwater-butterflyfish": {
+    "src": "/world/collections/fish-freshwater-butterflyfish.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "a9949dab7d03"
+  },
+  "fish-platinum-alligator-gar": {
+    "src": "/world/collections/fish-platinum-alligator-gar.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "89d57df3c277"
+  },
+  "fish-lanternfish": {
+    "src": "/world/collections/fish-lanternfish.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "b67a0a9150c4"
+  },
+  "fish-hatchetfish": {
+    "src": "/world/collections/fish-hatchetfish.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "d313e128e83b"
+  },
+  "fish-barreleye-dreamfish": {
+    "src": "/world/collections/fish-barreleye-dreamfish.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "24f4a5b920b0"
+  },
+  "fish-ribbon-oarfish": {
+    "src": "/world/collections/fish-ribbon-oarfish.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "30c67652778c"
+  },
+  "fish-gulper-eel": {
+    "src": "/world/collections/fish-gulper-eel.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "cbafe56cd36f"
+  },
+  "fish-violet-anglerfish": {
+    "src": "/world/collections/fish-violet-anglerfish.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "f134dbb14143"
+  },
+  "fish-black-dragonfish": {
+    "src": "/world/collections/fish-black-dragonfish.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "0ba4e4bd17a6"
+  },
+  "fish-pineapplefish": {
+    "src": "/world/collections/fish-pineapplefish.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "ff40c5ca89d4"
+  },
+  "fish-flashlight-fish": {
+    "src": "/world/collections/fish-flashlight-fish.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "c70b673ddd72"
+  },
+  "fish-coelacanth-dreamfish": {
+    "src": "/world/collections/fish-coelacanth-dreamfish.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "295ab4e7588d"
+  },
+  "fish-baby-zebra-shark": {
+    "src": "/world/collections/fish-baby-zebra-shark.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "a24844d33aa7"
+  },
+  "fish-baby-port-jackson-shark": {
+    "src": "/world/collections/fish-baby-port-jackson-shark.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "c0b4e882ac7c"
+  },
+  "fish-baby-hooded-carpetshark": {
+    "src": "/world/collections/fish-baby-hooded-carpetshark.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "837fb9f297f1"
+  },
+  "fish-baby-whitespotted-bamboo-shark": {
+    "src": "/world/collections/fish-baby-whitespotted-bamboo-shark.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "2269b969631f"
+  },
+  "fish-baby-nurse-shark": {
+    "src": "/world/collections/fish-baby-nurse-shark.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "b25d4258442f"
+  },
+  "fish-baby-lemon-shark": {
+    "src": "/world/collections/fish-baby-lemon-shark.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "9765238c6069"
+  },
+  "fish-baby-bonnethead-shark": {
+    "src": "/world/collections/fish-baby-bonnethead-shark.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "d6ef70ff721d"
+  },
+  "fish-baby-crested-bullhead-shark": {
+    "src": "/world/collections/fish-baby-crested-bullhead-shark.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "f7babcc10097"
+  },
+  "fish-baby-coral-catshark": {
+    "src": "/world/collections/fish-baby-coral-catshark.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "97b02bc287c6"
+  },
+  "fish-baby-swell-shark": {
+    "src": "/world/collections/fish-baby-swell-shark.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "0c579ba82094"
+  },
+  "fish-baby-blacktip-reef-shark": {
+    "src": "/world/collections/fish-baby-blacktip-reef-shark.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "9a76d3871e31"
+  },
+  "fish-baby-whitetip-reef-shark": {
+    "src": "/world/collections/fish-baby-whitetip-reef-shark.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "94bb39221dba"
+  },
+  "fish-baby-bowmouth-shark": {
+    "src": "/world/collections/fish-baby-bowmouth-shark.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "8a103b76f226"
+  },
+  "fish-baby-angelshark": {
+    "src": "/world/collections/fish-baby-angelshark.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "409701f5e963"
+  },
+  "fish-baby-wobbegong": {
+    "src": "/world/collections/fish-baby-wobbegong.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "9231e48b3ca7"
+  },
+  "fish-spotted-eagle-ray": {
+    "src": "/world/collections/fish-spotted-eagle-ray.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "069ad0c01239"
+  },
+  "fish-blue-spotted-stingray": {
+    "src": "/world/collections/fish-blue-spotted-stingray.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "69b97d97ba67"
+  },
+  "fish-cownose-ray": {
+    "src": "/world/collections/fish-cownose-ray.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "ff38e50e6aac"
+  },
+  "fish-electric-marbled-ray": {
+    "src": "/world/collections/fish-electric-marbled-ray.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "b6edcdd07565"
+  },
+  "fish-violet-manta-calf": {
+    "src": "/world/collections/fish-violet-manta-calf.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "2f1985d9e5c9"
+  },
+  "fish-pom-pom-crab": {
+    "src": "/world/collections/fish-pom-pom-crab.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "1d571a991593"
+  },
+  "fish-anemone-porcelain-crab": {
+    "src": "/world/collections/fish-anemone-porcelain-crab.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "8082e3eeb3c5"
+  },
+  "fish-emerald-crab": {
+    "src": "/world/collections/fish-emerald-crab.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "6852a63fbfc3"
+  },
+  "fish-halloween-hermit-crab": {
+    "src": "/world/collections/fish-halloween-hermit-crab.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "de40a5ba7097"
+  },
+  "fish-blue-knee-hermit-crab": {
+    "src": "/world/collections/fish-blue-knee-hermit-crab.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "cc04a0641158"
+  },
+  "fish-strawberry-hermit-crab": {
+    "src": "/world/collections/fish-strawberry-hermit-crab.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "c2706276802e"
+  },
+  "fish-pistol-shrimp": {
+    "src": "/world/collections/fish-pistol-shrimp.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "1e39300c8f33"
+  },
+  "fish-harlequin-shrimp": {
+    "src": "/world/collections/fish-harlequin-shrimp.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "2afc3644736e"
+  },
+  "fish-fire-shrimp": {
+    "src": "/world/collections/fish-fire-shrimp.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "b1d8c47c5551"
+  },
+  "fish-bumblebee-shrimp": {
+    "src": "/world/collections/fish-bumblebee-shrimp.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "93edf7664b6c"
+  },
+  "fish-snowball-shrimp": {
+    "src": "/world/collections/fish-snowball-shrimp.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "94e31615bb04"
+  },
+  "fish-orange-rili-shrimp": {
+    "src": "/world/collections/fish-orange-rili-shrimp.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "3e802166d6c4"
+  },
+  "fish-blue-dwarf-crayfish": {
+    "src": "/world/collections/fish-blue-dwarf-crayfish.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "11b4db8cde9b"
+  },
+  "fish-red-swamp-crayfish": {
+    "src": "/world/collections/fish-red-swamp-crayfish.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "662973d7cf6c"
+  },
+  "fish-reef-slipper-lobster": {
+    "src": "/world/collections/fish-reef-slipper-lobster.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "467742f32097"
+  },
+  "fish-squat-lobster": {
+    "src": "/world/collections/fish-squat-lobster.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "ab52d38772b1"
+  },
+  "fish-violet-reef-lobster": {
+    "src": "/world/collections/fish-violet-reef-lobster.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "8749b6da0504"
+  },
+  "fish-tiger-snapping-shrimp": {
+    "src": "/world/collections/fish-tiger-snapping-shrimp.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "6a96d7de494b"
+  },
+  "fish-red-reef-prawn": {
+    "src": "/world/collections/fish-red-reef-prawn.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "424b03bb98d7"
+  },
+  "fish-glass-grass-shrimp": {
+    "src": "/world/collections/fish-glass-grass-shrimp.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "664abde1cf96"
+  },
+  "fish-flamboyant-cuttlefish": {
+    "src": "/world/collections/fish-flamboyant-cuttlefish.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "fbb39f89426e"
+  },
+  "fish-pink-umbrella-octopus": {
+    "src": "/world/collections/fish-pink-umbrella-octopus.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "9f05af2df3ef"
+  },
+  "fish-mimic-octopus": {
+    "src": "/world/collections/fish-mimic-octopus.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "62d4fb278893"
+  },
+  "fish-blue-ringed-octopus": {
+    "src": "/world/collections/fish-blue-ringed-octopus.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "ef41196d1746"
+  },
+  "fish-striped-pyjama-squid": {
+    "src": "/world/collections/fish-striped-pyjama-squid.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "2641ac2900e2"
+  },
+  "fish-stout-bobtail-squid": {
+    "src": "/world/collections/fish-stout-bobtail-squid.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "d0ee396f19a6"
+  },
+  "fish-pink-sea-pig": {
+    "src": "/world/collections/fish-pink-sea-pig.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "c02c2e0625eb"
+  },
+  "fish-royal-sea-slug": {
+    "src": "/world/collections/fish-royal-sea-slug.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "502e6a5429d2"
+  },
+  "fish-leaf-sheep-sea-slug": {
+    "src": "/world/collections/fish-leaf-sheep-sea-slug.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "4c9fcdfc2c03"
+  },
+  "fish-ribbon-sea-dragon": {
+    "src": "/world/collections/fish-ribbon-sea-dragon.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "ea8421b8f35a"
+  },
+  "fish-painted-turtle-hatchling": {
+    "src": "/world/collections/fish-painted-turtle-hatchling.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "bcf7c05dc9ff"
+  },
+  "fish-map-turtle-hatchling": {
+    "src": "/world/collections/fish-map-turtle-hatchling.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "0465c9c1531a"
+  },
+  "fish-spotted-turtle-hatchling": {
+    "src": "/world/collections/fish-spotted-turtle-hatchling.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "883cbe21b861"
+  },
+  "fish-musk-turtle-hatchling": {
+    "src": "/world/collections/fish-musk-turtle-hatchling.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "9981ea160c31"
+  },
+  "fish-diamondback-terrapin-hatchling": {
+    "src": "/world/collections/fish-diamondback-terrapin-hatchling.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "a7b2cef2d888"
+  },
+  "fish-softshell-turtle-hatchling": {
+    "src": "/world/collections/fish-softshell-turtle-hatchling.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "7d7ce311975a"
+  },
+  "fish-pig-nosed-turtle-hatchling": {
+    "src": "/world/collections/fish-pig-nosed-turtle-hatchling.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "edd2ec2f8d80"
+  },
+  "fish-reeves-turtle-hatchling": {
+    "src": "/world/collections/fish-reeves-turtle-hatchling.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "b5c80df540ae"
+  },
+  "fish-loggerhead-hatchling": {
+    "src": "/world/collections/fish-loggerhead-hatchling.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "440ea562348b"
+  },
+  "fish-hawksbill-hatchling": {
+    "src": "/world/collections/fish-hawksbill-hatchling.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "4f288db2db49"
+  },
+  "fish-fire-bellied-newt": {
+    "src": "/world/collections/fish-fire-bellied-newt.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "6349c57e901f"
+  },
+  "fish-alpine-newt": {
+    "src": "/world/collections/fish-alpine-newt.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "e745fcd0452e"
+  },
+  "fish-eastern-red-spotted-newt": {
+    "src": "/world/collections/fish-eastern-red-spotted-newt.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "9b15a160aecd"
+  },
+  "fish-marbled-salamander": {
+    "src": "/world/collections/fish-marbled-salamander.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "9e87a962e629"
+  },
+  "fish-spotted-salamander": {
+    "src": "/world/collections/fish-spotted-salamander.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "883bdf0fbde2"
+  },
+  "fish-tiger-salamander": {
+    "src": "/world/collections/fish-tiger-salamander.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "4e5d469e3127"
+  },
+  "fish-glass-frog": {
+    "src": "/world/collections/fish-glass-frog.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "8b73ce896976"
+  },
+  "fish-reed-frog": {
+    "src": "/world/collections/fish-reed-frog.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "1dbf4d3bf6ea"
+  },
+  "fish-yellow-bellied-toad": {
+    "src": "/world/collections/fish-yellow-bellied-toad.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "93efdb830563"
+  },
+  "fish-fire-salamander": {
+    "src": "/world/collections/fish-fire-salamander.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "5b6088edc27a"
+  },
+  "fish-fluted-giant-clam": {
+    "src": "/world/collections/fish-fluted-giant-clam.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "0f74203f9d17"
+  },
+  "fish-scallop-dancer": {
+    "src": "/world/collections/fish-scallop-dancer.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "15eda7d8f3e2"
+  },
+  "fish-tiger-cowrie": {
+    "src": "/world/collections/fish-tiger-cowrie.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "a5a9714c97db"
+  },
+  "fish-banded-trochus-snail": {
+    "src": "/world/collections/fish-banded-trochus-snail.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "cd99530f3bb5"
+  },
+  "fish-moon-snail": {
+    "src": "/world/collections/fish-moon-snail.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "d88f91fe68de"
+  },
+  "fish-harbor-seal-pup": {
+    "src": "/world/collections/fish-harbor-seal-pup.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "e862f3f39956"
+  },
+  "fish-river-otter-pup": {
+    "src": "/world/collections/fish-river-otter-pup.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "aa294cbe9867"
+  },
+  "fish-manatee-calf": {
+    "src": "/world/collections/fish-manatee-calf.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "aac7730239fd"
+  },
+  "fish-sand-dollar": {
+    "src": "/world/collections/fish-sand-dollar.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "2e2c46f70bc0"
+  },
+  "fish-feather-star": {
+    "src": "/world/collections/fish-feather-star.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 220,
+    "revision": "a120c6244b4a"
+  }
+}

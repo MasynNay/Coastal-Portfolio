@@ -1,0 +1,16 @@
+{
+  "heads": {
+    "src": "/world/arcade/EelHeads.png",
+    "cw": 128,
+    "ch": 128,
+    "columns": 3,
+    "rows": 1,
+    "revision": "4fb6ac514f34"
+  },
+  "body": {
+    "src": "/world/arcade/EelBody.png",
+    "width": 64,
+    "height": 128,
+    "revision": "64be442607b8"
+  }
+}

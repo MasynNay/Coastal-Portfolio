@@ -1,0 +1,13 @@
+Furnished habitat backgrounds generated with the built-in image generation tool. Terrarium reference: the user's miniature furnished enclosure photograph. These pictures contain no animals; the separate four-frame collection art remains animated over them.
+
+Sources: `terrarium.png`, `aquarium.png`. Runtime: `public/world/collections/{terrarium,aquarium}.webp`. Detailed residents are prepared from the original collection atlases by `scripts/PrepareCollections.py`.
+
+Final prompts:
+
+terrarium:
+
+Use case: stylized-concept. Asset type: landscape 3:2 detailed pixel-art background for a large interactive jumping-spider terrarium viewer. Use the reference only as inspiration for a furnished miniature enclosure. Create a straight-on cozy miniature woodland cottage room inside a clear glass terrarium: mossy forest-green back wall, rounded little window with warm daylight, wooden shelves with tiny blank books and jars, a small hollow cork hideaway, a miniature wooden ladder, bark climbing branches, ferns, layered moss and dark rich substrate. Refined lush storybook pixel art matching polished GBA-inspired building sprites, visible fine texture and clean contours, warm amber and blue-green palette. Wide center foreground has an empty horizontal bark perch at 70 percent height where a separately animated spider will sit. Do NOT draw spiders, insects, fish, people, text, words, logos, watermark or UI. No bright photograph-like outer room; entire image is the interior enclosure with subtle thin glass edges, front-facing rather than top-down. Make the center visually calm to keep the spider readable. Rich detailed furniture around the sides, no large props in center foreground.
+
+aquarium:
+
+Use case: stylized-concept. Asset type: landscape 3:2 detailed pixel-art background for a large interactive aquarium viewer. Create a front-facing view INSIDE a beautiful clear blue-green planted freshwater aquarium. Refined lush storybook pixel art matching polished GBA-inspired building sprites, fine natural texture and clean contours. Pale rippled light from the water surface, dark blue-green depth in the background, detailed leafy aquatic plants along the left and right, a gnarled driftwood arch at left, small smooth river stones, sand and pebble substrate, a little moss-covered sunken stone arch on right. Center is open clear water for a separately animated fish, 35 to 65 percent height. Realistic underwater depth expressed through layered pixel art, warm sunlit highlights, little caustic patterns on the sand. Thin glass edges and a subtle waterline, no outer room. Do NOT draw fish, animals, people, bubbles (animated separately), text, logos, watermark or UI. Richly detailed but keep clear swimming room in middle.

@@ -1,0 +1,773 @@
+/* These styles belong to the welcome card and activity panels, not the game map. */
+.world-welcome {
+  position: absolute;
+  inset: 0;
+  z-index: 30;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+  color: #eaf4e6;
+  background:
+    radial-gradient(ellipse at 50% 70%, #286c7088, transparent 60%),
+    linear-gradient(150deg, #102a36f5, #153a38f5);
+  animation: welcome-reveal 0.6s ease both;
+}
+.world-welcome small {
+  font-size: 10px;
+  letter-spacing: 0.26em;
+  color: #b7d9cc;
+}
+.world-welcome h1 {
+  font-size: clamp(42px, 7vw, 90px);
+  line-height: 1;
+  letter-spacing: -0.065em;
+  margin: 22px 0 8px;
+  font-weight: 400;
+}
+.world-welcome em {
+  font-family: Georgia, serif;
+  color: #d2e9af;
+}
+.world-welcome p {
+  color: #b9d2cf;
+  font-size: 14px;
+  line-height: 1.8;
+}
+.world-welcome button {
+  border: 1px solid #c9dfbc77;
+  border-radius: 30px;
+  background: #d4e6c5;
+  color: #163c3a;
+  padding: 13px 24px;
+  margin-top: 10px;
+  cursor: pointer;
+}
+.welcome-avatar {
+  animation: welcome-greet 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+.welcome-orbit {
+  position: absolute;
+  inset: 15%;
+  border: 1px solid #c0e0c31a;
+  border-radius: 50%;
+  pointer-events: none;
+  animation: welcome-orbit 24s linear infinite;
+}
+.welcome-orbit span {
+  position: absolute;
+  color: #cce4be;
+  font-size: 25px;
+  top: 10%;
+  left: 15%;
+}
+.welcome-orbit span + span {
+  top: 90%;
+  left: 85%;
+}
+@keyframes welcome-reveal {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes welcome-greet {
+  from {
+    transform: translateY(12px) scale(0.96);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+@keyframes welcome-orbit {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.world-activity {
+  text-align: center;
+}
+.activity-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin: 22px 0;
+}
+.activity-actions button,
+.spider-home button:not(.spider-habitat) {
+  border: 1px solid #9dbca566;
+  border-radius: 12px;
+  padding: 11px 16px;
+  color: #e1ecdf;
+  background: #284944;
+  cursor: pointer;
+}
+.world-activity small,
+.activity-note {
+  font-size: 12px;
+  color: #aec5c0;
+}
+/* One spacious enclosure per row. Backgrounds and detailed residents are only
+   requested while their collection is open, keeping the island renderer light. */
+.world-dialog.world-dialog-wide {
+  width: min(1080px, 100%);
+}
+.habitat-grid,
+.aquarium-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+  margin: 22px 0;
+}
+.habitat-grid article,
+.aquarium-grid article {
+  background: #1c3539;
+  padding: 14px;
+  border-radius: 18px;
+  border: 1px solid #b9d1b52a;
+}
+.habitat-grid h3 {
+  margin: 15px 0 8px;
+}
+.habitat-grid p {
+  font-size: 13px;
+  color: #bfd0c9;
+}
+.spider-habitat,
+.aquarium-tank {
+  position: relative;
+  display: block;
+  width: min(100%, 72dvh);
+  height: auto;
+  aspect-ratio: 3 / 2;
+  margin: auto;
+  overflow: hidden;
+  padding: 0 !important;
+  border-radius: 12px !important;
+  border: 1px solid #c3e4dc88 !important;
+  background: #193a32;
+  cursor: zoom-in;
+  isolation: isolate;
+}
+.spider-habitat.is-close {
+  width: min(100%, 96dvh);
+  height: auto;
+  cursor: zoom-out;
+}
+.habitat-scenery,
+.tank-scenery {
+  position: absolute;
+  inset: 0;
+  background-position: center;
+  background-size: cover;
+  transition: transform 0.4s ease;
+}
+.is-close .habitat-scenery,
+.is-close .tank-scenery {
+  transform: scale(1.08);
+}
+.habitat-spider,
+.is-close .habitat-spider {
+  position: absolute;
+  left: 50%;
+  bottom: 54%;
+  translate: -50% 0;
+  margin: 0;
+  transform-origin: center bottom;
+  animation: spider-hop 3s ease-in-out infinite;
+}
+.collection-sprite {
+  display: block;
+  width: clamp(105px, 16dvh, 165px);
+  background-size: 400% 100%;
+  background-repeat: no-repeat;
+  animation: collection-frames var(--frame-time) step-end infinite;
+}
+.is-close .habitat-spider .collection-sprite {
+  width: clamp(140px, 22dvh, 215px);
+}
+.collection-sprite.is-paused,
+.is-paused .habitat-spider,
+.is-paused .tank-fish,
+.is-paused .tank-bubble {
+  animation-play-state: paused;
+}
+.habitat-zoom {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  z-index: 2;
+  background: #10292ddd;
+  border: 1px solid #d8e8d455;
+  border-radius: 30px;
+  padding: 6px 12px;
+  font-size: 11px;
+  color: #e7f1e2;
+  pointer-events: none;
+}
+/* Explicit atlas positions keep the fourth pose inside the image, including
+   paused/reduced-motion previews. The old endpoint could expose a blank cell. */
+@keyframes collection-frames {
+  0% {
+    background-position-x: 0%;
+  }
+  25% {
+    background-position-x: 33.333333%;
+  }
+  50% {
+    background-position-x: 66.666667%;
+  }
+  75%,
+  100% {
+    background-position-x: 100%;
+  }
+}
+
+.collection-picker {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding: 12px 0;
+}
+.collection-picker button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 0 0 90px;
+  font-size: 11px;
+  padding: 4px 8px !important;
+}
+.collection-picker button[aria-pressed="true"] {
+  border-color: #c8dcac;
+  background: #36554a;
+}
+.collection-picker .sprite-pose {
+  flex-shrink: 0;
+}
+.collection-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 16px 0;
+}
+.collection-filters label {
+  display: grid;
+  gap: 5px;
+  font-size: 12px;
+  color: #c0d4ca;
+}
+.collection-filters label:first-child {
+  flex: 1 1 220px;
+}
+.collection-filters input,
+.collection-filters select {
+  min-width: 0;
+  border: 1px solid #b9d7c644;
+  border-radius: 8px;
+  background: #17353b;
+  color: #e3f0e6;
+  padding: 9px 10px;
+}
+.species-guide > button {
+  display: grid;
+  place-items: center;
+  gap: 3px;
+  align-content: start;
+  padding: 10px;
+}
+.species-guide > button:disabled {
+  opacity: 0.7;
+  cursor: default;
+}
+.species-guide > button:not(:disabled):hover {
+  border-color: #c6dba6;
+  background: #34574c;
+}
+.habitat-reflection {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  box-shadow:
+    inset 10px 0 0 #dcfff014,
+    inset -5px 0 0 #dcfff014;
+  background: linear-gradient(
+    115deg,
+    transparent 35%,
+    #defff010 36%,
+    transparent 55%
+  );
+}
+.spider-empty {
+  padding: 30px;
+  border: 1px dashed #b3ccad55;
+  border-radius: 18px;
+}
+.mailbox-letter > small {
+  letter-spacing: 0.18em;
+  color: #bdd5b6;
+}
+.letter-joke {
+  padding: 24px;
+  background: #cde2b814;
+  border-left: 3px solid #bdd5a2;
+  line-height: 1.9;
+}
+.mailbox-bonus {
+  margin-top: 26px;
+  border-top: 1px solid #cee3b833;
+  padding-top: 18px;
+}
+.world-mini-map button.mini-pond {
+  left: 50%;
+  top: 50%;
+  width: 42px;
+  height: 35px;
+  background: transparent;
+  border: 0;
+  border-radius: 50%;
+  padding: 0;
+}
+.world-mini-map button.mini-pond img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  image-rendering: pixelated;
+  filter: drop-shadow(0 2px 2px #0008);
+}
+.world-in-room ~ .world-room-exit {
+  left: 225px;
+  bottom: 115px;
+}
+.world-mini-map .mini-player[data-room="inside"] {
+  background: #fff1cd;
+  box-shadow:
+    0 0 0 2px #17332d,
+    0 0 6px #fff1cd;
+}
+@keyframes spider-hop {
+  0%,
+  30%,
+  70%,
+  100% {
+    transform: translateY(0) rotate(0);
+  }
+  42% {
+    transform: translateY(-38px) rotate(-7deg);
+  }
+  55% {
+    transform: translateY(0) rotate(0);
+  }
+}
+@media (max-width: 600px) {
+  .world-in-room ~ .world-room-exit {
+    left: 155px;
+    bottom: 160px;
+  }
+  .welcome-orbit {
+    inset: 20% 5%;
+  }
+  .habitat-grid {
+    grid-template-columns: 1fr;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .world-welcome,
+  .welcome-avatar,
+  .welcome-orbit,
+  .habitat-spider {
+    animation: none;
+  }
+}
+
+/* Inventory is the entry point for collections; habitats stay one level inside it. */
+.inventory-folder {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  text-align: left;
+  width: 100%;
+  padding: 22px;
+  border: 1px solid #abc7ad55;
+  border-radius: 20px;
+  background: linear-gradient(135deg, #315550, #1e373b);
+  color: #e8f0dd;
+  cursor: pointer;
+}
+.inventory-folder strong {
+  display: block;
+  font-size: 20px;
+  margin-bottom: 9px;
+}
+.inventory-folder small {
+  display: block;
+  color: #b8cfc4;
+  line-height: 1.7;
+}
+.inventory-folder > span:last-child {
+  margin-left: auto;
+  font-size: 26px;
+}
+.inventory-back {
+  border: 0;
+  background: transparent;
+  color: #c2dbb9;
+  margin-bottom: 15px;
+  padding: 0;
+  cursor: pointer;
+}
+.species-guide {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 24px 0;
+}
+.species-guide > div {
+  flex: 1 1 110px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid #c9dbbf22;
+  border-radius: 12px;
+  padding: 12px;
+  background: #183235;
+}
+.species-guide small {
+  font-size: 11px;
+  color: #b9ccc2;
+}
+/* Unknown entries retain their outline, but reveal no colors until collected. */
+.species-portrait {
+  display: inline-grid;
+  place-items: center;
+  position: relative;
+}
+.species-card[data-discovered="false"] .sprite-pose {
+  filter: brightness(0) invert(0.55);
+  opacity: 0.5;
+}
+.species-lock {
+  position: absolute;
+  color: #c8d7cd;
+  font-size: 18px;
+  font-weight: 700;
+  text-shadow: 0 1px 3px #000;
+  pointer-events: none;
+}
+/* Page controls bound preview decoding without hiding overall completion. */
+.collection-pages {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.collection-pages button:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+.collection-rarity {
+  display: inline-block;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #c1d4c2;
+  margin-bottom: 10px;
+}
+.collection-rarity[data-rarity="Rare"] {
+  color: #f4d083;
+}
+.collection-rarity[data-rarity="Very rare"] {
+  color: #a8d6ff;
+}
+.habitat-spider,
+.is-close .habitat-spider {
+  margin-left: 0;
+  translate: -50% 0;
+}
+.habitat-grid article[data-rarity="Rare"] {
+  border-color: #ceaa5c77;
+}
+.habitat-grid article[data-rarity="Very rare"] {
+  border-color: #81b4ed88;
+}
+
+.inventory-folder + .inventory-folder {
+  margin-top: 18px;
+}
+.aquarium-filter {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin: 18px 0;
+}
+.aquarium-filter select {
+  padding: 8px;
+  background: #193b43;
+  color: #e0eedc;
+  border: 1px solid #b3d3b955;
+  border-radius: 9px;
+}
+.aquarium-tank {
+  width: min(100%, 78dvh);
+  height: auto;
+}
+.aquarium-tank.is-close {
+  width: min(100%, 96dvh);
+  height: auto;
+  cursor: zoom-out;
+}
+.tank-scenery {
+}
+.tank-fish {
+  position: absolute;
+  left: 50%;
+  top: 43%;
+  translate: -50% -50%;
+  animation: fish-swim 8s ease-in-out infinite;
+}
+.tank-fish .collection-sprite {
+  width: clamp(160px, 22vw, 235px);
+}
+.is-close .tank-fish .collection-sprite {
+  width: clamp(190px, 27vw, 290px);
+}
+.tank-bubble {
+  position: absolute;
+  bottom: -15px;
+  right: 20%;
+  width: 7px;
+  height: 7px;
+  border: 1px solid #d2f7ee99;
+  border-radius: 50%;
+  animation: fish-bubble 4s linear infinite;
+}
+.tank-bubble.second {
+  right: 70%;
+  animation-delay: 2s;
+  width: 4px;
+  height: 4px;
+}
+.collection-rarity[data-rarity="Super rare"] {
+  color: #e1b4ff;
+  text-shadow: 0 0 12px #c18beb88;
+}
+.inventory-folder strong {
+  line-height: 1.3;
+}
+@keyframes fish-swim {
+  0%,
+  100% {
+    transform: translateX(-20px);
+  }
+  50% {
+    transform: translateX(20px);
+  }
+}
+@keyframes fish-bubble {
+  to {
+    bottom: 100%;
+    opacity: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .tank-fish,
+  .tank-bubble {
+    animation: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .spider-habitat {
+    height: 340px;
+  }
+  .spider-habitat.is-close {
+    height: 400px;
+  }
+  .aquarium-tank {
+    height: 300px;
+  }
+  .aquarium-tank.is-close {
+    height: 360px;
+  }
+  .habitat-grid article,
+  .aquarium-grid article {
+    padding: 8px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .collection-sprite {
+    animation: none;
+  }
+  .habitat-scenery,
+  .tank-scenery {
+    transition: none;
+  }
+}
+
+/* Bounded groups share one enclosure; scaling and lanes keep residents legible. */
+.habitat-residents {
+  position: absolute;
+  inset: 12% 8% 12%;
+  pointer-events: none;
+}
+.habitat-resident {
+  position: absolute;
+  translate: -50% -50%;
+  scale: var(--resident-scale);
+  transform-origin: center;
+  animation: resident-explore 5s ease-in-out infinite;
+  animation-delay: var(--resident-delay);
+}
+.habitat-resident .collection-sprite {
+  width: clamp(115px, 16dvh, 165px);
+}
+.is-aquatic .collection-sprite {
+  width: clamp(145px, 21vw, 225px);
+}
+.is-close .habitat-resident .collection-sprite {
+  width: clamp(145px, 22dvh, 215px);
+}
+.is-close .is-aquatic .collection-sprite {
+  width: clamp(175px, 25vw, 275px);
+}
+.habitat-resident.is-paused {
+  animation-play-state: paused;
+}
+@keyframes resident-explore {
+  0%,
+  100% {
+    transform: translate(-5px, 2px);
+  }
+  50% {
+    transform: translate(5px, -5px);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .habitat-resident {
+    animation: none;
+  }
+}
+
+.collection-progress {
+  margin: 15px 0 22px;
+  padding: 14px;
+  border: 1px solid #b9d9c333;
+  border-radius: 12px;
+  background: #a6cbb00a;
+}
+.collection-progress > summary {
+  color: #dce8d4;
+  font-weight: 600;
+  cursor: pointer;
+}
+.collection-totals {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px 30px;
+  margin: 20px 0;
+}
+.collection-totals dt {
+  font-size: 12px;
+  font-weight: 400;
+  color: #b3c8c5;
+}
+.collection-totals dd {
+  font-size: 24px;
+  margin: 4px 0;
+}
+.collection-category-progress > div {
+  display: grid;
+  grid-template-columns: minmax(90px, 1fr) 2fr auto;
+  align-items: center;
+  gap: 14px;
+  margin: 10px 0;
+  font-size: 13px;
+}
+.collection-category-progress meter {
+  width: 100%;
+  height: 16px;
+  accent-color: #92b899;
+}
+.collection-category-progress strong {
+  min-width: 55px;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+@media (max-width: 480px) {
+  .collection-category-progress > div {
+    grid-template-columns: 1fr auto;
+  }
+  .collection-category-progress meter {
+    grid-column: 1/-1;
+    grid-row: auto;
+  }
+  .collection-totals {
+    gap: 12px;
+  }
+}
+.field-guide-sections {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin: 20px 0;
+}
+.field-guide-sections button {
+  display: grid;
+  gap: 8px;
+  text-align: left;
+  padding: 16px;
+}
+.field-guide-sections button[aria-pressed="true"] {
+  background: #365748;
+  border-color: #c9dcad;
+}
+.field-guide-sections progress {
+  width: 100%;
+  accent-color: #c9dcad;
+}
+.species-guide .species-card {
+  flex: 1 1 120px;
+  display: grid;
+  place-items: center;
+  gap: 5px;
+  padding: 12px;
+  border: 1px solid #a6c4b538;
+  border-radius: 12px;
+  background: #1b3536;
+  text-align: center;
+}
+@media (max-width: 600px) {
+  .field-guide-sections {
+    grid-template-columns: 1fr;
+  }
+}
+/* Observe failed detailed downloads without displaying a duplicate image. */
+.collection-image-probe {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+.collection-missing {
+  display: grid;
+  place-items: center;
+  width: 100px;
+  height: 100px;
+  color: #d9cda4;
+}
+
+/* Shared waterfowl menu: keep both partners visible without doubling controls. */
+.waterfowl-portraits {
+  display: flex;
+  justify-content: center;
+  align-items: end;
+  gap: 1.5rem;
+}

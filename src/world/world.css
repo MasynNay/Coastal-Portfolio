@@ -1,0 +1,1277 @@
+/* Game-only UI: the website and desktop styles never inherit these rules. */
+.world-mode {
+  position: relative;
+  height: 100dvh;
+  min-height: 540px;
+  overflow: hidden;
+  background: #152e3b;
+  color: #e6e8da;
+  font-family: Arial, sans-serif;
+}
+.world-mode * {
+  box-sizing: border-box;
+}
+.world-mode button,
+.world-mode a {
+  font: inherit;
+}
+.world-mode button {
+  cursor: pointer;
+}
+.world-mode button:focus-visible,
+.world-mode a:focus-visible {
+  outline: 2px solid #e4c692;
+  outline-offset: 3px;
+}
+.world-viewport,
+.world-labels {
+  position: absolute;
+  inset: 0;
+}
+.world-viewport canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  touch-action: none;
+  cursor: crosshair;
+}
+/* Quiet navigation leaves the scene and character as the primary interface. */
+.world-top,
+.world-intro,
+.world-tools,
+.world-bottom,
+.world-room-exit {
+  position: absolute;
+  z-index: 3;
+}
+.world-top {
+  top: 24px;
+  left: 30px;
+  right: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+}
+.world-brand {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  color: #dce3d4;
+  text-decoration: none;
+}
+.world-brand div {
+  font-size: 10px;
+  letter-spacing: 2px;
+  font-weight: 700;
+}
+.world-brand small {
+  display: block;
+  font-size: 7px;
+  letter-spacing: 1.5px;
+  margin-top: 6px;
+}
+.world-top nav {
+  display: flex;
+  padding: 5px;
+  border-radius: 30px;
+  background: #173442ed;
+  border: 1px solid #d1e0d528;
+  font-size: 11px;
+}
+.world-top nav a,
+.world-top nav span {
+  padding: 10px 16px;
+  border-radius: 22px;
+  text-decoration: none;
+  color: #dce5db;
+}
+.world-top nav span {
+  background: #d0d9c5;
+  color: #29463e;
+}
+.world-intro {
+  left: 30px;
+  top: 94px;
+  padding: 8px 12px;
+  border: 1px solid #d4e1d619;
+  border-radius: 25px;
+  background: #112e3bc9;
+  pointer-events: none;
+}
+.world-intro > small,
+.world-intro > p:not(.world-hunt) {
+  display: none;
+}
+.world-intro h1 {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+}
+.world-progress {
+  font-size: 9px;
+  color: #bed0c9;
+}
+.world-progress span {
+  padding: 0 6px;
+}
+.world-hunt {
+  font-size: 10px;
+  color: #e0d5b0;
+  margin: 8px 0 0;
+}
+.world-intro.world-in-room {
+  border-radius: 12px;
+}
+.world-in-room h1 {
+  position: static;
+  width: auto;
+  height: auto;
+  clip-path: none;
+  font-size: 18px;
+  margin: 0 0 8px;
+  text-align: left;
+}
+.world-room-read {
+  pointer-events: auto;
+  background: #d3dcc8;
+  color: #29463e;
+  border: 1px solid #e6efdc;
+  border-radius: 7px;
+  padding: 7px 10px;
+  margin-top: 10px;
+  font-size: 11px !important;
+}
+.world-tools {
+  right: 26px;
+  bottom: 92px;
+  display: flex;
+  gap: 7px;
+}
+.world-tools button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  min-height: 40px;
+  padding: 10px 14px;
+  color: #e6e8da;
+  border: 1px solid #c5d6cb2e;
+  border-radius: 22px;
+  background: #173442ed;
+  font-size: 11px;
+}
+.world-tools button:disabled {
+  opacity: 0.6;
+}
+.world-labels {
+  z-index: 2;
+  pointer-events: none;
+}
+.world-labels button {
+  position: absolute;
+  left: 0;
+  top: 0;
+  pointer-events: auto;
+  background: #183c49eb;
+  color: #efdab5;
+  border: 1px solid #c8ddcd33;
+  font-size: 10px;
+  letter-spacing: 0.03em;
+  padding: 7px 22px 7px 11px;
+  border-radius: 5px;
+  box-shadow: 0 5px 15px #082b3730;
+  white-space: nowrap;
+}
+.world-labels button > span {
+  display: none;
+}
+.world-labels i {
+  position: absolute;
+  right: 8px;
+  top: 6px;
+  font-style: normal;
+}
+.world-bottom {
+  bottom: 24px;
+  left: 30px;
+  right: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 15px;
+}
+.world-mode kbd {
+  font-family: inherit;
+  background: #d5dfd2b8;
+  color: #294d50;
+  padding: 3px 5px;
+  border-radius: 4px;
+  font-size: 9px;
+}
+.world-interact {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  min-width: 215px;
+  background: #173442ed;
+  color: #f1e0bf;
+  border: 1px solid #b7cec530;
+  border-radius: 12px;
+  padding: 13px 20px;
+  font-size: 12px !important;
+}
+.world-interact:disabled {
+  opacity: 0.7;
+  background: #17344280;
+  cursor: default;
+}
+.world-interact:disabled kbd {
+  display: none;
+}
+.world-room-exit {
+  left: 30px;
+  bottom: 128px;
+  color: #e6e8da;
+  border: 1px solid #c5d6cb2e;
+  border-radius: 10px;
+  background: #173442ed;
+  padding: 10px 14px;
+  font-size: 11px;
+}
+.world-toast {
+  position: absolute;
+  left: 50%;
+  top: 92px;
+  transform: translateX(-50%);
+  z-index: 7;
+  border-radius: 22px;
+  background: #173442f5;
+  border: 1px solid #c7d6bf50;
+  padding: 12px 22px;
+  font-size: 12px;
+  max-width: 85%;
+  text-align: center;
+}
+.world-error {
+  position: absolute;
+  z-index: 9;
+  top: 40%;
+  left: 15%;
+  right: 15%;
+  padding: 30px;
+  background: #193f40;
+  border-radius: 20px;
+}
+.world-error a {
+  color: #fff;
+}
+/* React panels freeze input and trap focus; they share the actual website content. */
+.world-scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  background: #1023289c;
+  backdrop-filter: blur(9px);
+  display: grid;
+  place-items: center;
+  padding: 30px;
+}
+.world-dialog {
+  width: min(880px, 100%);
+  max-height: 85dvh;
+  overflow: auto;
+  background: #101d22;
+  color: #d5e0da;
+  border: 1px solid #b6d5c82e;
+  border-radius: 23px;
+  box-shadow: 0 25px 90px #06171780;
+  outline: none;
+}
+.world-dialog > header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 25px 30px;
+  border-bottom: 1px solid #c3e0d51f;
+  position: sticky;
+  top: 0;
+  background: #101d22f5;
+  z-index: 3;
+}
+.world-dialog small {
+  letter-spacing: 1.7px;
+  font-size: 9px;
+  color: #acccbd;
+}
+.world-dialog h2 {
+  font-size: 28px;
+  letter-spacing: -1px;
+  margin: 6px 0 0;
+}
+.world-dialog button {
+  color: #e1e7de;
+  background: #233b3e;
+  border: 1px solid #d9edda30;
+  border-radius: 9px;
+  padding: 10px 16px;
+}
+.world-dialog > header button {
+  font-size: 24px;
+  line-height: 1;
+  padding: 6px 12px;
+}
+.world-dialog-body {
+  padding: 30px;
+  font-size: 14px;
+  line-height: 1.8;
+  text-align: left;
+}
+.world-dialog-body h3 {
+  font-size: 19px;
+  margin: 15px 0;
+}
+.world-dialog-body h4 {
+  font-size: 16px;
+}
+.world-dialog-body p {
+  color: #aebeb8;
+}
+.world-dialog-body a {
+  color: #b9daca;
+  display: inline-block;
+  margin-right: 20px;
+}
+.world-lead {
+  font-size: 18px !important;
+  color: #dce7df !important;
+}
+.world-content-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 15px;
+}
+.world-content-grid article,
+.world-dialog-body > article {
+  padding: 18px;
+  border: 1px solid #b7d3c426;
+  border-radius: 14px;
+  background: #d9f8ea05;
+  margin-bottom: 12px;
+}
+.world-character-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+.world-character-grid button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+.world-character-grid button[aria-pressed="true"] {
+  border-color: #d3c28c;
+  background: #3b5148;
+}
+.world-character-grid img {
+  height: 120px;
+  width: 110px;
+  object-fit: contain;
+}
+.world-answers {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin: 20px 0;
+}
+.world-camera-options {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+.world-game-frame {
+  width: 100%;
+  height: 480px;
+  border: 0;
+  background: #000;
+}
+/* Scoped adaptations preserve the shared resume and contact form in a scrollable room panel. */
+.world-dialog .resume {
+  background: transparent !important;
+  color: #e4ebe5;
+  padding: 0;
+  min-height: 0;
+}
+.world-dialog .resume .container {
+  padding: 0;
+  max-width: none;
+}
+.world-dialog .resume .header-section {
+  margin: 0 0 25px;
+  padding: 0;
+}
+.world-dialog .resume h2 {
+  font-size: 21px;
+}
+.world-dialog .resume .resume-section {
+  border-color: #ffffff20;
+}
+.world-dialog .resume li,
+.world-dialog .resume p {
+  color: #c2d1ca;
+}
+.world-dialog .resume-skill-list li {
+  background: #ffffff0a;
+  border-color: #ffffff20;
+}
+.world-dialog .contact {
+  background: transparent;
+  padding: 0;
+}
+.world-dialog .contact .row > .col-md-6:first-child {
+  display: none;
+}
+.world-dialog .contact .col-md-6 {
+  width: 100%;
+}
+.world-dialog .contact h2 {
+  display: none;
+}
+.world-dialog .contact input,
+.world-dialog .contact textarea {
+  background: #ffffff09;
+  border: 1px solid #ffffff30;
+  color: #fff;
+  text-align: left;
+  font-size: 14px;
+}
+.world-dialog .contact input:focus,
+.world-dialog .contact textarea:focus {
+  background: #ffffff12;
+  color: #fff;
+  outline: 2px solid #b9ceba;
+}
+.world-dialog .contact .contact-description {
+  font-size: 14px;
+  color: #b8cdc3;
+  margin-bottom: 20px;
+}
+@media (max-width: 1000px) {
+  .world-top {
+    left: 20px;
+    right: 20px;
+    top: 20px;
+  }
+  .world-brand div {
+    display: none;
+  }
+  .world-intro {
+    left: 20px;
+    top: 91px;
+  }
+  .world-intro .world-progress {
+    font-size: 8px;
+  }
+  .world-tools {
+    right: 20px;
+    bottom: 90px;
+  }
+  .world-tools button {
+    padding: 10px 12px;
+  }
+  .world-tools button:not(:first-child) span {
+    display: none;
+  }
+}
+@media (max-width: 650px) {
+  .world-scrim {
+    padding: 15px;
+  }
+  .world-dialog-body {
+    padding: 20px;
+  }
+  .world-dialog > header {
+    padding: 20px;
+  }
+  .world-content-grid {
+    grid-template-columns: 1fr;
+  }
+  .world-character-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .world-character-grid img {
+    height: 90px;
+  }
+  .world-game-frame {
+    height: 360px;
+  }
+  .world-dialog h2 {
+    font-size: 23px;
+  }
+  .world-answers {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 550px) {
+  .world-top {
+    top: 15px;
+    left: 15px;
+    right: 12px;
+  }
+  .world-top nav a,
+  .world-top nav span {
+    padding: 9px 10px;
+    font-size: 9px;
+  }
+  .world-tools {
+    top: 80px;
+    bottom: auto;
+    right: 12px;
+    gap: 5px;
+  }
+  .world-tools button {
+    padding: 8px 11px;
+    min-height: 37px;
+  }
+  .world-intro {
+    left: 12px;
+    top: 85px;
+    max-width: 174px;
+    padding: 7px 9px;
+  }
+  .world-intro .world-progress {
+    font-size: 7px;
+  }
+  .world-labels button {
+    font-size: 9px;
+  }
+  .world-interact {
+    font-size: 11px !important;
+    min-width: 185px;
+    padding: 12px 15px;
+  }
+  .world-room-exit {
+    left: 18px;
+    bottom: 132px;
+  }
+  .world-bottom {
+    left: 18px;
+    right: 18px;
+  }
+  .world-toast {
+    top: auto;
+    bottom: 90px;
+    font-size: 10px;
+  }
+}
+@media (pointer: coarse), (max-width: 600px) {
+  .world-bottom {
+    justify-content: flex-end;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .world-mode * {
+    scroll-behavior: auto !important;
+  }
+}
+/* The map is navigable with pointer or keyboard, and every marker uses the town coordinates. */
+.world-map {
+  position: relative;
+  height: 430px;
+  max-width: 700px;
+  margin: auto;
+  border: 5px solid #e9d99a;
+  border-radius: 18px;
+  background: radial-gradient(ellipse, #e4ce97 43%, #85b56d 44%);
+}
+.world-map-pond {
+  position: absolute;
+  left: 35%;
+  top: 37%;
+  width: 30%;
+  height: 26%;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: #68b4c7;
+  color: #164e64;
+  font: bold 12px monospace;
+}
+.world-map > button {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  width: 125px;
+  border: 2px solid #48775c;
+  background: #f3e9c8;
+  border-radius: 8px;
+  padding: 10px;
+  color: #243d36;
+}
+.world-map > button small,
+.world-map > button span {
+  display: none;
+}
+.family-encounter {
+  font-family: monospace;
+  font-size: 18px;
+  background: #e9e4c9;
+  color: #233b43;
+  padding: 20px;
+  border: 5px double #567568;
+  border-radius: 12px;
+}
+.encounter-stage {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background: linear-gradient(#b6dbce, #e6ebbe);
+  border-radius: 40%;
+  padding: 15px;
+}
+.encounter-stage img {
+  height: 180px;
+  image-rendering: pixelated;
+}
+.family-encounter button {
+  padding: 12px 22px;
+  background: #356c66;
+  color: white;
+  border: 2px solid #234a50;
+  border-radius: 8px;
+}
+.world-viewport canvas {
+  image-rendering: pixelated;
+}
+.world-mini-map {
+  position: absolute;
+  z-index: 4;
+  bottom: 24px;
+  left: 24px;
+  width: 210px;
+  height: 216px;
+  border-radius: 14px;
+  overflow: hidden;
+  background: radial-gradient(circle at 45% 40%, #314b49, #172b31 74%);
+  border: 3px solid #80988c;
+  box-shadow:
+    0 0 0 5px #102321dc,
+    0 10px 25px #091a2366,
+    inset 0 1px 10px #0008;
+}
+.world-mini-map button {
+  position: absolute;
+  transform: translate(-50%, -100%);
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  cursor: pointer;
+}
+.world-mini-map button img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 2px #000a);
+}
+.world-mini-map button:hover,
+.world-mini-map button:focus-visible {
+  background: #dfecd523;
+  outline: 2px solid #e8ddbc;
+  outline-offset: 1px;
+}
+.world-mini-map .mini-player {
+  position: absolute;
+  z-index: 3;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #f4dfa4;
+  box-shadow: 0 0 0 2px #17332d;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+.world-mini-map .mini-player[data-mode="surf"] {
+  background: #9ce7eb;
+}
+.world-fish-button {
+  border: 1px solid #b3cfb477;
+  border-radius: 14px;
+  background: #21483fe8;
+  color: #dcebd9;
+  padding: 12px 18px;
+  cursor: pointer;
+}
+@media (max-width: 600px) {
+  .world-mini-map {
+    width: 150px;
+    height: 155px;
+    left: 12px;
+    bottom: 20px;
+  }
+}
+
+/* The selector previews the actual game sheets, including Masyn's persistent outfits. */
+.world-wardrobe > p {
+  color: #b6cdc8;
+  max-width: 65ch;
+  line-height: 1.7;
+}
+.world-wardrobe h3 {
+  font-size: 18px;
+  margin: 28px 0 16px;
+}
+.world-character-grid button {
+  min-height: 140px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.world-character-grid .sprite-pose {
+  flex-shrink: 0;
+}
+.world-sprite-link {
+  display: inline-block;
+  margin-top: 24px;
+  color: #b8d7cb;
+}
+.world-fishing-dialogue {
+  position: absolute;
+  z-index: 15;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(580px, calc(100% - 36px));
+  padding: 22px 28px;
+  color: #203e3d;
+  background: #f4f0dc;
+  border: 4px solid #56786e;
+  outline: 2px solid #e8dfc3;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px #102f3b40;
+  pointer-events: none;
+}
+.world-fishing-dialogue span {
+  display: block;
+  font-size: 23px;
+  letter-spacing: 0.1em;
+  font-weight: 700;
+}
+.world-fishing-dialogue small {
+  display: block;
+  margin-top: 8px;
+  color: #62736b;
+}
+.world-fishing-fade {
+  position: absolute;
+  inset: 0;
+  z-index: 25;
+  background: #102629;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 320ms ease;
+}
+.world-fishing-fade.is-visible {
+  opacity: 1;
+}
+.fishing-result-icon {
+  display: block;
+  font-size: 64px;
+  margin: 10px 0 20px;
+}
+.fishing-result p {
+  line-height: 1.8;
+  max-width: 46ch;
+  margin: 0 auto 24px;
+}
+
+.family-encounter p {
+  color: #344e48;
+}
+.fishing-result {
+  text-align: center;
+}
+.fishing-result .world-camera-options {
+  justify-content: center;
+}
+.fishing-result-icon.has-fish {
+  width: 90px;
+  height: 70px;
+  margin: 10px auto 20px;
+  background-position: 0 0;
+  background-size: 360px 560px;
+  background-repeat: no-repeat;
+  image-rendering: pixelated;
+}
+
+/* Keep the lowered minimap clear of touch controls and narrow-screen prompts. */
+@media (max-width: 600px) {
+  .world-bottom {
+    left: 160px;
+    right: 12px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 8px;
+  }
+  .world-interact {
+    min-width: 0;
+    width: 100%;
+    padding: 10px 9px;
+    font-size: 10px !important;
+  }
+  .world-fish-button {
+    padding: 8px 14px;
+  }
+}
+
+.mini-terrain {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+.world-mini-map .mini-pond {
+  transform: translate(-50%, -50%);
+}
+
+@media (max-width: 600px) {
+  .world-progress {
+    max-width: 140px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
+/* Touch HUD: action names stay visible, thumbs get real hit areas, and safe-area
+   insets keep controls clear of phone notches and the home indicator. */
+.world-tools .world-map-toggle {
+  display: none;
+}
+.world-ability-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 11px 16px;
+  border: 1px solid #b3cfb477;
+  border-radius: 12px;
+  background: #21483fed;
+  color: #e6efdf;
+}
+.world-mode button {
+  touch-action: manipulation;
+}
+@media (any-pointer: coarse), (max-width: 1024px) {
+  .world-mode {
+    min-height: 0;
+  }
+  .world-top {
+    top: max(12px, env(safe-area-inset-top));
+    left: max(12px, env(safe-area-inset-left));
+    right: max(12px, env(safe-area-inset-right));
+  }
+  .world-top nav a,
+  .world-top nav span {
+    min-height: 44px;
+    display: grid;
+    place-items: center;
+  }
+  .world-tools {
+    top: calc(max(12px, env(safe-area-inset-top)) + 62px);
+    bottom: auto;
+    right: max(12px, env(safe-area-inset-right));
+    gap: 6px;
+  }
+  .world-tools button {
+    min-width: 44px;
+    min-height: 44px;
+    padding: 10px;
+  }
+  .world-tools button span {
+    display: none;
+  }
+  .world-tools .world-map-toggle {
+    display: flex;
+  }
+  .world-intro {
+    top: calc(max(12px, env(safe-area-inset-top)) + 118px);
+    left: max(12px, env(safe-area-inset-left));
+    max-width: 190px;
+  }
+  .world-in-room h1 {
+    font-size: 15px;
+    margin-bottom: 3px;
+  }
+  .world-room-read {
+    min-height: 44px;
+    margin-top: 4px;
+  }
+  /* Touch screens open the same map from the toolbar, keeping the scene clear. */
+  .world-hud > .world-mini-map {
+    display: none;
+  }
+  .world-bottom {
+    left: max(12px, env(safe-area-inset-left));
+    right: max(12px, env(safe-area-inset-right));
+    bottom: calc(16px + env(safe-area-inset-bottom));
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+  .world-bottom button {
+    width: 100%;
+    max-width: 250px;
+    align-self: flex-end;
+    min-width: 0;
+    min-height: 44px;
+    padding: 10px 12px;
+    font-size: 12px !important;
+  }
+  .world-mode kbd {
+    display: none;
+  }
+  .world-room-exit {
+    left: auto;
+    right: max(12px, env(safe-area-inset-right));
+    bottom: calc(210px + env(safe-area-inset-bottom));
+    min-height: 44px;
+  }
+  .world-toast {
+    top: auto;
+    bottom: calc(230px + env(safe-area-inset-bottom));
+    max-width: min(440px, 90%);
+  }
+  .world-scrim {
+    padding: max(12px, env(safe-area-inset-top))
+      max(12px, env(safe-area-inset-right))
+      max(12px, env(safe-area-inset-bottom))
+      max(12px, env(safe-area-inset-left));
+    backdrop-filter: none;
+    background: #102328dc;
+  }
+  .world-dialog {
+    max-height: calc(
+      100dvh - 28px - env(safe-area-inset-top) - env(safe-area-inset-bottom)
+    );
+  }
+  .world-dialog button,
+  .world-dialog > header button {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  .world-dialog input,
+  .world-dialog select,
+  .world-dialog textarea {
+    font-size: 16px !important;
+  }
+}
+@media (max-width: 380px) {
+  .world-top nav a,
+  .world-top nav span {
+    padding: 9px 8px;
+  }
+  .world-mini-map {
+    width: 136px;
+    height: 140px;
+  }
+}
+@media (max-height: 540px) and (orientation: landscape) {
+  .world-mini-map {
+    width: 128px;
+    height: 128px;
+    bottom: calc(12px + env(safe-area-inset-bottom));
+  }
+  .world-intro:not(.world-in-room) {
+    display: none;
+  }
+  .world-bottom {
+    left: max(12px, env(safe-area-inset-left));
+    bottom: calc(12px + env(safe-area-inset-bottom));
+    gap: 5px;
+  }
+  .world-bottom button {
+    min-height: 44px;
+    padding: 7px 12px;
+  }
+  .world-room-exit {
+    bottom: 165px;
+  }
+  .world-welcome h1 {
+    font-size: 36px;
+    margin: 12px 0 0;
+  }
+  .world-welcome .welcome-avatar {
+    transform: scale(0.7);
+    height: 78px;
+  }
+  .world-welcome p {
+    margin: 4px 0;
+    font-size: 12px;
+  }
+  .world-welcome button {
+    padding: 9px 18px;
+    margin-top: 5px;
+  }
+}
+
+/* Rental markers share the map's exact world coordinates and stay touchable. */
+.world-mini-map .mini-ride {
+  width: clamp(12px, 9%, 16px);
+  height: auto;
+  aspect-ratio: 1;
+  min-width: 0;
+  min-height: 0;
+  padding: 0;
+  z-index: 4;
+  border: 1px solid #dfdfbcaa;
+  background: #173f50ed;
+  border-radius: 4px;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 2px 6px #09282d66;
+}
+.world-mini-map .mini-ride img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.world-mini-map .mini-ride:disabled {
+  opacity: 0.5;
+}
+
+/* The automatic race owns the camera and replaces movement controls with a
+   small announcement. Its leave button still uses the normal touch/E action. */
+.world-mode.is-racing .world-hud > .world-mini-map,
+.world-mode.is-racing .world-intro {
+  /* These describe the island; the race takes place beyond its map bounds. */
+  display: none;
+}
+.world-race-status {
+  position: absolute;
+  top: 100px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 4;
+  display: grid;
+  gap: 5px;
+  width: max-content;
+  max-width: calc(100% - 32px);
+  padding: 14px 24px;
+  text-align: center;
+  color: #eff1db;
+  background: #173a42ed;
+  border: 1px solid #d7dfaf77;
+  border-radius: 18px;
+  pointer-events: none;
+}
+.world-race-status small {
+  letter-spacing: 0.2em;
+  font-size: 10px;
+}
+.world-race-status strong {
+  font-size: clamp(22px, 4vw, 34px);
+}
+.world-race-status span {
+  font-size: 12px;
+}
+/* Results reuse the game's accessible, focus-trapped dialog and real surf art. */
+.world-race-result {
+  text-align: center;
+}
+/* The crown sits above the head inside the real mounted winner portrait. */
+.world-race-winner {
+  display: inline-block;
+  position: relative;
+}
+.world-winner-crown {
+  position: absolute;
+  width: 38px;
+  height: 28px;
+  top: 12%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+  filter: drop-shadow(0 2px 3px #173d4577);
+}
+.world-race-result ol {
+  width: max-content;
+  margin: 12px auto 24px;
+  text-align: left;
+}
+.world-race-result button {
+  margin: 4px;
+}
+@media (max-height: 500px) {
+  .world-race-status {
+    top: 72px;
+    padding: 7px 16px;
+  }
+  .world-race-status span {
+    display: none;
+  }
+}
+
+/* The popup reuses the HUD map's projection at a readable, scrollable size.
+   Only its marker buttons override dialog-wide target sizes, preserving exact
+   locations and preventing nearby boat/jet-ski markers from overlapping. */
+.world-map-panel .world-dialog-body {
+  padding: 16px;
+}
+.world-map-panel .world-mini-map {
+  position: relative;
+  inset: auto;
+  width: min(100%, 420px);
+  height: auto;
+  aspect-ratio: 66 / 68;
+  margin: 20px auto;
+}
+.world-map-panel .world-mini-map button {
+  min-width: 0;
+  min-height: 0;
+  padding: 0;
+}
+.world-map-panel .world-mini-map .mini-ride {
+  width: clamp(24px, 9%, 32px);
+}
+.world-map-note {
+  color: #bdd1c7;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+/* The HUD badge opens the discovery journal without occupying the walking
+   canvas. Its contents use normal document flow inside the accessible dialog. */
+button.world-progress {
+  cursor: pointer;
+  border: 1px solid #bdd5cf38;
+  background: #183c45e8;
+  border-radius: 24px;
+  padding: 9px 13px;
+  text-align: left;
+  pointer-events: auto;
+}
+button.world-progress:hover {
+  background: #295761;
+}
+button.world-progress:focus-visible {
+  outline: 2px solid #e5ddb2;
+  outline-offset: 3px;
+}
+.journal-places,
+.journal-secrets {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+}
+.journal-places {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.journal-places li,
+.journal-secrets li {
+  padding: 14px;
+  border: 1px solid #a8c6bc30;
+  border-radius: 12px;
+  background: #b8cbb209;
+}
+.journal-places span,
+.journal-secrets small {
+  display: block;
+  color: #b6c8c3;
+  margin-top: 5px;
+  font-size: 12px;
+}
+.journal-secrets li[data-found="true"] {
+  border-color: #abd4ab6b;
+}
+.journal-secrets p {
+  margin: 8px 0 0;
+  font-size: 13px;
+}
+.journal-floats {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 8px;
+  margin: 16px 0 24px;
+}
+.journal-floats > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 12px 2px;
+  border: 1px solid #a8c6bc30;
+  border-radius: 12px;
+}
+.journal-floats span:not(.sprite-pose) {
+  font-size: 12px;
+  margin-top: 6px;
+}
+.journal-floats small {
+  color: #bbcec3;
+  font-size: 10px;
+}
+.journal-floats [data-found="false"] .sprite-pose {
+  filter: grayscale(1);
+  opacity: 0.4;
+}
+@media (max-width: 600px) {
+  .journal-floats {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+  .journal-places {
+    grid-template-columns: 1fr;
+  }
+  .world-intro button.world-progress {
+    font-size: 10px;
+    min-height: 44px;
+    white-space: normal;
+    line-height: 1.5;
+  }
+}
+
+/* The lodge's float story connects the island activity to family memories and
+   the real coastal tradition; source links stay readable on small screens. */
+.float-story {
+  display: grid;
+  grid-template-columns: 90px minmax(0, 1fr);
+  gap: 20px;
+  align-items: start;
+  padding: 22px;
+  margin: 18px 0 22px;
+  border: 1px solid #a9d9ca40;
+  border-radius: 18px;
+  background: linear-gradient(135deg, #285b514d, #10343c66);
+}
+.float-story h4 {
+  margin: 0 0 12px;
+  font-size: 17px;
+}
+.float-story p {
+  font-size: 13px;
+  line-height: 1.8;
+}
+.float-story-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+  font-size: 12px;
+}
+@media (max-width: 550px) {
+  .float-story {
+    grid-template-columns: 1fr;
+    padding: 18px;
+  }
+  .float-story > .sprite-pose {
+    justify-self: center;
+  }
+}

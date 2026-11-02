@@ -1,0 +1,1174 @@
+[
+  {
+    "key": "WalkSouth",
+    "rows": [
+      {
+        "asset": "masyn",
+        "row": 0
+      },
+      {
+        "asset": "mi-shell",
+        "row": 0
+      },
+      {
+        "asset": "ezra",
+        "row": 0
+      },
+      {
+        "asset": "fallyn",
+        "row": 0
+      },
+      {
+        "asset": "fitzgerald",
+        "row": 0
+      },
+      {
+        "asset": "costume-skills",
+        "row": 0
+      },
+      {
+        "asset": "costume-portfolio",
+        "row": 0
+      },
+      {
+        "asset": "costume-resume",
+        "row": 0
+      },
+      {
+        "asset": "costume-contact",
+        "row": 0
+      },
+      {
+        "asset": "costume-airbender",
+        "row": 0
+      },
+      {
+        "asset": "costume-ezra-spider",
+        "row": 0
+      },
+      {
+        "asset": "costume-fallyn-ladybug",
+        "row": 0
+      },
+      {
+        "asset": "costume-fitzgerald-spider",
+        "row": 0
+      }
+    ],
+    "reference": "/home/lotus/Projects/masynnay.com/docs/source-assets/animation/references/WalkSouth.png",
+    "prompt": "Use case: identity-preserve. Production game animation IN-BETWEEN atlas. The input is an exact numbered-by-position atlas of existing key poses. Preserve every row's detailed original character, face, body proportions, clothing, hair, textures, props, mounts and facing direction. Do not simplify or redesign, no enlarged chibi heads. Create exactly FOUR COLUMNS and 13 ROWS of NEW intermediate animation frames. Within EACH ROW: output column1 is a new pose halfway between input columns1 and2; output column2 halfway between input2 and3; output column3 halfway between input3 and4; output column4 halfway between input4 and1 to complete the loop. These are newly drawn intermediate limb/motion poses, not copies, crossfades, ghost images or blurry morphs. Each output row belongs to the same input row. Walking: natural heel/toe transitions and arm swings; running: bent elbows, clear airborne stride transitions; mounted activities: rider stays seated, mount motion remains smooth; fishing/casting: rods and hands move gradually; other actions preserve their supplied sequence and costume. Feet/body anchors and visual scale stay stable; move only the parts that animate. Every frame in a directional row must keep the given facing, especially back-left (up-left, NOT up-right). For the one-row turn/call actions only, preserve their gradual changing heading as supplied. Row identities top to bottom:\n1. masyn: SOUTH front; walk action. Exact same person, costume, mount and props as this reference row.\n2. mi-shell: SOUTH front; walk action. Exact same person, costume, mount and props as this reference row.\n3. ezra: SOUTH front; walk action. Exact same person, costume, mount and props as this reference row.\n4. fallyn: SOUTH front; walk action. Exact same person, costume, mount and props as this reference row.\n5. fitzgerald: SOUTH front; walk action. Exact same person, costume, mount and props as this reference row.\n6. costume-skills: SOUTH front; walk action. Exact same person, costume, mount and props as this reference row.\n7. costume-portfolio: SOUTH front; walk action. Exact same person, costume, mount and props as this reference row.\n8. costume-resume: SOUTH front; walk action. Exact same person, costume, mount and props as this reference row.\n9. costume-contact: SOUTH front; walk action. Exact same person, costume, mount and props as this reference row.\n10. costume-airbender: SOUTH front; walk action. Exact same person, costume, mount and props as this reference row.\n11. costume-ezra-spider: SOUTH front; walk action. Exact same person, costume, mount and props as this reference row.\n12. costume-fallyn-ladybug: SOUTH front; walk action. Exact same person, costume, mount and props as this reference row.\n13. costume-fitzgerald-spider: SOUTH front; walk action. Exact same person, costume, mount and props as this reference row.\nFull-body clean polished shaded pixel art, restrained outlines and rich material detail matching the input. Even spacing, generous empty margins, no clipped hair, wings, rods or limbs. Genuine transparent background, no text, labels, grids, scenery, floor shadows, particles or detached debris. Tall atlas 1536x3072, with exactly the requested rows and four columns."
+  },
+  {
+    "key": "WalkSouthwest",
+    "rows": [
+      {
+        "asset": "masyn",
+        "row": 1
+      },
+      {
+        "asset": "mi-shell",
+        "row": 1
+      },
+      {
+        "asset": "ezra",
+        "row": 1
+      },
+      {
+        "asset": "fallyn",
+        "row": 1
+      },
+      {
+        "asset": "fitzgerald",
+        "row": 1
+      },
+      {
+        "asset": "costume-skills",
+        "row": 1
+      },
+      {
+        "asset": "costume-portfolio",
+        "row": 1
+      },
+      {
+        "asset": "costume-resume",
+        "row": 1
+      },
+      {
+        "asset": "costume-contact",
+        "row": 1
+      },
+      {
+        "asset": "costume-airbender",
+        "row": 1
+      },
+      {
+        "asset": "costume-ezra-spider",
+        "row": 1
+      },
+      {
+        "asset": "costume-fallyn-ladybug",
+        "row": 1
+      },
+      {
+        "asset": "costume-fitzgerald-spider",
+        "row": 1
+      }
+    ],
+    "reference": "/home/lotus/Projects/masynnay.com/docs/source-assets/animation/references/WalkSouthwest.png",
+    "prompt": "Use case: identity-preserve. Production game animation IN-BETWEEN atlas. The input is an exact numbered-by-position atlas of existing key poses. Preserve every row's detailed original character, face, body proportions, clothing, hair, textures, props, mounts and facing direction. Do not simplify or redesign, no enlarged chibi heads. Create exactly FOUR COLUMNS and 13 ROWS of NEW intermediate animation frames. Within EACH ROW: output column1 is a new pose halfway between input columns1 and2; output column2 halfway between input2 and3; output column3 halfway between input3 and4; output column4 halfway between input4 and1 to complete the loop. These are newly drawn intermediate limb/motion poses, not copies, crossfades, ghost images or blurry morphs. Each output row belongs to the same input row. Walking: natural heel/toe transitions and arm swings; running: bent elbows, clear airborne stride transitions; mounted activities: rider stays seated, mount motion remains smooth; fishing/casting: rods and hands move gradually; other actions preserve their supplied sequence and costume. Feet/body anchors and visual scale stay stable; move only the parts that animate. Every frame in a directional row must keep the given facing, especially back-left (up-left, NOT up-right). For the one-row turn/call actions only, preserve their gradual changing heading as supplied. Row identities top to bottom:\n1. masyn: SOUTHWEST down-left; walk action. Exact same person, costume, mount and props as this reference row.\n2. mi-shell: SOUTHWEST down-left; walk action. Exact same person, costume, mount and props as this reference row.\n3. ezra: SOUTHWEST down-left; walk action. Exact same person, costume, mount and props as this reference row.\n4. fallyn: SOUTHWEST down-left; walk action. Exact same person, costume, mount and props as this reference row.\n5. fitzgerald: SOUTHWEST down-left; walk action. Exact same person, costume, mount and props as this reference row.\n6. costume-skills: SOUTHWEST down-left; walk action. Exact same person, costume, mount and props as this reference row.\n7. costume-portfolio: SOUTHWEST down-left; walk action. Exact same person, costume, mount and props as this reference row.\n8. costume-resume: SOUTHWEST down-left; walk action. Exact same person, costume, mount and props as this reference row.\n9. costume-contact: SOUTHWEST down-left; walk action. Exact same person, costume, mount and props as this reference row.\n10. costume-airbender: SOUTHWEST down-left; walk action. Exact same person, costume, mount and props as this reference row.\n11. costume-ezra-spider: SOUTHWEST down-left; walk action. Exact same person, costume, mount and props as this reference row.\n12. costume-fallyn-ladybug: SOUTHWEST down-left; walk action. Exact same person, costume, mount and props as this reference row.\n13. costume-fitzgerald-spider: SOUTHWEST down-left; walk action. Exact same person, costume, mount and props as this reference row.\nFull-body clean polished shaded pixel art, restrained outlines and rich material detail matching the input. Even spacing, generous empty margins, no clipped hair, wings, rods or limbs. Genuine transparent background, no text, labels, grids, scenery, floor shadows, particles or detached debris. Tall atlas 1536x3072, with exactly the requested rows and four columns."
+  },
+  {
+    "key": "WalkWest",
+    "rows": [
+      {
+        "asset": "masyn",
+        "row": 2
+      },
+      {
+        "asset": "mi-shell",
+        "row": 2
+      },
+      {
+        "asset": "ezra",
+        "row": 2
+      },
+      {
+        "asset": "fallyn",
+        "row": 2
+      },
+      {
+        "asset": "fitzgerald",
+        "row": 2
+      },
+      {
+        "asset": "costume-skills",
+        "row": 2
+      },
+      {
+        "asset": "costume-portfolio",
+        "row": 2
+      },
+      {
+        "asset": "costume-resume",
+        "row": 2
+      },
+      {
+        "asset": "costume-contact",
+        "row": 2
+      },
+      {
+        "asset": "costume-airbender",
+        "row": 2
+      },
+      {
+        "asset": "costume-ezra-spider",
+        "row": 2
+      },
+      {
+        "asset": "costume-fallyn-ladybug",
+        "row": 2
+      },
+      {
+        "asset": "costume-fitzgerald-spider",
+        "row": 2
+      }
+    ],
+    "reference": "/home/lotus/Projects/masynnay.com/docs/source-assets/animation/references/WalkWest.png",
+    "prompt": "Use case: identity-preserve. Production game animation IN-BETWEEN atlas. The input is an exact numbered-by-position atlas of existing key poses. Preserve every row's detailed original character, face, body proportions, clothing, hair, textures, props, mounts and facing direction. Do not simplify or redesign, no enlarged chibi heads. Create exactly FOUR COLUMNS and 13 ROWS of NEW intermediate animation frames. Within EACH ROW: output column1 is a new pose halfway between input columns1 and2; output column2 halfway between input2 and3; output column3 halfway between input3 and4; output column4 halfway between input4 and1 to complete the loop. These are newly drawn intermediate limb/motion poses, not copies, crossfades, ghost images or blurry morphs. Each output row belongs to the same input row. Walking: natural heel/toe transitions and arm swings; running: bent elbows, clear airborne stride transitions; mounted activities: rider stays seated, mount motion remains smooth; fishing/casting: rods and hands move gradually; other actions preserve their supplied sequence and costume. Feet/body anchors and visual scale stay stable; move only the parts that animate. Every frame in a directional row must keep the given facing, especially back-left (up-left, NOT up-right). For the one-row turn/call actions only, preserve their gradual changing heading as supplied. Row identities top to bottom:\n1. masyn: WEST left profile; walk action. Exact same person, costume, mount and props as this reference row.\n2. mi-shell: WEST left profile; walk action. Exact same person, costume, mount and props as this reference row.\n3. ezra: WEST left profile; walk action. Exact same person, costume, mount and props as this reference row.\n4. fallyn: WEST left profile; walk action. Exact same person, costume, mount and props as this reference row.\n5. fitzgerald: WEST left profile; walk action. Exact same person, costume, mount and props as this reference row.\n6. costume-skills: WEST left profile; walk action. Exact same person, costume, mount and props as this reference row.\n7. costume-portfolio: WEST left profile; walk action. Exact same person, costume, mount and props as this reference row.\n8. costume-resume: WEST left profile; walk action. Exact same person, costume, mount and props as this reference row.\n9. costume-contact: WEST left profile; walk action. Exact same person, costume, mount and props as this reference row.\n10. costume-airbender: WEST left profile; walk action. Exact same person, costume, mount and props as this reference row.\n11. costume-ezra-spider: WEST left profile; walk action. Exact same person, costume, mount and props as this reference row.\n12. costume-fallyn-ladybug: WEST left profile; walk action. Exact same person, costume, mount and props as this reference row.\n13. costume-fitzgerald-spider: WEST left profile; walk action. Exact same person, costume, mount and props as this reference row.\nFull-body clean polished shaded pixel art, restrained outlines and rich material detail matching the input. Even spacing, generous empty margins, no clipped hair, wings, rods or limbs. Genuine transparent background, no text, labels, grids, scenery, floor shadows, particles or detached debris. Tall atlas 1536x3072, with exactly the requested rows and four columns."
+  },
+  {
+    "key": "WalkNorthwest",
+    "rows": [
+      {
+        "asset": "masyn",
+        "row": 3
+      },
+      {
+        "asset": "mi-shell",
+        "row": 3
+      },
+      {
+        "asset": "ezra",
+        "row": 3
+      },
+      {
+        "asset": "fallyn",
+        "row": 3
+      },
+      {
+        "asset": "fitzgerald",
+        "row": 3
+      },
+      {
+        "asset": "costume-skills",
+        "row": 3
+      },
+      {
+        "asset": "costume-portfolio",
+        "row": 3
+      },
+      {
+        "asset": "costume-resume",
+        "row": 3
+      },
+      {
+        "asset": "costume-contact",
+        "row": 3
+      },
+      {
+        "asset": "costume-airbender",
+        "row": 3
+      },
+      {
+        "asset": "costume-ezra-spider",
+        "row": 3
+      },
+      {
+        "asset": "costume-fallyn-ladybug",
+        "row": 3
+      },
+      {
+        "asset": "costume-fitzgerald-spider",
+        "row": 3
+      }
+    ],
+    "reference": "/home/lotus/Projects/masynnay.com/docs/source-assets/animation/references/WalkNorthwest.png",
+    "prompt": "Use case: identity-preserve. Production game animation IN-BETWEEN atlas. The input is an exact numbered-by-position atlas of existing key poses. Preserve every row's detailed original character, face, body proportions, clothing, hair, textures, props, mounts and facing direction. Do not simplify or redesign, no enlarged chibi heads. Create exactly FOUR COLUMNS and 13 ROWS of NEW intermediate animation frames. Within EACH ROW: output column1 is a new pose halfway between input columns1 and2; output column2 halfway between input2 and3; output column3 halfway between input3 and4; output column4 halfway between input4 and1 to complete the loop. These are newly drawn intermediate limb/motion poses, not copies, crossfades, ghost images or blurry morphs. Each output row belongs to the same input row. Walking: natural heel/toe transitions and arm swings; running: bent elbows, clear airborne stride transitions; mounted activities: rider stays seated, mount motion remains smooth; fishing/casting: rods and hands move gradually; other actions preserve their supplied sequence and costume. Feet/body anchors and visual scale stay stable; move only the parts that animate. Every frame in a directional row must keep the given facing, especially back-left (up-left, NOT up-right). For the one-row turn/call actions only, preserve their gradual changing heading as supplied. Row identities top to bottom:\n1. masyn: NORTHWEST up-left back view; walk action. Exact same person, costume, mount and props as this reference row.\n2. mi-shell: NORTHWEST up-left back view; walk action. Exact same person, costume, mount and props as this reference row.\n3. ezra: NORTHWEST up-left back view; walk action. Exact same person, costume, mount and props as this reference row.\n4. fallyn: NORTHWEST up-left back view; walk action. Exact same person, costume, mount and props as this reference row.\n5. fitzgerald: NORTHWEST up-left back view; walk action. Exact same person, costume, mount and props as this reference row.\n6. costume-skills: NORTHWEST up-left back view; walk action. Exact same person, costume, mount and props as this reference row.\n7. costume-portfolio: NORTHWEST up-left back view; walk action. Exact same person, costume, mount and props as this reference row.\n8. costume-resume: NORTHWEST up-left back view; walk action. Exact same person, costume, mount and props as this reference row.\n9. costume-contact: NORTHWEST up-left back view; walk action. Exact same person, costume, mount and props as this reference row.\n10. costume-airbender: NORTHWEST up-left back view; walk action. Exact same person, costume, mount and props as this reference row.\n11. costume-ezra-spider: NORTHWEST up-left back view; walk action. Exact same person, costume, mount and props as this reference row.\n12. costume-fallyn-ladybug: NORTHWEST up-left back view; walk action. Exact same person, costume, mount and props as this reference row.\n13. costume-fitzgerald-spider: NORTHWEST up-left back view; walk action. Exact same person, costume, mount and props as this reference row.\nFull-body clean polished shaded pixel art, restrained outlines and rich material detail matching the input. Even spacing, generous empty margins, no clipped hair, wings, rods or limbs. Genuine transparent background, no text, labels, grids, scenery, floor shadows, particles or detached debris. Tall atlas 1536x3072, with exactly the requested rows and four columns."
+  },
+  {
+    "key": "WalkNorth",
+    "rows": [
+      {
+        "asset": "masyn",
+        "row": 4
+      },
+      {
+        "asset": "mi-shell",
+        "row": 4
+      },
+      {
+        "asset": "ezra",
+        "row": 4
+      },
+      {
+        "asset": "fallyn",
+        "row": 4
+      },
+      {
+        "asset": "fitzgerald",
+        "row": 4
+      },
+      {
+        "asset": "costume-skills",
+        "row": 4
+      },
+      {
+        "asset": "costume-portfolio",
+        "row": 4
+      },
+      {
+        "asset": "costume-resume",
+        "row": 4
+      },
+      {
+        "asset": "costume-contact",
+        "row": 4
+      },
+      {
+        "asset": "costume-airbender",
+        "row": 4
+      },
+      {
+        "asset": "costume-ezra-spider",
+        "row": 4
+      },
+      {
+        "asset": "costume-fallyn-ladybug",
+        "row": 4
+      },
+      {
+        "asset": "costume-fitzgerald-spider",
+        "row": 4
+      }
+    ],
+    "reference": "/home/lotus/Projects/masynnay.com/docs/source-assets/animation/references/WalkNorth.png",
+    "prompt": "Use case: identity-preserve. Production game animation IN-BETWEEN atlas. The input is an exact numbered-by-position atlas of existing key poses. Preserve every row's detailed original character, face, body proportions, clothing, hair, textures, props, mounts and facing direction. Do not simplify or redesign, no enlarged chibi heads. Create exactly FOUR COLUMNS and 13 ROWS of NEW intermediate animation frames. Within EACH ROW: output column1 is a new pose halfway between input columns1 and2; output column2 halfway between input2 and3; output column3 halfway between input3 and4; output column4 halfway between input4 and1 to complete the loop. These are newly drawn intermediate limb/motion poses, not copies, crossfades, ghost images or blurry morphs. Each output row belongs to the same input row. Walking: natural heel/toe transitions and arm swings; running: bent elbows, clear airborne stride transitions; mounted activities: rider stays seated, mount motion remains smooth; fishing/casting: rods and hands move gradually; other actions preserve their supplied sequence and costume. Feet/body anchors and visual scale stay stable; move only the parts that animate. Every frame in a directional row must keep the given facing, especially back-left (up-left, NOT up-right). For the one-row turn/call actions only, preserve their gradual changing heading as supplied. Row identities top to bottom:\n1. masyn: NORTH back view; walk action. Exact same person, costume, mount and props as this reference row.\n2. mi-shell: NORTH back view; walk action. Exact same person, costume, mount and props as this reference row.\n3. ezra: NORTH back view; walk action. Exact same person, costume, mount and props as this reference row.\n4. fallyn: NORTH back view; walk action. Exact same person, costume, mount and props as this reference row.\n5. fitzgerald: NORTH back view; walk action. Exact same person, costume, mount and props as this reference row.\n6. costume-skills: NORTH back view; walk action. Exact same person, costume, mount and props as this reference row.\n7. costume-portfolio: NORTH back view; walk action. Exact same person, costume, mount and props as this reference row.\n8. costume-resume: NORTH back view; walk action. Exact same person, costume, mount and props as this reference row.\n9. costume-contact: NORTH back view; walk action. Exact same person, costume, mount and props as this reference row.\n10. costume-airbender: NORTH back view; walk action. Exact same person, costume, mount and props as this reference row.\n11. costume-ezra-spider: NORTH back view; walk action. Exact same person, costume, mount and props as this reference row.\n12. costume-fallyn-ladybug: NORTH back view; walk action. Exact same person, costume, mount and props as this reference row.\n13. costume-fitzgerald-spider: NORTH back view; walk action. Exact same person, costume, mount and props as this reference row.\nFull-body clean polished shaded pixel art, restrained outlines and rich material detail matching the input. Even spacing, generous empty margins, no clipped hair, wings, rods or limbs. Genuine transparent background, no text, labels, grids, scenery, floor shadows, particles or detached debris. Tall atlas 1536x3072, with exactly the requested rows and four columns."
+  },
+  {
+    "key": "RunSouth",
+    "rows": [
+      {
+        "asset": "masyn-run",
+        "row": 0
+      },
+      {
+        "asset": "mi-shell-run",
+        "row": 0
+      },
+      {
+        "asset": "ezra-run",
+        "row": 0
+      },
+      {
+        "asset": "fallyn-run",
+        "row": 0
+      },
+      {
+        "asset": "fitzgerald-run",
+        "row": 0
+      },
+      {
+        "asset": "costume-skills-run",
+        "row": 0
+      },
+      {
+        "asset": "costume-portfolio-run",
+        "row": 0
+      },
+      {
+        "asset": "costume-resume-run",
+        "row": 0
+      },
+      {
+        "asset": "costume-contact-run",
+        "row": 0
+      },
+      {
+        "asset": "costume-airbender-run",
+        "row": 0
+      },
+      {
+        "asset": "costume-ezra-spider-run",
+        "row": 0
+      },
+      {
+        "asset": "costume-fallyn-ladybug-run",
+        "row": 0
+      },
+      {
+        "asset": "costume-fitzgerald-spider-run",
+        "row": 0
+      }
+    ],
+    "reference": "/home/lotus/Projects/masynnay.com/docs/source-assets/animation/references/RunSouth.png",
+    "prompt": "Use case: identity-preserve. Production game animation IN-BETWEEN atlas. The input is an exact numbered-by-position atlas of existing key poses. Preserve every row's detailed original character, face, body proportions, clothing, hair, textures, props, mounts and facing direction. Do not simplify or redesign, no enlarged chibi heads. Create exactly FOUR COLUMNS and 13 ROWS of NEW intermediate animation frames. Within EACH ROW: output column1 is a new pose halfway between input columns1 and2; output column2 halfway between input2 and3; output column3 halfway between input3 and4; output column4 halfway between input4 and1 to complete the loop. These are newly drawn intermediate limb/motion poses, not copies, crossfades, ghost images or blurry morphs. Each output row belongs to the same input row. Walking: natural heel/toe transitions and arm swings; running: bent elbows, clear airborne stride transitions; mounted activities: rider stays seated, mount motion remains smooth; fishing/casting: rods and hands move gradually; other actions preserve their supplied sequence and costume. Feet/body anchors and visual scale stay stable; move only the parts that animate. Every frame in a directional row must keep the given facing, especially back-left (up-left, NOT up-right). For the one-row turn/call actions only, preserve their gradual changing heading as supplied. Row identities top to bottom:\n1. masyn-run: SOUTH front; run action. Exact same person, costume, mount and props as this reference row.\n2. mi-shell-run: SOUTH front; run action. Exact same person, costume, mount and props as this reference row.\n3. ezra-run: SOUTH front; run action. Exact same person, costume, mount and props as this reference row.\n4. fallyn-run: SOUTH front; run action. Exact same person, costume, mount and props as this reference row.\n5. fitzgerald-run: SOUTH front; run action. Exact same person, costume, mount and props as this reference row.\n6. costume-skills-run: SOUTH front; run action. Exact same person, costume, mount and props as this reference row.\n7. costume-portfolio-run: SOUTH front; run action. Exact same person, costume, mount and props as this reference row.\n8. costume-resume-run: SOUTH front; run action. Exact same person, costume, mount and props as this reference row.\n9. costume-contact-run: SOUTH front; run action. Exact same person, costume, mount and props as this reference row.\n10. costume-airbender-run: SOUTH front; run action. Exact same person, costume, mount and props as this reference row.\n11. costume-ezra-spider-run: SOUTH front; run action. Exact same person, costume, mount and props as this reference row.\n12. costume-fallyn-ladybug-run: SOUTH front; run action. Exact same person, costume, mount and props as this reference row.\n13. costume-fitzgerald-spider-run: SOUTH front; run action. Exact same person, costume, mount and props as this reference row.\nFull-body clean polished shaded pixel art, restrained outlines and rich material detail matching the input. Even spacing, generous empty margins, no clipped hair, wings, rods or limbs. Genuine transparent background, no text, labels, grids, scenery, floor shadows, particles or detached debris. Tall atlas 1536x3072, with exactly the requested rows and four columns."
+  },
+  {
+    "key": "RunSouthwest",
+    "rows": [
+      {
+        "asset": "masyn-run",
+        "row": 1
+      },
+      {
+        "asset": "mi-shell-run",
+        "row": 1
+      },
+      {
+        "asset": "ezra-run",
+        "row": 1
+      },
+      {
+        "asset": "fallyn-run",
+        "row": 1
+      },
+      {
+        "asset": "fitzgerald-run",
+        "row": 1
+      },
+      {
+        "asset": "costume-skills-run",
+        "row": 1
+      },
+      {
+        "asset": "costume-portfolio-run",
+        "row": 1
+      },
+      {
+        "asset": "costume-resume-run",
+        "row": 1
+      },
+      {
+        "asset": "costume-contact-run",
+        "row": 1
+      },
+      {
+        "asset": "costume-airbender-run",
+        "row": 1
+      },
+      {
+        "asset": "costume-ezra-spider-run",
+        "row": 1
+      },
+      {
+        "asset": "costume-fallyn-ladybug-run",
+        "row": 1
+      },
+      {
+        "asset": "costume-fitzgerald-spider-run",
+        "row": 1
+      }
+    ],
+    "reference": "/home/lotus/Projects/masynnay.com/docs/source-assets/animation/references/RunSouthwest.png",
+    "prompt": "Use case: identity-preserve. Production game animation IN-BETWEEN atlas. The input is an exact numbered-by-position atlas of existing key poses. Preserve every row's detailed original character, face, body proportions, clothing, hair, textures, props, mounts and facing direction. Do not simplify or redesign, no enlarged chibi heads. Create exactly FOUR COLUMNS and 13 ROWS of NEW intermediate animation frames. Within EACH ROW: output column1 is a new pose halfway between input columns1 and2; output column2 halfway between input2 and3; output column3 halfway between input3 and4; output column4 halfway between input4 and1 to complete the loop. These are newly drawn intermediate limb/motion poses, not copies, crossfades, ghost images or blurry morphs. Each output row belongs to the same input row. Walking: natural heel/toe transitions and arm swings; running: bent elbows, clear airborne stride transitions; mounted activities: rider stays seated, mount motion remains smooth; fishing/casting: rods and hands move gradually; other actions preserve their supplied sequence and costume. Feet/body anchors and visual scale stay stable; move only the parts that animate. Every frame in a directional row must keep the given facing, especially back-left (up-left, NOT up-right). For the one-row turn/call actions only, preserve their gradual changing heading as supplied. Row identities top to bottom:\n1. masyn-run: SOUTHWEST down-left; run action. Exact same person, costume, mount and props as this reference row.\n2. mi-shell-run: SOUTHWEST down-left; run action. Exact same person, costume, mount and props as this reference row.\n3. ezra-run: SOUTHWEST down-left; run action. Exact same person, costume, mount and props as this reference row.\n4. fallyn-run: SOUTHWEST down-left; run action. Exact same person, costume, mount and props as this reference row.\n5. fitzgerald-run: SOUTHWEST down-left; run action. Exact same person, costume, mount and props as this reference row.\n6. costume-skills-run: SOUTHWEST down-left; run action. Exact same person, costume, mount and props as this reference row.\n7. costume-portfolio-run: SOUTHWEST down-left; run action. Exact same person, costume, mount and props as this reference row.\n8. costume-resume-run: SOUTHWEST down-left; run action. Exact same person, costume, mount and props as this reference row.\n9. costume-contact-run: SOUTHWEST down-left; run action. Exact same person, costume, mount and props as this reference row.\n10. costume-airbender-run: SOUTHWEST down-left; run action. Exact same person, costume, mount and props as this reference row.\n11. costume-ezra-spider-run: SOUTHWEST down-left; run action. Exact same person, costume, mount and props as this reference row.\n12. costume-fallyn-ladybug-run: SOUTHWEST down-left; run action. Exact same person, costume, mount and props as this reference row.\n13. costume-fitzgerald-spider-run: SOUTHWEST down-left; run action. Exact same person, costume, mount and props as this reference row.\nFull-body clean polished shaded pixel art, restrained outlines and rich material detail matching the input. Even spacing, generous empty margins, no clipped hair, wings, rods or limbs. Genuine transparent background, no text, labels, grids, scenery, floor shadows, particles or detached debris. Tall atlas 1536x3072, with exactly the requested rows and four columns."
+  },
+  {
+    "key": "RunWest",
+    "rows": [
+      {
+        "asset": "masyn-run",
+        "row": 2
+      },
+      {
+        "asset": "mi-shell-run",
+        "row": 2
+      },
+      {
+        "asset": "ezra-run",
+        "row": 2
+      },
+      {
+        "asset": "fallyn-run",
+        "row": 2
+      },
+      {
+        "asset": "fitzgerald-run",
+        "row": 2
+      },
+      {
+        "asset": "costume-skills-run",
+        "row": 2
+      },
+      {
+        "asset": "costume-portfolio-run",
+        "row": 2
+      },
+      {
+        "asset": "costume-resume-run",
+        "row": 2
+      },
+      {
+        "asset": "costume-contact-run",
+        "row": 2
+      },
+      {
+        "asset": "costume-airbender-run",
+        "row": 2
+      },
+      {
+        "asset": "costume-ezra-spider-run",
+        "row": 2
+      },
+      {
+        "asset": "costume-fallyn-ladybug-run",
+        "row": 2
+      },
+      {
+        "asset": "costume-fitzgerald-spider-run",
+        "row": 2
+      }
+    ],
+    "reference": "/home/lotus/Projects/masynnay.com/docs/source-assets/animation/references/RunWest.png",
+    "prompt": "Use case: identity-preserve. Production game animation IN-BETWEEN atlas. The input is an exact numbered-by-position atlas of existing key poses. Preserve every row's detailed original character, face, body proportions, clothing, hair, textures, props, mounts and facing direction. Do not simplify or redesign, no enlarged chibi heads. Create exactly FOUR COLUMNS and 13 ROWS of NEW intermediate animation frames. Within EACH ROW: output column1 is a new pose halfway between input columns1 and2; output column2 halfway between input2 and3; output column3 halfway between input3 and4; output column4 halfway between input4 and1 to complete the loop. These are newly drawn intermediate limb/motion poses, not copies, crossfades, ghost images or blurry morphs. Each output row belongs to the same input row. Walking: natural heel/toe transitions and arm swings; running: bent elbows, clear airborne stride transitions; mounted activities: rider stays seated, mount motion remains smooth; fishing/casting: rods and hands move gradually; other actions preserve their supplied sequence and costume. Feet/body anchors and visual scale stay stable; move only the parts that animate. Every frame in a directional row must keep the given facing, especially back-left (up-left, NOT up-right). For the one-row turn/call actions only, preserve their gradual changing heading as supplied. Row identities top to bottom:\n1. masyn-run: WEST left profile; run action. Exact same person, costume, mount and props as this reference row.\n2. mi-shell-run: WEST left profile; run action. Exact same person, costume, mount and props as this reference row.\n3. ezra-run: WEST left profile; run action. Exact same person, costume, mount and props as this reference row.\n4. fallyn-run: WEST left profile; run action. Exact same person, costume, mount and props as this reference row.\n5. fitzgerald-run: WEST left profile; run action. Exact same person, costume, mount and props as this reference row.\n6. costume-skills-run: WEST left profile; run action. Exact same person, costume, mount and props as this reference row.\n7. costume-portfolio-run: WEST left profile; run action. Exact same person, costume, mount and props as this reference row.\n8. costume-resume-run: WEST left profile; run action. Exact same person, costume, mount and props as this reference row.\n9. costume-contact-run: WEST left profile; run action. Exact same person, costume, mount and props as this reference row.\n10. costume-airbender-run: WEST left profile; run action. Exact same person, costume, mount and props as this reference row.\n11. costume-ezra-spider-run: WEST left profile; run action. Exact same person, costume, mount and props as this reference row.\n12. costume-fallyn-ladybug-run: WEST left profile; run action. Exact same person, costume, mount and props as this reference row.\n13. costume-fitzgerald-spider-run: WEST left profile; run action. Exact same person, costume, mount and props as this reference row.\nFull-body clean polished shaded pixel art, restrained outlines and rich material detail matching the input. Even spacing, generous empty margins, no clipped hair, wings, rods or limbs. Genuine transparent background, no text, labels, grids, scenery, floor shadows, particles or detached debris. Tall atlas 1536x3072, with exactly the requested rows and four columns."
+  },
+  {
+    "key": "RunNorthwest",
+    "rows": [
+      {
+        "asset": "masyn-run",
+        "row": 3
+      },
+      {
+        "asset": "mi-shell-run",
+        "row": 3
+      },
+      {
+        "asset": "ezra-run",
+        "row": 3
+      },
+      {
+        "asset": "fallyn-run",
+        "row": 3
+      },
+      {
+        "asset": "fitzgerald-run",
+        "row": 3
+      },
+      {
+        "asset": "costume-skills-run",
+        "row": 3
+      },
+      {
+        "asset": "costume-portfolio-run",
+        "row": 3
+      },
+      {
+        "asset": "costume-resume-run",
+        "row": 3
+      },
+      {
+        "asset": "costume-contact-run",
+        "row": 3
+      },
+      {
+        "asset": "costume-airbender-run",
+        "row": 3
+      },
+      {
+        "asset": "costume-ezra-spider-run",
+        "row": 3
+      },
+      {
+        "asset": "costume-fallyn-ladybug-run",
+        "row": 3
+      },
+      {
+        "asset": "costume-fitzgerald-spider-run",
+        "row": 3
+      }
+    ],
+    "reference": "/home/lotus/Projects/masynnay.com/docs/source-assets/animation/references/RunNorthwest.png",
+    "prompt": "Use case: identity-preserve. Production game animation IN-BETWEEN atlas. The input is an exact numbered-by-position atlas of existing key poses. Preserve every row's detailed original character, face, body proportions, clothing, hair, textures, props, mounts and facing direction. Do not simplify or redesign, no enlarged chibi heads. Create exactly FOUR COLUMNS and 13 ROWS of NEW intermediate animation frames. Within EACH ROW: output column1 is a new pose halfway between input columns1 and2; output column2 halfway between input2 and3; output column3 halfway between input3 and4; output column4 halfway between input4 and1 to complete the loop. These are newly drawn intermediate limb/motion poses, not copies, crossfades, ghost images or blurry morphs. Each output row belongs to the same input row. Walking: natural heel/toe transitions and arm swings; running: bent elbows, clear airborne stride transitions; mounted activities: rider stays seated, mount motion remains smooth; fishing/casting: rods and hands move gradually; other actions preserve their supplied sequence and costume. Feet/body anchors and visual scale stay stable; move only the parts that animate. Every frame in a directional row must keep the given facing, especially back-left (up-left, NOT up-right). For the one-row turn/call actions only, preserve their gradual changing heading as supplied. Row identities top to bottom:\n1. masyn-run: NORTHWEST up-left back view; run action. Exact same person, costume, mount and props as this reference row.\n2. mi-shell-run: NORTHWEST up-left back view; run action. Exact same person, costume, mount and props as this reference row.\n3. ezra-run: NORTHWEST up-left back view; run action. Exact same person, costume, mount and props as this reference row.\n4. fallyn-run: NORTHWEST up-left back view; run action. Exact same person, costume, mount and props as this reference row.\n5. fitzgerald-run: NORTHWEST up-left back view; run action. Exact same person, costume, mount and props as this reference row.\n6. costume-skills-run: NORTHWEST up-left back view; run action. Exact same person, costume, mount and props as this reference row.\n7. costume-portfolio-run: NORTHWEST up-left back view; run action. Exact same person, costume, mount and props as this reference row.\n8. costume-resume-run: NORTHWEST up-left back view; run action. Exact same person, costume, mount and props as this reference row.\n9. costume-contact-run: NORTHWEST up-left back view; run action. Exact same person, costume, mount and props as this reference row.\n10. costume-airbender-run: NORTHWEST up-left back view; run action. Exact same person, costume, mount and props as this reference row.\n11. costume-ezra-spider-run: NORTHWEST up-left back view; run action. Exact same person, costume, mount and props as this reference row.\n12. costume-fallyn-ladybug-run: NORTHWEST up-left back view; run action. Exact same person, costume, mount and props as this reference row.\n13. costume-fitzgerald-spider-run: NORTHWEST up-left back view; run action. Exact same person, costume, mount and props as this reference row.\nFull-body clean polished shaded pixel art, restrained outlines and rich material detail matching the input. Even spacing, generous empty margins, no clipped hair, wings, rods or limbs. Genuine transparent background, no text, labels, grids, scenery, floor shadows, particles or detached debris. Tall atlas 1536x3072, with exactly the requested rows and four columns."
+  },
+  {
+    "key": "RunNorth",
+    "rows": [
+      {
+        "asset": "masyn-run",
+        "row": 4
+      },
+      {
+        "asset": "mi-shell-run",
+        "row": 4
+      },
+      {
+        "asset": "ezra-run",
+        "row": 4
+      },
+      {
+        "asset": "fallyn-run",
+        "row": 4
+      },
+      {
+        "asset": "fitzgerald-run",
+        "row": 4
+      },
+      {
+        "asset": "costume-skills-run",
+        "row": 4
+      },
+      {
+        "asset": "costume-portfolio-run",
+        "row": 4
+      },
+      {
+        "asset": "costume-resume-run",
+        "row": 4
+      },
+      {
+        "asset": "costume-contact-run",
+        "row": 4
+      },
+      {
+        "asset": "costume-airbender-run",
+        "row": 4
+      },
+      {
+        "asset": "costume-ezra-spider-run",
+        "row": 4
+      },
+      {
+        "asset": "costume-fallyn-ladybug-run",
+        "row": 4
+      },
+      {
+        "asset": "costume-fitzgerald-spider-run",
+        "row": 4
+      }
+    ],
+    "reference": "/home/lotus/Projects/masynnay.com/docs/source-assets/animation/references/RunNorth.png",
+    "prompt": "Use case: identity-preserve. Production game animation IN-BETWEEN atlas. The input is an exact numbered-by-position atlas of existing key poses. Preserve every row's detailed original character, face, body proportions, clothing, hair, textures, props, mounts and facing direction. Do not simplify or redesign, no enlarged chibi heads. Create exactly FOUR COLUMNS and 13 ROWS of NEW intermediate animation frames. Within EACH ROW: output column1 is a new pose halfway between input columns1 and2; output column2 halfway between input2 and3; output column3 halfway between input3 and4; output column4 halfway between input4 and1 to complete the loop. These are newly drawn intermediate limb/motion poses, not copies, crossfades, ghost images or blurry morphs. Each output row belongs to the same input row. Walking: natural heel/toe transitions and arm swings; running: bent elbows, clear airborne stride transitions; mounted activities: rider stays seated, mount motion remains smooth; fishing/casting: rods and hands move gradually; other actions preserve their supplied sequence and costume. Feet/body anchors and visual scale stay stable; move only the parts that animate. Every frame in a directional row must keep the given facing, especially back-left (up-left, NOT up-right). For the one-row turn/call actions only, preserve their gradual changing heading as supplied. Row identities top to bottom:\n1. masyn-run: NORTH back view; run action. Exact same person, costume, mount and props as this reference row.\n2. mi-shell-run: NORTH back view; run action. Exact same person, costume, mount and props as this reference row.\n3. ezra-run: NORTH back view; run action. Exact same person, costume, mount and props as this reference row.\n4. fallyn-run: NORTH back view; run action. Exact same person, costume, mount and props as this reference row.\n5. fitzgerald-run: NORTH back view; run action. Exact same person, costume, mount and props as this reference row.\n6. costume-skills-run: NORTH back view; run action. Exact same person, costume, mount and props as this reference row.\n7. costume-portfolio-run: NORTH back view; run action. Exact same person, costume, mount and props as this reference row.\n8. costume-resume-run: NORTH back view; run action. Exact same person, costume, mount and props as this reference row.\n9. costume-contact-run: NORTH back view; run action. Exact same person, costume, mount and props as this reference row.\n10. costume-airbender-run: NORTH back view; run action. Exact same person, costume, mount and props as this reference row.\n11. costume-ezra-spider-run: NORTH back view; run action. Exact same person, costume, mount and props as this reference row.\n12. costume-fallyn-ladybug-run: NORTH back view; run action. Exact same person, costume, mount and props as this reference row.\n13. costume-fitzgerald-spider-run: NORTH back view; run action. Exact same person, costume, mount and props as this reference row.\nFull-body clean polished shaded pixel art, restrained outlines and rich material detail matching the input. Even spacing, generous empty margins, no clipped hair, wings, rods or limbs. Genuine transparent background, no text, labels, grids, scenery, floor shadows, particles or detached debris. Tall atlas 1536x3072, with exactly the requested rows and four columns."
+  },
+  {
+    "key": "Surf1",
+    "rows": [
+      {
+        "asset": "masyn-surf",
+        "row": 0
+      },
+      {
+        "asset": "masyn-surf",
+        "row": 1
+      },
+      {
+        "asset": "masyn-surf",
+        "row": 2
+      },
+      {
+        "asset": "mi-shell-surf",
+        "row": 0
+      },
+      {
+        "asset": "mi-shell-surf",
+        "row": 1
+      },
+      {
+        "asset": "mi-shell-surf",
+        "row": 2
+      },
+      {
+        "asset": "ezra-surf",
+        "row": 0
+      },
+      {
+        "asset": "ezra-surf",
+        "row": 1
+      },
+      {
+        "asset": "ezra-surf",
+        "row": 2
+      },
+      {
+        "asset": "fallyn-surf",
+        "row": 0
+      }
+    ],
+    "reference": "/home/lotus/Projects/masynnay.com/docs/source-assets/animation/references/Surf1.png",
+    "prompt": "Use case: identity-preserve. Production game animation IN-BETWEEN atlas. The input is an exact numbered-by-position atlas of existing key poses. Preserve every row's detailed original character, face, body proportions, clothing, hair, textures, props, mounts and facing direction. Do not simplify or redesign, no enlarged chibi heads. Create exactly FOUR COLUMNS and 10 ROWS of NEW intermediate animation frames. Within EACH ROW: output column1 is a new pose halfway between input columns1 and2; output column2 halfway between input2 and3; output column3 halfway between input3 and4; output column4 halfway between input4 and1 to complete the loop. These are newly drawn intermediate limb/motion poses, not copies, crossfades, ghost images or blurry morphs. Each output row belongs to the same input row. Walking: natural heel/toe transitions and arm swings; running: bent elbows, clear airborne stride transitions; mounted activities: rider stays seated, mount motion remains smooth; fishing/casting: rods and hands move gradually; other actions preserve their supplied sequence and costume. Feet/body anchors and visual scale stay stable; move only the parts that animate. Every frame in a directional row must keep the given facing, especially back-left (up-left, NOT up-right). For the one-row turn/call actions only, preserve their gradual changing heading as supplied. Row identities top to bottom:\n1. masyn-surf: SOUTH front; surf action. Exact same person, costume, mount and props as this reference row.\n2. masyn-surf: NORTH back; surf action. Exact same person, costume, mount and props as this reference row.\n3. masyn-surf: WEST left; surf action. Exact same person, costume, mount and props as this reference row.\n4. mi-shell-surf: SOUTH front; surf action. Exact same person, costume, mount and props as this reference row.\n5. mi-shell-surf: NORTH back; surf action. Exact same person, costume, mount and props as this reference row.\n6. mi-shell-surf: WEST left; surf action. Exact same person, costume, mount and props as this reference row.\n7. ezra-surf: SOUTH front; surf action. Exact same person, costume, mount and props as this reference row.\n8. ezra-surf: NORTH back; surf action. Exact same person, costume, mount and props as this reference row.\n9. ezra-surf: WEST left; surf action. Exact same person, costume, mount and props as this reference row.\n10. fallyn-surf: SOUTH front; surf action. Exact same person, costume, mount and props as this reference row.\nFull-body clean polished shaded pixel art, restrained outlines and rich material detail matching the input. Even spacing, generous empty margins, no clipped hair, wings, rods or limbs. Genuine transparent background, no text, labels, grids, scenery, floor shadows, particles or detached debris. Tall atlas 1536x3072, with exactly the requested rows and four columns."
+  },
+  {
+    "key": "Surf2",
+    "rows": [
+      {
+        "asset": "fallyn-surf",
+        "row": 1
+      },
+      {
+        "asset": "fallyn-surf",
+        "row": 2
+      },
+      {
+        "asset": "fitzgerald-surf",
+        "row": 0
+      },
+      {
+        "asset": "fitzgerald-surf",
+        "row": 1
+      },
+      {
+        "asset": "fitzgerald-surf",
+        "row": 2
+      }
+    ],
+    "reference": "/home/lotus/Projects/masynnay.com/docs/source-assets/animation/references/Surf2.png",
+    "prompt": "Use case: identity-preserve. Production game animation IN-BETWEEN atlas. The input is an exact numbered-by-position atlas of existing key poses. Preserve every row's detailed original character, face, body proportions, clothing, hair, textures, props, mounts and facing direction. Do not simplify or redesign, no enlarged chibi heads. Create exactly FOUR COLUMNS and 5 ROWS of NEW intermediate animation frames. Within EACH ROW: output column1 is a new pose halfway between input columns1 and2; output column2 halfway between input2 and3; output column3 halfway between input3 and4; output column4 halfway between input4 and1 to complete the loop. These are newly drawn intermediate limb/motion poses, not copies, crossfades, ghost images or blurry morphs. Each output row belongs to the same input row. Walking: natural heel/toe transitions and arm swings; running: bent elbows, clear airborne stride transitions; mounted activities: rider stays seated, mount motion remains smooth; fishing/casting: rods and hands move gradually; other actions preserve their supplied sequence and costume. Feet/body anchors and visual scale stay stable; move only the parts that animate. Every frame in a directional row must keep the given facing, especially back-left (up-left, NOT up-right). For the one-row turn/call actions only, preserve their gradual changing heading as supplied. Row identities top to bottom:\n1. fallyn-surf: NORTH back; surf action. Exact same person, costume, mount and props as this reference row.\n2. fallyn-surf: WEST left; surf action. Exact same person, costume, mount and props as this reference row.\n3. fitzgerald-surf: SOUTH front; surf action. Exact same person, costume, mount and props as this reference row.\n4. fitzgerald-surf: NORTH back; surf action. Exact same person, costume, mount and props as this reference row.\n5. fitzgerald-surf: WEST left; surf action. Exact same person, costume, mount and props as this reference row.\nFull-body clean polished shaded pixel art, restrained outlines and rich material detail matching the input. Even spacing, generous empty margins, no clipped hair, wings, rods or limbs. Genuine transparent background, no text, labels, grids, scenery, floor shadows, particles or detached debris. Tall atlas 1536x3072, with exactly the requested rows and four columns."
+  },
+  {
+    "key": "Fishing1",
+    "rows": [
+      {
+        "asset": "masyn-fish",
+        "row": 0
+      },
+      {
+        "asset": "masyn-fish",
+        "row": 1
+      },
+      {
+        "asset": "masyn-fish",
+        "row": 2
+      },
+      {
+        "asset": "masyn-fish-surf",
+        "row": 0
+      },
+      {
+        "asset": "masyn-fish-surf",
+        "row": 1
+      },
+      {
+        "asset": "masyn-fish-surf",
+        "row": 2
+      },
+      {
+        "asset": "mi-shell-fish",
+        "row": 0
+      },
+      {
+        "asset": "mi-shell-fish",
+        "row": 1
+      },
+      {
+        "asset": "mi-shell-fish",
+        "row": 2
+      },
+      {
+        "asset": "mi-shell-fish-surf",
+        "row": 0
+      }
+    ],
+    "reference": "/home/lotus/Projects/masynnay.com/docs/source-assets/animation/references/Fishing1.png",
+    "prompt": "Use case: identity-preserve. Production game animation IN-BETWEEN atlas. The input is an exact numbered-by-position atlas of existing key poses. Preserve every row's detailed original character, face, body proportions, clothing, hair, textures, props, mounts and facing direction. Do not simplify or redesign, no enlarged chibi heads. Create exactly FOUR COLUMNS and 10 ROWS of NEW intermediate animation frames. Within EACH ROW: output column1 is a new pose halfway between input columns1 and2; output column2 halfway between input2 and3; output column3 halfway between input3 and4; output column4 halfway between input4 and1 to complete the loop. These are newly drawn intermediate limb/motion poses, not copies, crossfades, ghost images or blurry morphs. Each output row belongs to the same input row. Walking: natural heel/toe transitions and arm swings; running: bent elbows, clear airborne stride transitions; mounted activities: rider stays seated, mount motion remains smooth; fishing/casting: rods and hands move gradually; other actions preserve their supplied sequence and costume. Feet/body anchors and visual scale stay stable; move only the parts that animate. Every frame in a directional row must keep the given facing, especially back-left (up-left, NOT up-right). For the one-row turn/call actions only, preserve their gradual changing heading as supplied. Row identities top to bottom:\n1. masyn-fish: SOUTH front; fish action. Exact same person, costume, mount and props as this reference row.\n2. masyn-fish: NORTH back; fish action. Exact same person, costume, mount and props as this reference row.\n3. masyn-fish: WEST left; fish action. Exact same person, costume, mount and props as this reference row.\n4. masyn-fish-surf: SOUTH front; fish action. Exact same person, costume, mount and props as this reference row.\n5. masyn-fish-surf: NORTH back; fish action. Exact same person, costume, mount and props as this reference row.\n6. masyn-fish-surf: WEST left; fish action. Exact same person, costume, mount and props as this reference row.\n7. mi-shell-fish: SOUTH front; fish action. Exact same person, costume, mount and props as this reference row.\n8. mi-shell-fish: NORTH back; fish action. Exact same person, costume, mount and props as this reference row.\n9. mi-shell-fish: WEST left; fish action. Exact same person, costume, mount and props as this reference row.\n10. mi-shell-fish-surf: SOUTH front; fish action. Exact same person, costume, mount and props as this reference row.\nFull-body clean polished shaded pixel art, restrained outlines and rich material detail matching the input. Even spacing, generous empty margins, no clipped hair, wings, rods or limbs. Genuine transparent background, no text, labels, grids, scenery, floor shadows, particles or detached debris. Tall atlas 1536x3072, with exactly the requested rows and four columns."
+  },
+  {
+    "key": "Fishing2",
+    "rows": [
+      {
+        "asset": "mi-shell-fish-surf",
+        "row": 1
+      },
+      {
+        "asset": "mi-shell-fish-surf",
+        "row": 2
+      },
+      {
+        "asset": "ezra-fish",
+        "row": 0
+      },
+      {
+        "asset": "ezra-fish",
+        "row": 1
+      },
+      {
+        "asset": "ezra-fish",
+        "row": 2
+      },
+      {
+        "asset": "ezra-fish-surf",
+        "row": 0
+      },
+      {
+        "asset": "ezra-fish-surf",
+        "row": 1
+      },
+      {
+        "asset": "ezra-fish-surf",
+        "row": 2
+      },
+      {
+        "asset": "fallyn-fish",
+        "row": 0
+      },
+      {
+        "asset": "fallyn-fish",
+        "row": 1
+      }
+    ],
+    "reference": "/home/lotus/Projects/masynnay.com/docs/source-assets/animation/references/Fishing2.png",
+    "prompt": "Use case: identity-preserve. Production game animation IN-BETWEEN atlas. The input is an exact numbered-by-position atlas of existing key poses. Preserve every row's detailed original character, face, body proportions, clothing, hair, textures, props, mounts and facing direction. Do not simplify or redesign, no enlarged chibi heads. Create exactly FOUR COLUMNS and 10 ROWS of NEW intermediate animation frames. Within EACH ROW: output column1 is a new pose halfway between input columns1 and2; output column2 halfway between input2 and3; output column3 halfway between input3 and4; output column4 halfway between input4 and1 to complete the loop. These are newly drawn intermediate limb/motion poses, not copies, crossfades, ghost images or blurry morphs. Each output row belongs to the same input row. Walking: natural heel/toe transitions and arm swings; running: bent elbows, clear airborne stride transitions; mounted activities: rider stays seated, mount motion remains smooth; fishing/casting: rods and hands move gradually; other actions preserve their supplied sequence and costume. Feet/body anchors and visual scale stay stable; move only the parts that animate. Every frame in a directional row must keep the given facing, especially back-left (up-left, NOT up-right). For the one-row turn/call actions only, preserve their gradual changing heading as supplied. Row identities top to bottom:\n1. mi-shell-fish-surf: NORTH back; fish action. Exact same person, costume, mount and props as this reference row.\n2. mi-shell-fish-surf: WEST left; fish action. Exact same person, costume, mount and props as this reference row.\n3. ezra-fish: SOUTH front; fish action. Exact same person, costume, mount and props as this reference row.\n4. ezra-fish: NORTH back; fish action. Exact same person, costume, mount and props as this reference row.\n5. ezra-fish: WEST left; fish action. Exact same person, costume, mount and props as this reference row.\n6. ezra-fish-surf: SOUTH front; fish action. Exact same person, costume, mount and props as this reference row.\n7. ezra-fish-surf: NORTH back; fish action. Exact same person, costume, mount and props as this reference row.\n8. ezra-fish-surf: WEST left; fish action. Exact same person, costume, mount and props as this reference row.\n9. fallyn-fish: SOUTH front; fish action. Exact same person, costume, mount and props as this reference row.\n10. fallyn-fish: NORTH back; fish action. Exact same person, costume, mount and props as this reference row.\nFull-body clean polished shaded pixel art, restrained outlines and rich material detail matching the input. Even spacing, generous empty margins, no clipped hair, wings, rods or limbs. Genuine transparent background, no text, labels, grids, scenery, floor shadows, particles or detached debris. Tall atlas 1536x3072, with exactly the requested rows and four columns."
+  },
+  {
+    "key": "Fishing3",
+    "rows": [
+      {
+        "asset": "fallyn-fish",
+        "row": 2
+      },
+      {
+        "asset": "fallyn-fish-surf",
+        "row": 0
+      },
+      {
+        "asset": "fallyn-fish-surf",
+        "row": 1
+      },
+      {
+        "asset": "fallyn-fish-surf",
+        "row": 2
+      },
+      {
+        "asset": "fitzgerald-fish",
+        "row": 0
+      },
+      {
+        "asset": "fitzgerald-fish",
+        "row": 1
+      },
+      {
+        "asset": "fitzgerald-fish",
+        "row": 2
+      },
+      {
+        "asset": "fitzgerald-fish-surf",
+        "row": 0
+      },
+      {
+        "asset": "fitzgerald-fish-surf",
+        "row": 1
+      },
+      {
+        "asset": "fitzgerald-fish-surf",
+        "row": 2
+      }
+    ],
+    "reference": "/home/lotus/Projects/masynnay.com/docs/source-assets/animation/references/Fishing3.png",
+    "prompt": "Use case: identity-preserve. Production game animation IN-BETWEEN atlas. The input is an exact numbered-by-position atlas of existing key poses. Preserve every row's detailed original character, face, body proportions, clothing, hair, textures, props, mounts and facing direction. Do not simplify or redesign, no enlarged chibi heads. Create exactly FOUR COLUMNS and 10 ROWS of NEW intermediate animation frames. Within EACH ROW: output column1 is a new pose halfway between input columns1 and2; output column2 halfway between input2 and3; output column3 halfway between input3 and4; output column4 halfway between input4 and1 to complete the loop. These are newly drawn intermediate limb/motion poses, not copies, crossfades, ghost images or blurry morphs. Each output row belongs to the same input row. Walking: natural heel/toe transitions and arm swings; running: bent elbows, clear airborne stride transitions; mounted activities: rider stays seated, mount motion remains smooth; fishing/casting: rods and hands move gradually; other actions preserve their supplied sequence and costume. Feet/body anchors and visual scale stay stable; move only the parts that animate. Every frame in a directional row must keep the given facing, especially back-left (up-left, NOT up-right). For the one-row turn/call actions only, preserve their gradual changing heading as supplied. Row identities top to bottom:\n1. fallyn-fish: WEST left; fish action. Exact same person, costume, mount and props as this reference row.\n2. fallyn-fish-surf: SOUTH front; fish action. Exact same person, costume, mount and props as this reference row.\n3. fallyn-fish-surf: NORTH back; fish action. Exact same person, costume, mount and props as this reference row.\n4. fallyn-fish-surf: WEST left; fish action. Exact same person, costume, mount and props as this reference row.\n5. fitzgerald-fish: SOUTH front; fish action. Exact same person, costume, mount and props as this reference row.\n6. fitzgerald-fish: NORTH back; fish action. Exact same person, costume, mount and props as this reference row.\n7. fitzgerald-fish: WEST left; fish action. Exact same person, costume, mount and props as this reference row.\n8. fitzgerald-fish-surf: SOUTH front; fish action. Exact same person, costume, mount and props as this reference row.\n9. fitzgerald-fish-surf: NORTH back; fish action. Exact same person, costume, mount and props as this reference row.\n10. fitzgerald-fish-surf: WEST left; fish action. Exact same person, costume, mount and props as this reference row.\nFull-body clean polished shaded pixel art, restrained outlines and rich material detail matching the input. Even spacing, generous empty margins, no clipped hair, wings, rods or limbs. Genuine transparent background, no text, labels, grids, scenery, floor shadows, particles or detached debris. Tall atlas 1536x3072, with exactly the requested rows and four columns."
+  },
+  {
+    "key": "Bikes1",
+    "rows": [
+      {
+        "asset": "masyn-bike-acro",
+        "row": 0
+      },
+      {
+        "asset": "masyn-bike-acro",
+        "row": 1
+      },
+      {
+        "asset": "masyn-bike-acro",
+        "row": 2
+      },
+      {
+        "asset": "masyn-bike-mach",
+        "row": 0
+      },
+      {
+        "asset": "masyn-bike-mach",
+        "row": 1
+      },
+      {
+        "asset": "masyn-bike-mach",
+        "row": 2
+      },
+      {
+        "asset": "mi-shell-bike-acro",
+        "row": 0
+      },
+      {
+        "asset": "mi-shell-bike-acro",
+        "row": 1
+      },
+      {
+        "asset": "mi-shell-bike-acro",
+        "row": 2
+      },
+      {
+        "asset": "mi-shell-bike-mach",
+        "row": 0
+      }
+    ],
+    "reference": "/home/lotus/Projects/masynnay.com/docs/source-assets/animation/references/Bikes1.png",
+    "prompt": "Use case: identity-preserve. Production game animation IN-BETWEEN atlas. The input is an exact numbered-by-position atlas of existing key poses. Preserve every row's detailed original character, face, body proportions, clothing, hair, textures, props, mounts and facing direction. Do not simplify or redesign, no enlarged chibi heads. Create exactly FOUR COLUMNS and 10 ROWS of NEW intermediate animation frames. Within EACH ROW: output column1 is a new pose halfway between input columns1 and2; output column2 halfway between input2 and3; output column3 halfway between input3 and4; output column4 halfway between input4 and1 to complete the loop. These are newly drawn intermediate limb/motion poses, not copies, crossfades, ghost images or blurry morphs. Each output row belongs to the same input row. Walking: natural heel/toe transitions and arm swings; running: bent elbows, clear airborne stride transitions; mounted activities: rider stays seated, mount motion remains smooth; fishing/casting: rods and hands move gradually; other actions preserve their supplied sequence and costume. Feet/body anchors and visual scale stay stable; move only the parts that animate. Every frame in a directional row must keep the given facing, especially back-left (up-left, NOT up-right). For the one-row turn/call actions only, preserve their gradual changing heading as supplied. Row identities top to bottom:\n1. masyn-bike-acro: SOUTH front; bike action. Exact same person, costume, mount and props as this reference row.\n2. masyn-bike-acro: NORTH back; bike action. Exact same person, costume, mount and props as this reference row.\n3. masyn-bike-acro: WEST left; bike action. Exact same person, costume, mount and props as this reference row.\n4. masyn-bike-mach: SOUTH front; bike action. Exact same person, costume, mount and props as this reference row.\n5. masyn-bike-mach: NORTH back; bike action. Exact same person, costume, mount and props as this reference row.\n6. masyn-bike-mach: WEST left; bike action. Exact same person, costume, mount and props as this reference row.\n7. mi-shell-bike-acro: SOUTH front; bike action. Exact same person, costume, mount and props as this reference row.\n8. mi-shell-bike-acro: NORTH back; bike action. Exact same person, costume, mount and props as this reference row.\n9. mi-shell-bike-acro: WEST left; bike action. Exact same person, costume, mount and props as this reference row.\n10. mi-shell-bike-mach: SOUTH front; bike action. Exact same person, costume, mount and props as this reference row.\nFull-body clean polished shaded pixel art, restrained outlines and rich material detail matching the input. Even spacing, generous empty margins, no clipped hair, wings, rods or limbs. Genuine transparent background, no text, labels, grids, scenery, floor shadows, particles or detached debris. Tall atlas 1536x3072, with exactly the requested rows and four columns."
+  },
+  {
+    "key": "Bikes2",
+    "rows": [
+      {
+        "asset": "mi-shell-bike-mach",
+        "row": 1
+      },
+      {
+        "asset": "mi-shell-bike-mach",
+        "row": 2
+      },
+      {
+        "asset": "ezra-bike-acro",
+        "row": 0
+      },
+      {
+        "asset": "ezra-bike-acro",
+        "row": 1
+      },
+      {
+        "asset": "ezra-bike-acro",
+        "row": 2
+      },
+      {
+        "asset": "ezra-bike-mach",
+        "row": 0
+      },
+      {
+        "asset": "ezra-bike-mach",
+        "row": 1
+      },
+      {
+        "asset": "ezra-bike-mach",
+        "row": 2
+      },
+      {
+        "asset": "fallyn-bike-acro",
+        "row": 0
+      },
+      {
+        "asset": "fallyn-bike-acro",
+        "row": 1
+      }
+    ],
+    "reference": "/home/lotus/Projects/masynnay.com/docs/source-assets/animation/references/Bikes2.png",
+    "prompt": "Use case: identity-preserve. Production game animation IN-BETWEEN atlas. The input is an exact numbered-by-position atlas of existing key poses. Preserve every row's detailed original character, face, body proportions, clothing, hair, textures, props, mounts and facing direction. Do not simplify or redesign, no enlarged chibi heads. Create exactly FOUR COLUMNS and 10 ROWS of NEW intermediate animation frames. Within EACH ROW: output column1 is a new pose halfway between input columns1 and2; output column2 halfway between input2 and3; output column3 halfway between input3 and4; output column4 halfway between input4 and1 to complete the loop. These are newly drawn intermediate limb/motion poses, not copies, crossfades, ghost images or blurry morphs. Each output row belongs to the same input row. Walking: natural heel/toe transitions and arm swings; running: bent elbows, clear airborne stride transitions; mounted activities: rider stays seated, mount motion remains smooth; fishing/casting: rods and hands move gradually; other actions preserve their supplied sequence and costume. Feet/body anchors and visual scale stay stable; move only the parts that animate. Every frame in a directional row must keep the given facing, especially back-left (up-left, NOT up-right). For the one-row turn/call actions only, preserve their gradual changing heading as supplied. Row identities top to bottom:\n1. mi-shell-bike-mach: NORTH back; bike action. Exact same person, costume, mount and props as this reference row.\n2. mi-shell-bike-mach: WEST left; bike action. Exact same person, costume, mount and props as this reference row.\n3. ezra-bike-acro: SOUTH front; bike action. Exact same person, costume, mount and props as this reference row.\n4. ezra-bike-acro: NORTH back; bike action. Exact same person, costume, mount and props as this reference row.\n5. ezra-bike-acro: WEST left; bike action. Exact same person, costume, mount and props as this reference row.\n6. ezra-bike-mach: SOUTH front; bike action. Exact same person, costume, mount and props as this reference row.\n7. ezra-bike-mach: NORTH back; bike action. Exact same person, costume, mount and props as this reference row.\n8. ezra-bike-mach: WEST left; bike action. Exact same person, costume, mount and props as this reference row.\n9. fallyn-bike-acro: SOUTH front; bike action. Exact same person, costume, mount and props as this reference row.\n10. fallyn-bike-acro: NORTH back; bike action. Exact same person, costume, mount and props as this reference row.\nFull-body clean polished shaded pixel art, restrained outlines and rich material detail matching the input. Even spacing, generous empty margins, no clipped hair, wings, rods or limbs. Genuine transparent background, no text, labels, grids, scenery, floor shadows, particles or detached debris. Tall atlas 1536x3072, with exactly the requested rows and four columns."
+  },
+  {
+    "key": "Bikes3",
+    "rows": [
+      {
+        "asset": "fallyn-bike-acro",
+        "row": 2
+      },
+      {
+        "asset": "fallyn-bike-mach",
+        "row": 0
+      },
+      {
+        "asset": "fallyn-bike-mach",
+        "row": 1
+      },
+      {
+        "asset": "fallyn-bike-mach",
+        "row": 2
+      },
+      {
+        "asset": "fitzgerald-bike-acro",
+        "row": 0
+      },
+      {
+        "asset": "fitzgerald-bike-acro",
+        "row": 1
+      },
+      {
+        "asset": "fitzgerald-bike-acro",
+        "row": 2
+      },
+      {
+        "asset": "fitzgerald-bike-mach",
+        "row": 0
+      },
+      {
+        "asset": "fitzgerald-bike-mach",
+        "row": 1
+      },
+      {
+        "asset": "fitzgerald-bike-mach",
+        "row": 2
+      }
+    ],
+    "reference": "/home/lotus/Projects/masynnay.com/docs/source-assets/animation/references/Bikes3.png",
+    "prompt": "Use case: identity-preserve. Production game animation IN-BETWEEN atlas. The input is an exact numbered-by-position atlas of existing key poses. Preserve every row's detailed original character, face, body proportions, clothing, hair, textures, props, mounts and facing direction. Do not simplify or redesign, no enlarged chibi heads. Create exactly FOUR COLUMNS and 10 ROWS of NEW intermediate animation frames. Within EACH ROW: output column1 is a new pose halfway between input columns1 and2; output column2 halfway between input2 and3; output column3 halfway between input3 and4; output column4 halfway between input4 and1 to complete the loop. These are newly drawn intermediate limb/motion poses, not copies, crossfades, ghost images or blurry morphs. Each output row belongs to the same input row. Walking: natural heel/toe transitions and arm swings; running: bent elbows, clear airborne stride transitions; mounted activities: rider stays seated, mount motion remains smooth; fishing/casting: rods and hands move gradually; other actions preserve their supplied sequence and costume. Feet/body anchors and visual scale stay stable; move only the parts that animate. Every frame in a directional row must keep the given facing, especially back-left (up-left, NOT up-right). For the one-row turn/call actions only, preserve their gradual changing heading as supplied. Row identities top to bottom:\n1. fallyn-bike-acro: WEST left; bike action. Exact same person, costume, mount and props as this reference row.\n2. fallyn-bike-mach: SOUTH front; bike action. Exact same person, costume, mount and props as this reference row.\n3. fallyn-bike-mach: NORTH back; bike action. Exact same person, costume, mount and props as this reference row.\n4. fallyn-bike-mach: WEST left; bike action. Exact same person, costume, mount and props as this reference row.\n5. fitzgerald-bike-acro: SOUTH front; bike action. Exact same person, costume, mount and props as this reference row.\n6. fitzgerald-bike-acro: NORTH back; bike action. Exact same person, costume, mount and props as this reference row.\n7. fitzgerald-bike-acro: WEST left; bike action. Exact same person, costume, mount and props as this reference row.\n8. fitzgerald-bike-mach: SOUTH front; bike action. Exact same person, costume, mount and props as this reference row.\n9. fitzgerald-bike-mach: NORTH back; bike action. Exact same person, costume, mount and props as this reference row.\n10. fitzgerald-bike-mach: WEST left; bike action. Exact same person, costume, mount and props as this reference row.\nFull-body clean polished shaded pixel art, restrained outlines and rich material detail matching the input. Even spacing, generous empty margins, no clipped hair, wings, rods or limbs. Genuine transparent background, no text, labels, grids, scenery, floor shadows, particles or detached debris. Tall atlas 1536x3072, with exactly the requested rows and four columns."
+  },
+  {
+    "key": "Abilities1",
+    "rows": [
+      {
+        "asset": "ability-trident",
+        "row": 0
+      },
+      {
+        "asset": "ability-trident",
+        "row": 1
+      },
+      {
+        "asset": "ability-trident",
+        "row": 2
+      },
+      {
+        "asset": "ability-spell",
+        "row": 0
+      },
+      {
+        "asset": "ability-spell",
+        "row": 1
+      },
+      {
+        "asset": "ability-spell",
+        "row": 2
+      },
+      {
+        "asset": "ability-pokeball",
+        "row": 0
+      },
+      {
+        "asset": "ability-pokeball",
+        "row": 1
+      },
+      {
+        "asset": "ability-pokeball",
+        "row": 2
+      },
+      {
+        "asset": "ability-arrow",
+        "row": 0
+      }
+    ],
+    "reference": "/home/lotus/Projects/masynnay.com/docs/source-assets/animation/references/Abilities1.png",
+    "prompt": "Use case: identity-preserve. Production game animation IN-BETWEEN atlas. The input is an exact numbered-by-position atlas of existing key poses. Preserve every row's detailed original character, face, body proportions, clothing, hair, textures, props, mounts and facing direction. Do not simplify or redesign, no enlarged chibi heads. Create exactly FOUR COLUMNS and 10 ROWS of NEW intermediate animation frames. Within EACH ROW: output column1 is a new pose halfway between input columns1 and2; output column2 halfway between input2 and3; output column3 halfway between input3 and4; output column4 halfway between input4 and1 to complete the loop. These are newly drawn intermediate limb/motion poses, not copies, crossfades, ghost images or blurry morphs. Each output row belongs to the same input row. Walking: natural heel/toe transitions and arm swings; running: bent elbows, clear airborne stride transitions; mounted activities: rider stays seated, mount motion remains smooth; fishing/casting: rods and hands move gradually; other actions preserve their supplied sequence and costume. Feet/body anchors and visual scale stay stable; move only the parts that animate. Every frame in a directional row must keep the given facing, especially back-left (up-left, NOT up-right). For the one-row turn/call actions only, preserve their gradual changing heading as supplied. Row identities top to bottom:\n1. ability-trident: SOUTH front; ability action. Exact same person, costume, mount and props as this reference row.\n2. ability-trident: NORTH back; ability action. Exact same person, costume, mount and props as this reference row.\n3. ability-trident: WEST left; ability action. Exact same person, costume, mount and props as this reference row.\n4. ability-spell: SOUTH front; ability action. Exact same person, costume, mount and props as this reference row.\n5. ability-spell: NORTH back; ability action. Exact same person, costume, mount and props as this reference row.\n6. ability-spell: WEST left; ability action. Exact same person, costume, mount and props as this reference row.\n7. ability-pokeball: SOUTH front; ability action. Exact same person, costume, mount and props as this reference row.\n8. ability-pokeball: NORTH back; ability action. Exact same person, costume, mount and props as this reference row.\n9. ability-pokeball: WEST left; ability action. Exact same person, costume, mount and props as this reference row.\n10. ability-arrow: SOUTH front; ability action. Exact same person, costume, mount and props as this reference row.\nFull-body clean polished shaded pixel art, restrained outlines and rich material detail matching the input. Even spacing, generous empty margins, no clipped hair, wings, rods or limbs. Genuine transparent background, no text, labels, grids, scenery, floor shadows, particles or detached debris. Tall atlas 1536x3072, with exactly the requested rows and four columns."
+  },
+  {
+    "key": "Abilities2",
+    "rows": [
+      {
+        "asset": "ability-arrow",
+        "row": 1
+      },
+      {
+        "asset": "ability-arrow",
+        "row": 2
+      },
+      {
+        "asset": "ability-money",
+        "row": 0
+      },
+      {
+        "asset": "ability-money",
+        "row": 1
+      },
+      {
+        "asset": "ability-money",
+        "row": 2
+      }
+    ],
+    "reference": "/home/lotus/Projects/masynnay.com/docs/source-assets/animation/references/Abilities2.png",
+    "prompt": "Use case: identity-preserve. Production game animation IN-BETWEEN atlas. The input is an exact numbered-by-position atlas of existing key poses. Preserve every row's detailed original character, face, body proportions, clothing, hair, textures, props, mounts and facing direction. Do not simplify or redesign, no enlarged chibi heads. Create exactly FOUR COLUMNS and 5 ROWS of NEW intermediate animation frames. Within EACH ROW: output column1 is a new pose halfway between input columns1 and2; output column2 halfway between input2 and3; output column3 halfway between input3 and4; output column4 halfway between input4 and1 to complete the loop. These are newly drawn intermediate limb/motion poses, not copies, crossfades, ghost images or blurry morphs. Each output row belongs to the same input row. Walking: natural heel/toe transitions and arm swings; running: bent elbows, clear airborne stride transitions; mounted activities: rider stays seated, mount motion remains smooth; fishing/casting: rods and hands move gradually; other actions preserve their supplied sequence and costume. Feet/body anchors and visual scale stay stable; move only the parts that animate. Every frame in a directional row must keep the given facing, especially back-left (up-left, NOT up-right). For the one-row turn/call actions only, preserve their gradual changing heading as supplied. Row identities top to bottom:\n1. ability-arrow: NORTH back; ability action. Exact same person, costume, mount and props as this reference row.\n2. ability-arrow: WEST left; ability action. Exact same person, costume, mount and props as this reference row.\n3. ability-money: SOUTH front; ability action. Exact same person, costume, mount and props as this reference row.\n4. ability-money: NORTH back; ability action. Exact same person, costume, mount and props as this reference row.\n5. ability-money: WEST left; ability action. Exact same person, costume, mount and props as this reference row.\nFull-body clean polished shaded pixel art, restrained outlines and rich material detail matching the input. Even spacing, generous empty margins, no clipped hair, wings, rods or limbs. Genuine transparent background, no text, labels, grids, scenery, floor shadows, particles or detached debris. Tall atlas 1536x3072, with exactly the requested rows and four columns."
+  },
+  {
+    "key": "Travel1",
+    "rows": [
+      {
+        "asset": "masyn-call",
+        "row": 0
+      },
+      {
+        "asset": "masyn-ride",
+        "row": 0
+      },
+      {
+        "asset": "masyn-land",
+        "row": 0
+      },
+      {
+        "asset": "masyn-emote",
+        "row": 0
+      },
+      {
+        "asset": "mi-shell-call",
+        "row": 0
+      },
+      {
+        "asset": "mi-shell-ride",
+        "row": 0
+      },
+      {
+        "asset": "mi-shell-land",
+        "row": 0
+      },
+      {
+        "asset": "mi-shell-emote",
+        "row": 0
+      },
+      {
+        "asset": "ezra-call",
+        "row": 0
+      },
+      {
+        "asset": "ezra-ride",
+        "row": 0
+      }
+    ],
+    "reference": "/home/lotus/Projects/masynnay.com/docs/source-assets/animation/references/Travel1.png",
+    "prompt": "Use case: identity-preserve. Production game animation IN-BETWEEN atlas. The input is an exact numbered-by-position atlas of existing key poses. Preserve every row's detailed original character, face, body proportions, clothing, hair, textures, props, mounts and facing direction. Do not simplify or redesign, no enlarged chibi heads. Create exactly FOUR COLUMNS and 10 ROWS of NEW intermediate animation frames. Within EACH ROW: output column1 is a new pose halfway between input columns1 and2; output column2 halfway between input2 and3; output column3 halfway between input3 and4; output column4 halfway between input4 and1 to complete the loop. These are newly drawn intermediate limb/motion poses, not copies, crossfades, ghost images or blurry morphs. Each output row belongs to the same input row. Walking: natural heel/toe transitions and arm swings; running: bent elbows, clear airborne stride transitions; mounted activities: rider stays seated, mount motion remains smooth; fishing/casting: rods and hands move gradually; other actions preserve their supplied sequence and costume. Feet/body anchors and visual scale stay stable; move only the parts that animate. Every frame in a directional row must keep the given facing, especially back-left (up-left, NOT up-right). For the one-row turn/call actions only, preserve their gradual changing heading as supplied. Row identities top to bottom:\n1. masyn-call: same action sequence as reference; call action. Exact same person, costume, mount and props as this reference row.\n2. masyn-ride: same action sequence as reference; ride action. Exact same person, costume, mount and props as this reference row.\n3. masyn-land: same action sequence as reference; land action. Exact same person, costume, mount and props as this reference row.\n4. masyn-emote: same action sequence as reference; emote action. Exact same person, costume, mount and props as this reference row.\n5. mi-shell-call: same action sequence as reference; call action. Exact same person, costume, mount and props as this reference row.\n6. mi-shell-ride: same action sequence as reference; ride action. Exact same person, costume, mount and props as this reference row.\n7. mi-shell-land: same action sequence as reference; land action. Exact same person, costume, mount and props as this reference row.\n8. mi-shell-emote: same action sequence as reference; emote action. Exact same person, costume, mount and props as this reference row.\n9. ezra-call: same action sequence as reference; call action. Exact same person, costume, mount and props as this reference row.\n10. ezra-ride: same action sequence as reference; ride action. Exact same person, costume, mount and props as this reference row.\nFull-body clean polished shaded pixel art, restrained outlines and rich material detail matching the input. Even spacing, generous empty margins, no clipped hair, wings, rods or limbs. Genuine transparent background, no text, labels, grids, scenery, floor shadows, particles or detached debris. Tall atlas 1536x3072, with exactly the requested rows and four columns."
+  },
+  {
+    "key": "Travel2",
+    "rows": [
+      {
+        "asset": "ezra-land",
+        "row": 0
+      },
+      {
+        "asset": "ezra-emote",
+        "row": 0
+      },
+      {
+        "asset": "fallyn-call",
+        "row": 0
+      },
+      {
+        "asset": "fallyn-ride",
+        "row": 0
+      },
+      {
+        "asset": "fallyn-land",
+        "row": 0
+      },
+      {
+        "asset": "fallyn-emote",
+        "row": 0
+      },
+      {
+        "asset": "fitzgerald-call",
+        "row": 0
+      },
+      {
+        "asset": "fitzgerald-ride",
+        "row": 0
+      },
+      {
+        "asset": "fitzgerald-land",
+        "row": 0
+      },
+      {
+        "asset": "fitzgerald-emote",
+        "row": 0
+      }
+    ],
+    "reference": "/home/lotus/Projects/masynnay.com/docs/source-assets/animation/references/Travel2.png",
+    "prompt": "Use case: identity-preserve. Production game animation IN-BETWEEN atlas. The input is an exact numbered-by-position atlas of existing key poses. Preserve every row's detailed original character, face, body proportions, clothing, hair, textures, props, mounts and facing direction. Do not simplify or redesign, no enlarged chibi heads. Create exactly FOUR COLUMNS and 10 ROWS of NEW intermediate animation frames. Within EACH ROW: output column1 is a new pose halfway between input columns1 and2; output column2 halfway between input2 and3; output column3 halfway between input3 and4; output column4 halfway between input4 and1 to complete the loop. These are newly drawn intermediate limb/motion poses, not copies, crossfades, ghost images or blurry morphs. Each output row belongs to the same input row. Walking: natural heel/toe transitions and arm swings; running: bent elbows, clear airborne stride transitions; mounted activities: rider stays seated, mount motion remains smooth; fishing/casting: rods and hands move gradually; other actions preserve their supplied sequence and costume. Feet/body anchors and visual scale stay stable; move only the parts that animate. Every frame in a directional row must keep the given facing, especially back-left (up-left, NOT up-right). For the one-row turn/call actions only, preserve their gradual changing heading as supplied. Row identities top to bottom:\n1. ezra-land: same action sequence as reference; land action. Exact same person, costume, mount and props as this reference row.\n2. ezra-emote: same action sequence as reference; emote action. Exact same person, costume, mount and props as this reference row.\n3. fallyn-call: same action sequence as reference; call action. Exact same person, costume, mount and props as this reference row.\n4. fallyn-ride: same action sequence as reference; ride action. Exact same person, costume, mount and props as this reference row.\n5. fallyn-land: same action sequence as reference; land action. Exact same person, costume, mount and props as this reference row.\n6. fallyn-emote: same action sequence as reference; emote action. Exact same person, costume, mount and props as this reference row.\n7. fitzgerald-call: same action sequence as reference; call action. Exact same person, costume, mount and props as this reference row.\n8. fitzgerald-ride: same action sequence as reference; ride action. Exact same person, costume, mount and props as this reference row.\n9. fitzgerald-land: same action sequence as reference; land action. Exact same person, costume, mount and props as this reference row.\n10. fitzgerald-emote: same action sequence as reference; emote action. Exact same person, costume, mount and props as this reference row.\nFull-body clean polished shaded pixel art, restrained outlines and rich material detail matching the input. Even spacing, generous empty margins, no clipped hair, wings, rods or limbs. Genuine transparent background, no text, labels, grids, scenery, floor shadows, particles or detached debris. Tall atlas 1536x3072, with exactly the requested rows and four columns."
+  },
+  {
+    "key": "Glider1",
+    "rows": [
+      {
+        "asset": "ability-glide",
+        "row": 0
+      },
+      {
+        "asset": "ability-glide",
+        "row": 1
+      },
+      {
+        "asset": "ability-glide",
+        "row": 2
+      },
+      {
+        "asset": "ability-glide",
+        "row": 3
+      },
+      {
+        "asset": "ability-glide",
+        "row": 4
+      }
+    ],
+    "reference": "/home/lotus/Projects/masynnay.com/docs/source-assets/animation/references/Glider1.png",
+    "prompt": "Use case: identity-preserve. Production game animation IN-BETWEEN atlas. The input is an exact numbered-by-position atlas of existing key poses. Preserve every row's detailed original character, face, body proportions, clothing, hair, textures, props, mounts and facing direction. Do not simplify or redesign, no enlarged chibi heads. Create exactly FOUR COLUMNS and 5 ROWS of NEW intermediate animation frames. Within EACH ROW: output column1 is a new pose halfway between input columns1 and2; output column2 halfway between input2 and3; output column3 halfway between input3 and4; output column4 halfway between input4 and1 to complete the loop. These are newly drawn intermediate limb/motion poses, not copies, crossfades, ghost images or blurry morphs. Each output row belongs to the same input row. Walking: natural heel/toe transitions and arm swings; running: bent elbows, clear airborne stride transitions; mounted activities: rider stays seated, mount motion remains smooth; fishing/casting: rods and hands move gradually; other actions preserve their supplied sequence and costume. Feet/body anchors and visual scale stay stable; move only the parts that animate. Every frame in a directional row must keep the given facing, especially back-left (up-left, NOT up-right). For the one-row turn/call actions only, preserve their gradual changing heading as supplied. Row identities top to bottom:\n1. ability-glide: SOUTH front; ability action. Exact same person, costume, mount and props as this reference row.\n2. ability-glide: SOUTHWEST down-left; ability action. Exact same person, costume, mount and props as this reference row.\n3. ability-glide: WEST left profile; ability action. Exact same person, costume, mount and props as this reference row.\n4. ability-glide: NORTHWEST up-left back view; ability action. Exact same person, costume, mount and props as this reference row.\n5. ability-glide: NORTH back view; ability action. Exact same person, costume, mount and props as this reference row.\nFull-body clean polished shaded pixel art, restrained outlines and rich material detail matching the input. Even spacing, generous empty margins, no clipped hair, wings, rods or limbs. Genuine transparent background, no text, labels, grids, scenery, floor shadows, particles or detached debris. Tall atlas 1536x3072, with exactly the requested rows and four columns."
+  },
+  {
+    "key": "GliderLanding1",
+    "rows": [
+      {
+        "asset": "glide-launch",
+        "row": 0
+      },
+      {
+        "asset": "glide-launch",
+        "row": 1
+      },
+      {
+        "asset": "glide-launch",
+        "row": 2
+      },
+      {
+        "asset": "glide-land",
+        "row": 0
+      },
+      {
+        "asset": "glide-land",
+        "row": 1
+      },
+      {
+        "asset": "glide-land",
+        "row": 2
+      }
+    ],
+    "reference": "/home/lotus/Projects/masynnay.com/docs/source-assets/animation/references/GliderLanding1.png",
+    "prompt": "Use case: identity-preserve. Production game animation IN-BETWEEN atlas. The input is an exact numbered-by-position atlas of existing key poses. Preserve every row's detailed original character, face, body proportions, clothing, hair, textures, props, mounts and facing direction. Do not simplify or redesign, no enlarged chibi heads. Create exactly FOUR COLUMNS and 6 ROWS of NEW intermediate animation frames. Within EACH ROW: output column1 is a new pose halfway between input columns1 and2; output column2 halfway between input2 and3; output column3 halfway between input3 and4; output column4 halfway between input4 and1 to complete the loop. These are newly drawn intermediate limb/motion poses, not copies, crossfades, ghost images or blurry morphs. Each output row belongs to the same input row. Walking: natural heel/toe transitions and arm swings; running: bent elbows, clear airborne stride transitions; mounted activities: rider stays seated, mount motion remains smooth; fishing/casting: rods and hands move gradually; other actions preserve their supplied sequence and costume. Feet/body anchors and visual scale stay stable; move only the parts that animate. Every frame in a directional row must keep the given facing, especially back-left (up-left, NOT up-right). For the one-row turn/call actions only, preserve their gradual changing heading as supplied. Row identities top to bottom:\n1. glide-launch: SOUTH front; ability action. Exact same person, costume, mount and props as this reference row.\n2. glide-launch: NORTH back; ability action. Exact same person, costume, mount and props as this reference row.\n3. glide-launch: WEST left; ability action. Exact same person, costume, mount and props as this reference row.\n4. glide-land: SOUTH front; ability action. Exact same person, costume, mount and props as this reference row.\n5. glide-land: NORTH back; ability action. Exact same person, costume, mount and props as this reference row.\n6. glide-land: WEST left; ability action. Exact same person, costume, mount and props as this reference row.\nFull-body clean polished shaded pixel art, restrained outlines and rich material detail matching the input. Even spacing, generous empty margins, no clipped hair, wings, rods or limbs. Genuine transparent background, no text, labels, grids, scenery, floor shadows, particles or detached debris. Tall atlas 1536x3072, with exactly the requested rows and four columns."
+  }
+]

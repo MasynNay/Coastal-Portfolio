@@ -1,0 +1,7 @@
+{
+  "tool": "Built-in imagegen",
+  "original": "brand/Original.png",
+  "transparent": "brand/MNLogo.png",
+  "prompt": "Use case: background-extraction. Edit target: the supplied MN lotus logo. Remove ONLY the solid black background, including black negative space between petals and between the MN strokes, and replace it with true alpha transparency. Preserve the EXACT lotus silhouette, exact interwoven MN letter shapes, all pointed petals, thin base flourish and small diamond, mint/aqua metallic gradients, fine ribbon texture, bright edge highlights and a restrained soft teal glow. This is a background removal task, not a redesign or a reinterpretation. Do not add or alter any lettering, petals, strokes or symbols. No extra name, no watermark, no frame. Keep every tip intact and leave a small transparent margin around the full logo. Output the unchanged mint logo on an actually transparent background, no black or white rectangle and no baked checkerboard.",
+  "exports": "Run python3 scripts/BrandAssets.py to rebuild site artwork and browser/app icons."
+}

@@ -1,0 +1,23 @@
+[
+  {
+    "key": "rosie",
+    "transparent_background": true,
+    "referenced_image_paths": [
+      "/home/lotus/Projects/masynnay.com/public/world/sprites/rosie.webp"
+    ],
+    "prompt": "Clean up this walking sprite sheet of Rosie, a golden brown long-haired dachshund. Keep the friendly face, LONG low sausage body, very short legs, fluffy brown ears, feathered tail, and rich warm brown fur. Remove all white fluff, gray edge pixels, isolated colored pixels, jagged speckling, stray background debris. Fur highlights should be brown/gold, never white. Draw clean intentional pixel clusters in polished GBA JRPG style, still furry but with a clear dark outline. Exactly 4 columns x 8 rows full-body walk poses in separate evenly spaced cells; rows south, southwest, west, northwest, north, northeast, east, southeast. Four alternating paw poses per row, consistent size and floor baseline. Preserve genuine transparent background, no drop shadows, no text, no grid. Portrait sheet."
+  },
+  {
+    "key": "millie",
+    "transparent_background": true,
+    "referenced_image_paths": [
+      "/home/lotus/Projects/masynnay.com/public/world/sprites/millie.webp"
+    ],
+    "prompt": "Clean up this walking sprite sheet of Millie, a warm chestnut brown long-haired dachshund. Keep the friendly face, LONG low sausage body, very short legs, fluffy brown ears, feathered tail and warm chestnut fur. Remove all white fluff, gray edge pixels, isolated colored pixels, jagged speckling and stray background debris. Fur highlights should be brown/caramel, never white. Draw clean intentional pixel clusters in polished GBA JRPG style, still furry but with a clear dark outline. Exactly 4 columns x 8 rows full-body walk poses in separate evenly spaced cells; rows south, southwest, west, northwest, north, northeast, east, southeast. Four alternating paw poses per row, consistent size and floor baseline. Preserve genuine transparent background, no drop shadows, no text, no grid. Portrait sheet."
+  },
+  {
+    "key": "pond-icon",
+    "transparent_background": true,
+    "prompt": "One beautiful tiny navigational map icon for a GBA-style seaside portfolio town. Top-down oval turquoise pond, deep blue center, sandy pale stone rim, two lily pads with one small pink water lily, a little green reed tuft at the upper edge and subtle clean ripples. Polished cohesive JRPG pixel art. A single compact sprite centered on transparent background, strong silhouette legible at 40 pixels wide. No lettering, no square background, no border, no shadow outside the pond, no multiple views. Landscape oval icon."
+  }
+]

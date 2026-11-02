@@ -1,0 +1,56 @@
+{
+  "name": "coastal-portfolio",
+  "version": "1.0.0",
+  "private": true,
+  "homepage": "https://masynnay.com/",
+  "dependencies": {
+    "@react-pdf/renderer": "^3.4.4",
+    "animate.css": "^4.1.1",
+    "bootstrap": "^5.3.0",
+    "emailjs-com": "^3.2.0",
+    "react": "^18.2.0",
+    "react-bootstrap": "^2.8.0",
+    "react-bootstrap-icons": "^1.8.2",
+    "react-dom": "^18.2.0",
+    "react-multi-carousel": "^2.8.1",
+    "react-on-screen": "^2.1.1",
+    "react-responsive-carousel": "^3.2.23",
+    "react-router-dom": "^6.26.1",
+    "react-router-hash-link": "^2.4.3",
+    "react-scripts": "^5.0.1",
+    "typescript": "^4.9.5",
+    "web-vitals": "^2.1.4"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "prestart": "node scripts/IndexPhotos.cjs",
+    "prebuild": "node scripts/IndexPhotos.cjs",
+    "lint": "eslint src --ext .js --max-warnings 0"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ],
+    "settings": {
+      "testing-library/utils-module": "off",
+      "testing-library/custom-renders": "off",
+      "testing-library/custom-queries": "off"
+    }
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}

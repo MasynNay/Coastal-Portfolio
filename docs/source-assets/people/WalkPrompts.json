@@ -1,0 +1,90 @@
+[
+  {
+    "key": "walk-masyn-west",
+    "name": "masyn",
+    "view": "west",
+    "guide": "people/guides/walk-west.png",
+    "reference": "people/references/masyn/west.png",
+    "prompt": "Use case: identity-preserve. IMAGE 1 is the REQUIRED anatomical pose guide. IMAGE 2 is the identity reference. Draw Masyn: short brown hair, beard, GREEN eyes, forest-green hoodie, filled dark navy pants and light sneakers. in ALL SIXTEEN guide positions. This image is ONLY ONE WALKING CYCLE, exactly FOUR ROWS and FOUR COLUMNS. Sixteen CONSECUTIVE evenly timed fully redrawn full-body WALK poses, left to right then next row. No idle or running rows. strict WEST/LEFT profile, nose pointing LEFT; do not rotate or change camera between frames. Preserve the identity reference's face, hair, outfit, palette and finely shaded polished handheld RPG style. Head/torso/legs each roughly one third of height, sturdy anatomically natural limbs, real alternating foot contacts, passing legs and opposing arm swing, heel lift without knee distortion. All whole-body complete drawings, not separated cutout limbs. Follow guide timing precisely. Identical body scale and head size in every cell. Generous clear cell margins, no merging, no cropping, no captions, no lines or shadows, genuine transparent background. Square composition."
+  },
+  {
+    "key": "walk-masyn-south",
+    "name": "masyn",
+    "view": "south",
+    "guide": "people/guides/walk-south.png",
+    "reference": "people/references/masyn/south.png",
+    "prompt": "Use case: identity-preserve. IMAGE 1 is the REQUIRED anatomical pose guide. IMAGE 2 is the identity reference. Draw Masyn: short brown hair, beard, GREEN eyes, forest-green hoodie, filled dark navy pants and light sneakers. in ALL SIXTEEN guide positions. This image is ONLY ONE WALKING CYCLE, exactly FOUR ROWS and FOUR COLUMNS. Sixteen CONSECUTIVE evenly timed fully redrawn full-body WALK poses, left to right then next row. No idle or running rows. STRAIGHT SOUTH/front, square face and shoulders toward viewer; do not rotate or change camera between frames. Preserve the identity reference's face, hair, outfit, palette and finely shaded polished handheld RPG style. Head/torso/legs each roughly one third of height, sturdy anatomically natural limbs, real alternating foot contacts, passing legs and opposing arm swing, heel lift without knee distortion. All whole-body complete drawings, not separated cutout limbs. Follow guide timing precisely. Identical body scale and head size in every cell. Generous clear cell margins, no merging, no cropping, no captions, no lines or shadows, genuine transparent background. Square composition."
+  },
+  {
+    "key": "walk-costume-ezra-spider-west",
+    "name": "costume-ezra-spider",
+    "view": "west",
+    "guide": "people/guides/walk-west.png",
+    "reference": "people/references/costume-ezra-spider/west.png",
+    "prompt": "Use case: identity-preserve. IMAGE 1 is the REQUIRED anatomical pose guide. IMAGE 2 is the identity reference. Draw Ezra Shadow Spider: long curly brown hair, brown eyes, red/black spider-inspired suit, face uncovered. in ALL SIXTEEN guide positions. This image is ONLY ONE WALKING CYCLE, exactly FOUR ROWS and FOUR COLUMNS. Sixteen CONSECUTIVE evenly timed fully redrawn full-body WALK poses, left to right then next row. No idle or running rows. strict WEST/LEFT profile, nose pointing LEFT; do not rotate or change camera between frames. Preserve the identity reference's face, hair, outfit, palette and finely shaded polished handheld RPG style. Head/torso/legs each roughly one third of height, sturdy anatomically natural limbs, real alternating foot contacts, passing legs and opposing arm swing, heel lift without knee distortion. All whole-body complete drawings, not separated cutout limbs. Follow guide timing precisely. Identical body scale and head size in every cell. Generous clear cell margins, no merging, no cropping, no captions, no lines or shadows, genuine transparent background. Square composition."
+  },
+  {
+    "key": "walk-mi-shell-southwest",
+    "name": "mi-shell",
+    "view": "southwest",
+    "guide": "people/guides/walk-southwest.png",
+    "reference": "people/references/mi-shell/southwest.png",
+    "prompt": "Use case: identity-preserve. IMAGE 1 is the REQUIRED anatomical pose guide. IMAGE 2 is the identity reference. Draw Mi Shell: long straight black hair, glasses, brown eyes, white small-polka-dot dress above the knees, sandals. Legs have real calves and knees; dress flows naturally. in ALL SIXTEEN guide positions. This image is ONLY ONE WALKING CYCLE, exactly FOUR ROWS and FOUR COLUMNS. Sixteen CONSECUTIVE evenly timed fully redrawn full-body WALK poses, left to right then next row. No idle or running rows. SOUTHWEST/front-left diagonal toward viewer and LEFT; do not rotate or change camera between frames. Preserve the identity reference's face, hair, outfit, palette and finely shaded polished handheld RPG style. Head/torso/legs each roughly one third of height, sturdy anatomically natural limbs, real alternating foot contacts, passing legs and opposing arm swing, heel lift without knee distortion. All whole-body complete drawings, not separated cutout limbs. Follow guide timing precisely. Identical body scale and head size in every cell. Generous clear cell margins, no merging, no cropping, no captions, no lines or shadows, genuine transparent background. Square composition."
+  },
+  {
+    "key": "walk-costume-fitzgerald-spider-north",
+    "name": "costume-fitzgerald-spider",
+    "view": "north",
+    "guide": "people/guides/walk-north.png",
+    "reference": "people/references/costume-fitzgerald-spider/north.png",
+    "prompt": "Use case: identity-preserve. IMAGE 1 is the REQUIRED anatomical pose guide. IMAGE 2 is the identity reference. Draw Fitzgerald Blue Spider: tousled brown hair, HAZEL eyes, black suit with cobalt blue panels and web motif, face uncovered. in ALL SIXTEEN guide positions. This image is ONLY ONE WALKING CYCLE, exactly FOUR ROWS and FOUR COLUMNS. Sixteen CONSECUTIVE evenly timed fully redrawn full-body WALK poses, left to right then next row. No idle or running rows. STRAIGHT NORTH/back, square shoulders AWAY from viewer, back of head and clothes, NO face or eyes; do not rotate or change camera between frames. Preserve the identity reference's face, hair, outfit, palette and finely shaded polished handheld RPG style. Head/torso/legs each roughly one third of height, sturdy anatomically natural limbs, real alternating foot contacts, passing legs and opposing arm swing, heel lift without knee distortion. All whole-body complete drawings, not separated cutout limbs. Follow guide timing precisely. Identical body scale and head size in every cell. Generous clear cell margins, no merging, no cropping, no captions, no lines or shadows, genuine transparent background. Square composition."
+  },
+  {
+    "key": "walk-costume-fitzgerald-spider-south",
+    "name": "costume-fitzgerald-spider",
+    "view": "south",
+    "guide": "people/guides/walk-south.png",
+    "reference": "people/references/costume-fitzgerald-spider/south.png",
+    "prompt": "Use case: identity-preserve. IMAGE 1 is the REQUIRED anatomical pose guide. IMAGE 2 is the identity reference. Draw Fitzgerald Blue Spider: tousled brown hair, HAZEL eyes, black suit with cobalt blue panels and web motif, face uncovered. in ALL SIXTEEN guide positions. This image is ONLY ONE WALKING CYCLE, exactly FOUR ROWS and FOUR COLUMNS. Sixteen CONSECUTIVE evenly timed fully redrawn full-body WALK poses, left to right then next row. No idle or running rows. STRAIGHT SOUTH/front, square face and shoulders toward viewer; do not rotate or change camera between frames. Preserve the identity reference's face, hair, outfit, palette and finely shaded polished handheld RPG style. Head/torso/legs each roughly one third of height, sturdy anatomically natural limbs, real alternating foot contacts, passing legs and opposing arm swing, heel lift without knee distortion. All whole-body complete drawings, not separated cutout limbs. Follow guide timing precisely. Identical body scale and head size in every cell. Generous clear cell margins, no merging, no cropping, no captions, no lines or shadows, genuine transparent background. Square composition."
+  },
+  {
+    "key": "walk-fallyn-southwest",
+    "name": "fallyn",
+    "view": "southwest",
+    "guide": "people/guides/walk-southwest.png",
+    "reference": "people/references/fallyn/southwest.png",
+    "prompt": "Use case: identity-preserve. IMAGE 1 is the REQUIRED anatomical pose guide. IMAGE 2 is the identity reference. Draw Fallyn: long brown hair with bangs, GREEN eyes, black dress and sandals. in ALL SIXTEEN guide positions. This image is ONLY ONE WALKING CYCLE, exactly FOUR ROWS and FOUR COLUMNS. Sixteen CONSECUTIVE evenly timed fully redrawn full-body WALK poses, left to right then next row. No idle or running rows. SOUTHWEST/front-left diagonal toward viewer and LEFT; do not rotate or change camera between frames. Preserve the identity reference's face, hair, outfit, palette and finely shaded polished handheld RPG style. Head/torso/legs each roughly one third of height, sturdy anatomically natural limbs, real alternating foot contacts, passing legs and opposing arm swing, heel lift without knee distortion. All whole-body complete drawings, not separated cutout limbs. Follow guide timing precisely. Identical body scale and head size in every cell. Generous clear cell margins, no merging, no cropping, no captions, no lines or shadows, genuine transparent background. Square composition."
+  },
+  {
+    "key": "walk-fallyn-south",
+    "name": "fallyn",
+    "view": "south",
+    "guide": "people/guides/walk-south.png",
+    "reference": "people/references/fallyn/south.png",
+    "prompt": "Use case: identity-preserve. IMAGE 1 is the REQUIRED anatomical pose guide. IMAGE 2 is the identity reference. Draw Fallyn: long brown hair with bangs, GREEN eyes, black dress and sandals. in ALL SIXTEEN guide positions. This image is ONLY ONE WALKING CYCLE, exactly FOUR ROWS and FOUR COLUMNS. Sixteen CONSECUTIVE evenly timed fully redrawn full-body WALK poses, left to right then next row. No idle or running rows. STRAIGHT SOUTH/front, square face and shoulders toward viewer; do not rotate or change camera between frames. Preserve the identity reference's face, hair, outfit, palette and finely shaded polished handheld RPG style. Head/torso/legs each roughly one third of height, sturdy anatomically natural limbs, real alternating foot contacts, passing legs and opposing arm swing, heel lift without knee distortion. All whole-body complete drawings, not separated cutout limbs. Follow guide timing precisely. Identical body scale and head size in every cell. Generous clear cell margins, no merging, no cropping, no captions, no lines or shadows, genuine transparent background. Square composition."
+  },
+  {
+    "key": "walk-fitzgerald-west",
+    "name": "fitzgerald",
+    "view": "west",
+    "guide": "people/guides/walk-west.png",
+    "reference": "people/references/fitzgerald/west.png",
+    "prompt": "Use case: identity-preserve. IMAGE 1 is the REQUIRED anatomical pose guide. IMAGE 2 is the identity reference. Draw Fitzgerald: tousled brown hair, HAZEL eyes, black T-shirt, tan trousers and black/light sneakers. in ALL SIXTEEN guide positions. This image is ONLY ONE WALKING CYCLE, exactly FOUR ROWS and FOUR COLUMNS. Sixteen CONSECUTIVE evenly timed fully redrawn full-body WALK poses, left to right then next row. No idle or running rows. strict WEST/LEFT profile, nose pointing LEFT; do not rotate or change camera between frames. Preserve the identity reference's face, hair, outfit, palette and finely shaded polished handheld RPG style. Head/torso/legs each roughly one third of height, sturdy anatomically natural limbs, real alternating foot contacts, passing legs and opposing arm swing, heel lift without knee distortion. All whole-body complete drawings, not separated cutout limbs. Follow guide timing precisely. Identical body scale and head size in every cell. Generous clear cell margins, no merging, no cropping, no captions, no lines or shadows, genuine transparent background. Square composition."
+  },
+  {
+    "key": "walk-ezra-west",
+    "name": "ezra",
+    "view": "west",
+    "guide": "people/guides/walk-west.png",
+    "reference": "people/references/ezra/west.png",
+    "prompt": "Use case: identity-preserve. IMAGE 1 is the REQUIRED anatomical pose guide. IMAGE 2 is the identity reference. Draw Ezra: long curly brown hair to upper back, brown eyes, cream sweater, dark trousers, sneakers. Keep hair length stable, no giant wig or growing head. in ALL SIXTEEN guide positions. This image is ONLY ONE WALKING CYCLE, exactly FOUR ROWS and FOUR COLUMNS. Sixteen CONSECUTIVE evenly timed fully redrawn full-body WALK poses, left to right then next row. No idle or running rows. strict WEST/LEFT profile, nose pointing LEFT; do not rotate or change camera between frames. Preserve the identity reference's face, hair, outfit, palette and finely shaded polished handheld RPG style. Head/torso/legs each roughly one third of height, sturdy anatomically natural limbs, real alternating foot contacts, passing legs and opposing arm swing, heel lift without knee distortion. All whole-body complete drawings, not separated cutout limbs. Follow guide timing precisely. Identical body scale and head size in every cell. Generous clear cell margins, no merging, no cropping, no captions, no lines or shadows, genuine transparent background. Square composition."
+  },
+  {
+    "key": "walk-ezra-southwest",
+    "name": "ezra",
+    "view": "southwest",
+    "guide": "people/guides/walk-southwest.png",
+    "reference": "people/references/ezra/southwest.png",
+    "prompt": "Use case: identity-preserve. IMAGE 1 is the REQUIRED anatomical pose guide. IMAGE 2 is the identity reference. Draw Ezra: long curly brown hair to upper back, brown eyes, cream sweater, dark trousers, sneakers. Keep hair length stable, no giant wig or growing head. in ALL SIXTEEN guide positions. This image is ONLY ONE WALKING CYCLE, exactly FOUR ROWS and FOUR COLUMNS. Sixteen CONSECUTIVE evenly timed fully redrawn full-body WALK poses, left to right then next row. No idle or running rows. SOUTHWEST/front-left diagonal toward viewer and LEFT; do not rotate or change camera between frames. Preserve the identity reference's face, hair, outfit, palette and finely shaded polished handheld RPG style. Head/torso/legs each roughly one third of height, sturdy anatomically natural limbs, real alternating foot contacts, passing legs and opposing arm swing, heel lift without knee distortion. All whole-body complete drawings, not separated cutout limbs. Follow guide timing precisely. Identical body scale and head size in every cell. Generous clear cell margins, no merging, no cropping, no captions, no lines or shadows, genuine transparent background. Square composition."
+  }
+]

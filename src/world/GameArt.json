@@ -1,0 +1,188 @@
+{
+  "orc-scout": {
+    "src": "/world/games/orc-scout.png",
+    "cw": 320,
+    "ch": 224,
+    "rows": 1,
+    "columns": 8,
+    "cycleFrames": 8,
+    "idleFrame": 0,
+    "bodyHeight": 180,
+    "footY": 216,
+    "frameMs": 110,
+    "smooth": true,
+    "revision": "6026d2f14c97"
+  },
+  "orc-guard": {
+    "src": "/world/games/orc-guard.png",
+    "cw": 320,
+    "ch": 224,
+    "rows": 1,
+    "columns": 8,
+    "cycleFrames": 8,
+    "idleFrame": 0,
+    "bodyHeight": 180,
+    "footY": 216,
+    "frameMs": 110,
+    "smooth": true,
+    "revision": "fe7222a41e19"
+  },
+  "runner-temple": {
+    "src": "/world/games/runner-temple.webp",
+    "width": 960,
+    "height": 1120,
+    "smooth": true,
+    "revision": "43e88f7e4820"
+  },
+  "windfall-chart": {
+    "src": "/world/games/windfall-chart.webp",
+    "width": 960,
+    "height": 960,
+    "smooth": true,
+    "revision": "d103199c88b3"
+  },
+  "runner-air": {
+    "src": "/world/games/runner-air.png",
+    "width": 256,
+    "height": 256,
+    "smooth": true,
+    "revision": "6bf355f57e49"
+  },
+  "runner-water": {
+    "src": "/world/games/runner-water.png",
+    "width": 256,
+    "height": 256,
+    "smooth": true,
+    "revision": "6db143f78c0c"
+  },
+  "runner-fire": {
+    "src": "/world/games/runner-fire.png",
+    "width": 256,
+    "height": 256,
+    "smooth": true,
+    "revision": "f426554527a7"
+  },
+  "runner-earth": {
+    "src": "/world/games/runner-earth.png",
+    "width": 256,
+    "height": 256,
+    "smooth": true,
+    "revision": "07a605d69391"
+  },
+  "runner-crate": {
+    "src": "/world/games/runner-crate.png",
+    "width": 256,
+    "height": 256,
+    "smooth": true,
+    "revision": "b3d8e85b3251"
+  },
+  "runner-rail": {
+    "src": "/world/games/runner-rail.png",
+    "width": 256,
+    "height": 256,
+    "smooth": true,
+    "revision": "dbda31e78767"
+  },
+  "runner-arch": {
+    "src": "/world/games/runner-arch.png",
+    "width": 256,
+    "height": 256,
+    "smooth": true,
+    "revision": "901336fdf4c8"
+  },
+  "rocket-bomb": {
+    "src": "/world/games/rocket-bomb.png",
+    "width": 144,
+    "height": 144,
+    "smooth": true,
+    "revision": "b294d8f594ce"
+  },
+  "rainbow-ball": {
+    "src": "/world/games/rainbow-ball.png",
+    "width": 144,
+    "height": 144,
+    "smooth": true,
+    "revision": "9e6dfa6c0cae"
+  },
+  "orc-scout-hit": {
+    "src": "/world/games/orc-scout-hit.png",
+    "cw": 320,
+    "ch": 224,
+    "rows": 1,
+    "columns": 8,
+    "cycleFrames": 8,
+    "idleFrame": 0,
+    "bodyHeight": 180,
+    "footY": 216,
+    "frameMs": 90,
+    "smooth": true,
+    "revision": "4aa471b8fbd8"
+  },
+  "orc-guard-hit": {
+    "src": "/world/games/orc-guard-hit.png",
+    "cw": 320,
+    "ch": 224,
+    "rows": 1,
+    "columns": 8,
+    "cycleFrames": 8,
+    "idleFrame": 0,
+    "bodyHeight": 180,
+    "footY": 216,
+    "frameMs": 90,
+    "smooth": true,
+    "revision": "2869b065a44e"
+  },
+  "runner-water-aura": {
+    "src": "/world/games/runner-water-aura.png",
+    "width": 1536,
+    "height": 256,
+    "smooth": true,
+    "revision": "a5feab12d8c4",
+    "cw": 192,
+    "ch": 256,
+    "columns": 8,
+    "rows": 1,
+    "cycleFrames": 8,
+    "idleFrame": 0,
+    "footY": 248,
+    "bodyHeight": 240,
+    "frameMs": 105
+  },
+  "rocket-explosion": {
+    "src": "/world/games/rocket-explosion.png",
+    "width": 2048,
+    "height": 256,
+    "smooth": true,
+    "revision": "d6437f50421a",
+    "cw": 256,
+    "ch": 256,
+    "columns": 8,
+    "rows": 1,
+    "cycleFrames": 8,
+    "idleFrame": 0,
+    "footY": 250,
+    "bodyHeight": 244,
+    "frameMs": 110
+  },
+  "arrow": {
+    "src": "/world/games/arrow.png",
+    "width": 316,
+    "height": 100,
+    "smooth": true,
+    "revision": "62836b13410f"
+  },
+  "runner-floor": {
+    "src": "/world/games/runner-floor.webp",
+    "width": 960,
+    "height": 960,
+    "smooth": true,
+    "revision": "b87c4baa4811"
+  },
+  "orc-moria": {
+    "src": "/world/games/orc-moria.webp",
+    "width": 960,
+    "height": 540,
+    "smooth": true,
+    "revision": "0f1bfe6186b0"
+  }
+}

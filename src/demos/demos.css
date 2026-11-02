@@ -1,0 +1,77 @@
+/* Local project-demo launcher and preview windows. These styles contain the
+   embedded projects without leaking their original CSS into the portfolio. */
+.project-demo {
+  min-height: 100dvh;
+  background: #112329;
+  color: #e8efe8;
+  font-family: system-ui, sans-serif;
+  padding: 24px;
+}
+.project-demo-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 25px;
+  max-width: 1500px;
+  margin: 0 auto 22px;
+}
+.project-demo-header h1 {
+  font-size: 30px;
+  margin: 12px 0 6px;
+}
+.project-demo-header p {
+  margin: 0;
+  max-width: 780px;
+  color: #b8cac4;
+  font-size: 15px;
+  line-height: 1.6;
+}
+.project-demo a {
+  color: #c6e0cf;
+  text-decoration: none;
+}
+.project-demo a:hover {
+  text-decoration: underline;
+}
+.project-demo-header nav {
+  display: flex;
+  gap: 18px;
+  flex-wrap: wrap;
+  flex-shrink: 0;
+}
+.project-demo-frame {
+  display: block;
+  width: 100%;
+  height: max(75dvh, 650px);
+  max-width: 1500px;
+  margin: auto;
+  border: 1px solid #4f6d63;
+  border-radius: 12px;
+  background: #e8eee8;
+}
+.project-demo-typing {
+  max-width: 1200px;
+  margin: auto;
+  min-height: 650px;
+  border: 1px solid #4f6d63;
+  border-radius: 12px;
+  overflow: hidden;
+}
+@media (max-width: 700px) {
+  .project-demo {
+    padding: 16px 10px;
+  }
+  .project-demo-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  .project-demo-header h1 {
+    font-size: 25px;
+  }
+  .project-demo-frame {
+    height: 80dvh;
+  }
+  .project-demo-typing {
+    min-height: 80dvh;
+  }
+}

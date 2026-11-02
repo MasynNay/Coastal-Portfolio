@@ -1,0 +1,1310 @@
+.desktop-site {
+  height: 100dvh;
+  min-height: 420px;
+  overflow: hidden;
+  position: relative;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: #0f1112;
+  color: #eef0f1;
+}
+.desktop-site a {
+  color: inherit;
+  text-decoration: none;
+}
+.desktop-site button {
+  font-family: inherit;
+}
+.desktop-site button:focus-visible,
+.desktop-site a:focus-visible {
+  outline: 2px solid #cfd5d8;
+  outline-offset: 4px;
+}
+.desktop-menubar {
+  position: relative;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  padding: 0 22px;
+  height: 42px;
+  background: #131719b3;
+  backdrop-filter: blur(25px);
+  border-bottom: 1px solid #d5dadc16;
+  font-size: 12px;
+  box-shadow: 0 5px 25px #0002;
+}
+.desktop-menubar > a {
+  display: grid;
+  place-items: center;
+}
+.desktop-menubar strong {
+  font-weight: 600;
+}
+.desktop-menu-caption {
+  color: #bbc3c7;
+  font-size: 11px;
+}
+.desktop-menu-right {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+.desktop-menu-right > a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-right: 1px solid #ffffff20;
+  padding-right: 18px;
+  font-size: 11px;
+}
+.desktop-menu-right time {
+  font-size: 11px;
+  white-space: nowrap;
+}
+.desktop-menu-right time span {
+  margin-left: 9px;
+}
+.desktop-workspace {
+  height: calc(100% - 42px);
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse at 20% 100%, #17354038, transparent 55%),
+    radial-gradient(ellipse at 80% 20%, #1a394633, transparent 60%), #0b0e14;
+}
+.desktop-wallpaper {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+.desktop-wallpaper > span {
+  position: absolute;
+  top: 18%;
+  left: 7%;
+  font-size: clamp(50px, 7vw, 110px);
+  font-weight: 750;
+  line-height: 1.05;
+  letter-spacing: -0.07em;
+  color: #9da9af1c;
+}
+.desktop-wallpaper > span em {
+  color: #bfc7cb20;
+  font-family: Georgia, serif;
+  font-weight: 400;
+}
+.desktop-wallpaper-loop {
+  position: absolute;
+  width: 85vw;
+  height: 75vw;
+  left: 15%;
+  top: 24%;
+  border-radius: 43%;
+  border: 70px solid #82919813;
+  box-shadow:
+    inset 20px 20px 40px #cbd1d40a,
+    20px 20px 50px #06070855;
+  transform: rotate(-30deg);
+}
+.desktop-shortcuts {
+  position: absolute;
+  top: 35px;
+  right: 27px;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  width: 90px;
+  z-index: 2;
+}
+.desktop-shortcuts button,
+.desktop-shortcuts a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 4px;
+  background: none;
+  border: 1px solid transparent;
+  border-radius: 9px;
+  color: #f2f4f5;
+  font-size: 12px;
+  text-shadow: 0 2px 5px #000;
+}
+.desktop-shortcuts button:hover,
+.desktop-shortcuts a:hover {
+  background: #ffffff0e;
+  border-color: #ffffff22;
+}
+.desktop-shortcuts svg {
+  font-size: 46px;
+  color: #acb6bb;
+  filter: drop-shadow(0 5px 10px #0005);
+}
+.desktop-shortcuts a svg {
+  color: #c2c9cd;
+}
+.desktop-window {
+  position: absolute;
+  top: var(--window-y);
+  left: var(--window-x);
+  width: min(720px, calc(100% - 30px - var(--window-x)));
+  height: min(580px, calc(100% - 110px - var(--window-y)));
+  min-width: 340px;
+  min-height: 260px;
+  max-width: calc(100% - 20px);
+  max-height: calc(100% - 110px - var(--window-y));
+  border: 1px solid #dde1e325;
+  border-radius: 14px;
+  background: #181c1eed;
+  box-shadow:
+    0 30px 100px #0008,
+    0 3px 15px #0005,
+    inset 0 1px 0 #ffffff08;
+  overflow: hidden;
+  resize: both;
+  display: flex;
+  flex-direction: column;
+  backdrop-filter: blur(35px);
+}
+.desktop-window[hidden] {
+  display: none;
+}
+.desktop-window:focus {
+  outline: none;
+}
+.desktop-window.window-active {
+  border-color: #dbe0e244;
+  box-shadow:
+    0 35px 100px #0009,
+    0 2px 12px #0005,
+    inset 0 1px 0 #ffffff12;
+}
+.desktop-window.window-maximized {
+  top: 12px;
+  left: 12px;
+  width: calc(100% - 24px) !important;
+  height: calc(100% - 116px) !important;
+  max-height: none;
+  resize: none;
+}
+.desktop-window-titlebar {
+  height: 45px;
+  min-height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 0 16px;
+  background: linear-gradient(#ffffff08, #ffffff02);
+  border-bottom: 1px solid #ffffff10;
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+}
+.desktop-window-titlebar:active {
+  cursor: grabbing;
+}
+.desktop-window-titlebar > span {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 12px;
+  color: #dde2e4;
+}
+.desktop-window-titlebar .desktop-window-mode {
+  font-size: 8px;
+  letter-spacing: 0.1em;
+  color: #86959c;
+}
+.desktop-window-controls {
+  display: flex;
+  gap: 8px;
+}
+.desktop-window-controls button {
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  border: 1px solid #0002;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  font-size: 11px;
+  line-height: 10px;
+  color: #0009;
+  font-weight: 700;
+}
+.window-close {
+  background: #ff6059;
+}
+.window-minimize {
+  background: #ffbd2e;
+}
+.window-expand {
+  background: #6a7d86;
+}
+.desktop-window-body {
+  flex: 1;
+  overflow: auto;
+  scrollbar-color: #7b8e9844 transparent;
+  scrollbar-width: thin;
+}
+.desktop-about {
+  padding: 35px 45px;
+  text-align: center;
+}
+.desktop-avatar {
+  width: 88px;
+  height: 88px;
+  display: grid;
+  place-items: center;
+  margin: 0 auto 22px;
+  border: 1px solid #dde2e444;
+  border-radius: 25px;
+  font-size: 40px;
+  font-weight: 650;
+  letter-spacing: -0.07em;
+  background: linear-gradient(135deg, #173f37, #102a33);
+  box-shadow:
+    inset 0 1px 0 #ffffff25,
+    0 15px 30px #0002;
+  color: #e0e4e6;
+}
+.desktop-kicker {
+  color: #99a5ab;
+  font-size: 8px;
+  letter-spacing: 0.17em;
+}
+.desktop-about h1 {
+  margin: 12px 0 8px;
+  font-size: 38px;
+  letter-spacing: -0.055em;
+  font-weight: 650;
+}
+.desktop-about p {
+  color: #b8c0c4;
+  font-size: 13px;
+  line-height: 1.85;
+  margin-bottom: 14px;
+}
+.desktop-about .desktop-about-role {
+  color: #cdd3d6;
+  font-size: 14px;
+  margin-bottom: 24px;
+}
+.desktop-about-actions {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin: 25px 0;
+  flex-wrap: wrap;
+}
+.desktop-about-actions button,
+.desktop-empty button {
+  border: 1px solid #cdd3d644;
+  background: #c1c9cd22;
+  color: #e7eaeb;
+  font-size: 12px;
+  padding: 11px 17px;
+  border-radius: 9px;
+}
+.desktop-about-actions button + button {
+  background: #ffffff05;
+  border-color: #ffffff20;
+}
+.desktop-about .desktop-window-tip {
+  font-size: 10px;
+  color: #89979e;
+}
+.desktop-dock {
+  position: absolute;
+  bottom: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 210;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px 6px;
+  border: 1px solid #e7eaec30;
+  border-radius: 22px;
+  background: linear-gradient(120deg, #afb8bd22, #afb9be18);
+  box-shadow:
+    inset 0 1px 0 #ffffff15,
+    0 12px 40px #0005;
+  backdrop-filter: blur(35px) saturate(140%);
+}
+.desktop-dock > button,
+.desktop-dock > a {
+  position: relative;
+  background: none;
+  border: 0;
+  padding: 0 0 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+}
+.desktop-app-icon {
+  display: grid;
+  place-items: center;
+  width: 54px;
+  height: 54px;
+  border-radius: 14px;
+  box-shadow:
+    inset 0 1px 0 #ffffff55,
+    0 4px 8px #0004;
+  border: 1px solid #ffffff30;
+  transition: transform 0.2s;
+}
+.desktop-app-icon svg {
+  font-size: 28px;
+  color: #f7f8f8;
+  filter: drop-shadow(0 1px 2px #0003);
+}
+.icon-green {
+  background: linear-gradient(145deg, #a0abb1, #667982);
+}
+.icon-black {
+  background: linear-gradient(145deg, #46535a, #1d2224);
+}
+.icon-moss {
+  background: linear-gradient(145deg, #c4cbce, #819098);
+}
+.icon-orange {
+  background: linear-gradient(145deg, #e5a777, #b46c47);
+}
+.icon-teal {
+  background: linear-gradient(145deg, #819098, #4e5c63);
+}
+.desktop-dock button:hover .desktop-app-icon,
+.desktop-dock a:hover .desktop-app-icon,
+.desktop-dock button:focus-visible .desktop-app-icon,
+.desktop-dock a:focus-visible .desktop-app-icon {
+  transform: translateY(-8px) scale(1.12);
+}
+.desktop-dock button > i {
+  position: absolute;
+  bottom: 0;
+  height: 4px;
+  width: 4px;
+  border-radius: 50%;
+  background: transparent;
+}
+.desktop-dock button.app-running > i {
+  background: #dce0e2;
+}
+.dock-tooltip {
+  position: absolute;
+  bottom: calc(100% + 17px);
+  background: #2c3438ee;
+  border: 1px solid #ffffff20;
+  padding: 6px 10px;
+  border-radius: 7px;
+  font-size: 11px;
+  color: #f2f3f4;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s;
+}
+.desktop-dock button:hover .dock-tooltip,
+.desktop-dock a:hover .dock-tooltip,
+.desktop-dock button:focus-visible .dock-tooltip,
+.desktop-dock a:focus-visible .dock-tooltip {
+  opacity: 1;
+}
+.desktop-dock-divider {
+  width: 1px;
+  align-self: stretch;
+  background: #ffffff25;
+  margin: 3px 3px 10px;
+}
+.desktop-empty {
+  position: absolute;
+  top: 28%;
+  left: 20%;
+  right: 20%;
+  text-align: center;
+}
+.desktop-empty h1 {
+  font-size: 36px;
+  letter-spacing: -0.04em;
+}
+.desktop-empty p {
+  margin: 20px 0;
+  font-size: 14px;
+  color: #b6bfc4;
+}
+.desktop-projects.glass-site,
+.desktop-contact.glass-site {
+  min-height: 0;
+  background: none;
+}
+.desktop-projects.glass-site .project {
+  padding: 30px 12px;
+}
+.desktop-projects.glass-site .project h2 {
+  font-size: 30px;
+}
+.desktop-projects.glass-site .project p {
+  font-size: 13px;
+  margin-bottom: 20px;
+}
+.desktop-projects.glass-site .project .container {
+  padding: 0 15px;
+  max-width: none;
+}
+.desktop-projects .glass-project-column {
+  width: 100%;
+}
+.desktop-projects .glass-project-cover {
+  height: 160px;
+}
+.desktop-projects .glass-project-cover > span {
+  font-size: 54px;
+}
+.desktop-projects .glass-project-body {
+  padding: 22px;
+}
+.desktop-projects.glass-site .project video {
+  border-radius: 12px;
+}
+.desktop-projects .animate__animated,
+.desktop-contact .animate__animated {
+  animation: none;
+}
+.desktop-skills {
+  padding: 30px;
+  font-family: monospace;
+}
+.desktop-terminal-path {
+  color: #b6bfc3;
+  font-size: 12px;
+}
+.desktop-skills h2 {
+  font-size: 25px;
+  margin: 20px 0 10px;
+  letter-spacing: -0.04em;
+}
+.desktop-skills p {
+  text-align: left;
+  font-size: 12px;
+  line-height: 1.9;
+  color: #bec5c9;
+}
+.desktop-skills > p {
+  margin-bottom: 25px;
+}
+.desktop-skills section {
+  border-top: 1px solid #ffffff12;
+  padding: 18px 0;
+}
+.desktop-skills h3 {
+  font-size: 14px;
+  margin-bottom: 9px;
+}
+.desktop-skills h3 > span {
+  color: #b0b9be;
+}
+.desktop-terminal-cursor {
+  color: #b0b9be;
+}
+.desktop-resume .resume {
+  background: none;
+  padding: 15px 20px;
+}
+.desktop-resume .header-section {
+  margin: 10px 0 30px;
+  padding-top: 15px;
+}
+.desktop-resume .resume h1 {
+  font-size: 30px;
+}
+.desktop-resume .resume h2 {
+  font-size: 22px;
+  margin-bottom: 18px;
+}
+.desktop-resume .resume h3 {
+  font-size: 17px;
+}
+.desktop-resume .resume h4 {
+  font-size: 17px;
+  color: #d2d7da;
+}
+.desktop-resume .resume p,
+.desktop-resume .resume li {
+  font-size: 12px;
+  line-height: 1.9;
+  color: #c0c8cc;
+}
+.desktop-resume .resume a {
+  color: #d2d8db;
+  overflow-wrap: anywhere;
+}
+.desktop-resume .resume ul {
+  padding-left: 15px;
+}
+.desktop-contact {
+  padding: 25px;
+}
+.desktop-contact > p {
+  color: #c0c8cc;
+  font-size: 13px;
+}
+.desktop-contact > a {
+  display: block;
+  text-align: center;
+  font-size: 12px;
+  margin: 12px 0 0;
+  color: #d3d8db;
+}
+.desktop-contact.glass-site .contact {
+  padding: 25px 0 0;
+}
+.desktop-contact.glass-site .contact .container {
+  padding: 20px 12px;
+  border-radius: 16px;
+}
+.desktop-contact.glass-site .contact h2 {
+  font-size: 25px;
+  margin-bottom: 22px;
+}
+.desktop-contact.glass-site .contact form input,
+.desktop-contact.glass-site .contact form textarea {
+  padding: 12px;
+  font-size: 12px;
+}
+@media (max-width: 900px) {
+  .desktop-menu-caption {
+    display: none;
+  }
+  .desktop-window {
+    width: min(650px, calc(100% - 120px));
+  }
+  .desktop-menubar {
+    gap: 15px;
+  }
+}
+@media (max-width: 700px) {
+  .desktop-menubar {
+    padding: 0 13px;
+    gap: 12px;
+    font-size: 11px;
+  }
+  .desktop-menu-right {
+    gap: 12px;
+  }
+  .desktop-menu-right > svg,
+  .desktop-menu-right time,
+  .desktop-menu-right > a > span {
+    display: none;
+  }
+  .desktop-menu-right > a {
+    padding-right: 0;
+    border: 0;
+    font-size: 17px;
+  }
+  .desktop-shortcuts {
+    top: 25px;
+    right: 20px;
+  }
+  .desktop-window,
+  .desktop-window.window-maximized {
+    top: 18px;
+    left: 12px;
+    width: calc(100% - 24px) !important;
+    height: calc(100% - 120px) !important;
+    min-width: 0;
+    max-width: none;
+    max-height: none;
+    resize: none;
+  }
+  .desktop-window-titlebar {
+    padding: 0 12px;
+    cursor: default;
+  }
+  .desktop-window-titlebar .desktop-window-mode {
+    display: none;
+  }
+  .desktop-window-titlebar > span {
+    margin-right: auto;
+    margin-left: 10px;
+  }
+  .desktop-window-controls button {
+    width: 18px;
+    height: 18px;
+    font-size: 13px;
+  }
+  .desktop-about {
+    padding: 28px 22px;
+  }
+  .desktop-about h1 {
+    font-size: 31px;
+  }
+  .desktop-about p {
+    font-size: 12px;
+  }
+  .desktop-about .desktop-about-role {
+    font-size: 12px;
+  }
+  .desktop-dock {
+    max-width: calc(100% - 18px);
+    gap: 6px;
+    padding: 9px 9px 5px;
+    border-radius: 17px;
+    bottom: 16px;
+  }
+  .desktop-app-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 11px;
+  }
+  .desktop-app-icon svg {
+    font-size: 23px;
+  }
+  .desktop-dock-divider {
+    margin: 2px 0 10px;
+  }
+  .desktop-dock button:hover .desktop-app-icon,
+  .desktop-dock a:hover .desktop-app-icon {
+    transform: translateY(-3px);
+  }
+  .desktop-contact {
+    padding: 20px 15px;
+  }
+  .desktop-skills {
+    padding: 25px 20px;
+  }
+  .desktop-empty {
+    left: 10%;
+    right: 10%;
+  }
+  .desktop-empty h1 {
+    font-size: 28px;
+  }
+}
+@media (max-width: 360px) {
+  .desktop-app-icon {
+    width: 33px;
+    height: 33px;
+    border-radius: 9px;
+  }
+  .desktop-dock {
+    gap: 5px;
+  }
+  .desktop-app-icon svg {
+    font-size: 20px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .desktop-site *,
+  .desktop-site *::before,
+  .desktop-site *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* Physical iMac presentation. The OS remains a contained, interactive screen. */
+.desktop-studio {
+  min-height: 100dvh;
+  padding: clamp(14px, 3vh, 34px) clamp(12px, 3vw, 52px) 0;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse at 25% 20%, #e3eeeb 0, transparent 57%),
+    linear-gradient(125deg, #d3dcd9, #eceae2 65%, #d3dcda);
+}
+.imac-computer {
+  width: min(1480px, 100%);
+  position: relative;
+  isolation: isolate;
+}
+.imac-computer::before {
+  content: "";
+  position: absolute;
+  left: 9%;
+  right: 9%;
+  bottom: -3px;
+  height: 30px;
+  border-radius: 50%;
+  background: #253f4533;
+  filter: blur(16px);
+  z-index: -1;
+}
+.imac-screen-shell {
+  position: relative;
+  padding: 20px 18px 18px;
+  border-radius: 25px 25px 0 0;
+  background: linear-gradient(125deg, #303536, #101718 48%, #262c2e);
+  border: 1px solid #576166;
+  border-bottom: 0;
+  box-shadow:
+    0 28px 70px #203c4438,
+    inset 0 1px 2px #ffffff75;
+}
+.imac-camera {
+  position: absolute;
+  top: 7px;
+  left: calc(50% - 3px);
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #305168, #03070c 65%);
+  box-shadow:
+    0 0 0 2px #171d20,
+    0 1px 2px #ffffff15;
+}
+.imac-chin {
+  height: clamp(45px, 8vh, 72px);
+  display: grid;
+  place-items: center;
+  border-radius: 0 0 23px 23px;
+  border: 1px solid #94a5ac;
+  border-top: 1px solid #d0d9dc;
+  background: linear-gradient(
+    105deg,
+    #d7dfe1,
+    #f0f2f1 42%,
+    #c4d0d4 80%,
+    #b5c3ca
+  );
+  box-shadow:
+    inset 0 1px 0 #fff,
+    0 12px 25px #30485020;
+}
+.imac-chin svg {
+  width: 28px;
+  height: 28px;
+  color: #4e6069;
+  filter: drop-shadow(0 1px 0 #fff9);
+}
+.imac-stand {
+  position: relative;
+  height: 88px;
+  width: 240px;
+  margin: 0 auto;
+  perspective: 400px;
+}
+.imac-stand::before {
+  content: "";
+  position: absolute;
+  width: 98px;
+  height: 78px;
+  left: 71px;
+  top: -2px;
+  clip-path: polygon(12% 0, 88% 0, 100% 100%, 0 100%);
+  background: linear-gradient(
+    90deg,
+    #95a6af,
+    #d3dde1 30%,
+    #e1e7e7 50%,
+    #b5c4cb 87%,
+    #8fa1aa
+  );
+  box-shadow: inset 0 14px 13px #314b5955;
+}
+.imac-stand span {
+  position: absolute;
+  width: 230px;
+  height: 28px;
+  bottom: 0;
+  left: 5px;
+  border-radius: 6px 6px 12px 12px;
+  transform: rotateX(50deg);
+  transform-origin: bottom;
+  background: linear-gradient(#dce4e6, #b5c5cd 70%, #e4ebed 76%, #899da7 92%);
+  border: 1px solid #a9bac3;
+  box-shadow: 0 5px 6px #263d452a;
+}
+.imac-screen-shell .desktop-site {
+  height: calc(100dvh - 215px);
+  min-height: 430px;
+  border-radius: 5px;
+}
+/* Ocean folds keep the dark app windows distinct without burying the wallpaper in black. */
+.desktop-workspace {
+  background:
+    radial-gradient(ellipse at 78% 5%, #99cfca 0, transparent 50%),
+    radial-gradient(ellipse at 10% 110%, #125d70 0, transparent 65%),
+    linear-gradient(135deg, #397c89 0, #467b87 38%, #254b66 74%, #1b3a53);
+}
+.desktop-wallpaper::before,
+.desktop-wallpaper::after {
+  content: "";
+  position: absolute;
+  width: 120%;
+  height: 115%;
+  left: -10%;
+  top: 48%;
+  border-radius: 48%;
+  transform: rotate(-24deg);
+  background: linear-gradient(160deg, #b9dcd16b, #267386bb 30%, #153b60 68%);
+  box-shadow:
+    inset 0 2px 2px #ddf4e09c,
+    0 -25px 70px #b8e5d227;
+}
+.desktop-wallpaper::after {
+  left: 25%;
+  top: 66%;
+  transform: rotate(-30deg);
+  background: linear-gradient(155deg, #87bbb7, #20576f 40%, #122f4b);
+}
+.desktop-wallpaper > span {
+  z-index: 1;
+  top: 17%;
+  left: 8%;
+  font-size: clamp(44px, 6.2vw, 96px);
+  color: #f0f4e8;
+  font-weight: 650;
+  text-shadow: 0 3px 30px #12364440;
+  letter-spacing: -0.065em;
+}
+.desktop-wallpaper > span em {
+  color: #def3e8;
+  font-weight: 400;
+}
+.desktop-wallpaper-loop {
+  display: none;
+}
+.desktop-menubar {
+  background: #143847ab;
+  border-bottom-color: #d9eee533;
+}
+.desktop-menu-caption {
+  color: #d2e4e5;
+}
+.desktop-shortcuts svg {
+  color: #f1f4eb;
+}
+.desktop-empty {
+  top: auto;
+  left: 8%;
+  right: auto;
+  bottom: 120px;
+  text-align: left;
+  max-width: 450px;
+}
+.desktop-empty .desktop-welcome-label {
+  margin: 0 0 6px;
+  color: #f3f5ec;
+  font-size: 16px;
+  font-weight: 600;
+}
+.desktop-empty p {
+  margin: 0 0 14px;
+  color: #dfede9;
+  font-size: 13px;
+  line-height: 1.5;
+}
+.desktop-empty button {
+  background: #eff3e6;
+  color: #183b46;
+  border-color: #ffffffe0;
+  padding: 10px 17px;
+}
+.desktop-dock {
+  background: #e4eeeb35;
+  border-color: #e6f4e95c;
+  box-shadow:
+    0 14px 35px #052c4747,
+    inset 0 1px 0 #ffffff40;
+}
+@media (min-width: 1700px) {
+  .imac-screen-shell .desktop-site {
+    max-height: 1000px;
+  }
+}
+@media (max-width: 700px) {
+  .desktop-studio {
+    padding: 10px 8px 0;
+    align-items: start;
+  }
+  .imac-screen-shell {
+    padding: 14px 7px 7px;
+    border-radius: 18px 18px 0 0;
+  }
+  .imac-camera {
+    top: 4px;
+    width: 4px;
+    height: 4px;
+  }
+  .imac-screen-shell .desktop-site {
+    height: calc(100dvh - 145px);
+    min-height: 480px;
+  }
+  .imac-chin {
+    height: 42px;
+    border-radius: 0 0 17px 17px;
+  }
+  .imac-chin svg {
+    height: 22px;
+    width: 22px;
+  }
+  .imac-stand {
+    height: 65px;
+    transform: scaleX(0.8);
+    transform-origin: top;
+  }
+  .imac-stand::before {
+    height: 59px;
+  }
+  .desktop-wallpaper > span {
+    top: 19%;
+    left: 7%;
+    font-size: clamp(38px, 8vw, 55px);
+  }
+  .desktop-empty {
+    left: 7%;
+    right: 10%;
+    bottom: 105px;
+  }
+}
+/* Distinct app colors make the dock readable against the brighter wallpaper. */
+.desktop-app-icon.icon-blue {
+  background: linear-gradient(145deg, #78baf0, #3269bd);
+  color: #fff;
+}
+.desktop-app-icon.icon-folder {
+  background: linear-gradient(145deg, #89d5ed, #2586b7);
+  color: #eafaff;
+}
+.desktop-app-icon.icon-paper {
+  background: linear-gradient(145deg, #fffef5, #d8e3e2);
+  color: #527384;
+}
+.desktop-app-icon.icon-mail {
+  background: linear-gradient(145deg, #57b8ef, #2465bc);
+  color: #fff;
+}
+.desktop-app-icon.icon-paper svg {
+  color: #42677c;
+}
+.desktop-empty p {
+  text-align: left;
+}
+
+/* Close seated viewpoint: the computer nearly fills the browser, while its bezel stays visible. */
+.desktop-studio {
+  padding: 5px 6px 0;
+  place-items: start center;
+  background: #293c42;
+}
+.imac-computer {
+  width: 100%;
+  max-width: none;
+}
+.imac-screen-shell .desktop-site {
+  height: calc(100dvh - 78px);
+  min-height: 420px;
+}
+.imac-chin {
+  height: 46px;
+}
+.imac-stand {
+  height: 24px;
+  overflow: hidden;
+}
+.desktop-wallpaper::before {
+  animation: mac-tide 19s ease-in-out infinite alternate;
+}
+.desktop-wallpaper::after {
+  animation: mac-tide 27s ease-in-out infinite alternate-reverse;
+}
+.desktop-wallpaper-loop {
+  animation: mac-glow 14s ease-in-out infinite alternate;
+}
+@keyframes mac-tide {
+  from {
+    transform: translate3d(-3%, -2%, 0) rotate(-6deg) scale(1.04);
+  }
+  to {
+    transform: translate3d(5%, 4%, 0) rotate(8deg) scale(1.18);
+  }
+}
+@keyframes mac-glow {
+  from {
+    transform: translate(-4%, 0) rotate(-8deg);
+    opacity: 0.6;
+  }
+  to {
+    transform: translate(5%, -6%) rotate(12deg);
+    opacity: 1;
+  }
+}
+.mac-games,
+.mac-photos {
+  padding: 24px;
+  color: #e6f0eb;
+}
+.mac-games > button,
+.mac-controls button,
+.mac-photos button {
+  padding: 9px 13px;
+  border-radius: 10px;
+  border: 1px solid #ffffff35;
+  background: #426c76;
+  color: white;
+}
+.mac-games iframe {
+  width: 100%;
+  height: min(52vh, 450px);
+  border: 0;
+  border-radius: 12px;
+  margin-top: 12px;
+  background: #0d171c;
+}
+.mac-controls {
+  border: 1px solid #b5d8c8;
+  border-radius: 12px;
+  padding: 15px;
+  margin: 12px 0;
+  background: #243d46;
+}
+.mac-photos img {
+  display: block;
+  width: 100%;
+  height: 45vh;
+  object-fit: contain;
+  margin-bottom: 15px;
+}
+.mac-photos > div {
+  /* Photo controls wrap inside narrow app windows instead of spilling past
+     the iMac bezel; each button keeps its readable label and touch target. */
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+@media (prefers-reduced-motion: reduce) {
+  .desktop-wallpaper::before,
+  .desktop-wallpaper::after,
+  .desktop-wallpaper-loop {
+    animation: none;
+  }
+}
+.imac-screen-shell .desktop-site {
+  height: calc(100dvh - 125px);
+  min-height: 0;
+}
+.mac-games > a {
+  display: inline-block;
+  color: #b5e3d2;
+  margin-left: 15px;
+}
+
+/* Reserve the shortcut column when the iMac is shown on a phone. */
+@media (max-width: 600px) {
+  .desktop-wallpaper > span {
+    width: calc(100% - 122px);
+    max-width: 245px;
+    font-size: clamp(25px, 7vw, 34px);
+    line-height: 1.12;
+    left: 22px;
+  }
+  .desktop-wallpaper > span em {
+    font-size: inherit;
+  }
+}
+
+/* Phones and touch tablets use contained app windows rather than tiny draggable
+   resize handles. The iMac frame stays; every app remains reachable in the dock. */
+@media (any-pointer: coarse), (max-width: 1024px) {
+  .desktop-window,
+  .desktop-window.window-maximized {
+    top: 10px;
+    left: 10px;
+    width: calc(100% - 20px) !important;
+    height: calc(100% - 105px) !important;
+    min-width: 0;
+    min-height: 0;
+    max-width: none;
+    max-height: none;
+    resize: none;
+    backdrop-filter: none;
+    background: #181e23fa;
+  }
+  .desktop-window-titlebar {
+    min-height: 52px;
+    height: 52px;
+    padding: 0 8px;
+    gap: 3px;
+    cursor: default;
+  }
+  .desktop-window-titlebar .desktop-window-mode {
+    display: none;
+  }
+  .desktop-window-controls {
+    gap: 0;
+  }
+  .desktop-window-controls button {
+    width: 44px;
+    height: 44px;
+    border: 0;
+    line-height: 44px;
+    font-size: 12px;
+    background: radial-gradient(
+      circle,
+      var(--control-color) 8px,
+      transparent 9px
+    );
+  }
+  .window-close {
+    --control-color: #ff6059;
+  }
+  .window-minimize {
+    --control-color: #ffbd2e;
+  }
+  .window-expand {
+    --control-color: #8eb3a0;
+  }
+  .desktop-window-body {
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+  }
+  .desktop-dock {
+    max-width: calc(100% - 16px);
+    overflow-x: auto;
+    overflow-y: hidden;
+    gap: 5px;
+    padding: 8px 9px 4px;
+    touch-action: pan-x;
+    scrollbar-width: thin;
+  }
+  .desktop-dock > button,
+  .desktop-dock > a {
+    flex: 0 0 44px;
+    min-height: 54px;
+    padding-bottom: 6px;
+  }
+  .desktop-app-icon {
+    width: 44px;
+    height: 44px;
+  }
+  .desktop-dock-divider {
+    flex-shrink: 0;
+  }
+  .desktop-shortcuts button,
+  .desktop-shortcuts a {
+    min-width: 44px;
+    min-height: 44px;
+  }
+  .desktop-window button,
+  .mac-about-panel button {
+    min-height: 44px;
+    touch-action: manipulation;
+  }
+  .desktop-window input,
+  .desktop-window textarea,
+  .desktop-window select {
+    font-size: 16px !important;
+  }
+  .desktop-window .mac-games,
+  .desktop-window .mac-photos {
+    padding: 18px;
+  }
+  .mac-games iframe {
+    /* Keep the player and its controls inside the phone/tablet app window.
+       The surrounding app body scrolls when the game picker is taller. */
+    height: min(40dvh, 450px);
+    min-height: 0;
+    aspect-ratio: auto;
+  }
+  .mac-photos img {
+    touch-action: pan-y;
+  }
+  .desktop-wallpaper::before,
+  .desktop-wallpaper::after {
+    animation-duration: 30s;
+  }
+}
+@media (max-height: 540px) and (orientation: landscape) {
+  .desktop-studio {
+    padding-top: 4px;
+  }
+  .imac-screen-shell .desktop-site {
+    height: calc(100dvh - 60px);
+  }
+  .imac-chin {
+    height: 28px;
+  }
+  .imac-stand {
+    height: 10px;
+  }
+  .desktop-menubar {
+    height: 36px;
+  }
+  .desktop-window,
+  .desktop-window.window-maximized {
+    top: 4px;
+    height: calc(100% - 80px) !important;
+  }
+  .desktop-dock {
+    bottom: 4px;
+    padding-top: 4px;
+  }
+  .desktop-dock > button,
+  .desktop-dock > a {
+    min-height: 44px;
+  }
+  .desktop-app-icon {
+    width: 38px;
+    height: 38px;
+  }
+  .desktop-empty {
+    bottom: 76px;
+  }
+}
+@media (any-pointer: coarse), (max-width: 700px) {
+  .desktop-dock {
+    scrollbar-color: #87afae transparent;
+  }
+}
+
+/* A game launches beside the cartridge library, in its own bounded app window.
+   Controls and player share the available height rather than sitting below a
+   long cartridge list. The player can still expand itself to fullscreen. */
+.desktop-window .mac-game-player {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 320px;
+  padding: 16px;
+  gap: 12px;
+}
+.mac-game-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+}
+.mac-game-toolbar > button,
+.mac-controls > button {
+  padding: 8px 12px;
+  border: 1px solid #b7d5ca55;
+  border-radius: 9px;
+  background: #355d60;
+  color: #eff7ee;
+}
+.mac-game-toolbar > a {
+  color: #b5e3d2;
+  font-size: 12px;
+}
+.mac-game-player .mac-controls {
+  margin: 0;
+  padding: 10px 12px;
+}
+.mac-game-player .mac-controls p {
+  font-size: 12px;
+  line-height: 1.5;
+  margin: 6px 0;
+}
+.mac-game-player iframe {
+  flex: 1;
+  width: 100%;
+  height: auto;
+  min-height: 160px;
+  margin: 0;
+}

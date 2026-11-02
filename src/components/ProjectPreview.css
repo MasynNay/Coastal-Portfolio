@@ -1,0 +1,71 @@
+/* Crisp app imagery stays contained in its browser frame in both a portfolio
+   card and a smaller Mac window. No iframe or app runtime loads in a cover. */
+.project-preview {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid #d2e0da30;
+  border-radius: 12px;
+  background: #101c22;
+  box-shadow: 0 16px 32px #03101666;
+}
+.project-preview-bar {
+  flex: 0 0 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 0 10px;
+  background: #263539;
+  border-bottom: 1px solid #d2e0da20;
+  color: #c5d5cf;
+  font:
+    500 10px/1 Arial,
+    sans-serif;
+}
+.project-preview-bar small {
+  font-size: 7px;
+  letter-spacing: 1px;
+  white-space: nowrap;
+}
+.project-preview-lights {
+  display: flex;
+  gap: 4px;
+}
+.project-preview-lights i {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #c58178;
+}
+.project-preview-lights i:nth-child(2) {
+  background: #c7b47a;
+}
+.project-preview-lights i:nth-child(3) {
+  background: #84b398;
+}
+.project-preview > img {
+  display: block;
+  flex: 1;
+  width: 100%;
+  height: 0;
+  min-height: 0;
+  object-fit: contain;
+}
+.glass-project-cover.has-preview {
+  height: auto;
+  aspect-ratio: 16 / 10;
+  padding: 18px;
+  background:
+    radial-gradient(ellipse at 40% 0, #42605a, transparent 75%), #14252c;
+}
+.desktop-projects .glass-project-cover.has-preview {
+  height: auto;
+}
+.design-project-art.has-preview {
+  padding: 18px;
+}

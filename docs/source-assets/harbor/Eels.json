@@ -1,0 +1,10 @@
+{
+  "tool": "built-in imagegen",
+  "prompt": "Asset type: polished handheld fantasy pixel-RPG game obstacle sprite sheet, transparent PNG, exactly TWO COLUMNS and TWO ROWS, four separate cells with wide clear gutters. FIRST THREE CELLS (top left, top right, bottom left) are the SAME friendly teal/sea-green MORAY EEL HEAD facing UPWARD in side view with a wide open mouth pointing to TOP of sheet, neck trailing DOWN. Three subtle jaw/gill animation frames. Detailed expressive amber eye, pale cream lower jaw, tiny rounded teeth, mottled scales, restrained cute style like a detailed jumping spider sprite, NOT preschool/baby art, not frightening, no gore. Mouth is always open as if catching bubbles; keep head shape/scale same across3poses. FOURTH CELL bottom-right is a straight vertical length of matching eel BODY, same neck width as head, cylindrical teal mottled skin, subtle side fin, straight top/bottom edges for tiling under the head; no head or tail. Head neck should connect to this body tile smoothly. Design for flappy-bird-like game: these eels rise from bottom water or hang from above as obstacles instead of pipes, so heads need a readable silhouette at about80pixels wide. Exactly2x2cells, no text/labels, no scenery/water/pipes, genuine transparent background, all components complete and separate. Three head drawings and one skin/body segment only.",
+  "source": "Eels.png",
+  "published": [
+    "/world/arcade/EelHeads.png",
+    "/world/arcade/EelBody.png"
+  ],
+  "packing": "Three complete head poses share a 128-pixel cell; the matching body is a separate 64\u00d7128 texture. Neither human animation nor the shared world tiles are altered by this importer."
+}

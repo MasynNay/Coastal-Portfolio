@@ -1,0 +1,389 @@
+/* TypeNinja inside the Mac Mode window: typing surface, live results and
+   responsive controls. The host window owns positioning; this app owns its content. */
+.typing-app {
+  --ninja-sage: #b0c6a3;
+  padding: 24px 28px;
+  color: #e9edf0;
+  background:
+    radial-gradient(ellipse at 100% 0, #77948528, transparent 55%), #263744;
+  min-height: 100%;
+}
+.typing-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 20px;
+}
+.typing-header img {
+  width: 66px;
+  height: 66px;
+  object-fit: contain;
+}
+.typing-header h1 {
+  margin: 2px 0 4px;
+  font-size: 30px;
+  letter-spacing: -0.04em;
+  font-weight: 700;
+}
+.typing-header > div > span,
+.typing-result > span {
+  color: var(--ninja-sage);
+  font-size: 9px;
+  letter-spacing: 0.2em;
+}
+.typing-header p {
+  margin: 0;
+  font-size: 12px;
+  color: #b6c3cb;
+}
+.typing-app button {
+  min-height: 40px;
+  padding: 8px 12px;
+  border: 1px solid #c7d7e12b;
+  border-radius: 9px;
+  background: #c4d0d310;
+  color: #e4ecee;
+  font-size: 12px;
+  font-family: inherit;
+  transition: background 0.15s;
+}
+.typing-app button:hover {
+  background: #c4d0d327;
+}
+.typing-app button:focus-visible {
+  outline: 2px solid var(--ninja-sage);
+  outline-offset: 3px;
+}
+.typing-app button:disabled {
+  opacity: 0.55;
+  cursor: default;
+}
+.typing-app button[aria-pressed="true"] {
+  background: var(--ninja-sage);
+  color: #22332d;
+  border-color: transparent;
+}
+.typing-app .typing-scores-toggle {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  margin-left: auto;
+}
+.typing-settings {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+.typing-settings > div {
+  display: flex;
+  gap: 5px;
+}
+.typing-metrics {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  margin: 12px 0;
+}
+.typing-metrics > div {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.typing-metrics strong {
+  font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+  font-size: 29px;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+}
+.typing-metrics strong small {
+  font-size: 15px;
+  margin-left: 2px;
+}
+.typing-metrics > div > span {
+  color: #acbbc3;
+  font-size: 10px;
+}
+.typing-time-track {
+  overflow: hidden;
+  height: 3px;
+  background: #c5d1d31a;
+  border-radius: 10px;
+  margin: 14px 0;
+}
+.typing-time-track span {
+  display: block;
+  height: 100%;
+  background: var(--ninja-sage);
+  transform-origin: left;
+  transition: transform 0.1s linear;
+}
+.typing-board {
+  position: relative;
+  border: 1px solid #b9c6cd4d;
+  border-radius: 12px;
+  background: #172832aa;
+  padding: 18px;
+  transition: border-color 0.2s;
+}
+.typing-board.is-focused {
+  border-color: var(--ninja-sage);
+  box-shadow: 0 0 0 3px #b0c6a310;
+}
+.typing-words {
+  position: relative;
+  height: 126px;
+  overflow: hidden;
+  color: #8a9ea9;
+  font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+  font-size: 20px;
+  line-height: 42px;
+}
+.typing-word {
+  display: inline-block;
+  margin-right: 0.65em;
+  white-space: pre;
+}
+.typing-word .is-correct {
+  color: #c2dbad;
+}
+.typing-word .is-wrong {
+  color: #ff8fa4;
+  text-decoration: underline;
+  text-decoration-color: #ff8fa455;
+}
+.typing-word .is-caret {
+  position: relative;
+}
+.typing-word .is-caret::before {
+  content: "";
+  position: absolute;
+  width: 2px;
+  height: 1.1em;
+  top: 0;
+  left: -1px;
+  background: #f0ddab;
+}
+.typing-board textarea {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  resize: none;
+  opacity: 0.01;
+  cursor: text;
+  font-size: 16px;
+  border: 0;
+  padding: 0;
+  color: transparent;
+  caret-color: transparent;
+  background: transparent;
+}
+.typing-focus-hint {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  text-align: center;
+  background: #172832c9;
+  backdrop-filter: blur(3px);
+  font-size: 13px;
+  color: #e4ecee;
+  pointer-events: none;
+}
+.typing-app .typing-hint {
+  font-size: 11px;
+  line-height: 1.6;
+  color: #aebdc7;
+  margin: 11px 0;
+}
+.typing-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 12px;
+}
+.typing-actions button {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+.typing-actions .typing-start {
+  margin-left: auto;
+  background: var(--ninja-sage);
+  color: #21322b;
+}
+.typing-result {
+  padding: 25px 18px;
+  border: 1px solid #b0c6a34d;
+  border-radius: 12px;
+  background: #abc69a0d;
+  text-align: center;
+}
+.typing-result h2 {
+  font-family: ui-monospace, monospace;
+  font-size: 48px;
+  margin: 8px 0;
+}
+.typing-result h2 small {
+  font-size: 17px;
+  color: var(--ninja-sage);
+}
+.typing-result p {
+  font-size: 12px;
+  color: #c0cbd1;
+  margin: 8px 0 0;
+}
+.typing-scoreboard {
+  margin-top: 22px;
+  border-top: 1px solid #b9c6cd29;
+  padding-top: 16px;
+}
+.typing-scoreboard h2 {
+  font-size: 17px;
+}
+.typing-scoreboard h2 small {
+  font-size: 11px;
+  color: #acbbc3;
+  margin-left: 8px;
+}
+.typing-scoreboard ol {
+  list-style: none;
+  padding: 0;
+  margin: 12px 0 0;
+}
+.typing-scoreboard li {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 9px 0;
+  border-bottom: 1px solid #b9c6cd16;
+  font-size: 12px;
+}
+.typing-scoreboard li > span:last-child {
+  color: #acbbc3;
+}
+.typing-scoreboard p {
+  font-size: 12px;
+  color: #acbbc3;
+}
+.typing-score-undo {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  font-size: 12px;
+  margin-top: 12px;
+}
+.typing-scoreboard li button {
+  min-height: 32px;
+  padding: 4px 8px;
+  font-size: 10px;
+}
+.typing-footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+  padding-top: 12px;
+  border-top: 1px solid #b9c6cd22;
+  font-size: 10px;
+  color: #9eb1bc;
+}
+.typing-footer a {
+  color: #c8d8bd;
+}
+@media (max-height: 850px) {
+  .typing-app {
+    padding: 12px 18px;
+  }
+  .typing-header {
+    margin-bottom: 8px;
+    gap: 10px;
+  }
+  .typing-header img {
+    width: 40px;
+    height: 40px;
+  }
+  .typing-header h1 {
+    font-size: 23px;
+    margin: 0 0 2px;
+  }
+  .typing-header p {
+    font-size: 10px;
+  }
+  .typing-app button {
+    min-height: 32px;
+    padding: 6px 10px;
+  }
+  .typing-settings {
+    margin-bottom: 8px;
+  }
+  .typing-metrics {
+    margin: 6px 0;
+  }
+  .typing-metrics strong {
+    font-size: 24px;
+  }
+  .typing-time-track {
+    margin: 8px 0;
+  }
+  .typing-board {
+    padding: 10px 12px;
+  }
+  .typing-words {
+    height: 64px;
+    line-height: 32px;
+    font-size: 18px;
+  }
+  .typing-app .typing-hint,
+  .typing-footer {
+    display: none;
+  }
+  .typing-actions {
+    margin-top: 10px;
+  }
+}
+@media (any-pointer: coarse), (max-width: 600px) {
+  .typing-app button {
+    min-height: 44px;
+  }
+}
+@media (max-width: 600px) {
+  .typing-app {
+    padding: 18px 14px;
+  }
+  .typing-header {
+    gap: 9px;
+    flex-wrap: wrap;
+  }
+  .typing-header img {
+    width: 48px;
+    height: 48px;
+  }
+  .typing-header h1 {
+    font-size: 25px;
+  }
+  .typing-header p {
+    font-size: 10px;
+  }
+  .typing-header .typing-scores-toggle {
+    min-height: 44px;
+    padding: 8px;
+  }
+  .typing-app button {
+    min-height: 44px;
+  }
+  .typing-words {
+    font-size: 17px;
+  }
+  .typing-metrics strong {
+    font-size: 25px;
+  }
+  .typing-board {
+    padding: 12px;
+  }
+}

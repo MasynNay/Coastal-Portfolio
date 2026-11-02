@@ -1,0 +1,151 @@
+[
+  {
+    "asset": "masyn",
+    "prompt": "Use case: identity-preserve. Asset type: a complete transparent 2D RPG action sprite sheet for Masyn in his dark forest green hoodie, dark pants and sneakers. Reference image is the exact character identity and costume; preserve this person's face, hair, body proportions, colors, garment detailing, outlines and illustrated RPG texture. Change only the arm gesture. Exactly EIGHT full-body frames in a strict FOUR-COLUMN TWO-ROW grid, chronological order left to right then next row. Character faces SOUTH/front in EVERY frame with feet planted and body stationary, no body turns, no stepping, no duplicate limbs. Animate the Hunger Games three-finger salute with LEFT HAND (viewer right): index, middle, ring fingers extended together; thumb and little finger curled into palm. Frame 1 left hand rising from waist; frame 2 fingertips touching lips; frame 3 lifting forearm; frame 4 raised beside forehead, palm forward, THREE straight fingers together very clear; frame 5 held overhead same THREE fingers visible; frame 6 same respectful held salute; frame 7 lowering hand past shoulder; frame 8 arm returns naturally to side. Right hand relaxed at side throughout. No generic wave, no peace sign, no fist, no five fingers raised. Each frame must be a separate complete figure on transparent alpha, generous clear gutters, identical body scale, head height and foot baseline across all eight cells; raised hand must not touch top edge or neighbors. Keep the same polished hand-drawn sprite style as the reference. No scenery, text, labels, floor shadows or checkerboard. Weapons/accessories stay stowed so the LEFT hand is visibly making the gesture.",
+    "path": "docs/source-assets/people/masyn/salute.png",
+    "source": "docs/source-assets/people/masyn/salute.png",
+    "generator": "built-in image_gen",
+    "mirrorFrames": [
+      4,
+      5
+    ]
+  },
+  {
+    "asset": "mi-shell",
+    "prompt": "Use case: identity-preserve. Asset type: a complete transparent 2D RPG action sprite sheet for Mi Shell in her white dotted dress, black bow, glasses and sandals. Reference image is the exact character identity and costume; preserve this person's face, hair, body proportions, colors, garment detailing, outlines and illustrated RPG texture. Change only the arm gesture. Exactly EIGHT full-body frames in a strict FOUR-COLUMN TWO-ROW grid, chronological order left to right then next row. Character faces SOUTH/front in EVERY frame with feet planted and body stationary, no body turns, no stepping, no duplicate limbs. Animate the Hunger Games three-finger salute with LEFT HAND (viewer right): index, middle, ring fingers extended together; thumb and little finger curled into palm. Frame 1 left hand rising from waist; frame 2 fingertips touching lips; frame 3 lifting forearm; frame 4 raised beside forehead, palm forward, THREE straight fingers together very clear; frame 5 held overhead same THREE fingers visible; frame 6 same respectful held salute; frame 7 lowering hand past shoulder; frame 8 arm returns naturally to side. Right hand relaxed at side throughout. No generic wave, no peace sign, no fist, no five fingers raised. Each frame must be a separate complete figure on transparent alpha, generous clear gutters, identical body scale, head height and foot baseline across all eight cells; raised hand must not touch top edge or neighbors. Keep the same polished hand-drawn sprite style as the reference. No scenery, text, labels, floor shadows or checkerboard. Weapons/accessories stay stowed so the LEFT hand is visibly making the gesture.",
+    "path": "docs/source-assets/people/mi-shell/salute.png",
+    "source": "docs/source-assets/people/mi-shell/salute.png",
+    "generator": "built-in image_gen",
+    "mirrorFrames": [
+      3,
+      4,
+      5,
+      6
+    ]
+  },
+  {
+    "asset": "ezra",
+    "prompt": "Use case: identity-preserve. Asset type: a complete transparent 2D RPG action sprite sheet for Ezra with long curly brown hair, cream sweater and dark trousers. Reference image is the exact character identity and costume; preserve this person's face, hair, body proportions, colors, garment detailing, outlines and illustrated RPG texture. Change only the arm gesture. Exactly EIGHT full-body frames in a strict FOUR-COLUMN TWO-ROW grid, chronological order left to right then next row. Character faces SOUTH/front in EVERY frame with feet planted and body stationary, no body turns, no stepping, no duplicate limbs. Animate the Hunger Games three-finger salute with LEFT HAND (viewer right): index, middle, ring fingers extended together; thumb and little finger curled into palm. Frame 1 left hand rising from waist; frame 2 fingertips touching lips; frame 3 lifting forearm; frame 4 raised beside forehead, palm forward, THREE straight fingers together very clear; frame 5 held overhead same THREE fingers visible; frame 6 same respectful held salute; frame 7 lowering hand past shoulder; frame 8 arm returns naturally to side. Right hand relaxed at side throughout. No generic wave, no peace sign, no fist, no five fingers raised. Each frame must be a separate complete figure on transparent alpha, generous clear gutters, identical body scale, head height and foot baseline across all eight cells; raised hand must not touch top edge or neighbors. Keep the same polished hand-drawn sprite style as the reference. No scenery, text, labels, floor shadows or checkerboard. Weapons/accessories stay stowed so the LEFT hand is visibly making the gesture.",
+    "path": "docs/source-assets/people/ezra/salute.png",
+    "source": "docs/source-assets/people/ezra/salute.png",
+    "generator": "built-in image_gen",
+    "mirrorFrames": [
+      3,
+      4,
+      5,
+      6
+    ]
+  },
+  {
+    "asset": "fallyn",
+    "prompt": "Use case: identity-preserve. Asset type: a complete transparent 2D RPG action sprite sheet for Fallyn with straight long brown hair, black dress and sandals. Reference image is the exact character identity and costume; preserve this person's face, hair, body proportions, colors, garment detailing, outlines and illustrated RPG texture. Change only the arm gesture. Exactly EIGHT full-body frames in a strict FOUR-COLUMN TWO-ROW grid, chronological order left to right then next row. Character faces SOUTH/front in EVERY frame with feet planted and body stationary, no body turns, no stepping, no duplicate limbs. Animate the Hunger Games three-finger salute with LEFT HAND (viewer right): index, middle, ring fingers extended together; thumb and little finger curled into palm. Frame 1 left hand rising from waist; frame 2 fingertips touching lips; frame 3 lifting forearm; frame 4 raised beside forehead, palm forward, THREE straight fingers together very clear; frame 5 held overhead same THREE fingers visible; frame 6 same respectful held salute; frame 7 lowering hand past shoulder; frame 8 arm returns naturally to side. Right hand relaxed at side throughout. No generic wave, no peace sign, no fist, no five fingers raised. Each frame must be a separate complete figure on transparent alpha, generous clear gutters, identical body scale, head height and foot baseline across all eight cells; raised hand must not touch top edge or neighbors. Keep the same polished hand-drawn sprite style as the reference. No scenery, text, labels, floor shadows or checkerboard. Weapons/accessories stay stowed so the LEFT hand is visibly making the gesture.",
+    "path": "docs/source-assets/people/fallyn/salute.png",
+    "source": "docs/source-assets/people/fallyn/salute.png",
+    "generator": "built-in image_gen",
+    "mirrorFrames": [
+      4,
+      5
+    ]
+  },
+  {
+    "asset": "fitzgerald",
+    "prompt": "Use case: identity-preserve. Asset type: a complete transparent 2D RPG action sprite sheet for Fitzgerald with short spiky brown hair, black tee and tan trousers. Reference image is the exact character identity and costume; preserve this person's face, hair, body proportions, colors, garment detailing, outlines and illustrated RPG texture. Change only the arm gesture. Exactly EIGHT full-body frames in a strict FOUR-COLUMN TWO-ROW grid, chronological order left to right then next row. Character faces SOUTH/front in EVERY frame with feet planted and body stationary, no body turns, no stepping, no duplicate limbs. Animate the Hunger Games three-finger salute with LEFT HAND (viewer right): index, middle, ring fingers extended together; thumb and little finger curled into palm. Frame 1 left hand rising from waist; frame 2 fingertips touching lips; frame 3 lifting forearm; frame 4 raised beside forehead, palm forward, THREE straight fingers together very clear; frame 5 held overhead same THREE fingers visible; frame 6 same respectful held salute; frame 7 lowering hand past shoulder; frame 8 arm returns naturally to side. Right hand relaxed at side throughout. No generic wave, no peace sign, no fist, no five fingers raised. Each frame must be a separate complete figure on transparent alpha, generous clear gutters, identical body scale, head height and foot baseline across all eight cells; raised hand must not touch top edge or neighbors. Keep the same polished hand-drawn sprite style as the reference. No scenery, text, labels, floor shadows or checkerboard. Weapons/accessories stay stowed so the LEFT hand is visibly making the gesture.",
+    "path": "docs/source-assets/people/fitzgerald/salute.png",
+    "source": "docs/source-assets/people/fitzgerald/salute.png",
+    "generator": "built-in image_gen",
+    "mirrorFrames": []
+  },
+  {
+    "asset": "costume-airbender",
+    "prompt": "Use case: identity-preserve. Asset type: a complete transparent 2D RPG action sprite sheet for Masyn in orange and red airbender robes, forehead arrow, keep brown hair and beard. Reference image is the exact character identity and costume; preserve this person's face, hair, body proportions, colors, garment detailing, outlines and illustrated RPG texture. Change only the arm gesture. Exactly EIGHT full-body frames in a strict FOUR-COLUMN TWO-ROW grid, chronological order left to right then next row. Character faces SOUTH/front in EVERY frame with feet planted and body stationary, no body turns, no stepping, no duplicate limbs. Animate the Hunger Games three-finger salute with LEFT HAND (viewer right): index, middle, ring fingers extended together; thumb and little finger curled into palm. Frame 1 left hand rising from waist; frame 2 fingertips touching lips; frame 3 lifting forearm; frame 4 raised beside forehead, palm forward, THREE straight fingers together very clear; frame 5 held overhead same THREE fingers visible; frame 6 same respectful held salute; frame 7 lowering hand past shoulder; frame 8 arm returns naturally to side. Right hand relaxed at side throughout. No generic wave, no peace sign, no fist, no five fingers raised. Each frame must be a separate complete figure on transparent alpha, generous clear gutters, identical body scale, head height and foot baseline across all eight cells; raised hand must not touch top edge or neighbors. Keep the same polished hand-drawn sprite style as the reference. No scenery, text, labels, floor shadows or checkerboard. Weapons/accessories stay stowed so the LEFT hand is visibly making the gesture.",
+    "path": "docs/source-assets/people/costume-airbender/salute.png",
+    "source": "docs/source-assets/people/costume-airbender/salute.png",
+    "generator": "built-in image_gen",
+    "mirrorFrames": []
+  },
+  {
+    "asset": "costume-skills",
+    "prompt": "Use case: identity-preserve. Asset type: a complete transparent 2D RPG action sprite sheet for Masyn in woodland archer green and brown leather, bow stowed on back. Reference image is the exact character identity and costume; preserve this person's face, hair, body proportions, colors, garment detailing, outlines and illustrated RPG texture. Change only the arm gesture. Exactly EIGHT full-body frames in a strict FOUR-COLUMN TWO-ROW grid, chronological order left to right then next row. Character faces SOUTH/front in EVERY frame with feet planted and body stationary, no body turns, no stepping, no duplicate limbs. Animate the Hunger Games three-finger salute with LEFT HAND (viewer right): index, middle, ring fingers extended together; thumb and little finger curled into palm. Frame 1 left hand rising from waist; frame 2 fingertips touching lips; frame 3 lifting forearm; frame 4 raised beside forehead, palm forward, THREE straight fingers together very clear; frame 5 held overhead same THREE fingers visible; frame 6 same respectful held salute; frame 7 lowering hand past shoulder; frame 8 arm returns naturally to side. Right hand relaxed at side throughout. No generic wave, no peace sign, no fist, no five fingers raised. Each frame must be a separate complete figure on transparent alpha, generous clear gutters, identical body scale, head height and foot baseline across all eight cells; raised hand must not touch top edge or neighbors. Keep the same polished hand-drawn sprite style as the reference. No scenery, text, labels, floor shadows or checkerboard. Weapons/accessories stay stowed so the LEFT hand is visibly making the gesture.",
+    "path": "docs/source-assets/people/costume-skills/salute.png",
+    "source": "docs/source-assets/people/costume-skills/salute.png",
+    "generator": "built-in image_gen",
+    "mirrorFrames": [
+      4,
+      5,
+      6
+    ]
+  },
+  {
+    "asset": "costume-portfolio",
+    "prompt": "Use case: identity-preserve. Asset type: a complete transparent 2D RPG action sprite sheet for Masyn in red white cap, blue vest, jeans; keep adult brown beard and green eyes. Reference image is the exact character identity and costume; preserve this person's face, hair, body proportions, colors, garment detailing, outlines and illustrated RPG texture. Change only the arm gesture. Exactly EIGHT full-body frames in a strict FOUR-COLUMN TWO-ROW grid, chronological order left to right then next row. Character faces SOUTH/front in EVERY frame with feet planted and body stationary, no body turns, no stepping, no duplicate limbs. Animate the Hunger Games three-finger salute with LEFT HAND (viewer right): index, middle, ring fingers extended together; thumb and little finger curled into palm. Frame 1 left hand rising from waist; frame 2 fingertips touching lips; frame 3 lifting forearm; frame 4 raised beside forehead, palm forward, THREE straight fingers together very clear; frame 5 held overhead same THREE fingers visible; frame 6 same respectful held salute; frame 7 lowering hand past shoulder; frame 8 arm returns naturally to side. Right hand relaxed at side throughout. No generic wave, no peace sign, no fist, no five fingers raised. Each frame must be a separate complete figure on transparent alpha, generous clear gutters, identical body scale, head height and foot baseline across all eight cells; raised hand must not touch top edge or neighbors. Keep the same polished hand-drawn sprite style as the reference. No scenery, text, labels, floor shadows or checkerboard. Weapons/accessories stay stowed so the LEFT hand is visibly making the gesture.",
+    "path": "docs/source-assets/people/costume-portfolio/salute.png",
+    "source": "docs/source-assets/people/costume-portfolio/salute.png",
+    "generator": "built-in image_gen",
+    "mirrorFrames": []
+  },
+  {
+    "asset": "costume-resume",
+    "prompt": "Use case: identity-preserve. Asset type: a complete transparent 2D RPG action sprite sheet for Masyn in navy wizard robes, wand stowed; keep brown hair and beard. Reference image is the exact character identity and costume; preserve this person's face, hair, body proportions, colors, garment detailing, outlines and illustrated RPG texture. Change only the arm gesture. Exactly EIGHT full-body frames in a strict FOUR-COLUMN TWO-ROW grid, chronological order left to right then next row. Character faces SOUTH/front in EVERY frame with feet planted and body stationary, no body turns, no stepping, no duplicate limbs. Animate the Hunger Games three-finger salute with LEFT HAND (viewer right): index, middle, ring fingers extended together; thumb and little finger curled into palm. Frame 1 left hand rising from waist; frame 2 fingertips touching lips; frame 3 lifting forearm; frame 4 raised beside forehead, palm forward, THREE straight fingers together very clear; frame 5 held overhead same THREE fingers visible; frame 6 same respectful held salute; frame 7 lowering hand past shoulder; frame 8 arm returns naturally to side. Right hand relaxed at side throughout. No generic wave, no peace sign, no fist, no five fingers raised. Each frame must be a separate complete figure on transparent alpha, generous clear gutters, identical body scale, head height and foot baseline across all eight cells; raised hand must not touch top edge or neighbors. Keep the same polished hand-drawn sprite style as the reference. No scenery, text, labels, floor shadows or checkerboard. Weapons/accessories stay stowed so the LEFT hand is visibly making the gesture.",
+    "path": "docs/source-assets/people/costume-resume/salute.png",
+    "source": "docs/source-assets/people/costume-resume/salute.png",
+    "generator": "built-in image_gen",
+    "mirrorFrames": [
+      4,
+      5
+    ]
+  },
+  {
+    "asset": "costume-contact",
+    "prompt": "Use case: identity-preserve. Asset type: a complete transparent 2D RPG action sprite sheet for Masyn in gold teal ocean king armor and crown, trident stowed; keep brown hair and beard. Reference image is the exact character identity and costume; preserve this person's face, hair, body proportions, colors, garment detailing, outlines and illustrated RPG texture. Change only the arm gesture. Exactly EIGHT full-body frames in a strict FOUR-COLUMN TWO-ROW grid, chronological order left to right then next row. Character faces SOUTH/front in EVERY frame with feet planted and body stationary, no body turns, no stepping, no duplicate limbs. Animate the Hunger Games three-finger salute with LEFT HAND (viewer right): index, middle, ring fingers extended together; thumb and little finger curled into palm. Frame 1 left hand rising from waist; frame 2 fingertips touching lips; frame 3 lifting forearm; frame 4 raised beside forehead, palm forward, THREE straight fingers together very clear; frame 5 held overhead same THREE fingers visible; frame 6 same respectful held salute; frame 7 lowering hand past shoulder; frame 8 arm returns naturally to side. Right hand relaxed at side throughout. No generic wave, no peace sign, no fist, no five fingers raised. Each frame must be a separate complete figure on transparent alpha, generous clear gutters, identical body scale, head height and foot baseline across all eight cells; raised hand must not touch top edge or neighbors. Keep the same polished hand-drawn sprite style as the reference. No scenery, text, labels, floor shadows or checkerboard. Weapons/accessories stay stowed so the LEFT hand is visibly making the gesture.",
+    "path": "docs/source-assets/people/costume-contact/salute.png",
+    "source": "docs/source-assets/people/costume-contact/salute.png",
+    "generator": "built-in image_gen",
+    "mirrorFrames": [
+      4,
+      5
+    ]
+  },
+  {
+    "asset": "link",
+    "prompt": "Use case: identity-preserve. Asset type: a complete transparent 2D RPG action sprite sheet for Masyn in green Hyrulian adventurer tunic and fully fitted green cap; adult brown beard and green eyes. Reference image is the exact character identity and costume; preserve this person's face, hair, body proportions, colors, garment detailing, outlines and illustrated RPG texture. Change only the arm gesture. Exactly EIGHT full-body frames in a strict FOUR-COLUMN TWO-ROW grid, chronological order left to right then next row. Character faces SOUTH/front in EVERY frame with feet planted and body stationary, no body turns, no stepping, no duplicate limbs. Animate the Hunger Games three-finger salute with LEFT HAND (viewer right): index, middle, ring fingers extended together; thumb and little finger curled into palm. Frame 1 left hand rising from waist; frame 2 fingertips touching lips; frame 3 lifting forearm; frame 4 raised beside forehead, palm forward, THREE straight fingers together very clear; frame 5 held overhead same THREE fingers visible; frame 6 same respectful held salute; frame 7 lowering hand past shoulder; frame 8 arm returns naturally to side. Right hand relaxed at side throughout. No generic wave, no peace sign, no fist, no five fingers raised. Each frame must be a separate complete figure on transparent alpha, generous clear gutters, identical body scale, head height and foot baseline across all eight cells; raised hand must not touch top edge or neighbors. Keep the same polished hand-drawn sprite style as the reference. No scenery, text, labels, floor shadows or checkerboard. Weapons/accessories stay stowed so the LEFT hand is visibly making the gesture.",
+    "path": "docs/source-assets/people/link/salute.png",
+    "source": "docs/source-assets/people/link/salute.png",
+    "generator": "built-in image_gen",
+    "mirrorFrames": []
+  },
+  {
+    "asset": "costume-ezra-spider",
+    "prompt": "Reference-matched eight-pose front-facing three-finger greeting: hand rises, touches lips, lifts and holds index/middle/ring fingers, then lowers. Same curly hair and black/red outfit, feet planted, transparent background.",
+    "path": "docs/source-assets/people/costume-ezra-spider/salute.png",
+    "source": "docs/source-assets/people/costume-ezra-spider/salute.png",
+    "generator": "built-in image_gen",
+    "mirrorFrames": []
+  },
+  {
+    "asset": "costume-fallyn-ladybug",
+    "prompt": "Use case: identity-preserve. Asset type: a complete transparent 2D RPG action sprite sheet for Fallyn in red black ladybug costume and eye mask, long brown hair. Reference image is the exact character identity and costume; preserve this person's face, hair, body proportions, colors, garment detailing, outlines and illustrated RPG texture. Change only the arm gesture. Exactly EIGHT full-body frames in a strict FOUR-COLUMN TWO-ROW grid, chronological order left to right then next row. Character faces SOUTH/front in EVERY frame with feet planted and body stationary, no body turns, no stepping, no duplicate limbs. Animate the Hunger Games three-finger salute with LEFT HAND (viewer right): index, middle, ring fingers extended together; thumb and little finger curled into palm. Frame 1 left hand rising from waist; frame 2 fingertips touching lips; frame 3 lifting forearm; frame 4 raised beside forehead, palm forward, THREE straight fingers together very clear; frame 5 held overhead same THREE fingers visible; frame 6 same respectful held salute; frame 7 lowering hand past shoulder; frame 8 arm returns naturally to side. Right hand relaxed at side throughout. No generic wave, no peace sign, no fist, no five fingers raised. Each frame must be a separate complete figure on transparent alpha, generous clear gutters, identical body scale, head height and foot baseline across all eight cells; raised hand must not touch top edge or neighbors. Keep the same polished hand-drawn sprite style as the reference. No scenery, text, labels, floor shadows or checkerboard. Weapons/accessories stay stowed so the LEFT hand is visibly making the gesture.",
+    "path": "docs/source-assets/people/costume-fallyn-ladybug/salute.png",
+    "source": "docs/source-assets/people/costume-fallyn-ladybug/salute.png",
+    "generator": "built-in image_gen",
+    "mirrorFrames": []
+  },
+  {
+    "asset": "costume-fitzgerald-spider",
+    "prompt": "Use case: identity-preserve. Asset type: a complete transparent 2D RPG action sprite sheet for Fitzgerald in blue black spider costume, no mask. Reference image is the exact character identity and costume; preserve this person's face, hair, body proportions, colors, garment detailing, outlines and illustrated RPG texture. Change only the arm gesture. Exactly EIGHT full-body frames in a strict FOUR-COLUMN TWO-ROW grid, chronological order left to right then next row. Character faces SOUTH/front in EVERY frame with feet planted and body stationary, no body turns, no stepping, no duplicate limbs. Animate the Hunger Games three-finger salute with LEFT HAND (viewer right): index, middle, ring fingers extended together; thumb and little finger curled into palm. Frame 1 left hand rising from waist; frame 2 fingertips touching lips; frame 3 lifting forearm; frame 4 raised beside forehead, palm forward, THREE straight fingers together very clear; frame 5 held overhead same THREE fingers visible; frame 6 same respectful held salute; frame 7 lowering hand past shoulder; frame 8 arm returns naturally to side. Right hand relaxed at side throughout. No generic wave, no peace sign, no fist, no five fingers raised. Each frame must be a separate complete figure on transparent alpha, generous clear gutters, identical body scale, head height and foot baseline across all eight cells; raised hand must not touch top edge or neighbors. Keep the same polished hand-drawn sprite style as the reference. No scenery, text, labels, floor shadows or checkerboard. Weapons/accessories stay stowed so the LEFT hand is visibly making the gesture.",
+    "path": "docs/source-assets/people/costume-fitzgerald-spider/salute.png",
+    "source": "docs/source-assets/people/costume-fitzgerald-spider/salute.png",
+    "generator": "built-in image_gen",
+    "mirrorFrames": []
+  },
+  {
+    "asset": "costume-panem",
+    "prompt": "Use case: identity-preserve. Create a NEW transparent illustrated RPG character sprite sheet, using reference 1 as the EXACT action/pose layout, reference 2 as Masyn's face/identity, reference 3 as outfit/clothing inspiration. Redress every one of the 8 figures in reference 1 into the SAME Panem Tribute outfit: black weatherproof jacket worn open with clearly visible dark red inner collar/zipper lining, plain black shirt, olive green cargo trousers with side pockets, dark brown strapped leather boots, and a SMALL circular GOLD MOCKINGJAY PIN fixed on his LEFT chest when that side is visible. Adult male Masyn keeps his short swept brown hair, short brown beard, green eyes, and the exact existing head/body proportions and illustrated sprite rendering. No hood up, no robe, no cape, no costume headwear. Preserve each FULL BODY pose and its facing/hand/leg positions exactly from reference 1, including every animal or activity prop. Do not replace directional poses with front views. The sheet MUST have exactly 4 COLUMNS by 2 ROWS in the same order as reference 1, with complete connected figures and ample transparent separation. No cropped limbs, no missing/extra frames, no figures touching, no floating pixels. Keep the original consistent anatomy, action timing and style. For salute specifically, retain all reference animation positions without inventing a different action. Camera/direction and framing stay as reference 1. Transparent alpha background with NO text, labels, checkerboard, ground, scenery, or shadows. This is a matching new costume for the SAME existing character, not a different person.",
+    "path": "docs/source-assets/people/costume-panem/salute.png",
+    "source": "docs/source-assets/people/costume-panem/salute.png",
+    "generator": "built-in image_gen",
+    "mirrorFrames": [
+      4,
+      5
+    ]
+  }
+]

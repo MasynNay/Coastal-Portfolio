@@ -1,0 +1,14 @@
+[
+  {
+    "key": "Boat",
+    "rows": 8,
+    "columns": 4,
+    "prompt": "Production overhead RPG polished shaded pixel art, matching the coastal town's detailed wood/metal textures. True transparent background, no text, no scenery, no floor shadows, generous clear margins, equal cell spacing and stable object anchors. Create a nautical BLUE AND WHITE open motorboat / small runabout, wooden interior benches, front windshield and helm, open center cockpit where one adult can sit, small outboard motor. Empty boat, no people. Exactly FOUR COLUMNS and EIGHT ROWS. Rows SOUTH bow toward screen bottom, SOUTHWEST bottom-left, WEST bow to left, NORTHWEST top-left, NORTH bow to top, NORTHEAST top-right, EAST right, SOUTHEAST bottom-right. Each row holds its own fixed heading through four gentle floating/motor animation phases. All eight views show coherent hull/helm placement. Top-down three-quarter view, charming detailed handheld game art, blue hull trim white upper hull, teak seats, clean sprite silhouettes. No sail or roof hiding the rider. Atlas 1536x2048."
+  },
+  {
+    "key": "JetSki",
+    "rows": 8,
+    "columns": 4,
+    "prompt": "Production overhead RPG polished shaded pixel art, matching the coastal town's detailed wood/metal textures. True transparent background, no text, no scenery, no floor shadows, generous clear margins, equal cell spacing and stable object anchors. Create an empty RED AND WHITE jet ski with teal accents, black seat and visible handlebars, rear foot platform. No people. Exactly FOUR COLUMNS and EIGHT ROWS. Rows SOUTH bow toward screen bottom, SOUTHWEST bottom-left, WEST left, NORTHWEST top-left, NORTH top, NORTHEAST top-right, EAST right, SOUTHEAST bottom-right. Each row keeps its fixed heading through four subtle buoyant/throttle animation phases. Detailed top-down three-quarter handheld game sprite, polished metal and rubber, clean readable shape like the harbor boats' art. Keep handlebars and seat readable for a separate rider layer. Do not draw huge waves or background. 1536x2048 atlas."
+  }
+]

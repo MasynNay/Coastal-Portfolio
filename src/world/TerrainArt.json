@@ -1,0 +1,221 @@
+{
+  "tiles": {
+    "src": "/world/town-art/Tiles.png",
+    "width": 512,
+    "height": 512
+  },
+  "props": {
+    "harbor-lighthouse": {
+      "src": "/world/town-art/lighthouse.png",
+      "width": 207,
+      "height": 420
+    },
+    "harbor-tree": {
+      "src": "/world/town-art/tree.png",
+      "width": 283,
+      "height": 324
+    },
+    "harbor-pine": {
+      "src": "/world/town-art/pine.png",
+      "width": 229,
+      "height": 331
+    },
+    "harbor-palm": {
+      "src": "/world/town-art/palm.png",
+      "width": 197,
+      "height": 217
+    },
+    "harbor-bench": {
+      "src": "/world/town-art/bench.png",
+      "width": 238,
+      "height": 134
+    },
+    "harbor-umbrella": {
+      "src": "/world/town-art/umbrella.png",
+      "width": 195,
+      "height": 219
+    },
+    "harbor-lamp": {
+      "src": "/world/town-art/lamp.png",
+      "width": 64,
+      "height": 218
+    },
+    "harbor-sign": {
+      "src": "/world/town-art/sign.png",
+      "width": 152,
+      "height": 159
+    },
+    "harbor-bollard": {
+      "src": "/world/town-art/bollard.png",
+      "width": 183,
+      "height": 156
+    },
+    "harbor-crates": {
+      "src": "/world/town-art/crates.png",
+      "width": 220,
+      "height": 145
+    },
+    "harbor-planter": {
+      "src": "/world/town-art/planter.png",
+      "width": 230,
+      "height": 159
+    },
+    "harbor-hedge": {
+      "src": "/world/town-art/hedge.png",
+      "width": 256,
+      "height": 128
+    },
+    "harbor-railing": {
+      "src": "/world/town-art/railing.png",
+      "width": 224,
+      "height": 110
+    },
+    "harbor-ring": {
+      "src": "/world/town-art/ring.png",
+      "width": 148,
+      "height": 195
+    },
+    "town-bonsai": {
+      "src": "/world/town-art/bonsai.png",
+      "width": 273,
+      "height": 311
+    },
+    "town-chimes": {
+      "src": "/world/town-art/chimes.png",
+      "width": 243,
+      "height": 312
+    },
+    "town-mushroom": {
+      "src": "/world/town-art/mushroom.png",
+      "width": 211,
+      "height": 304
+    },
+    "town-workbench": {
+      "src": "/world/town-art/workbench.png",
+      "width": 286,
+      "height": 242
+    },
+    "town-parcelbox": {
+      "src": "/world/town-art/parcelbox.png",
+      "width": 191,
+      "height": 287
+    },
+    "town-workstation": {
+      "src": "/world/town-art/workstation.png",
+      "width": 263,
+      "height": 272
+    },
+    "town-telescope": {
+      "src": "/world/town-art/telescope.png",
+      "width": 234,
+      "height": 281
+    },
+    "town-orrery": {
+      "src": "/world/town-art/orrery.png",
+      "width": 265,
+      "height": 290
+    },
+    "town-shell-fountain": {
+      "src": "/world/town-art/shell-fountain.png",
+      "width": 312,
+      "height": 301
+    },
+    "town-coastal-mailbox": {
+      "src": "/world/town-art/coastal-mailbox.png",
+      "width": 172,
+      "height": 304
+    },
+    "town-windmill": {
+      "src": "/world/town-art/windmill.png",
+      "width": 212,
+      "height": 311
+    },
+    "town-playhouse": {
+      "src": "/world/town-art/playhouse.png",
+      "width": 298,
+      "height": 272
+    },
+    "town-swings": {
+      "src": "/world/town-art/swings.png",
+      "width": 294,
+      "height": 258
+    },
+    "town-seesaw": {
+      "src": "/world/town-art/seesaw.png",
+      "width": 303,
+      "height": 166
+    },
+    "town-sandbox": {
+      "src": "/world/town-art/sandbox.png",
+      "width": 288,
+      "height": 216
+    },
+    "town-tunnel": {
+      "src": "/world/town-art/town-tunnel.png",
+      "width": 256,
+      "height": 165
+    },
+    "town-climbing-dome": {
+      "src": "/world/town-art/town-climbing-dome.png",
+      "width": 256,
+      "height": 200
+    },
+    "town-spring-rider": {
+      "src": "/world/town-art/town-spring-rider.png",
+      "width": 191,
+      "height": 256
+    },
+    "town-picnic-table": {
+      "src": "/world/town-art/town-picnic-table.png",
+      "width": 256,
+      "height": 237
+    },
+    "mailbox-home": {
+      "src": "/world/town-art/mailbox-home.png",
+      "width": 195,
+      "height": 256,
+      "revision": "5f3881226e59"
+    },
+    "mailbox-skills": {
+      "src": "/world/town-art/mailbox-skills.png",
+      "width": 194,
+      "height": 256,
+      "revision": "c149f3db302d"
+    },
+    "mailbox-portfolio": {
+      "src": "/world/town-art/mailbox-portfolio.png",
+      "width": 210,
+      "height": 256,
+      "revision": "8b337016cd0d"
+    },
+    "mailbox-resume": {
+      "src": "/world/town-art/mailbox-resume.png",
+      "width": 170,
+      "height": 256,
+      "revision": "8301a536141a"
+    },
+    "mailbox-contact": {
+      "src": "/world/town-art/mailbox-contact.png",
+      "width": 193,
+      "height": 256,
+      "revision": "9be84548752d"
+    },
+    "mailbox-lodge": {
+      "src": "/world/town-art/mailbox-lodge.png",
+      "width": 190,
+      "height": 256,
+      "revision": "bfe964e60524"
+    },
+    "harbor-race-start": {
+      "src": "/world/town-art/RaceStart.png",
+      "width": 525,
+      "height": 256,
+      "revision": "0bfcb3de14c9"
+    }
+  },
+  "ground": {
+    "src": "/world/town-art/GardenTiles.png",
+    "width": 1024,
+    "height": 1024
+  }
+}

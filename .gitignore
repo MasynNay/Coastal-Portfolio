@@ -1,0 +1,15 @@
+node_modules
+
+build/
+__pycache__/
+*.pyc
+
+# Local credentials, editor state and machine-specific files never ship.
+.env
+.env.*
+!.env.example
+.codex/
+.agents/
+.aws/
+.DS_Store
+Thumbs.db

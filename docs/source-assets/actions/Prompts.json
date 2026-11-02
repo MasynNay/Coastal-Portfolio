@@ -1,0 +1,266 @@
+[
+  {
+    "key": "Surf-masyn",
+    "id": "masyn-surf",
+    "rows": 4,
+    "reference": "/home/lotus/Projects/masynnay.com/docs/source-assets/legacy/masyn-walk-home.png",
+    "pose": "/home/lotus/Projects/masynnay.com/docs/source-assets/emerald/travel-masyn.png",
+    "prompt": "Use case: identity-preserve. Image1 is the EXACT older character identity, face, hairstyle, head-to-body ratio and fine illustrated rendering to preserve. Image2 is ONLY a POSE/PROP reference; ignore its simplified oversized head and chunky pixel shapes. The output must look like the original character artist drew the new action, with the same limb lengths, face and body proportions as image1. No chibi redesign, no head/eye enlargement, no shrinking torso, no style reinvention. Refined warm illustrated 2D JRPG game sprites with textured hair, readable facial detail, natural cloth folds and clean smooth dark contours. Real transparent background, no scenery, text, labels, grid, cast shadows or detached pixels. Exact equal cells with minimum 24px empty transparent gutters, full bodies and props in bounds. Stable scale and ground baseline across every cell. Preserve green eyes, brown hair and short beard. Exactly FOUR columns x FOUR rows. Row1 SOUTH front, row2 NORTH back, row3 WEST left, row4 EAST right. Four gently bobbing swimming poses in each row, seated naturally on the same familiar ocean blue axolotl. Include the entire axolotl, its gills and tail in every cell. All hair remains intact in back views; no head or hair clipping.",
+    "source": "Surf-masyn.png"
+  },
+  {
+    "key": "Fishing-masyn",
+    "id": "masyn",
+    "kind": "fishing",
+    "rows": 8,
+    "reference": "/home/lotus/Projects/masynnay.com/docs/source-assets/legacy/masyn-walk-home.png",
+    "pose": "/home/lotus/Projects/masynnay.com/docs/source-assets/emerald/fishing-masyn.png",
+    "prompt": "Use case: identity-preserve. Image1 is the EXACT older character identity, face, hairstyle, head-to-body ratio and fine illustrated rendering to preserve. Image2 is ONLY a POSE/PROP reference; ignore its simplified oversized head and chunky pixel shapes. The output must look like the original character artist drew the new action, with the same limb lengths, face and body proportions as image1. No chibi redesign, no head/eye enlargement, no shrinking torso, no style reinvention. Refined warm illustrated 2D JRPG game sprites with textured hair, readable facial detail, natural cloth folds and clean smooth dark contours. Real transparent background, no scenery, text, labels, grid, cast shadows or detached pixels. Exact equal cells with minimum 24px empty transparent gutters, full bodies and props in bounds. Stable scale and ground baseline across every cell. Preserve green eyes, brown hair and short beard. Exactly FOUR columns x EIGHT rows. ROWS1-4 STANDING fishing, respectively SOUTH/front, NORTH/back, WEST/left, EAST/right. ROWS5-8 same character seated on their ocean blue axolotl, same S,N,W,E directions. Each row four casting poses: rod held ready, rod swung backward, rod flicked forward, relaxed waiting pose with rod extending toward water in that row's true direction. Keep original person's proportions and full hair in all back views. All rod tips fit in their cells. No line/bobber/particles outside held rod; game draws the fishing line.",
+    "source": "Fishing-masyn.png"
+  },
+  {
+    "key": "Riding-masyn",
+    "id": "masyn",
+    "kind": "bikes",
+    "rows": 8,
+    "reference": "/home/lotus/Projects/masynnay.com/docs/source-assets/legacy/masyn-walk-home.png",
+    "pose": "/home/lotus/Projects/masynnay.com/docs/source-assets/emerald/Bike-masyn.png",
+    "prompt": "Use case: identity-preserve. Image1 is the EXACT older character identity, face, hairstyle, head-to-body ratio and fine illustrated rendering to preserve. Image2 is ONLY a POSE/PROP reference; ignore its simplified oversized head and chunky pixel shapes. The output must look like the original character artist drew the new action, with the same limb lengths, face and body proportions as image1. No chibi redesign, no head/eye enlargement, no shrinking torso, no style reinvention. Refined warm illustrated 2D JRPG game sprites with textured hair, readable facial detail, natural cloth folds and clean smooth dark contours. Real transparent background, no scenery, text, labels, grid, cast shadows or detached pixels. Exact equal cells with minimum 24px empty transparent gutters, full bodies and props in bounds. Stable scale and ground baseline across every cell. Preserve green eyes, brown hair and short beard. Exactly FOUR columns x EIGHT rows. ROWS1-4 riding the BLUE Acro bicycle, S/front, N/back, W/left, E/right. ROWS5-8 riding RED Mach bicycle, same S,N,W,E order. Four fluid pedal phases per row with alternating legs, hands firmly holding handlebars, torso and head stable. Same bicycle designs as image2, but person must use image1's original face and body proportions, no giant heads. Full wheels and all hair fit in each cell.",
+    "source": "Riding-masyn.png"
+  },
+  {
+    "key": "Fishing-mi-shell",
+    "id": "mi-shell",
+    "kind": "fishing",
+    "rows": 8,
+    "reference": "/home/lotus/Projects/masynnay.com/docs/source-assets/legacy/family-mi-shell-walk.png",
+    "pose": "/home/lotus/Projects/masynnay.com/docs/source-assets/emerald/fishing-mi-shell.png",
+    "prompt": "Use case: identity-preserve. Image1 is the EXACT older character identity, face, hairstyle, head-to-body ratio and fine illustrated rendering to preserve. Image2 is ONLY a POSE/PROP reference; ignore its simplified oversized head and chunky pixel shapes. The output must look like the original character artist drew the new action, with the same limb lengths, face and body proportions as image1. No chibi redesign, no head/eye enlargement, no shrinking torso, no style reinvention. Refined warm illustrated 2D JRPG game sprites with textured hair, readable facial detail, natural cloth folds and clean smooth dark contours. Real transparent background, no scenery, text, labels, grid, cast shadows or detached pixels. Exact equal cells with minimum 24px empty transparent gutters, full bodies and props in bounds. Stable scale and ground baseline across every cell. Preserve black glasses and full shoulder-length black hair, white spotted dress. Exactly FOUR columns x EIGHT rows. ROWS1-4 STANDING fishing, respectively SOUTH/front, NORTH/back, WEST/left, EAST/right. ROWS5-8 same character seated on their rose pink axolotl, same S,N,W,E directions. Each row four casting poses: rod held ready, rod swung backward, rod flicked forward, relaxed waiting pose with rod extending toward water in that row's true direction. Keep original person's proportions and full hair in all back views. All rod tips fit in their cells. No line/bobber/particles outside held rod; game draws the fishing line.",
+    "source": "Fishing-mi-shell.png"
+  },
+  {
+    "key": "Riding-mi-shell",
+    "id": "mi-shell",
+    "kind": "bikes",
+    "rows": 8,
+    "reference": "/home/lotus/Projects/masynnay.com/docs/source-assets/legacy/family-mi-shell-walk.png",
+    "pose": "/home/lotus/Projects/masynnay.com/docs/source-assets/emerald/Bike-mi-shell.png",
+    "prompt": "Use case: identity-preserve. Image1 is the EXACT older character identity, face, hairstyle, head-to-body ratio and fine illustrated rendering to preserve. Image2 is ONLY a POSE/PROP reference; ignore its simplified oversized head and chunky pixel shapes. The output must look like the original character artist drew the new action, with the same limb lengths, face and body proportions as image1. No chibi redesign, no head/eye enlargement, no shrinking torso, no style reinvention. Refined warm illustrated 2D JRPG game sprites with textured hair, readable facial detail, natural cloth folds and clean smooth dark contours. Real transparent background, no scenery, text, labels, grid, cast shadows or detached pixels. Exact equal cells with minimum 24px empty transparent gutters, full bodies and props in bounds. Stable scale and ground baseline across every cell. Preserve black glasses and full shoulder-length black hair, white spotted dress. Exactly FOUR columns x EIGHT rows. ROWS1-4 riding the BLUE Acro bicycle, S/front, N/back, W/left, E/right. ROWS5-8 riding RED Mach bicycle, same S,N,W,E order. Four fluid pedal phases per row with alternating legs, hands firmly holding handlebars, torso and head stable. Same bicycle designs as image2, but person must use image1's original face and body proportions, no giant heads. Full wheels and all hair fit in each cell.",
+    "source": "Riding-mi-shell.png"
+  },
+  {
+    "key": "Surf-ezra",
+    "id": "ezra-surf",
+    "rows": 4,
+    "reference": "/home/lotus/Projects/masynnay.com/docs/source-assets/legacy/family-ezra-walk.png",
+    "pose": "/home/lotus/Projects/masynnay.com/docs/source-assets/emerald/travel-ezra.png",
+    "prompt": "Use case: identity-preserve. Image1 is the EXACT older character identity, face, hairstyle, head-to-body ratio and fine illustrated rendering to preserve. Image2 is ONLY a POSE/PROP reference; ignore its simplified oversized head and chunky pixel shapes. The output must look like the original character artist drew the new action, with the same limb lengths, face and body proportions as image1. No chibi redesign, no head/eye enlargement, no shrinking torso, no style reinvention. Refined warm illustrated 2D JRPG game sprites with textured hair, readable facial detail, natural cloth folds and clean smooth dark contours. Real transparent background, no scenery, text, labels, grid, cast shadows or detached pixels. Exact equal cells with minimum 24px empty transparent gutters, full bodies and props in bounds. Stable scale and ground baseline across every cell. Preserve long curly brown hair, cream shirt and dark trousers. Exactly FOUR columns x FOUR rows. Row1 SOUTH front, row2 NORTH back, row3 WEST left, row4 EAST right. Four gently bobbing swimming poses in each row, seated naturally on the same familiar lavender purple axolotl. Include the entire axolotl, its gills and tail in every cell. All hair remains intact in back views; no head or hair clipping.",
+    "source": "Surf-ezra.png"
+  },
+  {
+    "key": "Fishing-ezra",
+    "id": "ezra",
+    "kind": "fishing",
+    "rows": 8,
+    "reference": "/home/lotus/Projects/masynnay.com/docs/source-assets/legacy/family-ezra-walk.png",
+    "pose": "/home/lotus/Projects/masynnay.com/docs/source-assets/emerald/fishing-ezra.png",
+    "prompt": "Use case: identity-preserve. Image1 is the EXACT older character identity, face, hairstyle, head-to-body ratio and fine illustrated rendering to preserve. Image2 is ONLY a POSE/PROP reference; ignore its simplified oversized head and chunky pixel shapes. The output must look like the original character artist drew the new action, with the same limb lengths, face and body proportions as image1. No chibi redesign, no head/eye enlargement, no shrinking torso, no style reinvention. Refined warm illustrated 2D JRPG game sprites with textured hair, readable facial detail, natural cloth folds and clean smooth dark contours. Real transparent background, no scenery, text, labels, grid, cast shadows or detached pixels. Exact equal cells with minimum 24px empty transparent gutters, full bodies and props in bounds. Stable scale and ground baseline across every cell. Preserve long curly brown hair, cream shirt and dark trousers. Exactly FOUR columns x EIGHT rows. ROWS1-4 STANDING fishing, respectively SOUTH/front, NORTH/back, WEST/left, EAST/right. ROWS5-8 same character seated on their lavender purple axolotl, same S,N,W,E directions. Each row four casting poses: rod held ready, rod swung backward, rod flicked forward, relaxed waiting pose with rod extending toward water in that row's true direction. Keep original person's proportions and full hair in all back views. All rod tips fit in their cells. No line/bobber/particles outside held rod; game draws the fishing line.",
+    "source": "Fishing-ezra.png"
+  },
+  {
+    "key": "Riding-ezra",
+    "id": "ezra",
+    "kind": "bikes",
+    "rows": 8,
+    "reference": "/home/lotus/Projects/masynnay.com/docs/source-assets/legacy/family-ezra-walk.png",
+    "pose": "/home/lotus/Projects/masynnay.com/docs/source-assets/emerald/Bike-ezra.png",
+    "prompt": "Use case: identity-preserve. Image1 is the EXACT older character identity, face, hairstyle, head-to-body ratio and fine illustrated rendering to preserve. Image2 is ONLY a POSE/PROP reference; ignore its simplified oversized head and chunky pixel shapes. The output must look like the original character artist drew the new action, with the same limb lengths, face and body proportions as image1. No chibi redesign, no head/eye enlargement, no shrinking torso, no style reinvention. Refined warm illustrated 2D JRPG game sprites with textured hair, readable facial detail, natural cloth folds and clean smooth dark contours. Real transparent background, no scenery, text, labels, grid, cast shadows or detached pixels. Exact equal cells with minimum 24px empty transparent gutters, full bodies and props in bounds. Stable scale and ground baseline across every cell. Preserve long curly brown hair, cream shirt and dark trousers. Exactly FOUR columns x EIGHT rows. ROWS1-4 riding the BLUE Acro bicycle, S/front, N/back, W/left, E/right. ROWS5-8 riding RED Mach bicycle, same S,N,W,E order. Four fluid pedal phases per row with alternating legs, hands firmly holding handlebars, torso and head stable. Same bicycle designs as image2, but person must use image1's original face and body proportions, no giant heads. Full wheels and all hair fit in each cell.",
+    "source": "Riding-ezra.png"
+  },
+  {
+    "key": "Surf-fallyn",
+    "id": "fallyn-surf",
+    "rows": 4,
+    "reference": "/home/lotus/Projects/masynnay.com/docs/source-assets/legacy/family-fallyn-walk.png",
+    "pose": "/home/lotus/Projects/masynnay.com/docs/source-assets/emerald/travel-fallyn.png",
+    "prompt": "Use case: identity-preserve. Image1 is the EXACT older character identity, face, hairstyle, head-to-body ratio and fine illustrated rendering to preserve. Image2 is ONLY a POSE/PROP reference; ignore its simplified oversized head and chunky pixel shapes. The output must look like the original character artist drew the new action, with the same limb lengths, face and body proportions as image1. No chibi redesign, no head/eye enlargement, no shrinking torso, no style reinvention. Refined warm illustrated 2D JRPG game sprites with textured hair, readable facial detail, natural cloth folds and clean smooth dark contours. Real transparent background, no scenery, text, labels, grid, cast shadows or detached pixels. Exact equal cells with minimum 24px empty transparent gutters, full bodies and props in bounds. Stable scale and ground baseline across every cell. Preserve green eyes, straight brown hair with bangs and black dress. Exactly FOUR columns x FOUR rows. Row1 SOUTH front, row2 NORTH back, row3 WEST left, row4 EAST right. Four gently bobbing swimming poses in each row, seated naturally on the same familiar mint green axolotl. Include the entire axolotl, its gills and tail in every cell. All hair remains intact in back views; no head or hair clipping.",
+    "source": "Surf-fallyn.png"
+  },
+  {
+    "key": "Fishing-fallyn",
+    "id": "fallyn",
+    "kind": "fishing",
+    "rows": 8,
+    "reference": "/home/lotus/Projects/masynnay.com/docs/source-assets/legacy/family-fallyn-walk.png",
+    "pose": "/home/lotus/Projects/masynnay.com/docs/source-assets/emerald/fishing-fallyn.png",
+    "prompt": "Use case: identity-preserve. Image1 is the EXACT older character identity, face, hairstyle, head-to-body ratio and fine illustrated rendering to preserve. Image2 is ONLY a POSE/PROP reference; ignore its simplified oversized head and chunky pixel shapes. The output must look like the original character artist drew the new action, with the same limb lengths, face and body proportions as image1. No chibi redesign, no head/eye enlargement, no shrinking torso, no style reinvention. Refined warm illustrated 2D JRPG game sprites with textured hair, readable facial detail, natural cloth folds and clean smooth dark contours. Real transparent background, no scenery, text, labels, grid, cast shadows or detached pixels. Exact equal cells with minimum 24px empty transparent gutters, full bodies and props in bounds. Stable scale and ground baseline across every cell. Preserve green eyes, straight brown hair with bangs and black dress. Exactly FOUR columns x EIGHT rows. ROWS1-4 STANDING fishing, respectively SOUTH/front, NORTH/back, WEST/left, EAST/right. ROWS5-8 same character seated on their mint green axolotl, same S,N,W,E directions. Each row four casting poses: rod held ready, rod swung backward, rod flicked forward, relaxed waiting pose with rod extending toward water in that row's true direction. Keep original person's proportions and full hair in all back views. All rod tips fit in their cells. No line/bobber/particles outside held rod; game draws the fishing line.",
+    "source": "Fishing-fallyn.png"
+  },
+  {
+    "key": "Riding-fallyn",
+    "id": "fallyn",
+    "kind": "bikes",
+    "rows": 8,
+    "reference": "/home/lotus/Projects/masynnay.com/docs/source-assets/legacy/family-fallyn-walk.png",
+    "pose": "/home/lotus/Projects/masynnay.com/docs/source-assets/emerald/Bike-fallyn.png",
+    "prompt": "Use case: identity-preserve. Image1 is the EXACT older character identity, face, hairstyle, head-to-body ratio and fine illustrated rendering to preserve. Image2 is ONLY a POSE/PROP reference; ignore its simplified oversized head and chunky pixel shapes. The output must look like the original character artist drew the new action, with the same limb lengths, face and body proportions as image1. No chibi redesign, no head/eye enlargement, no shrinking torso, no style reinvention. Refined warm illustrated 2D JRPG game sprites with textured hair, readable facial detail, natural cloth folds and clean smooth dark contours. Real transparent background, no scenery, text, labels, grid, cast shadows or detached pixels. Exact equal cells with minimum 24px empty transparent gutters, full bodies and props in bounds. Stable scale and ground baseline across every cell. Preserve green eyes, straight brown hair with bangs and black dress. Exactly FOUR columns x EIGHT rows. ROWS1-4 riding the BLUE Acro bicycle, S/front, N/back, W/left, E/right. ROWS5-8 riding RED Mach bicycle, same S,N,W,E order. Four fluid pedal phases per row with alternating legs, hands firmly holding handlebars, torso and head stable. Same bicycle designs as image2, but person must use image1's original face and body proportions, no giant heads. Full wheels and all hair fit in each cell.",
+    "source": "Riding-fallyn.png"
+  },
+  {
+    "key": "Surf-fitzgerald",
+    "id": "fitzgerald-surf",
+    "rows": 4,
+    "reference": "/home/lotus/Projects/masynnay.com/docs/source-assets/legacy/family-fitzgerald-walk.png",
+    "pose": "/home/lotus/Projects/masynnay.com/docs/source-assets/emerald/travel-fitzgerald.png",
+    "prompt": "Use case: identity-preserve. Image1 is the EXACT older character identity, face, hairstyle, head-to-body ratio and fine illustrated rendering to preserve. Image2 is ONLY a POSE/PROP reference; ignore its simplified oversized head and chunky pixel shapes. The output must look like the original character artist drew the new action, with the same limb lengths, face and body proportions as image1. No chibi redesign, no head/eye enlargement, no shrinking torso, no style reinvention. Refined warm illustrated 2D JRPG game sprites with textured hair, readable facial detail, natural cloth folds and clean smooth dark contours. Real transparent background, no scenery, text, labels, grid, cast shadows or detached pixels. Exact equal cells with minimum 24px empty transparent gutters, full bodies and props in bounds. Stable scale and ground baseline across every cell. Preserve hazel eyes, spiky brown hair, black tee and tan trousers. Exactly FOUR columns x FOUR rows. Row1 SOUTH front, row2 NORTH back, row3 WEST left, row4 EAST right. Four gently bobbing swimming poses in each row, seated naturally on the same familiar golden yellow axolotl. Include the entire axolotl, its gills and tail in every cell. All hair remains intact in back views; no head or hair clipping.",
+    "source": "Surf-fitzgerald.png"
+  },
+  {
+    "key": "Fishing-fitzgerald",
+    "id": "fitzgerald",
+    "kind": "fishing",
+    "rows": 8,
+    "reference": "/home/lotus/Projects/masynnay.com/docs/source-assets/legacy/family-fitzgerald-walk.png",
+    "pose": "/home/lotus/Projects/masynnay.com/docs/source-assets/emerald/fishing-fitzgerald.png",
+    "prompt": "Use case: identity-preserve. Image1 is the EXACT older character identity, face, hairstyle, head-to-body ratio and fine illustrated rendering to preserve. Image2 is ONLY a POSE/PROP reference; ignore its simplified oversized head and chunky pixel shapes. The output must look like the original character artist drew the new action, with the same limb lengths, face and body proportions as image1. No chibi redesign, no head/eye enlargement, no shrinking torso, no style reinvention. Refined warm illustrated 2D JRPG game sprites with textured hair, readable facial detail, natural cloth folds and clean smooth dark contours. Real transparent background, no scenery, text, labels, grid, cast shadows or detached pixels. Exact equal cells with minimum 24px empty transparent gutters, full bodies and props in bounds. Stable scale and ground baseline across every cell. Preserve hazel eyes, spiky brown hair, black tee and tan trousers. Exactly FOUR columns x EIGHT rows. ROWS1-4 STANDING fishing, respectively SOUTH/front, NORTH/back, WEST/left, EAST/right. ROWS5-8 same character seated on their golden yellow axolotl, same S,N,W,E directions. Each row four casting poses: rod held ready, rod swung backward, rod flicked forward, relaxed waiting pose with rod extending toward water in that row's true direction. Keep original person's proportions and full hair in all back views. All rod tips fit in their cells. No line/bobber/particles outside held rod; game draws the fishing line.",
+    "source": "Fishing-fitzgerald.png"
+  },
+  {
+    "key": "Riding-fitzgerald",
+    "id": "fitzgerald",
+    "kind": "bikes",
+    "rows": 8,
+    "reference": "/home/lotus/Projects/masynnay.com/docs/source-assets/legacy/family-fitzgerald-walk.png",
+    "pose": "/home/lotus/Projects/masynnay.com/docs/source-assets/emerald/Bike-fitzgerald.png",
+    "prompt": "Use case: identity-preserve. Image1 is the EXACT older character identity, face, hairstyle, head-to-body ratio and fine illustrated rendering to preserve. Image2 is ONLY a POSE/PROP reference; ignore its simplified oversized head and chunky pixel shapes. The output must look like the original character artist drew the new action, with the same limb lengths, face and body proportions as image1. No chibi redesign, no head/eye enlargement, no shrinking torso, no style reinvention. Refined warm illustrated 2D JRPG game sprites with textured hair, readable facial detail, natural cloth folds and clean smooth dark contours. Real transparent background, no scenery, text, labels, grid, cast shadows or detached pixels. Exact equal cells with minimum 24px empty transparent gutters, full bodies and props in bounds. Stable scale and ground baseline across every cell. Preserve hazel eyes, spiky brown hair, black tee and tan trousers. Exactly FOUR columns x EIGHT rows. ROWS1-4 riding the BLUE Acro bicycle, S/front, N/back, W/left, E/right. ROWS5-8 riding RED Mach bicycle, same S,N,W,E order. Four fluid pedal phases per row with alternating legs, hands firmly holding handlebars, torso and head stable. Same bicycle designs as image2, but person must use image1's original face and body proportions, no giant heads. Full wheels and all hair fit in each cell.",
+    "source": "Riding-fitzgerald.png"
+  },
+  {
+    "key": "Action-ocarina",
+    "id": "ability-ocarina",
+    "kind": "ability",
+    "rows": 4,
+    "reference": "/home/lotus/Projects/masynnay.com/docs/source-assets/legacy/masyn-walk-home.png",
+    "pose": "/home/lotus/Projects/masynnay.com/docs/source-assets/emerald/Ability-ocarina.png",
+    "prompt": "Refine this existing transparent 4-column, 4-row character action sheet. Preserve the green adventurer outfit and blue ocarina. Keep the exact ordered poses, props and four facing rows from image1. Use image2 as the original facial identity, adult head-to-body proportions and illustrated material detail reference. Preserve the same brown-haired, short-bearded, green-eyed Masyn; no enlarged head or eyes and no chibi redesign. Give hair, skin and fabric the same warm refined texture as image2. Full bodies and all held objects must fit in their cells, with wide clear transparent gutters. No text, background, particles or new accessories.",
+    "source": "Action-ocarina.png"
+  },
+  {
+    "key": "Action-trident",
+    "id": "ability-trident",
+    "kind": "ability",
+    "rows": 4,
+    "reference": "/home/lotus/Projects/masynnay.com/docs/source-assets/legacy/masyn-walk-contact.png",
+    "pose": "/home/lotus/Projects/masynnay.com/docs/source-assets/emerald/Ability-trident.png",
+    "prompt": "Use case: identity-preserve. Image1 is the EXACT older character identity, face, hairstyle, head-to-body ratio and fine illustrated rendering to preserve. Image2 is ONLY a POSE/PROP reference; ignore its simplified oversized head and chunky pixel shapes. The output must look like the original character artist drew the new action, with the same limb lengths, face and body proportions as image1. No chibi redesign, no head/eye enlargement, no shrinking torso, no style reinvention. Refined warm illustrated 2D JRPG game sprites with textured hair, readable facial detail, natural cloth folds and clean smooth dark contours. Real transparent background, no scenery, text, labels, grid, cast shadows or detached pixels. Exact equal cells with minimum 24px empty transparent gutters, full bodies and props in bounds. Stable scale and ground baseline across every cell. Preserve Masyn in the original teal/gold Ocean king outfit with crown. Exactly FOUR columns x FOUR rows: SOUTH/front, NORTH/back, WEST/left, EAST/right. Four ordered action poses in each row: winds back trident; throws and follows through empty-handed; holds open hand awaiting return; holds trident again. All poses use the same feet positions and body scale. Face, original adult proportions and outfit details stay consistent in every pose. Airborne projectiles and effects are drawn separately by the game, do not include them. Props are in hand only in the specified held poses. Keep the actual original face, not image2's simplified face.",
+    "source": "Action-trident.png"
+  },
+  {
+    "key": "Action-spell",
+    "id": "ability-spell",
+    "kind": "ability",
+    "rows": 4,
+    "reference": "/home/lotus/Projects/masynnay.com/docs/source-assets/legacy/masyn-walk-resume.png",
+    "pose": "/home/lotus/Projects/masynnay.com/docs/source-assets/emerald/Ability-spell.png",
+    "prompt": "Use case: identity-preserve. Image1 is the EXACT older character identity, face, hairstyle, head-to-body ratio and fine illustrated rendering to preserve. Image2 is ONLY a POSE/PROP reference; ignore its simplified oversized head and chunky pixel shapes. The output must look like the original character artist drew the new action, with the same limb lengths, face and body proportions as image1. No chibi redesign, no head/eye enlargement, no shrinking torso, no style reinvention. Refined warm illustrated 2D JRPG game sprites with textured hair, readable facial detail, natural cloth folds and clean smooth dark contours. Real transparent background, no scenery, text, labels, grid, cast shadows or detached pixels. Exact equal cells with minimum 24px empty transparent gutters, full bodies and props in bounds. Stable scale and ground baseline across every cell. Preserve Masyn in the original navy wizard robes. Exactly FOUR columns x FOUR rows: SOUTH/front, NORTH/back, WEST/left, EAST/right. Four ordered action poses in each row: pulls wand from robe; raises it; points it forward to cast; tucks it away. All poses use the same feet positions and body scale. Face, original adult proportions and outfit details stay consistent in every pose. Airborne projectiles and effects are drawn separately by the game, do not include them. Props are in hand only in the specified held poses. Keep the actual original face, not image2's simplified face.",
+    "source": "Action-spell.png"
+  },
+  {
+    "key": "Action-pokeball",
+    "id": "ability-pokeball",
+    "kind": "ability",
+    "rows": 4,
+    "reference": "/home/lotus/Projects/masynnay.com/docs/source-assets/legacy/masyn-walk-portfolio.png",
+    "pose": "/home/lotus/Projects/masynnay.com/docs/source-assets/emerald/Ability-pokeball.png",
+    "prompt": "Refine this existing transparent 4-column, 4-row character action sheet. Preserve the red-white cap, trainer clothes and small red-white ball. Keep the exact ordered poses, props and four facing rows from image1. Use image2 as the original facial identity, adult head-to-body proportions and illustrated material detail reference. Preserve the same brown-haired, short-bearded, green-eyed Masyn; no enlarged head or eyes and no chibi redesign. Give hair, skin and fabric the same warm refined texture as image2. Full bodies and all held objects must fit in their cells, with wide clear transparent gutters. No text, background, particles or new accessories.",
+    "source": "Action-pokeball.png"
+  },
+  {
+    "key": "Action-arrow",
+    "id": "ability-arrow",
+    "kind": "ability",
+    "rows": 4,
+    "reference": "/home/lotus/Projects/masynnay.com/docs/source-assets/legacy/masyn-walk-skills.png",
+    "pose": "/home/lotus/Projects/masynnay.com/docs/source-assets/emerald/Ability-arrow.png",
+    "prompt": "Use case: identity-preserve. Image1 is the EXACT older character identity, face, hairstyle, head-to-body ratio and fine illustrated rendering to preserve. Image2 is ONLY a POSE/PROP reference; ignore its simplified oversized head and chunky pixel shapes. The output must look like the original character artist drew the new action, with the same limb lengths, face and body proportions as image1. No chibi redesign, no head/eye enlargement, no shrinking torso, no style reinvention. Refined warm illustrated 2D JRPG game sprites with textured hair, readable facial detail, natural cloth folds and clean smooth dark contours. Real transparent background, no scenery, text, labels, grid, cast shadows or detached pixels. Exact equal cells with minimum 24px empty transparent gutters, full bodies and props in bounds. Stable scale and ground baseline across every cell. Preserve Masyn in the original woodland archer outfit. Exactly FOUR columns x FOUR rows: SOUTH/front, NORTH/back, WEST/left, EAST/right. Four ordered action poses in each row: reaches for bow on back; nocks and draws; releases empty bowstring; places bow on back. All poses use the same feet positions and body scale. Face, original adult proportions and outfit details stay consistent in every pose. Airborne projectiles and effects are drawn separately by the game, do not include them. Props are in hand only in the specified held poses. Keep the actual original face, not image2's simplified face.",
+    "source": "Action-arrow.png"
+  },
+  {
+    "key": "Action-money",
+    "id": "ability-money",
+    "kind": "ability",
+    "rows": 4,
+    "reference": "/home/lotus/Projects/masynnay.com/docs/source-assets/legacy/family-mi-shell-walk.png",
+    "pose": "/home/lotus/Projects/masynnay.com/docs/source-assets/emerald/MiShellMoney.png",
+    "prompt": "Use case: identity-preserve. Image1 is the EXACT older character identity, face, hairstyle, head-to-body ratio and fine illustrated rendering to preserve. Image2 is ONLY a POSE/PROP reference; ignore its simplified oversized head and chunky pixel shapes. The output must look like the original character artist drew the new action, with the same limb lengths, face and body proportions as image1. No chibi redesign, no head/eye enlargement, no shrinking torso, no style reinvention. Refined warm illustrated 2D JRPG game sprites with textured hair, readable facial detail, natural cloth folds and clean smooth dark contours. Real transparent background, no scenery, text, labels, grid, cast shadows or detached pixels. Exact equal cells with minimum 24px empty transparent gutters, full bodies and props in bounds. Stable scale and ground baseline across every cell. Preserve Mi Shell in her original white spotted dress, glasses and full shoulder-length hair. Exactly FOUR columns x FOUR rows: SOUTH/front, NORTH/back, WEST/left, EAST/right. Four ordered action poses in each row: reaches into small purse; raises a fan of green bills; flicks hand empty; returns hand to purse. All poses use the same feet positions and body scale. Face, original adult proportions and outfit details stay consistent in every pose. Airborne projectiles and effects are drawn separately by the game, do not include them. Props are in hand only in the specified held poses. Keep the actual original face, not image2's simplified face.",
+    "source": "Action-money.png"
+  },
+  {
+    "key": "Gliding",
+    "kind": "glide",
+    "rows": 8,
+    "reference": "/home/lotus/Projects/masynnay.com/docs/source-assets/legacy/masyn-walk-home.png",
+    "pose": "/home/lotus/Projects/masynnay.com/docs/source-assets/emerald/AirbenderGlide.png",
+    "prompt": "Use case: identity-preserve. Image1 is the EXACT older character identity, face, hairstyle, head-to-body ratio and fine illustrated rendering to preserve. Image2 is ONLY a POSE/PROP reference; ignore its simplified oversized head and chunky pixel shapes. The output must look like the original character artist drew the new action, with the same limb lengths, face and body proportions as image1. No chibi redesign, no head/eye enlargement, no shrinking torso, no style reinvention. Refined warm illustrated 2D JRPG game sprites with textured hair, readable facial detail, natural cloth folds and clean smooth dark contours. Real transparent background, no scenery, text, labels, grid, cast shadows or detached pixels. Exact equal cells with minimum 24px empty transparent gutters, full bodies and props in bounds. Stable scale and ground baseline across every cell. Masyn keeps his original adult proportions, brown hair, short beard and green eyes, now wearing orange/yellow air-nomad robes with a blue forehead arrow. Exactly FOUR columns x EIGHT rows, row order S,SW,W,NW,N,NE,E,SE. Four gently moving flight poses in each direction, holding Aang-inspired wooden glider staff with broad orange cloth wings open overhead, legs tucked naturally while hanging from staff. Image2 is only the staff shape, clothes and action reference. All wings and limbs fully in bounds with wide gutters. Match the exact original person's face and body proportions.",
+    "source": "Gliding.png"
+  },
+  {
+    "key": "GliderTransitions",
+    "kind": "glide-transitions",
+    "rows": 8,
+    "reference": "/home/lotus/Projects/masynnay.com/docs/source-assets/legacy/masyn-walk-home.png",
+    "pose": "/home/lotus/Projects/masynnay.com/docs/source-assets/emerald/AirbenderTransitions.png",
+    "prompt": "Use case: identity-preserve. Image1 is the EXACT older character identity, face, hairstyle, head-to-body ratio and fine illustrated rendering to preserve. Image2 is ONLY a POSE/PROP reference; ignore its simplified oversized head and chunky pixel shapes. The output must look like the original character artist drew the new action, with the same limb lengths, face and body proportions as image1. No chibi redesign, no head/eye enlargement, no shrinking torso, no style reinvention. Refined warm illustrated 2D JRPG game sprites with textured hair, readable facial detail, natural cloth folds and clean smooth dark contours. Real transparent background, no scenery, text, labels, grid, cast shadows or detached pixels. Exact equal cells with minimum 24px empty transparent gutters, full bodies and props in bounds. Stable scale and ground baseline across every cell. Masyn keeps his original adult proportions, brown hair, short beard and green eyes, wearing orange/yellow air-nomad robes with blue forehead arrow and wooden glider staff. Exactly FOUR columns x EIGHT rows. ROWS1-4 TAKEOFF in S,N,W,E directions: unstraps folded staff, unfolds orange cloth glider, grips crossbar and crouches, jumps into low airborne pose. ROWS5-8 LANDING in S,N,W,E directions: descends with wings open, touches feet down, folds wings into staff, straps folded staff onto back. Image2 only references actions and wardrobe, never its chibi proportions. Full wings/limbs in cells, wide gutters, consistent original body/head size.",
+    "source": "GliderTransitions.png"
+  },
+  {
+    "key": "Details-masyn",
+    "id": "masyn",
+    "kind": "details",
+    "rows": 4,
+    "reference": "/home/lotus/Projects/masynnay.com/docs/source-assets/legacy/masyn-walk-home.png",
+    "pose": "/home/lotus/Projects/masynnay.com/docs/source-assets/emerald/travel-masyn.png",
+    "prompt": "Use case: identity-preserve. Image1 is the EXACT original character's face, hair, body proportions, clothing and illustrated style. Image2 only references the actions and familiar white duck, never its coarse enlarged-head artwork. Draw the SAME older original person in these action poses, retaining original head-to-body ratio and face, no new chibi, no head/eye enlargement. Clean warm illustrated JRPG material detail and smooth contours matching image1. Exactly FOUR columns x FOUR rows on genuine transparency, equal cells with wide empty gutters. ROW1 calling/turning: four standing poses facing SOUTH, WEST, NORTH, EAST, raising one hand to call a duck; maintain original clothes and body proportions. ROW2 seated naturally on the same white duck with orange beak, facing RIGHT in all four cells; four gentle alternating wing-flap phases. ROW3 landing: first pose riding the duck descending, second pose stepping off duck, third pose feet on ground raising head, fourth pose relaxed standing SOUTH/front. ROW4 expressions in standing SOUTH/front poses: neutral, mildly exasperated/arguing with hands raised, surprised, warmly happy with hands near heart. All bodies, hair, wings and feet fully in bounds with at least 24px empty transparent gutters. No scenery, text, labels, grid, extra people, detached particles or cast shadows.",
+    "source": "Details-masyn.png"
+  },
+  {
+    "key": "Details-mi-shell",
+    "id": "mi-shell",
+    "kind": "details",
+    "rows": 4,
+    "reference": "/home/lotus/Projects/masynnay.com/docs/source-assets/legacy/family-mi-shell-walk.png",
+    "pose": "/home/lotus/Projects/masynnay.com/docs/source-assets/emerald/travel-mi-shell.png",
+    "prompt": "Use case: identity-preserve. Image1 is the EXACT original character's face, hair, body proportions, clothing and illustrated style. Image2 only references the actions and familiar white duck, never its coarse enlarged-head artwork. Draw the SAME older original person in these action poses, retaining original head-to-body ratio and face, no new chibi, no head/eye enlargement. Clean warm illustrated JRPG material detail and smooth contours matching image1. Exactly FOUR columns x FOUR rows on genuine transparency, equal cells with wide empty gutters. ROW1 calling/turning: four standing poses facing SOUTH, WEST, NORTH, EAST, raising one hand to call a duck; maintain original clothes and body proportions. ROW2 seated naturally on the same white duck with orange beak, facing RIGHT in all four cells; four gentle alternating wing-flap phases. ROW3 landing: first pose riding the duck descending, second pose stepping off duck, third pose feet on ground raising head, fourth pose relaxed standing SOUTH/front. ROW4 expressions in standing SOUTH/front poses: neutral, mildly exasperated/arguing with hands raised, surprised, warmly happy with hands near heart. All bodies, hair, wings and feet fully in bounds with at least 24px empty transparent gutters. No scenery, text, labels, grid, extra people, detached particles or cast shadows.",
+    "source": "Details-mi-shell.png"
+  },
+  {
+    "key": "Details-ezra",
+    "id": "ezra",
+    "kind": "details",
+    "rows": 4,
+    "reference": "/home/lotus/Projects/masynnay.com/docs/source-assets/legacy/family-ezra-walk.png",
+    "pose": "/home/lotus/Projects/masynnay.com/docs/source-assets/emerald/travel-ezra.png",
+    "prompt": "Use case: identity-preserve. Image1 is the EXACT original character's face, hair, body proportions, clothing and illustrated style. Image2 only references the actions and familiar white duck, never its coarse enlarged-head artwork. Draw the SAME older original person in these action poses, retaining original head-to-body ratio and face, no new chibi, no head/eye enlargement. Clean warm illustrated JRPG material detail and smooth contours matching image1. Exactly FOUR columns x FOUR rows on genuine transparency, equal cells with wide empty gutters. ROW1 calling/turning: four standing poses facing SOUTH, WEST, NORTH, EAST, raising one hand to call a duck; maintain original clothes and body proportions. ROW2 seated naturally on the same white duck with orange beak, facing RIGHT in all four cells; four gentle alternating wing-flap phases. ROW3 landing: first pose riding the duck descending, second pose stepping off duck, third pose feet on ground raising head, fourth pose relaxed standing SOUTH/front. ROW4 expressions in standing SOUTH/front poses: neutral, mildly exasperated/arguing with hands raised, surprised, warmly happy with hands near heart. All bodies, hair, wings and feet fully in bounds with at least 24px empty transparent gutters. No scenery, text, labels, grid, extra people, detached particles or cast shadows.",
+    "source": "Details-ezra.png"
+  },
+  {
+    "key": "Details-fallyn",
+    "id": "fallyn",
+    "kind": "details",
+    "rows": 4,
+    "reference": "/home/lotus/Projects/masynnay.com/docs/source-assets/legacy/family-fallyn-walk.png",
+    "pose": "/home/lotus/Projects/masynnay.com/docs/source-assets/emerald/travel-fallyn.png",
+    "prompt": "Use case: identity-preserve. Image1 is the EXACT original character's face, hair, body proportions, clothing and illustrated style. Image2 only references the actions and familiar white duck, never its coarse enlarged-head artwork. Draw the SAME older original person in these action poses, retaining original head-to-body ratio and face, no new chibi, no head/eye enlargement. Clean warm illustrated JRPG material detail and smooth contours matching image1. Exactly FOUR columns x FOUR rows on genuine transparency, equal cells with wide empty gutters. ROW1 calling/turning: four standing poses facing SOUTH, WEST, NORTH, EAST, raising one hand to call a duck; maintain original clothes and body proportions. ROW2 seated naturally on the same white duck with orange beak, facing RIGHT in all four cells; four gentle alternating wing-flap phases. ROW3 landing: first pose riding the duck descending, second pose stepping off duck, third pose feet on ground raising head, fourth pose relaxed standing SOUTH/front. ROW4 expressions in standing SOUTH/front poses: neutral, mildly exasperated/arguing with hands raised, surprised, warmly happy with hands near heart. All bodies, hair, wings and feet fully in bounds with at least 24px empty transparent gutters. No scenery, text, labels, grid, extra people, detached particles or cast shadows.",
+    "source": "Details-fallyn.png"
+  },
+  {
+    "key": "Details-fitzgerald",
+    "id": "fitzgerald",
+    "kind": "details",
+    "rows": 4,
+    "reference": "/home/lotus/Projects/masynnay.com/docs/source-assets/legacy/family-fitzgerald-walk.png",
+    "pose": "/home/lotus/Projects/masynnay.com/docs/source-assets/emerald/travel-fitzgerald.png",
+    "prompt": "Use case: identity-preserve. Image1 is the EXACT original character's face, hair, body proportions, clothing and illustrated style. Image2 only references the actions and familiar white duck, never its coarse enlarged-head artwork. Draw the SAME older original person in these action poses, retaining original head-to-body ratio and face, no new chibi, no head/eye enlargement. Clean warm illustrated JRPG material detail and smooth contours matching image1. Exactly FOUR columns x FOUR rows on genuine transparency, equal cells with wide empty gutters. ROW1 calling/turning: four standing poses facing SOUTH, WEST, NORTH, EAST, raising one hand to call a duck; maintain original clothes and body proportions. ROW2 seated naturally on the same white duck with orange beak, facing RIGHT in all four cells; four gentle alternating wing-flap phases. ROW3 landing: first pose riding the duck descending, second pose stepping off duck, third pose feet on ground raising head, fourth pose relaxed standing SOUTH/front. ROW4 expressions in standing SOUTH/front poses: neutral, mildly exasperated/arguing with hands raised, surprised, warmly happy with hands near heart. All bodies, hair, wings and feet fully in bounds with at least 24px empty transparent gutters. No scenery, text, labels, grid, extra people, detached particles or cast shadows.",
+    "source": "Details-fitzgerald.png"
+  }
+]

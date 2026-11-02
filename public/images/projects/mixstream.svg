@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700">
+<title>MixStream interface preview</title>
+<desc>A modern interface illustration based on the local MixStream demo, not a captured browser screenshot.</desc>
+<defs>
+  <linearGradient id="surface" x2="1" y2="1"><stop stop-color="#20333b"/><stop offset="1" stop-color="#0d181e"/></linearGradient>
+  <linearGradient id="poster" x2="1" y2="1"><stop stop-color="#81ad96"/><stop offset=".5" stop-color="#294b46"/><stop offset="1" stop-color="#1a2e3b"/></linearGradient>
+</defs>
+<g font-family="Arial, Helvetica, sans-serif"><rect x="0" y="0" width="1200" height="700" rx="0" fill="#101c22" />
+<rect x="0" y="0" width="1200" height="80" rx="0" fill="#17292e" />
+<text x="38" y="51" font-size="30" fill="#d4efdb" font-weight="700">MixStream</text>
+<text x="910" y="48" font-size="16" fill="#b2c8bf" >Movies &amp; shows</text>
+<rect x="1086" y="24" width="76" height="34" rx="8" fill="#29443f" />
+<text x="1109" y="47" font-size="15" fill="#e5efec" >US</text>
+<rect x="0" y="80" width="245" height="620" rx="0" fill="#15262b" />
+<text x="28" y="130" font-size="13" fill="#91b4a5" letter-spacing="2">YOUR LIBRARY</text>
+<rect x="18" y="154" width="208" height="48" rx="8" fill="#2c4943" />
+<text x="38" y="185" font-size="18" fill="#e0f0e3" font-weight="600">Search</text>
+<text x="38" y="239" font-size="17" fill="#aec8ba" >Saved favorites</text>
+<text x="28" y="326" font-size="12" fill="#91b4a5" letter-spacing="1.5">RECENT SEARCHES</text>
+<text x="38" y="367" font-size="17" fill="#deebe2" >The Matrix</text>
+<text x="38" y="407" font-size="17" fill="#9bb4ad" >Lord of the Rings</text>
+<text x="38" y="447" font-size="17" fill="#9bb4ad" >Studio Ghibli</text>
+<text x="285" y="141" font-size="31" fill="#edf5e9" font-weight="700">Find a Movie or Show</text>
+<text x="285" y="176" font-size="17" fill="#9cb8ae" >Search a title. Save a favorite. Find where to watch.</text>
+<rect x="285" y="204" width="726" height="52" rx="10" fill="#20343a" stroke="#405c59"/>
+<text x="306" y="237" font-size="18" fill="#e5efec" >The Matrix</text>
+<rect x="1025" y="209" width="135" height="42" rx="9" fill="#bad8c4" /><text x="1092.5" y="236" font-size="15" fill="#13372d" text-anchor="middle" font-weight="600">Search</text>
+<text x="285" y="306" font-size="20" fill="#dce9e2" font-weight="600">Search results</text>
+<text x="1060" y="305" font-size="14" fill="#91b4a5" >1 result</text>
+<rect x="285" y="331" width="875" height="316" rx="16" fill="url(#surface)" stroke="#34524d"/>
+<rect x="308" y="354" width="188" height="270" rx="9" fill="url(#poster)" />
+<path d="M320 585 470 387M349 622 487 442M315 523 430 363" stroke="#b5dfbd" stroke-opacity=".18" stroke-width="12"/>
+<text x="331" y="476" font-size="18" fill="#d9e9d6" letter-spacing="6">THE</text>
+<text x="330" y="513" font-size="29" fill="#f0f8e4" font-weight="700" letter-spacing="2">MATRIX</text>
+<text x="528" y="390" font-size="32" fill="#edf4e9" font-weight="700">The Matrix</text>
+<text x="530" y="426" font-size="16" fill="#a9c0b4" >1999  ·  Film  ·  Science fiction</text>
+<text x="530" y="478" font-size="18" fill="#cfdfd6" >A computer hacker discovers a reality</text>
+<text x="530" y="507" font-size="18" fill="#cfdfd6" >far beyond the world he knows.</text>
+<rect x="530" y="554" width="184" height="42" rx="9" fill="#bad8c4" /><text x="622" y="581" font-size="15" fill="#13372d" text-anchor="middle" font-weight="600">Save favorite</text>
+<rect x="729" y="554" width="186" height="42" rx="9" fill="#263b40" /><text x="822" y="581" font-size="15" fill="#d9e6df" text-anchor="middle" font-weight="600">Where to watch</text>
+<text x="1095" y="676" font-size="11" fill="#708d84" text-anchor="end" letter-spacing="2">PREVIEW</text></g>
+</svg>

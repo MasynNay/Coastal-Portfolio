@@ -1,0 +1,73 @@
+[
+  {
+    "name": "RunnerCoast",
+    "path": "docs/source-assets/games/RunnerCoast.png",
+    "prompt": "A highly polished hand-painted game background for ELEMENT RUNNER, a cozy fantasy 3-lane endless runner in a coastal island. Vertical portrait 3:4 composition. Straight camera looking toward a small vanishing point at x50% y18%. A broad empty CHARCOAL COBBLESTONE promenade fills the middle 80% at the bottom and narrows to 15% at the horizon; three readable equally wide running lanes subtly marked by inset pale stone borders. Tropical grass, ancient turquoise-and-gold elemental shrines, lanterns and little flowering gardens line the extreme left and right edges, bright azure ocean on both sides, distant peaceful fantasy island skyline, billowing summer clouds. Charming detailed illustrated game environment consistent with beautiful GBA fantasy building art upgraded to modern hand-painted detail. Warm late-afternoon light, cohesive ocean teal and sage with amber accents, polished 2.5D adventure game aesthetic. The central road must be clear and visually quiet for obstacles. No people, no objects on the road, no text, no UI, no flat blocks, no black outline, no photo."
+  },
+  {
+    "name": "RunnerItems",
+    "path": "docs/source-assets/games/RunnerItems.png",
+    "prompt": "Production game asset sheet on TRANSPARENT background. EXACT TWO ROWS and FOUR COLUMNS, 8 separate isolated props with wide completely transparent gutters. Match a detailed charming hand-painted fantasy coastal island game. Row1: a circular jade wind shield orb with curling air symbol; a sapphire water magnet orb with wave and tiny magnetic spark; a glowing warm orange fireburst orb with flame; a mossy green earth multiplier orb with faceted little crystal. All four are same size, beautiful glassy magical elemental tokens with clear symbols but NO text. Row2: a squat wooden shipping crate obstacle with rope bindings; a LOW hurdle made of beautiful carved wood with one low crossbeam to jump over; a TALL ancient teal stone gate obstacle with a very LOW opening underneath to slide through, wide upper crosspiece extending down to chest height; a small warm golden collectible spark with a four-point diamond shape. Row2 each object same overall cell size but realistic relative proportions, camera straight front slightly above looking downward, isolated full artwork, no shadows clipped at cell edges. Crisp clean edges, detailed shading matching hand-painted fantasy pixel-art environment, no blurry halos, no labels, no background, no grids."
+  },
+  {
+    "name": "WindWakerBoard",
+    "path": "docs/source-assets/games/WindWakerBoard.png",
+    "prompt": "Beautiful original illustrated backdrop for a Wind Waker-inspired 2048 game. Square composition. Stylized CEL SHADED vibrant turquoise ocean, cream paper charts, nautical rope framing along the outer 8% border, tiny red-sailed wooden dragon sailboat near bottom-left, sunny whimsical coastal island and little windmill at upper right, seagulls and stylized swirling white winds, gold and teal motifs. Center 80% must be a quiet dark deep teal sea-chart panel, uncluttered and subtly textured, where a 4x4 number game will be overlaid. Joyful Nintendo GameCube-era ocean adventure feel with polished modern detail. No UI, no text or numbers, no grid, no characters or faces."
+  },
+  {
+    "name": "MatchPowers",
+    "path": "docs/source-assets/games/MatchPowers.png",
+    "prompt": "A polished transparent game icon sheet EXACTLY FOUR COLUMNS ONE ROW. Four isolated detailed original Pokemon-inspired power-up objects consistent with glossy detailed Pokeball icons: (1) spherical charcoal Team Rocket bomb with red R letter emblem and short lit fuse, whimsical no violence; (2) rainbow prismatic Pokeball with pearlescent multicolor shell, white central latch and lovely spectral glow tight around ball; (3) a little glossy gold lightning bolt badge; (4) a pastel candy-colored Pokeball burst star with a Pokeball center. Same centered scale, wide clear transparent gutters, crisp readable 2D game artwork, no rectangles, no background, no captions except R on bomb."
+  },
+  {
+    "name": "RunnerTemple",
+    "path": "docs/source-assets/games/RunnerTemple.png",
+    "prompt": "Edit this game background to clearly become an AVATAR THE LAST AIRBENDER inspired elemental temple causeway. Preserve this exact image's beautiful polish, perspective, empty central road, water/landscaping, warm lighting and composition. REPLACE the European fairy-tale palace/castle skyline and pointy arches with elegant EAST ASIAN/TIBETAN AIR NOMAD temple pagodas, sweeping orange and green tiled roofs, round air-symbol stone gateways, terraced mountain monasteries and circular windows. Emerald Earth Kingdom carved stone along the road, blue Water Tribe cloth banners, small red Fire Nation lantern accents. The result is an Air Temple coastal training course, not a Zelda/wind-waker kingdom. Remove all long inset lane-divider stripes from the central cobblestone road; keep its beautiful charcoal stones but no painted or paved lane markings because the game overlays moving effects. Keep the promenade empty. No characters, no items on the road, no text, no UI. Same portrait composition and precise vanishing point."
+  },
+  {
+    "name": "WaterBending",
+    "path": "docs/source-assets/games/WaterBending.png",
+    "prompt": "Transparent 2D game VFX sheet EXACT ONE ROW EIGHT COLUMNS. Eight fluid looping frames of a beautiful WATERBENDING ribbon swirling around an invisible standing character. Front three-quarter game view slightly above, water spiral begins by feet, curls up around waist and streams back down. Clear EMPTY central opening for the person. Only organic flowing translucent azure and turquoise water, delicate icy white edges and a few restrained droplets, softly painted high-detail fantasy game style. Water has real volume and curling fluid shapes, NOT flat circles/ellipses, NOT neon lines, NOT a solid blue blob. Consistent center and scale. Each isolated full effect frame with ample transparent gutters, no people, no floor, no grid or labels. Preserve calm readable effect, not flashing."
+  },
+  {
+    "name": "OrcWoodland",
+    "path": "docs/source-assets/games/OrcWoodland.png",
+    "prompt": "A beautiful original MIDDLE EARTH inspired woodland archery game background, landscape 4:3. Dense ancient silver-barked trees arch overhead, mossy stone ruins, lush ferns, shafts of warm light through the canopy, distant misty mountains, small rounded timber-and-stone elven/shire architecture very far behind. Clear gently winding grassy earth trail spanning the central foreground from LEFT to RIGHT so three orcs can run across it at different depths. Rich detailed hand-painted fantasy game style matching detailed pixel-art fantasy buildings, sage/forest green, golden sunlight, natural leafy textures. Center and lower half relatively quiet/readable behind moving characters. No people, no orcs, no UI, no targets, no text, no modern objects."
+  },
+  {
+    "name": "RocketBlast",
+    "path": "docs/source-assets/games/RocketBlast.png",
+    "prompt": "Transparent 2D game VFX sprite sheet, EXACT ONE ROW EIGHT COLUMNS with wide clear gutters. Eight chronological frames of a whimsical TEAM ROCKET BOMB EXPLOSION for a polished Pokemon-style match-three puzzle. Frame1 little golden fuse spark; frame2 compact orange ignition puff; frame3 expanding bright orange-yellow cartoon flame puff with a subtle red R-shaped spark at center; frame4 fullest rounded fiery burst; frame5 flame softens into warm ochre smoke puffs; frame6 gray-lavender rounded smoke clouds; frame7 thinning smoke and tiny golden embers; frame8 faint dissipating smoke. No actual bomb object, because game already draws the bomb. Consistent center, maximum effect completely inside each cell with empty margins, no scenery, no black background, no white matte, no grid or captions. Beautiful detailed hand-painted game particle art, cute exciting and readable, no gore, no large white flashes, no blurry rectangle.",
+    "sourceColumns": [
+      0,
+      190,
+      440,
+      765,
+      1125,
+      1430,
+      1710,
+      1970,
+      2172
+    ]
+  },
+  {
+    "name": "Arrow",
+    "path": "docs/source-assets/games/Arrow.png",
+    "prompt": "One beautiful horizontal fantasy archer's ARROW, pointing exactly RIGHT. Transparent background, isolated complete arrow with generous margins. Rich dark walnut shaft, elegant silver leaf-shaped broadhead tip, carefully bound pale mint and cream feather fletching at the LEFT tail, tiny gold nock. Detailed hand-painted Middle-earth woodland game prop, not a UI arrow icon, not a cartoon triangle or line. Long slender realistic wooden arrow, about 10:1 width:height including feather ends. Crisp clean edges, readable at 90 pixels wide, no glow, no shadow floor, no background, no text, no bow or person."
+  },
+  {
+    "name": "OrcMoria",
+    "path": "docs/source-assets/games/OrcMoria.png",
+    "prompt": "Use case: stylized-concept. Asset type: landscape background for a 2D archery minigame called Orc Hunt in a detailed illustrated coastal RPG. Create the INTERIOR OF THE MINES OF MORIA inspired by Tolkien: an ancient vast dwarven underground stone hall, monumental squared carved pillars receding into darkness, broad worn slate floor, weathered geometric stone carvings, a few dim warm braziers deep at the edges. Strong atmospheric depth, cool blue-gray stone and muted desaturated charcoal palette. Camera from slightly above looking across a spacious chamber, wide stage composition. The middle and lower two-thirds must stay open and visually quiet with soft stone gradients, for readable small detailed green/brown orc sprites and a warm brown/green human archer placed over it. Keep bright sources and high-contrast carvings to distant upper edges. Beautiful polished hand-painted fantasy game environment, subtle stone texture, no busy foliage, no green outdoor scenery, no characters, no creatures, no text, no UI, no borders. Wide landscape 16:9."
+  },
+  {
+    "name": "RunnerFloor",
+    "path": "docs/source-assets/games/RunnerFloor.png",
+    "prompt": "Use case: stylized-concept. Asset type: seamless square stone-ground texture for the moving floor of an Avatar-inspired Air Temple runner game. Strict orthographic straight top-down view. Large warm desaturated charcoal slate paving stones, mostly rectangular irregular hand-cut slabs, subtle worn bevels, softly illuminated cool-gray surfaces, thin dark seams, gentle detailed painterly texture. About 5 columns by 5 rows of large stones across whole square, not tiny busy cobbles. The image must tile seamlessly on all four edges, no outer border, no perspective, no shadows from other objects, no moss or plants, no glowing runes, no colored objects, no UI, no text. Low-contrast attractive hand-painted fantasy game artwork; playable coins and characters must stand out strongly over this quiet ground. Entire frame is paving with no margins."
+  },
+  {
+    "name": "RunnerSky",
+    "path": "docs/source-assets/games/RunnerSky.png",
+    "prompt": "Create a WIDE OPEN SCENIC BACKDROP for an Avatar-inspired Air Temple runner game. Vertical composition matching 600x700. A distant white-and-gold air temple, pagodas and floating rocky islands across a luminous blue sea, sunlit clouds, mountains and a few hanging banners near the upper side edges. The temple is very distant near the TOP QUARTER. The LOWER THREE QUARTERS are OPEN BLUE SEA with subtle distant mist; only distant islands at far side edges. CRITICAL: absolutely NO road, bridge, causeway, pavement, floor, boardwalk, stairs, platforms, railings, or walkway anywhere. The game draws its own moving stone causeway over this image. No near objects, no characters, no UI, no text. Beautiful detailed hand-painted fantasy game scenery, warm late afternoon, calm readable background, no photorealism."
+  }
+]

@@ -1,0 +1,3 @@
+Built-in image generation tool.
+
+Use case: stylized-concept. A transparent 2D game sprite atlas for a harmless wizard transformation easter egg in a cozy richly illustrated JRPG town. ONE charming leaf-green frog, rounded body, folded hind legs, small front toes, gentle large glossy amber eyes and creamy throat; not a baby cartoon, no clothes or human expression. Match detailed hand-painted JRPG town props, refined dark outlines and lush warm material shading. Exactly FOUR columns x FOUR rows. Row1 SOUTH/front, row2 NORTH/back, row3 WEST/left, row4 EAST/right. Four subtle idle/hopping poses in each row, consistent scale and feet baseline, isolated full-body cells, wide transparent gutters, no shadows, text, scenery, particles or grid. Real transparent background.

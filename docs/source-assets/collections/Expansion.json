@@ -1,0 +1,562 @@
+[
+  {
+    "key": "mantis-1",
+    "kind": "spiders",
+    "category": "Mantises",
+    "rows": [
+      "mantis-clover",
+      "mantis-willow",
+      "mantis-acorn",
+      "mantis-juniper",
+      "mantis-marigold",
+      "mantis-thistle",
+      "mantis-bramble",
+      "mantis-spruce",
+      "mantis-dandelion",
+      "mantis-hazel"
+    ],
+    "prompt": "Use case: illustration-story. Production transparent game sprite atlas for a polished coastal handheld RPG. Exactly TEN ROWS and FOUR COLUMNS, forty full-body mantises. Each ROW is one distinct species; columns show four gentle consecutive living animation poses of that SAME creature: relaxed, small movement, raised wings/forearms, return. Match reference 1 species rendering and the restrained appealing expression and detailed shading of reference 2 jumping spider. Cute and lifelike, not baby caricatures or human faces. Rich restrained colors, clean dark contours, delicate surface texture, naturally glossy eyes. Each row must have the exact creature listed, all four frames consistent in size, colors, markings and anatomy. Every insect has six legs (mantis forearms count as its front pair), no extra limbs. No costumes or objects. Row designs from TOP to BOTTOM:\n1. Clover mantis: sage green with cream markings; orchid-petal forearms and delicate flower wing lobes; small expressive glossy eyes, friendly natural proportions\n2. Willow mantis: russet red with honey markings; dry-leaf serrated wing edges and pointed crest; small expressive glossy eyes, friendly natural proportions\n3. Acorn mantis: lavender with plum markings; broad shield-shaped thorax and compact folded forearms; small expressive glossy eyes, friendly natural proportions\n4. Juniper mantis: charcoal with silver markings; long slender twig body and thin antennae; small expressive glossy eyes, friendly natural proportions\n5. Marigold mantis: sky blue with navy markings; rounded broad leaf wings with branching veins; small expressive glossy eyes, friendly natural proportions\n6. Thistle mantis: leaf green with gold markings; feather-shaped antennae and narrow grasslike wings; small expressive glossy eyes, friendly natural proportions\n7. Bramble mantis: teal with pale mint markings; small flowerlike shoulder flanges and curved folded forearms; small expressive glossy eyes, friendly natural proportions\n8. Spruce mantis: amber gold with dark brown markings; orchid-petal forearms and delicate flower wing lobes; small expressive glossy eyes, friendly natural proportions\n9. Dandelion mantis: ivory with copper markings; dry-leaf serrated wing edges and pointed crest; small expressive glossy eyes, friendly natural proportions\n10. Hazel mantis: peach with rose markings; broad shield-shaped thorax and compact folded forearms; small expressive glossy eyes, friendly natural proportions\nKeep large clear transparent gaps between EVERY row and column. All wings, antennae, feet and tail tips completely inside their own cell. Do not overlap neighbors. Genuine transparent background, NO scenery, color wash, ground, shadows, grid, lettering, captions or background. Portrait sprite atlas.",
+    "reference": "docs/source-assets/collections/MantisesReference.png",
+    "mode": "built-in"
+  },
+  {
+    "key": "mantis-2",
+    "kind": "spiders",
+    "category": "Mantises",
+    "rows": [
+      "mantis-rowan",
+      "mantis-poppy",
+      "mantis-primrose",
+      "mantis-cedar",
+      "mantis-fernwood",
+      "mantis-sorrel",
+      "mantis-sage",
+      "mantis-brook",
+      "mantis-mossbank",
+      "mantis-pebblewood"
+    ],
+    "prompt": "Use case: illustration-story. Production transparent game sprite atlas for a polished coastal handheld RPG. Exactly TEN ROWS and FOUR COLUMNS, forty full-body mantises. Each ROW is one distinct species; columns show four gentle consecutive living animation poses of that SAME creature: relaxed, small movement, raised wings/forearms, return. Match reference 1 species rendering and the restrained appealing expression and detailed shading of reference 2 jumping spider. Cute and lifelike, not baby caricatures or human faces. Rich restrained colors, clean dark contours, delicate surface texture, naturally glossy eyes. Each row must have the exact creature listed, all four frames consistent in size, colors, markings and anatomy. Every insect has six legs (mantis forearms count as its front pair), no extra limbs. No costumes or objects. Row designs from TOP to BOTTOM:\n1. Rowan mantis: amber gold with dark brown markings; long slender twig body and thin antennae; small expressive glossy eyes, friendly natural proportions\n2. Poppy mantis: ivory with copper markings; rounded broad leaf wings with branching veins; small expressive glossy eyes, friendly natural proportions\n3. Primrose mantis: peach with rose markings; feather-shaped antennae and narrow grasslike wings; small expressive glossy eyes, friendly natural proportions\n4. Cedar mantis: sage green with cream markings; small flowerlike shoulder flanges and curved folded forearms; small expressive glossy eyes, friendly natural proportions\n5. Fernwood mantis: russet red with honey markings; orchid-petal forearms and delicate flower wing lobes; small expressive glossy eyes, friendly natural proportions\n6. Sorrel mantis: lavender with plum markings; dry-leaf serrated wing edges and pointed crest; small expressive glossy eyes, friendly natural proportions\n7. Sage mantis: charcoal with silver markings; broad shield-shaped thorax and compact folded forearms; small expressive glossy eyes, friendly natural proportions\n8. Brook mantis: sky blue with navy markings; long slender twig body and thin antennae; small expressive glossy eyes, friendly natural proportions\n9. Mossbank mantis: leaf green with gold markings; rounded broad leaf wings with branching veins; small expressive glossy eyes, friendly natural proportions\n10. Pebblewood mantis: teal with pale mint markings; feather-shaped antennae and narrow grasslike wings; small expressive glossy eyes, friendly natural proportions\nKeep large clear transparent gaps between EVERY row and column. All wings, antennae, feet and tail tips completely inside their own cell. Do not overlap neighbors. Genuine transparent background, NO scenery, color wash, ground, shadows, grid, lettering, captions or background. Portrait sprite atlas.",
+    "reference": "docs/source-assets/collections/MantisesReference.png",
+    "mode": "built-in"
+  },
+  {
+    "key": "mantis-3",
+    "kind": "spiders",
+    "category": "Mantises",
+    "rows": [
+      "mantis-dewdrop",
+      "mantis-sunleaf",
+      "mantis-honeycomb",
+      "mantis-buttercup",
+      "mantis-rainleaf",
+      "mantis-applewood",
+      "mantis-wildflower",
+      "mantis-copperleaf",
+      "mantis-seaglass",
+      "mantis-bluebell"
+    ],
+    "prompt": "Use case: illustration-story. Production transparent game sprite atlas for a polished coastal handheld RPG. Exactly TEN ROWS and FOUR COLUMNS, forty full-body mantises. Each ROW is one distinct species; columns show four gentle consecutive living animation poses of that SAME creature: relaxed, small movement, raised wings/forearms, return. Match reference 1 species rendering and the restrained appealing expression and detailed shading of reference 2 jumping spider. Cute and lifelike, not baby caricatures or human faces. Rich restrained colors, clean dark contours, delicate surface texture, naturally glossy eyes. Each row must have the exact creature listed, all four frames consistent in size, colors, markings and anatomy. Every insect has six legs (mantis forearms count as its front pair), no extra limbs. No costumes or objects. Row designs from TOP to BOTTOM:\n1. Dewdrop mantis: sky blue with navy markings; small flowerlike shoulder flanges and curved folded forearms; small expressive glossy eyes, friendly natural proportions\n2. Sunleaf mantis: leaf green with gold markings; orchid-petal forearms and delicate flower wing lobes; small expressive glossy eyes, friendly natural proportions\n3. Honeycomb mantis: teal with pale mint markings; dry-leaf serrated wing edges and pointed crest; small expressive glossy eyes, friendly natural proportions\n4. Buttercup mantis: amber gold with dark brown markings; broad shield-shaped thorax and compact folded forearms; small expressive glossy eyes, friendly natural proportions\n5. Rainleaf mantis: ivory with copper markings; long slender twig body and thin antennae; small expressive glossy eyes, friendly natural proportions\n6. Applewood mantis: peach with rose markings; rounded broad leaf wings with branching veins; small expressive glossy eyes, friendly natural proportions\n7. Wildflower mantis: sage green with cream markings; feather-shaped antennae and narrow grasslike wings; small expressive glossy eyes, friendly natural proportions\n8. Copperleaf mantis: russet red with honey markings; small flowerlike shoulder flanges and curved folded forearms; small expressive glossy eyes, friendly natural proportions\n9. Seaglass mantis: lavender with plum markings; orchid-petal forearms and delicate flower wing lobes; small expressive glossy eyes, friendly natural proportions\n10. Bluebell mantis: charcoal with silver markings; dry-leaf serrated wing edges and pointed crest; small expressive glossy eyes, friendly natural proportions\nKeep large clear transparent gaps between EVERY row and column. All wings, antennae, feet and tail tips completely inside their own cell. Do not overlap neighbors. Genuine transparent background, NO scenery, color wash, ground, shadows, grid, lettering, captions or background. Portrait sprite atlas.",
+    "reference": "docs/source-assets/collections/MantisesReference.png",
+    "mode": "built-in"
+  },
+  {
+    "key": "mantis-4",
+    "kind": "spiders",
+    "category": "Mantises",
+    "rows": [
+      "mantis-orchard",
+      "mantis-bayleaf",
+      "mantis-watermint",
+      "mantis-sunstone",
+      "mantis-driftwood",
+      "mantis-moonpetal",
+      "mantis-rosewood",
+      "mantis-amberleaf",
+      "mantis-wildmint",
+      "mantis-pinecone"
+    ],
+    "prompt": "Use case: illustration-story. Production transparent game sprite atlas for a polished coastal handheld RPG. Exactly TEN ROWS and FOUR COLUMNS, forty full-body mantises. Each ROW is one distinct species; columns show four gentle consecutive living animation poses of that SAME creature: relaxed, small movement, raised wings/forearms, return. Match reference 1 species rendering and the restrained appealing expression and detailed shading of reference 2 jumping spider. Cute and lifelike, not baby caricatures or human faces. Rich restrained colors, clean dark contours, delicate surface texture, naturally glossy eyes. Each row must have the exact creature listed, all four frames consistent in size, colors, markings and anatomy. Every insect has six legs (mantis forearms count as its front pair), no extra limbs. No costumes or objects. Row designs from TOP to BOTTOM:\n1. Orchard mantis: russet red with honey markings; broad shield-shaped thorax and compact folded forearms; small expressive glossy eyes, friendly natural proportions\n2. Bayleaf mantis: lavender with plum markings; long slender twig body and thin antennae; small expressive glossy eyes, friendly natural proportions\n3. Watermint mantis: charcoal with silver markings; rounded broad leaf wings with branching veins; small expressive glossy eyes, friendly natural proportions\n4. Sunstone mantis: sky blue with navy markings; feather-shaped antennae and narrow grasslike wings; small expressive glossy eyes, friendly natural proportions\n5. Driftwood mantis: leaf green with gold markings; small flowerlike shoulder flanges and curved folded forearms; small expressive glossy eyes, friendly natural proportions\n6. Moonpetal mantis: teal with pale mint markings; orchid-petal forearms and delicate flower wing lobes; small expressive glossy eyes, friendly natural proportions\n7. Rosewood mantis: amber gold with dark brown markings; dry-leaf serrated wing edges and pointed crest; small expressive glossy eyes, friendly natural proportions\n8. Amberleaf mantis: ivory with copper markings; broad shield-shaped thorax and compact folded forearms; small expressive glossy eyes, friendly natural proportions\n9. Wildmint mantis: peach with rose markings; long slender twig body and thin antennae; small expressive glossy eyes, friendly natural proportions\n10. Pinecone mantis: sage green with cream markings; rounded broad leaf wings with branching veins; small expressive glossy eyes, friendly natural proportions\nKeep large clear transparent gaps between EVERY row and column. All wings, antennae, feet and tail tips completely inside their own cell. Do not overlap neighbors. Genuine transparent background, NO scenery, color wash, ground, shadows, grid, lettering, captions or background. Portrait sprite atlas.",
+    "reference": "docs/source-assets/collections/MantisesReference.png",
+    "mode": "built-in"
+  },
+  {
+    "key": "mantis-5",
+    "kind": "spiders",
+    "category": "Mantises",
+    "rows": [
+      "mantis-lilypond",
+      "mantis-meadowmist",
+      "mantis-goldenrod",
+      "mantis-silverfern",
+      "mantis-seabreeze",
+      "mantis-sandstone",
+      "mantis-snowdrop",
+      "mantis-firelight",
+      "mantis-stormleaf",
+      "mantis-dreamleaf"
+    ],
+    "prompt": "Use case: illustration-story. Production transparent game sprite atlas for a polished coastal handheld RPG. Exactly TEN ROWS and FOUR COLUMNS, forty full-body mantises. Each ROW is one distinct species; columns show four gentle consecutive living animation poses of that SAME creature: relaxed, small movement, raised wings/forearms, return. Match reference 1 species rendering and the restrained appealing expression and detailed shading of reference 2 jumping spider. Cute and lifelike, not baby caricatures or human faces. Rich restrained colors, clean dark contours, delicate surface texture, naturally glossy eyes. Each row must have the exact creature listed, all four frames consistent in size, colors, markings and anatomy. Every insect has six legs (mantis forearms count as its front pair), no extra limbs. No costumes or objects. Row designs from TOP to BOTTOM:\n1. Lilypond mantis: ivory with copper markings; feather-shaped antennae and narrow grasslike wings; small expressive glossy eyes, friendly natural proportions\n2. Meadowmist mantis: peach with rose markings; small flowerlike shoulder flanges and curved folded forearms; small expressive glossy eyes, friendly natural proportions\n3. Goldenrod mantis: sage green with cream markings; orchid-petal forearms and delicate flower wing lobes; small expressive glossy eyes, friendly natural proportions\n4. Silverfern mantis: russet red with honey markings; dry-leaf serrated wing edges and pointed crest; small expressive glossy eyes, friendly natural proportions\n5. Seabreeze mantis: lavender with plum markings; broad shield-shaped thorax and compact folded forearms; small expressive glossy eyes, friendly natural proportions\n6. Sandstone mantis: charcoal with silver markings; long slender twig body and thin antennae; small expressive glossy eyes, friendly natural proportions\n7. Snowdrop mantis: sky blue with navy markings; rounded broad leaf wings with branching veins; small expressive glossy eyes, friendly natural proportions\n8. Firelight mantis: leaf green with gold markings; feather-shaped antennae and narrow grasslike wings; small expressive glossy eyes, friendly natural proportions\n9. Stormleaf mantis: teal with pale mint markings; small flowerlike shoulder flanges and curved folded forearms; small expressive glossy eyes, friendly natural proportions\n10. Dreamleaf mantis: amber gold with dark brown markings; orchid-petal forearms and delicate flower wing lobes; small expressive glossy eyes, friendly natural proportions\nKeep large clear transparent gaps between EVERY row and column. All wings, antennae, feet and tail tips completely inside their own cell. Do not overlap neighbors. Genuine transparent background, NO scenery, color wash, ground, shadows, grid, lettering, captions or background. Portrait sprite atlas.",
+    "reference": "docs/source-assets/collections/MantisesReference.png",
+    "mode": "built-in"
+  },
+  {
+    "key": "mantis-6",
+    "kind": "spiders",
+    "category": "Mantises",
+    "rows": [
+      "mantis-nightbloom",
+      "mantis-moonstone",
+      "mantis-velvetwing",
+      "mantis-amethyst",
+      "mantis-starfall",
+      "mantis-twilight",
+      "mantis-opal",
+      "mantis-indigo",
+      "mantis-lantern",
+      "mantis-frostbloom"
+    ],
+    "prompt": "Use case: illustration-story. Production transparent game sprite atlas for a polished coastal handheld RPG. Exactly TEN ROWS and FOUR COLUMNS, forty full-body mantises. Each ROW is one distinct species; columns show four gentle consecutive living animation poses of that SAME creature: relaxed, small movement, raised wings/forearms, return. Match reference 1 species rendering and the restrained appealing expression and detailed shading of reference 2 jumping spider. Cute and lifelike, not baby caricatures or human faces. Rich restrained colors, clean dark contours, delicate surface texture, naturally glossy eyes. Each row must have the exact creature listed, all four frames consistent in size, colors, markings and anatomy. Every insect has six legs (mantis forearms count as its front pair), no extra limbs. No costumes or objects. Row designs from TOP to BOTTOM:\n1. Nightbloom mantis: leaf green with gold markings; dry-leaf serrated wing edges and pointed crest; small expressive glossy eyes, friendly natural proportions\n2. Moonstone mantis: teal with pale mint markings; broad shield-shaped thorax and compact folded forearms; small expressive glossy eyes, friendly natural proportions\n3. Velvetwing mantis: amber gold with dark brown markings; long slender twig body and thin antennae; small expressive glossy eyes, friendly natural proportions\n4. Amethyst mantis: ivory with copper markings; rounded broad leaf wings with branching veins; small expressive glossy eyes, friendly natural proportions\n5. Starfall mantis: peach with rose markings; feather-shaped antennae and narrow grasslike wings; small expressive glossy eyes, friendly natural proportions\n6. Twilight mantis: sage green with cream markings; small flowerlike shoulder flanges and curved folded forearms; small expressive glossy eyes, friendly natural proportions\n7. Opal mantis: russet red with honey markings; orchid-petal forearms and delicate flower wing lobes; small expressive glossy eyes, friendly natural proportions\n8. Indigo mantis: lavender with plum markings; dry-leaf serrated wing edges and pointed crest; small expressive glossy eyes, friendly natural proportions\n9. Lantern mantis: charcoal with silver markings; broad shield-shaped thorax and compact folded forearms; small expressive glossy eyes, friendly natural proportions\n10. Frostbloom mantis: sky blue with navy markings; long slender twig body and thin antennae; small expressive glossy eyes, friendly natural proportions\nKeep large clear transparent gaps between EVERY row and column. All wings, antennae, feet and tail tips completely inside their own cell. Do not overlap neighbors. Genuine transparent background, NO scenery, color wash, ground, shadows, grid, lettering, captions or background. Portrait sprite atlas.",
+    "reference": "docs/source-assets/collections/MantisesReference.png",
+    "mode": "built-in"
+  },
+  {
+    "key": "mantis-7",
+    "kind": "spiders",
+    "category": "Mantises",
+    "rows": [
+      "mantis-eclipse",
+      "mantis-silvermist",
+      "mantis-cinder",
+      "mantis-aurora",
+      "mantis-pearlglow",
+      "mantis-crystal",
+      "mantis-mistveil",
+      "mantis-starlace",
+      "mantis-celestial",
+      "mantis-rainbow"
+    ],
+    "prompt": "Use case: illustration-story. Production transparent game sprite atlas for a polished coastal handheld RPG. Exactly TEN ROWS and FOUR COLUMNS, forty full-body mantises. Each ROW is one distinct species; columns show four gentle consecutive living animation poses of that SAME creature: relaxed, small movement, raised wings/forearms, return. Match reference 1 species rendering and the restrained appealing expression and detailed shading of reference 2 jumping spider. Cute and lifelike, not baby caricatures or human faces. Rich restrained colors, clean dark contours, delicate surface texture, naturally glossy eyes. Each row must have the exact creature listed, all four frames consistent in size, colors, markings and anatomy. Every insect has six legs (mantis forearms count as its front pair), no extra limbs. No costumes or objects. Row designs from TOP to BOTTOM:\n1. Eclipse mantis: lavender with plum markings; rounded broad leaf wings with branching veins; small expressive glossy eyes, friendly natural proportions\n2. Silvermist mantis: charcoal with silver markings; feather-shaped antennae and narrow grasslike wings; small expressive glossy eyes, friendly natural proportions\n3. Cinder mantis: sky blue with navy markings; small flowerlike shoulder flanges and curved folded forearms; small expressive glossy eyes, friendly natural proportions\n4. Aurora mantis: leaf green with gold markings; orchid-petal forearms and delicate flower wing lobes; small expressive glossy eyes, friendly natural proportions\n5. Pearlglow mantis: teal with pale mint markings; dry-leaf serrated wing edges and pointed crest; small expressive glossy eyes, friendly natural proportions\n6. Crystal mantis: amber gold with dark brown markings; broad shield-shaped thorax and compact folded forearms; small expressive glossy eyes, friendly natural proportions\n7. Mistveil mantis: ivory with copper markings; long slender twig body and thin antennae; small expressive glossy eyes, friendly natural proportions\n8. Starlace mantis: peach with rose markings; rounded broad leaf wings with branching veins; small expressive glossy eyes, friendly natural proportions\n9. Celestial mantis: sage green with cream markings; feather-shaped antennae and narrow grasslike wings; small expressive glossy eyes, friendly natural proportions\n10. Rainbow mantis: russet red with honey markings; small flowerlike shoulder flanges and curved folded forearms; small expressive glossy eyes, friendly natural proportions\nKeep large clear transparent gaps between EVERY row and column. All wings, antennae, feet and tail tips completely inside their own cell. Do not overlap neighbors. Genuine transparent background, NO scenery, color wash, ground, shadows, grid, lettering, captions or background. Portrait sprite atlas.",
+    "reference": "docs/source-assets/collections/MantisesReference.png",
+    "mode": "built-in"
+  },
+  {
+    "key": "butterfly-1",
+    "kind": "spiders",
+    "category": "Butterflies",
+    "rows": [
+      "butterfly-clover",
+      "butterfly-willow",
+      "butterfly-acorn",
+      "butterfly-juniper",
+      "butterfly-marigold",
+      "butterfly-thistle",
+      "butterfly-bramble",
+      "butterfly-spruce",
+      "butterfly-dandelion",
+      "butterfly-hazel"
+    ],
+    "prompt": "Use case: illustration-story. Production transparent game sprite atlas for a polished coastal handheld RPG. Exactly TEN ROWS and FOUR COLUMNS, forty full-body butterflies. Each ROW is one distinct species; columns show four gentle consecutive living animation poses of that SAME creature: relaxed, small movement, raised wings/forearms, return. Match reference 1 species rendering and the restrained appealing expression and detailed shading of reference 2 jumping spider. Cute and lifelike, not baby caricatures or human faces. Rich restrained colors, clean dark contours, delicate surface texture, naturally glossy eyes. Each row must have the exact creature listed, all four frames consistent in size, colors, markings and anatomy. Every insect has six legs (mantis forearms count as its front pair), no extra limbs. No costumes or objects. Row designs from TOP to BOTTOM:\n1. Clover butterfly: sage green with cream markings; long swallowtail wing tips and oval wing spots; small expressive glossy eyes, friendly natural proportions\n2. Willow butterfly: russet red with honey markings; rounded wings with large concentric eyespots; small expressive glossy eyes, friendly natural proportions\n3. Acorn butterfly: lavender with plum markings; clear glasslike wing windows with colored veins; small expressive glossy eyes, friendly natural proportions\n4. Juniper butterfly: charcoal with silver markings; scalloped outer wing edges and a dotted border; small expressive glossy eyes, friendly natural proportions\n5. Marigold butterfly: sky blue with navy markings; triangular wings with bold diagonal bands; small expressive glossy eyes, friendly natural proportions\n6. Thistle butterfly: leaf green with gold markings; small rounded lower wings and checkered upper wings; small expressive glossy eyes, friendly natural proportions\n7. Bramble butterfly: teal with pale mint markings; broad owl-pattern wings with crescent markings; small expressive glossy eyes, friendly natural proportions\n8. Spruce butterfly: amber gold with dark brown markings; long swallowtail wing tips and oval wing spots; small expressive glossy eyes, friendly natural proportions\n9. Dandelion butterfly: ivory with copper markings; rounded wings with large concentric eyespots; small expressive glossy eyes, friendly natural proportions\n10. Hazel butterfly: peach with rose markings; clear glasslike wing windows with colored veins; small expressive glossy eyes, friendly natural proportions\nKeep large clear transparent gaps between EVERY row and column. All wings, antennae, feet and tail tips completely inside their own cell. Do not overlap neighbors. Genuine transparent background, NO scenery, color wash, ground, shadows, grid, lettering, captions or background. Portrait sprite atlas.",
+    "reference": "docs/source-assets/collections/ButterfliesReference.png",
+    "mode": "built-in"
+  },
+  {
+    "key": "butterfly-2",
+    "kind": "spiders",
+    "category": "Butterflies",
+    "rows": [
+      "butterfly-rowan",
+      "butterfly-poppy",
+      "butterfly-primrose",
+      "butterfly-cedar",
+      "butterfly-fernwood",
+      "butterfly-sorrel",
+      "butterfly-sage",
+      "butterfly-brook",
+      "butterfly-mossbank",
+      "butterfly-pebblewood"
+    ],
+    "prompt": "Use case: illustration-story. Production transparent game sprite atlas for a polished coastal handheld RPG. Exactly TEN ROWS and FOUR COLUMNS, forty full-body butterflies. Each ROW is one distinct species; columns show four gentle consecutive living animation poses of that SAME creature: relaxed, small movement, raised wings/forearms, return. Match reference 1 species rendering and the restrained appealing expression and detailed shading of reference 2 jumping spider. Cute and lifelike, not baby caricatures or human faces. Rich restrained colors, clean dark contours, delicate surface texture, naturally glossy eyes. Each row must have the exact creature listed, all four frames consistent in size, colors, markings and anatomy. Every insect has six legs (mantis forearms count as its front pair), no extra limbs. No costumes or objects. Row designs from TOP to BOTTOM:\n1. Rowan butterfly: amber gold with dark brown markings; scalloped outer wing edges and a dotted border; small expressive glossy eyes, friendly natural proportions\n2. Poppy butterfly: ivory with copper markings; triangular wings with bold diagonal bands; small expressive glossy eyes, friendly natural proportions\n3. Primrose butterfly: peach with rose markings; small rounded lower wings and checkered upper wings; small expressive glossy eyes, friendly natural proportions\n4. Cedar butterfly: sage green with cream markings; broad owl-pattern wings with crescent markings; small expressive glossy eyes, friendly natural proportions\n5. Fernwood butterfly: russet red with honey markings; long swallowtail wing tips and oval wing spots; small expressive glossy eyes, friendly natural proportions\n6. Sorrel butterfly: lavender with plum markings; rounded wings with large concentric eyespots; small expressive glossy eyes, friendly natural proportions\n7. Sage butterfly: charcoal with silver markings; clear glasslike wing windows with colored veins; small expressive glossy eyes, friendly natural proportions\n8. Brook butterfly: sky blue with navy markings; scalloped outer wing edges and a dotted border; small expressive glossy eyes, friendly natural proportions\n9. Mossbank butterfly: leaf green with gold markings; triangular wings with bold diagonal bands; small expressive glossy eyes, friendly natural proportions\n10. Pebblewood butterfly: teal with pale mint markings; small rounded lower wings and checkered upper wings; small expressive glossy eyes, friendly natural proportions\nKeep large clear transparent gaps between EVERY row and column. All wings, antennae, feet and tail tips completely inside their own cell. Do not overlap neighbors. Genuine transparent background, NO scenery, color wash, ground, shadows, grid, lettering, captions or background. Portrait sprite atlas.",
+    "reference": "docs/source-assets/collections/ButterfliesReference.png",
+    "mode": "built-in"
+  },
+  {
+    "key": "butterfly-3",
+    "kind": "spiders",
+    "category": "Butterflies",
+    "rows": [
+      "butterfly-dewdrop",
+      "butterfly-sunleaf",
+      "butterfly-honeycomb",
+      "butterfly-buttercup",
+      "butterfly-rainleaf",
+      "butterfly-applewood",
+      "butterfly-wildflower",
+      "butterfly-copperleaf",
+      "butterfly-seaglass",
+      "butterfly-bluebell"
+    ],
+    "prompt": "Use case: illustration-story. Production transparent game sprite atlas for a polished coastal handheld RPG. Exactly TEN ROWS and FOUR COLUMNS, forty full-body butterflies. Each ROW is one distinct species; columns show four gentle consecutive living animation poses of that SAME creature: relaxed, small movement, raised wings/forearms, return. Match reference 1 species rendering and the restrained appealing expression and detailed shading of reference 2 jumping spider. Cute and lifelike, not baby caricatures or human faces. Rich restrained colors, clean dark contours, delicate surface texture, naturally glossy eyes. Each row must have the exact creature listed, all four frames consistent in size, colors, markings and anatomy. Every insect has six legs (mantis forearms count as its front pair), no extra limbs. No costumes or objects. Row designs from TOP to BOTTOM:\n1. Dewdrop butterfly: sky blue with navy markings; broad owl-pattern wings with crescent markings; small expressive glossy eyes, friendly natural proportions\n2. Sunleaf butterfly: leaf green with gold markings; long swallowtail wing tips and oval wing spots; small expressive glossy eyes, friendly natural proportions\n3. Honeycomb butterfly: teal with pale mint markings; rounded wings with large concentric eyespots; small expressive glossy eyes, friendly natural proportions\n4. Buttercup butterfly: amber gold with dark brown markings; clear glasslike wing windows with colored veins; small expressive glossy eyes, friendly natural proportions\n5. Rainleaf butterfly: ivory with copper markings; scalloped outer wing edges and a dotted border; small expressive glossy eyes, friendly natural proportions\n6. Applewood butterfly: peach with rose markings; triangular wings with bold diagonal bands; small expressive glossy eyes, friendly natural proportions\n7. Wildflower butterfly: sage green with cream markings; small rounded lower wings and checkered upper wings; small expressive glossy eyes, friendly natural proportions\n8. Copperleaf butterfly: russet red with honey markings; broad owl-pattern wings with crescent markings; small expressive glossy eyes, friendly natural proportions\n9. Seaglass butterfly: lavender with plum markings; long swallowtail wing tips and oval wing spots; small expressive glossy eyes, friendly natural proportions\n10. Bluebell butterfly: charcoal with silver markings; rounded wings with large concentric eyespots; small expressive glossy eyes, friendly natural proportions\nKeep large clear transparent gaps between EVERY row and column. All wings, antennae, feet and tail tips completely inside their own cell. Do not overlap neighbors. Genuine transparent background, NO scenery, color wash, ground, shadows, grid, lettering, captions or background. Portrait sprite atlas.",
+    "reference": "docs/source-assets/collections/ButterfliesReference.png",
+    "mode": "built-in"
+  },
+  {
+    "key": "butterfly-4",
+    "kind": "spiders",
+    "category": "Butterflies",
+    "rows": [
+      "butterfly-orchard",
+      "butterfly-bayleaf",
+      "butterfly-watermint",
+      "butterfly-sunstone",
+      "butterfly-driftwood",
+      "butterfly-moonpetal",
+      "butterfly-rosewood",
+      "butterfly-amberleaf",
+      "butterfly-wildmint",
+      "butterfly-pinecone"
+    ],
+    "prompt": "Use case: illustration-story. Production transparent game sprite atlas for a polished coastal handheld RPG. Exactly TEN ROWS and FOUR COLUMNS, forty full-body butterflies. Each ROW is one distinct species; columns show four gentle consecutive living animation poses of that SAME creature: relaxed, small movement, raised wings/forearms, return. Match reference 1 species rendering and the restrained appealing expression and detailed shading of reference 2 jumping spider. Cute and lifelike, not baby caricatures or human faces. Rich restrained colors, clean dark contours, delicate surface texture, naturally glossy eyes. Each row must have the exact creature listed, all four frames consistent in size, colors, markings and anatomy. Every insect has six legs (mantis forearms count as its front pair), no extra limbs. No costumes or objects. Row designs from TOP to BOTTOM:\n1. Orchard butterfly: russet red with honey markings; clear glasslike wing windows with colored veins; small expressive glossy eyes, friendly natural proportions\n2. Bayleaf butterfly: lavender with plum markings; scalloped outer wing edges and a dotted border; small expressive glossy eyes, friendly natural proportions\n3. Watermint butterfly: charcoal with silver markings; triangular wings with bold diagonal bands; small expressive glossy eyes, friendly natural proportions\n4. Sunstone butterfly: sky blue with navy markings; small rounded lower wings and checkered upper wings; small expressive glossy eyes, friendly natural proportions\n5. Driftwood butterfly: leaf green with gold markings; broad owl-pattern wings with crescent markings; small expressive glossy eyes, friendly natural proportions\n6. Moonpetal butterfly: teal with pale mint markings; long swallowtail wing tips and oval wing spots; small expressive glossy eyes, friendly natural proportions\n7. Rosewood butterfly: amber gold with dark brown markings; rounded wings with large concentric eyespots; small expressive glossy eyes, friendly natural proportions\n8. Amberleaf butterfly: ivory with copper markings; clear glasslike wing windows with colored veins; small expressive glossy eyes, friendly natural proportions\n9. Wildmint butterfly: peach with rose markings; scalloped outer wing edges and a dotted border; small expressive glossy eyes, friendly natural proportions\n10. Pinecone butterfly: sage green with cream markings; triangular wings with bold diagonal bands; small expressive glossy eyes, friendly natural proportions\nKeep large clear transparent gaps between EVERY row and column. All wings, antennae, feet and tail tips completely inside their own cell. Do not overlap neighbors. Genuine transparent background, NO scenery, color wash, ground, shadows, grid, lettering, captions or background. Portrait sprite atlas.",
+    "reference": "docs/source-assets/collections/ButterfliesReference.png",
+    "mode": "built-in"
+  },
+  {
+    "key": "butterfly-5",
+    "kind": "spiders",
+    "category": "Butterflies",
+    "rows": [
+      "butterfly-lilypond",
+      "butterfly-meadowmist",
+      "butterfly-goldenrod",
+      "butterfly-silverfern",
+      "butterfly-seabreeze",
+      "butterfly-sandstone",
+      "butterfly-snowdrop",
+      "butterfly-firelight",
+      "butterfly-stormleaf",
+      "butterfly-dreamleaf"
+    ],
+    "prompt": "Use case: illustration-story. Production transparent game sprite atlas for a polished coastal handheld RPG. Exactly TEN ROWS and FOUR COLUMNS, forty full-body butterflies. Each ROW is one distinct species; columns show four gentle consecutive living animation poses of that SAME creature: relaxed, small movement, raised wings/forearms, return. Match reference 1 species rendering and the restrained appealing expression and detailed shading of reference 2 jumping spider. Cute and lifelike, not baby caricatures or human faces. Rich restrained colors, clean dark contours, delicate surface texture, naturally glossy eyes. Each row must have the exact creature listed, all four frames consistent in size, colors, markings and anatomy. Every insect has six legs (mantis forearms count as its front pair), no extra limbs. No costumes or objects. Row designs from TOP to BOTTOM:\n1. Lilypond butterfly: ivory with copper markings; small rounded lower wings and checkered upper wings; small expressive glossy eyes, friendly natural proportions\n2. Meadowmist butterfly: peach with rose markings; broad owl-pattern wings with crescent markings; small expressive glossy eyes, friendly natural proportions\n3. Goldenrod butterfly: sage green with cream markings; long swallowtail wing tips and oval wing spots; small expressive glossy eyes, friendly natural proportions\n4. Silverfern butterfly: russet red with honey markings; rounded wings with large concentric eyespots; small expressive glossy eyes, friendly natural proportions\n5. Seabreeze butterfly: lavender with plum markings; clear glasslike wing windows with colored veins; small expressive glossy eyes, friendly natural proportions\n6. Sandstone butterfly: charcoal with silver markings; scalloped outer wing edges and a dotted border; small expressive glossy eyes, friendly natural proportions\n7. Snowdrop butterfly: sky blue with navy markings; triangular wings with bold diagonal bands; small expressive glossy eyes, friendly natural proportions\n8. Firelight butterfly: leaf green with gold markings; small rounded lower wings and checkered upper wings; small expressive glossy eyes, friendly natural proportions\n9. Stormleaf butterfly: teal with pale mint markings; broad owl-pattern wings with crescent markings; small expressive glossy eyes, friendly natural proportions\n10. Dreamleaf butterfly: amber gold with dark brown markings; long swallowtail wing tips and oval wing spots; small expressive glossy eyes, friendly natural proportions\nKeep large clear transparent gaps between EVERY row and column. All wings, antennae, feet and tail tips completely inside their own cell. Do not overlap neighbors. Genuine transparent background, NO scenery, color wash, ground, shadows, grid, lettering, captions or background. Portrait sprite atlas.",
+    "reference": "docs/source-assets/collections/ButterfliesReference.png",
+    "mode": "built-in"
+  },
+  {
+    "key": "butterfly-6",
+    "kind": "spiders",
+    "category": "Butterflies",
+    "rows": [
+      "butterfly-nightbloom",
+      "butterfly-moonstone",
+      "butterfly-velvetwing",
+      "butterfly-amethyst",
+      "butterfly-starfall",
+      "butterfly-twilight",
+      "butterfly-opal",
+      "butterfly-indigo",
+      "butterfly-lantern",
+      "butterfly-frostbloom"
+    ],
+    "prompt": "Use case: illustration-story. Production transparent game sprite atlas for a polished coastal handheld RPG. Exactly TEN ROWS and FOUR COLUMNS, forty full-body butterflies. Each ROW is one distinct species; columns show four gentle consecutive living animation poses of that SAME creature: relaxed, small movement, raised wings/forearms, return. Match reference 1 species rendering and the restrained appealing expression and detailed shading of reference 2 jumping spider. Cute and lifelike, not baby caricatures or human faces. Rich restrained colors, clean dark contours, delicate surface texture, naturally glossy eyes. Each row must have the exact creature listed, all four frames consistent in size, colors, markings and anatomy. Every insect has six legs (mantis forearms count as its front pair), no extra limbs. No costumes or objects. Row designs from TOP to BOTTOM:\n1. Nightbloom butterfly: leaf green with gold markings; rounded wings with large concentric eyespots; small expressive glossy eyes, friendly natural proportions\n2. Moonstone butterfly: teal with pale mint markings; clear glasslike wing windows with colored veins; small expressive glossy eyes, friendly natural proportions\n3. Velvetwing butterfly: amber gold with dark brown markings; scalloped outer wing edges and a dotted border; small expressive glossy eyes, friendly natural proportions\n4. Amethyst butterfly: ivory with copper markings; triangular wings with bold diagonal bands; small expressive glossy eyes, friendly natural proportions\n5. Starfall butterfly: peach with rose markings; small rounded lower wings and checkered upper wings; small expressive glossy eyes, friendly natural proportions\n6. Twilight butterfly: sage green with cream markings; broad owl-pattern wings with crescent markings; small expressive glossy eyes, friendly natural proportions\n7. Opal butterfly: russet red with honey markings; long swallowtail wing tips and oval wing spots; small expressive glossy eyes, friendly natural proportions\n8. Indigo butterfly: lavender with plum markings; rounded wings with large concentric eyespots; small expressive glossy eyes, friendly natural proportions\n9. Lantern butterfly: charcoal with silver markings; clear glasslike wing windows with colored veins; small expressive glossy eyes, friendly natural proportions\n10. Frostbloom butterfly: sky blue with navy markings; scalloped outer wing edges and a dotted border; small expressive glossy eyes, friendly natural proportions\nKeep large clear transparent gaps between EVERY row and column. All wings, antennae, feet and tail tips completely inside their own cell. Do not overlap neighbors. Genuine transparent background, NO scenery, color wash, ground, shadows, grid, lettering, captions or background. Portrait sprite atlas.",
+    "reference": "docs/source-assets/collections/ButterfliesReference.png",
+    "mode": "built-in"
+  },
+  {
+    "key": "butterfly-7",
+    "kind": "spiders",
+    "category": "Butterflies",
+    "rows": [
+      "butterfly-eclipse",
+      "butterfly-silvermist",
+      "butterfly-cinder",
+      "butterfly-aurora",
+      "butterfly-pearlglow",
+      "butterfly-crystal",
+      "butterfly-mistveil",
+      "butterfly-starlace",
+      "butterfly-celestial",
+      "butterfly-rainbow"
+    ],
+    "prompt": "Use case: illustration-story. Production transparent game sprite atlas for a polished coastal handheld RPG. Exactly TEN ROWS and FOUR COLUMNS, forty full-body butterflies. Each ROW is one distinct species; columns show four gentle consecutive living animation poses of that SAME creature: relaxed, small movement, raised wings/forearms, return. Match reference 1 species rendering and the restrained appealing expression and detailed shading of reference 2 jumping spider. Cute and lifelike, not baby caricatures or human faces. Rich restrained colors, clean dark contours, delicate surface texture, naturally glossy eyes. Each row must have the exact creature listed, all four frames consistent in size, colors, markings and anatomy. Every insect has six legs (mantis forearms count as its front pair), no extra limbs. No costumes or objects. Row designs from TOP to BOTTOM:\n1. Eclipse butterfly: lavender with plum markings; triangular wings with bold diagonal bands; small expressive glossy eyes, friendly natural proportions\n2. Silvermist butterfly: charcoal with silver markings; small rounded lower wings and checkered upper wings; small expressive glossy eyes, friendly natural proportions\n3. Cinder butterfly: sky blue with navy markings; broad owl-pattern wings with crescent markings; small expressive glossy eyes, friendly natural proportions\n4. Aurora butterfly: leaf green with gold markings; long swallowtail wing tips and oval wing spots; small expressive glossy eyes, friendly natural proportions\n5. Pearlglow butterfly: teal with pale mint markings; rounded wings with large concentric eyespots; small expressive glossy eyes, friendly natural proportions\n6. Crystal butterfly: amber gold with dark brown markings; clear glasslike wing windows with colored veins; small expressive glossy eyes, friendly natural proportions\n7. Mistveil butterfly: ivory with copper markings; scalloped outer wing edges and a dotted border; small expressive glossy eyes, friendly natural proportions\n8. Starlace butterfly: peach with rose markings; triangular wings with bold diagonal bands; small expressive glossy eyes, friendly natural proportions\n9. Celestial butterfly: sage green with cream markings; small rounded lower wings and checkered upper wings; small expressive glossy eyes, friendly natural proportions\n10. Rainbow butterfly: russet red with honey markings; broad owl-pattern wings with crescent markings; small expressive glossy eyes, friendly natural proportions\nKeep large clear transparent gaps between EVERY row and column. All wings, antennae, feet and tail tips completely inside their own cell. Do not overlap neighbors. Genuine transparent background, NO scenery, color wash, ground, shadows, grid, lettering, captions or background. Portrait sprite atlas.",
+    "reference": "docs/source-assets/collections/ButterfliesReference.png",
+    "mode": "built-in"
+  },
+  {
+    "key": "ladybug-1",
+    "kind": "spiders",
+    "category": "Ladybugs",
+    "rows": [
+      "ladybug-clover",
+      "ladybug-willow",
+      "ladybug-acorn",
+      "ladybug-juniper",
+      "ladybug-marigold",
+      "ladybug-thistle",
+      "ladybug-bramble",
+      "ladybug-spruce",
+      "ladybug-dandelion",
+      "ladybug-hazel"
+    ],
+    "prompt": "Use case: illustration-story. Production transparent game sprite atlas for a polished coastal handheld RPG. Exactly TEN ROWS and FOUR COLUMNS, forty full-body ladybugs. Each ROW is one distinct species; columns show four gentle consecutive living animation poses of that SAME creature: relaxed, small movement, raised wings/forearms, return. Match reference 1 species rendering and the restrained appealing expression and detailed shading of reference 2 jumping spider. Cute and lifelike, not baby caricatures or human faces. Rich restrained colors, clean dark contours, delicate surface texture, naturally glossy eyes. Each row must have the exact creature listed, all four frames consistent in size, colors, markings and anatomy. Every insect has six legs (mantis forearms count as its front pair), no extra limbs. No costumes or objects. Row designs from TOP to BOTTOM:\n1. Clover ladybug: sage green with cream markings; rounded glossy dome and seven bold shell spots; small expressive glossy eyes, friendly natural proportions\n2. Willow ladybug: russet red with honey markings; slender oval shell and a pale stripe beside each wing seam; small expressive glossy eyes, friendly natural proportions\n3. Acorn ladybug: lavender with plum markings; broad domed shell and paired crescent-shaped markings; small expressive glossy eyes, friendly natural proportions\n4. Juniper ladybug: charcoal with silver markings; compact speckled shell and two large dark shoulder spots; small expressive glossy eyes, friendly natural proportions\n5. Marigold ladybug: sky blue with navy markings; rounded shell with branching leaflike markings; small expressive glossy eyes, friendly natural proportions\n6. Thistle ladybug: leaf green with gold markings; oval shell with a checker of small contrasting spots; small expressive glossy eyes, friendly natural proportions\n7. Bramble ladybug: teal with pale mint markings; plump small dome with four large heart-shaped shell spots; small expressive glossy eyes, friendly natural proportions\n8. Spruce ladybug: amber gold with dark brown markings; rounded glossy dome and seven bold shell spots; small expressive glossy eyes, friendly natural proportions\n9. Dandelion ladybug: ivory with copper markings; slender oval shell and a pale stripe beside each wing seam; small expressive glossy eyes, friendly natural proportions\n10. Hazel ladybug: peach with rose markings; broad domed shell and paired crescent-shaped markings; small expressive glossy eyes, friendly natural proportions\nKeep large clear transparent gaps between EVERY row and column. All wings, antennae, feet and tail tips completely inside their own cell. Do not overlap neighbors. Genuine transparent background, NO scenery, color wash, ground, shadows, grid, lettering, captions or background. Portrait sprite atlas.",
+    "reference": "docs/source-assets/collections/LadybugsReference.png",
+    "mode": "built-in"
+  },
+  {
+    "key": "ladybug-2",
+    "kind": "spiders",
+    "category": "Ladybugs",
+    "rows": [
+      "ladybug-rowan",
+      "ladybug-poppy",
+      "ladybug-primrose",
+      "ladybug-cedar",
+      "ladybug-fernwood",
+      "ladybug-sorrel",
+      "ladybug-sage",
+      "ladybug-brook",
+      "ladybug-mossbank",
+      "ladybug-pebblewood"
+    ],
+    "prompt": "Use case: illustration-story. Production transparent game sprite atlas for a polished coastal handheld RPG. Exactly TEN ROWS and FOUR COLUMNS, forty full-body ladybugs. Each ROW is one distinct species; columns show four gentle consecutive living animation poses of that SAME creature: relaxed, small movement, raised wings/forearms, return. Match reference 1 species rendering and the restrained appealing expression and detailed shading of reference 2 jumping spider. Cute and lifelike, not baby caricatures or human faces. Rich restrained colors, clean dark contours, delicate surface texture, naturally glossy eyes. Each row must have the exact creature listed, all four frames consistent in size, colors, markings and anatomy. Every insect has six legs (mantis forearms count as its front pair), no extra limbs. No costumes or objects. Row designs from TOP to BOTTOM:\n1. Rowan ladybug: amber gold with dark brown markings; compact speckled shell and two large dark shoulder spots; small expressive glossy eyes, friendly natural proportions\n2. Poppy ladybug: ivory with copper markings; rounded shell with branching leaflike markings; small expressive glossy eyes, friendly natural proportions\n3. Primrose ladybug: peach with rose markings; oval shell with a checker of small contrasting spots; small expressive glossy eyes, friendly natural proportions\n4. Cedar ladybug: sage green with cream markings; plump small dome with four large heart-shaped shell spots; small expressive glossy eyes, friendly natural proportions\n5. Fernwood ladybug: russet red with honey markings; rounded glossy dome and seven bold shell spots; small expressive glossy eyes, friendly natural proportions\n6. Sorrel ladybug: lavender with plum markings; slender oval shell and a pale stripe beside each wing seam; small expressive glossy eyes, friendly natural proportions\n7. Sage ladybug: charcoal with silver markings; broad domed shell and paired crescent-shaped markings; small expressive glossy eyes, friendly natural proportions\n8. Brook ladybug: sky blue with navy markings; compact speckled shell and two large dark shoulder spots; small expressive glossy eyes, friendly natural proportions\n9. Mossbank ladybug: leaf green with gold markings; rounded shell with branching leaflike markings; small expressive glossy eyes, friendly natural proportions\n10. Pebblewood ladybug: teal with pale mint markings; oval shell with a checker of small contrasting spots; small expressive glossy eyes, friendly natural proportions\nKeep large clear transparent gaps between EVERY row and column. All wings, antennae, feet and tail tips completely inside their own cell. Do not overlap neighbors. Genuine transparent background, NO scenery, color wash, ground, shadows, grid, lettering, captions or background. Portrait sprite atlas.",
+    "reference": "docs/source-assets/collections/LadybugsReference.png",
+    "mode": "built-in"
+  },
+  {
+    "key": "ladybug-3",
+    "kind": "spiders",
+    "category": "Ladybugs",
+    "rows": [
+      "ladybug-dewdrop",
+      "ladybug-sunleaf",
+      "ladybug-honeycomb",
+      "ladybug-buttercup",
+      "ladybug-rainleaf",
+      "ladybug-applewood",
+      "ladybug-wildflower",
+      "ladybug-copperleaf",
+      "ladybug-seaglass",
+      "ladybug-bluebell"
+    ],
+    "prompt": "Use case: illustration-story. Production transparent game sprite atlas for a polished coastal handheld RPG. Exactly TEN ROWS and FOUR COLUMNS, forty full-body ladybugs. Each ROW is one distinct species; columns show four gentle consecutive living animation poses of that SAME creature: relaxed, small movement, raised wings/forearms, return. Match reference 1 species rendering and the restrained appealing expression and detailed shading of reference 2 jumping spider. Cute and lifelike, not baby caricatures or human faces. Rich restrained colors, clean dark contours, delicate surface texture, naturally glossy eyes. Each row must have the exact creature listed, all four frames consistent in size, colors, markings and anatomy. Every insect has six legs (mantis forearms count as its front pair), no extra limbs. No costumes or objects. Row designs from TOP to BOTTOM:\n1. Dewdrop ladybug: sky blue with navy markings; plump small dome with four large heart-shaped shell spots; small expressive glossy eyes, friendly natural proportions\n2. Sunleaf ladybug: leaf green with gold markings; rounded glossy dome and seven bold shell spots; small expressive glossy eyes, friendly natural proportions\n3. Honeycomb ladybug: teal with pale mint markings; slender oval shell and a pale stripe beside each wing seam; small expressive glossy eyes, friendly natural proportions\n4. Buttercup ladybug: amber gold with dark brown markings; broad domed shell and paired crescent-shaped markings; small expressive glossy eyes, friendly natural proportions\n5. Rainleaf ladybug: ivory with copper markings; compact speckled shell and two large dark shoulder spots; small expressive glossy eyes, friendly natural proportions\n6. Applewood ladybug: peach with rose markings; rounded shell with branching leaflike markings; small expressive glossy eyes, friendly natural proportions\n7. Wildflower ladybug: sage green with cream markings; oval shell with a checker of small contrasting spots; small expressive glossy eyes, friendly natural proportions\n8. Copperleaf ladybug: russet red with honey markings; plump small dome with four large heart-shaped shell spots; small expressive glossy eyes, friendly natural proportions\n9. Seaglass ladybug: lavender with plum markings; rounded glossy dome and seven bold shell spots; small expressive glossy eyes, friendly natural proportions\n10. Bluebell ladybug: charcoal with silver markings; slender oval shell and a pale stripe beside each wing seam; small expressive glossy eyes, friendly natural proportions\nKeep large clear transparent gaps between EVERY row and column. All wings, antennae, feet and tail tips completely inside their own cell. Do not overlap neighbors. Genuine transparent background, NO scenery, color wash, ground, shadows, grid, lettering, captions or background. Portrait sprite atlas.",
+    "reference": "docs/source-assets/collections/LadybugsReference.png",
+    "mode": "built-in"
+  },
+  {
+    "key": "ladybug-4",
+    "kind": "spiders",
+    "category": "Ladybugs",
+    "rows": [
+      "ladybug-orchard",
+      "ladybug-bayleaf",
+      "ladybug-watermint",
+      "ladybug-sunstone",
+      "ladybug-driftwood",
+      "ladybug-moonpetal",
+      "ladybug-rosewood",
+      "ladybug-amberleaf",
+      "ladybug-wildmint",
+      "ladybug-pinecone"
+    ],
+    "prompt": "Use case: illustration-story. Production transparent game sprite atlas for a polished coastal handheld RPG. Exactly TEN ROWS and FOUR COLUMNS, forty full-body ladybugs. Each ROW is one distinct species; columns show four gentle consecutive living animation poses of that SAME creature: relaxed, small movement, raised wings/forearms, return. Match reference 1 species rendering and the restrained appealing expression and detailed shading of reference 2 jumping spider. Cute and lifelike, not baby caricatures or human faces. Rich restrained colors, clean dark contours, delicate surface texture, naturally glossy eyes. Each row must have the exact creature listed, all four frames consistent in size, colors, markings and anatomy. Every insect has six legs (mantis forearms count as its front pair), no extra limbs. No costumes or objects. Row designs from TOP to BOTTOM:\n1. Orchard ladybug: russet red with honey markings; broad domed shell and paired crescent-shaped markings; small expressive glossy eyes, friendly natural proportions\n2. Bayleaf ladybug: lavender with plum markings; compact speckled shell and two large dark shoulder spots; small expressive glossy eyes, friendly natural proportions\n3. Watermint ladybug: charcoal with silver markings; rounded shell with branching leaflike markings; small expressive glossy eyes, friendly natural proportions\n4. Sunstone ladybug: sky blue with navy markings; oval shell with a checker of small contrasting spots; small expressive glossy eyes, friendly natural proportions\n5. Driftwood ladybug: leaf green with gold markings; plump small dome with four large heart-shaped shell spots; small expressive glossy eyes, friendly natural proportions\n6. Moonpetal ladybug: teal with pale mint markings; rounded glossy dome and seven bold shell spots; small expressive glossy eyes, friendly natural proportions\n7. Rosewood ladybug: amber gold with dark brown markings; slender oval shell and a pale stripe beside each wing seam; small expressive glossy eyes, friendly natural proportions\n8. Amberleaf ladybug: ivory with copper markings; broad domed shell and paired crescent-shaped markings; small expressive glossy eyes, friendly natural proportions\n9. Wildmint ladybug: peach with rose markings; compact speckled shell and two large dark shoulder spots; small expressive glossy eyes, friendly natural proportions\n10. Pinecone ladybug: sage green with cream markings; rounded shell with branching leaflike markings; small expressive glossy eyes, friendly natural proportions\nKeep large clear transparent gaps between EVERY row and column. All wings, antennae, feet and tail tips completely inside their own cell. Do not overlap neighbors. Genuine transparent background, NO scenery, color wash, ground, shadows, grid, lettering, captions or background. Portrait sprite atlas.",
+    "reference": "docs/source-assets/collections/LadybugsReference.png",
+    "mode": "built-in"
+  },
+  {
+    "key": "ladybug-5",
+    "kind": "spiders",
+    "category": "Ladybugs",
+    "rows": [
+      "ladybug-lilypond",
+      "ladybug-meadowmist",
+      "ladybug-goldenrod",
+      "ladybug-silverfern",
+      "ladybug-seabreeze",
+      "ladybug-sandstone",
+      "ladybug-snowdrop",
+      "ladybug-firelight",
+      "ladybug-stormleaf",
+      "ladybug-dreamleaf"
+    ],
+    "prompt": "Use case: illustration-story. Production transparent game sprite atlas for a polished coastal handheld RPG. Exactly TEN ROWS and FOUR COLUMNS, forty full-body ladybugs. Each ROW is one distinct species; columns show four gentle consecutive living animation poses of that SAME creature: relaxed, small movement, raised wings/forearms, return. Match reference 1 species rendering and the restrained appealing expression and detailed shading of reference 2 jumping spider. Cute and lifelike, not baby caricatures or human faces. Rich restrained colors, clean dark contours, delicate surface texture, naturally glossy eyes. Each row must have the exact creature listed, all four frames consistent in size, colors, markings and anatomy. Every insect has six legs (mantis forearms count as its front pair), no extra limbs. No costumes or objects. Row designs from TOP to BOTTOM:\n1. Lilypond ladybug: ivory with copper markings; oval shell with a checker of small contrasting spots; small expressive glossy eyes, friendly natural proportions\n2. Meadowmist ladybug: peach with rose markings; plump small dome with four large heart-shaped shell spots; small expressive glossy eyes, friendly natural proportions\n3. Goldenrod ladybug: sage green with cream markings; rounded glossy dome and seven bold shell spots; small expressive glossy eyes, friendly natural proportions\n4. Silverfern ladybug: russet red with honey markings; slender oval shell and a pale stripe beside each wing seam; small expressive glossy eyes, friendly natural proportions\n5. Seabreeze ladybug: lavender with plum markings; broad domed shell and paired crescent-shaped markings; small expressive glossy eyes, friendly natural proportions\n6. Sandstone ladybug: charcoal with silver markings; compact speckled shell and two large dark shoulder spots; small expressive glossy eyes, friendly natural proportions\n7. Snowdrop ladybug: sky blue with navy markings; rounded shell with branching leaflike markings; small expressive glossy eyes, friendly natural proportions\n8. Firelight ladybug: leaf green with gold markings; oval shell with a checker of small contrasting spots; small expressive glossy eyes, friendly natural proportions\n9. Stormleaf ladybug: teal with pale mint markings; plump small dome with four large heart-shaped shell spots; small expressive glossy eyes, friendly natural proportions\n10. Dreamleaf ladybug: amber gold with dark brown markings; rounded glossy dome and seven bold shell spots; small expressive glossy eyes, friendly natural proportions\nKeep large clear transparent gaps between EVERY row and column. All wings, antennae, feet and tail tips completely inside their own cell. Do not overlap neighbors. Genuine transparent background, NO scenery, color wash, ground, shadows, grid, lettering, captions or background. Portrait sprite atlas.",
+    "reference": "docs/source-assets/collections/LadybugsReference.png",
+    "mode": "built-in"
+  },
+  {
+    "key": "ladybug-6",
+    "kind": "spiders",
+    "category": "Ladybugs",
+    "rows": [
+      "ladybug-nightbloom",
+      "ladybug-moonstone",
+      "ladybug-velvetwing",
+      "ladybug-amethyst",
+      "ladybug-starfall",
+      "ladybug-twilight",
+      "ladybug-opal-meadow",
+      "ladybug-indigo",
+      "ladybug-lantern",
+      "ladybug-frostbloom"
+    ],
+    "prompt": "Use case: illustration-story. Production transparent game sprite atlas for a polished coastal handheld RPG. Exactly TEN ROWS and FOUR COLUMNS, forty full-body ladybugs. Each ROW is one distinct species; columns show four gentle consecutive living animation poses of that SAME creature: relaxed, small movement, raised wings/forearms, return. Match reference 1 species rendering and the restrained appealing expression and detailed shading of reference 2 jumping spider. Cute and lifelike, not baby caricatures or human faces. Rich restrained colors, clean dark contours, delicate surface texture, naturally glossy eyes. Each row must have the exact creature listed, all four frames consistent in size, colors, markings and anatomy. Every insect has six legs (mantis forearms count as its front pair), no extra limbs. No costumes or objects. Row designs from TOP to BOTTOM:\n1. Nightbloom ladybug: leaf green with gold markings; slender oval shell and a pale stripe beside each wing seam; small expressive glossy eyes, friendly natural proportions\n2. Moonstone ladybug: teal with pale mint markings; broad domed shell and paired crescent-shaped markings; small expressive glossy eyes, friendly natural proportions\n3. Velvetwing ladybug: amber gold with dark brown markings; compact speckled shell and two large dark shoulder spots; small expressive glossy eyes, friendly natural proportions\n4. Amethyst ladybug: ivory with copper markings; rounded shell with branching leaflike markings; small expressive glossy eyes, friendly natural proportions\n5. Starfall ladybug: peach with rose markings; oval shell with a checker of small contrasting spots; small expressive glossy eyes, friendly natural proportions\n6. Twilight ladybug: sage green with cream markings; plump small dome with four large heart-shaped shell spots; small expressive glossy eyes, friendly natural proportions\n7. Opal meadow ladybug: russet red with honey markings; rounded glossy dome and seven bold shell spots; small expressive glossy eyes, friendly natural proportions\n8. Indigo ladybug: lavender with plum markings; slender oval shell and a pale stripe beside each wing seam; small expressive glossy eyes, friendly natural proportions\n9. Lantern ladybug: charcoal with silver markings; broad domed shell and paired crescent-shaped markings; small expressive glossy eyes, friendly natural proportions\n10. Frostbloom ladybug: sky blue with navy markings; compact speckled shell and two large dark shoulder spots; small expressive glossy eyes, friendly natural proportions\nKeep large clear transparent gaps between EVERY row and column. All wings, antennae, feet and tail tips completely inside their own cell. Do not overlap neighbors. Genuine transparent background, NO scenery, color wash, ground, shadows, grid, lettering, captions or background. Portrait sprite atlas.",
+    "reference": "docs/source-assets/collections/LadybugsReference.png",
+    "mode": "built-in"
+  },
+  {
+    "key": "ladybug-7",
+    "kind": "spiders",
+    "category": "Ladybugs",
+    "rows": [
+      "ladybug-eclipse",
+      "ladybug-silvermist",
+      "ladybug-cinder",
+      "ladybug-aurora",
+      "ladybug-pearlglow",
+      "ladybug-crystal",
+      "ladybug-mistveil",
+      "ladybug-starlace",
+      "ladybug-celestial",
+      "ladybug-rainbow"
+    ],
+    "prompt": "Use case: illustration-story. Production transparent game sprite atlas for a polished coastal handheld RPG. Exactly TEN ROWS and FOUR COLUMNS, forty full-body ladybugs. Each ROW is one distinct species; columns show four gentle consecutive living animation poses of that SAME creature: relaxed, small movement, raised wings/forearms, return. Match reference 1 species rendering and the restrained appealing expression and detailed shading of reference 2 jumping spider. Cute and lifelike, not baby caricatures or human faces. Rich restrained colors, clean dark contours, delicate surface texture, naturally glossy eyes. Each row must have the exact creature listed, all four frames consistent in size, colors, markings and anatomy. Every insect has six legs (mantis forearms count as its front pair), no extra limbs. No costumes or objects. Row designs from TOP to BOTTOM:\n1. Eclipse ladybug: lavender with plum markings; rounded shell with branching leaflike markings; small expressive glossy eyes, friendly natural proportions\n2. Silvermist ladybug: charcoal with silver markings; oval shell with a checker of small contrasting spots; small expressive glossy eyes, friendly natural proportions\n3. Cinder ladybug: sky blue with navy markings; plump small dome with four large heart-shaped shell spots; small expressive glossy eyes, friendly natural proportions\n4. Aurora ladybug: leaf green with gold markings; rounded glossy dome and seven bold shell spots; small expressive glossy eyes, friendly natural proportions\n5. Pearlglow ladybug: teal with pale mint markings; slender oval shell and a pale stripe beside each wing seam; small expressive glossy eyes, friendly natural proportions\n6. Crystal ladybug: amber gold with dark brown markings; broad domed shell and paired crescent-shaped markings; small expressive glossy eyes, friendly natural proportions\n7. Mistveil ladybug: ivory with copper markings; compact speckled shell and two large dark shoulder spots; small expressive glossy eyes, friendly natural proportions\n8. Starlace ladybug: peach with rose markings; rounded shell with branching leaflike markings; small expressive glossy eyes, friendly natural proportions\n9. Celestial ladybug: sage green with cream markings; oval shell with a checker of small contrasting spots; small expressive glossy eyes, friendly natural proportions\n10. Rainbow ladybug: russet red with honey markings; plump small dome with four large heart-shaped shell spots; small expressive glossy eyes, friendly natural proportions\nKeep large clear transparent gaps between EVERY row and column. All wings, antennae, feet and tail tips completely inside their own cell. Do not overlap neighbors. Genuine transparent background, NO scenery, color wash, ground, shadows, grid, lettering, captions or background. Portrait sprite atlas.",
+    "reference": "docs/source-assets/collections/LadybugsReference.png",
+    "mode": "built-in"
+  },
+  {
+    "key": "dragonfly-1",
+    "kind": "spiders",
+    "category": "Dragonflies",
+    "rows": [
+      "dragonfly-clover",
+      "dragonfly-willow",
+      "dragonfly-acorn",
+      "dragonfly-juniper",
+      "dragonfly-marigold",
+      "dragonfly-thistle",
+      "dragonfly-bramble",
+      "dragonfly-spruce",
+      "dragonfly-dandelion",
+      "dragonfly-hazel"
+    ],
+    "prompt": "Use case: illustration-story. Production transparent game sprite atlas for a polished coastal handheld RPG. Exactly TEN ROWS and FOUR COLUMNS, forty full-body dragonflies. Each ROW is one distinct species; columns show four gentle consecutive living animation poses of that SAME creature: relaxed, small movement, raised wings/forearms, return. Match reference 1 species rendering and the restrained appealing expression and detailed shading of reference 2 jumping spider. Cute and lifelike, not baby caricatures or human faces. Rich restrained colors, clean dark contours, delicate surface texture, naturally glossy eyes. Each row must have the exact creature listed, all four frames consistent in size, colors, markings and anatomy. Every insect has six legs (mantis forearms count as its front pair), no extra limbs. No costumes or objects. Row designs from TOP to BOTTOM:\n1. Clover dragonfly: sage green with cream markings; broad glassy wings with branching veins and a rounded tail tip; small expressive glossy eyes, friendly natural proportions\n2. Willow dragonfly: russet red with honey markings; very slender damselfly body and narrow paired wings; small expressive glossy eyes, friendly natural proportions\n3. Acorn dragonfly: lavender with plum markings; short stout skimmer abdomen and broad wing bases; small expressive glossy eyes, friendly natural proportions\n4. Juniper dragonfly: charcoal with silver markings; club-shaped segmented tail and clear narrow wings; small expressive glossy eyes, friendly natural proportions\n5. Marigold dragonfly: sky blue with navy markings; long darner body and boldly outlined wing veins; small expressive glossy eyes, friendly natural proportions\n6. Thistle dragonfly: leaf green with gold markings; small rounded wings with colored tips and a short striped abdomen; small expressive glossy eyes, friendly natural proportions\n7. Bramble dragonfly: teal with pale mint markings; broad spotted wings and alternating light-dark tail bands; small expressive glossy eyes, friendly natural proportions\n8. Spruce dragonfly: amber gold with dark brown markings; broad glassy wings with branching veins and a rounded tail tip; small expressive glossy eyes, friendly natural proportions\n9. Dandelion dragonfly: ivory with copper markings; very slender damselfly body and narrow paired wings; small expressive glossy eyes, friendly natural proportions\n10. Hazel dragonfly: peach with rose markings; short stout skimmer abdomen and broad wing bases; small expressive glossy eyes, friendly natural proportions\nKeep large clear transparent gaps between EVERY row and column. All wings, antennae, feet and tail tips completely inside their own cell. Do not overlap neighbors. Genuine transparent background, NO scenery, color wash, ground, shadows, grid, lettering, captions or background. Portrait sprite atlas.",
+    "reference": "docs/source-assets/collections/DragonfliesReference.png",
+    "mode": "built-in"
+  },
+  {
+    "key": "dragonfly-2",
+    "kind": "spiders",
+    "category": "Dragonflies",
+    "rows": [
+      "dragonfly-rowan",
+      "dragonfly-poppy",
+      "dragonfly-primrose",
+      "dragonfly-cedar",
+      "dragonfly-fernwood",
+      "dragonfly-sorrel",
+      "dragonfly-sage",
+      "dragonfly-brook",
+      "dragonfly-mossbank",
+      "dragonfly-pebblewood"
+    ],
+    "prompt": "Use case: illustration-story. Production transparent game sprite atlas for a polished coastal handheld RPG. Exactly TEN ROWS and FOUR COLUMNS, forty full-body dragonflies. Each ROW is one distinct species; columns show four gentle consecutive living animation poses of that SAME creature: relaxed, small movement, raised wings/forearms, return. Match reference 1 species rendering and the restrained appealing expression and detailed shading of reference 2 jumping spider. Cute and lifelike, not baby caricatures or human faces. Rich restrained colors, clean dark contours, delicate surface texture, naturally glossy eyes. Each row must have the exact creature listed, all four frames consistent in size, colors, markings and anatomy. Every insect has six legs (mantis forearms count as its front pair), no extra limbs. No costumes or objects. Row designs from TOP to BOTTOM:\n1. Rowan dragonfly: amber gold with dark brown markings; club-shaped segmented tail and clear narrow wings; small expressive glossy eyes, friendly natural proportions\n2. Poppy dragonfly: ivory with copper markings; long darner body and boldly outlined wing veins; small expressive glossy eyes, friendly natural proportions\n3. Primrose dragonfly: peach with rose markings; small rounded wings with colored tips and a short striped abdomen; small expressive glossy eyes, friendly natural proportions\n4. Cedar dragonfly: sage green with cream markings; broad spotted wings and alternating light-dark tail bands; small expressive glossy eyes, friendly natural proportions\n5. Fernwood dragonfly: russet red with honey markings; broad glassy wings with branching veins and a rounded tail tip; small expressive glossy eyes, friendly natural proportions\n6. Sorrel dragonfly: lavender with plum markings; very slender damselfly body and narrow paired wings; small expressive glossy eyes, friendly natural proportions\n7. Sage dragonfly: charcoal with silver markings; short stout skimmer abdomen and broad wing bases; small expressive glossy eyes, friendly natural proportions\n8. Brook dragonfly: sky blue with navy markings; club-shaped segmented tail and clear narrow wings; small expressive glossy eyes, friendly natural proportions\n9. Mossbank dragonfly: leaf green with gold markings; long darner body and boldly outlined wing veins; small expressive glossy eyes, friendly natural proportions\n10. Pebblewood dragonfly: teal with pale mint markings; small rounded wings with colored tips and a short striped abdomen; small expressive glossy eyes, friendly natural proportions\nKeep large clear transparent gaps between EVERY row and column. All wings, antennae, feet and tail tips completely inside their own cell. Do not overlap neighbors. Genuine transparent background, NO scenery, color wash, ground, shadows, grid, lettering, captions or background. Portrait sprite atlas.",
+    "reference": "docs/source-assets/collections/DragonfliesReference.png",
+    "mode": "built-in"
+  },
+  {
+    "key": "dragonfly-3",
+    "kind": "spiders",
+    "category": "Dragonflies",
+    "rows": [
+      "dragonfly-dewdrop",
+      "dragonfly-sunleaf",
+      "dragonfly-honeycomb",
+      "dragonfly-buttercup",
+      "dragonfly-rainleaf",
+      "dragonfly-applewood",
+      "dragonfly-wildflower",
+      "dragonfly-copperleaf",
+      "dragonfly-seaglass",
+      "dragonfly-bluebell"
+    ],
+    "prompt": "Use case: illustration-story. Production transparent game sprite atlas for a polished coastal handheld RPG. Exactly TEN ROWS and FOUR COLUMNS, forty full-body dragonflies. Each ROW is one distinct species; columns show four gentle consecutive living animation poses of that SAME creature: relaxed, small movement, raised wings/forearms, return. Match reference 1 species rendering and the restrained appealing expression and detailed shading of reference 2 jumping spider. Cute and lifelike, not baby caricatures or human faces. Rich restrained colors, clean dark contours, delicate surface texture, naturally glossy eyes. Each row must have the exact creature listed, all four frames consistent in size, colors, markings and anatomy. Every insect has six legs (mantis forearms count as its front pair), no extra limbs. No costumes or objects. Row designs from TOP to BOTTOM:\n1. Dewdrop dragonfly: sky blue with navy markings; broad spotted wings and alternating light-dark tail bands; small expressive glossy eyes, friendly natural proportions\n2. Sunleaf dragonfly: leaf green with gold markings; broad glassy wings with branching veins and a rounded tail tip; small expressive glossy eyes, friendly natural proportions\n3. Honeycomb dragonfly: teal with pale mint markings; very slender damselfly body and narrow paired wings; small expressive glossy eyes, friendly natural proportions\n4. Buttercup dragonfly: amber gold with dark brown markings; short stout skimmer abdomen and broad wing bases; small expressive glossy eyes, friendly natural proportions\n5. Rainleaf dragonfly: ivory with copper markings; club-shaped segmented tail and clear narrow wings; small expressive glossy eyes, friendly natural proportions\n6. Applewood dragonfly: peach with rose markings; long darner body and boldly outlined wing veins; small expressive glossy eyes, friendly natural proportions\n7. Wildflower dragonfly: sage green with cream markings; small rounded wings with colored tips and a short striped abdomen; small expressive glossy eyes, friendly natural proportions\n8. Copperleaf dragonfly: russet red with honey markings; broad spotted wings and alternating light-dark tail bands; small expressive glossy eyes, friendly natural proportions\n9. Seaglass dragonfly: lavender with plum markings; broad glassy wings with branching veins and a rounded tail tip; small expressive glossy eyes, friendly natural proportions\n10. Bluebell dragonfly: charcoal with silver markings; very slender damselfly body and narrow paired wings; small expressive glossy eyes, friendly natural proportions\nKeep large clear transparent gaps between EVERY row and column. All wings, antennae, feet and tail tips completely inside their own cell. Do not overlap neighbors. Genuine transparent background, NO scenery, color wash, ground, shadows, grid, lettering, captions or background. Portrait sprite atlas.",
+    "reference": "docs/source-assets/collections/DragonfliesReference.png",
+    "mode": "built-in"
+  },
+  {
+    "key": "dragonfly-4",
+    "kind": "spiders",
+    "category": "Dragonflies",
+    "rows": [
+      "dragonfly-orchard",
+      "dragonfly-bayleaf",
+      "dragonfly-watermint",
+      "dragonfly-sunstone",
+      "dragonfly-driftwood",
+      "dragonfly-moonpetal",
+      "dragonfly-rosewood",
+      "dragonfly-amberleaf",
+      "dragonfly-wildmint",
+      "dragonfly-pinecone"
+    ],
+    "prompt": "Use case: illustration-story. Production transparent game sprite atlas for a polished coastal handheld RPG. Exactly TEN ROWS and FOUR COLUMNS, forty full-body dragonflies. Each ROW is one distinct species; columns show four gentle consecutive living animation poses of that SAME creature: relaxed, small movement, raised wings/forearms, return. Match reference 1 species rendering and the restrained appealing expression and detailed shading of reference 2 jumping spider. Cute and lifelike, not baby caricatures or human faces. Rich restrained colors, clean dark contours, delicate surface texture, naturally glossy eyes. Each row must have the exact creature listed, all four frames consistent in size, colors, markings and anatomy. Every insect has six legs (mantis forearms count as its front pair), no extra limbs. No costumes or objects. Row designs from TOP to BOTTOM:\n1. Orchard dragonfly: russet red with honey markings; short stout skimmer abdomen and broad wing bases; small expressive glossy eyes, friendly natural proportions\n2. Bayleaf dragonfly: lavender with plum markings; club-shaped segmented tail and clear narrow wings; small expressive glossy eyes, friendly natural proportions\n3. Watermint dragonfly: charcoal with silver markings; long darner body and boldly outlined wing veins; small expressive glossy eyes, friendly natural proportions\n4. Sunstone dragonfly: sky blue with navy markings; small rounded wings with colored tips and a short striped abdomen; small expressive glossy eyes, friendly natural proportions\n5. Driftwood dragonfly: leaf green with gold markings; broad spotted wings and alternating light-dark tail bands; small expressive glossy eyes, friendly natural proportions\n6. Moonpetal dragonfly: teal with pale mint markings; broad glassy wings with branching veins and a rounded tail tip; small expressive glossy eyes, friendly natural proportions\n7. Rosewood dragonfly: amber gold with dark brown markings; very slender damselfly body and narrow paired wings; small expressive glossy eyes, friendly natural proportions\n8. Amberleaf dragonfly: ivory with copper markings; short stout skimmer abdomen and broad wing bases; small expressive glossy eyes, friendly natural proportions\n9. Wildmint dragonfly: peach with rose markings; club-shaped segmented tail and clear narrow wings; small expressive glossy eyes, friendly natural proportions\n10. Pinecone dragonfly: sage green with cream markings; long darner body and boldly outlined wing veins; small expressive glossy eyes, friendly natural proportions\nKeep large clear transparent gaps between EVERY row and column. All wings, antennae, feet and tail tips completely inside their own cell. Do not overlap neighbors. Genuine transparent background, NO scenery, color wash, ground, shadows, grid, lettering, captions or background. Portrait sprite atlas.",
+    "reference": "docs/source-assets/collections/DragonfliesReference.png",
+    "mode": "built-in"
+  },
+  {
+    "key": "dragonfly-5",
+    "kind": "spiders",
+    "category": "Dragonflies",
+    "rows": [
+      "dragonfly-lilypond",
+      "dragonfly-meadowmist",
+      "dragonfly-goldenrod",
+      "dragonfly-silverfern",
+      "dragonfly-seabreeze",
+      "dragonfly-sandstone",
+      "dragonfly-snowdrop",
+      "dragonfly-firelight",
+      "dragonfly-stormleaf",
+      "dragonfly-dreamleaf"
+    ],
+    "prompt": "Use case: illustration-story. Production transparent game sprite atlas for a polished coastal handheld RPG. Exactly TEN ROWS and FOUR COLUMNS, forty full-body dragonflies. Each ROW is one distinct species; columns show four gentle consecutive living animation poses of that SAME creature: relaxed, small movement, raised wings/forearms, return. Match reference 1 species rendering and the restrained appealing expression and detailed shading of reference 2 jumping spider. Cute and lifelike, not baby caricatures or human faces. Rich restrained colors, clean dark contours, delicate surface texture, naturally glossy eyes. Each row must have the exact creature listed, all four frames consistent in size, colors, markings and anatomy. Every insect has six legs (mantis forearms count as its front pair), no extra limbs. No costumes or objects. Row designs from TOP to BOTTOM:\n1. Lilypond dragonfly: ivory with copper markings; small rounded wings with colored tips and a short striped abdomen; small expressive glossy eyes, friendly natural proportions\n2. Meadowmist dragonfly: peach with rose markings; broad spotted wings and alternating light-dark tail bands; small expressive glossy eyes, friendly natural proportions\n3. Goldenrod dragonfly: sage green with cream markings; broad glassy wings with branching veins and a rounded tail tip; small expressive glossy eyes, friendly natural proportions\n4. Silverfern dragonfly: russet red with honey markings; very slender damselfly body and narrow paired wings; small expressive glossy eyes, friendly natural proportions\n5. Seabreeze dragonfly: lavender with plum markings; short stout skimmer abdomen and broad wing bases; small expressive glossy eyes, friendly natural proportions\n6. Sandstone dragonfly: charcoal with silver markings; club-shaped segmented tail and clear narrow wings; small expressive glossy eyes, friendly natural proportions\n7. Snowdrop dragonfly: sky blue with navy markings; long darner body and boldly outlined wing veins; small expressive glossy eyes, friendly natural proportions\n8. Firelight dragonfly: leaf green with gold markings; small rounded wings with colored tips and a short striped abdomen; small expressive glossy eyes, friendly natural proportions\n9. Stormleaf dragonfly: teal with pale mint markings; broad spotted wings and alternating light-dark tail bands; small expressive glossy eyes, friendly natural proportions\n10. Dreamleaf dragonfly: amber gold with dark brown markings; broad glassy wings with branching veins and a rounded tail tip; small expressive glossy eyes, friendly natural proportions\nKeep large clear transparent gaps between EVERY row and column. All wings, antennae, feet and tail tips completely inside their own cell. Do not overlap neighbors. Genuine transparent background, NO scenery, color wash, ground, shadows, grid, lettering, captions or background. Portrait sprite atlas.",
+    "reference": "docs/source-assets/collections/DragonfliesReference.png",
+    "mode": "built-in"
+  },
+  {
+    "key": "dragonfly-6",
+    "kind": "spiders",
+    "category": "Dragonflies",
+    "rows": [
+      "dragonfly-nightbloom",
+      "dragonfly-moonstone",
+      "dragonfly-velvetwing",
+      "dragonfly-amethyst",
+      "dragonfly-starfall",
+      "dragonfly-twilight",
+      "dragonfly-opal",
+      "dragonfly-indigo",
+      "dragonfly-lantern",
+      "dragonfly-frostbloom"
+    ],
+    "prompt": "Use case: illustration-story. Production transparent game sprite atlas for a polished coastal handheld RPG. Exactly TEN ROWS and FOUR COLUMNS, forty full-body dragonflies. Each ROW is one distinct species; columns show four gentle consecutive living animation poses of that SAME creature: relaxed, small movement, raised wings/forearms, return. Match reference 1 species rendering and the restrained appealing expression and detailed shading of reference 2 jumping spider. Cute and lifelike, not baby caricatures or human faces. Rich restrained colors, clean dark contours, delicate surface texture, naturally glossy eyes. Each row must have the exact creature listed, all four frames consistent in size, colors, markings and anatomy. Every insect has six legs (mantis forearms count as its front pair), no extra limbs. No costumes or objects. Row designs from TOP to BOTTOM:\n1. Nightbloom dragonfly: leaf green with gold markings; very slender damselfly body and narrow paired wings; small expressive glossy eyes, friendly natural proportions\n2. Moonstone dragonfly: teal with pale mint markings; short stout skimmer abdomen and broad wing bases; small expressive glossy eyes, friendly natural proportions\n3. Velvetwing dragonfly: amber gold with dark brown markings; club-shaped segmented tail and clear narrow wings; small expressive glossy eyes, friendly natural proportions\n4. Amethyst dragonfly: ivory with copper markings; long darner body and boldly outlined wing veins; small expressive glossy eyes, friendly natural proportions\n5. Starfall dragonfly: peach with rose markings; small rounded wings with colored tips and a short striped abdomen; small expressive glossy eyes, friendly natural proportions\n6. Twilight dragonfly: sage green with cream markings; broad spotted wings and alternating light-dark tail bands; small expressive glossy eyes, friendly natural proportions\n7. Opal dragonfly: russet red with honey markings; broad glassy wings with branching veins and a rounded tail tip; small expressive glossy eyes, friendly natural proportions\n8. Indigo dragonfly: lavender with plum markings; very slender damselfly body and narrow paired wings; small expressive glossy eyes, friendly natural proportions\n9. Lantern dragonfly: charcoal with silver markings; short stout skimmer abdomen and broad wing bases; small expressive glossy eyes, friendly natural proportions\n10. Frostbloom dragonfly: sky blue with navy markings; club-shaped segmented tail and clear narrow wings; small expressive glossy eyes, friendly natural proportions\nKeep large clear transparent gaps between EVERY row and column. All wings, antennae, feet and tail tips completely inside their own cell. Do not overlap neighbors. Genuine transparent background, NO scenery, color wash, ground, shadows, grid, lettering, captions or background. Portrait sprite atlas.",
+    "reference": "docs/source-assets/collections/DragonfliesReference.png",
+    "mode": "built-in"
+  },
+  {
+    "key": "dragonfly-7",
+    "kind": "spiders",
+    "category": "Dragonflies",
+    "rows": [
+      "dragonfly-eclipse",
+      "dragonfly-silvermist",
+      "dragonfly-cinder",
+      "dragonfly-aurora-meadow",
+      "dragonfly-pearlglow",
+      "dragonfly-crystal",
+      "dragonfly-mistveil",
+      "dragonfly-starlace",
+      "dragonfly-celestial",
+      "dragonfly-rainbow"
+    ],
+    "prompt": "Use case: illustration-story. Production transparent game sprite atlas for a polished coastal handheld RPG. Exactly TEN ROWS and FOUR COLUMNS, forty full-body dragonflies. Each ROW is one distinct species; columns show four gentle consecutive living animation poses of that SAME creature: relaxed, small movement, raised wings/forearms, return. Match reference 1 species rendering and the restrained appealing expression and detailed shading of reference 2 jumping spider. Cute and lifelike, not baby caricatures or human faces. Rich restrained colors, clean dark contours, delicate surface texture, naturally glossy eyes. Each row must have the exact creature listed, all four frames consistent in size, colors, markings and anatomy. Every insect has six legs (mantis forearms count as its front pair), no extra limbs. No costumes or objects. Row designs from TOP to BOTTOM:\n1. Eclipse dragonfly: lavender with plum markings; long darner body and boldly outlined wing veins; small expressive glossy eyes, friendly natural proportions\n2. Silvermist dragonfly: charcoal with silver markings; small rounded wings with colored tips and a short striped abdomen; small expressive glossy eyes, friendly natural proportions\n3. Cinder dragonfly: sky blue with navy markings; broad spotted wings and alternating light-dark tail bands; small expressive glossy eyes, friendly natural proportions\n4. Aurora meadow dragonfly: leaf green with gold markings; broad glassy wings with branching veins and a rounded tail tip; small expressive glossy eyes, friendly natural proportions\n5. Pearlglow dragonfly: teal with pale mint markings; very slender damselfly body and narrow paired wings; small expressive glossy eyes, friendly natural proportions\n6. Crystal dragonfly: amber gold with dark brown markings; short stout skimmer abdomen and broad wing bases; small expressive glossy eyes, friendly natural proportions\n7. Mistveil dragonfly: ivory with copper markings; club-shaped segmented tail and clear narrow wings; small expressive glossy eyes, friendly natural proportions\n8. Starlace dragonfly: peach with rose markings; long darner body and boldly outlined wing veins; small expressive glossy eyes, friendly natural proportions\n9. Celestial dragonfly: sage green with cream markings; small rounded wings with colored tips and a short striped abdomen; small expressive glossy eyes, friendly natural proportions\n10. Rainbow dragonfly: russet red with honey markings; broad spotted wings and alternating light-dark tail bands; small expressive glossy eyes, friendly natural proportions\nKeep large clear transparent gaps between EVERY row and column. All wings, antennae, feet and tail tips completely inside their own cell. Do not overlap neighbors. Genuine transparent background, NO scenery, color wash, ground, shadows, grid, lettering, captions or background. Portrait sprite atlas.",
+    "reference": "docs/source-assets/collections/DragonfliesReference.png",
+    "mode": "built-in"
+  }
+]

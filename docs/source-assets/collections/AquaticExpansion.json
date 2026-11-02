@@ -1,0 +1,272 @@
+[
+  {
+    "key": "aquatic-1",
+    "kind": "fish",
+    "rows": [
+      "tomato-clownfish",
+      "blackcap-basslet",
+      "psychedelic-dragonet",
+      "longnose-hawkfish",
+      "threadfin-cardinalfish",
+      "flame-angelfish",
+      "copperband-butterflyfish",
+      "yellow-boxfish",
+      "moorish-idol",
+      "blue-green-chromis"
+    ],
+    "prompt": "Use case: illustration-story. Transparent sprite atlas of ten different collectible aquatic creatures for a polished coastal handheld RPG. Exactly TEN ROWS and FOUR COLUMNS, forty complete separate animals. One species per row; four consecutive gentle swimming or paddling poses in each row. Match the detailed pixel-painted style of reference 1 and the appealing glossy-eyed expression of reference 2, without baby caricatures, human faces or oversized heads. Preserve correct recognizable fins, limbs, flippers, shell shapes and tails for each listed creature. Cute, lively, restrained polished shading, fine outlines and rich natural colors. Row designs TOP to BOTTOM:\n1. Tomato clownfish: round red-orange body, broad single white head band, black-edged fins\n2. Blackcap basslet: small violet basslet with a crisp black cap above the eyes\n3. Psychedelic dragonet: small pale green dragonet with orange and blue bullseye rings and broad fins\n4. Longnose hawkfish: slender cream body with red checker markings and a long narrow snout\n5. Threadfin cardinalfish: small translucent silver cardinalfish with gold side stripe, black tail spot and long fine fin rays\n6. Flame angelfish: bright orange deep body with narrow black bars and blue fin edges\n7. Copperband butterflyfish: thin disk-shaped cream fish, copper vertical bands and long snout\n8. Yellow boxfish: compact rounded box-shaped yellow body with evenly spaced black dots\n9. Moorish idol: disk-shaped black white yellow striped body and long trailing dorsal pennant\n10. Blue-green chromis: small turquoise oval body with emerald sheen and forked tail\nAll four frames in a row have identical identity, markings and size. Keep full bodies, antennae, fins, tails and flippers visible with generous clear transparent gaps between all cells and image edges. No water, tanks, scenery, color haze, shadows, ground, text, captions, grid or extra creatures. Genuine transparent background. Portrait atlas.",
+    "mode": "built-in"
+  },
+  {
+    "key": "aquatic-2",
+    "kind": "fish",
+    "rows": [
+      "fire-goby",
+      "scooter-dragonet",
+      "orange-spotted-blenny",
+      "pajama-cardinalfish",
+      "clown-triggerfish",
+      "harlequin-tuskfish",
+      "regal-angelfish",
+      "sailfin-tang",
+      "gem-tang",
+      "blue-ribbon-eel"
+    ],
+    "prompt": "Use case: illustration-story. Transparent sprite atlas of ten different collectible aquatic creatures for a polished coastal handheld RPG. Exactly TEN ROWS and FOUR COLUMNS, forty complete separate animals. One species per row; four consecutive gentle swimming or paddling poses in each row. Match the detailed pixel-painted style of reference 1 and the appealing glossy-eyed expression of reference 2, without baby caricatures, human faces or oversized heads. Preserve correct recognizable fins, limbs, flippers, shell shapes and tails for each listed creature. Cute, lively, restrained polished shading, fine outlines and rich natural colors. Row designs TOP to BOTTOM:\n1. Fire goby: cream front, orange-red tail, tall thin white dorsal fin\n2. Scooter dragonet: tiny mottled brown armored-looking fish with broad fanlike pectoral fins\n3. Orange-spotted blenny: slender cream body, orange dots, tiny brow tufts and perched fins\n4. Pajama cardinalfish: yellow face, black midbody band and red polka-dot rear half\n5. Clown triggerfish: sturdy black body with large white lower spots and yellow snout\n6. Harlequin tuskfish: blue and orange bands, sturdy oval body and small bright blue teeth\n7. Regal angelfish: blue white and orange vertical bands, rounded tall body\n8. Sailfin tang: tan striped disk body with an enormous gently fanned dorsal fin\n9. Gem tang: charcoal oval fish with fine pale spots and bright yellow tail\n10. Blue ribbon eel: long thin cobalt eel with yellow dorsal edge and curled ribbon body\nAll four frames in a row have identical identity, markings and size. Keep full bodies, antennae, fins, tails and flippers visible with generous clear transparent gaps between all cells and image edges. No water, tanks, scenery, color haze, shadows, ground, text, captions, grid or extra creatures. Genuine transparent background. Portrait atlas.",
+    "mode": "built-in"
+  },
+  {
+    "key": "aquatic-3",
+    "kind": "fish",
+    "rows": [
+      "snowflake-moray",
+      "spotted-garden-eel",
+      "peacock-wrasse",
+      "cleaner-wrasse",
+      "bicolor-parrotfish",
+      "leaf-scorpionfish",
+      "flying-gurnard",
+      "weedy-dragonet",
+      "peppermint-angelfish",
+      "candy-basslet"
+    ],
+    "prompt": "Use case: illustration-story. Transparent sprite atlas of ten different collectible aquatic creatures for a polished coastal handheld RPG. Exactly TEN ROWS and FOUR COLUMNS, forty complete separate animals. One species per row; four consecutive gentle swimming or paddling poses in each row. Match the detailed pixel-painted style of reference 1 and the appealing glossy-eyed expression of reference 2, without baby caricatures, human faces or oversized heads. Preserve correct recognizable fins, limbs, flippers, shell shapes and tails for each listed creature. Cute, lively, restrained polished shading, fine outlines and rich natural colors. Row designs TOP to BOTTOM:\n1. Snowflake moray: cream eel with irregular dark honeycomb blotches and a softly curved body\n2. Spotted garden eel: slender pale eel with dark dots peeking from a tiny sand-colored tube base\n3. Peacock wrasse: slender blue-green body with bright yellow and orange ornate spots\n4. Cleaner wrasse: narrow blue fish with one bold black lateral stripe\n5. Bicolor parrotfish: sturdy turquoise fish with lavender face, coral tail and rounded beak\n6. Leaf scorpionfish: flattened pale pink leaf-shaped fish with frilly dorsal edge\n7. Flying gurnard: small striped body with huge blue-edged fanlike pectoral fins\n8. Weedy dragonet: small russet fish with leaflike frills and delicate spotted fins\n9. Peppermint angelfish: compact disk fish with brilliant red and white vertical stripes\n10. Candy basslet: small pink and orange striped fish with violet highlights\nAll four frames in a row have identical identity, markings and size. Keep full bodies, antennae, fins, tails and flippers visible with generous clear transparent gaps between all cells and image edges. No water, tanks, scenery, color haze, shadows, ground, text, captions, grid or extra creatures. Genuine transparent background. Portrait atlas.",
+    "mode": "built-in"
+  },
+  {
+    "key": "aquatic-4",
+    "kind": "fish",
+    "rows": [
+      "cardinal-tetra",
+      "ember-tetra",
+      "rummynose-tetra",
+      "congo-tetra",
+      "galaxy-rasbora",
+      "chili-rasbora",
+      "clown-loach",
+      "yoyo-loach",
+      "hillstream-loach",
+      "panda-corydoras"
+    ],
+    "prompt": "Use case: illustration-story. Transparent sprite atlas of ten different collectible aquatic creatures for a polished coastal handheld RPG. Exactly TEN ROWS and FOUR COLUMNS, forty complete separate animals. One species per row; four consecutive gentle swimming or paddling poses in each row. Match the detailed pixel-painted style of reference 1 and the appealing glossy-eyed expression of reference 2, without baby caricatures, human faces or oversized heads. Preserve correct recognizable fins, limbs, flippers, shell shapes and tails for each listed creature. Cute, lively, restrained polished shading, fine outlines and rich natural colors. Row designs TOP to BOTTOM:\n1. Cardinal tetra: slender bright blue upper stripe over a vivid red lower body\n2. Ember tetra: tiny translucent amber-orange fish with delicate fins\n3. Rummynose tetra: silver body, ruby-red head and black-white striped forked tail\n4. Congo tetra: iridescent rainbow silver body and long pale flowing fins\n5. Galaxy rasbora: tiny navy fish dotted with gold pearls, orange-red fins\n6. Chili rasbora: tiny slender scarlet fish with dark lateral dash\n7. Clown loach: orange barrel-shaped body with three broad black vertical bands\n8. Yoyo loach: small cream bottom fish with looping dark Y-shaped bands and little barbels\n9. Hillstream loach: flattened brown spotted fish with wide rounded suckerlike fins\n10. Panda corydoras: small cream catfish with black eye patch and dark tail saddle\nAll four frames in a row have identical identity, markings and size. Keep full bodies, antennae, fins, tails and flippers visible with generous clear transparent gaps between all cells and image edges. No water, tanks, scenery, color haze, shadows, ground, text, captions, grid or extra creatures. Genuine transparent background. Portrait atlas.",
+    "mode": "built-in"
+  },
+  {
+    "key": "aquatic-5",
+    "kind": "fish",
+    "rows": [
+      "bronze-corydoras",
+      "green-phantom-pleco",
+      "zebra-pleco",
+      "honey-gourami",
+      "sparkling-gourami",
+      "kissing-gourami",
+      "dwarf-rainbowfish",
+      "threadfin-rainbowfish",
+      "roseline-barb",
+      "golden-dojo-loach"
+    ],
+    "prompt": "Use case: illustration-story. Transparent sprite atlas of ten different collectible aquatic creatures for a polished coastal handheld RPG. Exactly TEN ROWS and FOUR COLUMNS, forty complete separate animals. One species per row; four consecutive gentle swimming or paddling poses in each row. Match the detailed pixel-painted style of reference 1 and the appealing glossy-eyed expression of reference 2, without baby caricatures, human faces or oversized heads. Preserve correct recognizable fins, limbs, flippers, shell shapes and tails for each listed creature. Cute, lively, restrained polished shading, fine outlines and rich natural colors. Row designs TOP to BOTTOM:\n1. Bronze corydoras: compact bronze-green armored catfish with tiny barbels\n2. Green phantom pleco: compact emerald armored catfish with pale yellow spots and broad fins\n3. Zebra pleco: small white armored catfish with bold clean black zebra stripes\n4. Honey gourami: warm honey-yellow body with fine threadlike pelvic fins\n5. Sparkling gourami: tiny warm brown fish with rows of iridescent turquoise sparkles and delicate fins\n6. Kissing gourami: soft pink rounded fish with gently protruding little lips\n7. Dwarf rainbowfish: small iridescent blue body with bright scarlet fin edges\n8. Threadfin rainbowfish: slender golden rainbowfish with long delicate black-blue fin threads\n9. Roseline barb: silver torpedo fish with black side stripe and vivid red upper stripe\n10. Golden dojo loach: long soft golden-yellow loach with tiny whiskers\nAll four frames in a row have identical identity, markings and size. Keep full bodies, antennae, fins, tails and flippers visible with generous clear transparent gaps between all cells and image edges. No water, tanks, scenery, color haze, shadows, ground, text, captions, grid or extra creatures. Genuine transparent background. Portrait atlas.",
+    "mode": "built-in"
+  },
+  {
+    "key": "aquatic-6",
+    "kind": "fish",
+    "rows": [
+      "peacock-gudgeon",
+      "german-blue-ram",
+      "electric-blue-acara",
+      "threadfin-acara",
+      "red-turquoise-discus",
+      "marble-angelfish",
+      "silver-arowana",
+      "clown-knifefish",
+      "freshwater-butterflyfish",
+      "platinum-alligator-gar"
+    ],
+    "prompt": "Use case: illustration-story. Transparent sprite atlas of ten different collectible aquatic creatures for a polished coastal handheld RPG. Exactly TEN ROWS and FOUR COLUMNS, forty complete separate animals. One species per row; four consecutive gentle swimming or paddling poses in each row. Match the detailed pixel-painted style of reference 1 and the appealing glossy-eyed expression of reference 2, without baby caricatures, human faces or oversized heads. Preserve correct recognizable fins, limbs, flippers, shell shapes and tails for each listed creature. Cute, lively, restrained polished shading, fine outlines and rich natural colors. Row designs TOP to BOTTOM:\n1. Peacock gudgeon: compact turquoise fish with red spots and yellow-edged fins\n2. German blue ram: small gold cichlid with blue sparkles, black face band and orange belly\n3. Electric blue acara: rounded bright turquoise cichlid with dark fin edging\n4. Threadfin acara: soft blue-green fish with long delicate threadlike fin tips\n5. Red turquoise discus: round disk fish with red maze patterns over turquoise\n6. Marble angelfish: tall triangular white fish with black marbling and trailing pelvic fins\n7. Silver arowana: long silver-scaled fish with upturned mouth and small chin barbels\n8. Clown knifefish: curved silver body with black-ringed round spots and long ribbonlike lower fin\n9. Freshwater butterflyfish: mottled brown surface fish with broad winglike pectoral fins\n10. Platinum alligator gar: long pale silver armored fish with narrow toothy snout and spotted fins\nAll four frames in a row have identical identity, markings and size. Keep full bodies, antennae, fins, tails and flippers visible with generous clear transparent gaps between all cells and image edges. No water, tanks, scenery, color haze, shadows, ground, text, captions, grid or extra creatures. Genuine transparent background. Portrait atlas.",
+    "mode": "built-in"
+  },
+  {
+    "key": "aquatic-7",
+    "kind": "fish",
+    "rows": [
+      "lanternfish",
+      "hatchetfish",
+      "barreleye-dreamfish",
+      "ribbon-oarfish",
+      "gulper-eel",
+      "violet-anglerfish",
+      "black-dragonfish",
+      "pineapplefish",
+      "flashlight-fish",
+      "coelacanth-dreamfish"
+    ],
+    "prompt": "Use case: illustration-story. Transparent sprite atlas of ten different collectible aquatic creatures for a polished coastal handheld RPG. Exactly TEN ROWS and FOUR COLUMNS, forty complete separate animals. One species per row; four consecutive gentle swimming or paddling poses in each row. Match the detailed pixel-painted style of reference 1 and the appealing glossy-eyed expression of reference 2, without baby caricatures, human faces or oversized heads. Preserve correct recognizable fins, limbs, flippers, shell shapes and tails for each listed creature. Cute, lively, restrained polished shading, fine outlines and rich natural colors. Row designs TOP to BOTTOM:\n1. Lanternfish: small dark blue fish with a tidy row of softly glowing cyan light organs\n2. Hatchetfish: tiny deep-bodied silver fish with large glossy eyes and a narrow tail\n3. Barreleye dreamfish: small translucent green-domed fish with gentle upward-looking eyes\n4. Ribbon oarfish: long silver ribbon body with a red crest and small red fins\n5. Gulper eel: slender dark eel with a broad expandable mouth and tiny glowing tail tip\n6. Violet anglerfish: round dark violet fish, soft smiling mouth and a glowing lure on its head\n7. Black dragonfish: slender black-blue fish with pale light spots and a small chin lure\n8. Pineapplefish: round golden armored fish with black netlike scale outlines\n9. Flashlight fish: small charcoal fish with bright soft blue lights below the eyes\n10. Coelacanth dreamfish: sturdy deep blue spotted fish with fleshy lobed fins\nAll four frames in a row have identical identity, markings and size. Keep full bodies, antennae, fins, tails and flippers visible with generous clear transparent gaps between all cells and image edges. No water, tanks, scenery, color haze, shadows, ground, text, captions, grid or extra creatures. Genuine transparent background. Portrait atlas.",
+    "mode": "built-in"
+  },
+  {
+    "key": "aquatic-8",
+    "kind": "fish",
+    "rows": [
+      "baby-zebra-shark",
+      "baby-port-jackson-shark",
+      "baby-hooded-carpetshark",
+      "baby-whitespotted-bamboo-shark",
+      "baby-nurse-shark",
+      "baby-lemon-shark",
+      "baby-bonnethead-shark",
+      "baby-crested-bullhead-shark",
+      "baby-coral-catshark",
+      "baby-swell-shark"
+    ],
+    "prompt": "Use case: illustration-story. Transparent sprite atlas of ten different collectible aquatic creatures for a polished coastal handheld RPG. Exactly TEN ROWS and FOUR COLUMNS, forty complete separate animals. One species per row; four consecutive gentle swimming or paddling poses in each row. Match the detailed pixel-painted style of reference 1 and the appealing glossy-eyed expression of reference 2, without baby caricatures, human faces or oversized heads. Preserve correct recognizable fins, limbs, flippers, shell shapes and tails for each listed creature. Cute, lively, restrained polished shading, fine outlines and rich natural colors. Row designs TOP to BOTTOM:\n1. Baby zebra shark: small golden shark with dark juvenile zebra bands and a very long tail\n2. Baby Port Jackson shark: small tawny shark with bold dark harness-like bands across shoulders and back\n3. Baby hooded carpetshark: small pale brown bottom shark with cream spots and a dark hoodlike shoulder patch\n4. Baby whitespotted bamboo shark: tiny brown bamboo shark with tidy cream-white spots and rounded fins\n5. Baby nurse shark: small warm brown shark with rounded snout and tiny nose barbels\n6. Baby lemon shark: little pale yellow-gray shark with two rounded dorsal fins\n7. Baby bonnethead shark: small gray shark with a smooth shovel-shaped head\n8. Baby crested bullhead shark: small tan blunt-headed shark with a raised brow ridge and broad dark bands\n9. Baby coral catshark: tiny slender tan shark with cream spots and darker saddles\n10. Baby swell shark: small mottled amber shark with broad head and rounded belly\nAll four frames in a row have identical identity, markings and size. Keep full bodies, antennae, fins, tails and flippers visible with generous clear transparent gaps between all cells and image edges. No water, tanks, scenery, color haze, shadows, ground, text, captions, grid or extra creatures. Genuine transparent background. Portrait atlas.",
+    "mode": "built-in"
+  },
+  {
+    "key": "aquatic-9",
+    "kind": "fish",
+    "rows": [
+      "baby-blacktip-reef-shark",
+      "baby-whitetip-reef-shark",
+      "baby-bowmouth-shark",
+      "baby-angelshark",
+      "baby-wobbegong",
+      "spotted-eagle-ray",
+      "blue-spotted-stingray",
+      "cownose-ray",
+      "electric-marbled-ray",
+      "violet-manta-calf"
+    ],
+    "prompt": "Use case: illustration-story. Transparent sprite atlas of ten different collectible aquatic creatures for a polished coastal handheld RPG. Exactly TEN ROWS and FOUR COLUMNS, forty complete separate animals. One species per row; four consecutive gentle swimming or paddling poses in each row. Match the detailed pixel-painted style of reference 1 and the appealing glossy-eyed expression of reference 2, without baby caricatures, human faces or oversized heads. Preserve correct recognizable fins, limbs, flippers, shell shapes and tails for each listed creature. Cute, lively, restrained polished shading, fine outlines and rich natural colors. Row designs TOP to BOTTOM:\n1. Baby blacktip reef shark: small silver-gray shark with crisp black fin tips\n2. Baby whitetip reef shark: little gray reef shark with white dorsal and tail tips\n3. Baby bowmouth shark: rounded gray raylike head and shark tail with fine pale dots\n4. Baby angelshark: tiny flattened sandy shark with broad winglike fins and short tail\n5. Baby wobbegong: small mottled carpet shark with soft beardlike fringe around the snout\n6. Spotted eagle ray: small dark blue ray with white polka dots and long slender tail\n7. Blue-spotted stingray: rounded sandy ray with bright blue spots and a short curved tail\n8. Cownose ray: bronze ray with gently notched snout and broad diamond wings\n9. Electric marbled ray: small round marbled tan ray with a short sturdy tail\n10. Violet manta calf: small violet manta with pale underside and gently curled cephalic fins\nAll four frames in a row have identical identity, markings and size. Keep full bodies, antennae, fins, tails and flippers visible with generous clear transparent gaps between all cells and image edges. No water, tanks, scenery, color haze, shadows, ground, text, captions, grid or extra creatures. Genuine transparent background. Portrait atlas.",
+    "mode": "built-in"
+  },
+  {
+    "key": "aquatic-10",
+    "kind": "fish",
+    "rows": [
+      "pom-pom-crab",
+      "anemone-porcelain-crab",
+      "emerald-crab",
+      "halloween-hermit-crab",
+      "blue-knee-hermit-crab",
+      "strawberry-hermit-crab",
+      "pistol-shrimp",
+      "harlequin-shrimp",
+      "fire-shrimp",
+      "bumblebee-shrimp"
+    ],
+    "prompt": "Use case: illustration-story. Transparent sprite atlas of ten different collectible aquatic creatures for a polished coastal handheld RPG. Exactly TEN ROWS and FOUR COLUMNS, forty complete separate animals. One species per row; four consecutive gentle swimming or paddling poses in each row. Match the detailed pixel-painted style of reference 1 and the appealing glossy-eyed expression of reference 2, without baby caricatures, human faces or oversized heads. Preserve correct recognizable fins, limbs, flippers, shell shapes and tails for each listed creature. Cute, lively, restrained polished shading, fine outlines and rich natural colors. Row designs TOP to BOTTOM:\n1. Pom-pom crab: tiny cream crab holding two fluffy pale pink anemone pom-poms\n2. Anemone porcelain crab: small cream crab with dark red speckles and broad flattened claws\n3. Emerald crab: compact moss-green crab with smooth rounded claws\n4. Halloween hermit crab: orange-black striped hermit crab peeking from a spiral shell\n5. Blue-knee hermit crab: small hermit with cobalt knee bands and a warm brown spiral shell\n6. Strawberry hermit crab: red hermit crab covered in pale seedlike dots\n7. Pistol shrimp: little striped cream shrimp with one oversized coral-pink claw\n8. Harlequin shrimp: white shrimp with large lavender spots and flattened paddlelike forelimbs\n9. Fire shrimp: bright scarlet shrimp with white dots, long white antennae and white feet\n10. Bumblebee shrimp: tiny cream and charcoal banded shrimp with a short rounded body\nAll four frames in a row have identical identity, markings and size. Keep full bodies, antennae, fins, tails and flippers visible with generous clear transparent gaps between all cells and image edges. No water, tanks, scenery, color haze, shadows, ground, text, captions, grid or extra creatures. Genuine transparent background. Portrait atlas.",
+    "mode": "built-in"
+  },
+  {
+    "key": "aquatic-11",
+    "kind": "fish",
+    "rows": [
+      "snowball-shrimp",
+      "orange-rili-shrimp",
+      "blue-dwarf-crayfish",
+      "red-swamp-crayfish",
+      "reef-slipper-lobster",
+      "squat-lobster",
+      "violet-reef-lobster",
+      "tiger-snapping-shrimp",
+      "red-reef-prawn",
+      "glass-grass-shrimp"
+    ],
+    "prompt": "Use case: illustration-story. Transparent sprite atlas of ten different collectible aquatic creatures for a polished coastal handheld RPG. Exactly TEN ROWS and FOUR COLUMNS, forty complete separate animals. One species per row; four consecutive gentle swimming or paddling poses in each row. Match the detailed pixel-painted style of reference 1 and the appealing glossy-eyed expression of reference 2, without baby caricatures, human faces or oversized heads. Preserve correct recognizable fins, limbs, flippers, shell shapes and tails for each listed creature. Cute, lively, restrained polished shading, fine outlines and rich natural colors. Row designs TOP to BOTTOM:\n1. Snowball shrimp: tiny milky-white translucent shrimp with delicate white feelers and a curved tail\n2. Orange rili shrimp: tiny orange shrimp with a clear middle band and curved tail\n3. Blue dwarf crayfish: small sky-blue crayfish with short rounded claws and segmented tail\n4. Red swamp crayfish: tiny deep red crayfish with textured claws and broad tail fan\n5. Reef slipper lobster: flattened mottled tan lobster with broad shovel-shaped antennae\n6. Squat lobster: small russet lobster with long slender claws and a tucked striped tail\n7. Violet reef lobster: small purple lobster with orange bands and sturdy orange-tipped claws\n8. Tiger snapping shrimp: cream shrimp with brown tiger bands and one large claw\n9. Red reef prawn: slender coral-red prawn with long white-striped antennae\n10. Glass grass shrimp: nearly clear shrimp with green tint and subtle speckling\nAll four frames in a row have identical identity, markings and size. Keep full bodies, antennae, fins, tails and flippers visible with generous clear transparent gaps between all cells and image edges. No water, tanks, scenery, color haze, shadows, ground, text, captions, grid or extra creatures. Genuine transparent background. Portrait atlas.",
+    "mode": "built-in"
+  },
+  {
+    "key": "aquatic-12",
+    "kind": "fish",
+    "rows": [
+      "flamboyant-cuttlefish",
+      "pink-umbrella-octopus",
+      "mimic-octopus",
+      "blue-ringed-octopus",
+      "striped-pyjama-squid",
+      "stout-bobtail-squid",
+      "pink-sea-pig",
+      "royal-sea-slug",
+      "leaf-sheep-sea-slug",
+      "ribbon-sea-dragon"
+    ],
+    "prompt": "Use case: illustration-story. Transparent sprite atlas of ten different collectible aquatic creatures for a polished coastal handheld RPG. Exactly TEN ROWS and FOUR COLUMNS, forty complete separate animals. One species per row; four consecutive gentle swimming or paddling poses in each row. Match the detailed pixel-painted style of reference 1 and the appealing glossy-eyed expression of reference 2, without baby caricatures, human faces or oversized heads. Preserve correct recognizable fins, limbs, flippers, shell shapes and tails for each listed creature. Cute, lively, restrained polished shading, fine outlines and rich natural colors. Row designs TOP to BOTTOM:\n1. Flamboyant cuttlefish: small plum and cream cuttlefish with bright yellow frills\n2. Pink umbrella octopus: small pale pink octopus with a soft umbrella-shaped web joining its arms\n3. Mimic octopus: small brown and cream banded octopus with long slender gently curled arms\n4. Blue-ringed octopus: small golden octopus with vivid blue rings on its curled arms\n5. Striped pyjama squid: tiny round white squid with bold dark stripes and little side fins\n6. Stout bobtail squid: tiny plump plum-bronze squid with broad rounded side fins and pale speckles\n7. Pink sea pig: small pale pink sea cucumber with six soft little tube feet\n8. Royal sea slug: small purple nudibranch with orange gill plume and orange edge\n9. Leaf sheep sea slug: tiny pale green sea slug with leaflike back fronds and dark-tipped feelers\n10. Ribbon sea dragon: small golden-green seahorse relative with leafy body frills and curled tail\nAll four frames in a row have identical identity, markings and size. Keep full bodies, antennae, fins, tails and flippers visible with generous clear transparent gaps between all cells and image edges. No water, tanks, scenery, color haze, shadows, ground, text, captions, grid or extra creatures. Genuine transparent background. Portrait atlas.",
+    "mode": "built-in"
+  },
+  {
+    "key": "aquatic-13",
+    "kind": "fish",
+    "rows": [
+      "painted-turtle-hatchling",
+      "map-turtle-hatchling",
+      "spotted-turtle-hatchling",
+      "musk-turtle-hatchling",
+      "diamondback-terrapin-hatchling",
+      "softshell-turtle-hatchling",
+      "pig-nosed-turtle-hatchling",
+      "reeves-turtle-hatchling",
+      "loggerhead-hatchling",
+      "hawksbill-hatchling"
+    ],
+    "prompt": "Use case: illustration-story. Transparent sprite atlas of ten different collectible aquatic creatures for a polished coastal handheld RPG. Exactly TEN ROWS and FOUR COLUMNS, forty complete separate animals. One species per row; four consecutive gentle swimming or paddling poses in each row. Match the detailed pixel-painted style of reference 1 and the appealing glossy-eyed expression of reference 2, without baby caricatures, human faces or oversized heads. Preserve correct recognizable fins, limbs, flippers, shell shapes and tails for each listed creature. Cute, lively, restrained polished shading, fine outlines and rich natural colors. Row designs TOP to BOTTOM:\n1. Painted turtle hatchling: tiny green turtle with red-yellow neck stripes and a smooth patterned shell\n2. Map turtle hatchling: small olive turtle with thin maplike shell lines and striped cheeks\n3. Spotted turtle hatchling: tiny black turtle with bright yellow shell and head dots\n4. Musk turtle hatchling: small brown turtle with a high domed shell and pale cheek stripes\n5. Diamondback terrapin hatchling: small pale gray turtle with dark speckled skin and diamond shell scutes\n6. Softshell turtle hatchling: tiny flat sandy turtle with a soft round shell and long little snorkel nose\n7. Pig-nosed turtle hatchling: small gray turtle with little flippers and a rounded piglike snout\n8. Reeves turtle hatchling: small brown turtle with three raised shell ridges and yellow face lines\n9. Loggerhead hatchling: tiny warm brown sea turtle with broad head and small paddle flippers\n10. Hawksbill hatchling: tiny amber sea turtle with overlapping shell plates and a gently pointed beak\nAll four frames in a row have identical identity, markings and size. Keep full bodies, antennae, fins, tails and flippers visible with generous clear transparent gaps between all cells and image edges. No water, tanks, scenery, color haze, shadows, ground, text, captions, grid or extra creatures. Genuine transparent background. Portrait atlas.",
+    "mode": "built-in"
+  },
+  {
+    "key": "aquatic-14",
+    "kind": "fish",
+    "rows": [
+      "fire-bellied-newt",
+      "alpine-newt",
+      "eastern-red-spotted-newt",
+      "marbled-salamander",
+      "spotted-salamander",
+      "tiger-salamander",
+      "glass-frog",
+      "reed-frog",
+      "yellow-bellied-toad",
+      "fire-salamander"
+    ],
+    "prompt": "Use case: illustration-story. Transparent sprite atlas of ten different collectible aquatic creatures for a polished coastal handheld RPG. Exactly TEN ROWS and FOUR COLUMNS, forty complete separate animals. One species per row; four consecutive gentle swimming or paddling poses in each row. Match the detailed pixel-painted style of reference 1 and the appealing glossy-eyed expression of reference 2, without baby caricatures, human faces or oversized heads. Preserve correct recognizable fins, limbs, flippers, shell shapes and tails for each listed creature. Cute, lively, restrained polished shading, fine outlines and rich natural colors. Row designs TOP to BOTTOM:\n1. Fire-bellied newt: tiny charcoal newt with bright orange underside and a curved tail\n2. Alpine newt: small slate-blue newt with a bright orange belly and pale speckles\n3. Eastern red-spotted newt: small olive newt with red spots outlined in black along its back\n4. Marbled salamander: small charcoal salamander with bold pale silver crossbands\n5. Spotted salamander: rounded black salamander with two rows of bright yellow spots\n6. Tiger salamander: small dark salamander with broad yellow irregular bands\n7. Glass frog: tiny pale green frog with soft translucent belly and rounded toe pads\n8. Reed frog: little emerald frog with cream side stripe and orange toes\n9. Yellow-bellied toad: small olive toad with bright yellow-black belly markings\n10. Fire salamander: small black salamander with broad irregular golden-yellow patches\nAll four frames in a row have identical identity, markings and size. Keep full bodies, antennae, fins, tails and flippers visible with generous clear transparent gaps between all cells and image edges. No water, tanks, scenery, color haze, shadows, ground, text, captions, grid or extra creatures. Genuine transparent background. Portrait atlas.",
+    "mode": "built-in"
+  },
+  {
+    "key": "aquatic-15",
+    "kind": "fish",
+    "rows": [
+      "fluted-giant-clam",
+      "scallop-dancer",
+      "tiger-cowrie",
+      "banded-trochus-snail",
+      "moon-snail",
+      "harbor-seal-pup",
+      "river-otter-pup",
+      "manatee-calf",
+      "sand-dollar",
+      "feather-star"
+    ],
+    "prompt": "Use case: illustration-story. Transparent sprite atlas of ten different collectible aquatic creatures for a polished coastal handheld RPG. Exactly TEN ROWS and FOUR COLUMNS, forty complete separate animals. One species per row; four consecutive gentle swimming or paddling poses in each row. Match the detailed pixel-painted style of reference 1 and the appealing glossy-eyed expression of reference 2, without baby caricatures, human faces or oversized heads. Preserve correct recognizable fins, limbs, flippers, shell shapes and tails for each listed creature. Cute, lively, restrained polished shading, fine outlines and rich natural colors. Row designs TOP to BOTTOM:\n1. Fluted giant clam: small blue-violet clam mantle inside a deeply fluted cream shell\n2. Scallop dancer: tiny orange scallop with a ridged fan shell and a fringe of little blue eyes\n3. Tiger cowrie: rounded glossy cream cowrie shell with bold dark brown spots and a soft pale foot\n4. Banded trochus snail: small cream cone-shaped snail shell with red-brown diagonal stripes\n5. Moon snail: small rounded pale sand-colored spiral shell and a broad cream foot\n6. Harbor seal pup: small round silver-gray seal with dark spots, tiny flippers and soft whiskers\n7. River otter pup: small warm brown otter with pale cheeks, short whiskers and a curved tail\n8. Manatee calf: tiny friendly rounded gray manatee with paddle tail and small front flippers\n9. Sand dollar: small pale cream disk with a delicate five-petal marking\n10. Feather star: small crimson feather star with many soft curled feathery arms\nAll four frames in a row have identical identity, markings and size. Keep full bodies, antennae, fins, tails and flippers visible with generous clear transparent gaps between all cells and image edges. No water, tanks, scenery, color haze, shadows, ground, text, captions, grid or extra creatures. Genuine transparent background. Portrait atlas.",
+    "mode": "built-in"
+  }
+]

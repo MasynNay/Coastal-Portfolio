@@ -1,0 +1,789 @@
+/* Each island arcade lives inside WorldDialog, which pauses the town and owns
+   focus/Escape. Boards scale to phones; every game has pointer/touch actions. */
+.island-mini-game {
+  max-width: 640px;
+  margin: auto;
+}
+.island-mini-game > p {
+  font-size: 14px;
+  line-height: 1.75;
+}
+.mini-score {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin: 18px 0;
+  color: #eee3bc;
+}
+.mini-score strong {
+  font-size: 20px;
+}
+.number-board {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  background: #14272e;
+  padding: 12px;
+  border: 1px solid #c8d9b54a;
+  border-radius: 18px;
+  touch-action: none;
+  max-width: 420px;
+  margin: auto;
+}
+.number-tile {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 1;
+  border-radius: 10px;
+  background: #aec8bd12;
+  font-size: clamp(20px, 5vw, 34px);
+  font-weight: 750;
+  color: #102f36;
+}
+.number-tile:not([data-value="0"]) {
+  background: #ced9b4;
+  box-shadow: inset 0 1px #f6f7d977;
+  animation: tile-appear 0.14s ease-out;
+}
+.number-tile[data-value="4"] {
+  background: #e5d399;
+}
+.number-tile[data-value="8"] {
+  background: #e3b66e;
+}
+.number-tile[data-value="16"] {
+  background: #e29468;
+}
+.number-tile[data-value="32"] {
+  background: #df7b6e;
+}
+.number-tile[data-value="64"] {
+  background: #cf6571;
+}
+.number-tile[data-value="128"],
+.number-tile[data-value="256"],
+.number-tile[data-value="512"],
+.number-tile[data-value="1024"],
+.number-tile[data-value="2048"] {
+  background: #e7ca5b;
+  box-shadow: 0 0 20px #edc36b33;
+}
+.mini-directions {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 18px 0;
+}
+.mini-directions button {
+  min-width: 48px;
+  min-height: 48px;
+}
+.gem-board {
+  display: grid;
+  grid-template-columns: repeat(8, minmax(0, 1fr));
+  gap: 5px;
+  padding: 10px;
+  border-radius: 18px;
+  background: #0c212b;
+  border: 1px solid #6caba966;
+}
+.world-dialog .gem-cell {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 1;
+  padding: 0;
+  min-width: 0;
+  min-height: 0;
+  font-size: clamp(21px, 6vw, 38px);
+  border: 1px solid #9dc4bc25;
+  border-radius: 8px;
+  background: #29454c;
+  line-height: 1;
+}
+
+.gem-cell[aria-pressed="true"] {
+  outline: 3px solid #faf0ba;
+  outline-offset: -3px;
+  background: #54746a;
+}
+.memory-board {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+}
+.world-dialog .memory-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  aspect-ratio: 3/4;
+  min-width: 0;
+  background: repeating-linear-gradient(
+    45deg,
+    #332941,
+    #332941 12px,
+    #3c3047 12px,
+    #3c3047 13px
+  );
+  border: 2px solid #ae916557;
+  border-radius: 12px;
+  color: #e0c887;
+  padding: 8px;
+}
+.memory-card[data-revealed="true"] {
+  background: radial-gradient(ellipse, #655775, #282c43);
+  border-color: #d4bc7a;
+}
+.memory-card small {
+  font-size: 11px;
+  text-align: center;
+}
+.memory-card:disabled {
+  opacity: 0.75;
+  filter: none;
+}
+.orc-hunt-field {
+  height: clamp(290px, 46dvh, 390px);
+  position: relative;
+  overflow: hidden;
+  border: 1px solid #b9d3b746;
+  border-radius: 18px;
+  background: radial-gradient(ellipse at 60% 60%, #84986b, #284d39 85%);
+  isolation: isolate;
+}
+
+.world-dialog .orc-hunt-target {
+  position: absolute;
+  top: var(--target-top, calc(3% + var(--lane) * 24%));
+  padding: 0;
+  border: 0;
+  background: transparent;
+  min-width: 144px;
+  min-height: 100px;
+  animation: orc-crossing 5s linear both;
+  animation-delay: var(--delay);
+}
+.orc-hunt-ready {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  padding: 20px;
+  text-align: center;
+  color: #f0ead0;
+}
+.orc-hunt-ready strong {
+  font-size: 26px;
+}
+
+@keyframes tile-appear {
+  from {
+    scale: 0.96;
+    opacity: 0.7;
+  }
+  to {
+    scale: 1;
+    opacity: 1;
+  }
+}
+@media (max-width: 450px) {
+  .number-board {
+    gap: 6px;
+    padding: 8px;
+  }
+  .memory-board {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .mini-score {
+    gap: 8px;
+  }
+  .gem-board {
+    gap: 3px;
+    padding: 6px;
+  }
+  .memory-card small {
+    font-size: 10px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .number-tile:not([data-value="0"]) {
+    animation: none;
+  }
+  .orc-hunt-target {
+    animation-timing-function: steps(8) !important;
+  }
+}
+.number-board {
+  cursor: grab;
+  user-select: none;
+}
+.number-board[data-dragging="true"] {
+  cursor: grabbing;
+}
+.number-tile {
+  translate: var(--drag-x, 0px) var(--drag-y, 0px);
+  transition: translate 0.1s ease-out;
+  pointer-events: none;
+}
+.number-board[data-dragging="true"] .number-tile {
+  transition: none;
+}
+.gem-cell img {
+  width: 80%;
+  height: 80%;
+  object-fit: contain;
+  pointer-events: none;
+}
+/* The runner has a fixed drawing surface and scales to the available dialog.
+   Touch gestures belong to its canvas only; the surrounding menu still scrolls. */
+.runner-stage {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid #b9d3b74d;
+  border-radius: 18px;
+  max-width: 600px;
+  width: min(100%, 53dvh);
+  margin: auto;
+  background: #426f64;
+}
+.runner-stage canvas {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  touch-action: none;
+  outline-offset: -4px;
+}
+.runner-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 16px;
+  background: #092e39b5;
+  text-align: center;
+  padding: 24px;
+  color: #efe7bc;
+}
+.runner-overlay strong {
+  font-size: clamp(24px, 5vw, 38px);
+}
+.runner-controls {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 14px;
+}
+.world-dialog .runner-controls button {
+  min-width: 0;
+  min-height: 48px;
+  padding: 8px;
+  font-size: 13px;
+  touch-action: manipulation;
+}
+
+.orc-hunt-target {
+  touch-action: manipulation;
+  cursor: crosshair;
+}
+@media (max-width: 450px) {
+  .runner-controls {
+    gap: 5px;
+  }
+  .world-dialog .runner-controls button {
+    font-size: 11px;
+    padding: 5px;
+  }
+}
+/* The Great Sea board keeps numeric contrast, even on the illustrated chart.
+   The game-over overlay stays inside the board and provides a touch restart. */
+.windfall-tiles {
+  color: #dae7dd;
+}
+.windfall-board-wrap {
+  position: relative;
+  max-width: 440px;
+  margin: auto;
+  padding: 12px;
+  background-color: #247a87;
+  background-position: center;
+  background-size: cover;
+  border: 2px solid #cfc39a;
+  border-radius: 22px;
+  box-shadow:
+    0 12px 35px #0005,
+    inset 0 0 0 5px #ffffff1a;
+}
+.windfall-tiles .number-board {
+  background: #0c4358e3;
+  border-color: #d5dcc06b;
+  border-radius: 12px;
+  box-shadow: inset 0 0 24px #001e3359;
+}
+.windfall-tiles .number-tile {
+  font-family: Georgia, serif;
+  font-weight: 700;
+  border-radius: 5px;
+  background: #c7f5ef17;
+  color: #073244;
+  text-shadow: 0 1px #ffffff70;
+}
+.windfall-tiles .number-tile:not([data-value="0"]) {
+  border: 1px solid #fff4c284;
+  box-shadow:
+    inset 0 2px #ffffed90,
+    inset 0 -3px #655a4430,
+    0 3px 6px #001b354d;
+}
+.windfall-tiles .number-tile[data-value="2"] {
+  background: #d5eecf;
+}
+.windfall-tiles .number-tile[data-value="4"] {
+  background: #a1ddd3;
+}
+.windfall-tiles .number-tile[data-value="8"] {
+  background: #79c8ce;
+}
+.windfall-tiles .number-tile[data-value="16"] {
+  background: #79aac9;
+}
+.windfall-tiles .number-tile[data-value="32"] {
+  background: #b6a6d6;
+}
+.windfall-tiles .number-tile[data-value="64"] {
+  background: #e0ada1;
+}
+.tiles-game-over {
+  position: absolute;
+  inset: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  gap: 14px;
+  padding: 22px;
+  border-radius: 14px;
+  background: #082f46ed;
+  backdrop-filter: blur(6px);
+  color: #eee8b8;
+}
+.tiles-game-over h3 {
+  font-family: Georgia, serif;
+  font-size: 32px !important;
+  margin: 0;
+}
+.nautical-compass {
+  font-size: 48px;
+  color: #ddcb89;
+}
+.gem-board {
+  touch-action: none;
+  user-select: none;
+}
+.gem-cell {
+  position: relative;
+  overflow: hidden;
+}
+.gem-cell[data-power="rainbow"] {
+  background: conic-gradient(#4a567b, #43767a, #7f744b, #75455e, #4a567b);
+  box-shadow: inset 0 0 18px #fff3;
+}
+.gem-cell[data-power="bomb"] {
+  background: radial-gradient(#785052, #293f48);
+}
+.gem-board[data-rainbow="true"] .gem-cell {
+  border-color: #e2d9a86b;
+}
+.bomb-color {
+  position: absolute;
+  bottom: 4%;
+  right: 4%;
+  width: 17%;
+  height: 17%;
+  border-radius: 50%;
+  background: var(--ball-color);
+  border: 1px solid #fff9;
+}
+.runner-help {
+  font-size: 13px;
+  line-height: 1.7;
+  color: #c3d6ce;
+}
+.runner-help summary {
+  cursor: pointer;
+  padding: 8px 0;
+}
+.runner-help p {
+  margin: 8px 0;
+}
+.runner-power-bar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  margin: 0 0 12px;
+  color: #df9585;
+  font-size: 18px;
+}
+.runner-power-bar > span {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  white-space: nowrap;
+}
+.runner-power-bar > span + span {
+  font-size: 11px;
+  color: #dbe5cf;
+  opacity: 0.45;
+}
+.runner-power-bar > span[data-active="true"] {
+  opacity: 1;
+}
+.runner-power-bar img {
+  width: 26px;
+  height: 26px;
+  object-fit: contain;
+}
+
+.orc-hunt-target[data-shot="true"] {
+  cursor: default;
+}
+.orc-hunt-target .sprite-pose {
+  pointer-events: none;
+}
+.orc-hunt-arrows {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: visible;
+}
+.orc-hunt-archer {
+  position: absolute;
+  left: 0;
+  bottom: -16px;
+  pointer-events: none;
+  filter: drop-shadow(0 4px 3px #122b29aa);
+}
+@keyframes orc-crossing {
+  from {
+    left: 0;
+  }
+  to {
+    left: calc(100% - 148px);
+  }
+}
+/* Powers remain visible above the board for their whole animation. Pointer
+   input waits for the resolution so a second swipe cannot skip the feedback. */
+.gem-board {
+  position: relative;
+}
+.match-effects {
+  position: absolute;
+  inset: 10px;
+  pointer-events: none;
+  z-index: 3;
+}
+.rocket-explosion {
+  position: absolute;
+  width: 48%;
+  aspect-ratio: 1;
+  translate: -50% -50%;
+  background-image: var(--bomb-animation);
+  background-size: 800% 100%;
+  background-repeat: no-repeat;
+  animation: rocket-frames 0.9s step-end forwards;
+  filter: drop-shadow(0 2px 8px #b16e3466);
+}
+@keyframes rocket-frames {
+  0% {
+    background-position: 0% 0;
+  }
+  12.5% {
+    background-position: 14.2857% 0;
+  }
+  25% {
+    background-position: 28.5714% 0;
+  }
+  37.5% {
+    background-position: 42.8571% 0;
+  }
+  50% {
+    background-position: 57.1428% 0;
+  }
+  62.5% {
+    background-position: 71.4285% 0;
+  }
+  75% {
+    background-position: 85.7142% 0;
+  }
+  87.5%,
+  100% {
+    background-position: 100% 0;
+  }
+}
+.rainbow-clear {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+.rainbow-clear path {
+  stroke-dasharray: 1;
+  animation: rainbow-trail 0.9s ease-out forwards;
+}
+.rainbow-clear circle {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: rainbow-ring 0.9s ease-out forwards;
+}
+@keyframes rainbow-trail {
+  0% {
+    stroke-dashoffset: 1;
+    opacity: 0;
+  }
+  35% {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+  100% {
+    stroke-dashoffset: -1;
+    opacity: 0;
+  }
+}
+@keyframes rainbow-ring {
+  0% {
+    scale: 0.2;
+    opacity: 1;
+  }
+  100% {
+    scale: 2;
+    opacity: 0;
+  }
+}
+.orc-arrow {
+  position: absolute;
+  width: clamp(72px, 15vw, 104px);
+  height: 18px;
+  object-fit: contain;
+  transform-origin: 100% 50%;
+  filter: drop-shadow(0 2px 1px #20352c88);
+}
+.orc-hunt-archer {
+  left: 2%;
+  bottom: -12px;
+}
+
+/* Reserve room for the whole runner, including touch actions. The ordinary
+   room panel is intentionally roomier; this game needs its feet visible. */
+.world-dialog.world-runner-dialog {
+  max-height: 94dvh;
+}
+.world-dialog.world-runner-dialog > header {
+  padding: 10px 18px;
+}
+.world-runner-dialog > header small {
+  display: none;
+}
+.world-runner-dialog h2 {
+  margin: 0;
+  font-size: 24px;
+}
+.world-dialog.world-runner-dialog > header button {
+  min-height: 44px;
+  min-width: 44px;
+}
+.world-runner-dialog .world-dialog-body {
+  padding: 10px 18px 14px;
+}
+.element-runner .mini-score {
+  margin: 6px 0;
+}
+.element-runner .mini-score strong {
+  font-size: 16px;
+}
+.element-runner {
+  display: grid;
+  grid-template-rows: auto auto auto minmax(160px, 1fr) auto;
+  height: calc(94dvh - 96px);
+}
+.element-runner .runner-stage {
+  width: auto;
+  height: 100%;
+  max-width: 100%;
+  aspect-ratio: 6 / 7;
+}
+.element-runner > p[role="status"] {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+}
+
+/* A true opaque reading surface keeps the start/result copy legible even
+   when a brazier or carved pillar sits directly behind it. */
+.world-dialog .orc-hunt-start-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 360px;
+  padding: 24px;
+  border: 1px solid #baa67b80;
+  border-radius: 14px;
+  background: #101921;
+  color: #fff0cb;
+  box-shadow: 0 8px 32px #0008;
+}
+.orc-hunt-start-card span {
+  color: #f1e8d4;
+  line-height: 1.6;
+}
+
+/* A turn shows three separate moments: swap, matched-ball capture, then gravity.
+   Animate the icons, leaving their touch slots in a predictable grid. */
+.gem-board {
+  overflow: hidden;
+}
+.world-dialog .gem-cell:disabled {
+  opacity: 1;
+  filter: none;
+}
+.gem-cell img {
+  width: 100%;
+  height: 100%;
+  padding: 10%;
+}
+.gem-board[data-phase="swapping"] .gem-cell img {
+  transform: translate(
+    calc(var(--swap-x) * (100% + 5px)),
+    calc(var(--swap-y) * (100% + 5px))
+  );
+  transition: transform 180ms ease-in-out;
+}
+.gem-board[data-phase="falling"] .gem-cell {
+  overflow: visible;
+}
+.gem-board[data-phase="falling"] .gem-cell img {
+  position: relative;
+  z-index: 2;
+  animation: ball-fall 320ms cubic-bezier(0.22, 0.7, 0.3, 1.05) both;
+}
+.gem-cell[data-flash="true"] img {
+  animation: ball-capture 420ms ease-in both;
+}
+.gem-cell[data-flash="true"]::after {
+  content: "✦";
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  color: #fff5b3;
+  font-size: clamp(22px, 6vw, 40px);
+  text-shadow: 0 0 14px #ffe58b;
+  animation: match-spark 420ms ease-out both;
+  pointer-events: none;
+}
+.match-combo {
+  position: absolute;
+  z-index: 4;
+  left: 50%;
+  top: 42%;
+  translate: -50% -50%;
+  white-space: nowrap;
+  padding: 10px 18px;
+  border-radius: 30px;
+  border: 1px solid #ffe4a3;
+  background: #15353aee;
+  color: #fff0b4;
+  box-shadow: 0 5px 18px #00192380;
+  font-size: clamp(16px, 4vw, 24px);
+  font-weight: 750;
+  pointer-events: none;
+  animation: match-cheer 420ms ease-out both;
+}
+@keyframes ball-fall {
+  from {
+    transform: translateY(calc(var(--fall) * -1 * (100% + 5px)));
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+@keyframes ball-capture {
+  0% {
+    scale: 1;
+    filter: brightness(1);
+  }
+  35% {
+    scale: 1.22;
+    filter: brightness(1.8);
+  }
+  100% {
+    scale: 0;
+    opacity: 0;
+    filter: brightness(2);
+  }
+}
+@keyframes match-spark {
+  0% {
+    scale: 0.25;
+    opacity: 0;
+    rotate: -40deg;
+  }
+  40% {
+    scale: 1;
+    opacity: 1;
+  }
+  100% {
+    scale: 1.6;
+    opacity: 0;
+    rotate: 35deg;
+  }
+}
+@keyframes match-cheer {
+  from {
+    opacity: 0;
+    translate: -50% -25%;
+  }
+  30%,
+  75% {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+    translate: -50% -85%;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .gem-cell img,
+  .gem-cell::after,
+  .match-combo {
+    animation-duration: 1ms !important;
+    transition: none !important;
+  }
+}
+
+.world-dialog .orc-hunt-start-card {
+  cursor: pointer;
+  text-align: center;
+}
+.world-dialog .orc-hunt-start-card:hover {
+  background: #1c2d39;
+  border-color: #e5c794;
+}
+.world-dialog .orc-hunt-start-card:focus-visible {
+  outline: 3px solid #f5d590;
+  outline-offset: 4px;
+}

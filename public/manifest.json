@@ -1,0 +1,22 @@
+{
+  "short_name": "Masyn Nay",
+  "name": "Masyn Nay \u2014 Portfolio",
+  "icons": [
+    {
+      "src": "brand/Icon-192.png",
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "brand/Icon-512.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "any maskable"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#122c2e",
+  "background_color": "#101c22"
+}

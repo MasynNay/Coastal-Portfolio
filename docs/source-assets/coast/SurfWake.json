@@ -1,0 +1,5 @@
+{
+  "name": "SurfWake",
+  "path": "docs/source-assets/coast/SurfWake.png",
+  "prompt": "Create a polished 2D game VFX sprite sheet for a little surfboard wake on a hand-painted detailed coastal pixel-art town. EXACTLY EIGHT evenly spaced columns, ONE row, eight distinct chronological looping frames. Transparent background. Each cell shows only a small soft turquoise swell with delicate broken ivory seafoam ripples behind a moving surfboard that is NOT drawn. Top-down view, travel is straight DOWN in the image: rounded leading water mound near bottom-center, tapered translucent wake spreading gently upward behind. Subtle ebbing scalloped foam, beautiful clean organically painted blue-green water, gentle glints, no giant cartoon crescent, no dark outline, no circles or dots, no visible rectangular canvas, no board, no person, no splashes in front, no text. Keep exact position and scale identical in every frame. Eight complete isolated wake frames, generous empty gutters. Match detailed cozy GBA-inspired world artwork, readable small on ocean. Portrait-shaped wake within each cell, 3:4 proportion. Not photorealistic."
+}

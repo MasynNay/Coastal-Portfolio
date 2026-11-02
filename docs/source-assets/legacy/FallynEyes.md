@@ -1,0 +1,3 @@
+Built-in image-generation tool. Input: family-fallyn-walk.png. The original brown-eyed source is retained as the identity reference; the green-eyed sheet supplies current walking/running frames.
+
+Precise localized color edit of this supplied character sprite sheet. Change ONLY the brown irises to natural forest green irises in every pose where an eye is visible. Preserve the dark pupils and white highlights. Do not change ANY face shape, eye size, hairstyle, head/body proportions, outfit, body pose, direction, grid spacing, cell count, image crop or background transparency. This is Fallyn's original artwork; keep it exactly recognizable. Do not redraw or restyle the character. Only the iris hue changes from brown to forest green.
