@@ -146,14 +146,15 @@
 }
 .desktop-window {
   position: absolute;
-  top: var(--window-y);
-  left: var(--window-x);
-  width: min(720px, calc(100% - 30px - var(--window-x)));
-  height: min(580px, calc(100% - 110px - var(--window-y)));
+  top: var(--window-y, var(--window-start-y));
+  left: var(--window-x, var(--window-start-x));
+  /* Position must not change size while a title bar is being dragged. */
+  width: min(720px, calc(100% - 24px));
+  height: min(580px, calc(100% - 110px));
   min-width: 340px;
   min-height: 260px;
   max-width: calc(100% - 20px);
-  max-height: calc(100% - 110px - var(--window-y));
+  max-height: calc(100% - 110px);
   border: 1px solid #dde1e325;
   border-radius: 14px;
   background: #181c1eed;
@@ -189,6 +190,7 @@
   resize: none;
 }
 .desktop-window-titlebar {
+  position: relative;
   height: 45px;
   min-height: 45px;
   display: flex;
@@ -204,6 +206,18 @@
 }
 .desktop-window-titlebar:active {
   cursor: grabbing;
+}
+.desktop-window-titlebar:focus-visible {
+  outline: 2px solid #8eb3a0;
+  outline-offset: -3px;
+}
+.window-dragging {
+  /* Embedded games must not steal a captured drag as it crosses the player. */
+  -webkit-user-select: none;
+  user-select: none;
+}
+.window-dragging iframe {
+  pointer-events: none;
 }
 .desktop-window-titlebar > span {
   display: flex;
@@ -609,20 +623,8 @@
     top: 25px;
     right: 20px;
   }
-  .desktop-window,
-  .desktop-window.window-maximized {
-    top: 18px;
-    left: 12px;
-    width: calc(100% - 24px) !important;
-    height: calc(100% - 120px) !important;
-    min-width: 0;
-    max-width: none;
-    max-height: none;
-    resize: none;
-  }
   .desktop-window-titlebar {
     padding: 0 12px;
-    cursor: default;
   }
   .desktop-window-titlebar .desktop-window-mode {
     display: none;
@@ -1109,15 +1111,14 @@
   }
 }
 
-/* Phones and touch tablets use contained app windows rather than tiny draggable
-   resize handles. The iMac frame stays; every app remains reachable in the dock. */
+/* Touch windows leave room to drag their title bars. Contents scroll normally;
+   only the title bar owns the gesture. Maximize remains available for reading. */
 @media (any-pointer: coarse), (max-width: 1024px) {
-  .desktop-window,
-  .desktop-window.window-maximized {
-    top: 10px;
-    left: 10px;
-    width: calc(100% - 20px) !important;
-    height: calc(100% - 105px) !important;
+  .desktop-window {
+    top: var(--window-y, 18px);
+    left: var(--window-x, 16px);
+    width: min(720px, calc(100% - 32px));
+    height: min(580px, calc(100% - 175px));
     min-width: 0;
     min-height: 0;
     max-width: none;
@@ -1126,12 +1127,29 @@
     backdrop-filter: none;
     background: #181e23fa;
   }
+  .desktop-window.window-maximized {
+    top: 10px;
+    left: 10px;
+    width: calc(100% - 20px) !important;
+    height: calc(100% - 105px) !important;
+  }
   .desktop-window-titlebar {
     min-height: 52px;
     height: 52px;
     padding: 0 8px;
     gap: 3px;
-    cursor: default;
+    cursor: grab;
+  }
+  .desktop-window-titlebar::after {
+    content: "";
+    position: absolute;
+    bottom: 4px;
+    left: calc(50% - 18px);
+    width: 36px;
+    height: 3px;
+    border-radius: 3px;
+    background: #a3b8bf60;
+    pointer-events: none;
   }
   .desktop-window-titlebar .desktop-window-mode {
     display: none;
@@ -1236,10 +1254,12 @@
   .desktop-menubar {
     height: 36px;
   }
-  .desktop-window,
   .desktop-window.window-maximized {
     top: 4px;
     height: calc(100% - 80px) !important;
+  }
+  .desktop-window:not(.window-maximized) {
+    height: min(580px, calc(100% - 125px));
   }
   .desktop-dock {
     bottom: 4px;

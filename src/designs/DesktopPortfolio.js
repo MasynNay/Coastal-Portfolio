@@ -24,6 +24,7 @@ import { profile } from "../data/resume";
 import { MacMenu, AboutMac } from "./MacMenu";
 import { GamesApp, GamePlayer, PhotosApp } from "./MacApps";
 import TypingTest from "../typing/TypingTest";
+import useWindowDrag from "../hooks/useWindowDrag";
 import "./glass.css";
 import "./desktop.css";
 
@@ -50,28 +51,37 @@ export function DesktopPortfolio() {
     return () => clearInterval(timer);
   }, []);
 
+  const nextLayer = (current) =>
+    Math.max(0, ...current.map((item) => item.layer)) + 1;
+
+  function openWindow(entry) {
+    setWindows((current) => {
+      const next = { ...entry, minimized: false, layer: nextLayer(current) };
+      return current.some((item) => item.id === entry.id)
+        ? current.map((item) => (item.id === entry.id ? next : item))
+        : [...current, next];
+    });
+    setActive(entry.id);
+  }
+
   function openApp(id) {
-    setWindows((current) => [
-      ...current.filter((window) => window.id !== id),
-      { id, minimized: false },
-    ]);
-    setActive(id);
+    openWindow({ id });
   }
 
   function openGame(game) {
     const id = `game-${game.id}`;
-    setWindows((current) => [
-      ...current.filter((window) => window.id !== id),
-      { id, game, minimized: false },
-    ]);
-    setActive(id);
+    openWindow({ id, game });
   }
 
   function focusApp(id) {
-    setWindows((current) => [
-      ...current.filter((window) => window.id !== id),
-      ...current.filter((window) => window.id === id),
-    ]);
+    // Raise with z-index instead of moving DOM nodes. Reordering a captured
+    // title bar in the DOM can cancel a finger drag on a background window.
+    setWindows((current) => {
+      const layer = nextLayer(current);
+      return current.map((item) =>
+        item.id === id ? { ...item, layer } : item,
+      );
+    });
     setActive(id);
   }
 
@@ -155,7 +165,7 @@ export function DesktopPortfolio() {
                   <span>GitHub ↗</span>
                 </a>
               </div>
-              {windows.map((window, index) => (
+              {windows.map((window) => (
                 <DesktopWindow
                   key={window.id}
                   app={
@@ -169,7 +179,7 @@ export function DesktopPortfolio() {
                   }
                   minimized={window.minimized}
                   active={active === window.id}
-                  stack={index}
+                  stack={window.layer}
                   onFocus={() => focusApp(window.id)}
                   onClose={() => closeApp(window.id)}
                   onMinimize={() => minimizeApp(window.id)}
@@ -323,7 +333,7 @@ function DesktopWindow({
   onClose,
   onMinimize,
 }) {
-  const [position, setPosition] = useState({
+  const initialPosition = {
     x:
       app.id === "typing"
         ? 40
@@ -332,10 +342,13 @@ function DesktopWindow({
       app.id === "typing"
         ? 24
         : 42 + apps.findIndex((item) => item.id === app.id) * 22,
-  });
+  };
   const [maximized, setMaximized] = useState(false);
-  const drag = useRef(null);
   const windowRef = useRef(null);
+  const { position, dragging, titlebarProps } = useWindowDrag(
+    windowRef,
+    maximized || minimized,
+  );
 
   useEffect(() => {
     if (
@@ -346,41 +359,6 @@ function DesktopWindow({
       windowRef.current?.focus({ preventScroll: true });
   }, [active, minimized]);
 
-  function startDrag(event) {
-    if (
-      maximized ||
-      event.button !== 0 ||
-      event.target.closest("button") ||
-      window.matchMedia("(any-pointer: coarse), (max-width: 1024px)").matches
-    )
-      return;
-    onFocus();
-    event.currentTarget.setPointerCapture(event.pointerId);
-    drag.current = {
-      x: event.clientX - position.x,
-      y: event.clientY - position.y,
-    };
-  }
-
-  function moveDrag(event) {
-    if (!drag.current) return;
-    const bounds = windowRef.current.getBoundingClientRect();
-    const workspace = windowRef.current.parentElement.getBoundingClientRect();
-    setPosition({
-      x: Math.max(
-        0,
-        Math.min(
-          event.clientX - drag.current.x,
-          workspace.width - Math.min(bounds.width, workspace.width),
-        ),
-      ),
-      y: Math.max(
-        0,
-        Math.min(event.clientY - drag.current.y, workspace.height - 160),
-      ),
-    });
-  }
-
   return (
     <section
       ref={windowRef}
@@ -388,13 +366,17 @@ function DesktopWindow({
       aria-label={app.title}
       tabIndex={-1}
       hidden={minimized}
-      className={`desktop-window ${active ? "window-active" : ""} ${maximized ? "window-maximized" : ""}`}
+      className={`desktop-window ${active ? "window-active" : ""} ${maximized ? "window-maximized" : ""} ${dragging ? "window-dragging" : ""}`}
       style={{
-        "--window-x": `${position.x}px`,
-        "--window-y": `${position.y}px`,
+        "--window-start-x": `${initialPosition.x}px`,
+        "--window-start-y": `${initialPosition.y}px`,
+        "--window-x": position ? `${position.x}px` : undefined,
+        "--window-y": position ? `${position.y}px` : undefined,
         zIndex: 10 + stack,
       }}
-      onPointerDown={onFocus}
+      onPointerDown={() => {
+        if (!active) onFocus();
+      }}
       onFocusCapture={() => {
         if (!active) onFocus();
       }}
@@ -407,17 +389,10 @@ function DesktopWindow({
     >
       <div
         className="desktop-window-titlebar"
-        onPointerDown={startDrag}
-        onPointerMove={moveDrag}
-        onPointerUp={() => {
-          drag.current = null;
-        }}
-        onPointerCancel={() => {
-          drag.current = null;
-        }}
-        onLostPointerCapture={() => {
-          drag.current = null;
-        }}
+        role="toolbar"
+        tabIndex={0}
+        aria-label={`${app.title} title bar. Drag to move, or use arrow keys when focused.`}
+        {...titlebarProps}
         onDoubleClick={(event) => {
           if (!event.target.closest("button")) setMaximized(!maximized);
         }}

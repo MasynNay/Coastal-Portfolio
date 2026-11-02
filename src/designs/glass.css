@@ -1059,6 +1059,8 @@
   .glass-site .navbar-toggler {
     min-width: 44px;
     min-height: 44px;
+    background: #ffffff0c;
+    border-color: #dbece450;
   }
   .glass-site .glass-skills-panel {
     grid-template-columns: repeat(2, minmax(0, 1fr));

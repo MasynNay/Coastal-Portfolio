@@ -6,7 +6,7 @@ import BrandMark from "./BrandMark";
 import nav1 from "../assets/images/nav1.svg";
 import nav2 from "../assets/images/nav2.svg";
 import nav3 from "../assets/images/nav3.svg";
-import { Apple, Controller } from "react-bootstrap-icons";
+import { Apple, Controller, List, X } from "react-bootstrap-icons";
 
 export const NavBar = ({ glass = false }) => {
   const [activeLink, setActiveLink] = useState("home");
@@ -90,7 +90,11 @@ export const NavBar = ({ glass = false }) => {
           label="Toggle navigation"
           aria-expanded={expanded}
         >
-          <span className="navbar-toggler-icon"></span>
+          {expanded ? (
+            <X className="navbar-menu-icon" size={28} aria-hidden="true" />
+          ) : (
+            <List className="navbar-menu-icon" size={28} aria-hidden="true" />
+          )}
         </Navbar.Toggle>
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto">
