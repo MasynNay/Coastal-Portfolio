@@ -6,6 +6,20 @@ import SpritePose from "./SpritePose";
 
 // These IDs are also used to validate saved discoveries and count the HUD badge.
 export const islandSecrets = [
+  {
+    id: "lodge-arcade",
+    title: "Windfall Arcade",
+    home: "lodge",
+    kind: "Room secret",
+    detail: "A cartridge library hidden in the Lodge's two treasure chests.",
+  },
+  {
+    id: "love-letter",
+    title: "A Message For My Love",
+    home: "home",
+    kind: "Room secret",
+    detail: "A personal letter waiting in the About room's blue light.",
+  },
   ...Object.entries(mailboxLetters).map(([home, letter]) => ({
     id: `mail-${home}`,
     title: letter.title,

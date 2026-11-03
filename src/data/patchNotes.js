@@ -2,6 +2,17 @@
 // the preceding production commit, rather than fictional in-game release notes.
 const patchNotes = [
   {
+    version: "1.0.9",
+    date: "November 3, 2026",
+    previousCommit: "31eed2e",
+    changes: [
+      "Windfall Lodge’s back-right treasure chests now open all eighteen cartridges, with the same game player, controls and ROM downloads as Mac Mode. Return to the shelf to choose another game.",
+      "Mi Shell can reveal A Message For My Love by throwing dollar bills toward the About room’s back-right blue light. Use Q or the on-screen ability button, then interact with the light to read Masyn’s letter. The discovery is saved on this device.",
+      "About this Mac now says About 150 lbs of FAT32 and Dad jokes rendered in 4K.",
+      "Shared the cartridge shelf and player between Mac Mode and room games so controls and future library changes stay consistent.",
+    ],
+  },
+  {
     version: "1.0.8",
     date: "November 3, 2026",
     previousCommit: "fb276d0",

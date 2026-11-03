@@ -1,0 +1,91 @@
+/* Shared cartridge player. Mac windows and room dialogs provide its height;
+   the iframe and controls divide that space without an external page scroll. */
+.mac-game-player {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 320px;
+  padding: 16px;
+  gap: 12px;
+  color: #e6f0eb;
+}
+.mac-game-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+}
+.mac-game-toolbar-actions {
+  display: flex;
+  flex-wrap: wrap;
+  min-width: 0;
+  align-items: center;
+  gap: 8px;
+}
+.mac-game-toolbar-actions button[aria-label="Play fullscreen"] {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.mac-game-toolbar > button,
+.mac-game-toolbar-actions > button,
+.mac-controls > button {
+  padding: 8px 12px;
+  border: 1px solid #b7d5ca55;
+  border-radius: 9px;
+  background: #355d60;
+  color: #eff7ee;
+}
+.mac-game-toolbar > a {
+  color: #b5e3d2;
+  font-size: 12px;
+}
+.mac-controls {
+  border: 1px solid #b5d8c8;
+  border-radius: 12px;
+  background: #243d46;
+}
+.mac-game-player .mac-controls {
+  margin: 0;
+  padding: 10px 12px;
+}
+.mac-game-player .mac-controls p {
+  font-size: 12px;
+  line-height: 1.5;
+  margin: 6px 0;
+}
+.mac-game-player iframe {
+  flex: 1;
+  width: 100%;
+  height: auto;
+  min-height: 160px;
+  margin: 0;
+  border: 0;
+  border-radius: 12px;
+  background: #0d171c;
+}
+.mac-game-player.mac-game-player-expanded {
+  min-height: 0;
+  padding: 10px;
+  gap: 8px;
+}
+.mac-game-player-expanded .mac-game-toolbar {
+  justify-content: space-between;
+  gap: 8px;
+  flex-shrink: 0;
+}
+.mac-game-player-expanded .mac-controls {
+  flex-shrink: 0;
+  max-height: 45%;
+  overflow: auto;
+}
+.mac-game-player-expanded iframe {
+  min-height: 0;
+  height: 0;
+}
+.mac-game-player-expanded iframe:fullscreen {
+  width: 100vw;
+  height: 100dvh;
+  border-radius: 0;
+}

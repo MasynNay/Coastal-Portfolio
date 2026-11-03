@@ -109,8 +109,8 @@ export function AboutMac({ onClose, returnFocusRef }) {
   const specs = [
     ["Processor", "Powered by caffeine"],
     ["Memory", "About the same as Dory the fish"],
-    ["Storage", "about 150 lbs of FAT32"],
-    ["Graphics", "An overactive imagination"],
+    ["Storage", "About 150 lbs of FAT32"],
+    ["Graphics", "Dad jokes rendered in 4K"],
     ["System", "MasynOS · Always learning"],
     ["Serial number", "MN-MTNDEW-REPEAT"],
   ];

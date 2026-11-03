@@ -9,6 +9,7 @@ Layouts read these files instead of maintaining their own copies of facts.
 | `projects.js` | Project titles, descriptions, screenshots, demos and source links |
 | `games.js` | Shared ROM/island cartridge catalog and controls |
 | `roms.json` | Approved archive metadata, integrity hashes and stable save IDs |
+| `loveLetter.js` | Masyn’s hidden personal letter to Mi Shell |
 | `friendsTrivia.json` | Questions and choices for the About room's trivia |
 | `photos.js` | Public shared photo album selection |
 | `patchNotes.js` | Actual dated release changes and comparison baselines |

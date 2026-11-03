@@ -1,0 +1,32 @@
+/* A quiet, readable letter inside the existing accessible world dialog. */
+.love-letter {
+  max-width: 660px;
+  margin: 0 auto;
+  padding: clamp(18px, 4vw, 36px);
+  border: 1px solid #d4b4a94a;
+  border-radius: 18px;
+  background: linear-gradient(145deg, #28413f, #232f36);
+  color: #f4ebe2;
+  font-family: Georgia, serif;
+}
+.love-letter p {
+  text-align: left;
+  line-height: 1.9;
+  font-size: clamp(15px, 2.4vw, 17px);
+  margin: 0 0 20px;
+}
+.love-letter .love-letter-greeting {
+  font-size: 23px;
+}
+.love-letter-heart {
+  display: block;
+  text-align: center;
+  color: #e9b2ae;
+  font-size: 28px;
+  margin-bottom: 18px;
+}
+.love-letter footer {
+  text-align: right;
+  font-style: italic;
+  font-size: 20px;
+}

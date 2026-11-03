@@ -67,6 +67,8 @@ test("About this Mac opens as a modal and returns focus to the system trigger wh
   expect(dialog.getAttribute("aria-modal")).toBe("true");
   expect(document.activeElement).toBe(dialog);
   expect(dialog.textContent).toContain("MN-MTNDEW-REPEAT");
+  expect(dialog.textContent).toContain("About 150 lbs of FAT32");
+  expect(dialog.textContent).toContain("Dad jokes rendered in 4K");
   key("Tab");
   expect(document.activeElement.getAttribute("aria-label")).toBe(
     "Close About this Mac",

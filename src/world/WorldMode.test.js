@@ -172,3 +172,35 @@ test("the goose couple has one menu and both partners remain selected after feed
   );
   expect(host.textContent).toContain("Play with Haymitch and Lenore Dove");
 });
+
+test("the Lodge library opens all cartridges and unloads a player when returning to the shelf", () => {
+  act(() => callbacks.onEvent({ type: "room-arcade", id: "lodge-arcade" }));
+  const panel = host.querySelector('[aria-label="Windfall Arcade"]');
+  expect(panel.querySelectorAll(".game-cartridge")).toHaveLength(18);
+  expect(game.freeze).toHaveBeenLastCalledWith(true);
+  act(() => panel.querySelector(".game-cartridge").click());
+  expect(panel.querySelector("iframe").getAttribute("src")).toContain(
+    "/emulator/player.html?game=",
+  );
+  act(() => panel.querySelector(".room-arcade-return button").click());
+  expect(panel.querySelector("iframe")).toBeNull();
+  expect(panel.querySelectorAll(".game-cartridge")).toHaveLength(18);
+  act(() => panel.querySelector('[aria-label="Close panel"]').click());
+  expect(game.freeze).toHaveBeenLastCalledWith(false);
+});
+
+test("the offering announces the saved discovery, and the letter opens only on interaction", () => {
+  act(() => callbacks.onEvent({ type: "room-unlocked", id: "love-letter" }));
+  expect(host.querySelector(".world-dialog")).toBeNull();
+  expect(JSON.parse(localStorage.getItem("masyn-world-v1")).secrets).toContain(
+    "love-letter",
+  );
+  act(() => callbacks.onEvent({ type: "love-letter", id: "love-letter" }));
+  const panel = host.querySelector('[aria-label="A Message For My Love"]');
+  expect(panel.textContent).toContain(
+    "You are everything to me. I love you, always.",
+  );
+  expect(panel.textContent).toContain("— Masyn ♥");
+  act(() => panel.querySelector('[aria-label="Close panel"]').click());
+  expect(game.freeze).toHaveBeenLastCalledWith(false);
+});

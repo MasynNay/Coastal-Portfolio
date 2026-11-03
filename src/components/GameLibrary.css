@@ -1,0 +1,5 @@
+/* The shared shelf inherits its surrounding app/dialog typography. */
+.game-library {
+  padding: 24px;
+  color: #e6f0eb;
+}

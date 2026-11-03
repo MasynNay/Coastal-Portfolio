@@ -1,3 +1,5 @@
+import RoomArcade from "./RoomArcade";
+import LoveLetter from "./LoveLetter";
 import RomDownload from "../components/RomDownload";
 import { playWindSong } from "./WindStatue";
 import IslandGames from "./games/IslandGames";
@@ -200,6 +202,8 @@ function panelTitle(dialog) {
     "fishing-result": "A moment by the water",
     encounter: "A familiar encounter",
     trivia: "The one with the trivia",
+    "room-arcade": "Windfall Arcade",
+    "love-letter": "A Message For My Love",
   };
   if (dialog.type === "island-game") return gameTitles[dialog.id];
   if (dialog.type === "dog" || dialog.type === "duck")
@@ -273,6 +277,8 @@ export default function WorldMode() {
     [toast, setToast] = useState(""),
     [error, setError] = useState(null),
     [progress, setProgress] = useState(readProgress);
+  // Saved unlocks seed the simulation once; new discoveries must not restart it.
+  const initialSecrets = useRef(progress.secrets);
   const ability =
     status.character === "masyn" && status.outfit === "panem"
       ? characterAbility(status.character, status.outfit, status.surfing)
@@ -336,6 +342,7 @@ export default function WorldMode() {
     document.title = "Game Mode · Masyn Nay";
     try {
       engine.current = createWorld(host.current, {
+        secrets: initialSecrets.current,
         onStatus: setStatus,
         onCollection: setCaught,
         onAquariums: setAquariums,
@@ -365,6 +372,20 @@ export default function WorldMode() {
             }));
         },
         onEvent: (event) => {
+          if (
+            ["room-unlocked", "room-arcade", "love-letter"].includes(event.type)
+          ) {
+            setProgress((p) => ({
+              ...p,
+              secrets: [...new Set([...p.secrets, event.id])],
+            }));
+            if (event.type === "room-unlocked") {
+              announce(
+                "A Message For My Love is waiting at the blue light. ♥",
+              );
+              return;
+            }
+          }
           if (event.type === "wind-song") {
             playWindSong();
             announce("A little melody carries across the sea. ♫");
@@ -1029,18 +1050,24 @@ export default function WorldMode() {
       )}
       {dialog && (
         <Dialog
-          wide={dialog.type === "axolotl-game"}
+          wide={dialog.type === "axolotl-game" || dialog.type === "room-arcade"}
           className={
-            dialog.type === "axolotl-game"
-              ? "world-arcade-dialog"
-              : dialog.type === "island-game" && dialog.id === "chimes"
-                ? "world-runner-dialog"
-                : ""
+            dialog.type === "room-arcade"
+              ? "room-arcade-dialog"
+              : dialog.type === "axolotl-game"
+                ? "world-arcade-dialog"
+                : dialog.type === "island-game" && dialog.id === "chimes"
+                  ? "world-runner-dialog"
+                  : ""
           }
           title={panelTitle(dialog)}
           onClose={() => setDialog(null)}
         >
-          {dialog.type === "island-game" ? (
+          {dialog.type === "room-arcade" ? (
+            <RoomArcade />
+          ) : dialog.type === "love-letter" ? (
+            <LoveLetter />
+          ) : dialog.type === "island-game" ? (
             <IslandGames
               id={dialog.id}
               character={status.character}

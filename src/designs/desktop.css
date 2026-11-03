@@ -1037,82 +1037,21 @@
     opacity: 1;
   }
 }
-.mac-games,
+/* Maximized game windows give the shared player the full app body. */
+.window-large-game .desktop-window-body {
+  min-height: 0;
+  overflow: hidden;
+}
 .mac-photos {
   padding: 24px;
   color: #e6f0eb;
 }
-.mac-games > button,
-.mac-controls button,
 .mac-photos button {
   padding: 9px 13px;
   border-radius: 10px;
   border: 1px solid #ffffff35;
   background: #426c76;
   color: white;
-}
-.mac-games iframe {
-  width: 100%;
-  height: min(52vh, 450px);
-  border: 0;
-  border-radius: 12px;
-  margin-top: 12px;
-  background: #0d171c;
-}
-/* These two canvas games use the whole maximized app body rather than a fixed
-   450px iframe buried below an open controls panel. The viewer sizes itself
-   to this frame, including when the user restores or resizes the window. */
-.window-large-game .desktop-window-body {
-  min-height: 0;
-  overflow: hidden;
-}
-.mac-game-player-expanded {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  height: 100%;
-  min-height: 0;
-  padding: 12px;
-}
-.mac-game-player-expanded .mac-game-toolbar {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 8px;
-  flex-shrink: 0;
-}
-.mac-game-toolbar-actions {
-  display: flex;
-  flex-wrap: wrap;
-  min-width: 0;
-  align-items: center;
-  gap: 8px;
-}
-.mac-game-toolbar-actions button[aria-label="Play fullscreen"] {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-}
-.mac-game-player-expanded .mac-controls {
-  flex-shrink: 0;
-  max-height: 45%;
-  overflow: auto;
-  margin: 0;
-}
-.mac-game-player.mac-game-player-expanded iframe {
-  flex: 1;
-  min-height: 0;
-  height: 0;
-  margin: 0;
-}
-.mac-controls {
-  border: 1px solid #b5d8c8;
-  border-radius: 12px;
-  padding: 15px;
-  margin: 12px 0;
-  background: #243d46;
 }
 .mac-photos img {
   display: block;
@@ -1369,62 +1308,4 @@
   .desktop-dock {
     scrollbar-color: #87afae transparent;
   }
-}
-
-/* A game launches beside the cartridge library, in its own bounded app window.
-   Controls and player share the available height rather than sitting below a
-   long cartridge list. The player can still expand itself to fullscreen. */
-.desktop-window .mac-game-player {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  min-height: 320px;
-  padding: 16px;
-  gap: 12px;
-}
-.mac-game-toolbar {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 12px;
-}
-.mac-game-toolbar > button,
-.mac-game-toolbar-actions > button,
-.mac-controls > button {
-  padding: 8px 12px;
-  border: 1px solid #b7d5ca55;
-  border-radius: 9px;
-  background: #355d60;
-  color: #eff7ee;
-}
-.mac-game-toolbar > a {
-  color: #b5e3d2;
-  font-size: 12px;
-}
-.mac-game-player .mac-controls {
-  margin: 0;
-  padding: 10px 12px;
-}
-.mac-game-player .mac-controls p {
-  font-size: 12px;
-  line-height: 1.5;
-  margin: 6px 0;
-}
-.mac-game-player iframe {
-  flex: 1;
-  width: 100%;
-  height: auto;
-  min-height: 160px;
-  margin: 0;
-}
-/* Override the ordinary player minimum only for the expanded canvas windows. */
-.desktop-window .mac-game-player.mac-game-player-expanded {
-  min-height: 0;
-  padding: 10px;
-  gap: 8px;
-}
-.mac-game-player-expanded iframe:fullscreen {
-  width: 100vw;
-  height: 100dvh;
-  border-radius: 0;
 }

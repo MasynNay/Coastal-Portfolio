@@ -1,3 +1,4 @@
+import { createRoomInteractions, isLoveOffering } from "./RoomInteractions";
 import { startWindSong } from "./WindStatue";
 import { restSpots, createRestSpots } from "./RestSpots";
 import { gameTitles } from "./games/GameLocations";
@@ -74,6 +75,7 @@ export function createWorld(host, callbacks) {
   const scene = createCanvasScene(host, () => {
     if (!disposed) requestDraw();
   });
+  const roomInteractions = createRoomInteractions(callbacks.secrets);
   let room = null,
     character = "masyn",
     outfit = null,
@@ -385,6 +387,7 @@ export function createWorld(host, callbacks) {
   function points() {
     if (room)
       return [
+        ...roomInteractions.points(room),
         {
           id: "exit",
           ...roomExit,
@@ -970,6 +973,8 @@ export function createWorld(host, callbacks) {
         worldTime,
         !room,
       );
+      if (isLoveOffering(room, actor, abilityEffect))
+        abilityEffect.revealsLove = true;
       if (abilityEffect?.kind === "trident")
         oceanPraise.summon({ ...actor, kind: "trident", room }, worldTime);
       if (abilityEffect?.target) direction = abilityEffect.direction;
@@ -1019,6 +1024,8 @@ export function createWorld(host, callbacks) {
     if (saluting && abilityEffect && !frozen)
       abilityEffect.started += dt * 1000;
     if (abilityEffect && !abilityActive(abilityEffect, worldTime)) {
+      if (abilityEffect.revealsLove && roomInteractions.revealLove())
+        callbacks.onEvent?.({ type: "room-unlocked", id: "love-letter" });
       cancelAbility();
       dirty = true;
     }

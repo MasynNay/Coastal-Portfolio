@@ -1003,3 +1003,66 @@ test("Panem Q pauses a bicycle in place and resumes its route without skipping t
     game.dispose();
   }
 });
+
+test("Mi Shell's completed offering reveals a persistent, reopenable room interaction", async () => {
+  const { loveLight } = require("./RoomInteractions");
+  const onEvent = jest.fn();
+  const game = createWorld(document.createElement("div"), { onEvent });
+  try {
+    await Promise.resolve();
+    frame(16);
+    await game.enter("home");
+    game.setCharacter("mi-shell");
+    mockScene.hit = () => ({ x: loveLight.x, z: loveLight.z });
+    mockScene.canvas.dispatchEvent(
+      new MouseEvent("pointerdown", { button: 0 }),
+    );
+    frame(0);
+    for (let i = 0; i < 100; i++) frame(50);
+    onEvent.mockClear();
+    game.ability();
+    frame(100);
+    expect(onEvent).not.toHaveBeenCalledWith(
+      expect.objectContaining({ type: "room-unlocked" }),
+    );
+    for (let i = 0; i < 38; i++) frame(50);
+    expect(onEvent).toHaveBeenCalledWith({
+      type: "room-unlocked",
+      id: "love-letter",
+    });
+    game.interact();
+    expect(onEvent).toHaveBeenCalledWith(
+      expect.objectContaining({ type: "love-letter" }),
+    );
+    game.ability();
+    for (let i = 0; i < 38; i++) frame(50);
+    expect(
+      onEvent.mock.calls.filter(([event]) => event.type === "room-unlocked"),
+    ).toHaveLength(1);
+  } finally {
+    game.dispose();
+  }
+});
+
+test("the Lodge chests open the cartridge library", async () => {
+  const { lodgeChests } = require("./RoomInteractions");
+  const onEvent = jest.fn();
+  const game = createWorld(document.createElement("div"), { onEvent });
+  try {
+    await Promise.resolve();
+    frame(16);
+    await game.enter("lodge");
+    mockScene.hit = () => lodgeChests;
+    mockScene.canvas.dispatchEvent(
+      new MouseEvent("pointerdown", { button: 0 }),
+    );
+    frame(0);
+    for (let i = 0; i < 100; i++) frame(50);
+    game.interact();
+    expect(onEvent).toHaveBeenCalledWith(
+      expect.objectContaining({ type: "room-arcade", id: "lodge-arcade" }),
+    );
+  } finally {
+    game.dispose();
+  }
+});

@@ -1,0 +1,27 @@
+/* The room uses the same shelf/player as Mac Mode within the world's modal. */
+.world-dialog.room-arcade-dialog {
+  width: min(1180px, 100%);
+}
+.room-arcade-dialog .world-dialog-body {
+  padding: 16px;
+}
+.room-arcade-dialog .game-library {
+  padding: 8px;
+}
+.room-arcade-return {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+.room-arcade-return h3 {
+  margin: 0;
+}
+.room-cartridge-player {
+  height: min(60dvh, 600px);
+  min-height: 280px;
+}
+.room-arcade-dialog .mac-game-player {
+  padding: 0;
+}
