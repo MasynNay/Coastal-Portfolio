@@ -880,7 +880,7 @@ export function createWorld(host, callbacks) {
       callbacks.onEvent?.({
         type: "notice",
         message: result.count
-          ? "Three little visitors fell from the branches! Press E nearby to catch them."
+          ? "Three little visitors fell from the branches! Move close to a bug, then press E or tap its Catch action."
           : result.reason,
       });
       publish();

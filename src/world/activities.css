@@ -119,19 +119,62 @@
 .world-dialog.world-dialog-wide {
   width: min(1080px, 100%);
 }
+.world-collection-dialog {
+  min-width: 0;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+.world-collection-dialog .world-dialog-body,
+.spider-home,
+.aquariums {
+  min-width: 0;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+.spider-home > p,
+.aquariums > p {
+  text-align: left;
+}
 .habitat-grid,
 .aquarium-grid {
   display: grid;
-  grid-template-columns: 1fr;
+  /* An automatic grid minimum let fixed-height tanks force the entire article
+     wider than a phone. The track and article must both be allowed to shrink. */
+  grid-template-columns: minmax(0, 1fr);
+  min-width: 0;
   gap: 24px;
   margin: 22px 0;
 }
 .habitat-grid article,
 .aquarium-grid article {
+  min-width: 0;
+  max-width: 100%;
   background: #1c3539;
   padding: 14px;
   border-radius: 18px;
   border: 1px solid #b9d1b52a;
+  text-align: center;
+}
+.habitat-grid article p,
+.aquarium-grid article p {
+  text-align: center;
+}
+.collection-toolbar {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin-bottom: 16px;
+}
+.world-dialog .collection-toolbar button {
+  min-width: 0;
+  min-height: 44px;
+  padding: 10px 8px;
+  margin: 0;
+  border: 1px solid #d9edda30;
+  border-radius: 9px;
+  background: #233b3e;
+  color: #e1e7de;
+  font-size: 13px;
 }
 .habitat-grid h3 {
   margin: 15px 0 8px;
@@ -140,11 +183,24 @@
   font-size: 13px;
   color: #bfd0c9;
 }
+.habitat-view {
+  position: relative;
+  width: min(100%, 72dvh);
+  margin: auto;
+}
+.habitat-view.aquatic-view {
+  width: min(100%, 78dvh);
+}
+.habitat-view.is-close {
+  width: min(100%, 96dvh);
+}
 .spider-habitat,
 .aquarium-tank {
   position: relative;
   display: block;
-  width: min(100%, 72dvh);
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
   height: auto;
   aspect-ratio: 3 / 2;
   margin: auto;
@@ -157,7 +213,6 @@
   isolation: isolate;
 }
 .spider-habitat.is-close {
-  width: min(100%, 96dvh);
   height: auto;
   cursor: zoom-out;
 }
@@ -199,18 +254,57 @@
 .is-paused .tank-bubble {
   animation-play-state: paused;
 }
-.habitat-zoom {
+.habitat-view button.habitat-zoom,
+.habitat-view button.habitat-release {
   position: absolute;
-  right: 12px;
   bottom: 12px;
   z-index: 2;
   background: #10292ddd;
   border: 1px solid #d8e8d455;
   border-radius: 30px;
-  padding: 6px 12px;
+  padding: 6px 8px;
   font-size: 11px;
+  /* Both controls always occupy identical boxes, including the longer label
+     shown while inspecting. On phones they share the available width evenly. */
+  box-sizing: border-box;
+  width: min(150px, calc(50% - 18px));
+  height: 44px;
+  min-height: 44px;
+  display: grid;
+  place-items: center;
+  line-height: 1.35;
+  text-align: center;
   color: #e7f1e2;
-  pointer-events: none;
+}
+.habitat-zoom {
+  right: 12px;
+}
+.habitat-view button.habitat-release {
+  left: 12px;
+  cursor: pointer;
+}
+.habitat-actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 16px;
+}
+.world-confirmation-overlay {
+  position: fixed;
+  z-index: 100;
+}
+.world-dialog.release-confirmation {
+  width: min(420px, 100%);
+}
+.release-confirmation .activity-actions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-bottom: 0;
+}
+.release-confirmation .activity-actions button {
+  width: 100%;
+  min-width: 0;
+  height: 44px;
+  padding: 8px;
 }
 /* Explicit atlas positions keep the fourth pose inside the image, including
    paused/reduced-motion previews. The old endpoint could expose a blank cell. */
@@ -234,7 +328,14 @@
   display: flex;
   gap: 8px;
   overflow-x: auto;
+  max-width: 100%;
+  min-width: 0;
+  overscroll-behavior-x: contain;
   padding: 12px 0;
+}
+.collection-picker:focus-visible {
+  outline: 2px solid #b9d7a0;
+  outline-offset: 3px;
 }
 .collection-picker button {
   display: flex;
@@ -243,6 +344,27 @@
   flex: 0 0 90px;
   font-size: 11px;
   padding: 4px 8px !important;
+  min-width: 90px;
+  overflow-wrap: anywhere;
+}
+.collection-instructions {
+  margin: 16px 0;
+  padding: 4px 14px;
+  border: 1px solid #abcbb333;
+  border-radius: 12px;
+  background: #b6d4bc08;
+  text-align: left;
+}
+.collection-instructions summary {
+  padding: 10px 0;
+  line-height: 1.6;
+  font-weight: 600;
+  cursor: pointer;
+}
+.collection-instructions p {
+  margin: 12px 0;
+  font-size: 13px;
+  text-align: left;
 }
 .collection-picker button[aria-pressed="true"] {
   border-color: #c8dcac;
@@ -324,6 +446,10 @@
   border-top: 1px solid #cee3b833;
   padding-top: 18px;
 }
+.island-patch-notes li {
+  margin-bottom: 12px;
+  line-height: 1.7;
+}
 .world-mini-map button.mini-pond {
   left: 50%;
   top: 50%;
@@ -374,7 +500,7 @@
     inset: 20% 5%;
   }
   .habitat-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -547,11 +673,10 @@
   border-radius: 9px;
 }
 .aquarium-tank {
-  width: min(100%, 78dvh);
+  width: 100%;
   height: auto;
 }
 .aquarium-tank.is-close {
-  width: min(100%, 96dvh);
   height: auto;
   cursor: zoom-out;
 }
@@ -616,17 +741,19 @@
 }
 
 @media (max-width: 600px) {
-  .spider-habitat {
-    height: 340px;
-  }
-  .spider-habitat.is-close {
-    height: 400px;
-  }
-  .aquarium-tank {
-    height: 300px;
-  }
+  /* Keep the original 3:2 artwork visible at the available width in both
+     inspection states. Zoom enlarges residents inside the frame, not the page. */
+  .spider-habitat,
+  .spider-habitat.is-close,
+  .aquarium-tank,
   .aquarium-tank.is-close {
-    height: 360px;
+    width: 100%;
+    height: auto;
+  }
+  .habitat-view,
+  .habitat-view.aquatic-view,
+  .habitat-view.is-close {
+    width: 100%;
   }
   .habitat-grid article,
   .aquarium-grid article {
@@ -656,18 +783,19 @@
   transform-origin: center;
   animation: resident-explore 5s ease-in-out infinite;
   animation-delay: var(--resident-delay);
+  width: clamp(60px, 32%, 165px);
 }
 .habitat-resident .collection-sprite {
-  width: clamp(115px, 16dvh, 165px);
+  width: 100%;
 }
-.is-aquatic .collection-sprite {
-  width: clamp(145px, 21vw, 225px);
+.is-aquatic .habitat-resident {
+  width: clamp(70px, 42%, 225px);
 }
-.is-close .habitat-resident .collection-sprite {
-  width: clamp(145px, 22dvh, 215px);
+.is-close .habitat-resident {
+  width: clamp(80px, 42%, 215px);
 }
-.is-close .is-aquatic .collection-sprite {
-  width: clamp(175px, 25vw, 275px);
+.is-close .is-aquatic .habitat-resident {
+  width: clamp(90px, 55%, 275px);
 }
 .habitat-resident.is-paused {
   animation-play-state: paused;

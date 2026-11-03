@@ -8,12 +8,14 @@ export default function Dialog({
   onClose,
   wide = false,
   className = "",
+  scrimClassName = "",
+  returnFocusRef,
 }) {
   const ref = useRef(null);
-  useDialogFocus(ref, onClose);
+  useDialogFocus(ref, onClose, returnFocusRef);
   return (
     <div
-      className="world-scrim"
+      className={"world-scrim " + scrimClassName}
       onClick={(e) => {
         if (e.target === e.currentTarget) onClose();
       }}

@@ -107,6 +107,10 @@ test("Help explains tap, double tap, pinch, map travel and touch actions without
   expect(panel.textContent).toContain("Double-tap the same spot to run");
   expect(panel.textContent).toContain("Pinch with two fingers");
   expect(panel.textContent).toContain("Open Map");
+  expect(panel.textContent).toContain("Shake tree · find bugs");
+  expect(panel.textContent).toContain("Gently catch");
+  expect(panel.textContent).toContain("Phone or tablet");
+  expect(panel.textContent).toContain("How to catch aquatic life");
   expect(panel.textContent).not.toContain("direction pad");
   act(() => panel.querySelector('[aria-label="Close panel"]').click());
   expect(host.querySelector(".world-dialog")).toBeNull();

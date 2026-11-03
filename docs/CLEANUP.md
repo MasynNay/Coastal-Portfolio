@@ -22,6 +22,6 @@ The renderer now leaves native atlas ownership with the bounded art cache instea
 
 The original site is built separately from its last original commit into `public/React-Portfolio/`, with original logos and screenshots. New artwork cannot leak into that demo through shared components. Its source remains in the original repository.
 
-Removed the unused sample mail server. The current contact form uses its existing EmailJS integration; it does not use that server. Removed the obsolete root GitHub Pages CNAME file because the redesigned site is hosted through Cloudflare. Local credentials and editor state are ignored. Build output remains reproducible and excluded from the new source repository.
+Removed the unused sample mail server. The contact form subsequently moved from the inaccessible EmailJS account to FormSubmit; the unused EmailJS SDK was removed. Removed the obsolete root GitHub Pages CNAME file because the redesigned site is hosted through Cloudflare. Local credentials and editor state are ignored. Build output remains reproducible and excluded from the new source repository.
 
 Dedicated board-balancing drawings replace the earlier skating walk cycle for all family appearances and costumes. The artwork import scripts preserve editable sources and publish only the packed atlases required at runtime. The retired sandcastle mini-game panel was removed; the construction now belongs to the shared world's animation clock.

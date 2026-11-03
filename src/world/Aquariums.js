@@ -1,10 +1,12 @@
 import { useState } from "react";
 import HabitatResidents from "./HabitatResidents";
+import HabitatView from "./HabitatView";
 import SpritePose from "./SpritePose";
+import CollectingHelp from "./CollectingHelp";
 import { fishSpecies, fishHabitats } from "./Fish";
 // Aquarium cards render the same animated atlas awarded by fishing. Counts are
 // owned by the engine/store; this view never invents catches or resets progress.
-export default function Aquariums({ caught, onRelease, onGuide }) {
+export default function Aquariums({ caught, onRelease }) {
   const [inspect, setInspect] = useState(null),
     [filter, setFilter] = useState("All"),
     [paused, setPaused] = useState(false),
@@ -20,11 +22,10 @@ export default function Aquariums({ caught, onRelease, onGuide }) {
         Your aquatic finds, with a little room to explore. {collected.length} /{" "}
         {fishSpecies.length} types discovered.
       </p>
-      {onGuide && <button onClick={onGuide}>Open field guide</button>}
+      <CollectingHelp kind="fish" expanded={!collected.length} />
       {!collected.length ? (
         <div className="spider-empty">
-          Cast a line at the pond or pier to begin your aquariums. Successful
-          catches are saved here automatically.
+          No residents yet. Successful catches are saved here automatically.
         </div>
       ) : (
         <>
@@ -43,7 +44,7 @@ export default function Aquariums({ caught, onRelease, onGuide }) {
               ))}
             </select>
           </label>
-          <div className="collection-picker" aria-label="Choose an aquarium">
+          <div className="collection-picker" role="region" tabIndex={0} aria-label="Choose an aquarium">
             {visible.map((f) => (
               <button
                 key={f.id}
@@ -69,13 +70,13 @@ export default function Aquariums({ caught, onRelease, onGuide }) {
           <div className="aquarium-grid">
             {(resident ? [resident] : []).map((f) => (
               <article key={f.id} data-rarity={f.rarity}>
-                <button
-                  className={
-                    "aquarium-tank " + (inspect === f.id ? "is-close" : "")
-                  }
-                  aria-label={"Inspect " + f.name}
-                  aria-pressed={inspect === f.id}
-                  onClick={() => setInspect(inspect === f.id ? null : f.id)}
+                <HabitatView
+                  name={f.name}
+                  aquatic
+                  inspecting={inspect === f.id}
+                  paused={paused}
+                  onInspect={() => setInspect(inspect === f.id ? null : f.id)}
+                  onRelease={onRelease ? () => onRelease(f.id) : undefined}
                 >
                   <span
                     className="tank-scenery"
@@ -89,38 +90,29 @@ export default function Aquariums({ caught, onRelease, onGuide }) {
                     paused={paused}
                     aquatic
                   />
-                  <span className="habitat-zoom">
-                    {inspect === f.id ? "− Back to aquarium" : "+ Look closer"}
-                  </span>
                   <i className="tank-bubble" />
                   <i className="tank-bubble second" />
-                </button>
+                </HabitatView>
                 <h3>{f.name}</h3>
                 <span className="collection-rarity" data-rarity={f.rarity}>
                   {f.rarity}
                 </span>
                 <p>{caught[f.id]} in this aquarium</p>
                 <p>{fishHabitats[f.habitat]}</p>
-                {onRelease && (
-                  <button onClick={() => onRelease(f.id)}>
-                    Release one to the{" "}
-                    {f.habitat === "freshwater" ? "pond" : "sea"}
-                  </button>
-                )}
                 {caught[f.id] > 8 && (
                   <small>
                     Showing 8 residents · all {caught[f.id]} are saved.
                   </small>
                 )}
+                <div className="habitat-actions">
+                  <button onClick={() => setPaused(!paused)}>
+                    {paused ? "Let them swim" : "Pause to look closely"}
+                  </button>
+                </div>
               </article>
             ))}
           </div>
         </>
-      )}
-      {!!collected.length && (
-        <button onClick={() => setPaused(!paused)}>
-          {paused ? "Let them swim" : "Pause to look closely"}
-        </button>
       )}
       <p className="activity-note">
         Catches are saved on this device. One super-rare find waits among{" "}

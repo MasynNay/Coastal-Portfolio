@@ -7,6 +7,7 @@ import BrandMark from "../components/BrandMark";
 import AxolotlGame from "./AxolotlGame";
 import { characterAbility } from "./Abilities";
 import Aquariums from "./Aquariums";
+import CollectingHelp from "./CollectingHelp";
 import FieldGuide from "./FieldGuide";
 import { readAquariums, fishSpecies } from "./Fish";
 import Welcome from "./Welcome";
@@ -712,7 +713,13 @@ export default function WorldMode() {
       {menu && (
         <Dialog
           wide={["aquariums", "terrariums", "field-guide"].includes(menu)}
-          className={menu === "travel" ? "world-map-panel" : ""}
+          className={
+            menu === "travel"
+              ? "world-map-panel"
+              : ["aquariums", "terrariums"].includes(menu)
+                ? "world-collection-dialog"
+                : ""
+          }
           title={
             menu === "journal"
               ? "Island journal"
@@ -776,14 +783,16 @@ export default function WorldMode() {
             </>
           ) : menu === "aquariums" ? (
             <>
+              <div className="collection-toolbar">
               <button
                 className="inventory-back"
                 onClick={() => setMenu("inventory")}
               >
                 ← Inventory
               </button>
+                <button onClick={() => openGuide("fish")}>Open field guide</button>
+              </div>
               <Aquariums
-                onGuide={() => openGuide("fish")}
                 caught={aquariums}
                 onRelease={(id) => engine.current?.releaseFish(id)}
               />
@@ -798,14 +807,16 @@ export default function WorldMode() {
             />
           ) : menu === "terrariums" ? (
             <>
+              <div className="collection-toolbar">
               <button
                 className="inventory-back"
                 onClick={() => setMenu("inventory")}
               >
                 ← Inventory
               </button>
+                <button onClick={() => openGuide("bugs")}>Open field guide</button>
+              </div>
               <Terrariums
-                onGuide={() => openGuide("bugs")}
                 caught={caught}
                 onRelease={(id) => engine.current?.releaseBug(id)}
               />
@@ -876,7 +887,7 @@ export default function WorldMode() {
             <>
               <h3>The beach & island journal</h3>
               <p>
-                Click the places / secrets counter to review discoveries and the
+                Tap or click the places / secrets counter to review discoveries and the
                 glass-float hunt. On the beach beside the pier, walk close to
                 shells, the sandcastle bucket or the dragon kite, then press E
                 or tap the action button. Footprints fade from the sand; collect
@@ -907,6 +918,13 @@ export default function WorldMode() {
                 animal menus, bikes, bugs, mailboxes and room panels all work by
                 touch; use each panel’s × to close it.
               </p>
+              <p>
+                The action button at the bottom changes as you approach
+                something you can use. Tap that label to interact; you do not
+                need a keyboard for E or Q actions. Shake tree, Catch, Fish,
+                animal activities and costume abilities all have on-screen
+                controls.
+              </p>
               <h3>Keyboard & mouse</h3>
               <p>
                 At the boat on the pier's left side, use E or the action button
@@ -936,7 +954,8 @@ export default function WorldMode() {
                 of Masyn’s themed costumes also has a Q action on land: glide in
                 a circle as an airbender, play the ocarina, throw a returning
                 trident, cast a wand spell, throw a Poké Ball, or shoot an
-                arrow. Mi Shell’s Q tosses a few dollar bills.
+                arrow. Panem Tribute raises a three-finger salute. Mi Shell’s
+                Q tosses a few dollar bills.
               </p>
               <p>
                 Try the wand, Poké Ball or bow near another person for a small
@@ -962,11 +981,13 @@ export default function WorldMode() {
                 land to dismount. Choose Fish to cast, wait for a nibble, and
                 discover what you caught.
               </p>
+              <h3>Collecting bugs & aquatic life</h3>
+              <CollectingHelp kind="bugs" expanded />
+              <CollectingHelp kind="fish" expanded />
               <p>
-                Press E beside a tree to shake out three bugs, then catch them
-                with E. Look in Inventory → Terrariums to inspect your
-                discoveries. The Acro and Mach bikes beside the playground take
-                you on a guided pond lap and return you to the starting spot.
+                The Acro and Mach bikes beside the playground take you on a
+                guided pond lap and return you to the starting spot. Approach a
+                bike and press E or tap its Ride action to begin.
               </p>
               <p>
                 Visits and discovered room secrets are saved on this device. No

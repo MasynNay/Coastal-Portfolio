@@ -1,7 +1,10 @@
 import { Book } from "react-bootstrap-icons";
 import { useState } from "react";
 import HabitatResidents from "./HabitatResidents";
+import HabitatView from "./HabitatView";
 import CollectionSprite from "./CollectionSprite";
+import CollectingHelp from "./CollectingHelp";
+import PatchNotes from "./PatchNotes";
 import { totalResidents } from "./CollectionCounts";
 import SpritePose from "./SpritePose";
 import { artwork } from "./art";
@@ -52,7 +55,7 @@ export function BugEncounter({ id, onCatch, onClose }) {
     </div>
   );
 }
-export function Terrariums({ caught, onRelease, onGuide }) {
+export function Terrariums({ caught, onRelease }) {
   const [inspecting, setInspecting] = useState(null),
     [paused, setPaused] = useState(false),
     [selected, setSelected] = useState(null);
@@ -61,9 +64,10 @@ export function Terrariums({ caught, onRelease, onGuide }) {
   return (
     <div className="spider-home">
       <p>
-        Shake a tree with E to discover three little visitors. Each kind of bug
-        has a home of its own. Click a habitat to look closer.
+        Each kind of bug has a home of its own. Swipe or scroll the creature
+        strip to choose one, then tap or click its habitat to look closer.
       </p>
+      <CollectingHelp kind="bugs" expanded={!spiders.length} />
       {spiders.some((s) => s.legacy) && (
         <p className="activity-note">
           Your earlier island discoveries are still here. The current field
@@ -72,13 +76,11 @@ export function Terrariums({ caught, onRelease, onGuide }) {
       )}
       {!spiders.length && (
         <div className="spider-empty">
-          No residents yet. Walk up to a tree and press E to shake it, then
-          approach a fallen bug and press E to catch it.
+          No residents yet. Your catches will appear here with their own habitats.
         </div>
       )}
-      {onGuide && <button onClick={onGuide}>Open field guide</button>}
       {!!spiders.length && (
-        <div className="collection-picker" aria-label="Choose a terrarium">
+        <div className="collection-picker" role="region" tabIndex={0} aria-label="Choose a terrarium">
           {spiders.map((s) => (
             <button
               key={s.id}
@@ -104,15 +106,12 @@ export function Terrariums({ caught, onRelease, onGuide }) {
       <div className="habitat-grid">
         {(resident ? [resident] : []).map((s) => (
           <article key={s.id} data-rarity={s.rarity}>
-            <button
-              className={
-                "spider-habitat " +
-                (inspecting === s.id ? "is-close " : "") +
-                (paused ? "is-paused" : "")
-              }
-              aria-label={"Inspect " + s.name}
-              aria-pressed={inspecting === s.id}
-              onClick={() => setInspecting(inspecting === s.id ? null : s.id)}
+            <HabitatView
+              name={s.name}
+              inspecting={inspecting === s.id}
+              paused={paused}
+              onInspect={() => setInspecting(inspecting === s.id ? null : s.id)}
+              onRelease={onRelease ? () => onRelease(s.id) : undefined}
             >
               <span
                 className="habitat-scenery"
@@ -126,10 +125,7 @@ export function Terrariums({ caught, onRelease, onGuide }) {
                 paused={paused}
               />
               <span className="habitat-reflection" />
-              <span className="habitat-zoom">
-                {inspecting === s.id ? "− Back to habitat" : "+ Look closer"}
-              </span>
-            </button>
+            </HabitatView>
             <h3>{s.name}</h3>
             <span className="collection-rarity" data-rarity={s.rarity}>
               {s.rarity}
@@ -140,17 +136,14 @@ export function Terrariums({ caught, onRelease, onGuide }) {
             {caught[s.id] > 8 && (
               <small>Showing 8 residents · all {caught[s.id]} are saved.</small>
             )}
-            <button onClick={() => onRelease(s.id)}>
-              Release one to the garden
-            </button>
+            <div className="habitat-actions">
+              <button onClick={() => setPaused(!paused)}>
+                {paused ? "Let them explore" : "Pause to look closely"}
+              </button>
+            </div>
           </article>
         ))}
       </div>
-      {!!spiders.length && (
-        <button onClick={() => setPaused(!paused)}>
-          {paused ? "Let them explore" : "Pause to look closely"}
-        </button>
-      )}
       <p className="activity-note">Your terrariums are saved on this device.</p>
     </div>
   );
@@ -193,7 +186,11 @@ export function MailboxMessage({ id, children, onOpen }) {
         </>
       ) : (
         <>
-          <p className="letter-joke">{letter.joke}</p>
+          {letter.content === "patch-notes" ? (
+            <PatchNotes />
+          ) : (
+            <p className="letter-joke">{letter.joke}</p>
+          )}
           {letter.reward && (
             <p>
               <a href={letter.reward.url} target="_blank" rel="noreferrer">

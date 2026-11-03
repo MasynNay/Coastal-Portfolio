@@ -32,12 +32,8 @@ export const mailboxLetters = {
     joke: "Dear Masyn, the pond Wi-Fi is excellent. We still refuse to pay the bill. Warmest quacks, the ducks.",
   },
   lodge: {
-    title: "An adventurer’s essential item",
-    teaser: "A treasure map folds out into something unexpected…",
-    reward: {
-      label: "Claim your adventurer’s reward ↗",
-      url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    },
-    joke: "It’s a shopping list. Milk, bread, batteries, and one heroic amount of coffee. Even adventurers have errands.",
+    title: "News from Windfall",
+    teaser: "The latest island update has arrived. Open the letter for real patch notes.",
+    content: "patch-notes",
   },
 };

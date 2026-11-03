@@ -34,3 +34,13 @@ The [React-Portfolio repository](https://github.com/MasynNay/React-Portfolio) re
 The same original build is included in this project at `public/React-Portfolio/`. See [the development guide](DEVELOPMENT.md#preserved-original-portfolio) for rebuilding it from the fixed original commit. Normal portfolio builds use that saved demo without fetching or modifying the old repository.
 
 The domain belongs to the current site. Do not add it back to GitHub Pages or the old Cloudflare project after the migration.
+
+## Contact email
+
+The shared contact form uses FormSubmit to deliver submissions to `masynnay33@gmail.com`, with the subject **Someone sent you a message from your portfolio**. It includes the visitor's name, email, optional phone number and message. Reply-To points to the visitor's address.
+
+The recipient must activate the form through FormSubmit's one-time confirmation email before email delivery is enabled. No EmailJS account, SMTP password or private API key is required. The form keeps the visitor's input when a request fails and offers a direct email link. See [FormSubmit's setup instructions](https://formsubmit.co/) for activation, and [ContactMail.js](../src/components/ContactMail.js) for the shared request.
+
+## In-game patch notes
+
+Windfall's mailbox reads `src/data/patchNotes.js`. Add only completed changes relative to the recorded production commit, and publish the matching version tag so its comparison link points to the actual patch.

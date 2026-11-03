@@ -11,7 +11,7 @@ export const islandSecrets = [
     title: letter.title,
     home,
     kind: "Mailbox letter",
-    detail: letter.joke,
+    detail: letter.joke || letter.teaser,
   })),
   ...Object.entries(GAME_PORTALS).map(([id, portal]) => ({
     id,

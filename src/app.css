@@ -214,6 +214,11 @@ nav.navbar .navbar-menu-icon {
   display: block;
 }
 
+/* Contact delivery's honeypot must stay outside the visible and focusable form. */
+.contact form .contact-trap {
+  display: none;
+}
+
 /************ Banner Css ************/
 .banner {
   margin-top: 0;

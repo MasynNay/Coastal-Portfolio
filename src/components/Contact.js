@@ -3,7 +3,7 @@ import { Container, Row, Col } from "react-bootstrap";
 import contactImg from "../assets/images/contact.svg";
 import "animate.css";
 import TrackVisibility from "react-on-screen";
-import emailjs from "emailjs-com";
+import { contactEmail, sendContactMessage } from "./ContactMail";
 
 export const Contact = () => {
   const formInitialDetails = {
@@ -12,6 +12,7 @@ export const Contact = () => {
     email: "",
     phone: "",
     message: "",
+    website: "",
   };
   const [formDetails, setFormDetails] = useState(formInitialDetails);
   const [buttonText, setButtonText] = useState("Send");
@@ -27,24 +28,10 @@ export const Contact = () => {
     if (isSending) return;
     setIsSending(true);
     setButtonText("Sending...");
+    setStatus({});
 
     try {
-      const serviceID = "service_qgcqxfq";
-      const templateID = "template_3kptr7o";
-      const userID = "chpuBHqXeXXq-CaCF";
-
-      await emailjs.send(
-        serviceID,
-        templateID,
-        {
-          firstName: formDetails.firstName,
-          lastName: formDetails.lastName,
-          email: formDetails.email,
-          phone: formDetails.phone,
-          message: formDetails.message,
-        },
-        userID,
-      );
+      await sendContactMessage(formDetails);
 
       setButtonText("Send");
       setFormDetails(formInitialDetails);
@@ -54,7 +41,7 @@ export const Contact = () => {
       setButtonText("Send");
       setStatus({
         success: false,
-        message: "Failed to send message. Please try again later.",
+        message: "Your message couldn’t be sent. Your details are still here—please try again, or email me directly.",
       });
     } finally {
       setIsSending(false);
@@ -94,10 +81,24 @@ export const Contact = () => {
                     message. You’re welcome to just say hello, too.
                   </p>
                   <form onSubmit={handleSubmit}>
+                    {/* This hidden field is only a spam trap; it is never a
+                        keyboard or screen-reader destination. */}
+                    <div className="contact-trap" aria-hidden="true">
+                      <input
+                        type="text"
+                        name="website"
+                        tabIndex={-1}
+                        autoComplete="off"
+                        value={formDetails.website}
+                        onChange={(e) => onFormUpdate("website", e.target.value)}
+                      />
+                    </div>
                     <Row>
                       <Col size={12} sm={6} className="px-1">
                         <input
                           type="text"
+                          name="firstName"
+                          disabled={isSending}
                           aria-label="First name"
                           autoComplete="given-name"
                           required
@@ -111,6 +112,8 @@ export const Contact = () => {
                       <Col size={12} sm={6} className="px-1">
                         <input
                           type="text"
+                          name="lastName"
+                          disabled={isSending}
                           aria-label="Last name"
                           autoComplete="family-name"
                           value={formDetails.lastName}
@@ -123,6 +126,8 @@ export const Contact = () => {
                       <Col size={12} sm={6} className="px-1">
                         <input
                           type="email"
+                          name="email"
+                          disabled={isSending}
                           aria-label="Email address"
                           autoComplete="email"
                           required
@@ -136,6 +141,8 @@ export const Contact = () => {
                       <Col size={12} sm={6} className="px-1">
                         <input
                           type="tel"
+                          name="phone"
+                          disabled={isSending}
                           aria-label="Phone number"
                           autoComplete="tel"
                           value={formDetails.phone}
@@ -148,6 +155,8 @@ export const Contact = () => {
                       <Col size={12} className="px-1">
                         <textarea
                           rows="6"
+                          name="message"
+                          disabled={isSending}
                           aria-label="Message"
                           required
                           value={formDetails.message}
@@ -166,6 +175,9 @@ export const Contact = () => {
                             }
                           >
                             {status.message}
+                            {status.success === false && (
+                              <> <a href={`mailto:${contactEmail}`}>{contactEmail}</a></>
+                            )}
                           </p>
                         )}
                         <div className="button-container">

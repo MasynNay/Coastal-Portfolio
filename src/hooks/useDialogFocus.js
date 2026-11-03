@@ -84,8 +84,12 @@ export default function useDialogFocus(panelRef, onClose, returnFocusRef) {
       const wasTop = top();
       panels.splice(panels.indexOf(panel), 1);
       if (!panels.length) document.body.style.overflow = savedOverflow;
-      if (wasTop && previous?.isConnected)
-        previous.focus({ preventScroll: true });
+      if (wasTop) {
+        // Releasing the final resident can remove the button that opened a
+        // confirmation. Return to its containing panel instead of losing focus.
+        const target = previous?.isConnected ? previous : panels.at(-1);
+        target?.focus({ preventScroll: true });
+      }
     };
   }, [panelRef, returnFocusRef]);
 }
