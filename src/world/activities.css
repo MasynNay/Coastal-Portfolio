@@ -387,10 +387,13 @@
 }
 
 /* Inventory is the entry point for collections; habitats stay one level inside it. */
-.inventory-folder {
-  display: flex;
+.world-inventory .inventory-folder {
+  /* Keep a whole animation frame in its own column. Flex shrinking previously
+     narrowed the preview box without scaling its sprite background, cropping it. */
+  display: grid;
+  grid-template-columns: 64px minmax(0, 1fr) 18px;
   align-items: center;
-  gap: 24px;
+  gap: 16px;
   text-align: left;
   width: 100%;
   padding: 22px;
@@ -399,6 +402,21 @@
   background: linear-gradient(135deg, #315550, #1e373b);
   color: #e8f0dd;
   cursor: pointer;
+}
+.inventory-folder-icon {
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+}
+.inventory-folder-icon .collection-sprite {
+  /* Both collections use the same four-frame preview, sized to the slot rather
+     than a fixed background scale. Habitat and field-guide sizes are unchanged. */
+  width: 100%;
+}
+.inventory-folder > span:nth-child(2) {
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 .inventory-folder strong {
   display: block;
@@ -413,6 +431,20 @@
 .inventory-folder > span:last-child {
   margin-left: auto;
   font-size: 26px;
+}
+@media (max-width: 480px) {
+  .world-inventory .inventory-folder {
+    grid-template-columns: 56px minmax(0, 1fr) 14px;
+    gap: 12px;
+    padding: 14px;
+  }
+  .inventory-folder-icon {
+    width: 56px;
+    height: 56px;
+  }
+  .inventory-folder strong {
+    font-size: 18px;
+  }
 }
 .inventory-back {
   border: 0;

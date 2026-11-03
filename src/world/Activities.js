@@ -1,6 +1,7 @@
 import { Book } from "react-bootstrap-icons";
 import { useState } from "react";
 import HabitatResidents from "./HabitatResidents";
+import CollectionSprite from "./CollectionSprite";
 import { totalResidents } from "./CollectionCounts";
 import SpritePose from "./SpritePose";
 import { artwork } from "./art";
@@ -228,7 +229,9 @@ export function Inventory({
     <div className="world-inventory">
       <p>A home for the little things you find along the way.</p>
       <button className="inventory-folder" onClick={onFieldGuide}>
-        <Book size={56} aria-hidden="true" />
+        <span className="inventory-folder-icon">
+          <Book size={40} aria-hidden="true" />
+        </span>
         <span>
           <strong>Island Field Guide</strong>
           <small>
@@ -244,7 +247,9 @@ export function Inventory({
         <span aria-hidden="true">→</span>
       </button>
       <button className="inventory-folder" onClick={onAquariums}>
-        <SpritePose asset="fish-harbor" scale={2.5} label="Fish collection" />
+        <span className="inventory-folder-icon">
+          <CollectionSprite asset="fish-harbor" label="Fish collection" />
+        </span>
         <span>
           <strong>Aquariums</strong>
           <small>
@@ -256,12 +261,9 @@ export function Inventory({
         <span aria-hidden="true">→</span>
       </button>
       <button className="inventory-folder" onClick={onTerrariums}>
-        <SpritePose
-          asset="spider"
-          scale={previewScale("spider", 60)}
-          playing={false}
-          label="Bug collection"
-        />
+        <span className="inventory-folder-icon">
+          <CollectionSprite asset="spider" label="Bug collection" />
+        </span>
         <span>
           <strong>Terrariums</strong>
           <small>
