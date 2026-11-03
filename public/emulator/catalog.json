@@ -1,0 +1,44 @@
+{
+  "heart-and-soul": {
+    "name": "Pokémon Heart & Soul",
+    "version": "v2.0.6",
+    "saveId": 215988705,
+    "rom": "/roms/heart-and-soul-e2b9537e.zip"
+  },
+  "hoenns-last-wish": {
+    "name": "Pokémon Hoenn’s Last Wish",
+    "version": "",
+    "saveId": 204342214,
+    "rom": "/roms/hoenns-last-wish-756694e2.zip"
+  },
+  "emerald-rogue": {
+    "name": "Pokémon Emerald Rogue",
+    "version": "v2.2.1-EX",
+    "saveId": 27351819,
+    "rom": "/roms/emerald-rogue-43754f24.zip"
+  },
+  "amethyst": {
+    "name": "Pokémon Amethyst",
+    "version": "v1.4.3",
+    "saveId": 235342445,
+    "rom": "/roms/amethyst-9cb2c025.zip"
+  },
+  "sword-and-shield": {
+    "name": "Pokémon Sword and Shield Ultimate Plus",
+    "version": "v1.2.1.2",
+    "saveId": 258813552,
+    "rom": "/roms/sword-and-shield-e3f2bd20.zip"
+  },
+  "unbound": {
+    "name": "Pokémon Unbound",
+    "version": "v2.1.1.1",
+    "saveId": 128591291,
+    "rom": "/roms/unbound-fffab1d1.zip"
+  },
+  "red-rescue-shiny": {
+    "name": "Pokémon Mystery Dungeon: Red Rescue Team — Shiny Patch+",
+    "version": "v1.0.0",
+    "saveId": 170038425,
+    "rom": "/roms/red-rescue-shiny-b0d28480.zip"
+  }
+}

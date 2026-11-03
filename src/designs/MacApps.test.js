@@ -1,7 +1,7 @@
 import { act } from "react";
 import { createRoot } from "react-dom/client";
 import { GamesApp, GamePlayer, PhotosApp } from "./MacApps";
-import { games } from "../data/games";
+import { games, islandGames } from "../data/games";
 
 let host, root, originalFetch;
 beforeEach(() => {
@@ -35,10 +35,11 @@ test("the cartridge shelf opens a game window without embedding a player in the 
 });
 
 test("a game window includes its player, external link and dismissible keyboard/touch controls", () => {
-  act(() => root.render(<GamePlayer game={games[3]} />));
+  const game = islandGames.find((entry) => entry.id === "poke-ball-match");
+  act(() => root.render(<GamePlayer game={game} />));
   expect(host.querySelectorAll("iframe")).toHaveLength(1);
-  expect(host.querySelector("iframe").src).toBe(games[3].url);
-  expect(host.querySelector("iframe").title).toBe(games[3].name);
+  expect(host.querySelector("iframe").src).toBe(new URL(game.url, window.location.href).href);
+  expect(host.querySelector("iframe").title).toBe(game.name);
   const toggle = host.querySelector("[aria-controls]");
   expect(toggle.getAttribute("aria-expanded")).toBe("true");
   expect(
@@ -54,7 +55,7 @@ test("a game window includes its player, external link and dismissible keyboard/
   act(() => toggle.click());
   expect(host.querySelector(".mac-controls").hidden).toBe(false);
   const external = host.querySelector('a[target="_blank"]');
-  expect(external.href).toBe(games[3].url);
+  expect(external.href).toBe(new URL(game.url, window.location.href).href);
   expect(external.rel).toContain("noreferrer");
 });
 test("a slideshow preserves its position while inactive and resumes when reactivated", async () => {
@@ -88,4 +89,14 @@ test("Photos opens the shared album and refreshes it without fetching a local ph
   act(() => host.querySelector("button").click());
   expect(host.querySelector("iframe")).not.toBe(frame);
   expect(host.querySelector("iframe").src).toBe(frame.src);
+});
+
+// A ROM already has a game query; Mac sizing must append, not replace it.
+test("a GBA window preserves its cartridge query and starts with controls collapsed", () => {
+  const game = games[0];
+  act(() => root.render(<GamePlayer game={game} />));
+  expect(host.querySelector("iframe").getAttribute("src")).toBe(`${game.url}&view=mac`);
+  expect(host.querySelector(".mac-controls").hidden).toBe(true);
+  act(() => host.querySelector("[aria-controls]").click());
+  expect(host.querySelector(".mac-controls").textContent).toContain(game.controls);
 });

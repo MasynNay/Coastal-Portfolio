@@ -2,6 +2,18 @@
 // the preceding production commit, rather than fictional in-game release notes.
 const patchNotes = [
   {
+    version: "1.0.5",
+    date: "November 2, 2026",
+    previousCommit: "1587097",
+    changes: [
+      "Replaced the ad-supported retro players with a self-hosted Game Boy Advance emulator and all seven supplied cartridges: Heart & Soul, Hoenn’s Last Wish, Emerald Rogue, Amethyst, Sword and Shield Ultimate Plus, Unbound and Red Rescue Team Shiny Patch+.",
+      "Mac Mode, Pocket Arcade and the five hidden room games now use the same ROM library. The seven original island mini-games remain available.",
+      "Added keyboard, gamepad and on-screen touch controls, individual game saves, save-file import/export and fullscreen play. Game progress stays in this browser; export a save before clearing browser data or changing devices.",
+      "Cartridges are served directly from the portfolio, with verified downloads during the build. No RetroGames player or advertising page is loaded.",
+      "Added keyboard activation for Play and a clear message when a browser has no WebGL graphics available.",
+    ],
+  },
+  {
     version: "1.0.4",
     date: "November 2, 2026",
     previousCommit: "b8ae9df",

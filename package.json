@@ -1,6 +1,6 @@
 {
   "name": "coastal-portfolio",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "private": true,
   "homepage": "https://masynnay.com/",
   "dependencies": {
@@ -25,8 +25,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "prestart": "node scripts/IndexPhotos.cjs",
-    "prebuild": "node scripts/IndexPhotos.cjs",
+    "prestart": "node scripts/IndexPhotos.cjs && node scripts/PrepareRoms.cjs",
+    "prebuild": "node scripts/IndexPhotos.cjs && node scripts/PrepareRoms.cjs",
     "lint": "eslint src --ext .js --max-warnings 0"
   },
   "eslintConfig": {

@@ -130,17 +130,17 @@ test("cartridges open separate game windows; reopening restores one window and c
   const cartridges = library.querySelectorAll(".game-cartridge");
   act(() => cartridges[0].click());
   const player = host.querySelector(
-    '[role="dialog"][aria-label="Pokémon Ruby"]',
+    `[role="dialog"][aria-label="${games[0].name}"]`,
   );
-  expect(player.querySelector("iframe").src).toBe(games[0].url);
+  expect(player.querySelector("iframe").src).toBe(new URL(`${games[0].url}&view=mac`, window.location.href).href);
   expect(player.textContent).toContain("Take the controls");
   act(() => cartridges[0].click());
   expect(
-    host.querySelectorAll('[role="dialog"][aria-label="Pokémon Ruby"]'),
+    host.querySelectorAll(`[role="dialog"][aria-label="${games[0].name}"]`),
   ).toHaveLength(1);
   act(() => cartridges[1].click());
   expect(host.querySelectorAll("iframe")).toHaveLength(2);
-  act(() => player.querySelector('[aria-label="Close Pokémon Ruby"]').click());
+  act(() => player.querySelector(`[aria-label="Close ${games[0].name}"]`).click());
   expect(host.querySelectorAll("iframe")).toHaveLength(1);
   expect(document.activeElement).toBe(dock);
 });

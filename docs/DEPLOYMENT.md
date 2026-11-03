@@ -46,3 +46,7 @@ No EmailJS account, SMTP password or private API key is required. The form keeps
 ## In-game patch notes
 
 Windfall's mailbox reads `src/data/patchNotes.js`. Add only completed changes relative to the recorded production commit, and publish the matching version tag so its comparison link points to the actual patch.
+
+## GBA cartridge assets
+
+`prebuild` prepares the GBA archives before React's build. Public binary assets are stored on the `arcade-roms-v1` GitHub release, then downloaded, verified and served by Cloudflare Pages on this domain. `public/roms/` is ignored by Git. The release must exist before a clean Cloudflare build can succeed; unavailable or changed archives fail verification instead of shipping broken cartridge links. See [the arcade guide](ARCADE.md) for the catalog and update procedure.

@@ -9,14 +9,13 @@ import {
 import "./GameCartridge.css";
 
 const symbols = {
-  ruby: Gem,
-  "kingdom-hearts": Key,
-  "mystery-dungeon": Compass,
-  "red-rescue": Compass,
-  "sonic-advance-3": Lightning,
-  "liquid-crystal": Gem,
-  "return-of-the-king": Shield,
-  "shark-shrek": Stars,
+  "heart-and-soul": Key,
+  "hoenns-last-wish": Stars,
+  "emerald-rogue": Gem,
+  amethyst: Gem,
+  "sword-and-shield": Shield,
+  unbound: Lightning,
+  "red-rescue-shiny": Compass,
   "element-runner": Lightning,
   "poke-ball-match": Gem,
   "windfall-2048": Compass,
@@ -40,12 +39,13 @@ export default function GameCartridge({
     <button
       className={`game-cartridge${custom ? " custom-cartridge" : ""}`}
       data-game={game.id}
+      data-platform={game.platform}
       aria-label={`${action} ${game.name}`}
       aria-pressed={selected}
       onClick={onSelect}
     >
       <span className="cartridge-top" aria-hidden="true">
-        {custom ? "ISLAND ARCADE" : "GAME BOY"}
+        {custom ? "ISLAND ARCADE" : "GAME BOY ADVANCE"}
       </span>
       <span className="cartridge-label">
         <span className="cartridge-art" aria-hidden="true">

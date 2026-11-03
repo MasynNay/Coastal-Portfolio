@@ -1,0 +1,79 @@
+[
+  {
+    "id": "heart-and-soul",
+    "name": "Pokémon Heart & Soul",
+    "version": "v2.0.6",
+    "archive": "heart-and-soul.zip",
+    "bytes": 18541040,
+    "sha256": "e2b9537e99c5cf91e632019c40b4e51b6b3e13a4285465a11e030ccd1c9d7ac7",
+    "romSha256": "cdfb9e1f83f72c05cb47af40fdf5635567b1973bcb759e070ad0971f67a49191",
+    "saveId": 215988705,
+    "file": "heart-and-soul-e2b9537e.zip"
+  },
+  {
+    "id": "hoenns-last-wish",
+    "name": "Pokémon Hoenn’s Last Wish",
+    "version": "",
+    "archive": "hoenns-last-wish.zip",
+    "bytes": 15667929,
+    "sha256": "756694e2049079dfc8601b510bfb3afb09ffdc933b419bfbf5250e951995fe39",
+    "romSha256": "c2e03c69bc8059485891cc644360c8353fa05456e6ded976945b88659d32a011",
+    "saveId": 204342214,
+    "file": "hoenns-last-wish-756694e2.zip"
+  },
+  {
+    "id": "emerald-rogue",
+    "name": "Pokémon Emerald Rogue",
+    "version": "v2.2.1-EX",
+    "archive": "emerald-rogue.zip",
+    "bytes": 17953282,
+    "sha256": "43754f2421ecce4db3cfbed6cdcef7089b55c92e09b67485c487b558d98accfb",
+    "romSha256": "1a15b0b5bc273ae6576a937e721df64058c7bf278bf232da6091e8976c7ddcf7",
+    "saveId": 27351819,
+    "file": "emerald-rogue-43754f24.zip"
+  },
+  {
+    "id": "amethyst",
+    "name": "Pokémon Amethyst",
+    "version": "v1.4.3",
+    "archive": "amethyst.zip",
+    "bytes": 17553587,
+    "sha256": "9cb2c025ccb86b51f75cd2d843490dab703a7b3fd0bf520321eabc7e212d87a4",
+    "romSha256": "e070a6d160fb137ec7c2e58dc5b8b98526cea1eefd7c6d802afd0dd13eef60ea",
+    "saveId": 235342445,
+    "file": "amethyst-9cb2c025.zip"
+  },
+  {
+    "id": "sword-and-shield",
+    "name": "Pokémon Sword and Shield Ultimate Plus",
+    "version": "v1.2.1.2",
+    "archive": "sword-and-shield.zip",
+    "bytes": 13255211,
+    "sha256": "e3f2bd20944c90660bee59a2cc389372b2ff0aaadd49b77da329ce9a277eabf7",
+    "romSha256": "f6d2e7092831b983318b685132a19567ff5e6428665255738c4e5a63371bcce3",
+    "saveId": 258813552,
+    "file": "sword-and-shield-e3f2bd20.zip"
+  },
+  {
+    "id": "unbound",
+    "name": "Pokémon Unbound",
+    "version": "v2.1.1.1",
+    "archive": "unbound.zip",
+    "bytes": 19437704,
+    "sha256": "fffab1d12f0b4f0c67a7a3f5f7049a480195a95523f452f02bcb842667717ed2",
+    "romSha256": "7aa25bbf568f7cfcf6ee1cf2e9e6ff637350b3d0705c2375cabb6baa7d9739f7",
+    "saveId": 128591291,
+    "file": "unbound-fffab1d1.zip"
+  },
+  {
+    "id": "red-rescue-shiny",
+    "name": "Pokémon Mystery Dungeon: Red Rescue Team — Shiny Patch+",
+    "version": "v1.0.0",
+    "archive": "red-rescue-shiny.zip",
+    "bytes": 11389601,
+    "sha256": "b0d28480ef720f22a70f5166194660d17dec05956814f4a4d03bacf59d9862b1",
+    "romSha256": "a229499db3ce2db7e92e09c7045a17285bd6ab05dd7d6658ef54d6a236cd1a77",
+    "saveId": 170038425,
+    "file": "red-rescue-shiny-b0d28480.zip"
+  }
+]

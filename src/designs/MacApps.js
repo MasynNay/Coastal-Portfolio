@@ -33,7 +33,7 @@ export function GamesApp({ onOpen }) {
   );
 }
 
-// Each game owns a separate Mac window. Closing it unloads the external player;
+// Each game owns a separate Mac window. Closing it unloads the player;
 // choosing the same cartridge restores that window instead of duplicating it.
 export function GamePlayer({ game }) {
   const controlsId = useId(),
@@ -76,7 +76,7 @@ export function GamePlayer({ game }) {
       </div>
       <aside id={controlsId} hidden={!legend} className="mac-controls">
         <strong>Take the controls</strong>
-        {game.kind === "island" ? <p>{game.controls}</p> : (
+        {game.controls ? <p>{game.controls}</p> : (
           <>
             <p>Arrows: move · Z / X: A / B · Enter: Start · Shift: Select.</p>
             <p>On phones and tablets, use the player’s touch controls. Check its settings if the bindings differ.</p>
@@ -94,7 +94,7 @@ export function GamePlayer({ game }) {
       {notice && <p role="status">{notice}</p>}
       <iframe
         ref={player}
-        src={game.largePlayer ? `${game.url}?view=mac` : game.url}
+        src={game.largePlayer ? `${game.url}${game.url.includes("?") ? "&" : "?"}view=mac` : game.url}
         title={game.name}
         allowFullScreen
         allow="gamepad; fullscreen; cross-origin-isolated"

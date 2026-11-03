@@ -37,7 +37,7 @@ test("all cartridges select the intended game and changing cartridges replaces t
     expect(host.querySelectorAll("iframe")).toHaveLength(1);
     expect(host.querySelector("iframe").src).toBe(new URL(game.url, window.location.href).href);
     expect(cartridges[index].classList.contains("custom-cartridge")).toBe(game.kind === "island");
-    expect(cartridges[index].querySelector(".cartridge-top").textContent).toBe(game.kind === "island" ? "ISLAND ARCADE" : "GAME BOY");
-    expect(host.querySelector(".secret-control-card").textContent).toContain(game.kind === "island" ? game.controls : "Click inside the game first.");
+    expect(cartridges[index].querySelector(".cartridge-top").textContent).toBe(game.kind === "island" ? "ISLAND ARCADE" : "GAME BOY ADVANCE");
+    expect(host.querySelector(".secret-control-card").textContent).toContain(game.controls);
   }
 });

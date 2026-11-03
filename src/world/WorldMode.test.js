@@ -4,6 +4,7 @@ import { MemoryRouter } from "react-router-dom";
 import WorldMode from "./WorldMode";
 import { createWorld } from "./engine";
 import { miniPoint } from "./MiniMap";
+import { GAME_PORTALS } from "./legacySecrets";
 
 jest.mock("./engine", () => ({ createWorld: jest.fn() }));
 jest.mock("./SpritePose", () => () => null);
@@ -134,7 +135,7 @@ test("the progress badge opens a named journal with visited homes, discovered se
   act(() => badge.click());
   const panel = host.querySelector('[aria-label="Island journal"]');
   expect(panel).not.toBeNull();
-  expect(panel.textContent).toContain("Secret Nomad Game");
+  expect(panel.textContent).toContain(GAME_PORTALS["game-home"].title);
   expect(panel.textContent).toContain("Glass floats · 1 / 20");
   expect(
     panel.querySelectorAll('.journal-places [data-found="true"]'),

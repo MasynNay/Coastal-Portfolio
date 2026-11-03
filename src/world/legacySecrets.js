@@ -1,26 +1,20 @@
-// Original room secrets and trivia, retained from OLD OPEN WORLD.
-export const GAME_PORTALS = {
-  "game-home": {
-    title: "Secret Nomad Game",
-    src: "https://www.retrogames.cc/embed/26173-avatar-the-last-airbender-u-rising-sun.html",
-  },
-  "game-skills": {
-    title: "Secret Shire Game",
-    src: "https://www.retrogames.cc/embed/44723-lego-the-lord-of-the-rings-europe-en-fr-de-es-it-nl-da.html",
-  },
-  "game-portfolio": {
-    title: "Secret Trainer Game",
-    src: "https://www.retrogames.cc/embed/42136-pokemon-liquid-grystal-version.html",
-  },
-  "game-resume": {
-    title: "Secret Wizard Game",
-    src: "https://www.retrogames.cc/embed/42091-lego-harry-potter-years-1-4-usa-en-fr-es.html",
-  },
-  "game-contact": {
-    title: "Secret Demigod Game",
-    src: "https://www.retrogames.cc/embed/43047-percy-jackson-and-the-olympians-the-lightning-thief-usa-en-fr.html",
-  },
+import { retroGames } from "../data/games";
+
+// Retain the original secret IDs and discovery progress, while choosing games
+// from the same ad-free ROM library used by Mac Mode and Pocket Arcade.
+const roomCartridges = {
+  "game-home": "heart-and-soul",
+  "game-skills": "hoenns-last-wish",
+  "game-portfolio": "emerald-rogue",
+  "game-resume": "amethyst",
+  "game-contact": "unbound",
 };
+export const GAME_PORTALS = Object.fromEntries(
+  Object.entries(roomCartridges).map(([room, id]) => {
+    const game = retroGames.find((entry) => entry.id === id);
+    return [room, { title: game.name, src: game.url, controls: game.controls }];
+  }),
+);
 export const FRIENDS_TRIVIA = [
   {
     q: "What coffeehouse do the friends regularly visit?",

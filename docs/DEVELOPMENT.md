@@ -25,9 +25,9 @@ The project demos adapt the original projects to this portfolio. They are not pr
 
 ## Phones, tablets and controls
 
-The main website collapses its navigation and stacks content on smaller screens. Mac Mode keeps the iMac frame, uses contained app windows on touch screens, and lets the dock scroll horizontally. Selecting a cartridge opens its player and controls in a separate Mac window. The shared cartridge catalog includes the eight retro games and seven island originals: Element Runner, Poké Ball Match, Windfall 2048, Orc Hunt, Wizard Memory, Axolotl Drift and Axolotl Race. Originals use distinct custom cartridge shells and isolated `/arcade/:game` players that reuse the island's components and race rules without loading the town. The hidden `/game` page uses the same catalog. Embedded games provide keyboard/touch instructions; **Open game separately** is available for more space.
+The main website collapses its navigation and stacks content on smaller screens. Mac Mode keeps the iMac frame, uses contained app windows on touch screens, and lets the dock scroll horizontally. Selecting a cartridge opens its player and controls in a separate Mac window. The shared cartridge catalog includes seven self-hosted GBA cartridges and seven island originals: Element Runner, Poké Ball Match, Windfall 2048, Orc Hunt, Wizard Memory, Axolotl Drift and Axolotl Race. Originals use distinct custom cartridge shells and isolated `/arcade/:game` players that reuse the island's components and race rules without loading the town. The hidden `/game` page uses the same catalog. All cartridge players provide keyboard/touch instructions; **Open game separately** is available for more space.
 
-Element Runner and Axolotl Drift open maximized in Mac Mode, using a `?view=mac` layout that fits their courses to the iframe and puts controls beside the game on wide screens. Their extra controls panel starts collapsed, and a Fullscreen button can expand the player beyond the iMac frame. The green window control restores a smaller draggable window.
+GBA cartridges, Element Runner and Axolotl Drift open maximized in Mac Mode, using a `?view=mac` layout that fits their courses to the iframe and puts controls beside the game on wide screens. Their extra controls panel starts collapsed, and a Fullscreen button can expand the player beyond the iMac frame. The green window control restores a smaller draggable window.
 
 | Game action                            | Keyboard / mouse                                             | Phone / tablet                                                 |
 | -------------------------------------- | ------------------------------------------------------------ | -------------------------------------------------------------- |
@@ -98,7 +98,7 @@ python3 scripts/VerifyWorldAssets.py
 
 After importing artwork, run `python3 scripts/CleanSprites.py --write` before the read-only checks. See [sprite maintenance](docs/SPRITE-CLEANUP.md), [town behavior](docs/SPRITE-VILLAGE.md) and the [cleanup record](docs/CLEANUP.md).
 
-Automated checks verify behavior and build output, but do not replace visual playtesting on an actual phone or iPad. Before publishing, check portrait and landscape layouts, touch movement with simultaneous actions, modal scrolling, the dock, typing with an on-screen keyboard, and the external arcade players on the target devices. Third-party players depend on their hosts and browser support.
+Automated checks verify behavior and build output, but do not replace visual playtesting on an actual phone or iPad. Before publishing, check portrait and landscape layouts, touch movement with simultaneous actions, modal scrolling, the dock, typing with an on-screen keyboard, and the GBA players on the target devices. EmulatorJS requires WebAssembly and working WebGL graphics; embedded browser panels may not supply them. See [the arcade guide](ARCADE.md).
 
 ## Preserved original portfolio
 

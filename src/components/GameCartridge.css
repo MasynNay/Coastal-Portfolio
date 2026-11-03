@@ -60,6 +60,17 @@
   color: #60777a;
   text-shadow: 0 1px #effaf4;
 }
+.game-cartridge[data-platform="gba"] .cartridge-top {
+  font-size: 9px;
+  letter-spacing: 1px;
+}
+.game-cartridge[data-game="heart-and-soul"] { --label-color: #b66a84; --label-dark: #633858; }
+.game-cartridge[data-game="hoenns-last-wish"] { --label-color: #70977b; --label-dark: #2e584f; }
+.game-cartridge[data-game="emerald-rogue"] { --label-color: #399d86; --label-dark: #225e51; }
+.game-cartridge[data-game="amethyst"] { --label-color: #9271b3; --label-dark: #4a3866; }
+.game-cartridge[data-game="sword-and-shield"] { --label-color: #9d8661; --label-dark: #454e63; }
+.game-cartridge[data-game="unbound"] { --label-color: #598eb0; --label-dark: #313e70; }
+.game-cartridge[data-game="red-rescue-shiny"] { --label-color: #bd7067; --label-dark: #733950; }
 .cartridge-label {
   display: grid;
   grid-template-rows: 40px 42px 32px;
@@ -120,38 +131,7 @@
   text-transform: uppercase;
   color: #304b50;
 }
-.game-cartridge[data-game="ruby"] {
-  --label-color: #be4d57;
-  --label-dark: #6e213d;
-}
-.game-cartridge[data-game="kingdom-hearts"] {
-  --label-color: #657db4;
-  --label-dark: #262d55;
-}
-.game-cartridge[data-game="mystery-dungeon"] {
-  --label-color: #6599ad;
-  --label-dark: #275264;
-}
-.game-cartridge[data-game="red-rescue"] {
-  --label-color: #c87555;
-  --label-dark: #7c3533;
-}
-.game-cartridge[data-game="sonic-advance-3"] {
-  --label-color: #4e95c0;
-  --label-dark: #243d7c;
-}
-.game-cartridge[data-game="liquid-crystal"] {
-  --label-color: #7e9fb6;
-  --label-dark: #3c5775;
-}
-.game-cartridge[data-game="return-of-the-king"] {
-  --label-color: #9c8b50;
-  --label-dark: #4e5130;
-}
-.game-cartridge[data-game="shark-shrek"] {
-  --label-color: #6ba668;
-  --label-dark: #305a57;
-}
+
 /* Island originals have a compact dark shell, foil labels and gold contacts.
    They retain the shelf's fixed dimensions without imitating a Game Boy cart. */
 .game-cartridge-grid .custom-cartridge {

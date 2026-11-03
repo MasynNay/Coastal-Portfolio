@@ -139,7 +139,7 @@ export default function Game() {
                     <iframe
                       key={game.id}
                       src={game.url}
-                      title={`${game.name} — ${game.kind === "island" ? "island" : "external"} game player`}
+                      title={`${game.name} — game player`}
                       allowFullScreen
                       allow="fullscreen; gamepad; cross-origin-isolated"
                       onLoad={() => setLoading(false)}
@@ -152,15 +152,9 @@ export default function Game() {
                   </>
                 ) : (
                   <div className={`secret-start-screen game-${game.id}`}>
-                    {game.id === "ruby" ? (
-                      <div className="secret-ruby" aria-hidden="true">
-                        <span />
-                      </div>
-                    ) : (
-                      <div className="secret-game-symbol" aria-hidden="true">
-                        {game.id === "kingdom-hearts" ? <Key /> : <Compass />}
-                      </div>
-                    )}
+                    <div className="secret-game-symbol" aria-hidden="true">
+                      {game.kind === "emulator" ? <Key /> : <Compass />}
+                    </div>
                     <span className="secret-game-edition">
                       {game.kind === "island" ? "AN ISLAND ORIGINAL" : "A LITTLE NOSTALGIA"}
                     </span>
@@ -171,7 +165,7 @@ export default function Game() {
                     <button onClick={startGame}>
                       <PlayFill aria-hidden="true" /> Start game
                     </button>
-                    <p>{game.kind === "island" ? "Play the island’s original mini-game here." : "Opens the RetroGames player here."}</p>
+                    <p>{game.kind === "island" ? "Play the island’s original mini-game here." : "Loads this cartridge in the ad-free GBA emulator."}</p>
                   </div>
                 )}
               </div>
@@ -180,7 +174,7 @@ export default function Game() {
                   {started
                     ? loading
                       ? "CONNECTING TO PLAYER"
-                      : game.kind === "island" ? "ISLAND GAME OPEN" : "EXTERNAL PLAYER OPEN"
+                      : game.kind === "island" ? "ISLAND GAME OPEN" : "GBA PLAYER OPEN"
                     : "READY WHEN YOU ARE"}
                 </span>
                 <div>
@@ -238,7 +232,7 @@ export default function Game() {
               <div className="secret-controls-heading">
                 <span className="glass-eyebrow">THE BASICS</span>
                 <h2>Take the controls.</h2>
-                <p>{game.kind === "island" ? game.controls : "Click inside the game first. Its Controls Settings lists additional buttons."}</p>
+                <p>{game.controls}</p>
               </div>
               {game.kind !== "island" && <dl>
                 <div>
@@ -289,7 +283,7 @@ export default function Game() {
               <p>
                 Click or tap inside the player to give it focus. If it still
                 won’t load, try “Open separately.”
-                {game.kind !== "island" && " If it reports a graphics error, try a browser with graphics acceleration enabled. Availability and touch controls depend on the external player."}
+                {game.kind === "emulator" && " The emulator menu includes control mapping and save-file import/export. The first launch downloads the cartridge; later loads can use the browser cache."}
               </p>
             </details>
           </aside>

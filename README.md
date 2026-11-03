@@ -79,7 +79,7 @@ CI=true npm test -- --watchAll=false --runInBand
 npm run build
 ```
 
-The build produces static files in `build/`. It does not require a game server, a database or an account. Third-party arcade players require an internet connection and depend on their hosts.
+The build produces static files in `build/`. It does not require a game server, a database or an account. GBA cartridges use a self-hosted EmulatorJS/mGBA player, with seven supplied games and no external advertising pages. The first build downloads verified cartridge archives from the project’s public release assets. See the [arcade guide](docs/ARCADE.md) for hosting, controls, saves and runtime licenses.
 
 For directory responsibilities, sprite artwork, photo imports and game controls, see the [development guide](docs/DEVELOPMENT.md) and [world guide](src/world/README.md). Build settings, publishing and rollback are covered in the [deployment guide](docs/DEPLOYMENT.md).
 

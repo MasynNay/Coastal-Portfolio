@@ -1177,8 +1177,8 @@ export default function WorldMode() {
           ) : dialog.type === "secret" ? (
             <>
               <p>
-                A hidden game from the original world. It starts only when you
-                choose to load it.
+                An ad-free cartridge from the island’s shared GBA library. It
+                starts only when you choose to load it.
               </p>
               <SecretGame portal={GAME_PORTALS[dialog.id]} />
             </>
@@ -1200,6 +1200,7 @@ function SecretGame({ portal, onDiscover }) {
   const [started, setStarted] = useState(false);
   return started ? (
     <>
+      <p>{portal.controls}</p>
       <iframe
         className="world-game-frame"
         src={portal.src}

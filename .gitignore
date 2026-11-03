@@ -1,6 +1,7 @@
 node_modules
 
 build/
+public/roms/
 __pycache__/
 *.pyc
 
