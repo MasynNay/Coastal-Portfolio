@@ -62,7 +62,7 @@ export const retroGames = [
 ];
 
 export const islandGames = [
-  { id: "element-runner", location: "chimes", name: gameTitles.chimes,
+  { id: "element-runner", location: "chimes", name: gameTitles.chimes, largePlayer: true,
     edition: "Endless runner", controls: "A / D or Left / Right to change lanes. W / Up jumps; S / Down slides. Swipe or use the on-screen buttons on touch screens." },
   { id: "poke-ball-match", location: "workstation", name: gameTitles.workstation,
     edition: "Match-three puzzles", controls: "Swipe a ball toward a neighbor, or select two adjacent balls to swap. Match four or five to make special balls." },
@@ -72,7 +72,7 @@ export const islandGames = [
     edition: "Moria archery", controls: "Click or tap the orcs before the next wave. Each successful shot sends an arrow from the archer." },
   { id: "wizard-memory", location: "orrery", name: gameTitles.orrery,
     edition: "Find the magical pairs", controls: "Click or tap two cards to find matching pairs. Keyboard users can use Tab and Enter." },
-  { id: "axolotl-drift", name: "Axolotl Drift",
+  { id: "axolotl-drift", name: "Axolotl Drift", largePlayer: true,
     edition: "Ride between the eels", controls: "Press Space or Up, or tap the game, to rise. Avoid the eels and the sea floor." },
   { id: "axolotl-race", name: "Axolotl Race",
     edition: "The family regatta", controls: "Select Start race and cheer on the family. Everyone has their own lane and the winner is chosen randomly." },

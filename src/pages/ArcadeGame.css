@@ -27,6 +27,79 @@
 }
 .arcade-game-page a { color: #c5e8db; }
 .arcade-game-page canvas { max-width: 100%; }
+/* The Mac window already supplies the title. Keep its accessible heading while
+   giving the game the entire iframe height. Wide windows put the HUD/help in a
+   side column so the actual course does not shrink beneath stacked controls. */
+.arcade-game-large {
+  height: 100dvh;
+  min-height: 0;
+  padding: 8px;
+}
+.arcade-game-large > h1 {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+}
+.arcade-game-large .element-runner {
+  height: 100%;
+  max-width: none;
+}
+.arcade-game-large .axolotl-game {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto auto;
+  gap: 6px;
+  height: 100%;
+  max-width: none;
+}
+.arcade-game-large .axolotl-game-stage {
+  align-self: center;
+  justify-self: center;
+  width: 100%;
+  max-height: 100%;
+  aspect-ratio: 3 / 2;
+}
+.arcade-game-large .axolotl-game-stage canvas {
+  height: 100%;
+  aspect-ratio: auto;
+  object-fit: contain;
+}
+.arcade-game-large .axolotl-game-score { margin: 0; }
+.arcade-game-large .axolotl-game > button { position: static; margin: 0 auto; }
+.arcade-game-large .activity-note { display: block; margin: 0; font-size: 11px; }
+@media (min-width: 640px) {
+  .arcade-game-large .element-runner,
+  .arcade-game-large .axolotl-game {
+    grid-template-columns: minmax(150px, 190px) minmax(0, 1fr);
+    grid-template-rows: auto auto minmax(0, 1fr) auto;
+    column-gap: 16px;
+  }
+  .arcade-game-large .runner-help { grid-column: 1; grid-row: 3; overflow: auto; }
+  .arcade-game-large .runner-help summary { padding: 0; }
+  .arcade-game-large .mini-score { grid-column: 1; grid-row: 1; }
+  .arcade-game-large .runner-power-bar { grid-column: 1; grid-row: 2; flex-wrap: wrap; }
+  .arcade-game-large .runner-controls {
+    grid-column: 1;
+    grid-row: 4;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .arcade-game-large .element-runner .runner-stage,
+  .arcade-game-large .axolotl-game-stage {
+    grid-column: 2;
+    grid-row: 1 / -1;
+    width: auto;
+    height: 100%;
+    max-width: 100%;
+    margin: auto;
+  }
+  .arcade-game-large .axolotl-game-score { grid-column: 1; grid-row: 1; flex-wrap: wrap; }
+  .arcade-game-large .axolotl-game > button { grid-column: 1; grid-row: 2; }
+  .arcade-game-large .activity-note { grid-column: 1; grid-row: 3; }
+}
 @media (max-width: 480px) {
   .arcade-game-page { padding: 12px; }
+  .arcade-game-large { padding: 8px; }
 }

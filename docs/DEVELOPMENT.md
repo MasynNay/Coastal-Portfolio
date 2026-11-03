@@ -27,6 +27,8 @@ The project demos adapt the original projects to this portfolio. They are not pr
 
 The main website collapses its navigation and stacks content on smaller screens. Mac Mode keeps the iMac frame, uses contained app windows on touch screens, and lets the dock scroll horizontally. Selecting a cartridge opens its player and controls in a separate Mac window. The shared cartridge catalog includes the eight retro games and seven island originals: Element Runner, Poké Ball Match, Windfall 2048, Orc Hunt, Wizard Memory, Axolotl Drift and Axolotl Race. Originals use distinct custom cartridge shells and isolated `/arcade/:game` players that reuse the island's components and race rules without loading the town. The hidden `/game` page uses the same catalog. Embedded games provide keyboard/touch instructions; **Open game separately** is available for more space.
 
+Element Runner and Axolotl Drift open maximized in Mac Mode, using a `?view=mac` layout that fits their courses to the iframe and puts controls beside the game on wide screens. Their extra controls panel starts collapsed, and a Fullscreen button can expand the player beyond the iMac frame. The green window control restores a smaller draggable window.
+
 | Game action                            | Keyboard / mouse                                             | Phone / tablet                                                 |
 | -------------------------------------- | ------------------------------------------------------------ | -------------------------------------------------------------- |
 | Walk                                   | WASD, arrow keys or click ground                             | Tap clear ground to walk to that spot                          |

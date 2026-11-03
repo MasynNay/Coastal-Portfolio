@@ -144,3 +144,15 @@ test("cartridges open separate game windows; reopening restores one window and c
   expect(host.querySelectorAll("iframe")).toHaveLength(1);
   expect(document.activeElement).toBe(dock);
 });
+
+test.each(["Element Runner", "Axolotl Drift"])("%s opens maximized with its controls collapsed and can be restored", (title) => {
+  act(() => host.querySelector('[aria-label="Open Games"]').click());
+  act(() => host.querySelector(`[aria-label="Play ${title}"]`).click());
+  const player = host.querySelector(`[role="dialog"][aria-label="${title}"]`);
+  expect(player.classList.contains("window-maximized")).toBe(true);
+  expect(player.querySelector("iframe").src).toContain("?view=mac");
+  expect(player.querySelector(".mac-controls").hidden).toBe(true);
+  expect(player.querySelector('[aria-label="Play fullscreen"]')).not.toBeNull();
+  act(() => player.querySelector(`[aria-label="Restore ${title}"]`).click());
+  expect(player.classList.contains("window-maximized")).toBe(false);
+});

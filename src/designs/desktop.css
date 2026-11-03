@@ -1058,6 +1058,52 @@
   margin-top: 12px;
   background: #0d171c;
 }
+/* These two canvas games use the whole maximized app body rather than a fixed
+   450px iframe buried below an open controls panel. The viewer sizes itself
+   to this frame, including when the user restores or resizes the window. */
+.window-large-game .desktop-window-body {
+  min-height: 0;
+  overflow: hidden;
+}
+.mac-game-player-expanded {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  height: 100%;
+  min-height: 0;
+  padding: 12px;
+}
+.mac-game-player-expanded .mac-game-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  flex-shrink: 0;
+}
+.mac-game-toolbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.mac-game-toolbar-actions button[aria-label="Play fullscreen"] {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.mac-game-player-expanded .mac-controls {
+  flex-shrink: 0;
+  max-height: 45%;
+  overflow: auto;
+  margin: 0;
+}
+.mac-game-player.mac-game-player-expanded iframe {
+  flex: 1;
+  min-height: 0;
+  height: 0;
+  margin: 0;
+}
 .mac-controls {
   border: 1px solid #b5d8c8;
   border-radius: 12px;
@@ -1256,6 +1302,10 @@
   .desktop-window .mac-shared-photos {
     padding: 10px;
   }
+  .desktop-window .mac-game-player-expanded {
+    padding: 8px;
+  }
+  .mac-fullscreen-label { display: none; }
   .mac-games iframe {
     /* Keep the player and its controls inside the phone/tablet app window.
        The surrounding app body scrolls when the game picker is taller. */
@@ -1334,6 +1384,7 @@
   gap: 12px;
 }
 .mac-game-toolbar > button,
+.mac-game-toolbar-actions > button,
 .mac-controls > button {
   padding: 8px 12px;
   border: 1px solid #b7d5ca55;
@@ -1360,4 +1411,15 @@
   height: auto;
   min-height: 160px;
   margin: 0;
+}
+/* Override the ordinary player minimum only for the expanded canvas windows. */
+.desktop-window .mac-game-player.mac-game-player-expanded {
+  min-height: 0;
+  padding: 10px;
+  gap: 8px;
+}
+.mac-game-player-expanded iframe:fullscreen {
+  width: 100vw;
+  height: 100dvh;
+  border-radius: 0;
 }

@@ -2,6 +2,7 @@ import { useEffect, useId, useRef, useState } from "react";
 import { games } from "../data/games";
 import GameCartridge from "../components/GameCartridge";
 import { photoAlbum } from "../data/photos";
+import { ArrowsFullscreen } from "react-bootstrap-icons";
 // The cartridge library shares the arcade catalog; each selection opens a Mac app window.
 export function GamesApp({ onOpen }) {
   const [selected, setSelected] = useState(null);
@@ -36,11 +37,24 @@ export function GamesApp({ onOpen }) {
 // choosing the same cartridge restores that window instead of duplicating it.
 export function GamePlayer({ game }) {
   const controlsId = useId(),
-    controlsButton = useRef(null);
-  const [legend, setLegend] = useState(true);
+    controlsButton = useRef(null),
+    player = useRef(null);
+  const [legend, setLegend] = useState(!game.largePlayer);
+  const [notice, setNotice] = useState("");
+  async function fullscreen() {
+    try {
+      if (!player.current?.requestFullscreen) throw new Error("Unavailable");
+      await player.current.requestFullscreen();
+      player.current.focus();
+      setNotice("");
+    } catch {
+      setNotice("Fullscreen isn’t available here. Open the game separately for more room.");
+    }
+  }
   return (
-    <div className="mac-games mac-game-player">
+    <div className={`mac-games mac-game-player${game.largePlayer ? " mac-game-player-expanded" : ""}`}>
       <div className="mac-game-toolbar">
+        <div className="mac-game-toolbar-actions">
         <button
           ref={controlsButton}
           aria-expanded={legend}
@@ -49,6 +63,13 @@ export function GamePlayer({ game }) {
         >
           {legend ? "Hide controls" : "Show controls"}
         </button>
+        {game.largePlayer && (
+          <button onClick={fullscreen} aria-label="Play fullscreen">
+            <ArrowsFullscreen aria-hidden="true" />
+            <span className="mac-fullscreen-label">Fullscreen</span>
+          </button>
+        )}
+        </div>
         <a href={game.url} target="_blank" rel="noreferrer">
           Open game separately ↗
         </a>
@@ -70,8 +91,10 @@ export function GamePlayer({ game }) {
           Got it
         </button>
       </aside>
+      {notice && <p role="status">{notice}</p>}
       <iframe
-        src={game.url}
+        ref={player}
+        src={game.largePlayer ? `${game.url}?view=mac` : game.url}
         title={game.name}
         allowFullScreen
         allow="gamepad; fullscreen; cross-origin-isolated"

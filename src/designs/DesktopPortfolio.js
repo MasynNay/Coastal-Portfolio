@@ -174,6 +174,7 @@ export function DesktopPortfolio() {
                           id: window.id,
                           title: window.game.name,
                           Icon: Controller,
+                          largePlayer: window.game.largePlayer,
                         }
                       : apps.find((app) => app.id === window.id)
                   }
@@ -343,7 +344,9 @@ function DesktopWindow({
         ? 24
         : 42 + apps.findIndex((item) => item.id === app.id) * 22,
   };
-  const [maximized, setMaximized] = useState(false);
+  // Canvas-heavy games open at the largest size inside the iMac bezel. Their
+  // green window control still restores the ordinary draggable window.
+  const [maximized, setMaximized] = useState(!!app.largePlayer);
   const windowRef = useRef(null);
   const { position, dragging, titlebarProps } = useWindowDrag(
     windowRef,
@@ -366,7 +369,7 @@ function DesktopWindow({
       aria-label={app.title}
       tabIndex={-1}
       hidden={minimized}
-      className={`desktop-window ${active ? "window-active" : ""} ${maximized ? "window-maximized" : ""} ${dragging ? "window-dragging" : ""}`}
+      className={`desktop-window ${app.largePlayer ? "window-large-game" : ""} ${active ? "window-active" : ""} ${maximized ? "window-maximized" : ""} ${dragging ? "window-dragging" : ""}`}
       style={{
         "--window-start-x": `${initialPosition.x}px`,
         "--window-start-y": `${initialPosition.y}px`,

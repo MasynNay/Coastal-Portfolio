@@ -2,6 +2,16 @@
 // the preceding production commit, rather than fictional in-game release notes.
 const patchNotes = [
   {
+    version: "1.0.4",
+    date: "November 2, 2026",
+    previousCommit: "b8ae9df",
+    changes: [
+      "Element Runner and Axolotl Drift now open maximized inside Mac Mode, with their courses using the available window space.",
+      "Moved game information beside the courses in wide Mac windows and collapsed the extra controls panel by default. Show Controls and Restore remain available.",
+      "Added a Fullscreen control for these two games when an even larger view is wanted.",
+    ],
+  },
+  {
     version: "1.0.3",
     date: "November 2, 2026",
     previousCommit: "d6d5b23",
