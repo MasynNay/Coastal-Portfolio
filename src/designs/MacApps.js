@@ -1,6 +1,7 @@
 import { useEffect, useId, useRef, useState } from "react";
 import { games } from "../data/games";
 import GameCartridge from "../components/GameCartridge";
+import { photoAlbum } from "../data/photos";
 // The cartridge library shares the arcade catalog; each selection opens a Mac app window.
 export function GamesApp({ onOpen }) {
   const [selected, setSelected] = useState(null);
@@ -54,11 +55,12 @@ export function GamePlayer({ game }) {
       </div>
       <aside id={controlsId} hidden={!legend} className="mac-controls">
         <strong>Take the controls</strong>
-        <p>Arrows: move · Z / X: A / B · Enter: Start · Shift: Select.</p>
-        <p>
-          On phones and tablets, use the player’s touch controls. Check its
-          settings if the bindings differ.
-        </p>
+        {game.kind === "island" ? <p>{game.controls}</p> : (
+          <>
+            <p>Arrows: move · Z / X: A / B · Enter: Start · Shift: Select.</p>
+            <p>On phones and tablets, use the player’s touch controls. Check its settings if the bindings differ.</p>
+          </>
+        )}
         <button
           onClick={() => {
             setLegend(false);
@@ -77,8 +79,40 @@ export function GamePlayer({ game }) {
     </div>
   );
 }
-// Every image placed in public/slideshow is picked up by the local index generator.
-export function PhotosApp({ active = true }) {
+// The shared album supplies its own responsive viewer and slideshow. Keeping it
+// in an iframe avoids copying family photos or private photo metadata into Git.
+export function PhotosApp({ active = true, album = photoAlbum }) {
+  return album ? <SharedPhotos album={album} /> : <LocalPhotos active={active} />;
+}
+
+function SharedPhotos({ album }) {
+  const [revision, setRevision] = useState(0);
+  return (
+    <section className="mac-photos mac-shared-photos" aria-label="Photo gallery">
+      <header className="mac-photo-toolbar">
+        <button onClick={() => setRevision((value) => value + 1)}>
+          Refresh album
+        </button>
+        <a href={album.url} target="_blank" rel="noreferrer">
+          Open album ↗
+        </a>
+      </header>
+      <iframe
+        key={revision}
+        className="mac-photo-album"
+        title={`${album.name} shared photo album`}
+        src={album.url}
+        allow="fullscreen"
+        allowFullScreen
+        referrerPolicy="no-referrer"
+      />
+    </section>
+  );
+}
+
+// When no shared album is configured, the build-generated local index remains
+// available for a self-contained gallery using public/slideshow images.
+function LocalPhotos({ active = true }) {
   const [photos, setPhotos] = useState([]),
     [index, setIndex] = useState(0),
     [playing, setPlaying] = useState(false);

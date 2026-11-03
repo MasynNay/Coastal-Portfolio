@@ -1,0 +1,32 @@
+/* Only the standalone cartridge document uses these app-shell rules. The
+   imported game layouts and touch gestures remain shared with the town. */
+.arcade-game-page {
+  min-height: 100dvh;
+  padding: 16px;
+  background: #10262e;
+  color: #e1e9df;
+  font-family: Arial, sans-serif;
+}
+.arcade-game-page h1 {
+  margin: 0 0 16px;
+  font-size: clamp(20px, 4vw, 28px);
+  text-align: center;
+}
+.arcade-game-page button {
+  border: 1px solid #b8d3c755;
+  border-radius: 9px;
+  padding: 10px 14px;
+  color: #edf3e4;
+  background: #294b4c;
+  min-height: 44px;
+  cursor: pointer;
+}
+.arcade-game-page button:focus-visible {
+  outline: 3px solid #efdb9c;
+  outline-offset: 2px;
+}
+.arcade-game-page a { color: #c5e8db; }
+.arcade-game-page canvas { max-width: 100%; }
+@media (max-width: 480px) {
+  .arcade-game-page { padding: 12px; }
+}

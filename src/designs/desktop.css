@@ -1080,6 +1080,36 @@
   gap: 10px;
   justify-content: center;
 }
+/* Let the live album occupy the app body. The embedded viewer handles photo
+   navigation, swiping and slideshow controls at its own available width. */
+.mac-shared-photos {
+  height: 100%;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 12px;
+}
+.mac-photo-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.mac-photo-toolbar a {
+  color: #c5e8dd;
+}
+.mac-photo-album {
+  display: block;
+  flex: 1;
+  min-width: 0;
+  min-height: 240px;
+  width: 100%;
+  border: 1px solid #ffffff24;
+  border-radius: 12px;
+  background: #121212;
+}
 @media (prefers-reduced-motion: reduce) {
   .desktop-wallpaper::before,
   .desktop-wallpaper::after,
@@ -1222,6 +1252,9 @@
   .desktop-window .mac-games,
   .desktop-window .mac-photos {
     padding: 18px;
+  }
+  .desktop-window .mac-shared-photos {
+    padding: 10px;
   }
   .mac-games iframe {
     /* Keep the player and its controls inside the phone/tablet app window.

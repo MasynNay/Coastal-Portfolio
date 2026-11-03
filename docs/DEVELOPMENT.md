@@ -25,7 +25,7 @@ The project demos adapt the original projects to this portfolio. They are not pr
 
 ## Phones, tablets and controls
 
-The main website collapses its navigation and stacks content on smaller screens. Mac Mode keeps the iMac frame, uses contained app windows on touch screens, and lets the dock scroll horizontally. Selecting a cartridge opens its player and controls in a separate Mac window. Photos support swiping. Embedded arcade games provide their own controls; an **Open game separately** link is available if the external player needs more space or different settings.
+The main website collapses its navigation and stacks content on smaller screens. Mac Mode keeps the iMac frame, uses contained app windows on touch screens, and lets the dock scroll horizontally. Selecting a cartridge opens its player and controls in a separate Mac window. The shared cartridge catalog includes the eight retro games and seven island originals: Element Runner, Poké Ball Match, Windfall 2048, Orc Hunt, Wizard Memory, Axolotl Drift and Axolotl Race. Originals use distinct custom cartridge shells and isolated `/arcade/:game` players that reuse the island's components and race rules without loading the town. The hidden `/game` page uses the same catalog. Embedded games provide keyboard/touch instructions; **Open game separately** is available for more space.
 
 | Game action                            | Keyboard / mouse                                             | Phone / tablet                                                 |
 | -------------------------------------- | ------------------------------------------------------------ | -------------------------------------------------------------- |
@@ -69,7 +69,9 @@ Branding: the main navigation uses the `masynnay` wordmark and the floating hero
 
 Project artwork: `public/images/projects/` contains vector interface previews based on the local demos, rather than browser captures. Edit `scripts/ProjectPreviews.cjs` and run it with Node to rebuild these images.
 
-Adding photos: put the images in `public/slideshow/`, then restart the development server or rebuild. The photo index is generated automatically. The slideshow pauses while its app is inactive or minimized.
+Photos currently displays the public **Frames** album configured in `src/data/photos.js`. Add or remove photos in that shared album, then reopen Photos or select **Refresh album**. Updating the album does not require rebuilding the portfolio. The album's own controls provide its slideshow, photo navigation and mobile gestures; **Open album** also opens the full viewer in a separate tab. Keep the share available for public viewing.
+
+For a local gallery instead, set `photoAlbum` to `null`, put images in `public/slideshow/`, then restart the development server or rebuild. The photo index is generated automatically. Publish those files to update the live site. The local slideshow pauses while its app is inactive or minimized.
 
 Keep shared facts in the data files rather than copying them into each presentation. Keep rendering, simulation and menus separate. Comments should explain a component's purpose, important behavior and connections to other parts of the UI; avoid narrating obvious statements. CSS comments identify layout sections, responsive behavior and reasons for exceptions. Use simple file names and preserve existing saved IDs when changing labels or artwork.
 

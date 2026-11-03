@@ -2,6 +2,18 @@
 // the preceding production commit, rather than fictional in-game release notes.
 const patchNotes = [
   {
+    version: "1.0.3",
+    date: "November 2, 2026",
+    previousCommit: "d6d5b23",
+    changes: [
+      "Connected Mac Mode's Photos app to the live Frames shared album, with photo browsing and slideshow controls.",
+      "Added Refresh Album and Open Album controls. Photo changes can now come directly from the shared album without a portfolio rebuild.",
+      "Kept the local slideshow folder available as an alternative and documented how to switch photo sources.",
+      "Added all seven island mini-games to Mac Mode's Games app and the hidden Pocket Arcade, each with a custom cartridge and keyboard/touch instructions.",
+      "The same game components and rules power the island and standalone cartridge players, including a compact version of the family axolotl race.",
+    ],
+  },
+  {
     version: "1.0.2",
     date: "November 2, 2026",
     previousCommit: "eb2a0d2",

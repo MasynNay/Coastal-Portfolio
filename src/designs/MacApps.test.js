@@ -59,20 +59,33 @@ test("a game window includes its player, external link and dismissible keyboard/
 });
 test("a slideshow preserves its position while inactive and resumes when reactivated", async () => {
   jest.useFakeTimers();
-  await act(async () => root.render(<PhotosApp />));
+  await act(async () => root.render(<PhotosApp album={null} />));
   act(() => host.querySelectorAll("button")[1].click());
   act(() => jest.advanceTimersByTime(4000));
   expect(host.querySelector("img").getAttribute("src")).toBe(
     "/slideshow/two.jpg",
   );
-  act(() => root.render(<PhotosApp active={false} />));
+  act(() => root.render(<PhotosApp album={null} active={false} />));
   act(() => jest.advanceTimersByTime(12000));
   expect(host.querySelector("img").getAttribute("src")).toBe(
     "/slideshow/two.jpg",
   );
-  act(() => root.render(<PhotosApp active />));
+  act(() => root.render(<PhotosApp album={null} active />));
   act(() => jest.advanceTimersByTime(4000));
   expect(host.querySelector("img").getAttribute("src")).toBe(
     "/slideshow/one.jpg",
   );
+});
+
+test("Photos opens the shared album and refreshes it without fetching a local photo list", () => {
+  act(() => root.render(<PhotosApp />));
+  const frame = host.querySelector("iframe");
+  expect(frame.title).toBe("Frames shared photo album");
+  expect(frame.src).toBe(host.querySelector('a[target="_blank"]').href);
+  expect(frame.src).toMatch(/^https:\/\/photos\.trgcloud\.org\/share\//);
+  expect(frame.getAttribute("referrerpolicy")).toBe("no-referrer");
+  expect(global.fetch).not.toHaveBeenCalled();
+  act(() => host.querySelector("button").click());
+  expect(host.querySelector("iframe")).not.toBe(frame);
+  expect(host.querySelector("iframe").src).toBe(frame.src);
 });

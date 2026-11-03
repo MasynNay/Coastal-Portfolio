@@ -1,5 +1,8 @@
-// Both arcade screens use this catalog; selecting a game mounts only its player.
-export const games = [
+import { gameTitles } from "../world/games/GameLocations";
+
+// Mac Mode and the secret arcade share one catalog. Each local game has an
+// isolated player route, so keyboard controls never reach another open game.
+export const retroGames = [
   {
     id: "ruby",
     title: "Pokémon",
@@ -57,3 +60,27 @@ export const games = [
     url: "https://www.retrogames.cc/embed/19418-2-in-1-shark-tale-shrek-2-u-sir-vg.html",
   },
 ];
+
+export const islandGames = [
+  { id: "element-runner", location: "chimes", name: gameTitles.chimes,
+    edition: "Endless runner", controls: "A / D or Left / Right to change lanes. W / Up jumps; S / Down slides. Swipe or use the on-screen buttons on touch screens." },
+  { id: "poke-ball-match", location: "workstation", name: gameTitles.workstation,
+    edition: "Match-three puzzles", controls: "Swipe a ball toward a neighbor, or select two adjacent balls to swap. Match four or five to make special balls." },
+  { id: "windfall-2048", location: "windmill", name: gameTitles.windmill,
+    edition: "A sea of numbers", controls: "Use arrow keys, drag or swipe the board, or tap the direction buttons to combine matching tiles." },
+  { id: "orc-hunt", location: "workbench", name: gameTitles.workbench,
+    edition: "Moria archery", controls: "Click or tap the orcs before the next wave. Each successful shot sends an arrow from the archer." },
+  { id: "wizard-memory", location: "orrery", name: gameTitles.orrery,
+    edition: "Find the magical pairs", controls: "Click or tap two cards to find matching pairs. Keyboard users can use Tab and Enter." },
+  { id: "axolotl-drift", name: "Axolotl Drift",
+    edition: "Ride between the eels", controls: "Press Space or Up, or tap the game, to rise. Avoid the eels and the sea floor." },
+  { id: "axolotl-race", name: "Axolotl Race",
+    edition: "The family regatta", controls: "Select Start race and cheer on the family. Everyone has their own lane and the winner is chosen randomly." },
+].map((game) => ({
+  ...game,
+  kind: "island",
+  title: game.name,
+  url: `/arcade/${game.id}`,
+}));
+
+export const games = [...retroGames, ...islandGames];

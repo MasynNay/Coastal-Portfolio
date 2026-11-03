@@ -139,14 +139,14 @@ export default function Game() {
                     <iframe
                       key={game.id}
                       src={game.url}
-                      title={`${game.name} — external game player`}
+                      title={`${game.name} — ${game.kind === "island" ? "island" : "external"} game player`}
                       allowFullScreen
                       allow="fullscreen; gamepad; cross-origin-isolated"
                       onLoad={() => setLoading(false)}
                     />
                     {loading && (
                       <div className="secret-loading" role="status">
-                        Opening external player…
+                        Opening game…
                       </div>
                     )}
                   </>
@@ -162,7 +162,7 @@ export default function Game() {
                       </div>
                     )}
                     <span className="secret-game-edition">
-                      A LITTLE NOSTALGIA
+                      {game.kind === "island" ? "AN ISLAND ORIGINAL" : "A LITTLE NOSTALGIA"}
                     </span>
                     <h2>
                       {game.title}
@@ -171,7 +171,7 @@ export default function Game() {
                     <button onClick={startGame}>
                       <PlayFill aria-hidden="true" /> Start game
                     </button>
-                    <p>Opens the RetroGames player here.</p>
+                    <p>{game.kind === "island" ? "Play the island’s original mini-game here." : "Opens the RetroGames player here."}</p>
                   </div>
                 )}
               </div>
@@ -180,7 +180,7 @@ export default function Game() {
                   {started
                     ? loading
                       ? "CONNECTING TO PLAYER"
-                      : "EXTERNAL PLAYER OPEN"
+                      : game.kind === "island" ? "ISLAND GAME OPEN" : "EXTERNAL PLAYER OPEN"
                     : "READY WHEN YOU ARE"}
                 </span>
                 <div>
@@ -238,12 +238,9 @@ export default function Game() {
               <div className="secret-controls-heading">
                 <span className="glass-eyebrow">THE BASICS</span>
                 <h2>Take the controls.</h2>
-                <p>
-                  Click inside the game first. Its Controls Settings lists
-                  additional buttons.
-                </p>
+                <p>{game.kind === "island" ? game.controls : "Click inside the game first. Its Controls Settings lists additional buttons."}</p>
               </div>
-              <dl>
+              {game.kind !== "island" && <dl>
                 <div>
                   <dt>Move</dt>
                   <dd>
@@ -277,7 +274,7 @@ export default function Game() {
                     <kbd>Shift</kbd>
                   </dd>
                 </div>
-              </dl>
+              </dl>}
             </section>
             <section className="secret-story">
               <span>WHY A GAME?</span>
@@ -290,10 +287,9 @@ export default function Game() {
             <details className="secret-help">
               <summary>Player not responding?</summary>
               <p>
-                Click inside the player to give it keyboard focus. If it still
-                won’t load, try “Open separately.” If it reports a graphics
-                error, try a browser with graphics acceleration enabled. Game
-                availability and touch controls depend on the external player.
+                Click or tap inside the player to give it focus. If it still
+                won’t load, try “Open separately.”
+                {game.kind !== "island" && " If it reports a graphics error, try a browser with graphics acceleration enabled. Availability and touch controls depend on the external player."}
               </p>
             </details>
           </aside>

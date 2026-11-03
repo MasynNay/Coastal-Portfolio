@@ -23,6 +23,7 @@ import { DesktopPortfolio } from "./designs/DesktopPortfolio";
 const ProjectDemos = lazy(() => import("./demos/ProjectDemos"));
 const SpriteStudio = lazy(() => import("./world/SpriteStudio"));
 const WorldMode = lazy(() => import("./world/WorldMode"));
+const ArcadeGame = lazy(() => import("./pages/ArcadeGame"));
 function App() {
   return (
     <Router>
@@ -33,6 +34,14 @@ function App() {
 function PortfolioRoutes() {
   const location = useLocation();
   const pathname = location.pathname.replace(/\/$/, "") || "/";
+  if (pathname.startsWith("/arcade/"))
+    return (
+      <Suspense fallback={<p>Opening island game…</p>}>
+        <Routes>
+          <Route path="/arcade/:game" element={<ArcadeGame />} />
+        </Routes>
+      </Suspense>
+    );
   if (pathname.startsWith("/projects/"))
     return (
       <Suspense fallback={<p>Opening project…</p>}>

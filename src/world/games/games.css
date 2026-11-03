@@ -89,7 +89,7 @@
   background: #0c212b;
   border: 1px solid #6caba966;
 }
-.world-dialog .gem-cell {
+:is(.world-dialog, .arcade-game-page) .gem-cell {
   display: grid;
   place-items: center;
   aspect-ratio: 1;
@@ -113,7 +113,7 @@
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 10px;
 }
-.world-dialog .memory-card {
+:is(.world-dialog, .arcade-game-page) .memory-card {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -155,7 +155,7 @@
   isolation: isolate;
 }
 
-.world-dialog .orc-hunt-target {
+:is(.world-dialog, .arcade-game-page) .orc-hunt-target {
   position: absolute;
   top: var(--target-top, calc(3% + var(--lane) * 24%));
   padding: 0;
@@ -282,7 +282,7 @@
   gap: 8px;
   margin-top: 14px;
 }
-.world-dialog .runner-controls button {
+:is(.world-dialog, .arcade-game-page) .runner-controls button {
   min-width: 0;
   min-height: 48px;
   padding: 8px;
@@ -298,7 +298,7 @@
   .runner-controls {
     gap: 5px;
   }
-  .world-dialog .runner-controls button {
+  :is(.world-dialog, .arcade-game-page) .runner-controls button {
     font-size: 11px;
     padding: 5px;
   }
@@ -634,7 +634,7 @@
 
 /* A true opaque reading surface keeps the start/result copy legible even
    when a brazier or carved pillar sits directly behind it. */
-.world-dialog .orc-hunt-start-card {
+:is(.world-dialog, .arcade-game-page) .orc-hunt-start-card {
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -656,7 +656,7 @@
 .gem-board {
   overflow: hidden;
 }
-.world-dialog .gem-cell:disabled {
+:is(.world-dialog, .arcade-game-page) .gem-cell:disabled {
   opacity: 1;
   filter: none;
 }
@@ -775,15 +775,15 @@
   }
 }
 
-.world-dialog .orc-hunt-start-card {
+:is(.world-dialog, .arcade-game-page) .orc-hunt-start-card {
   cursor: pointer;
   text-align: center;
 }
-.world-dialog .orc-hunt-start-card:hover {
+:is(.world-dialog, .arcade-game-page) .orc-hunt-start-card:hover {
   background: #1c2d39;
   border-color: #e5c794;
 }
-.world-dialog .orc-hunt-start-card:focus-visible {
+:is(.world-dialog, .arcade-game-page) .orc-hunt-start-card:focus-visible {
   outline: 3px solid #f5d590;
   outline-offset: 4px;
 }

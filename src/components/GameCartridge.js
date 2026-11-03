@@ -17,6 +17,13 @@ const symbols = {
   "liquid-crystal": Gem,
   "return-of-the-king": Shield,
   "shark-shrek": Stars,
+  "element-runner": Lightning,
+  "poke-ball-match": Gem,
+  "windfall-2048": Compass,
+  "orc-hunt": Shield,
+  "wizard-memory": Stars,
+  "axolotl-drift": Compass,
+  "axolotl-race": Lightning,
 };
 
 // Both arcade pickers use the same shell and label layout. Title length never
@@ -28,16 +35,17 @@ export default function GameCartridge({
   action = "Play",
 }) {
   const Icon = symbols[game.id] || Stars;
+  const custom = game.kind === "island";
   return (
     <button
-      className="game-cartridge"
+      className={`game-cartridge${custom ? " custom-cartridge" : ""}`}
       data-game={game.id}
       aria-label={`${action} ${game.name}`}
       aria-pressed={selected}
       onClick={onSelect}
     >
       <span className="cartridge-top" aria-hidden="true">
-        GAME BOY
+        {custom ? "ISLAND ARCADE" : "GAME BOY"}
       </span>
       <span className="cartridge-label">
         <span className="cartridge-art" aria-hidden="true">
@@ -47,10 +55,10 @@ export default function GameCartridge({
         <span className="cartridge-edition">{game.edition}</span>
       </span>
       <span className="cartridge-bottom" aria-hidden="true">
-        <i />▼<i />
+        {custom ? <><i /><i /><i /><i /><i /><i /></> : <><i />▼<i /></>}
       </span>
       <span className="cartridge-selection" aria-hidden="true">
-        {selected ? "Selected" : "Pocket Arcade"}
+        {selected ? "Selected" : custom ? "Island original" : "Pocket Arcade"}
       </span>
     </button>
   );
