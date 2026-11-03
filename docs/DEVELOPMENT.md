@@ -21,7 +21,7 @@ Open the address printed by the development server, then visit `/design/glass` f
 | `/React-Portfolio/` archive, `/resume`                           | Original portfolio and resume |
 | `/design/polished`, `/design/expressive` | Earlier design studies        |
 
-The project demos adapt the original projects to this portfolio. They are not production backends: some use local sample data. See the notices inside each demo for its limits. TypeNinja's original MIT notice is in [docs/licenses/TypeNinja.txt](docs/licenses/TypeNinja.txt).
+The project demos adapt the original projects to this portfolio. They are not production backends: some use local sample data. See the notices inside each demo for its limits. TypeNinja's original MIT notice is in [docs/licenses/TypeNinja.txt](licenses/TypeNinja.txt).
 
 ## Phones, tablets and controls
 
@@ -59,7 +59,7 @@ Game Mode is a visual experience; it is not a screen-reader equivalent of the po
 | `src/components/`             | Shared portfolio sections and the original page                                                              |
 | `src/hooks/useDialogFocus.js` | Shared modal keyboard, focus restoration and scroll behavior                                                 |
 | `src/world/RoomContent.js`    | Portfolio information shown inside the town's homes                                                          |
-| `src/world/`                  | Town simulation, renderer, artwork manifests and React menus; see its [directory guide](src/world/README.md) |
+| `src/world/`                  | Town simulation, renderer, artwork manifests and React menus; see its [directory guide](../src/world/README.md) |
 | `src/typing/`                 | TypeNinja's offline word rounds and device-local scores                                                      |
 | `src/demos/`                  | Project demo screens                                                                                         |
 | `public/slideshow/`           | Images used by the Photos app                                                                                |
@@ -96,7 +96,7 @@ python3 scripts/VerifyDirections.py
 python3 scripts/VerifyWorldAssets.py
 ```
 
-After importing artwork, run `python3 scripts/CleanSprites.py --write` before the read-only checks. See [sprite maintenance](docs/SPRITE-CLEANUP.md), [town behavior](docs/SPRITE-VILLAGE.md) and the [cleanup record](docs/CLEANUP.md).
+After importing artwork, run `python3 scripts/CleanSprites.py --write` before the read-only checks. See [sprite maintenance](SPRITE-CLEANUP.md), [town behavior](SPRITE-VILLAGE.md) and the [cleanup record](CLEANUP.md).
 
 Automated checks verify behavior and build output, but do not replace visual playtesting on an actual phone or iPad. Before publishing, check portrait and landscape layouts, touch movement with simultaneous actions, modal scrolling, the dock, typing with an on-screen keyboard, and the GBA players on the target devices. EmulatorJS requires WebAssembly and working WebGL graphics; embedded browser panels may not supply them. See [the arcade guide](ARCADE.md).
 
@@ -115,3 +115,9 @@ Normal site builds use the already preserved static demo and do not fetch the or
 Element Runner at the chimes supports A/D or Left/Right for lanes, W/Up/Space to jump, S/Down to slide, directional swipes and touch buttons. Windmill 2048 accepts mouse drags, finger swipes, arrow keys and buttons. The other island arcades use tappable targets/cards/balls. Surfboard steering uses the same keyboard and tap-to-route system as other manual rides, with a small trailing wave. Steer onto any beach to step ashore there; the board resets at its original rack.
 
 The two lawn seats share `RestSpots.js`: a trainer stool by Portfolio and a rocking seahorse beside Contact. Current costumes remain equipped while seated; E, the touch action or movement stands up. Mailboxes use `TownLayout.js` for both drawing and collision, with room to read them beside each entrance.
+
+## Consistent maintenance
+
+Use `npm run format:check` to check authored JavaScript/CSS and `npm run format` to apply the pinned formatter. Use `python3 -m black --check scripts` for Python tools after installing `scripts/requirements.txt`. Vendor runtime, archived output and generated sprite manifests are excluded from source formatting.
+
+`npm run check:project` checks the import graph, local asset references and documentation links without fetching URLs or changing files. It also reports application modules with no path from the entry point. Continue using `VerifyWorldAssets.py` for dynamic artwork manifests; static import checks cannot identify those references by themselves. The [shared data guide](../src/data/README.md), [source-media guide](../src/assets/README.md) and [tools guide](../scripts/README.md) explain their folder responsibilities.

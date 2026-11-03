@@ -1,3 +1,4 @@
+import { rarities } from "./Rarity";
 import CollectionProgress from "./CollectionProgress";
 import { useState } from "react";
 import SpritePose from "./SpritePose";
@@ -99,14 +100,7 @@ export default function CollectionGuide({
                   setPage(0);
                 }}
               >
-                {[
-                  "All",
-                  "Common",
-                  "Uncommon",
-                  "Rare",
-                  "Very rare",
-                  "Super rare",
-                ].map((r) => (
+                {["All", ...rarities].map((r) => (
                   <option key={r}>{r}</option>
                 ))}
               </select>

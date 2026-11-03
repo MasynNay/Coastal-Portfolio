@@ -48,11 +48,7 @@ nav.navbar a.navbar-brand.brand-link {
   flex: 0 0 auto;
   line-height: 1;
 }
-.footerlogo .brand-mark {
-  width: 180px;
-  height: 135px;
-  max-width: 100%;
-}
+
 @media (max-width: 650px) {
   .brand-mark--nav {
     width: 68px;

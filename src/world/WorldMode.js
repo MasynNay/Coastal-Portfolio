@@ -35,7 +35,8 @@ import {
 import { createWorld } from "./engine";
 import { doorArrival } from "./WorldLayout";
 import { buildings, characters } from "./config";
-import { GAME_PORTALS, FRIENDS_TRIVIA } from "./legacySecrets";
+import { GAME_PORTALS } from "./RoomGames";
+import FRIENDS_TRIVIA from "../data/friendsTrivia.json";
 import RoomContent from "./RoomContent";
 import Dialog from "./WorldDialog";
 import "./world.css";
@@ -784,13 +785,15 @@ export default function WorldMode() {
           ) : menu === "aquariums" ? (
             <>
               <div className="collection-toolbar">
-              <button
-                className="inventory-back"
-                onClick={() => setMenu("inventory")}
-              >
-                ← Inventory
-              </button>
-                <button onClick={() => openGuide("fish")}>Open field guide</button>
+                <button
+                  className="inventory-back"
+                  onClick={() => setMenu("inventory")}
+                >
+                  ← Inventory
+                </button>
+                <button onClick={() => openGuide("fish")}>
+                  Open field guide
+                </button>
               </div>
               <Aquariums
                 caught={aquariums}
@@ -808,13 +811,15 @@ export default function WorldMode() {
           ) : menu === "terrariums" ? (
             <>
               <div className="collection-toolbar">
-              <button
-                className="inventory-back"
-                onClick={() => setMenu("inventory")}
-              >
-                ← Inventory
-              </button>
-                <button onClick={() => openGuide("bugs")}>Open field guide</button>
+                <button
+                  className="inventory-back"
+                  onClick={() => setMenu("inventory")}
+                >
+                  ← Inventory
+                </button>
+                <button onClick={() => openGuide("bugs")}>
+                  Open field guide
+                </button>
               </div>
               <Terrariums
                 caught={caught}
@@ -887,12 +892,12 @@ export default function WorldMode() {
             <>
               <h3>The beach & island journal</h3>
               <p>
-                Tap or click the places / secrets counter to review discoveries and the
-                glass-float hunt. On the beach beside the pier, walk close to
-                shells, the sandcastle bucket or the dragon kite, then press E
-                or tap the action button. Footprints fade from the sand; collect
-                50 shell varieties in the Field Guide. Start the 20-float hunt
-                inside Windfall lodge.
+                Tap or click the places / secrets counter to review discoveries
+                and the glass-float hunt. On the beach beside the pier, walk
+                close to shells, the sandcastle bucket or the dragon kite, then
+                press E or tap the action button. Footprints fade from the sand;
+                collect 50 shell varieties in the Field Guide. Start the
+                20-float hunt inside Windfall lodge.
               </p>
               <h3>Mobile & tablet</h3>
               <p>
@@ -954,8 +959,8 @@ export default function WorldMode() {
                 of Masyn’s themed costumes also has a Q action on land: glide in
                 a circle as an airbender, play the ocarina, throw a returning
                 trident, cast a wand spell, throw a Poké Ball, or shoot an
-                arrow. Panem Tribute raises a three-finger salute. Mi Shell’s
-                Q tosses a few dollar bills.
+                arrow. Panem Tribute raises a three-finger salute. Mi Shell’s Q
+                tosses a few dollar bills.
               </p>
               <p>
                 Try the wand, Poké Ball or bow near another person for a small

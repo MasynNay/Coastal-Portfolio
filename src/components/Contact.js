@@ -41,7 +41,8 @@ export const Contact = () => {
       setButtonText("Send");
       setStatus({
         success: false,
-        message: "Your message couldn’t be sent. Your details are still here—please try again, or email me directly.",
+        message:
+          "Your message couldn’t be sent. Your details are still here—please try again, or email me directly.",
       });
     } finally {
       setIsSending(false);
@@ -90,7 +91,9 @@ export const Contact = () => {
                         tabIndex={-1}
                         autoComplete="off"
                         value={formDetails.website}
-                        onChange={(e) => onFormUpdate("website", e.target.value)}
+                        onChange={(e) =>
+                          onFormUpdate("website", e.target.value)
+                        }
                       />
                     </div>
                     <Row>
@@ -176,7 +179,12 @@ export const Contact = () => {
                           >
                             {status.message}
                             {status.success === false && (
-                              <> <a href={`mailto:${contactEmail}`}>{contactEmail}</a></>
+                              <>
+                                {" "}
+                                <a href={`mailto:${contactEmail}`}>
+                                  {contactEmail}
+                                </a>
+                              </>
                             )}
                           </p>
                         )}

@@ -43,3 +43,5 @@ Character maintenance and source artwork are documented in `docs/SPRITE-CLEANUP.
 `WindStatue.js` plays a short conducting action independently of costume powers. Every appearance has its own twelve-pose `-conduct` atlas; hands and the baton are drawn together, with planted feet. `ImportConduct.py` publishes these sources from `docs/source-assets/people/Conducting.json`. The notes layer contains only music notes.
 
 `RunnerArt.js` retains the two active character images separately from the scenery cache. The background contains no paving: `RunnerTrack.js` draws the only road and projects objects through the same camera. Orc Hunt offers three-to-five target waves and starts from either its central card or round button. The geese Haymitch and Lenore Dove share a paired pond route.
+
+`RoomGames.js` maps persistent secret IDs to the shared ROM catalog; `src/data/friendsTrivia.json` holds the About room's separate question table. `Rarity.js` shares bug/aquarium rarity ordering and weighted selection, after the caller restricts the pool to the eligible category or water habitat. Seashells retain their distinct beach-specific distribution.

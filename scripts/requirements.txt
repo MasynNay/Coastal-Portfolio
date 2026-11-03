@@ -1,0 +1,4 @@
+# Artwork importers and read-only sprite validation.
+Pillow>=10.2
+# Formatting only; not part of the deployed website.
+black==25.1.0

@@ -76,11 +76,17 @@ export function Terrariums({ caught, onRelease }) {
       )}
       {!spiders.length && (
         <div className="spider-empty">
-          No residents yet. Your catches will appear here with their own habitats.
+          No residents yet. Your catches will appear here with their own
+          habitats.
         </div>
       )}
       {!!spiders.length && (
-        <div className="collection-picker" role="region" tabIndex={0} aria-label="Choose a terrarium">
+        <div
+          className="collection-picker"
+          role="region"
+          tabIndex={0}
+          aria-label="Choose a terrarium"
+        >
           {spiders.map((s) => (
             <button
               key={s.id}

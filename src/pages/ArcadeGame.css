@@ -25,8 +25,12 @@
   outline: 3px solid #efdb9c;
   outline-offset: 2px;
 }
-.arcade-game-page a { color: #c5e8db; }
-.arcade-game-page canvas { max-width: 100%; }
+.arcade-game-page a {
+  color: #c5e8db;
+}
+.arcade-game-page canvas {
+  max-width: 100%;
+}
 /* The Mac window already supplies the title. Keep its accessible heading while
    giving the game the entire iframe height. Wide windows put the HUD/help in a
    side column so the actual course does not shrink beneath stacked controls. */
@@ -67,9 +71,18 @@
   aspect-ratio: auto;
   object-fit: contain;
 }
-.arcade-game-large .axolotl-game-score { margin: 0; }
-.arcade-game-large .axolotl-game > button { position: static; margin: 0 auto; }
-.arcade-game-large .activity-note { display: block; margin: 0; font-size: 11px; }
+.arcade-game-large .axolotl-game-score {
+  margin: 0;
+}
+.arcade-game-large .axolotl-game > button {
+  position: static;
+  margin: 0 auto;
+}
+.arcade-game-large .activity-note {
+  display: block;
+  margin: 0;
+  font-size: 11px;
+}
 @media (min-width: 640px) {
   .arcade-game-large .element-runner,
   .arcade-game-large .axolotl-game {
@@ -77,10 +90,23 @@
     grid-template-rows: auto auto minmax(0, 1fr) auto;
     column-gap: 16px;
   }
-  .arcade-game-large .runner-help { grid-column: 1; grid-row: 3; overflow: auto; }
-  .arcade-game-large .runner-help summary { padding: 0; }
-  .arcade-game-large .mini-score { grid-column: 1; grid-row: 1; }
-  .arcade-game-large .runner-power-bar { grid-column: 1; grid-row: 2; flex-wrap: wrap; }
+  .arcade-game-large .runner-help {
+    grid-column: 1;
+    grid-row: 3;
+    overflow: auto;
+  }
+  .arcade-game-large .runner-help summary {
+    padding: 0;
+  }
+  .arcade-game-large .mini-score {
+    grid-column: 1;
+    grid-row: 1;
+  }
+  .arcade-game-large .runner-power-bar {
+    grid-column: 1;
+    grid-row: 2;
+    flex-wrap: wrap;
+  }
   .arcade-game-large .runner-controls {
     grid-column: 1;
     grid-row: 4;
@@ -95,11 +121,25 @@
     max-width: 100%;
     margin: auto;
   }
-  .arcade-game-large .axolotl-game-score { grid-column: 1; grid-row: 1; flex-wrap: wrap; }
-  .arcade-game-large .axolotl-game > button { grid-column: 1; grid-row: 2; }
-  .arcade-game-large .activity-note { grid-column: 1; grid-row: 3; }
+  .arcade-game-large .axolotl-game-score {
+    grid-column: 1;
+    grid-row: 1;
+    flex-wrap: wrap;
+  }
+  .arcade-game-large .axolotl-game > button {
+    grid-column: 1;
+    grid-row: 2;
+  }
+  .arcade-game-large .activity-note {
+    grid-column: 1;
+    grid-row: 3;
+  }
 }
 @media (max-width: 480px) {
-  .arcade-game-page { padding: 12px; }
-  .arcade-game-large { padding: 8px; }
+  .arcade-game-page {
+    padding: 12px;
+  }
+  .arcade-game-large {
+    padding: 8px;
+  }
 }

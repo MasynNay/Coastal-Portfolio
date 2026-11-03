@@ -1,3 +1,4 @@
+import { projectById } from "../data/projects";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { ArrowRepeat, Trophy } from "react-bootstrap-icons";
 import { makeWords } from "./Words";
@@ -386,11 +387,7 @@ export default function TypingTest({ active = true }) {
       )}
       <footer className="typing-footer">
         <span>Five correct characters = one WPM word.</span>
-        <a
-          href="https://github.com/MasynNay/TypeNinja"
-          target="_blank"
-          rel="noreferrer"
-        >
+        <a href={projectById.typeninja.github} target="_blank" rel="noreferrer">
           The original TypeNinja project ↗
         </a>
       </footer>

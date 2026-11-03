@@ -1,3 +1,6 @@
+// The main portfolio composes shared content and sections. Its resume variant
+// replaces the home content while retaining the same navigation and footer.
+import { links } from "../data/links";
 import BrandMark from "../components/BrandMark";
 import { NavBar } from "../components/NavBar";
 import { Banner } from "../components/Banner";
@@ -102,11 +105,9 @@ export function GlassPortfolio({ resume = false }) {
         </Link>
         <p>Technology, creativity, and a little curiosity.</p>
         <div>
-          <a href="https://github.com/MasynNay">GitHub ↗</a>
-          <a href="https://www.linkedin.com/in/masyn-nay-290225201/">
-            LinkedIn ↗
-          </a>
-          <a href="https://www.instagram.com/masynnay/">Instagram ↗</a>
+          <a href={links.github}>GitHub ↗</a>
+          <a href={links.linkedin}>LinkedIn ↗</a>
+          <a href={links.instagram}>Instagram ↗</a>
           <a href="/React-Portfolio/" target="_blank" rel="noreferrer">
             Before this redesign ↗
           </a>
@@ -116,18 +117,10 @@ export function GlassPortfolio({ resume = false }) {
           aria-label="Earlier portfolios"
         >
           <span>EARLIER PORTFOLIOS</span>
-          <a
-            href="https://masynnay.github.io/Reactive-Portfolio/"
-            target="_blank"
-            rel="noreferrer"
-          >
+          <a href={links.firstPortfolio} target="_blank" rel="noreferrer">
             2022 · HTML & CSS ↗
           </a>
-          <a
-            href="https://masynnay.github.io/React-Portfolio/"
-            target="_blank"
-            rel="noreferrer"
-          >
+          <a href={links.originalPortfolio} target="_blank" rel="noreferrer">
             2023 · React ↗
           </a>
         </div>

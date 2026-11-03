@@ -1,11 +1,12 @@
+import { links as profileLinks } from "../data/links";
 import { useState, useEffect } from "react";
 import { Navbar, Nav, Container } from "react-bootstrap";
 import { Link, useLocation } from "react-router-dom";
 import { HashLink } from "react-router-hash-link";
 import BrandMark from "./BrandMark";
-import nav1 from "../assets/images/nav1.svg";
-import nav2 from "../assets/images/nav2.svg";
-import nav3 from "../assets/images/nav3.svg";
+import linkedinIcon from "../assets/images/linkedin.svg";
+import githubIcon from "../assets/images/github.svg";
+import instagramIcon from "../assets/images/instagram.svg";
 import { Apple, Controller, List, X } from "react-bootstrap-icons";
 
 export const NavBar = ({ glass = false }) => {
@@ -142,20 +143,14 @@ export const NavBar = ({ glass = false }) => {
           )}
           <span className="navbar-text">
             <div className="social-icon">
-              <a
-                href="https://www.linkedin.com/in/masyn-nay-290225201/"
-                aria-label="LinkedIn"
-              >
-                <img src={nav1} alt="" />
+              <a href={profileLinks.linkedin} aria-label="LinkedIn">
+                <img src={linkedinIcon} alt="" />
               </a>
-              <a href="https://github.com/MasynNay" aria-label="GitHub">
-                <img src={nav2} alt="" />
+              <a href={profileLinks.github} aria-label="GitHub">
+                <img src={githubIcon} alt="" />
               </a>
-              <a
-                href="https://www.instagram.com/masynnay/"
-                aria-label="Instagram"
-              >
-                <img src={nav3} alt="" />
+              <a href={profileLinks.instagram} aria-label="Instagram">
+                <img src={instagramIcon} alt="" />
               </a>
             </div>
           </span>

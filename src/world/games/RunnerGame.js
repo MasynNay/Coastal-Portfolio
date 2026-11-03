@@ -1,3 +1,5 @@
+// Element Runner connects keyboard/touch actions to Runner.js and paints via
+// RunnerScene.js. It owns loading, pause, animation-loop cleanup and local bests.
 import { useCallback, useEffect, useRef, useState } from "react";
 import { characterAsset } from "../Wardrobe";
 import { createRunnerArt } from "./RunnerArt";

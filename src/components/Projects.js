@@ -1,9 +1,8 @@
 import { Container, Row, Col, Tab, Nav } from "react-bootstrap";
 import { ProjectCard } from "./ProjectCard";
 import { webProjects } from "../data/projects";
-import itproject1 from "../assets/images/itproject1.PNG";
-import video from "../assets/images/video1.mp4";
-import placeholder from "../assets/images/placeholder.png";
+import certificateImage from "../assets/images/comptia-certificate.png";
+import vendettaVideo from "../assets/images/vendetta-pokemon.mp4";
 import "animate.css";
 import TrackVisibility from "react-on-screen";
 import { Link, useLocation } from "react-router-dom";
@@ -14,7 +13,7 @@ export const Projects = ({ glass = false }) => {
   const { search } = useLocation();
   const initialTab =
     new URLSearchParams(search).get("project") === "first" ? "third" : "first";
-  const projectsTab1 = [
+  const itProjects = [
     ...(glass
       ? achievements.map((item) => ({
           title: item.title,
@@ -26,36 +25,20 @@ export const Projects = ({ glass = false }) => {
       title: "CompTIA A+ Certification",
       description:
         "I completed the CompTIA A+ certification in May, 2024. This certification is a great starting point for a career in IT and is a great way to learn the basics of computer hardware, software, and networking.",
-      imgUrl: itproject1,
-    },
-    {
-      title: "Custom Project 2",
-      description: "Description for custom project 2.",
-      imgUrl: placeholder,
+      imgUrl: certificateImage,
     },
   ];
 
-  const projectsTab2 = [
-    ...webProjects.map(({ github, demo, website, websiteLabel, ...project }) => ({
-      ...project,
-      gitLink: github,
-      demoLink: demo,
-      webLink: website,
-      webLabel: websiteLabel,
-    })),
-    // Retained on the original route only; the redesign hides unfinished cards.
-    {
-      title: "Placeholder #5",
-      description: "Placeholder #5",
-      imgUrl: placeholder,
-      // No links
-    },
-    {
-      title: "Placeholder #6",
-      description: "Placeholder #6",
-      imgUrl: placeholder,
-      // No links
-    },
+  const codingProjects = [
+    ...webProjects.map(
+      ({ github, demo, website, websiteLabel, ...project }) => ({
+        ...project,
+        gitLink: github,
+        demoLink: demo,
+        webLink: website,
+        webLabel: websiteLabel,
+      }),
+    ),
   ];
 
   return (
@@ -104,35 +87,24 @@ export const Projects = ({ glass = false }) => {
                     >
                       <Tab.Pane eventKey="first">
                         <Row>
-                          {projectsTab1
-                            .filter(
-                              (project) =>
-                                !glass || project.title !== "Custom Project 2",
-                            )
-                            .map((project) => (
-                              <ProjectCard
-                                key={project.title}
-                                {...project}
-                                glass={glass}
-                              />
-                            ))}
+                          {itProjects.map((project) => (
+                            <ProjectCard
+                              key={project.title}
+                              {...project}
+                              glass={glass}
+                            />
+                          ))}
                         </Row>
                       </Tab.Pane>
                       <Tab.Pane eventKey="second">
                         <Row>
-                          {projectsTab2
-                            .filter(
-                              (project) =>
-                                !glass ||
-                                !project.title.startsWith("Placeholder"),
-                            )
-                            .map((project) => (
-                              <ProjectCard
-                                key={project.title}
-                                {...project}
-                                glass={glass}
-                              />
-                            ))}
+                          {codingProjects.map((project) => (
+                            <ProjectCard
+                              key={project.title}
+                              {...project}
+                              glass={glass}
+                            />
+                          ))}
                         </Row>
                       </Tab.Pane>
                       <Tab.Pane eventKey="third">
@@ -150,7 +122,7 @@ export const Projects = ({ glass = false }) => {
                           className={glass ? "first-project-film" : undefined}
                         >
                           <video
-                            src={video}
+                            src={vendettaVideo}
                             controls
                             preload="metadata"
                             aria-label="Vendetta’s first coding project"

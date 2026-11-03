@@ -1,6 +1,8 @@
+// The shared home hero reads profile facts from the resume data. Its typewriter
+// timer respects reduced motion; the glass layout adds the floating monogram.
 import { useState, useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
-import headerImg from "../assets/images/header.svg";
+import legacyHeroImage from "../assets/images/legacy-hero.svg";
 import "animate.css";
 import TrackVisibility from "react-on-screen";
 import { profile } from "../data/resume";
@@ -126,7 +128,7 @@ export const Banner = ({ glass = false }) => {
                       </span>
                     </div>
                   ) : (
-                    <img src={headerImg} alt="Header Img" />
+                    <img src={legacyHeroImage} alt="Header Img" />
                   )}
                 </div>
               )}

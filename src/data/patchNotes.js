@@ -2,6 +2,18 @@
 // the preceding production commit, rather than fictional in-game release notes.
 const patchNotes = [
   {
+    version: "1.0.6",
+    date: "November 3, 2026",
+    previousCommit: "39cdc8e",
+    changes: [
+      "Consolidated profile URLs, project/demo metadata and bug/fish rarity rules into shared modules, preserving existing catch rates and saved collection IDs.",
+      "Unified the route tree, retained all current view aliases and made unmatched addresses return to the main website.",
+      "Removed unreachable old skills/footer components, six unused source images, obsolete styles and four unused packages. Renamed numbered source media by subject.",
+      "Separated the room cartridge map from the Friends trivia data and added folder guides and purpose comments for the remaining application modules.",
+      "Formatted authored JavaScript, CSS and Python tools consistently, and added repeatable formatting, import, asset-path and documentation-link checks. Preserved vendor files and the frozen original portfolio.",
+    ],
+  },
+  {
     version: "1.0.5",
     date: "November 2, 2026",
     previousCommit: "1587097",

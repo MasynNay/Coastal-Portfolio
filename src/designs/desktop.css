@@ -1,3 +1,4 @@
+/* Mac Mode screen, windows and dock. Later sections cover the physical iMac frame and touch layouts; game-specific expansion stays scoped to app windows. */
 .desktop-site {
   height: 100dvh;
   min-height: 420px;
@@ -1305,7 +1306,9 @@
   .desktop-window .mac-game-player-expanded {
     padding: 8px;
   }
-  .mac-fullscreen-label { display: none; }
+  .mac-fullscreen-label {
+    display: none;
+  }
   .mac-games iframe {
     /* Keep the player and its controls inside the phone/tablet app window.
        The surrounding app body scrolls when the game picker is taller. */

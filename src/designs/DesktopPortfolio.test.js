@@ -37,17 +37,28 @@ function mobileWindow() {
   const dialog = host.querySelector('[role="dialog"]');
   const titlebar = dialog.querySelector('[role="toolbar"]');
   const area = dialog.parentElement;
-  const layout = { width: 390, height: 620, windowWidth: 330, windowHeight: 360 };
+  const layout = {
+    width: 390,
+    height: 620,
+    windowWidth: 330,
+    windowHeight: 360,
+  };
   jest.spyOn(area, "getBoundingClientRect").mockImplementation(() => ({
-    left: 20, top: 60, width: layout.width, height: layout.height,
-    right: 20 + layout.width, bottom: 60 + layout.height,
+    left: 20,
+    top: 60,
+    width: layout.width,
+    height: layout.height,
+    right: 20 + layout.width,
+    bottom: 60 + layout.height,
   }));
   jest.spyOn(dialog, "getBoundingClientRect").mockImplementation(() => ({
     left: 20 + (parseFloat(dialog.style.getPropertyValue("--window-x")) || 16),
     top: 60 + (parseFloat(dialog.style.getPropertyValue("--window-y")) || 18),
-    width: layout.windowWidth, height: layout.windowHeight,
+    width: layout.windowWidth,
+    height: layout.windowHeight,
   }));
-  jest.spyOn(host.querySelector(".desktop-dock"), "getBoundingClientRect")
+  jest
+    .spyOn(host.querySelector(".desktop-dock"), "getBoundingClientRect")
     .mockImplementation(() => ({ top: 60 + layout.height - 76 }));
   titlebar.setPointerCapture = jest.fn();
   titlebar.hasPointerCapture = jest.fn(() => true);
@@ -60,7 +71,13 @@ function mobileWindow() {
 }
 
 function pointer(node, type, x, y, extra = {}) {
-  const event = new MouseEvent(type, { bubbles: true, cancelable: true, button: 0, clientX: x, clientY: y });
+  const event = new MouseEvent(type, {
+    bubbles: true,
+    cancelable: true,
+    button: 0,
+    clientX: x,
+    clientY: y,
+  });
   Object.defineProperties(event, {
     pointerId: { value: extra.pointerId ?? 7 },
     pointerType: { value: "touch" },
@@ -75,7 +92,10 @@ test("a finger drags from the actual mobile position, ignores other fingers, and
   pointer(titlebar, "pointerdown", 130, 90);
   expect(titlebar.setPointerCapture).toHaveBeenCalledWith(7);
   expect(dialog.classList.contains("window-dragging")).toBe(true);
-  pointer(titlebar, "pointerdown", 140, 100, { pointerId: 8, isPrimary: false });
+  pointer(titlebar, "pointerdown", 140, 100, {
+    pointerId: 8,
+    isPrimary: false,
+  });
   pointer(titlebar, "pointermove", 180, 150, { pointerId: 8 });
   expect(Number.isNaN(point().x)).toBe(true);
   pointer(titlebar, "pointermove", 180, 150);
@@ -98,16 +118,24 @@ test("rotation recontains the window above the dock; app scrolling, controls and
   expect(point()).toEqual({ x: 52, y: 168 });
   pointer(titlebar, "pointercancel", 1000, 1000);
   expect(dialog.classList.contains("window-dragging")).toBe(false);
-  layout.width = 320; layout.height = 480; layout.windowWidth = 270;
+  layout.width = 320;
+  layout.height = 480;
+  layout.windowWidth = 270;
   act(() => window.dispatchEvent(new Event("resize")));
   expect(point()).toEqual({ x: 42, y: 28 });
-  act(() => dialog.querySelector('[aria-label="Maximize About Masyn"]').click());
+  act(() =>
+    dialog.querySelector('[aria-label="Maximize About Masyn"]').click(),
+  );
   titlebar.setPointerCapture.mockClear();
   pointer(titlebar, "pointerdown", 130, 90);
   expect(titlebar.setPointerCapture).not.toHaveBeenCalled();
   act(() => dialog.querySelector('[aria-label="Restore About Masyn"]').click());
   expect(point()).toEqual({ x: 42, y: 28 });
-  act(() => titlebar.dispatchEvent(new KeyboardEvent("keydown", { key: "ArrowLeft", bubbles: true })));
+  act(() =>
+    titlebar.dispatchEvent(
+      new KeyboardEvent("keydown", { key: "ArrowLeft", bubbles: true }),
+    ),
+  );
   expect(point()).toEqual({ x: 26, y: 28 });
 });
 
@@ -118,7 +146,9 @@ test("grabbing a background window raises it without moving its captured DOM nod
   const originalOrder = [...host.querySelectorAll('[role="dialog"]')];
   pointer(titlebar, "pointerdown", 130, 90);
   expect([...host.querySelectorAll('[role="dialog"]')]).toEqual(originalOrder);
-  expect(Number(dialog.style.zIndex)).toBeGreaterThan(Number(skills.style.zIndex));
+  expect(Number(dialog.style.zIndex)).toBeGreaterThan(
+    Number(skills.style.zIndex),
+  );
   pointer(titlebar, "pointermove", 140, 120);
   expect(dialog.style.getPropertyValue("--window-y")).toBe("48px");
 });
@@ -132,7 +162,9 @@ test("cartridges open separate game windows; reopening restores one window and c
   const player = host.querySelector(
     `[role="dialog"][aria-label="${games[0].name}"]`,
   );
-  expect(player.querySelector("iframe").src).toBe(new URL(`${games[0].url}&view=mac`, window.location.href).href);
+  expect(player.querySelector("iframe").src).toBe(
+    new URL(`${games[0].url}&view=mac`, window.location.href).href,
+  );
   expect(player.textContent).toContain("Take the controls");
   act(() => cartridges[0].click());
   expect(
@@ -140,19 +172,26 @@ test("cartridges open separate game windows; reopening restores one window and c
   ).toHaveLength(1);
   act(() => cartridges[1].click());
   expect(host.querySelectorAll("iframe")).toHaveLength(2);
-  act(() => player.querySelector(`[aria-label="Close ${games[0].name}"]`).click());
+  act(() =>
+    player.querySelector(`[aria-label="Close ${games[0].name}"]`).click(),
+  );
   expect(host.querySelectorAll("iframe")).toHaveLength(1);
   expect(document.activeElement).toBe(dock);
 });
 
-test.each(["Element Runner", "Axolotl Drift"])("%s opens maximized with its controls collapsed and can be restored", (title) => {
-  act(() => host.querySelector('[aria-label="Open Games"]').click());
-  act(() => host.querySelector(`[aria-label="Play ${title}"]`).click());
-  const player = host.querySelector(`[role="dialog"][aria-label="${title}"]`);
-  expect(player.classList.contains("window-maximized")).toBe(true);
-  expect(player.querySelector("iframe").src).toContain("?view=mac");
-  expect(player.querySelector(".mac-controls").hidden).toBe(true);
-  expect(player.querySelector('[aria-label="Play fullscreen"]')).not.toBeNull();
-  act(() => player.querySelector(`[aria-label="Restore ${title}"]`).click());
-  expect(player.classList.contains("window-maximized")).toBe(false);
-});
+test.each(["Element Runner", "Axolotl Drift"])(
+  "%s opens maximized with its controls collapsed and can be restored",
+  (title) => {
+    act(() => host.querySelector('[aria-label="Open Games"]').click());
+    act(() => host.querySelector(`[aria-label="Play ${title}"]`).click());
+    const player = host.querySelector(`[role="dialog"][aria-label="${title}"]`);
+    expect(player.classList.contains("window-maximized")).toBe(true);
+    expect(player.querySelector("iframe").src).toContain("?view=mac");
+    expect(player.querySelector(".mac-controls").hidden).toBe(true);
+    expect(
+      player.querySelector('[aria-label="Play fullscreen"]'),
+    ).not.toBeNull();
+    act(() => player.querySelector(`[aria-label="Restore ${title}"]`).click());
+    expect(player.classList.contains("window-maximized")).toBe(false);
+  },
+);

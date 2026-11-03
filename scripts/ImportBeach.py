@@ -4,6 +4,7 @@ Approved sources and prompts stay in docs/source-assets/beach; the served images
 are small 128px cells. Rebuild with `python3 scripts/ImportBeach.py`, or pass a
 JSON list of new source jobs (name, path, rows, columns and prompt).
 """
+
 from pathlib import Path
 from PIL import Image, ImageDraw
 import hashlib
@@ -16,8 +17,12 @@ ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / "docs/source-assets/beach"
 OUT = ROOT / "public/world/beach"
 PROP_IDS = [
-    "beach-sand-mound", "beach-sand-half", "beach-sandcastle",
-    "beach-kite", "beach-spool", "beach-bucket",
+    "beach-sand-mound",
+    "beach-sand-half",
+    "beach-sandcastle",
+    "beach-kite",
+    "beach-spool",
+    "beach-bucket",
 ]
 
 
@@ -25,7 +30,9 @@ def clean_shell(cell):
     """Keep the main shell, removing tiny isolated tips from adjacent grid cells."""
     alpha = cell.getchannel("A")
     remaining = {
-        (x, y) for y in range(cell.height) for x in range(cell.width)
+        (x, y)
+        for y in range(cell.height)
+        for x in range(cell.width)
         if alpha.getpixel((x, y)) >= 160
     }
     components = []
@@ -34,8 +41,16 @@ def clean_shell(cell):
         pending, component = [point], [point]
         while pending:
             x, y = pending.pop()
-            for dx, dy in ((1, 0), (-1, 0), (0, 1), (0, -1),
-                           (1, 1), (-1, 1), (1, -1), (-1, -1)):
+            for dx, dy in (
+                (1, 0),
+                (-1, 0),
+                (0, 1),
+                (0, -1),
+                (1, 1),
+                (-1, 1),
+                (1, -1),
+                (-1, -1),
+            ):
                 neighbor = (x + dx, y + dy)
                 if neighbor in remaining:
                     remaining.remove(neighbor)
@@ -50,7 +65,14 @@ def clean_shell(cell):
 
 
 def publish(asset, cell):
-    if asset in {"beach-kite","beach-spool","beach-sand-mound","beach-sand-half","beach-sandcastle"}: return None # Replaced by the animated coast artwork.
+    if asset in {
+        "beach-kite",
+        "beach-spool",
+        "beach-sand-mound",
+        "beach-sand-half",
+        "beach-sandcastle",
+    }:
+        return None  # Replaced by the animated coast artwork.
     if asset.startswith("shell-"):
         cell = clean_shell(cell)
     cell.thumbnail((120, 120), Image.Resampling.LANCZOS)
@@ -60,9 +82,17 @@ def publish(asset, cell):
     canvas.save(target, optimize=True)
     return {
         "src": "/world/beach/" + target.name,
-        "cw": 128, "ch": 128, "columns": 1, "rows": 1, "idleFrame": 0,
-        "bodyHeight": 120, "footY": 124, "detailVersion": 1, "detailScale": 1,
-        "pixelArt": True, "smooth": True,
+        "cw": 128,
+        "ch": 128,
+        "columns": 1,
+        "rows": 1,
+        "idleFrame": 0,
+        "bodyHeight": 120,
+        "footY": 124,
+        "detailVersion": 1,
+        "detailScale": 1,
+        "pixelArt": True,
+        "smooth": True,
         "revision": hashlib.sha256(target.read_bytes()).hexdigest()[:12],
     }
 
@@ -102,7 +132,8 @@ def main(jobs_path):
         assert len(ids) == expected
         for asset, cell in zip(ids, cells):
             entry = publish(asset, cell)
-            if entry: manifest[asset] = entry
+            if entry:
+                manifest[asset] = entry
         job["path"] = str(source.relative_to(ROOT))
         job["sourceBoxes"] = boxes
     (SOURCE / "Artwork.json").write_text(json.dumps(jobs, indent=2) + "\n")

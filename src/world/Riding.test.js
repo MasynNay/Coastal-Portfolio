@@ -101,7 +101,13 @@ test("a visitor can wakeboard behind an NPC driver, flip while riding, and retur
     expect(ride.return(2600)).toBe(true);
     for (let t = 2616; t < 30000 && ride.active(); t += 16) {
       const p = ride.update(0.016, t);
-      if (!p.done) returnPositions.push({...riderPosition(p),at:t,boatX:p.x,boatZ:p.z});
+      if (!p.done)
+        returnPositions.push({
+          ...riderPosition(p),
+          at: t,
+          boatX: p.x,
+          boatZ: p.z,
+        });
     }
     expect(returnPositions.length).toBeGreaterThan(0);
     for (const p of returnPositions)

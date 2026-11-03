@@ -3,15 +3,22 @@
 (async function () {
   const status = document.getElementById("player-status");
   try {
-    const response = await fetch("/emulator/catalog.json", { cache: "no-cache" });
+    const response = await fetch("/emulator/catalog.json", {
+      cache: "no-cache",
+    });
     if (!response.ok) throw new Error("The cartridge list could not load.");
     const catalog = await response.json();
     const id = new URLSearchParams(window.location.search).get("game");
     const game = Object.hasOwn(catalog, id) ? catalog[id] : null;
-    if (!game) throw new Error("This cartridge is not available. Choose a game from the arcade.");
+    if (!game)
+      throw new Error(
+        "This cartridge is not available. Choose a game from the arcade.",
+      );
     const graphics = document.createElement("canvas");
     if (!graphics.getContext("webgl2") && !graphics.getContext("webgl"))
-      throw new Error("This browser has no WebGL graphics available. Open this cartridge in Chrome, Firefox or Safari with graphics acceleration enabled.");
+      throw new Error(
+        "This browser has no WebGL graphics available. Open this cartridge in Chrome, Firefox or Safari with graphics acceleration enabled.",
+      );
     document.title = `${game.name} · Pocket Arcade`;
     window.EJS_player = "#emulator-game";
     window.EJS_core = "mgba";
@@ -34,22 +41,31 @@
     // legacy core when WebGL2 is unavailable. Touch controls also cover iPads
     // that identify themselves as desktop browsers.
     window.EJS_defaultOptions = { webgl2Enabled: "enabled" };
-    if (navigator.maxTouchPoints > 0 || window.matchMedia("(pointer: coarse)").matches)
+    if (
+      navigator.maxTouchPoints > 0 ||
+      window.matchMedia("(pointer: coarse)").matches
+    )
       window.EJS_defaultOptions["virtual-gamepad"] = "enabled";
-    window.EJS_defaultControls = { 0: {
-      0: { value: "x", value2: "BUTTON_2" },
-      2: { value: "shift", value2: "SELECT" },
-      3: { value: "enter", value2: "START" },
-      4: { value: "up arrow", value2: "DPAD_UP" },
-      5: { value: "down arrow", value2: "DPAD_DOWN" },
-      6: { value: "left arrow", value2: "DPAD_LEFT" },
-      7: { value: "right arrow", value2: "DPAD_RIGHT" },
-      8: { value: "z", value2: "BUTTON_1" },
-      10: { value: "q", value2: "LEFT_TOP_SHOULDER" },
-      11: { value: "e", value2: "RIGHT_TOP_SHOULDER" },
-    }, 1: {}, 2: {}, 3: {} };
+    window.EJS_defaultControls = {
+      0: {
+        0: { value: "x", value2: "BUTTON_2" },
+        2: { value: "shift", value2: "SELECT" },
+        3: { value: "enter", value2: "START" },
+        4: { value: "up arrow", value2: "DPAD_UP" },
+        5: { value: "down arrow", value2: "DPAD_DOWN" },
+        6: { value: "left arrow", value2: "DPAD_LEFT" },
+        7: { value: "right arrow", value2: "DPAD_RIGHT" },
+        8: { value: "z", value2: "BUTTON_1" },
+        10: { value: "q", value2: "LEFT_TOP_SHOULDER" },
+        11: { value: "e", value2: "RIGHT_TOP_SHOULDER" },
+      },
+      1: {},
+      2: {},
+      3: {},
+    };
     const startupTimer = setTimeout(() => {
-      status.textContent = "The player is taking longer than expected. Please reopen the cartridge to try again.";
+      status.textContent =
+        "The player is taking longer than expected. Please reopen the cartridge to try again.";
     }, 30000);
     window.EJS_ready = () => {
       clearTimeout(startupTimer);
@@ -72,7 +88,8 @@
     loader.src = "/emulator/4.2.3/loader.js";
     loader.onerror = () => {
       clearTimeout(startupTimer);
-      status.textContent = "The player could not load. Please reopen the cartridge.";
+      status.textContent =
+        "The player could not load. Please reopen the cartridge.";
       status.hidden = false;
     };
     document.body.appendChild(loader);

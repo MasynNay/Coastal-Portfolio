@@ -16,7 +16,9 @@ export default function HabitatView({
   const [confirming, setConfirming] = useState(false);
   const releaseButton = useRef(null);
   return (
-    <div className={`habitat-view ${aquatic ? "aquatic-view" : ""} ${inspecting ? "is-close" : ""}`}>
+    <div
+      className={`habitat-view ${aquatic ? "aquatic-view" : ""} ${inspecting ? "is-close" : ""}`}
+    >
       <button
         className={`${aquatic ? "aquarium-tank" : "spider-habitat"} ${inspecting ? "is-close" : ""} ${paused ? "is-paused" : ""}`}
         aria-label={`Inspect ${name}`}
@@ -27,11 +29,15 @@ export default function HabitatView({
       </button>
       <button
         className="habitat-zoom"
-        aria-label={inspecting ? `Back to ${name}'s habitat` : `Look closer at ${name}`}
+        aria-label={
+          inspecting ? `Back to ${name}'s habitat` : `Look closer at ${name}`
+        }
         aria-pressed={inspecting}
         onClick={onInspect}
       >
-        {inspecting ? `− Back to ${aquatic ? "aquarium" : "habitat"}` : "+ Look closer"}
+        {inspecting
+          ? `− Back to ${aquatic ? "aquarium" : "habitat"}`
+          : "+ Look closer"}
       </button>
       {onRelease && (
         <button
@@ -43,26 +49,34 @@ export default function HabitatView({
           Release One
         </button>
       )}
-      {confirming && createPortal(
-        <Dialog
-          title="Release into the wild?"
-          className="release-confirmation"
-          scrimClassName="world-confirmation-overlay"
-          returnFocusRef={releaseButton}
-          onClose={() => setConfirming(false)}
-        >
-          <p>Are you sure you want to release one <strong>{name}</strong> into the wild?</p>
-          <p>Your field guide discovery will stay saved.</p>
-          <div className="activity-actions">
-            <button onClick={() => setConfirming(false)}>Cancel</button>
-            <button onClick={() => {
-              setConfirming(false);
-              onRelease();
-            }}>Release One</button>
-          </div>
-        </Dialog>,
-        document.body,
-      )}
+      {confirming &&
+        createPortal(
+          <Dialog
+            title="Release into the wild?"
+            className="release-confirmation"
+            scrimClassName="world-confirmation-overlay"
+            returnFocusRef={releaseButton}
+            onClose={() => setConfirming(false)}
+          >
+            <p>
+              Are you sure you want to release one <strong>{name}</strong> into
+              the wild?
+            </p>
+            <p>Your field guide discovery will stay saved.</p>
+            <div className="activity-actions">
+              <button onClick={() => setConfirming(false)}>Cancel</button>
+              <button
+                onClick={() => {
+                  setConfirming(false);
+                  onRelease();
+                }}
+              >
+                Release One
+              </button>
+            </div>
+          </Dialog>,
+          document.body,
+        )}
     </div>
   );
 }

@@ -6,6 +6,8 @@ export const webProjects = [
     imgUrl: "/images/projects/mixstream.svg",
     title: "MixStream",
     demo: "/projects/mixstream",
+    demoDescription:
+      "Movie and TV search, title details, saved favorites, and links to check streaming availability.",
     category: "Web",
     label: "01 / GROUP PROJECT",
     description:
@@ -18,6 +20,8 @@ export const webProjects = [
     imgUrl: "/images/projects/typeninja.svg",
     title: "TypeNinja",
     demo: "/projects/typeninja",
+    demoDescription:
+      "A working browser edition of our typing game, with timed rounds, accuracy and local scores.",
     category: "Web",
     label: "02 / GROUP PROJECT",
     description:
@@ -30,6 +34,8 @@ export const webProjects = [
     imgUrl: "/images/projects/semisnitch.svg",
     title: "SemiSnitch",
     demo: "/projects/semisnitch",
+    demoDescription:
+      "Explore fictional fleet reports, import your own JSON and update coaching statuses locally.",
     category: "Web",
     label: "03 / GROUP PROJECT",
     description:
@@ -51,3 +57,9 @@ export const webProjects = [
     github: "https://github.com/MasynNay/MGT",
   },
 ];
+
+// Direct lookup is shared by demo headers and app credits; the list above owns
+// titles, source links and local demo availability.
+export const projectById = Object.fromEntries(
+  webProjects.map((project) => [project.id, project]),
+);

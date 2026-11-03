@@ -1,3 +1,4 @@
+import { rarities } from "./Rarity";
 import { useState } from "react";
 import HabitatResidents from "./HabitatResidents";
 import HabitatView from "./HabitatView";
@@ -32,19 +33,17 @@ export default function Aquariums({ caught, onRelease }) {
           <label className="aquarium-filter">
             Show{" "}
             <select value={filter} onChange={(e) => setFilter(e.target.value)}>
-              {[
-                "All",
-                "Common",
-                "Uncommon",
-                "Rare",
-                "Very rare",
-                "Super rare",
-              ].map((r) => (
+              {["All", ...rarities].map((r) => (
                 <option key={r}>{r}</option>
               ))}
             </select>
           </label>
-          <div className="collection-picker" role="region" tabIndex={0} aria-label="Choose an aquarium">
+          <div
+            className="collection-picker"
+            role="region"
+            tabIndex={0}
+            aria-label="Choose an aquarium"
+          >
             {visible.map((f) => (
               <button
                 key={f.id}

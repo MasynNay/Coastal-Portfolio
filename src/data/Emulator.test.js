@@ -3,26 +3,40 @@ import path from "path";
 import vm from "vm";
 import roms from "./roms.json";
 import { retroGames } from "./games";
-import { GAME_PORTALS } from "../world/legacySecrets";
+import { GAME_PORTALS } from "../world/RoomGames";
 
 // Check our integration boundary without substituting a fake game for the real
 // emulator. Vendor WebAssembly and actual ROM booting need browser playtests.
-const source = fs.readFileSync(path.join(process.cwd(), "public/emulator/player.js"), "utf8");
-const catalog = Object.fromEntries(roms.map((rom) => [rom.id, {
-  name: rom.name, version: rom.version, saveId: rom.saveId,
-  rom: `/roms/${rom.file}`,
-}]));
+const source = fs.readFileSync(
+  path.join(process.cwd(), "public/emulator/player.js"),
+  "utf8",
+);
+const catalog = Object.fromEntries(
+  roms.map((rom) => [
+    rom.id,
+    {
+      name: rom.name,
+      version: rom.version,
+      saveId: rom.saveId,
+      rom: `/roms/${rom.file}`,
+    },
+  ]),
+);
 async function openPlayer(id, touch = false) {
-  document.body.innerHTML = '<div id="emulator-game"></div><p id="player-status">Opening…</p>';
+  document.body.innerHTML =
+    '<div id="emulator-game"></div><p id="player-status">Opening…</p>';
   const playerWindow = {
     location: { search: `?game=${encodeURIComponent(id)}` },
     matchMedia: () => ({ matches: touch }),
   };
   await new vm.Script(source).runInNewContext({
-    window: playerWindow, document, URLSearchParams,
+    window: playerWindow,
+    document,
+    URLSearchParams,
     navigator: { maxTouchPoints: touch ? 5 : 0 },
     fetch: async () => ({ ok: true, json: async () => catalog }),
-    setTimeout, clearTimeout,
+    setTimeout,
+    clearTimeout,
   });
   return playerWindow;
 }
@@ -55,7 +69,9 @@ test("a cartridge boots the local core with individual saves and touch controls"
   expect(config.EJS_threads).toBe(false);
   expect(config.EJS_defaultOptions["virtual-gamepad"]).toBe("enabled");
   expect(Object.keys(config.EJS_defaultControls)).toEqual(["0", "1", "2", "3"]);
-  expect(document.querySelector("script").getAttribute("src")).toBe("/emulator/4.2.3/loader.js");
+  expect(document.querySelector("script").getAttribute("src")).toBe(
+    "/emulator/4.2.3/loader.js",
+  );
   const start = document.createElement("div");
   start.className = "ejs_start_button";
   const click = jest.fn();
@@ -65,24 +81,37 @@ test("a cartridge boots the local core with individual saves and touch controls"
   expect(document.getElementById("player-status").hidden).toBe(true);
   expect(start.getAttribute("role")).toBe("button");
   expect(start.tabIndex).toBe(0);
-  start.dispatchEvent(new KeyboardEvent("keydown", { key: "Enter", bubbles: true }));
+  start.dispatchEvent(
+    new KeyboardEvent("keydown", { key: "Enter", bubbles: true }),
+  );
   expect(click).toHaveBeenCalledTimes(1);
   jest.advanceTimersByTime(30000);
   expect(document.getElementById("player-status").hidden).toBe(true);
 });
-test.each(["https://example.com/another.gba", "__proto__", "missing"])("rejects an unlisted cartridge: %s", async (id) => {
-  await openPlayer(id);
-  expect(document.querySelector("script")).toBeNull();
-  expect(document.getElementById("player-status").textContent).toContain("not available");
-});
+test.each(["https://example.com/another.gba", "__proto__", "missing"])(
+  "rejects an unlisted cartridge: %s",
+  async (id) => {
+    await openPlayer(id);
+    expect(document.querySelector("script")).toBeNull();
+    expect(document.getElementById("player-status").textContent).toContain(
+      "not available",
+    );
+  },
+);
 test("missing graphics support and loader failures show useful errors", async () => {
   HTMLCanvasElement.prototype.getContext.mockReturnValue(null);
   await openPlayer("unbound");
-  expect(document.getElementById("player-status").textContent).toContain("no WebGL");
+  expect(document.getElementById("player-status").textContent).toContain(
+    "no WebGL",
+  );
   HTMLCanvasElement.prototype.getContext.mockReturnValue({});
   await openPlayer("unbound");
   document.querySelector("script").dispatchEvent(new Event("error"));
-  expect(document.getElementById("player-status").textContent).toContain("could not load");
+  expect(document.getElementById("player-status").textContent).toContain(
+    "could not load",
+  );
   jest.advanceTimersByTime(30000);
-  expect(document.getElementById("player-status").textContent).toContain("could not load");
+  expect(document.getElementById("player-status").textContent).toContain(
+    "could not load",
+  );
 });

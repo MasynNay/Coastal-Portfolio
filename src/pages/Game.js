@@ -1,3 +1,5 @@
+// The hidden Pocket Arcade owns cartridge selection and one active player.
+// Game data and controls come from the same catalog used by Mac Mode.
 import BrandMark from "../components/BrandMark";
 import { useEffect, useRef, useState } from "react";
 import { HashLink } from "react-router-hash-link";
@@ -156,7 +158,9 @@ export default function Game() {
                       {game.kind === "emulator" ? <Key /> : <Compass />}
                     </div>
                     <span className="secret-game-edition">
-                      {game.kind === "island" ? "AN ISLAND ORIGINAL" : "A LITTLE NOSTALGIA"}
+                      {game.kind === "island"
+                        ? "AN ISLAND ORIGINAL"
+                        : "A LITTLE NOSTALGIA"}
                     </span>
                     <h2>
                       {game.title}
@@ -165,7 +169,11 @@ export default function Game() {
                     <button onClick={startGame}>
                       <PlayFill aria-hidden="true" /> Start game
                     </button>
-                    <p>{game.kind === "island" ? "Play the island’s original mini-game here." : "Loads this cartridge in the ad-free GBA emulator."}</p>
+                    <p>
+                      {game.kind === "island"
+                        ? "Play the island’s original mini-game here."
+                        : "Loads this cartridge in the ad-free GBA emulator."}
+                    </p>
                   </div>
                 )}
               </div>
@@ -174,7 +182,9 @@ export default function Game() {
                   {started
                     ? loading
                       ? "CONNECTING TO PLAYER"
-                      : game.kind === "island" ? "ISLAND GAME OPEN" : "GBA PLAYER OPEN"
+                      : game.kind === "island"
+                        ? "ISLAND GAME OPEN"
+                        : "GBA PLAYER OPEN"
                     : "READY WHEN YOU ARE"}
                 </span>
                 <div>
@@ -234,41 +244,43 @@ export default function Game() {
                 <h2>Take the controls.</h2>
                 <p>{game.controls}</p>
               </div>
-              {game.kind !== "island" && <dl>
-                <div>
-                  <dt>Move</dt>
-                  <dd>
-                    <kbd>↑</kbd>
-                    <kbd>←</kbd>
-                    <kbd>↓</kbd>
-                    <kbd>→</kbd>
-                  </dd>
-                </div>
-                <div>
-                  <dt>A button</dt>
-                  <dd>
-                    <kbd>Z</kbd>
-                  </dd>
-                </div>
-                <div>
-                  <dt>B button</dt>
-                  <dd>
-                    <kbd>X</kbd>
-                  </dd>
-                </div>
-                <div>
-                  <dt>Start</dt>
-                  <dd>
-                    <kbd>Enter</kbd>
-                  </dd>
-                </div>
-                <div>
-                  <dt>Select</dt>
-                  <dd>
-                    <kbd>Shift</kbd>
-                  </dd>
-                </div>
-              </dl>}
+              {game.kind !== "island" && (
+                <dl>
+                  <div>
+                    <dt>Move</dt>
+                    <dd>
+                      <kbd>↑</kbd>
+                      <kbd>←</kbd>
+                      <kbd>↓</kbd>
+                      <kbd>→</kbd>
+                    </dd>
+                  </div>
+                  <div>
+                    <dt>A button</dt>
+                    <dd>
+                      <kbd>Z</kbd>
+                    </dd>
+                  </div>
+                  <div>
+                    <dt>B button</dt>
+                    <dd>
+                      <kbd>X</kbd>
+                    </dd>
+                  </div>
+                  <div>
+                    <dt>Start</dt>
+                    <dd>
+                      <kbd>Enter</kbd>
+                    </dd>
+                  </div>
+                  <div>
+                    <dt>Select</dt>
+                    <dd>
+                      <kbd>Shift</kbd>
+                    </dd>
+                  </div>
+                </dl>
+              )}
             </section>
             <section className="secret-story">
               <span>WHY A GAME?</span>
@@ -283,7 +295,8 @@ export default function Game() {
               <p>
                 Click or tap inside the player to give it focus. If it still
                 won’t load, try “Open separately.”
-                {game.kind === "emulator" && " The emulator menu includes control mapping and save-file import/export. The first launch downloads the cartridge; later loads can use the browser cache."}
+                {game.kind === "emulator" &&
+                  " The emulator menu includes control mapping and save-file import/export. The first launch downloads the cartridge; later loads can use the browser cache."}
               </p>
             </details>
           </aside>

@@ -1,3 +1,6 @@
+// One semantic resume view serves the website, Mac window and game room.
+// Professional facts and contact details come from shared data files.
+import { links } from "../data/links";
 import { Container } from "react-bootstrap";
 import {
   profile,
@@ -22,11 +25,9 @@ export default function ResumePage() {
             <a href={`mailto:${profile.email}`}>{profile.email}</a>
           </p>
           <div className="resume-profile-links">
-            <a href="https://masynnay.com">Website ↗</a>
-            <a href="https://github.com/MasynNay">GitHub ↗</a>
-            <a href="https://www.linkedin.com/in/masyn-nay-290225201/">
-              LinkedIn ↗
-            </a>
+            <a href={links.website}>Website ↗</a>
+            <a href={links.github}>GitHub ↗</a>
+            <a href={links.linkedin}>LinkedIn ↗</a>
           </div>
         </header>
         <section

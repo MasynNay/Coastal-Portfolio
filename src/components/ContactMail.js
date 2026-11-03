@@ -1,16 +1,23 @@
-export const contactEmail = "masynnay33@gmail.com";
+import { profile } from "../data/resume";
+export const contactEmail = profile.email.toLowerCase();
 export const contactSubject = "Someone sent you a message from your portfolio";
 
 // All three portfolio modes use this delivery boundary. FormSubmit owns mail
 // delivery and recipient activation; no private mail credentials ship to visitors.
-export async function sendContactMessage(details, pageUrl = window.location.href) {
+export async function sendContactMessage(
+  details,
+  pageUrl = window.location.href,
+) {
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), 20000);
   try {
     const response = await fetch(`https://formsubmit.co/ajax/${contactEmail}`, {
       method: "POST",
       credentials: "omit",
-      headers: { "Content-Type": "application/json", Accept: "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
       signal: controller.signal,
       body: JSON.stringify({
         name: [details.firstName.trim(), details.lastName.trim()]

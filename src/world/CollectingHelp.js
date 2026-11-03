@@ -19,9 +19,9 @@ export default function CollectingHelp({ kind, expanded = false }) {
           </>
         ) : (
           <>
-            Tap clear ground at the pond or pier. When <strong>Fish</strong>
-            {" "}appears at the bottom of the screen, tap it to cast. Wait for
-            the result; successful catches are saved automatically.
+            Tap clear ground at the pond or pier. When <strong>Fish</strong>{" "}
+            appears at the bottom of the screen, tap it to cast. Wait for the
+            result; successful catches are saved automatically.
           </>
         )}
       </p>
@@ -44,9 +44,9 @@ export default function CollectingHelp({ kind, expanded = false }) {
       <p>
         {bugs
           ? "Your bugs live in Inventory → Terrariums."
-          : "Freshwater creatures come from the pond; saltwater creatures come from the sea. Find your catches in Inventory → Aquariums."}
-        {" "}Swipe or scroll the creature strip to choose a resident. Tap or
-        click the habitat to look closer, then again to return to the full view.
+          : "Freshwater creatures come from the pond; saltwater creatures come from the sea. Find your catches in Inventory → Aquariums."}{" "}
+        Swipe or scroll the creature strip to choose a resident. Tap or click
+        the habitat to look closer, then again to return to the full view.
       </p>
     </details>
   );

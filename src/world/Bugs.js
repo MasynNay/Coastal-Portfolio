@@ -1,3 +1,4 @@
+import { chooseByRarity, rarities } from "./Rarity";
 import {
   cleanCounts,
   changeCount,
@@ -22,7 +23,6 @@ export const bugCategories = [...new Set(bugSpecies.map((s) => s.category))];
 export const bugTrees = townDecor
   .filter(([id]) => /tree|pine|palm/.test(id))
   .map(([art, x, z, h], i) => ({ id: `tree-${i}`, art, x, z, h }));
-const weights = { Common: 8, Uncommon: 4, Rare: 1.2, "Very rare": 0.4 };
 // Choose a category first: catalog size and rarity weights can never favor spiders.
 // Then roll rarity within that category. All groups share the same rarity profile.
 export function chooseBug(random = Math.random, excluded = new Set()) {
@@ -36,26 +36,8 @@ export function chooseBug(random = Math.random, excluded = new Set()) {
     Math.min(groups.length - 1, Math.floor(random() * groups.length))
   ]
     .slice()
-    .sort(
-      (a, b) =>
-        ["Common", "Uncommon", "Rare", "Very rare", "Super rare"].indexOf(
-          a.rarity,
-        ) -
-        ["Common", "Uncommon", "Rare", "Very rare", "Super rare"].indexOf(
-          b.rarity,
-        ),
-    );
-  const roll = random();
-  const special = pool.find((s) => s.rarity === "Super rare");
-  if (roll < 0.001 && special) return special;
-  const ordinary = pool.filter((s) => s.rarity !== "Super rare");
-  if (!ordinary.length) return special || null;
-  let value =
-    Math.max(0, (roll - 0.001) / 0.999) *
-    ordinary.reduce((sum, s) => sum + weights[s.rarity], 0);
-  return (
-    ordinary.find((s) => (value -= weights[s.rarity]) < 0) || ordinary.at(-1)
-  );
+    .sort((a, b) => rarities.indexOf(a.rarity) - rarities.indexOf(b.rarity));
+  return chooseByRarity(pool, random);
 }
 export function readTerrariums() {
   try {

@@ -1,108 +1,56 @@
 import { lazy, Suspense } from "react";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import "./app.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  useLocation,
-} from "react-router-dom";
 import { DesignPortfolio } from "./designs/DesignPortfolio";
-import { NavBar } from "./components/NavBar";
-import { Banner } from "./components/Banner";
-import { Skills } from "./components/Skills";
-import { Projects } from "./components/Projects";
-import { Contact } from "./components/Contact";
-import { Footer } from "./components/Footer";
-import ResumePage from "./pages/ResumePage";
 import Game from "./pages/Game";
 import { GlassPortfolio } from "./designs/GlassPortfolio";
 import { DesktopPortfolio } from "./designs/DesktopPortfolio";
 
-// Load the sprite game and art workshop only when those modes are opened.
+// Heavy demos and the town are loaded only when their routes are opened. One
+// route tree owns aliases and fallbacks; no old second portfolio tree can drift
+// out of sync with the current views. The frozen original is a separate build.
 const ProjectDemos = lazy(() => import("./demos/ProjectDemos"));
 const SpriteStudio = lazy(() => import("./world/SpriteStudio"));
 const WorldMode = lazy(() => import("./world/WorldMode"));
 const ArcadeGame = lazy(() => import("./pages/ArcadeGame"));
-function App() {
+
+export default function App() {
   return (
-    <Router>
-      <PortfolioRoutes />
-    </Router>
-  );
-}
-function PortfolioRoutes() {
-  const location = useLocation();
-  const pathname = location.pathname.replace(/\/$/, "") || "/";
-  if (pathname.startsWith("/arcade/"))
-    return (
-      <Suspense fallback={<p>Opening island game…</p>}>
-        <Routes>
-          <Route path="/arcade/:game" element={<ArcadeGame />} />
-        </Routes>
-      </Suspense>
-    );
-  if (pathname.startsWith("/projects/"))
-    return (
-      <Suspense fallback={<p>Opening project…</p>}>
-        <Routes>
-          <Route path="/projects/:project" element={<ProjectDemos />} />
-        </Routes>
-      </Suspense>
-    );
-  if (["/world/characters", "/world/sprites"].includes(pathname))
-    return (
-      <Suspense fallback={<p>Opening character workshop…</p>}>
-        <SpriteStudio />
-      </Suspense>
-    );
-  if (pathname === "/world")
-    return (
+    <BrowserRouter>
       <Suspense
         fallback={
-          <div
-            style={{
-              padding: 40,
-              background: "#102328",
-              minHeight: "100vh",
-              color: "#e0e8df",
-            }}
-          >
-            Preparing the island…
+          <div className="app-loading" role="status">
+            Opening the portfolio…
           </div>
         }
       >
-        <WorldMode />
+        <Routes>
+          {["/", "/design/glass"].map((path) => (
+            <Route key={path} path={path} element={<GlassPortfolio />} />
+          ))}
+          {["/resume", "/design/glass/resume"].map((path) => (
+            <Route key={path} path={path} element={<GlassPortfolio resume />} />
+          ))}
+          <Route path="/design/desktop" element={<DesktopPortfolio />} />
+          <Route path="/world" element={<WorldMode />} />
+          {["/world/sprites", "/world/characters"].map((path) => (
+            <Route key={path} path={path} element={<SpriteStudio />} />
+          ))}
+          <Route path="/arcade/:game" element={<ArcadeGame />} />
+          <Route path="/projects/:project" element={<ProjectDemos />} />
+          <Route path="/game" element={<Game />} />
+          <Route
+            path="/design/polished"
+            element={<DesignPortfolio expressive={false} />}
+          />
+          <Route
+            path="/design/expressive"
+            element={<DesignPortfolio expressive />}
+          />
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
       </Suspense>
-    );
-  if (pathname === "/game") return <Game />;
-  if (
-    ["/", "/resume", "/design/glass", "/design/glass/resume"].includes(pathname)
-  )
-    return <GlassPortfolio resume={pathname.endsWith("/resume")} />;
-  if (pathname === "/design/desktop") return <DesktopPortfolio />;
-  if (pathname === "/design/polished" || pathname === "/design/expressive") {
-    return <DesignPortfolio expressive={pathname === "/design/expressive"} />;
-  }
-  return (
-    <div className="App">
-      <NavBar />
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <>
-              <Banner />
-              <Skills />
-              <Projects />
-              <Contact />
-            </>
-          }
-        />
-        <Route path="/resume" element={<ResumePage />} />
-      </Routes>
-      <Footer />
-    </div>
+    </BrowserRouter>
   );
 }
-export default App;

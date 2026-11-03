@@ -1,30 +1,13 @@
+// Demo routes reuse project metadata. TypeNinja runs as React; the other demos
+// use isolated documents so their styles and browser-local state stay contained.
+import { projectById } from "../data/projects";
 import { Link, useParams } from "react-router-dom";
 import TypingTest from "../typing/TypingTest";
 import "./demos.css";
-const projects = {
-  mixstream: {
-    title: "MixStream",
-    source: "https://github.com/MasynNay/MixStream",
-    description:
-      "Movie and TV search, title details, saved favorites, and links to check streaming availability.",
-  },
-  typeninja: {
-    title: "TypeNinja",
-    source: "https://github.com/MasynNay/TypeNinja",
-    description:
-      "A working browser edition of our typing game, with timed rounds, accuracy and local scores.",
-  },
-  semisnitch: {
-    title: "SemiSnitch",
-    source: "https://github.com/greg4949/Semi-Snitch",
-    description:
-      "Explore fictional fleet reports, import your own JSON and update coaching statuses locally.",
-  },
-};
 export default function ProjectDemos() {
   const { project } = useParams(),
-    info = projects[project];
-  if (!info)
+    info = projectById[project];
+  if (!info?.demo)
     return (
       <main className="project-demo">
         <h1>Project not found</h1>
@@ -37,17 +20,12 @@ export default function ProjectDemos() {
         <div>
           <Link to="/design/glass#projects">← Portfolio</Link>
           <h1>{info.title}</h1>
-          <p>{info.description}</p>
+          <p>{info.demoDescription}</p>
         </div>
         <nav aria-label="Project links">
-          <a href={info.source} target="_blank" rel="noreferrer">
+          <a href={info.github} target="_blank" rel="noreferrer">
             Original source ↗
           </a>
-          {info.live && (
-            <a href={info.live} target="_blank" rel="noreferrer">
-              Original live site ↗
-            </a>
-          )}
         </nav>
       </header>
       {project === "typeninja" ? (

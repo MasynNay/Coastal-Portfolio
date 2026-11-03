@@ -1,6 +1,6 @@
 import { buildings } from "./config";
 import { mailboxLetters } from "./Mailboxes";
-import { GAME_PORTALS } from "./legacySecrets";
+import { GAME_PORTALS } from "./RoomGames";
 import { glassFloats } from "./FloatHunt";
 import SpritePose from "./SpritePose";
 

@@ -38,7 +38,9 @@ test("a game window includes its player, external link and dismissible keyboard/
   const game = islandGames.find((entry) => entry.id === "poke-ball-match");
   act(() => root.render(<GamePlayer game={game} />));
   expect(host.querySelectorAll("iframe")).toHaveLength(1);
-  expect(host.querySelector("iframe").src).toBe(new URL(game.url, window.location.href).href);
+  expect(host.querySelector("iframe").src).toBe(
+    new URL(game.url, window.location.href).href,
+  );
   expect(host.querySelector("iframe").title).toBe(game.name);
   const toggle = host.querySelector("[aria-controls]");
   expect(toggle.getAttribute("aria-expanded")).toBe("true");
@@ -95,8 +97,12 @@ test("Photos opens the shared album and refreshes it without fetching a local ph
 test("a GBA window preserves its cartridge query and starts with controls collapsed", () => {
   const game = games[0];
   act(() => root.render(<GamePlayer game={game} />));
-  expect(host.querySelector("iframe").getAttribute("src")).toBe(`${game.url}&view=mac`);
+  expect(host.querySelector("iframe").getAttribute("src")).toBe(
+    `${game.url}&view=mac`,
+  );
   expect(host.querySelector(".mac-controls").hidden).toBe(true);
   act(() => host.querySelector("[aria-controls]").click());
-  expect(host.querySelector(".mac-controls").textContent).toContain(game.controls);
+  expect(host.querySelector(".mac-controls").textContent).toContain(
+    game.controls,
+  );
 });

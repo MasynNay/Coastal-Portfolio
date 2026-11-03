@@ -1,3 +1,5 @@
+// Windfall 2048 translates keys, drags, swipes and buttons into the same move.
+// Tiles.js owns merge rules; this panel owns score, feedback and game-over UI.
 import { useEffect, useRef, useState } from "react";
 import { newTiles, slideTiles, spawnTile, tilesEnded } from "./Tiles";
 export default function TileGame() {

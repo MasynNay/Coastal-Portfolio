@@ -1,3 +1,5 @@
+// The wizard memory panel owns card selection and the short mismatch timer.
+// It clears the timer on reset/unmount so a closed game cannot change later.
 import { useEffect, useRef, useState } from "react";
 import {
   Stars,

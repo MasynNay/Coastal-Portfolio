@@ -25,3 +25,13 @@ The original site is built separately from its last original commit into `public
 Removed the unused sample mail server. The contact form subsequently moved from the inaccessible EmailJS account to FormSubmit; the unused EmailJS SDK was removed. Removed the obsolete root GitHub Pages CNAME file because the redesigned site is hosted through Cloudflare. Local credentials and editor state are ignored. Build output remains reproducible and excluded from the new source repository.
 
 Dedicated board-balancing drawings replace the earlier skating walk cycle for all family appearances and costumes. The artwork import scripts preserve editable sources and publish only the packed atlases required at runtime. The retired sandcastle mini-game panel was removed; the construction now belongs to the shared world's animation clock.
+
+## Version 1.0.6 maintenance review — November 3, 2026
+
+The earlier entries record development cleanup before publication; this review follows live release 1.0.5. Shared profile URLs now live in `src/data/links.js`, project demo headers and app credits read `projects.js`, and `Rarity.js` owns the bug/fish weights and 1/1000 exceptional roll. Category choice, habitat restrictions, saved IDs and encounter ordering remain unchanged.
+
+`RoomGames.js` replaces the mixed `legacySecrets.js` file; Friends trivia is a separate data table. The app now has one route tree with the same public views and aliases. Its unreachable old fallback, unused Skills/Footer components, newsletter/old arcade/footer/skill styles, six unused images and four unused packages were removed. Numbered social, certificate, background and video files were renamed by subject with imports updated.
+
+All authored application JavaScript/CSS and retained Python tools were formatted, and missing module-purpose comments were added. `CheckProject.cjs` checks application reachability, relative imports, literal public asset paths, external URL syntax and local Markdown links. World manifests have their own asset checker. All current modules are reachable from the application entry. These checks cannot establish semantic absence of every repeated idea; shared behavior is extracted where the responsibilities and rules are actually the same.
+
+The original static portfolio, upstream emulator runtime, source artwork and generated atlas IDs retain their independent formats and identities. Matching source/export copies are deliberate, not unused duplicates. No artwork pixels, character sizes or animation timing changed in this pass. Python formatting was checked against the prior syntax trees, and all 35 retained Python tools were semantically unchanged.

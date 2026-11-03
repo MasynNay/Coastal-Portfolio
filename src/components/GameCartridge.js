@@ -55,7 +55,20 @@ export default function GameCartridge({
         <span className="cartridge-edition">{game.edition}</span>
       </span>
       <span className="cartridge-bottom" aria-hidden="true">
-        {custom ? <><i /><i /><i /><i /><i /><i /></> : <><i />▼<i /></>}
+        {custom ? (
+          <>
+            <i />
+            <i />
+            <i />
+            <i />
+            <i />
+            <i />
+          </>
+        ) : (
+          <>
+            <i />▼<i />
+          </>
+        )}
       </span>
       <span className="cartridge-selection" aria-hidden="true">
         {selected ? "Selected" : custom ? "Island original" : "Pocket Arcade"}

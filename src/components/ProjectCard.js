@@ -1,3 +1,5 @@
+// Project cards share destinations and preview artwork across portfolio layouts.
+// The glass flag changes presentation, never the project data or navigation.
 import { Link } from "react-router-dom";
 import { Col } from "react-bootstrap";
 import ProjectPreview from "./ProjectPreview";

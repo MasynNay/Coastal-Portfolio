@@ -4,7 +4,7 @@ import { MemoryRouter } from "react-router-dom";
 import WorldMode from "./WorldMode";
 import { createWorld } from "./engine";
 import { miniPoint } from "./MiniMap";
-import { GAME_PORTALS } from "./legacySecrets";
+import { GAME_PORTALS } from "./RoomGames";
 
 jest.mock("./engine", () => ({ createWorld: jest.fn() }));
 jest.mock("./SpritePose", () => () => null);

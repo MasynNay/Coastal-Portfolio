@@ -6,7 +6,9 @@ import patchNotes from "../data/patchNotes";
 
 test("Windfall opens actual patch notes while the one original Rickroll stays at About", () => {
   global.IS_REACT_ACT_ENVIRONMENT = true;
-  const host = document.createElement("div"), root = createRoot(host), opened = jest.fn();
+  const host = document.createElement("div"),
+    root = createRoot(host),
+    opened = jest.fn();
   try {
     act(() => root.render(<MailboxMessage id="lodge" onOpen={opened} />));
     expect(host.textContent).toContain("News from Windfall");
@@ -15,9 +17,15 @@ test("Windfall opens actual patch notes while the one original Rickroll stays at
     const latest = patchNotes[0];
     expect(host.textContent).toContain(`Island update · ${latest.version}`);
     expect(host.querySelectorAll("li").length).toBeGreaterThan(3);
-    expect(host.querySelector("a").href).toContain(`compare/${latest.previousCommit}...v${latest.version}`);
+    expect(host.querySelector("a").href).toContain(
+      `compare/${latest.previousCommit}...v${latest.version}`,
+    );
     expect(host.querySelector('a[href*="youtube"]')).toBeNull();
-    expect(Object.values(mailboxLetters).filter(letter => letter.reward?.url.includes("dQw4w9WgXcQ"))).toHaveLength(1);
+    expect(
+      Object.values(mailboxLetters).filter((letter) =>
+        letter.reward?.url.includes("dQw4w9WgXcQ"),
+      ),
+    ).toHaveLength(1);
     expect(mailboxLetters.home.reward.url).toContain("dQw4w9WgXcQ");
   } finally {
     act(() => root.unmount());

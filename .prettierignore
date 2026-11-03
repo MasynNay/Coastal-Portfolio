@@ -1,0 +1,14 @@
+node_modules/
+build/
+.git/
+# Frozen demos, vendor runtime and generated artwork retain their source format.
+public/React-Portfolio/
+public/emulator/4.2.3/
+public/roms/
+docs/source-assets/
+src/world/*.json
+public/emulator/catalog.json
+
+# Original third-party demo styles are retained with their attribution.
+public/demos/mixstream/assets/
+public/demos/semisnitch/original.css

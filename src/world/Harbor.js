@@ -125,7 +125,14 @@ export function waterRoute(points, id) {
       const t = k / 8;
       return blend(blend(entry, b, t), blend(b, exit, t), t);
     });
-    if (curve.every((p,i) => craftWater(p.x,p.z,id) && (!i || clearWaterLine(curve[i-1],p,id)))) rounded.push(...curve);
+    if (
+      curve.every(
+        (p, i) =>
+          craftWater(p.x, p.z, id) &&
+          (!i || clearWaterLine(curve[i - 1], p, id)),
+      )
+    )
+      rounded.push(...curve);
     else rounded.push(b);
   }
   rounded.push(points[points.length - 1]);

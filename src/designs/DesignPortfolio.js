@@ -1,8 +1,11 @@
+// Retained design studies use the same projects, skills and contact form as the
+// live site. Only their layout and visual treatment differ.
+import { links } from "../data/links";
 import BrandMark from "../components/BrandMark";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Contact } from "../components/Contact";
-import fishVideo from "../assets/images/video1.mp4";
+import fishVideo from "../assets/images/vendetta-pokemon.mp4";
 import { projects, skills } from "./content";
 import "./designs.css";
 import { profile } from "../data/resume";
@@ -274,7 +277,7 @@ export function DesignPortfolio({ expressive }) {
               Have a project, a question, or an opportunity? I’d love to hear
               from you.
             </p>
-            <a href="mailto:MasynNay33@gmail.com">MasynNay33@gmail.com ↗</a>
+            <a href={`mailto:${profile.email}`}>{profile.email} ↗</a>
           </div>
           <Contact />
         </section>
@@ -285,11 +288,9 @@ export function DesignPortfolio({ expressive }) {
         </a>
         <p>IT. Development. Design. Always learning.</p>
         <div>
-          <a href="https://github.com/MasynNay">GitHub ↗</a>
-          <a href="https://www.linkedin.com/in/masyn-nay-290225201/">
-            LinkedIn ↗
-          </a>
-          <a href="https://www.instagram.com/masynnay/">Instagram ↗</a>
+          <a href={links.github}>GitHub ↗</a>
+          <a href={links.linkedin}>LinkedIn ↗</a>
+          <a href={links.instagram}>Instagram ↗</a>
         </div>
         <a href="#home">Back to top ↑</a>
       </footer>

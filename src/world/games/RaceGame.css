@@ -2,42 +2,84 @@
   overflow: hidden;
   border: 2px solid #a9d8db;
   border-radius: 14px;
-  background: repeating-linear-gradient(170deg, #288ca4 0 18px, #3aa2b3 19px 21px, #237f9d 22px 40px);
+  background: repeating-linear-gradient(
+    170deg,
+    #288ca4 0 18px,
+    #3aa2b3 19px 21px,
+    #237f9d 22px 40px
+  );
 }
 .arcade-race-lane {
   height: 92px;
   position: relative;
   border-bottom: 2px dashed #f4e3a580;
 }
-.arcade-race-lane:last-child { border-bottom: 0; }
-.race-lane-number {
-  position: absolute; left: 6px; top: 8px;
-  font: 700 12px monospace; color: #e7f4ec;
+.arcade-race-lane:last-child {
+  border-bottom: 0;
 }
-.race-start-line, .race-finish-line {
-  position: absolute; top: 0; bottom: 0; width: 8px;
-  background: repeating-conic-gradient(#f4efda 0% 25%, #213d48 0% 50%) 0 / 8px 8px;
+.race-lane-number {
+  position: absolute;
+  left: 6px;
+  top: 8px;
+  font: 700 12px monospace;
+  color: #e7f4ec;
+}
+.race-start-line,
+.race-finish-line {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 8px;
+  background: repeating-conic-gradient(#f4efda 0% 25%, #213d48 0% 50%) 0 / 8px
+    8px;
   opacity: 0.8;
 }
-.race-start-line { left: 10%; }
-.race-finish-line { left: 90%; }
+.race-start-line {
+  left: 10%;
+}
+.race-finish-line {
+  left: 90%;
+}
 .arcade-racer {
-  position: absolute; top: 5px; transform: translateX(-50%);
-  display: flex; flex-direction: column; align-items: center;
+  position: absolute;
+  top: 5px;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   transition: left 60ms linear;
 }
 .arcade-racer small {
-  font-size: 10px; padding: 2px 4px; border-radius: 4px;
-  background: #103341dd; color: #f4f1df; white-space: nowrap;
+  font-size: 10px;
+  padding: 2px 4px;
+  border-radius: 4px;
+  background: #103341dd;
+  color: #f4f1df;
+  white-space: nowrap;
 }
 .race-rider-art {
   /* Mounted atlases anchor their figures near the foot of each frame. */
-  display: flex; align-items: flex-end; justify-content: center;
-  width: 96px; height: 68px; overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  width: 96px;
+  height: 68px;
+  overflow: hidden;
 }
 .race-crown {
-  position: absolute; top: -8px; z-index: 1;
-  color: #ffdf6a; font-size: 25px; text-shadow: 0 1px 3px #182a35;
+  position: absolute;
+  top: -8px;
+  z-index: 1;
+  color: #ffdf6a;
+  font-size: 25px;
+  text-shadow: 0 1px 3px #182a35;
 }
-.arcade-race-result { text-align: center; margin-top: 16px; }
-@media (prefers-reduced-motion: reduce) { .arcade-racer { transition: none; } }
+.arcade-race-result {
+  text-align: center;
+  margin-top: 16px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .arcade-racer {
+    transition: none;
+  }
+}

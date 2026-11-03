@@ -77,7 +77,8 @@ export default function useWindowDrag(windowRef, disabled = false) {
       event.isPrimary === false ||
       event.button > 0 ||
       event.target.closest("button")
-    ) return;
+    )
+      return;
     const bounds = geometry();
     if (!bounds) return;
     event.preventDefault();

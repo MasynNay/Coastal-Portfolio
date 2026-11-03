@@ -1,3 +1,4 @@
+import { links } from "../data/links";
 import BrandMark from "../components/BrandMark";
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
@@ -156,11 +157,7 @@ export function DesktopPortfolio() {
                       <span>{app.title}</span>
                     </button>
                   ))}
-                <a
-                  href="https://github.com/MasynNay"
-                  target="_blank"
-                  rel="noreferrer"
-                >
+                <a href={links.github} target="_blank" rel="noreferrer">
                   <Github aria-hidden="true" />
                   <span>GitHub ↗</span>
                 </a>
@@ -260,9 +257,7 @@ export function DesktopPortfolio() {
                   {window.id === "contact" && (
                     <div className="desktop-contact glass-site">
                       <p>Have something in mind? Let’s talk.</p>
-                      <a href="mailto:MasynNay33@gmail.com">
-                        MasynNay33@gmail.com ↗
-                      </a>
+                      <a href={`mailto:${profile.email}`}>{profile.email} ↗</a>
                       <Contact />
                     </div>
                   )}

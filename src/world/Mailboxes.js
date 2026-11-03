@@ -33,7 +33,8 @@ export const mailboxLetters = {
   },
   lodge: {
     title: "News from Windfall",
-    teaser: "The latest island update has arrived. Open the letter for real patch notes.",
+    teaser:
+      "The latest island update has arrived. Open the letter for real patch notes.",
     content: "patch-notes",
   },
 };

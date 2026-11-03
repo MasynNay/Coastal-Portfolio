@@ -48,27 +48,31 @@ export function GamePlayer({ game }) {
       player.current.focus();
       setNotice("");
     } catch {
-      setNotice("Fullscreen isn’t available here. Open the game separately for more room.");
+      setNotice(
+        "Fullscreen isn’t available here. Open the game separately for more room.",
+      );
     }
   }
   return (
-    <div className={`mac-games mac-game-player${game.largePlayer ? " mac-game-player-expanded" : ""}`}>
+    <div
+      className={`mac-games mac-game-player${game.largePlayer ? " mac-game-player-expanded" : ""}`}
+    >
       <div className="mac-game-toolbar">
         <div className="mac-game-toolbar-actions">
-        <button
-          ref={controlsButton}
-          aria-expanded={legend}
-          aria-controls={controlsId}
-          onClick={() => setLegend(!legend)}
-        >
-          {legend ? "Hide controls" : "Show controls"}
-        </button>
-        {game.largePlayer && (
-          <button onClick={fullscreen} aria-label="Play fullscreen">
-            <ArrowsFullscreen aria-hidden="true" />
-            <span className="mac-fullscreen-label">Fullscreen</span>
+          <button
+            ref={controlsButton}
+            aria-expanded={legend}
+            aria-controls={controlsId}
+            onClick={() => setLegend(!legend)}
+          >
+            {legend ? "Hide controls" : "Show controls"}
           </button>
-        )}
+          {game.largePlayer && (
+            <button onClick={fullscreen} aria-label="Play fullscreen">
+              <ArrowsFullscreen aria-hidden="true" />
+              <span className="mac-fullscreen-label">Fullscreen</span>
+            </button>
+          )}
         </div>
         <a href={game.url} target="_blank" rel="noreferrer">
           Open game separately ↗
@@ -76,10 +80,15 @@ export function GamePlayer({ game }) {
       </div>
       <aside id={controlsId} hidden={!legend} className="mac-controls">
         <strong>Take the controls</strong>
-        {game.controls ? <p>{game.controls}</p> : (
+        {game.controls ? (
+          <p>{game.controls}</p>
+        ) : (
           <>
             <p>Arrows: move · Z / X: A / B · Enter: Start · Shift: Select.</p>
-            <p>On phones and tablets, use the player’s touch controls. Check its settings if the bindings differ.</p>
+            <p>
+              On phones and tablets, use the player’s touch controls. Check its
+              settings if the bindings differ.
+            </p>
           </>
         )}
         <button
@@ -94,7 +103,11 @@ export function GamePlayer({ game }) {
       {notice && <p role="status">{notice}</p>}
       <iframe
         ref={player}
-        src={game.largePlayer ? `${game.url}${game.url.includes("?") ? "&" : "?"}view=mac` : game.url}
+        src={
+          game.largePlayer
+            ? `${game.url}${game.url.includes("?") ? "&" : "?"}view=mac`
+            : game.url
+        }
         title={game.name}
         allowFullScreen
         allow="gamepad; fullscreen; cross-origin-isolated"
@@ -105,13 +118,20 @@ export function GamePlayer({ game }) {
 // The shared album supplies its own responsive viewer and slideshow. Keeping it
 // in an iframe avoids copying family photos or private photo metadata into Git.
 export function PhotosApp({ active = true, album = photoAlbum }) {
-  return album ? <SharedPhotos album={album} /> : <LocalPhotos active={active} />;
+  return album ? (
+    <SharedPhotos album={album} />
+  ) : (
+    <LocalPhotos active={active} />
+  );
 }
 
 function SharedPhotos({ album }) {
   const [revision, setRevision] = useState(0);
   return (
-    <section className="mac-photos mac-shared-photos" aria-label="Photo gallery">
+    <section
+      className="mac-photos mac-shared-photos"
+      aria-label="Photo gallery"
+    >
       <header className="mac-photo-toolbar">
         <button onClick={() => setRevision((value) => value + 1)}>
           Refresh album
