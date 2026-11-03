@@ -2,6 +2,16 @@
 // the preceding production commit, rather than fictional in-game release notes.
 const patchNotes = [
   {
+    version: "1.0.7",
+    date: "November 3, 2026",
+    previousCommit: "6868192",
+    changes: [
+      "Added Pokémon Ash Gray — Newerest Edition v1.0, Pokémon Null v1.2.6, Pokémon Elysium Part A v2.5.0 and Pokémon Radical Red v4.10 to the shared GBA library.",
+      "Each new game has its own cartridge color, icon and version label in Mac Mode and Pocket Arcade, with independent save IDs.",
+      "The library now includes eleven GBA cartridges alongside the seven original island mini-games. Existing cartridges and saves retain their IDs.",
+    ],
+  },
+  {
     version: "1.0.6",
     date: "November 3, 2026",
     previousCommit: "39cdc8e",

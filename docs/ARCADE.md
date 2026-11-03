@@ -1,10 +1,10 @@
 # Pocket Arcade
 
-Mac Mode, the hidden `/game` arcade and the five room secrets use one cartridge catalog in `src/data/games.js`. The seven original island games continue to use the shared React game components. The seven supplied GBA games run in `/emulator/player.html?game=<id>`, a separate document that contains the emulator's globals, input listeners and WebAssembly memory. Closing a Mac game window unloads that player.
+Mac Mode, the hidden `/game` arcade and the five room secrets use one cartridge catalog in `src/data/games.js`. The seven original island games continue to use the shared React game components. The eleven supplied GBA games run in `/emulator/player.html?game=<id>`, a separate document that contains the emulator's globals, input listeners and WebAssembly memory. Closing a Mac game window unloads that player.
 
 ## Cartridges and hosting
 
-The supplied cartridges are Heart & Soul, Hoenn’s Last Wish, Emerald Rogue, Amethyst, Sword and Shield Ultimate Plus, Unbound, and Mystery Dungeon Red Rescue Team Shiny Patch+. The room secrets choose Heart & Soul (About), Hoenn’s Last Wish (Skills), Emerald Rogue (Portfolio), Amethyst (Resume) and Unbound (Contact). The original discovery IDs remain unchanged.
+The supplied cartridges are Heart & Soul, Hoenn’s Last Wish, Emerald Rogue, Amethyst, Sword and Shield Ultimate Plus, Unbound, Mystery Dungeon Red Rescue Team Shiny Patch+, Ash Gray — Newerest Edition v1.0, Null v1.2.6, Elysium Part A v2.5.0, and Radical Red v4.10. The room secrets choose Heart & Soul (About), Hoenn’s Last Wish (Skills), Emerald Rogue (Portfolio), Amethyst (Resume) and Unbound (Contact). The original discovery IDs remain unchanged.
 
 The ROM archives are **public downloads**, as requested by Masyn. They are stored as binary assets on the repository’s [`arcade-roms-v1` release](https://github.com/MasynNay/Coastal-Portfolio/releases/tag/arcade-roms-v1), outside Git source history. `scripts/PrepareRoms.cjs` runs before start/build, downloads missing archives and checks their exact size and SHA-256 hash against `src/data/roms.json`. A failed verification stops the build. Downloads run two at a time.
 

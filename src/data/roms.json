@@ -75,5 +75,49 @@
     "romSha256": "a229499db3ce2db7e92e09c7045a17285bd6ab05dd7d6658ef54d6a236cd1a77",
     "saveId": 170038425,
     "file": "red-rescue-shiny-b0d28480.zip"
+  },
+  {
+    "id": "ash-gray",
+    "name": "Pokémon Ash Gray — Newerest Edition",
+    "version": "v1.0",
+    "archive": "ash-gray.zip",
+    "bytes": 5806747,
+    "sha256": "27fe0990bb313594a26e02e6beb9352f0a82a12af69d6190a6a6219cb03fa2f6",
+    "romSha256": "a08055484c8366768d3e98e2dbed0998641abd2899ffbfc8d7f132925875f7a1",
+    "saveId": 168297812,
+    "file": "ash-gray-27fe0990.zip"
+  },
+  {
+    "id": "null",
+    "name": "Pokémon Null",
+    "version": "v1.2.6",
+    "archive": "null.zip",
+    "bytes": 17453797,
+    "sha256": "fde3664ff4658b8797c9a60e0b6b3449c6c16f7543a2d91debdf878f8c25ba49",
+    "romSha256": "78455d8dabf57ab6b90cf2041bdc173c1b825cc035a9f416c5e96903717e9045",
+    "saveId": 126113240,
+    "file": "null-fde3664f.zip"
+  },
+  {
+    "id": "elysium",
+    "name": "Pokémon Elysium",
+    "version": "Part A · v2.5.0",
+    "archive": "elysium.zip",
+    "bytes": 6981392,
+    "sha256": "0b4d7928f391f73c2e45983347f48cfc078fc2b7e9d41d124d8af1ed19225e9b",
+    "romSha256": "6254fb4edf3727d87c9837f4505ff97abb31eb7fd24820d63ea84b4c64291e4b",
+    "saveId": 103108532,
+    "file": "elysium-0b4d7928.zip"
+  },
+  {
+    "id": "radical-red",
+    "name": "Pokémon Radical Red",
+    "version": "v4.10",
+    "archive": "radical-red.zip",
+    "bytes": 17283648,
+    "sha256": "10b27d73f0f2309420c8594714f63d5eeadf7f5ad6dfdcbd60710b3ab4252c04",
+    "romSha256": "679d112cdfe699c2793d82c7e7999ac9dfca9e222ad5a85d4f8f1e457cd0283f",
+    "saveId": 108646674,
+    "file": "radical-red-10b27d73.zip"
   }
 ]

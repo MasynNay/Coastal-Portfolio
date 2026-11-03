@@ -5,6 +5,10 @@ import {
   Lightning,
   Shield,
   Stars,
+  PersonBadge,
+  MoonStars,
+  Sun,
+  Fire,
 } from "react-bootstrap-icons";
 import "./GameCartridge.css";
 
@@ -16,6 +20,10 @@ const symbols = {
   "sword-and-shield": Shield,
   unbound: Lightning,
   "red-rescue-shiny": Compass,
+  "ash-gray": PersonBadge,
+  null: MoonStars,
+  elysium: Sun,
+  "radical-red": Fire,
   "element-runner": Lightning,
   "poke-ball-match": Gem,
   "windfall-2048": Compass,

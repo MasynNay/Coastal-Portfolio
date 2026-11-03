@@ -92,6 +92,22 @@
   --label-color: #bd7067;
   --label-dark: #733950;
 }
+.game-cartridge[data-game="ash-gray"] {
+  --label-color: #8e949e;
+  --label-dark: #414958;
+}
+.game-cartridge[data-game="null"] {
+  --label-color: #736787;
+  --label-dark: #332a44;
+}
+.game-cartridge[data-game="elysium"] {
+  --label-color: #b69862;
+  --label-dark: #576d65;
+}
+.game-cartridge[data-game="radical-red"] {
+  --label-color: #c4595f;
+  --label-dark: #6f303c;
+}
 .cartridge-label {
   display: grid;
   grid-template-rows: 40px 42px 32px;

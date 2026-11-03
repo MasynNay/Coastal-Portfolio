@@ -34,7 +34,7 @@ Fishing casts on the map, waits with dialogue dots, signals a bite, fades, and o
 
 Six mailbox props contain jokes and the original hidden arcade portals. Opening a letter deliberately reveals its contents; videos do not load before opening. About-room Friends trivia remains. The lodge now starts a persistent hunt for 20 visible, colored glass floats; the HUD badge opens the journal with named visits, secrets and float progress. The lodge includes the family’s Oregon coast story and links to the official Finders Keepers and Lincoln City Glass Center pages. Masyn's interaction with Mi Shell normally shows hearts, with a 1/20 chance of the playful arguing encounter.
 
-Mac Mode's Games app and the arcade page share seven self-hosted GBA cartridges and seven island mini-games. The five hidden room portals use the same GBA library. Only selected players mount; no RetroGames page or advertising player loads. Games and Photos remain at the end of the dock.
+Mac Mode's Games app and the arcade page share eleven self-hosted GBA cartridges and seven island mini-games. The five hidden room portals use the same GBA library. Only selected players mount; no RetroGames page or advertising player loads. Games and Photos remain at the end of the dock.
 
 ## Artwork and maintenance
 

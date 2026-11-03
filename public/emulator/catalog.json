@@ -40,5 +40,29 @@
     "version": "v1.0.0",
     "saveId": 170038425,
     "rom": "/roms/red-rescue-shiny-b0d28480.zip"
+  },
+  "ash-gray": {
+    "name": "Pokémon Ash Gray — Newerest Edition",
+    "version": "v1.0",
+    "saveId": 168297812,
+    "rom": "/roms/ash-gray-27fe0990.zip"
+  },
+  "null": {
+    "name": "Pokémon Null",
+    "version": "v1.2.6",
+    "saveId": 126113240,
+    "rom": "/roms/null-fde3664f.zip"
+  },
+  "elysium": {
+    "name": "Pokémon Elysium",
+    "version": "Part A · v2.5.0",
+    "saveId": 103108532,
+    "rom": "/roms/elysium-0b4d7928.zip"
+  },
+  "radical-red": {
+    "name": "Pokémon Radical Red",
+    "version": "v4.10",
+    "saveId": 108646674,
+    "rom": "/roms/radical-red-10b27d73.zip"
   }
 }

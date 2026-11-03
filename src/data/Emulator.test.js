@@ -50,7 +50,7 @@ afterEach(() => {
   document.body.innerHTML = "";
 });
 test("every hidden room uses an approved cartridge and saves cannot collide", () => {
-  expect(retroGames).toHaveLength(7);
+  expect(retroGames).toHaveLength(11);
   expect(new Set(roms.map((rom) => rom.saveId)).size).toBe(roms.length);
   expect(new Set(roms.map((rom) => rom.file)).size).toBe(roms.length);
   expect(Object.keys(GAME_PORTALS)).toHaveLength(5);
