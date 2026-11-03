@@ -38,6 +38,10 @@ main {
    remain intact so keyboard, gamepads and phones use the same player. */
 #emulator-game .ejs_start_button {
   border-radius: 12px;
+  max-width: calc(100% - 32px);
+  white-space: normal;
+  overflow-wrap: anywhere;
+  text-align: center;
 }
 #emulator-game .ejs_start_button:focus-visible {
   outline: 3px solid #fff1bb;

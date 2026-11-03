@@ -97,6 +97,9 @@ test("Photos opens the shared album and refreshes it without fetching a local ph
 test("a GBA window preserves its cartridge query and starts with controls collapsed", () => {
   const game = games[0];
   act(() => root.render(<GamePlayer game={game} />));
+  expect(host.querySelector(".rom-download-button").textContent).toBe(
+    "Download ROM (.gba)",
+  );
   expect(host.querySelector("iframe").getAttribute("src")).toBe(
     `${game.url}&view=mac`,
   );

@@ -18,6 +18,11 @@ export const retroGames = roms.map((rom) => ({
   platform: "gba",
   largePlayer: true,
   url: `/emulator/player.html?game=${rom.id}`,
+  download: {
+    url: `/roms/${rom.file}`,
+    filename: `${rom.id}.gba`,
+    sha256: rom.romSha256,
+  },
   controls:
     "Arrows: move · Z: A · X: B · Enter: Start · Shift: Select · Q / E: L / R. On phones, use the player's on-screen buttons. Save/export progress from the emulator menu; saves stay on this device.",
 }));

@@ -2,6 +2,17 @@
 // the preceding production commit, rather than fictional in-game release notes.
 const patchNotes = [
   {
+    version: "1.0.8",
+    date: "November 3, 2026",
+    previousCommit: "fb276d0",
+    changes: [
+      "Added Download ROM (.gba) to GBA game controls in Mac Mode, Pocket Arcade and the hidden room games. Downloads contain the original GBA file, not a ZIP archive.",
+      "Downloads reuse the bundled ZIP decoder in a separate worker and verify the extracted file against its original checksum. Closing or changing a game cancels unfinished work.",
+      "All emulator start buttons now say Play Game, with bounded button widths so long cartridge names cannot overflow the player.",
+      "Game window controls wrap on narrow screens to keep the new download button accessible on phones and tablets.",
+    ],
+  },
+  {
     version: "1.0.7",
     date: "November 3, 2026",
     previousCommit: "6868192",

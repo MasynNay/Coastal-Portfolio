@@ -1,0 +1,34 @@
+/* One download control serves Mac windows, Pocket Arcade and room secrets.
+   Its status wraps beneath the button without widening a phone's toolbar. */
+.rom-download {
+  display: inline-grid;
+  gap: 4px;
+  max-width: 100%;
+  min-width: 0;
+}
+.rom-download-button {
+  padding: 8px 12px;
+  border: 1px solid #b7d5ca55;
+  border-radius: 9px;
+  background: #355d60;
+  color: #eff7ee;
+  font: inherit;
+  cursor: pointer;
+}
+.rom-download-button:disabled {
+  cursor: wait;
+  opacity: 0.65;
+}
+.rom-download-button:focus-visible {
+  outline: 2px solid #e6e2b6;
+  outline-offset: 3px;
+}
+.rom-download-status {
+  font-size: 12px;
+  line-height: 1.4;
+  max-width: 32ch;
+  overflow-wrap: anywhere;
+}
+.rom-download-status:empty {
+  display: none;
+}

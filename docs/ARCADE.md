@@ -12,6 +12,12 @@ Verified archives go in ignored `public/roms/`, then into Cloudflare Pages’ bu
 
 To add a cartridge, compress one supplied `.gba` into a ZIP, publish that archive as a release asset, and add its approved metadata to `src/data/roms.json`. Keep the original archive filename, byte count, hashes and stable save ID. Update `PrepareRoms.cjs` if using another asset release. Run it to create the public catalog, then test the actual cartridge in a browser before publishing. All pickers use the generated/shared IDs; no arbitrary ROM URL can be supplied through the player query.
 
+## Downloading a ROM
+
+Open a GBA cartridge in Mac Mode or Pocket Arcade and choose **Download ROM (.gba)** in its controls. Hidden room games provide the same button. Playing the game is not required. The browser downloads the hosted ZIP, unpacks it using the bundled decoder in a disposable worker, verifies SHA-256 against the original ROM, then saves `<cartridge-id>.gba`. Files are byte-for-byte copies of the supplied ROMs. No additional server or uncompressed 32 MiB hosted asset is needed.
+
+`src/components/RomDownload.js` shares this behavior across all three presentations. Changing/closing a game cancels unfinished work; decoder errors, timeouts and checksum mismatches produce an error instead of a bad download. Temporary object URLs and workers are released. The emulator’s green start control uses the fixed label **Play Game** for every cartridge.
+
 ## Controls and saves
 
 | Action | Keyboard | Phone/tablet |

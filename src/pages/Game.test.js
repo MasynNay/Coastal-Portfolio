@@ -35,6 +35,9 @@ test("all cartridges select the intended game and changing cartridges replaces t
     act(() => cartridges[index].click());
     expect(cartridges[index].getAttribute("aria-pressed")).toBe("true");
     expect(host.querySelectorAll("iframe")).toHaveLength(1);
+    expect(!!host.querySelector(".rom-download-button")).toBe(
+      game.kind === "emulator",
+    );
     expect(host.querySelector("iframe").src).toBe(
       new URL(game.url, window.location.href).href,
     );

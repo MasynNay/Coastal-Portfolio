@@ -1,3 +1,4 @@
+import RomDownload from "../components/RomDownload";
 // The hidden Pocket Arcade owns cartridge selection and one active player.
 // Game data and controls come from the same catalog used by Mac Mode.
 import BrandMark from "../components/BrandMark";
@@ -188,6 +189,7 @@ export default function Game() {
                     : "READY WHEN YOU ARE"}
                 </span>
                 <div>
+                  <RomDownload file={game.download} />
                   <button onClick={enterFullscreen} disabled={!started}>
                     <ArrowsFullscreen aria-hidden="true" /> Fullscreen
                   </button>

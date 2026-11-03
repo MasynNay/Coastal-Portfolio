@@ -28,7 +28,7 @@
     window.EJS_gameID = game.saveId;
     window.EJS_color = "#82b9a8";
     window.EJS_backgroundColor = "#10262e";
-    window.EJS_startButtonName = `Play ${game.name}`;
+    window.EJS_startButtonName = "Play Game";
     window.EJS_startOnLoaded = false;
     window.EJS_alignStartButton = "center";
     window.EJS_language = "en-US";

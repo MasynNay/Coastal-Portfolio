@@ -54,6 +54,14 @@ test("every hidden room uses an approved cartridge and saves cannot collide", ()
   expect(new Set(roms.map((rom) => rom.saveId)).size).toBe(roms.length);
   expect(new Set(roms.map((rom) => rom.file)).size).toBe(roms.length);
   expect(Object.keys(GAME_PORTALS)).toHaveLength(5);
+  for (const rom of roms) {
+    const game = retroGames.find((entry) => entry.id === rom.id);
+    expect(game.download).toEqual({
+      url: `/roms/${rom.file}`,
+      filename: `${rom.id}.gba`,
+      sha256: rom.romSha256,
+    });
+  }
   for (const portal of Object.values(GAME_PORTALS)) {
     expect(retroGames.some((game) => game.url === portal.src)).toBe(true);
     expect(portal.controls).toContain("on-screen buttons");
@@ -64,6 +72,7 @@ test("a cartridge boots the local core with individual saves and touch controls"
   const config = await openPlayer("unbound", true);
   expect(config.EJS_gameUrl).toBe(catalog.unbound.rom);
   expect(config.EJS_gameID).toBe(catalog.unbound.saveId);
+  expect(config.EJS_startButtonName).toBe("Play Game");
   expect(config.EJS_pathtodata).toBe("/emulator/4.2.3/");
   expect(config.EJS_AdUrl).toBe("");
   expect(config.EJS_threads).toBe(false);

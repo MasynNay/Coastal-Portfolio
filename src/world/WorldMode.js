@@ -1,3 +1,4 @@
+import RomDownload from "../components/RomDownload";
 import { playWindSong } from "./WindStatue";
 import IslandGames from "./games/IslandGames";
 import { gameTitles } from "./games/GameLocations";
@@ -1203,29 +1204,34 @@ export default function WorldMode() {
 }
 function SecretGame({ portal, onDiscover }) {
   const [started, setStarted] = useState(false);
-  return started ? (
+  return (
     <>
-      <p>{portal.controls}</p>
-      <iframe
-        className="world-game-frame"
-        src={portal.src}
-        title={portal.title}
-        allowFullScreen
-        allow="fullscreen; gamepad"
-      />
-      <a href={portal.src} target="_blank" rel="noreferrer">
-        Open game separately ↗
-      </a>
+      {started ? (
+        <>
+          <p>{portal.controls}</p>
+          <iframe
+            className="world-game-frame"
+            src={portal.src}
+            title={portal.title}
+            allowFullScreen
+            allow="fullscreen; gamepad"
+          />
+          <a href={portal.src} target="_blank" rel="noreferrer">
+            Open game separately ↗
+          </a>
+        </>
+      ) : (
+        <button
+          className="world-primary"
+          onClick={() => {
+            setStarted(true);
+            onDiscover?.();
+          }}
+        >
+          Load hidden game
+        </button>
+      )}
+      <RomDownload file={portal.download} />
     </>
-  ) : (
-    <button
-      className="world-primary"
-      onClick={() => {
-        setStarted(true);
-        onDiscover?.();
-      }}
-    >
-      Load hidden game
-    </button>
   );
 }

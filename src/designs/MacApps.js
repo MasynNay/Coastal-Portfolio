@@ -1,3 +1,4 @@
+import RomDownload from "../components/RomDownload";
 import { useEffect, useId, useRef, useState } from "react";
 import { games } from "../data/games";
 import GameCartridge from "../components/GameCartridge";
@@ -73,6 +74,7 @@ export function GamePlayer({ game }) {
               <span className="mac-fullscreen-label">Fullscreen</span>
             </button>
           )}
+          <RomDownload file={game.download} />
         </div>
         <a href={game.url} target="_blank" rel="noreferrer">
           Open game separately ↗

@@ -12,6 +12,14 @@ const roomCartridges = {
 export const GAME_PORTALS = Object.fromEntries(
   Object.entries(roomCartridges).map(([room, id]) => {
     const game = retroGames.find((entry) => entry.id === id);
-    return [room, { title: game.name, src: game.url, controls: game.controls }];
+    return [
+      room,
+      {
+        title: game.name,
+        src: game.url,
+        controls: game.controls,
+        download: game.download,
+      },
+    ];
   }),
 );
