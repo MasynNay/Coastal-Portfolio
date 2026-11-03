@@ -11,7 +11,7 @@ const patchNotes = [
       "Release One and Look Closer have matching sizes on opposite sides of each habitat. Pause is centered below the details.",
       "Releasing a creature now asks for confirmation. Discoveries stay in the field guide after release.",
       "Added phone, tablet and keyboard instructions for shaking trees, catching bugs and fishing, in the collection screens and Help.",
-      "Replaced the inaccessible EmailJS connection with FormSubmit. Failed submissions keep the visitor's message and offer a direct email link; delivery requires the recipient's one-time activation.",
+      "Fixed Contact Me email delivery with FormSubmit. Activation is complete, and a test from the live website was received successfully. Messages include the visitor's contact details and message; failed submissions keep their draft and offer a direct email link.",
       "The Windfall mailbox now holds these real patch notes instead of a duplicate Rickroll.",
     ],
   },

@@ -39,7 +39,9 @@ The domain belongs to the current site. Do not add it back to GitHub Pages or th
 
 The shared contact form uses FormSubmit to deliver submissions to `masynnay33@gmail.com`, with the subject **Someone sent you a message from your portfolio**. It includes the visitor's name, email, optional phone number and message. Reply-To points to the visitor's address.
 
-The recipient must activate the form through FormSubmit's one-time confirmation email before email delivery is enabled. No EmailJS account, SMTP password or private API key is required. The form keeps the visitor's input when a request fails and offers a direct email link. See [FormSubmit's setup instructions](https://formsubmit.co/) for activation, and [ContactMail.js](../src/components/ContactMail.js) for the shared request.
+Activation is complete. On November 2, 2026, a test submitted through the live website was accepted by FormSubmit and confirmed received by Masyn. If the recipient changes, the new address must complete FormSubmit's one-time activation before receiving messages.
+
+No EmailJS account, SMTP password or private API key is required. The form keeps the visitor's input when a request fails and offers a direct email link. See [FormSubmit's setup instructions](https://formsubmit.co/) for activation, and [ContactMail.js](../src/components/ContactMail.js) for the shared request.
 
 ## In-game patch notes
 
