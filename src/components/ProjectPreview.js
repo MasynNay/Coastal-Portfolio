@@ -1,7 +1,7 @@
 import "./ProjectPreview.css";
 
-// Browser chrome is shared across presentations. The image is deliberately
-// labeled as an interface preview, rather than an interactive app or screenshot.
+// Shared browser chrome frames interface artwork and real screenshots without
+// loading the live application inside each portfolio card.
 export default function ProjectPreview({ title, src }) {
   return (
     <figure className="project-preview">

@@ -7,6 +7,7 @@ export const ProjectCard = ({
   description,
   imgUrl,
   webLink,
+  webLabel = "Visit website",
   gitLink,
   demoLink,
   glass = false,
@@ -48,7 +49,7 @@ export const ProjectCard = ({
               {demoLink && <Link to={demoLink}>Try the demo ↗</Link>}
               {webLink && (
                 <a href={webLink} target="_blank" rel="noreferrer">
-                  Visit website ↗
+                  {webLabel} ↗
                 </a>
               )}
               {gitLink && (
@@ -86,7 +87,7 @@ export const ProjectCard = ({
               target="_blank"
               rel="noopener noreferrer"
             >
-              View Website
+              {webLabel}
             </a>
           )}
           {gitLink && (

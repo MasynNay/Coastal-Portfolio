@@ -216,7 +216,7 @@ export function DesignPortfolio({ expressive }) {
                           target="_blank"
                           rel="noreferrer"
                         >
-                          Visit website ↗
+                          {project.websiteLabel || "Visit website"} ↗
                         </a>
                       )}
                       {project.github && (

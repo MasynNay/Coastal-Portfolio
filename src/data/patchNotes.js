@@ -2,6 +2,15 @@
 // the preceding production commit, rather than fictional in-game release notes.
 const patchNotes = [
   {
+    version: "1.0.2",
+    date: "November 2, 2026",
+    previousCommit: "eb2a0d2",
+    changes: [
+      "Restored Mother Goose Tumbling to the shared project list across the website, Mac Mode and Game Mode.",
+      "Added a real screenshot, the preserved live application and source links, and a note that the current site has moved to a new administrator.",
+    ],
+  },
+  {
     version: "1.0.1",
     date: "November 2, 2026",
     previousCommit: "d79d89b",

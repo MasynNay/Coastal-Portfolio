@@ -37,4 +37,17 @@ export const webProjects = [
     tools: "React · GraphQL · Mongoose · Tailwind",
     github: "https://github.com/greg4949/Semi-Snitch",
   },
+  {
+    id: "mgt",
+    imgUrl: "/images/projects/mgt.jpg",
+    title: "Mother Goose Tumbling",
+    website: "https://masynnay.github.io/MGT/",
+    websiteLabel: "View preserved site",
+    category: "Web",
+    label: "04 / CLIENT PROJECT",
+    description:
+      "A website for Mother Goose Tumbling (MGT), featuring classes, a photo gallery, and parent resources. The site is now managed by a new administrator; my original version is preserved as a live application.",
+    tools: "Responsive design · Class information · Photo gallery",
+    github: "https://github.com/MasynNay/MGT",
+  },
 ];

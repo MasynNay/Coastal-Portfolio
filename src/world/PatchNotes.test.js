@@ -2,6 +2,7 @@ import { act } from "react";
 import { createRoot } from "react-dom/client";
 import { MailboxMessage } from "./Activities";
 import { mailboxLetters } from "./Mailboxes";
+import patchNotes from "../data/patchNotes";
 
 test("Windfall opens actual patch notes while the one original Rickroll stays at About", () => {
   global.IS_REACT_ACT_ENVIRONMENT = true;
@@ -11,9 +12,10 @@ test("Windfall opens actual patch notes while the one original Rickroll stays at
     expect(host.textContent).toContain("News from Windfall");
     act(() => host.querySelector("button").click());
     expect(opened).toHaveBeenCalledTimes(1);
-    expect(host.textContent).toContain("Island update · 1.0.1");
+    const latest = patchNotes[0];
+    expect(host.textContent).toContain(`Island update · ${latest.version}`);
     expect(host.querySelectorAll("li").length).toBeGreaterThan(3);
-    expect(host.querySelector("a").href).toContain("compare/d79d89b...v1.0.1");
+    expect(host.querySelector("a").href).toContain(`compare/${latest.previousCommit}...v${latest.version}`);
     expect(host.querySelector('a[href*="youtube"]')).toBeNull();
     expect(Object.values(mailboxLetters).filter(letter => letter.reward?.url.includes("dQw4w9WgXcQ"))).toHaveLength(1);
     expect(mailboxLetters.home.reward.url).toContain("dQw4w9WgXcQ");

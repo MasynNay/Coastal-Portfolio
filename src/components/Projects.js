@@ -36,10 +36,12 @@ export const Projects = ({ glass = false }) => {
   ];
 
   const projectsTab2 = [
-    ...webProjects.map(({ github, demo, ...project }) => ({
+    ...webProjects.map(({ github, demo, website, websiteLabel, ...project }) => ({
       ...project,
       gitLink: github,
       demoLink: demo,
+      webLink: website,
+      webLabel: websiteLabel,
     })),
     // Retained on the original route only; the redesign hides unfinished cards.
     {

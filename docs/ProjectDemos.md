@@ -12,4 +12,6 @@ MixStream preserves the original HTML structure, Foundation and project CSS, ban
 
 The two older apps are isolated in iframes so their global Foundation/Tailwind rules cannot affect the portfolio. TypeNinja reuses the same React component as its Mac Mode dock app. Its source and license notes are in `src/typing/README.md` and `docs/licenses/TypeNinja.txt`.
 
-No old API keys or credentials are carried into these demos. MGTumbling has been removed from project data and cards.
+No old API keys or credentials are carried into these demos.
+
+Mother Goose Tumbling (MGT) is also listed as a client project. Its current site has moved to a new administrator; the card links to [the preserved live application](https://masynnay.github.io/MGT/) and its source repository. The preview is a real homepage screenshot in `public/images/projects/mgt.jpg`, captured from that preserved site.
