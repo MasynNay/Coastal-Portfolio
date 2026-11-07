@@ -8,6 +8,7 @@ export const ProjectCard = ({
   title,
   description,
   imgUrl,
+  previewKind = "interface",
   webLink,
   webLabel = "Visit website",
   gitLink,
@@ -16,16 +17,17 @@ export const ProjectCard = ({
   iconLabel,
   category,
 }) => {
+  const hasPreview = (category === "Web" || category === "Software") && imgUrl;
   if (glass)
     return (
       <Col xs={12} md={6} className="glass-project-column">
         <article className="glass-project-card">
           <div
-            className={`glass-project-cover cover-${title.split(" ")[0].toLowerCase()}${category === "Web" && imgUrl ? " has-preview" : ""}`}
-            aria-hidden={category === "Web" ? undefined : true}
+            className={`glass-project-cover cover-${title.split(" ")[0].toLowerCase()}${hasPreview ? " has-preview" : ""}`}
+            aria-hidden={hasPreview ? undefined : true}
           >
-            {category === "Web" && imgUrl ? (
-              <ProjectPreview title={title} src={imgUrl} />
+            {hasPreview ? (
+              <ProjectPreview title={title} src={imgUrl} kind={previewKind} />
             ) : (
               <>
                 <span>
