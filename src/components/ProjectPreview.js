@@ -2,7 +2,7 @@ import "./ProjectPreview.css";
 
 // Shared browser chrome frames interface artwork and real screenshots without
 // loading the live application inside each portfolio card.
-export default function ProjectPreview({ title, src }) {
+export default function ProjectPreview({ title, src, kind = "interface" }) {
   return (
     <figure className="project-preview">
       <div className="project-preview-bar" aria-hidden="true">
@@ -12,11 +12,11 @@ export default function ProjectPreview({ title, src }) {
           <i />
         </span>
         <span>{title}</span>
-        <small>UI PREVIEW</small>
+        <small>{kind === "artwork" ? "ORIGINAL ARTWORK" : "UI PREVIEW"}</small>
       </div>
       <img
         src={src}
-        alt={`${title} interface preview`}
+        alt={kind === "artwork" ? `${title} original illustrated project artwork` : `${title} interface preview`}
         loading="lazy"
         decoding="async"
         width="1200"
