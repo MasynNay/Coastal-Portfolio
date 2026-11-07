@@ -16,7 +16,11 @@ export default function ProjectPreview({ title, src, kind = "interface" }) {
       </div>
       <img
         src={src}
-        alt={kind === "artwork" ? `${title} original illustrated project artwork` : `${title} interface preview`}
+        alt={
+          kind === "artwork"
+            ? `${title} original illustrated project artwork`
+            : `${title} interface preview`
+        }
         loading="lazy"
         decoding="async"
         width="1200"

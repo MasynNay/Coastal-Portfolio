@@ -175,7 +175,9 @@ export function DesignPortfolio({ expressive }) {
           </div>
           <p className="design-result-count" role="status">
             {
-              projects.filter((project) => matchesProjectFilter(project, filter)).length
+              projects.filter((project) =>
+                matchesProjectFilter(project, filter),
+              ).length
             }{" "}
             projects & milestones
           </p>
