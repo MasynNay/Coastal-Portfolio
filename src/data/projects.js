@@ -2,6 +2,20 @@
 // windows and game rooms. Each presentation chooses its own card layout.
 export const webProjects = [
   {
+    id: "anything-plays",
+    imgUrl: "https://anythingplays.masynnay.com/assets/anything-plays-original.webp",
+    previewKind: "artwork",
+    title: "Anything Plays",
+    website: "https://anythingplays.masynnay.com/",
+    websiteLabel: "Explore the project",
+    category: "Software",
+    label: "05 / INDEPENDENT DESKTOP SOFTWARE",
+    description:
+      "A camera-powered desktop gaming studio that turns tracked objects into controls for classic video games. Released as 2.0 for four consoles; version 3.0 expands native emulation while cross-platform QA continues.",
+    tools: "Python · OpenCV · Tkinter · Libretro · PyInstaller · GitHub Actions",
+    github: "https://github.com/MasynNay/anything-plays",
+  },
+  {
     id: "mixstream",
     imgUrl: "/images/projects/mixstream.svg",
     title: "MixStream",
