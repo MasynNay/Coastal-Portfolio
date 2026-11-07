@@ -166,7 +166,7 @@ export function DesignPortfolio({ expressive }) {
           <p className="design-result-count" role="status">
             {
               projects.filter(
-                (project) => filter === "All" || project.category === filter,
+                (project) => filter === "All" || (project.category === filter || (filter === "Web" && project.category === "Software")),
               ).length
             }{" "}
             projects & milestones
@@ -174,17 +174,18 @@ export function DesignPortfolio({ expressive }) {
           <div className="design-project-grid">
             {projects
               .filter(
-                (project) => filter === "All" || project.category === filter,
+                (project) => filter === "All" || (project.category === filter || (filter === "Web" && project.category === "Software")),
               )
               .map((project) => (
                 <article className="design-project" key={project.title}>
                   <div
-                    className={`design-project-art${project.category === "Web" ? " has-preview" : ""}`}
+                    className={`design-project-art${(project.category === "Web" || project.category === "Software") ? " has-preview" : ""}`}
                   >
-                    {project.category === "Web" ? (
+                    {(project.category === "Web" || project.category === "Software") ? (
                       <ProjectPreview
                         title={project.title}
                         src={project.imgUrl}
+                        kind={project.previewKind}
                       />
                     ) : (
                       <>
