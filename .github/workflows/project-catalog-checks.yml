@@ -1,0 +1,44 @@
+name: Portfolio project catalog checks
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'src/data/projects.js'
+      - 'src/data/projects.test.js'
+      - 'src/components/ProjectCard.js'
+      - 'src/components/ProjectPreview.js'
+      - 'src/designs/DesignPortfolio.js'
+      - 'README.md'
+      - '.github/workflows/project-catalog-checks.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: portfolio-catalog-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    env:
+      CI: 'true'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .node-version
+          cache: npm
+      - name: Install locked dependencies
+        run: npm ci
+      - name: Verify source formatting
+        run: npm run format:check
+      - name: Verify React source lint
+        run: npm run lint
+      - name: Test shared desktop project catalog
+        run: npm test -- --watchAll=false --runInBand
+      - name: Build production portfolio
+        run: npm run build
