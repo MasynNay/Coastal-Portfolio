@@ -1,0 +1,41 @@
+name: One-time project catalog formatting
+
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/_one_time_format_project.yml']
+
+permissions:
+  contents: write
+
+jobs:
+  format:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .node-version
+          cache: npm
+      - run: npm ci --ignore-scripts
+      - name: Apply repository-pinned Prettier to the touched project files
+        run: |
+          npx prettier --write \
+            src/data/projects.js \
+            src/data/projects.test.js \
+            src/components/ProjectPreview.js \
+            src/designs/DesignPortfolio.js
+      - name: Commit only formatting changes
+        shell: bash
+        run: |
+          git add -- src/data/projects.js src/data/projects.test.js src/components/ProjectPreview.js src/designs/DesignPortfolio.js
+          if git diff --cached --quiet; then
+            echo 'Already formatted'
+            exit 0
+          fi
+          git -c user.name="github-actions[bot]" -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
+            commit -m "style(portfolio): format Anything Plays integration with pinned Prettier"
+          git push
