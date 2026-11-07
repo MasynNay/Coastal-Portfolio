@@ -240,6 +240,15 @@ export function DesignPortfolio({ expressive }) {
                           View source ↗
                         </a>
                       )}
+                      {project.roadmap && (
+                        <a
+                          href={project.roadmap}
+                          target="_blank"
+                          rel="noreferrer"
+                        >
+                          Development roadmap ↗
+                        </a>
+                      )}
                     </div>
                   </div>
                 </article>
