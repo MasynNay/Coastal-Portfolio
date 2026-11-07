@@ -12,6 +12,7 @@ export const ProjectCard = ({
   webLink,
   webLabel = "Visit website",
   gitLink,
+  roadmap,
   demoLink,
   glass = false,
   iconLabel,
@@ -61,6 +62,11 @@ export const ProjectCard = ({
                   View source ↗
                 </a>
               )}
+              {roadmap && (
+                <a href={roadmap} target="_blank" rel="noreferrer">
+                  Development roadmap ↗
+                </a>
+              )}
             </div>
           </div>
         </article>
@@ -102,6 +108,16 @@ export const ProjectCard = ({
               rel="noopener noreferrer"
             >
               View GitHub Repo
+            </a>
+          )}
+          {roadmap && (
+            <a
+              className="projectbtn"
+              href={roadmap}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Development roadmap
             </a>
           )}
         </div>
