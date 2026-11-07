@@ -11,9 +11,9 @@ test("Anything Plays is a truthful, fully linked desktop project", () => {
   expect(entry.website).toBe("https://anythingplays.masynnay.com/");
   expect(entry.github).toBe("https://github.com/MasynNay/anything-plays");
   expect(entry.imgUrl).toBe(
-    "https://anythingplays.masynnay.com/assets/anything-plays-original.webp",
+    "https://anythingplays.masynnay.com/assets/anything-plays-desktop-preview.webp",
   );
-  expect(entry.previewKind).toBe("artwork");
+  expect(entry.previewKind).toBe("interface");
   expect(entry.demo).toBeUndefined();
   expect(entry.description).toMatch(/version 3\.0.*QA continues/i);
   expect(webProjects.filter((project) => project.id === entry.id)).toHaveLength(
