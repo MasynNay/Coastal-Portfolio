@@ -11,6 +11,16 @@ import "./designs.css";
 import { profile } from "../data/resume";
 import ProjectPreview from "../components/ProjectPreview";
 
+// The "Coding" filter includes browser work and native desktop software.
+const matchesProjectFilter = (project, filter) =>
+  filter === "All" ||
+  project.category === filter ||
+  (filter === "Web" && project.category === "Software");
+
+const hasProjectArtwork = (project) =>
+  (project.category === "Web" || project.category === "Software") &&
+  Boolean(project.imgUrl);
+
 export function DesignPortfolio({ expressive }) {
   const [filter, setFilter] = useState("All");
   const [menuOpen, setMenuOpen] = useState(false);
@@ -165,23 +175,19 @@ export function DesignPortfolio({ expressive }) {
           </div>
           <p className="design-result-count" role="status">
             {
-              projects.filter(
-                (project) => filter === "All" || (project.category === filter || (filter === "Web" && project.category === "Software")),
-              ).length
+              projects.filter((project) => matchesProjectFilter(project, filter)).length
             }{" "}
             projects & milestones
           </p>
           <div className="design-project-grid">
             {projects
-              .filter(
-                (project) => filter === "All" || (project.category === filter || (filter === "Web" && project.category === "Software")),
-              )
+              .filter((project) => matchesProjectFilter(project, filter))
               .map((project) => (
                 <article className="design-project" key={project.title}>
                   <div
-                    className={`design-project-art${(project.category === "Web" || project.category === "Software") ? " has-preview" : ""}`}
+                    className={`design-project-art${hasProjectArtwork(project) ? " has-preview" : ""}`}
                   >
-                    {(project.category === "Web" || project.category === "Software") ? (
+                    {hasProjectArtwork(project) ? (
                       <ProjectPreview
                         title={project.title}
                         src={project.imgUrl}
