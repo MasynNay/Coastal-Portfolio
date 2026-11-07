@@ -4,8 +4,8 @@ export const webProjects = [
   {
     id: "anything-plays",
     imgUrl:
-      "https://anythingplays.masynnay.com/assets/anything-plays-original.webp",
-    previewKind: "artwork",
+      "https://anythingplays.masynnay.com/assets/anything-plays-desktop-preview.webp",
+    previewKind: "interface",
     title: "Anything Plays",
     website: "https://anythingplays.masynnay.com/",
     websiteLabel: "Explore the project",
