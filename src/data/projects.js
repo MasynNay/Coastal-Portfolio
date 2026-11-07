@@ -16,6 +16,7 @@ export const webProjects = [
     tools:
       "Python · OpenCV · Tkinter · Libretro · PyInstaller · GitHub Actions",
     github: "https://github.com/MasynNay/anything-plays",
+    roadmap: "https://github.com/MasynNay/anything-plays/blob/main/ROADMAP.md",
   },
   {
     id: "mixstream",
