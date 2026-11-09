@@ -1,4 +1,4 @@
-import { groveDance, groveInteraction } from "./ForestGrove";
+import { groveDance, groveInteraction, groveTree } from "./ForestGrove";
 import { createRoomInteractions, isLoveOffering } from "./RoomInteractions";
 import { startWindSong } from "./WindStatue";
 import { restSpots, createRestSpots } from "./RestSpots";
@@ -732,7 +732,10 @@ export function createWorld(host, callbacks) {
     if (duckTarget?.type === "grove") {
       stop();
       cancelAbility();
-      direction = 4;
+      direction = movementDirection(
+        groveTree.x - position.x,
+        groveTree.z - position.z,
+      );
       groveStarted = worldTime;
       callbacks.onEvent?.({
         type: "notice",

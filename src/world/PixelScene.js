@@ -1,4 +1,9 @@
-import { drawGroveLights, groveSpirit, groveTree } from "./ForestGrove";
+import {
+  drawGroveLights,
+  drawGroveSpirit,
+  groveSpirits,
+  groveTree,
+} from "./ForestGrove";
 import { drawWindSong } from "./WindStatue";
 import { surfboard, drawSurfWave } from "./SurfRide";
 import { skyBirds } from "./Sky";
@@ -39,12 +44,7 @@ import { roomBounds, buildingHeight } from "./WorldLayout";
 import { artwork, createArtCache, drawSprite } from "./art";
 import { buildings, residents, animals, characters } from "./config";
 
-// Seat offsets follow the hull's eight headings. Nameplates use the same anchor.
-const seatHeights = {
-  boat: [1.15, 0.8, 0.5, 0.8, 1.15, 0.8, 0.5, 0.8],
-  jetski: [0.55, 0.45, 0.3, 0.45, 0.55, 0.45, 0.3, 0.45],
-};
-const riderSeat = (craft, direction = 0) => seatHeights[craft.id][direction];
+const jetSkiSeatHeights = [0.55, 0.45, 0.3, 0.45, 0.55, 0.45, 0.3, 0.45];
 const humanIds = new Set(characters.map((character) => character.id));
 
 // Emerald-inspired overhead renderer. Original artwork, shared movement and room secrets;
@@ -365,7 +365,7 @@ export function createCanvasScene(host, invalidate = () => {}) {
     };
   }
   function drawWatercraft(entry, state) {
-    const { craft, ride } = entry,
+    const { craft, ride, driver } = entry,
       time = state.rideTime ?? state.worldTime,
       direction = ride?.direction ?? 0;
     const p = at(entry.x, entry.z),
@@ -403,12 +403,8 @@ export function createCanvasScene(host, invalidate = () => {}) {
     sprite(craft.art, entry.x, entry.z, craft.h, direction, true, time);
     if (ride) {
       ctx.save();
-      if (craft.id === "boat") {
-        // The hull hides the seated driver's lower body in every heading.
-        // The portrait/arms remain above the gunwale; legs stay inside the boat.
-        const seat = riderSeat(craft, direction),
-          body = personHeight(ride.driver || state.character) * 0.9;
-        const bottom = p.y - unit * (seat + body * 0.36);
+      if (driver.deck != null) {
+        const bottom = p.y - unit * driver.deck;
         ctx.beginPath();
         ctx.rect(
           p.x - unit * 4,
@@ -427,13 +423,13 @@ export function createCanvasScene(host, invalidate = () => {}) {
           "water-ride",
           artwork,
         ),
-        entry.x - Math.sin(angle) * 0.12,
+        entry.x + driver.x,
         entry.z,
-        personHeight(ride.driver || state.character) * 0.9,
+        driver.body,
         direction,
         true,
         time,
-        riderSeat(craft, direction),
+        driver.lift,
       );
       ctx.restore();
     }
@@ -695,11 +691,8 @@ export function createCanvasScene(host, invalidate = () => {}) {
                 : h,
           });
     if (!room) {
-      sprites.push({
-        ...groveSpirit,
-        moving: !!state.grove,
-        time: state.grove?.elapsed,
-      });
+      for (const spirit of groveSpirits(state.grove))
+        sprites.push({ ...spirit, groveSpirit: true });
 
       for (const r of state.residents || residents)
         if (r.id !== state.character && !r.room && !r.hidden)
@@ -758,16 +751,26 @@ export function createCanvasScene(host, invalidate = () => {}) {
       for (const craft of watercraft) {
         const ride =
           (waterRide?.craftId || waterRide?.id) === craft.id ? waterRide : null;
+        const heading = ride?.direction ?? 0;
+        const body = personHeight(ride?.driver || state.character) * 0.9;
+        const cockpit = craft.cockpit?.[heading];
+        const driver = {
+          x: cockpit?.x ?? -Math.sin((heading * Math.PI) / 4) * 0.12,
+          deck: cockpit?.deck,
+          body,
+          lift: cockpit
+            ? cockpit.deck - body * 0.36
+            : jetSkiSeatHeights[heading],
+        };
         sprites.push({
           id: ride ? ride.driver || state.character : craft.id,
           watercraft: true,
           craft,
           ride,
+          driver,
           x: ride?.x ?? craft.x,
           z: ride?.z ?? craft.z,
-          h:
-            personHeight(ride?.driver || state.character) * 0.9 +
-            riderSeat(craft, ride?.direction || 0),
+          h: driver.body + driver.lift,
           lift: ride?.lift || 0,
           player:
             !!ride && (ride.driver || state.character) === state.character,
@@ -927,7 +930,9 @@ export function createCanvasScene(host, invalidate = () => {}) {
       return depth(a) - depth(b);
     }))
       if (!a.hidden && (!a.player || flight <= time))
-        if (a.restSpot) drawRestSpot(a, state);
+        if (a.groveSpirit)
+          drawGroveSpirit(ctx, at, unit, image("totoro-grove"), a);
+        else if (a.restSpot) drawRestSpot(a, state);
         else if (a.watercraft) drawWatercraft(a, state);
         else if (a.board) drawBoard(a, state);
         else if (a.surfboard) drawSurfer(a, state);
@@ -975,7 +980,7 @@ export function createCanvasScene(host, invalidate = () => {}) {
       if (!person || a.building || a.hidden || (a.player && flight > time))
         continue;
       const name = person.name,
-        p = at(a.x, a.z),
+        p = at(a.x + (a.driver?.x ?? 0), a.z),
         sheet = artwork[a.art],
         // A child sits higher on the full-size rental. Keep their name above
         // the actual head instead of placing it at their standing height.

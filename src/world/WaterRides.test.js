@@ -8,7 +8,29 @@ import {
 } from "./Harbor";
 import { canStand } from "./navigation";
 import sheets from "./SpriteSheets.json";
-import { spriteFrame } from "./animation";
+import { movementDirection, spriteFrame } from "./animation";
+
+test("the sailboat uses the painted heading for all eight movement directions", () => {
+  const sheet = sheets[watercraft[0].art];
+  const headings = [
+    [0, 1], // South
+    [1, 1],
+    [1, 0], // East
+    [1, -1],
+    [0, -1], // North
+    [-1, -1],
+    [-1, 0], // West
+    [-1, 1],
+  ];
+  expect(sheet.rows).toBe(headings.length);
+  expect(watercraft[0].cockpit).toHaveLength(headings.length);
+  for (const [row, [x, z]] of headings.entries())
+    expect(spriteFrame(sheet, movementDirection(x, z), true, 500)).toEqual({
+      row,
+      column: 0,
+      flip: false,
+    });
+});
 
 test("the boat makes a smooth ocean-only lap on all four sides and returns its rider to the exact origin", () => {
   const ride = createWaterRide(),

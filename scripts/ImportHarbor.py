@@ -4,6 +4,7 @@ Input: the built-in image tool result records (key, path, prompt) as JSON.
 Riders are separate complete drawings published by BuildActivities.py.
 """
 
+import hashlib
 import json
 from pathlib import Path
 import shutil
@@ -13,6 +14,83 @@ import ImportSprites as sprites
 
 ROOT = sprites.ROOT
 SOURCE = ROOT / "docs/source-assets/harbor"
+
+
+# Five drawn views plus exact reflections. Source cells are S, SE, E, NE, N.
+RED_LION_ROWS = [
+    [0, 0], [1, 0], [2, 0], [3, 0], [4, 0], [3, 1], [2, 1], [1, 1],
+]
+
+
+def pack_red_lion():
+    sheet = Image.open(SOURCE / "RedLion.png").convert("RGBA")
+    w, h = sheet.width // 3, sheet.height // 2
+    views = []
+    for row, flip in RED_LION_ROWS:
+        x, y = row % 3 * w, row // 3 * h
+        cell = sheet.crop((x, y, x + w, y + h))
+        cell.putalpha(cell.getchannel("A").point(lambda a: 255 if a >= 160 else 0))
+        box = cell.getbbox()
+        if not box or box[0] == 0 or box[1] == 0 or box[2] == w or box[3] == h:
+            raise ValueError(f"Missing or clipped sailboat view in cell {row + 1}")
+        pose = cell.crop(box)
+        views.append(ImageOps.mirror(pose) if flip else pose)
+
+    size, foot, body = 224, 216, 192
+    scale = body / max(max(pose.size) for pose in views)
+    atlas = Image.new("RGBA", (size, size * len(views)))
+    for row, pose in enumerate(views):
+        fit = pose.resize(
+            (round(pose.width * scale), round(pose.height * scale)),
+            Image.Resampling.LANCZOS,
+        )
+        fit.putalpha(fit.getchannel("A").point(lambda a: 255 if a >= 160 else 0))
+        fit = fit.crop(fit.getbbox())
+        atlas.alpha_composite(
+            fit, ((size - fit.width) // 2, row * size + foot - fit.height)
+        )
+    alpha = atlas.getchannel("A")
+    atlas = atlas.convert("RGB").quantize(colors=128, dither=Image.Dither.NONE).convert("RGBA")
+    atlas.putalpha(alpha)
+
+    path = "/world/sprites/emerald/harbor-boat.png"
+    target = ROOT / ("public" + path)
+    atlas.save(target, optimize=True)
+    sprites.manifest["harbor-boat"] = dict(
+        id="harbor-boat",
+        src=path,
+        cw=size,
+        ch=size,
+        rows=8,
+        columns=1,
+        footY=foot,
+        bodyHeight=body,
+        action="vehicle",
+        frameMs=140,
+        pixelArt=True,
+        smooth=True,
+        colors=128,
+        layout="eight",
+        canonicalDirections=True,
+        # The packed rows already follow world headings clockwise from south.
+        directions=[[row, 0] for row in range(len(views))],
+        revision=hashlib.sha256(target.read_bytes()).hexdigest()[:12],
+    )
+
+    side = views[2].copy()
+    side.thumbnail((92, 92), Image.Resampling.LANCZOS)
+    icon = Image.new("RGBA", (100, 100))
+    icon.alpha_composite(side, ((100 - side.width) // 2, (100 - side.height) // 2))
+    icon.save(ROOT / "public/world/sprites/wakeboard-icon.png", optimize=True)
+
+
+def publish_red_lion():
+    pack_red_lion()
+    directions_file = ROOT / "docs/source-assets/DirectionRows.json"
+    directions = json.loads(directions_file.read_text())
+    directions["harbor-boat"] = RED_LION_ROWS
+    directions_file.write_text(json.dumps(directions, indent=2) + "\n")
+    sprites.manifest_path.write_text(json.dumps(sprites.manifest, indent=2) + "\n")
 
 
 def main(results):
@@ -25,6 +103,10 @@ def main(results):
     directions_file = ROOT / "docs/source-assets/DirectionRows.json"
     directions = json.loads(directions_file.read_text())
     for key, name in [("Boat", "harbor-boat"), ("JetSki", "harbor-jetski")]:
+        if key == "Boat" and (SOURCE / "RedLion.png").exists():
+            pack_red_lion()
+            directions[name] = RED_LION_ROWS
+            continue
         # Visually checked: the jet-ski source starts at its stern (north),
         # so its written source labels must not be used as the game headings.
         rows = (
@@ -86,4 +168,7 @@ def main(results):
 
 
 if __name__ == "__main__":
-    main(sys.argv[1])
+    if sys.argv[1] == "--red-lion":
+        publish_red_lion()
+    else:
+        main(sys.argv[1])

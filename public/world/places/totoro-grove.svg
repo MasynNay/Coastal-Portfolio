@@ -1,44 +1,98 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="960" height="160" viewBox="0 0 960 160">
+<svg xmlns="http://www.w3.org/2000/svg" width="576" height="864" viewBox="0 0 576 864">
+  <!-- Four poses per row: idle, crouch, reach, step. Front and back for each coat. -->
+  <style>
+    .slate { --coat: url(#slate); --edge: #334447; --inner: #aebcb0; --marks: #778579; }
+    .blue { --coat: url(#blue); --edge: #305365; --inner: #adcad2; --marks: #658e94; }
+    .ivory { --coat: url(#ivory); --edge: #74887a; --inner: #f4d8c7; --marks: transparent; }
+    .fur { fill: var(--coat); stroke: var(--edge); stroke-width: 2.4; stroke-linejoin: round; }
+    .inner { fill: var(--inner); }
+    .paws { fill: var(--coat); stroke: var(--edge); stroke-width: 2.4; stroke-linecap: round; }
+    .marks { fill: none; stroke: var(--marks); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+  </style>
   <defs>
-    <linearGradient id="fur" x2=".45" y2="1"><stop stop-color="#9aa7a3"/><stop offset="1" stop-color="#586b65"/></linearGradient>
-    <linearGradient id="belly" x2=".1" y2="1"><stop stop-color="#f2ecd1"/><stop offset="1" stop-color="#cec4a1"/></linearGradient>
-    <g id="totoro" stroke="#314443" stroke-width="2.4" stroke-linejoin="round">
-      <path fill="url(#fur)" d="M-21-76c-9-10-13-28-8-34 8-4 15 9 19 25m19-1c5-18 14-27 20-24 6 5 1 23-7 34"/>
-      <path fill="url(#fur)" d="M0-90c20 0 33 13 37 31 4 12 15 27 12 41C47-4 33 0 0 0c-33 0-47-4-49-18-3-14 8-29 12-41C-33-77-20-90 0-90z"/>
-      <ellipse cx="0" cy="-29" rx="32" ry="25" fill="url(#belly)" stroke="none"/>
-      <path d="m-20-40 5-4 5 4m5-2 5-5 5 5m5 2 5-4 5 4m-33 9 5-4 4 4m8 0 5-4 5 4" fill="none" stroke="#6e7b68"/>
-      <ellipse cx="-17" cy="-65" rx="7" ry="7" fill="#fff6dd"/><ellipse cx="17" cy="-65" rx="7" ry="7" fill="#fff6dd"/>
-      <circle cx="-16" cy="-65" r="2.8" fill="#293b3e" stroke="none"/><circle cx="16" cy="-65" r="2.8" fill="#293b3e" stroke="none"/>
-      <path d="M-5-62q5-3 10 0l-5 4z" fill="#314443"/>
-      <path d="M-8-54q8 7 16 0m-34-4-17-4m16 9-18 1m70-6 17-4m-16 9 18 1" fill="none" stroke-linecap="round"/>
-      <path d="M-23-2l2-4m6 4 2-4m27 4 2-4m7 4 2-4" stroke="#eee1bf" stroke-linecap="round"/>
+    <linearGradient id="slate" x2=".27" y2="1">
+      <stop stop-color="#adb9ad"/><stop offset=".54" stop-color="#83958d"/><stop offset="1" stop-color="#596e68"/>
+    </linearGradient>
+    <linearGradient id="blue" x2=".27" y2="1">
+      <stop stop-color="#a2c8d6"/><stop offset=".56" stop-color="#70a6b9"/><stop offset="1" stop-color="#4a7d91"/>
+    </linearGradient>
+    <linearGradient id="ivory" x2=".27" y2="1">
+      <stop stop-color="#fffdf1"/><stop offset=".58" stop-color="#eae9d5"/><stop offset="1" stop-color="#b8c5b5"/>
+    </linearGradient>
+    <linearGradient id="belly" x2=".18" y2="1">
+      <stop stop-color="#fff6d9"/><stop offset=".73" stop-color="#f0e2bc"/><stop offset="1" stop-color="#d9c9a1"/>
+    </linearGradient>
+
+    <g id="ears">
+      <path class="fur" d="M-23-76Q-37-95-32-116Q-29-125-24-119Q-12-107-9-86ZM12-86Q17-107 28-118Q35-123 35-114Q38-96 25-76Z"/>
+      <path class="inner" d="M-24-92Q-31-103-28-114Q-20-107-18-95ZM20-94Q24-107 31-114Q33-102 26-92Z"/>
     </g>
-    <g id="blue" stroke="#315765" stroke-width="3" stroke-linejoin="round">
-      <path d="M-15-56q-11-21-4-27 8-2 15 17m8 0q9-21 16-16 6 6-5 28" fill="#6ba8b7"/>
-      <path d="M0-69q20 0 24 21l9 20C40-10 29 0 0 0s-40-10-33-28l9-20Q-20-69 0-69z" fill="#72aab7"/>
-      <ellipse cy="-19" rx="21" ry="16" fill="#e8e3cb" stroke="none"/>
-      <circle cx="-10" cy="-49" r="5.5" fill="#fff6df"/><circle cx="10" cy="-49" r="5.5" fill="#fff6df"/>
-      <circle cx="-9" cy="-49" r="2.5" fill="#293b3e"/><circle cx="9" cy="-49" r="2.5" fill="#293b3e"/>
-      <path d="m-9-27 4-4 5 4m3-2 4-4 4 4" fill="none" stroke="#658184"/>
+    <path id="body" class="fur" d="M-2-91C22-92 37-80 40-61C42-47 52-35 51-22C50-7 37-1 19-2Q1-5-19-2C-37-1-51-8-51-22C-52-37-43-47-41-60C-38-78-25-90-2-91Z"/>
+    <g id="feet">
+      <ellipse class="fur" cx="-24" cy="-5" rx="16" ry="6"/>
+      <ellipse class="fur" cx="24" cy="-5" rx="16" ry="6"/>
+      <path d="m-31-2 1-2m6 3v-3m46 3v-3m7 2-1-2" fill="none" stroke="#fff6db" stroke-opacity=".65" stroke-width="2" stroke-linecap="round"/>
     </g>
-    <g id="white" stroke="#758b82" stroke-width="2.8">
-      <path fill="#e6e8d5" d="M-12-43q-10-17-5-23 6-3 14 16m6 0q8-19 14-16 5 6-5 23M0-52q16 0 21 19l4 10Q31 0 0 0t-25-23l4-10Q-16-52 0-52z"/>
-      <circle cx="-7" cy="-37" r="2.6" fill="#344b4d" stroke="none"/><circle cx="7" cy="-37" r="2.6" fill="#344b4d" stroke="none"/>
+    <g id="stepFeet">
+      <ellipse class="fur" cx="-32" cy="-5" rx="16" ry="6" transform="rotate(-11 -32 -5)"/>
+      <ellipse class="fur" cx="23" cy="-10" rx="15" ry="6" transform="rotate(17 23 -10)"/>
     </g>
-    <g id="arms" fill="none" stroke="#61756c" stroke-width="14" stroke-linecap="round">
-      <path d="M-35-48q-13 9-15 18M35-48q13 9 15 18"/>
+    <g id="face">
+      <ellipse cx="-20" cy="-64" rx="8.5" ry="9.5" fill="#fff8e5"/>
+      <ellipse cx="20" cy="-64" rx="8.5" ry="9.5" fill="#fff8e5"/>
+      <ellipse cx="-19" cy="-63" rx="5.6" ry="6.8" fill="#27373b"/>
+      <ellipse cx="19" cy="-63" rx="5.6" ry="6.8" fill="#27373b"/>
+      <circle cx="-20.7" cy="-65.4" r="2.2" fill="#fffdf0"/>
+      <circle cx="17.3" cy="-65.4" r="2.2" fill="#fffdf0"/>
+      <ellipse cx="-28" cy="-53" rx="7" ry="3.7" fill="#eab0a0" opacity=".74"/>
+      <ellipse cx="28" cy="-53" rx="7" ry="3.7" fill="#eab0a0" opacity=".74"/>
+      <path d="M-5-61Q0-64 5-61L0-57Z" fill="#34484a"/>
+      <path d="M-8-53Q-4-49 0-53Q4-49 8-53" fill="none" stroke="#34484a" stroke-width="2.1" stroke-linecap="round"/>
+      <path d="m-35-57-12-3m12 7-13 1m83-5 12-3m-12 7 13 1" fill="none" stroke="#42595b" stroke-width="1.5" stroke-linecap="round"/>
     </g>
-    <g id="raised" fill="none" stroke="#788d80" stroke-width="13" stroke-linecap="round">
-      <path d="M-34-51q-17-1-20-26M34-51q17-1 20-26"/>
+    <g id="happyFace">
+      <path d="M-26-64q6-8 13 0m26 0q7-8 13 0" fill="none" stroke="#34484a" stroke-width="2.7" stroke-linecap="round"/>
+      <ellipse cx="-26" cy="-54" rx="7" ry="4" fill="#eab0a0"/>
+      <ellipse cx="26" cy="-54" rx="7" ry="4" fill="#eab0a0"/>
+      <path d="M-5-61Q0-64 5-61L0-57ZM-8-53Q0-48 8-53Q6-44 0-44Q-6-44-8-53Z" fill="#34484a"/>
+      <path d="M-4-47q4-3 8 0q-4 4-8 0" fill="#ec9c91"/>
     </g>
-    <g id="group">
-      <use href="#blue" transform="translate(53 142) scale(.91)"/>
-      <use href="#white" transform="translate(192 143) scale(.88)"/>
-      <use href="#totoro" transform="translate(123 147)"/>
+    <g id="coatFront">
+      <use href="#ears"/><use href="#body"/>
+      <ellipse cx="0" cy="-29" rx="34" ry="23" fill="url(#belly)"/>
+      <path class="marks" d="m-22-37 5-4 5 4m7-1 5-5 5 5m7 1 5-4 5 4m-33 8 4-3 4 3m6 0 4-3 4 3"/>
+      <path d="M-26-82q7-5 14-5m21 0q8 1 13 4" fill="none" stroke="#f9f6dd" stroke-opacity=".33" stroke-width="2.2" stroke-linecap="round"/>
+    </g>
+    <g id="coatBack">
+      <use href="#ears"/><use href="#body"/>
+      <path class="fur" d="M-13-10Q-9-24 0-25Q12-23 13-11Q8-4-4-4Z"/>
+      <path d="M-22-80q20-9 42 0" fill="none" stroke="#f7f2db" stroke-opacity=".28" stroke-width="2.4" stroke-linecap="round"/>
+    </g>
+    <path id="lowArms" class="paws" d="M-35-57Q-49-54-55-34Q-57-25-51-24Q-42-25-36-38M35-57Q49-54 55-34Q57-25 51-24Q42-25 36-38"/>
+    <path id="crouchArms" class="paws" d="M-38-50Q-46-49-47-35Q-47-23-37-20Q-29-20-30-26Q-37-34-32-42M38-50Q46-49 47-35Q47-23 37-20Q29-20 30-26Q37-34 32-42"/>
+    <path id="highArms" class="paws" d="M-37-53Q-55-59-62-80Q-66-93-59-97Q-53-100-49-88Q-43-75-34-71M37-53Q55-59 62-80Q66-93 59-97Q53-100 49-88Q43-75 34-71"/>
+    <path id="stepArms" class="paws" d="M-36-57Q-55-60-60-46Q-61-37-55-37Q-45-40-36-40M34-55Q51-51 56-30Q57-21 50-22Q41-25 36-38"/>
+
+    <g id="frontIdle"><use href="#feet"/><use href="#lowArms"/><use href="#coatFront"/><use href="#face"/></g>
+    <g id="frontCrouch" transform="scale(1.08 .82)"><use href="#feet"/><use href="#coatFront"/><use href="#crouchArms"/><use href="#face"/></g>
+    <g id="frontReach" transform="scale(.96 1.05)"><use href="#feet"/><use href="#highArms"/><use href="#coatFront"/><use href="#happyFace"/></g>
+    <g id="frontStep" transform="rotate(-4)"><use href="#stepFeet"/><use href="#stepArms"/><use href="#coatFront"/><use href="#face"/></g>
+    <g id="backIdle"><use href="#feet"/><use href="#lowArms"/><use href="#coatBack"/></g>
+    <g id="backCrouch" transform="scale(1.08 .82)"><use href="#feet"/><use href="#coatBack"/><use href="#crouchArms"/></g>
+    <g id="backReach" transform="scale(.96 1.05)"><use href="#feet"/><use href="#highArms"/><use href="#coatBack"/></g>
+    <g id="backStep" transform="rotate(-4)"><use href="#stepFeet"/><use href="#stepArms"/><use href="#coatBack"/></g>
+
+    <g id="front">
+      <use href="#frontIdle" x="72" y="132"/><use href="#frontCrouch" x="216" y="132"/>
+      <use href="#frontReach" x="360" y="132"/><use href="#frontStep" x="504" y="132"/>
+    </g>
+    <g id="back">
+      <use href="#backIdle" x="72" y="132"/><use href="#backCrouch" x="216" y="132"/>
+      <use href="#backReach" x="360" y="132"/><use href="#backStep" x="504" y="132"/>
     </g>
   </defs>
-  <use href="#group"/><use href="#arms" transform="translate(123 147)"/>
-  <g transform="translate(240 -4)"><use href="#group"/><use href="#raised" transform="translate(123 147)"/></g>
-  <g transform="translate(480 -9)"><use href="#group"/><use href="#raised" transform="translate(123 147) rotate(-6)"/></g>
-  <g transform="translate(720 -4)"><use href="#group"/><use href="#raised" transform="translate(123 147) rotate(6)"/></g>
+
+  <g class="slate"><use href="#front"/><use href="#back" y="144"/></g>
+  <g class="blue"><use href="#front" y="288"/><use href="#back" y="432"/></g>
+  <g class="ivory"><use href="#front" y="576"/><use href="#back" y="720"/></g>
 </svg>

@@ -3,13 +3,14 @@
 const patchNotes = [
   {
     version: "1.1.0",
-    date: "November 8, 2026",
+    date: "November 9, 2026",
     previousCommit: "c1d7133",
     changes: [
       "Coding now opens first in Portfolio. Added AFTERTONE and Keystoria, expanded the Anything Plays card with its 3.0 development status, and added skills from all three projects.",
-      "The Mac menu offers four wallpapers and four bezel colors, with choices saved on this device.",
-      "Added Ponyo as a super-rare ocean catch and a repeatable Totoro dance near the northwest trees.",
+      "The Mac menu offers twelve wallpapers and twelve bezel colors, with choices saved on this device.",
+      "Added Ponyo as a super-rare ocean catch and a repeatable dance near the northwest trees. Totoro and friends circle the trunk, crouch, and reach together as the tree grows in three beats.",
       "Terrariums offer five selectable habitats for each species. Repacked misaligned aquatic frames and removed stray pixels from affected fish and insect artwork.",
+      "The harbor boat now has a King of Red Lions–inspired red hull, lion figurehead, and spiral sail in all eight sailing directions.",
       "World interaction buttons stay compact, and each house has collision boundaries that follow its visible floor.",
       "Element Runner now responds when a swipe crosses its threshold, uses a low slide pose with matching obstacle clearance, and draws the road with fewer canvas operations. Axolotl Drift has a taller play area and mirrored, seamless eel gates.",
     ],

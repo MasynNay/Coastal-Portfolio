@@ -22,7 +22,11 @@ import { Contact } from "../components/Contact";
 import ResumePage from "../pages/ResumePage";
 import { skills } from "./content";
 import { profile } from "../data/resume";
-import MacAppearance, { readAppearance, saveAppearance } from "./MacAppearance";
+import MacAppearance, {
+  appearanceStyle,
+  readAppearance,
+  saveAppearance,
+} from "./MacAppearance";
 import { MacMenu, AboutMac } from "./MacMenu";
 import { GamesApp, GamePlayer, PhotosApp } from "./MacApps";
 import TypingTest from "../typing/TypingTest";
@@ -110,6 +114,7 @@ export function DesktopPortfolio() {
       className="desktop-studio"
       data-wallpaper={appearance.wallpaper}
       data-bezel={appearance.bezel}
+      style={appearanceStyle(appearance)}
     >
       {/* The physical frame surrounds the existing interactive desktop; app coordinates stay inside its screen. */}
       <div className="imac-computer">

@@ -6,24 +6,113 @@ export const groveInteraction = {
   x: -25.5,
   z: -21.1,
 };
-export const groveSpirit = { art: "totoro-grove", x: -26, z: -22.35, h: 2.5 };
-const danceDuration = 5600;
+
+const spirits = [
+  { x: -26.2, z: -22.25, h: 2.65, angle: 2.7 },
+  { x: -27.05, z: -22.6, h: 1.85, angle: 2.7 + (Math.PI * 2) / 3 },
+  { x: -25.25, z: -22.05, h: 1.42, angle: 2.7 + (Math.PI * 4) / 3 },
+];
+const cell = 144;
+const gatherMs = 650;
+const beatMs = 2100;
+const stepMs = 900;
+const reachMs = 1310;
+const beatCount = 3;
+const returnAt = gatherMs + beatMs * beatCount + 650;
+const returnMs = 1300;
+const duration = returnAt + returnMs;
+const clamp = (value) => Math.min(1, Math.max(0, value));
+const ease = (value) => {
+  const t = clamp(value);
+  return t * t * (3 - 2 * t);
+};
 
 export function groveDance(started, time) {
   const elapsed = time - started;
-  if (started === null || elapsed >= danceDuration) return null;
-  // A short build-up, a held growth pose, and a gentle return to the same tree.
-  const blend = Math.min(1, elapsed / 1700, (danceDuration - elapsed) / 1200);
-  const growth = blend * blend * (3 - 2 * blend);
+  if (started === null || elapsed >= duration) return null;
+
+  const rhythm = Math.max(0, elapsed - gatherMs);
+  const beat = Math.min(beatCount, Math.floor(rhythm / beatMs));
+  const beatTime = rhythm % beatMs;
+  const returning = elapsed >= returnAt;
+  const dancing = elapsed >= gatherMs && beat < beatCount;
+  const walking = dancing && beatTime < stepMs;
+  const reaching = dancing && beatTime >= reachMs;
+  const lap = (beat + (dancing ? ease(beatTime / stepMs) : 0)) / beatCount;
+  const progress = returning ? ease((elapsed - returnAt) / returnMs) : 0;
+  const growth =
+    ((beat + (reaching ? ease((beatTime - reachMs) / 680) : 0)) / beatCount) *
+    (1 - progress);
+
   return {
     elapsed,
     growth,
-    bounce: Math.max(0, Math.sin(elapsed / 145)) * 0.16,
+    lap,
+    returning,
+    progress,
+    walking,
+    pose: walking ? 3 : reaching ? 2 : dancing ? 1 : 0,
+    bounce: reaching
+      ? 0.14 * Math.sin(Math.PI * clamp((beatTime - reachMs) / 620))
+      : 0,
   };
 }
 
+export function groveSpirits(dance) {
+  return spirits.map((spirit, index) => {
+    if (!dance) return { ...spirit, row: index * 2, pose: 0 };
+    const angle = spirit.angle + dance.lap * Math.PI * 2;
+    const ringX = groveTree.x + Math.cos(angle) * 2.2;
+    const ringZ = groveTree.z + Math.sin(angle) * 1.55;
+    const approach = dance.returning
+      ? 1 - dance.progress
+      : ease(dance.elapsed / gatherMs);
+    const stepping = dance.walking || (approach < 1 && approach > 0);
+    const footfall = Math.sin(dance.elapsed / 95);
+    // During a reach, turn toward the trunk. While circling, follow the tangent.
+    const back = dance.walking ? Math.cos(angle) < 0 : ringZ > groveTree.z;
+    return {
+      x: spirit.x + (ringX - spirit.x) * approach,
+      z: spirit.z + (ringZ - spirit.z) * approach,
+      h: spirit.h,
+      row: index * 2 + Number(back && approach > 0.7),
+      pose: stepping ? 3 : dance.pose,
+      flip: stepping && footfall < 0,
+      lift: stepping ? Math.abs(footfall) * 0.14 : dance.bounce,
+    };
+  });
+}
+
+// Draw each dancer through the same depth sort as the player and tree.
+export function drawGroveSpirit(ctx, at, unit, image, spirit) {
+  if (!image) return;
+  const foot = at(spirit.x, spirit.z);
+  const size = spirit.h * unit;
+  const lift = (spirit.lift || 0) * unit;
+  ctx.save();
+  ctx.fillStyle = "#183d363c";
+  ctx.beginPath();
+  ctx.ellipse(foot.x, foot.y + 1, size * 0.28, size * 0.075, 0, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.translate(foot.x, foot.y - lift);
+  if (spirit.flip) ctx.scale(-1, 1);
+  ctx.imageSmoothingEnabled = true;
+  ctx.drawImage(
+    image,
+    spirit.pose * cell,
+    spirit.row * cell,
+    cell,
+    cell,
+    -size / 2,
+    -(132 / cell) * size,
+    size,
+    size,
+  );
+  ctx.restore();
+}
+
 export function drawGroveLights(ctx, at, unit, dance) {
-  if (!dance) return;
+  if (!dance || !dance.growth) return;
   const tree = at(groveTree.x, groveTree.z);
   ctx.save();
   ctx.fillStyle = "#f9e6a0";

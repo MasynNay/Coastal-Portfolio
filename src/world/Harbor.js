@@ -5,13 +5,26 @@ import { isOcean } from "./TownLayout";
 export const watercraft = [
   {
     id: "boat",
-    name: "Island boat",
+    name: "King of Red Lions",
     art: "harbor-boat",
     x: -5,
     z: 27,
     boardX: -2.25,
     boardZ: 27,
-    h: 3.2,
+    h: 4.7,
+    // Center of the aft deck in each painted heading, relative to the hull
+    // origin, clockwise from south. Deck height clips the driver's legs
+    // behind the near gunwale.
+    cockpit: [
+      { x: 0.12, deck: 1.4 },
+      { x: -0.62, deck: 1.24 },
+      { x: -0.7, deck: 0.92 },
+      { x: -0.56, deck: 1.06 },
+      { x: 0, deck: 1.02 },
+      { x: 0.56, deck: 1.06 },
+      { x: 0.7, deck: 0.92 },
+      { x: 0.62, deck: 1.24 },
+    ],
     speed: 16,
   },
   {
