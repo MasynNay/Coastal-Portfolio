@@ -22,10 +22,12 @@ import { terrariumSpecies } from "./Bugs";
 import { drawTricks, drawPassing } from "./TrickEffects";
 import { bikes, bikeHeight } from "./Bikes";
 import { glideVisual } from "./Glide";
+import { tumblingPose } from "./Tumbling";
 import { abilityActive, abilityColumn } from "./Abilities";
 import { drawFishingLine } from "./FishingLine";
+import { fishingPoseTime } from "./Fishing";
 import { personHeight, animalHeight } from "./Movement";
-import { gaitTimeForSheet } from "./Gait";
+import { createFootfalls, gaitTimeForSheet } from "./Gait";
 import { playerPose } from "./PlayerPose";
 import { activityAsset, characterAsset } from "./Wardrobe";
 import { spriteFrame, runningLift } from "./animation";
@@ -61,6 +63,7 @@ export function createCanvasScene(host, invalidate = () => {}) {
     requested = new Map();
   const bugArt = new Set(terrariumSpecies.map((s) => s.art));
   const terrain = createTownTerrain(art);
+  const settleFootfall = createFootfalls();
   let saluting = null;
   let width = 1,
     height = 1,
@@ -218,17 +221,17 @@ export function createCanvasScene(host, invalidate = () => {}) {
     if (ride)
       sprite(
         activityAsset(
-          state.character,
-          state.outfit,
+          entry.id,
+          entry.player ? state.outfit : entry.outfit,
           ride.phase === "launching" ? "water-ride" : "board-ride",
           artwork,
         ),
         entry.x,
         entry.z,
-        personHeight(state.character),
+        personHeight(entry.id),
         ride.direction,
         true,
-        state.rideTime ?? state.worldTime,
+        ride.time,
         0.05 + (ride.lift || 0),
         true,
       );
@@ -323,12 +326,15 @@ export function createCanvasScene(host, invalidate = () => {}) {
     ctx.save();
     ctx.imageSmoothingEnabled = !!sheet.smooth || !sheet.pixelArt;
     ctx.imageSmoothingQuality = "high";
+    // Smoothly sampled art can move at subpixel positions. Ground props and
+    // hard pixel edges still use their existing pixel grid.
+    const precise = !!sheet.smooth && (human || sheet.native);
     drawSprite(
       ctx,
       img,
       scaled,
-      Math.round(p.x),
-      Math.round(p.y),
+      precise ? p.x : Math.round(p.x),
+      precise ? p.y : Math.round(p.y),
       Math.round(
         h * unit * (sheet.bodyHeight ? sheet.ch / sheet.bodyHeight : 1),
       ),
@@ -348,7 +354,7 @@ export function createCanvasScene(host, invalidate = () => {}) {
       sheet,
       actor.direction,
       true,
-      Math.min(elapsed || 0, sheet.frameMs * (sheet.holdFrame ?? 6) + 1),
+      fishingPoseTime(sheet, elapsed, actor.fishingPhase),
     );
     const index = frame.row * sheet.columns + frame.column,
       tip = sheet.rodTips[index];
@@ -714,11 +720,19 @@ export function createCanvasScene(host, invalidate = () => {}) {
                   outfit: r.outfit,
                   surfing: r.surfing,
                   action: r.action,
+                  grove: r.outing === "grove" ? state.grove : null,
                   bikeRide: r.bike ? { id: r.bike, phase: "riding" } : null,
                 }),
             h: r.frog ? 0.95 : personHeight(r.id),
-            moving: r.frog || r.moving || !!r.action,
-            time: r.frog ? state.worldTime : r.time,
+            moving: r.frog || r.moving || !!r.action || r.playerFrame != null,
+            time: r.frog
+              ? state.worldTime
+              : r.playerFrame != null
+                ? r.playerFrame *
+                  artwork[activityAsset(r.id, r.outfit, "board-trick", artwork)]
+                    .frameMs
+                : r.time,
+            lift: r.bounce || 0,
           });
       for (const a of state.animals || animals)
         sprites.push({
@@ -743,13 +757,16 @@ export function createCanvasScene(host, invalidate = () => {}) {
           moving: false,
         });
       }
-    const costume = playerPose(state);
+    const playerDance = state.grove?.rider ? null : state.grove;
+    const costume = playerPose({ ...state, grove: playerDance });
+    if (state.character === "fallyn" && !state.outfit) image("fallyn-tumbling");
     if (artwork[costume]?.action === "walk") {
       if (artwork[costume + "-run"]) image(costume + "-run");
       if (artwork[costume + "-conduct"]) image(costume + "-conduct");
     }
     image(saluteBase + "-salute");
     const glide = glideVisual(state.abilityEffect, state.worldTime);
+    const tumble = tumblingPose(state.abilityEffect, state.worldTime);
     const cycling = state.bikeRide?.phase === "riding";
     const acting =
       abilityActive(state.abilityEffect, state.worldTime) &&
@@ -759,7 +776,11 @@ export function createCanvasScene(host, invalidate = () => {}) {
     if (!room)
       for (const craft of watercraft) {
         const ride =
-          (waterRide?.craftId || waterRide?.id) === craft.id ? waterRide : null;
+          (waterRide?.craftId || waterRide?.id) === craft.id
+            ? waterRide
+            : craft.id === "boat"
+              ? state.residentBoat
+              : null;
         const heading = ride?.direction ?? 0;
         const body = personHeight(ride?.driver || state.character) * 0.9;
         const cockpit = craft.cockpit?.[heading];
@@ -787,32 +808,39 @@ export function createCanvasScene(host, invalidate = () => {}) {
       }
     const surfer =
       state.surfRide && !state.surfRide.done ? state.surfRide : null;
+    const currentSurf = surfer || state.residentSurf;
     if (!room)
       sprites.push({
-        id: surfer ? state.character : "surfboard",
+        id: surfer ? state.character : currentSurf?.rider || "surfboard",
+        outfit: currentSurf?.outfit,
         surfboard: true,
-        ride: surfer,
-        x: surfer?.x ?? surfboard.x,
-        z: surfer?.z ?? surfboard.z,
-        h: surfer ? personHeight(state.character) : 2.4,
+        ride: currentSurf,
+        x: currentSurf?.x ?? surfboard.x,
+        z: currentSurf?.z ?? surfboard.z,
+        h: currentSurf
+          ? personHeight(currentSurf.rider || state.character)
+          : 2.4,
         player: !!surfer,
       });
     const skateRide =
       state.skateRide && !state.skateRide.done ? state.skateRide : null;
+    const currentSkate = skateRide || state.residentSkate;
     if (!room) {
       sprites.push({
-        id: skateRide ? state.character : "skateboard",
+        id: skateRide ? state.character : currentSkate?.rider || "skateboard",
+        outfit: currentSkate?.outfit,
         board: true,
-        ride: skateRide,
-        x: skateRide?.x ?? skateboard.x,
-        z: skateRide?.z ?? skateboard.z,
-        h: personHeight(state.character),
-        lift: skateRide?.lift || 0,
+        ride: currentSkate,
+        x: currentSkate?.x ?? skateboard.x,
+        z: currentSkate?.z ?? skateboard.z,
+        h: personHeight(currentSkate?.rider || state.character),
+        lift: currentSkate?.lift || 0,
         player: !!skateRide,
       });
-      const guest = waterRide?.wakeboarder;
+      const tow = waterRide?.wakeboarder ? waterRide : state.residentBoat;
+      const guest = tow?.wakeboarder;
       if (guest) {
-        const a = at(waterRide.x, waterRide.z),
+        const a = at(tow.x, tow.z),
           b = at(guest.x, guest.z);
         ctx.save();
         ctx.strokeStyle = "#e8e5b9";
@@ -824,6 +852,7 @@ export function createCanvasScene(host, invalidate = () => {}) {
         ctx.restore();
         sprites.push({
           ...guest,
+          outfit: state.residents?.find((r) => r.id === guest.id)?.outfit,
           board: true,
           wake: true,
           ride: guest,
@@ -851,6 +880,7 @@ export function createCanvasScene(host, invalidate = () => {}) {
             (acting ? state.abilityEffect.direction : state.direction)),
         lift:
           glide?.lift ??
+          tumble?.lift ??
           runningLift(artwork[costume], state.moving, state.gaitTime),
         moving:
           !!state.salute ||
@@ -858,11 +888,11 @@ export function createCanvasScene(host, invalidate = () => {}) {
           state.moving ||
           !!state.action ||
           state.surfing ||
-          state.grove?.playerFrame != null ||
+          playerDance?.playerFrame != null ||
           !!state.beach?.building,
         time:
-          state.grove?.playerFrame != null
-            ? state.grove.playerFrame * (artwork[costume]?.frameMs || 95)
+          playerDance?.playerFrame != null
+            ? playerDance.playerFrame * (artwork[costume]?.frameMs || 95)
             : state.salute
               ? cycling
                 ? state.bikeRide.time
@@ -880,11 +910,10 @@ export function createCanvasScene(host, invalidate = () => {}) {
                       ? abilityColumn(state.abilityEffect, state.worldTime) *
                         artwork[costume].frameMs
                       : state.action === "fish"
-                        ? Math.min(
-                            state.fishingElapsed || 0,
-                            (artwork[costume]?.frameMs || 160) *
-                              (artwork[costume]?.holdFrame ?? 3) +
-                              1,
+                        ? fishingPoseTime(
+                            artwork[costume],
+                            state.fishingElapsed,
+                            state.fishingPhase,
                           )
                         : state.action || state.surfing
                           ? time
@@ -949,18 +978,40 @@ export function createCanvasScene(host, invalidate = () => {}) {
         else if (a.watercraft) drawWatercraft(a, state);
         else if (a.board) drawBoard(a, state);
         else if (a.surfboard) drawSurfer(a, state);
-        else
+        else {
+          const human = humanIds.has(a.id);
+          const pose = human
+            ? settleFootfall(a, artwork[a.art], state.worldTime)
+            : a;
+          if (human && ["walk", "run"].includes(artwork[pose.art]?.action)) {
+            const ground = at(a.x, a.z);
+            // A small contact shadow keeps the feet anchored to the terrain
+            // through the drawn stride, especially on stone paths.
+            ctx.fillStyle = "#182f3280";
+            ctx.beginPath();
+            ctx.ellipse(
+              ground.x,
+              ground.y + unit * 0.025,
+              a.h * unit * 0.21,
+              a.h * unit * 0.062,
+              0,
+              0,
+              Math.PI * 2,
+            );
+            ctx.fill();
+          }
           sprite(
-            a.art,
+            pose.art,
             a.x,
             a.z,
             a.h,
-            a.direction || 0,
-            a.moving,
-            a.time ?? time,
-            (a.lift || 0) + (a.player ? state.grove?.bounce || 0 : 0),
-            humanIds.has(a.id),
+            pose.direction || 0,
+            pose.moving,
+            pose.time ?? time,
+            (a.lift || 0) + (a.player ? playerDance?.bounce || 0 : 0),
+            human,
           );
+        }
     if (!room) {
       for (const bird of skyBirds(
         state.skyTime ?? state.worldTime,

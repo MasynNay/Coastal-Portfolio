@@ -2,6 +2,18 @@
 // the preceding production commit, rather than fictional in-game release notes.
 const patchNotes = [
   {
+    version: "1.1.3",
+    date: "November 9, 2026",
+    previousCommit: "21c1b1f",
+    changes: [
+      "Everyday Fallyn can do two back handsprings into a full twist with Q or the on-screen Tumble button. All 24 poses use her everyday body scale and colors. Ladybug Fallyn keeps her yo-yo.",
+      "Masyn’s Airbender, Pokémon Trainer, and Hyrulian Adventurer outfits use his Everyday Hoodie face as their reference, including during rides and outfit abilities.",
+      "Residents now skateboard, surf, wakeboard, and dance with Totoro. Interact at the usual activity spot to take over, then the resident resumes their route.",
+      "Characters settle their last step into idle, and fishing poses and lines move together when a fish bites.",
+      "Cleaned stray pixels from bird, insect, and aquatic frames, fixed backward pond sprites, and retained fine details on 88 small map sprites.",
+    ],
+  },
+  {
     version: "1.1.2",
     date: "November 9, 2026",
     previousCommit: "b1e5bcc",

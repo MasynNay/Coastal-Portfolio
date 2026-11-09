@@ -22,13 +22,16 @@ for name, sheet in sheets.items():
     columns, rows = sheet.get("columns", 4), sheet["rows"]
     image = Image.open(ROOT / ("public" + sheet["src"])).convert("RGBA")
     assert image.size == (cw * columns, ch * rows), (name, "incorrect atlas dimensions")
-    assert set(image.getchannel("A").getdata()) <= {0, 255}, (name, "noisy alpha")
-    colors = {pixel[:3] for pixel in image.getdata() if pixel[3]}
-    assert len(colors) <= sheet.get("colors", 28), (
-        name,
-        "palette exceeds declared size",
-        len(colors),
-    )
+    # Vector-derived sheets use coverage alpha rather than a quantized pixel
+    # palette. Their dimensions, padding and visible frames are checked below.
+    if not sheet.get("softAlpha"):
+        assert set(image.getchannel("A").getdata()) <= {0, 255}, (name, "noisy alpha")
+        colors = {pixel[:3] for pixel in image.getdata() if pixel[3]}
+        assert len(colors) <= sheet.get("colors", 28), (
+            name,
+            "palette exceeds declared size",
+            len(colors),
+        )
     if rows == 4:
         assert sheet["layout"] == "four", (name, "four-direction art mapped as eight")
     if sheet.get("rootAligned"):
@@ -59,7 +62,7 @@ for name, sheet in sheets.items():
                 "cropped figure",
                 box,
             )
-            if not sheet.get("rootAligned"):
+            if not sheet.get("rootAligned") and "footY" in sheet:
                 assert abs(box[3] - sheet["footY"]) <= 2, (
                     name,
                     row,
@@ -75,7 +78,7 @@ for name, sheet in sheets.items():
             and name.endswith("-run")
         ):
             assert len(poses) >= 10, (name, row, "too few distinct drawn stride poses")
-    if sheet["action"] == "run":
+    if sheet.get("action") == "run":
         assert rows == 8, (name, "missing run directions")
         base = sheets[name.removesuffix("-run")]
         assert (ROOT / ("public" + base["src"])).read_bytes() != (

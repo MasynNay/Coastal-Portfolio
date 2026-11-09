@@ -6,6 +6,20 @@ import { pond } from "./TownLayout";
 import { npcWalkSpeed } from "./Movement";
 import { movementDirection } from "./animation";
 import { bikes } from "./Bikes";
+import { groveInteraction } from "./ForestGrove";
+import { skateboard } from "./SkateRide";
+import { surfboard } from "./SurfRide";
+import { watercraft } from "./Harbor";
+
+export const residentOutingStops = {
+  grove: groveInteraction,
+  skateboard,
+  surfboard,
+  boat: {
+    x: watercraft[0].boardX,
+    z: watercraft[0].boardZ,
+  },
+};
 
 export const children = ["ezra", "fallyn", "fitzgerald"];
 const playground = [
@@ -109,6 +123,7 @@ export function createResidentRoute(id, variant, seed) {
       activity = "resting",
       target = null,
       bike = null,
+      outing = null,
     } = {},
   ) {
     if (target)
@@ -126,22 +141,35 @@ export function createResidentRoute(id, variant, seed) {
       activity,
       target,
       bike,
+      outing,
     });
     duration += seconds;
   }
   const stopAt = (p) => {
     if (walk({ x: p[0], z: p[1] })) rest(2 + random() * 3);
   };
+  // Rotate outings between itineraries. Visit the real interaction spot before
+  // requesting a turn, and continue the walk from that spot afterward.
+  const outingIds = Object.keys(residentOutingStops);
+  const outing = outingIds[(index + variant) % outingIds.length];
+  const visitOuting = () => {
+    if (walk(residentOutingStops[outing]))
+      rest(5, { activity: "waiting", outing });
+  };
   if (child) {
     // Long playground visits are a preference, not a boundary around the kids.
-    for (let lap = 0; lap < 3; lap++)
+    for (let lap = 0; lap < 3; lap++) {
       for (const p of playground) {
         if (walk({ x: p[0], z: p[1] }))
           rest(9 + random() * 3, { activity: "playground" });
       }
-  } else
+      if (lap === 0) visitOuting();
+    }
+  } else {
+    visitOuting();
     for (let n = 0; n < 5; n++)
       stopAt(townStops[Math.floor(random() * townStops.length)]);
+  }
   // Every itinerary takes a different walk across the island before its activities.
   for (let n = 0; n < (child ? 2 : 4); n++)
     stopAt(townStops[Math.floor(random() * townStops.length)]);

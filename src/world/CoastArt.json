@@ -239,7 +239,7 @@
   },
   "mallard-flight": {
     "src": "/world/coast/mallard-flight.png",
-    "revision": "115354203abc",
+    "revision": "12117be2c312",
     "detailVersion": 1,
     "detailScale": 1,
     "native": true,
@@ -314,7 +314,7 @@
   },
   "goose-canada": {
     "src": "/world/coast/goose-canada.png",
-    "revision": "b6d3841ea641",
+    "revision": "f501178757ee",
     "detailVersion": 1,
     "detailScale": 1,
     "native": true,

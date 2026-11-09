@@ -1,3 +1,5 @@
+import { fishingPull } from "./Fishing";
+
 // The person comes from their real fishing sheet. Rod/line placement is projected
 // toward an actual water point, so a north-facing cast cannot leave its bobber on grass.
 export function drawFishingLine(
@@ -17,6 +19,7 @@ export function drawFishingLine(
     water = at(target.x, target.z);
   const t = Math.min(1, elapsed / 680);
   const dx = water.x - p.x;
+  const pull = fishingPull(elapsed, phase);
   const hand = {
     x:
       p.x +
@@ -24,16 +27,19 @@ export function drawFishingLine(
     y: p.y - bodyHeight * (mounted ? 0.5 : 0.52) * unit,
   };
   const tip = illustratedTip || {
-    x: hand.x + (water.x - p.x) * 0.55 * t,
+    x: hand.x + (water.x - p.x) * (0.55 - pull * 0.19) * t,
     y:
       hand.y -
       1.1 * unit * (1 - t) +
       (water.y - hand.y) * 0.55 * t -
-      0.4 * unit,
+      (0.4 + pull * 0.65) * unit,
   };
   const bob = {
-    x: hand.x + (water.x - hand.x) * t,
-    y: hand.y + (water.y - hand.y) * t - Math.sin(t * Math.PI) * unit * 0.8,
+    x: hand.x + (water.x - hand.x) * t * (1 - pull * 0.22),
+    y:
+      hand.y +
+      (water.y - hand.y) * t -
+      (Math.sin(t * Math.PI) * 0.8 + pull * 0.26) * unit,
   };
   ctx.save();
   ctx.strokeStyle = "#70452b";
@@ -49,7 +55,7 @@ export function drawFishingLine(
   ctx.lineWidth = Math.max(1, unit * 0.02);
   ctx.beginPath();
   ctx.moveTo(tip.x, tip.y);
-  ctx.quadraticCurveTo(bob.x, tip.y + 0.3 * unit, bob.x, bob.y);
+  ctx.quadraticCurveTo(bob.x, tip.y + (0.3 - pull * 0.14) * unit, bob.x, bob.y);
   ctx.stroke();
   const bounce =
     phase === "bite"

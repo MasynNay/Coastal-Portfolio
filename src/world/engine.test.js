@@ -1107,3 +1107,32 @@ test("the Lodge chests open the cartridge library", async () => {
     game.dispose();
   }
 });
+
+test("Q performs and lands everyday Fallyn's pass while Ladybug keeps her yo-yo", async () => {
+  const game = createWorld(document.createElement("div"), {});
+  try {
+    await Promise.resolve();
+    frame(16);
+    game.setCharacter("fallyn");
+    frame(16);
+    const origin = draws.at(-1).position;
+    window.dispatchEvent(
+      new KeyboardEvent("keydown", { code: "KeyQ", key: "q" }),
+    );
+    for (let i = 0; i < 18; i++) frame(100);
+    expect(draws.at(-1).abilityEffect).toMatchObject({
+      kind: "tumbling",
+      asset: "fallyn-tumbling",
+    });
+    expect(draws.at(-1).position.z).toBe(origin.z);
+    for (let i = 0; i < 10; i++) frame(100);
+    expect(draws.at(-1).abilityEffect).toBeNull();
+    expect(Math.abs(draws.at(-1).position.x - origin.x)).toBeCloseTo(4.7);
+    game.setCharacter("outfit:ladybug-fallyn");
+    game.ability();
+    frame(16);
+    expect(draws.at(-1).abilityEffect.kind).toBe("yoyo");
+  } finally {
+    game.dispose();
+  }
+});

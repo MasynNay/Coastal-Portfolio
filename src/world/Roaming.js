@@ -75,6 +75,7 @@ export function roamingPeople(time, clock = (id, t) => t) {
       playing: segment.activity === "playground" && children.includes(r.id),
       activity: segment.activity,
       wantsBike: segment.bike,
+      wantsOuting: segment.outing,
       activityId: `${Math.round((actorTime / 1000 + index * 3.3 - elapsed) * 1000)}:${segment.start.toFixed(3)}`,
       action: fishing ? "fish" : null,
       fishingTarget: segment.target,

@@ -2083,7 +2083,7 @@
     "width": 224,
     "height": 192,
     "frameMs": 170,
-    "revision": "000d3f4732b6"
+    "revision": "35225cc0bb7b"
   },
   "dragonfly-emerald": {
     "src": "/world/collections/dragonfly-emerald.webp",
@@ -4890,7 +4890,7 @@
     "width": 224,
     "height": 192,
     "frameMs": 220,
-    "revision": "b1d8c47c5551"
+    "revision": "641f6840ec04"
   },
   "fish-bumblebee-shrimp": {
     "src": "/world/collections/fish-bumblebee-shrimp.webp",

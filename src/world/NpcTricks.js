@@ -32,6 +32,8 @@ export function createNpcTricks() {
             !a.room &&
             !a.surfing &&
             !a.bike &&
+            !a.outing &&
+            !a.hidden &&
             !effects.some((e) => e.id === a.id),
         )
         .map((a) => ({

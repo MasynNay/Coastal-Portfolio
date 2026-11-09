@@ -37,6 +37,7 @@ import {
 import { abilityActive, abilityLocksMovement, startAbility } from "./Abilities";
 import { bikes, createBikeRide } from "./Bikes";
 import { planGlide, glideVisual } from "./Glide";
+import { planTumbling, tumblingPose } from "./Tumbling";
 import { createWebs } from "./Heroes";
 import { townProps, pond, mailboxes, isOcean } from "./TownLayout";
 import { walkSpeed, runSpeed } from "./Movement";
@@ -339,6 +340,9 @@ export function createWorld(host, callbacks) {
       oceanPraise: room ? null : oceanPraise.snapshot(worldTime),
       skateRide: skateRide.snapshot(),
       surfRide: surfRide.snapshot(),
+      residentBoat: npcRides.pose("boat"),
+      residentSkate: npcRides.pose("skateboard"),
+      residentSurf: npcRides.pose("surfboard"),
       rest: rest.snapshot(worldTime),
       npcTricks: tricks.snapshot(worldTime),
       night: room ? 0 : tricks.night(worldTime),
@@ -351,10 +355,12 @@ export function createWorld(host, callbacks) {
       bikeParking: bikeRide.parking(),
       webEffects,
       abilityEffect,
-      grove: groveSession && {
-        ...groveDance(groveSession.started, worldTime),
-        playerAngle: groveSession.angle,
-      },
+      grove: groveSession
+        ? {
+            ...groveDance(groveSession.started, worldTime),
+            playerAngle: groveSession.angle,
+          }
+        : npcRides.pose("grove"),
       treeShake: bugSpawns.treeShake(worldTime),
       worldTime,
       skyTime,
@@ -434,11 +440,18 @@ export function createWorld(host, callbacks) {
             ]
           : []),
       ];
+    const nearbyAnimals = worldAnimals();
     return [
       ...(!surfing ? [groveInteraction] : []),
       ...restSpots.map((p) => ({ ...p, type: "rest" })),
       axolotlRaceMarker,
-      { ...surfboard, type: "surfboard", label: "Catch a wave" },
+      {
+        ...surfboard,
+        type: "surfboard",
+        label: npcRides.active("surfboard")
+          ? "Take the surfboard"
+          : "Catch a wave",
+      },
       ...fishingSpots,
       ...watercraft.flatMap((c) => [
         {
@@ -465,7 +478,13 @@ export function createWorld(host, callbacks) {
         label: `Ride the ${b.name}`,
       })),
       ...(!room && !surfing
-        ? [{ ...skateboard, type: "skateboard", label: "Ride the skateboard" }]
+        ? [
+            {
+              ...skateboard,
+              type: "skateboard",
+              label: "Ride the skateboard",
+            },
+          ]
         : []),
       ...mailboxes.map((p) => ({
         ...p,
@@ -495,15 +514,18 @@ export function createWorld(host, callbacks) {
         label: `Enter ${b.title}`,
         type: "building",
       })),
-      ...state()
-        .residents.filter((r) => r.id !== character && !r.room && !r.hidden)
+      ...worldResidents()
+        .filter((r) => r.id !== character && !r.room && !r.hidden)
         .map((r) => ({
           ...r,
-          label: `Say hello to ${characters.find((c) => c.id === r.id).name}`,
-          type: "person",
+          label:
+            r.outing === "grove"
+              ? groveInteraction.label
+              : `Say hello to ${characters.find((c) => c.id === r.id).name}`,
+          type: r.outing === "grove" ? "grove" : "person",
         })),
-      ...state()
-        .animals.filter((a) => !a.lift && !a.ambient)
+      ...nearbyAnimals
+        .filter((a) => !a.lift && !a.ambient)
         .map((a) => ({
           ...a,
           label:
@@ -521,7 +543,7 @@ export function createWorld(host, callbacks) {
                   ? "bug"
                   : "animal",
         })),
-      ...[goosePair(state().animals)].filter(Boolean),
+      ...[goosePair(nearbyAnimals)].filter(Boolean),
       ...floatHunt
         .points()
         .map((p) => ({ ...p, type: "float", label: `Collect ${p.name}` })),
@@ -749,6 +771,7 @@ export function createWorld(host, callbacks) {
     if (duckTarget?.type === "grove") {
       stop();
       cancelAbility();
+      npcRides.claim("grove", worldTime);
       groveSession = groveStart(position, direction, worldTime);
       callbacks.onEvent?.({
         type: "notice",
@@ -786,6 +809,7 @@ export function createWorld(host, callbacks) {
     if (duckTarget?.type === "surfboard") {
       stop();
       cancelAbility();
+      npcRides.claim("surfboard", worldTime);
       surfing = false;
       surfRide.start(position, rideTime);
       publish();
@@ -850,6 +874,7 @@ export function createWorld(host, callbacks) {
     }
     if (duckTarget?.type === "skateboard") {
       stop();
+      npcRides.claim("skateboard", worldTime);
       if (skateRide.start(position, rideTime)) {
         position = { x: skateboard.x, z: skateboard.z };
         publish();
@@ -859,6 +884,7 @@ export function createWorld(host, callbacks) {
     }
     if (duckTarget?.type === "watercraft") {
       stop();
+      npcRides.claim(duckTarget.id, worldTime);
       const crew = worldResidents();
       const guest =
         duckTarget.id === "boat"
@@ -869,8 +895,18 @@ export function createWorld(host, callbacks) {
                   !r.hidden &&
                   !r.surfing &&
                   !r.bike &&
+                  !r.frog &&
+                  !r.outing &&
+                  !r.room,
+              ) ||
+              crew.find(
+                (r) =>
+                  r.id !== character &&
+                  !r.hidden &&
+                  !r.bike &&
+                  !r.outing &&
                   !r.frog,
-              ) || crew.find((r) => r.id !== character && !r.hidden && !r.bike)
+              )
             )?.id
           : null;
       if (
@@ -1024,6 +1060,16 @@ export function createWorld(host, callbacks) {
             message: "Find a little clear space for your glider.",
           });
       }
+      if (abilityEffect?.kind === "tumbling") {
+        abilityEffect = planTumbling(abilityEffect, (p) =>
+          canStand(p.x, p.z, room ? roomObstacles : obstacles, room),
+        );
+        if (!abilityEffect)
+          callbacks.onEvent?.({
+            type: "notice",
+            message: "Find a clear stretch of ground for your tumbling pass.",
+          });
+      }
       if (abilityEffect?.asset) path = [];
     }
     requestDraw();
@@ -1064,6 +1110,8 @@ export function createWorld(host, callbacks) {
     if (saluting && abilityEffect && !frozen)
       abilityEffect.started += dt * 1000;
     if (abilityEffect && !abilityActive(abilityEffect, worldTime)) {
+      const landing = tumblingPose(abilityEffect, worldTime);
+      if (landing) position = { x: landing.x, z: landing.z };
       if (abilityEffect.revealsLove && roomInteractions.revealLove())
         callbacks.onEvent?.({ type: "room-unlocked", id: "love-letter" });
       cancelAbility();
@@ -1074,12 +1122,23 @@ export function createWorld(host, callbacks) {
       position = { x: glide.x, z: glide.z };
       direction = glide.direction;
     }
+    const tumbling = tumblingPose(abilityEffect, worldTime);
+    if (tumbling && !saluting) {
+      position = { x: tumbling.x, z: tumbling.z };
+      direction = abilityEffect.direction;
+    }
     if (!frozen && !loading && !axolotlRace.active())
       npcRides.update(
         worldTime,
         worldResidents(),
         character,
         bikeRide.active() ? bikeRide.snapshot() : null,
+        [
+          groveSession && "grove",
+          skateRide.active() && "skateboard",
+          surfRide.active() && "surfboard",
+          waterRide.id(),
+        ],
       );
     const wasMoving = moving;
     moving = false;

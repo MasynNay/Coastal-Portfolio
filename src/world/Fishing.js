@@ -19,6 +19,31 @@ export const fishingStages = [
     delay: 350,
   },
 ];
+
+const biteStart = fishingStages[0].delay + fishingStages[1].delay;
+const biteDuration = fishingStages[2].delay;
+
+export function fishingPull(elapsed, phase) {
+  if (phase === "fade") return 1;
+  if (phase !== "bite") return 0;
+  const t = Math.min(1, Math.max(0, (elapsed - biteStart) / biteDuration));
+  return 1 - (1 - t) ** 3;
+}
+
+export function fishingPoseTime(sheet, elapsed, phase) {
+  if (!sheet?.frameMs) return 0;
+  const hold = sheet.holdFrame ?? 3;
+  if (phase === "bite" || phase === "fade") {
+    // Reverse toward the drawn lift pose when reeling. It works for the same
+    // eight directional frames while standing and on the axolotl.
+    const lift = Math.max(0, hold - 4);
+    return (
+      (hold - Math.floor(fishingPull(elapsed, phase) * (hold - lift))) *
+      sheet.frameMs
+    );
+  }
+  return Math.min(elapsed || 0, hold * sheet.frameMs + 1);
+}
 export function createFishingSequence({
   onPhase,
   onFinish,

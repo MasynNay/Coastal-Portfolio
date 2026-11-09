@@ -1,5 +1,23 @@
 import { drawFishingLine } from "./FishingLine";
+import { fishingPoseTime, fishingStages } from "./Fishing";
 import sheets from "./SpriteSheets.json";
+
+test("a bite draws an actual pull pose for every character, on land and mounted", () => {
+  const start = fishingStages[0].delay + fishingStages[1].delay;
+  for (const sheet of Object.values(sheets).filter(
+    (s) => s.action === "fish" || s.action === "fish-surf",
+  )) {
+    const hold = fishingPoseTime(sheet, start, "waiting");
+    const tug = fishingPoseTime(sheet, start + 250, "bite");
+    expect(
+      Math.floor(fishingPoseTime(sheet, start, "bite") / sheet.frameMs),
+    ).toBe(Math.floor(hold / sheet.frameMs));
+    expect(tug).toBeLessThan(hold);
+    expect(fishingPoseTime(sheet, start + 550, "fade")).toBeLessThanOrEqual(
+      tug,
+    );
+  }
+});
 test("illustrated rods get a line and bobber without a second rod stroke", () => {
   const ctx = new Proxy(
     {},

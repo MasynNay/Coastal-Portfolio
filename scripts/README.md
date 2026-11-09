@@ -10,8 +10,10 @@ These files support the site; they are not browser code. JavaScript build helper
 | Format Python | `python3 -m black scripts`; `python3 -m black --check scripts` checks without writing |
 | Verify published assets | `VerifyWorldAssets.py`, `VerifySprites.py`, `VerifyDirections.py`, `VerifyCollections.py`, `VerifyArcade.py` |
 | Publish character sheets | `BuildPeople.py`, `BuildActivities.py`, `PreparePeople.py`; see source catalogs and the sprite maintenance guide |
+| Reapply character details | `MatchMasyn.py` matches the costume faces to Everyday Hoodie after packing. `BuildTumbling.py` packs Fallyn's tumbling drawings. |
 | Import supplied/generated artwork | `Import*.py`, grouped by asset subject; each module describes its input manifest and output |
 | Clean sprite exports | `CleanSprites.py` checks by default; `--write` repairs exports |
+| Repair audited animal art | `RepairAnimalSprites.py` reapplies atlas corrections and rebuilds the map sprites listed in `FineSprites.json` |
 | Produce reference previews | `PoseGuide.py`, `ActivityGuide.py`, `PreviewPeople.py`, `FishingTips.py` |
 | Rebuild brand/project previews | `BrandAssets.py`, `ProjectPreviews.cjs` |
 | Rebuild the archived original site | `ArchivePortfolio.py`, using a separate original repository checkout |

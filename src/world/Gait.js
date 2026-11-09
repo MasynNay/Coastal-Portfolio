@@ -20,3 +20,42 @@ export function gaitTimeForSheet(sheet, time) {
   const duration = (sheet.cycleFrames || sheet.columns || 4) * sheet.frameMs;
   return (time / walkCycleMs) * duration;
 }
+
+// Land the last step before switching to the drawn standing pose. This keeps
+// one actor's stride independent of the other's and never blends two bodies.
+export function createFootfalls() {
+  const actors = new Map();
+  return (actor, sheet, now) => {
+    const previous = actors.get(actor.id);
+    if (!sheet?.rootAligned || !["walk", "run"].includes(sheet.action)) {
+      actors.delete(actor.id);
+      return actor;
+    }
+    if (actor.moving) {
+      actors.set(actor.id, { stride: actor, stopped: null });
+      return actor;
+    }
+    if (!previous) return actor;
+    const stride = previous.stride;
+    previous.stopped ??= now;
+    const age = now - previous.stopped;
+    if (
+      age >= 115 ||
+      Math.hypot(stride.x - actor.x, stride.z - actor.z) > 0.8 ||
+      stride.art.replace(/-run$/, "") !== actor.art
+    ) {
+      actors.delete(actor.id);
+      return actor;
+    }
+    // Let the pose advance by one or two authored frames, while the actual
+    // collision position remains planted and ready for the next input.
+    const t = age / 115;
+    return {
+      ...actor,
+      art: stride.art,
+      direction: stride.direction,
+      moving: true,
+      time: stride.time + (walkCycleMs / 10) * (1 - (1 - t) ** 2),
+    };
+  };
+}

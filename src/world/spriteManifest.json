@@ -5,36 +5,184 @@
     "ch": 80,
     "family": false,
     "costume": false,
-    "revision": "1fce62993a01"
+    "revision": "2c49c78e3334",
+    "directions": [
+      [
+        0,
+        0
+      ],
+      [
+        1,
+        0
+      ],
+      [
+        2,
+        0
+      ],
+      [
+        3,
+        0
+      ],
+      [
+        4,
+        0
+      ],
+      [
+        5,
+        0
+      ],
+      [
+        6,
+        0
+      ],
+      [
+        7,
+        0
+      ]
+    ],
+    "native": true,
+    "smooth": true
   },
   "goose": {
     "src": "/world/sprites/goose.webp",
     "cw": 180,
     "ch": 140,
-    "revision": "225f6aa48e11"
+    "revision": "225f6aa48e11",
+    "directions": [
+      [
+        0,
+        0
+      ],
+      [
+        1,
+        0
+      ],
+      [
+        2,
+        0
+      ],
+      [
+        3,
+        0
+      ],
+      [
+        4,
+        0
+      ],
+      [
+        5,
+        0
+      ],
+      [
+        6,
+        0
+      ],
+      [
+        7,
+        0
+      ]
+    ],
+    "native": true,
+    "smooth": true
   },
   "axolotl": {
     "src": "/world/sprites/axolotl.webp",
     "cw": 180,
     "ch": 140,
-    "revision": "5fb8b53227ca"
+    "revision": "5fb8b53227ca",
+    "native": true,
+    "smooth": true
   },
   "axolotl-blue": {
     "src": "/world/sprites/axolotl-blue.webp",
     "cw": 180,
     "ch": 140,
-    "revision": "07a0fc41b2c7"
+    "revision": "07a0fc41b2c7",
+    "native": true,
+    "smooth": true
   },
   "fish": {
     "src": "/world/sprites/fish.webp",
     "cw": 180,
     "ch": 140,
-    "revision": "b563db3bd901"
+    "revision": "b563db3bd901",
+    "directions": [
+      [
+        0,
+        0
+      ],
+      [
+        1,
+        0
+      ],
+      [
+        2,
+        0
+      ],
+      [
+        3,
+        0
+      ],
+      [
+        4,
+        0
+      ],
+      [
+        5,
+        0
+      ],
+      [
+        6,
+        0
+      ],
+      [
+        7,
+        0
+      ]
+    ],
+    "native": true,
+    "smooth": true
   },
   "koi": {
     "src": "/world/sprites/koi.webp",
     "cw": 180,
     "ch": 140,
-    "revision": "94677acd852b"
+    "revision": "94677acd852b",
+    "directions": [
+      [
+        0,
+        0
+      ],
+      [
+        1,
+        0
+      ],
+      [
+        2,
+        0
+      ],
+      [
+        3,
+        0
+      ],
+      [
+        4,
+        0
+      ],
+      [
+        5,
+        0
+      ],
+      [
+        6,
+        0
+      ],
+      [
+        7,
+        0
+      ]
+    ],
+    "native": true,
+    "smooth": true
   }
 }

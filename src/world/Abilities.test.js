@@ -106,7 +106,9 @@ test("archer aim rows follow the same cardinal direction as the released arrow",
 test("children retain their Q actions; mounted Masyn keeps his axolotl instead of replacing it", () => {
   expect(characterAbility("ezra").kind).toBe("web");
   expect(characterAbility("fitzgerald").kind).toBe("web");
-  expect(characterAbility("fallyn").kind).toBe("yoyo");
+  expect(characterAbility("fallyn").kind).toBe("tumbling");
+  expect(characterAbility("fallyn", "ladybug-fallyn").kind).toBe("yoyo");
+  expect(characterAbility("fallyn", null, true)).toBeNull();
   expect(characterAbility("masyn", "everyday")).toBe(null);
   expect(characterAbility("masyn", "home").kind).toBe("glide");
   expect(characterAbility("masyn", "lodge", true)).toBe(null);

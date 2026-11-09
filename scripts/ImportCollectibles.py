@@ -4,6 +4,7 @@ Generated sources and prompts stay under docs/source-assets/collections.
 """
 
 from pathlib import Path
+import hashlib
 from PIL import Image
 import json, sys, shutil, statistics
 import ImportSprites as sprites
@@ -13,33 +14,45 @@ SOURCE = ROOT / "docs/source-assets/collections"
 SOURCE.mkdir(parents=True, exist_ok=True)
 
 
+FINE_SPRITES = set(json.loads((SOURCE / "FineSprites.json").read_text()))
+
+
 def pack(spec, cells, kind):
     cw, ch = (64, 64) if kind == "spiders" else (64, 48)
     foot = ch - 4
     body = 32 if kind == "spiders" else 25
+    asset = spec["art"]
+    detail = 2 if asset in FINE_SPRITES else 1
+    threshold = 96 if detail == 2 else 180
+    cw, ch, foot, body = (value * detail for value in (cw, ch, foot, body))
     ratio = min(
         body / statistics.median(c.height for c in cells),
-        (cw - 6) / max(c.width for c in cells),
-        (ch - 6) / max(c.height for c in cells),
+        (cw - 6 * detail) / max(c.width for c in cells),
+        (ch - 6 * detail) / max(c.height for c in cells),
     )
     atlas = Image.new("RGBA", (cw * 4, ch))
     for column, cell in enumerate(cells):
         size = (max(1, round(cell.width * ratio)), max(1, round(cell.height * ratio)))
         small = cell.resize(size, Image.Resampling.LANCZOS)
-        small.putalpha(small.getchannel("A").point(lambda a: 255 if a >= 180 else 0))
+        # Thin antennae and whiskers break into floating tips at map resolution.
+        # Retain their coverage at twice the source resolution for those species.
+        small.putalpha(
+            small.getchannel("A").point(lambda a: 255 if a >= threshold else 0)
+        )
         small = small.crop(small.getbbox())
         atlas.alpha_composite(
             small, (column * cw + (cw - small.width) // 2, foot - small.height)
         )
     alpha = atlas.getchannel("A")
+    colors = 64 if detail == 2 else 28
     atlas = (
         atlas.convert("RGB")
-        .quantize(colors=28, dither=Image.Dither.NONE)
+        .quantize(colors=colors, dither=Image.Dither.NONE)
         .convert("RGBA")
     )
     atlas.putalpha(alpha)
-    asset = spec["art"]
-    atlas.save(sprites.OUT / (asset + ".png"), optimize=True)
+    target = sprites.OUT / (asset + ".png")
+    atlas.save(target, optimize=True)
     sprites.manifest[asset] = dict(
         id=asset,
         src="/world/sprites/emerald/" + asset + ".png",
@@ -53,7 +66,10 @@ def pack(spec, cells, kind):
         layout="eight",
         action="walk",
         frameMs=170 if kind == "spiders" else 220,
+        revision=hashlib.sha256(target.read_bytes()).hexdigest()[:12],
     )
+    if detail == 2:
+        sprites.manifest[asset].update(native=True, smooth=True, colors=colors)
 
 
 if __name__ == "__main__":

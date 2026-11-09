@@ -1,6 +1,7 @@
 import { conductFrame } from "./WindStatue";
 import sheets from "./SpriteSheets.json";
 import { glideDurationMs } from "./Glide";
+import { tumblingDuration, tumblingPose } from "./Tumbling";
 // One definition feeds the Q button, engine timing, action sprites and effects.
 // Outfit actions briefly plant Masyn's feet; held movement resumes afterward.
 const costumeAbilities = {
@@ -57,12 +58,20 @@ export function characterAbility(character, outfit, surfing = false) {
     };
   if (["ezra", "fitzgerald"].includes(character))
     return { kind: "web", label: "Web", verb: "Shoot web" };
-  if (character === "fallyn")
+  if (character === "fallyn" && outfit === "ladybug-fallyn")
     return {
       kind: "yoyo",
       label: "Yo-yo",
       verb: "Throw yo-yo",
       duration: 1100,
+    };
+  if (character === "fallyn" && !surfing)
+    return {
+      kind: "tumbling",
+      label: "Tumble",
+      verb: "Do a tumbling pass",
+      asset: "fallyn-tumbling",
+      duration: tumblingDuration,
     };
   if (character === "mi-shell" && !surfing)
     return {
@@ -103,6 +112,7 @@ export function startAbility(actor, time) {
 }
 export function abilityColumn(effect, time) {
   if (effect.kind === "conduct") return conductFrame(time - effect.started);
+  if (effect.kind === "tumbling") return tumblingPose(effect, time)?.frame || 0;
   const age = Math.max(0, time - effect.started);
   const stage = effect.cuts?.filter((cut) => age >= cut).length || 0;
   const columns = sheets[effect.asset]?.columns || 4;

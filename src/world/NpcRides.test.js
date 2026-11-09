@@ -110,3 +110,53 @@ test("the player reserves only their own bicycle and the other remains available
   rides.cancel(1500, "ezra");
   expect(rides.active()).toBe(false);
 });
+
+test.each([
+  ["skateboard", "mi-shell"],
+  ["surfboard", "ezra"],
+  ["boat", "fallyn"],
+  ["grove", "masyn"],
+])(
+  "a real itinerary can take a turn at %s and give it back to the player",
+  (id, character) => {
+    const {
+      residentOutingStops,
+      createResidentRoute,
+    } = require("./ResidentRoutes");
+    const route = createResidentRoute(character, 0, 31);
+    expect(route.segments.some((segment) => segment.outing === id)).toBe(true);
+    const stop = residentOutingStops[id];
+    const resident = {
+      ...stop,
+      id: "ezra",
+      outfit: "spider-ezra",
+      wantsOuting: id,
+      activityId: id,
+    };
+    const driver = { id: "fallyn", x: 0, z: 27 };
+    const rides = createNpcRides();
+    const people = [resident, driver];
+    rides.update(0, people, "masyn", null, [id]);
+    expect(rides.active(id)).toBe(false);
+    rides.update(20, people, "masyn");
+    expect(rides.active(id)).toBe(true);
+    const initial = rides.pose(id);
+    for (let time = 40; time < 2800; time += 20)
+      rides.update(time, people, "masyn");
+    const pose = rides.pose(id);
+    expect(Math.hypot(pose.x - initial.x, pose.z - initial.z)).toBeGreaterThan(
+      0.2,
+    );
+    expect(rides.decorate(resident).outing).toBe(id);
+    expect(pose.wakeboarder?.id).toBe(id === "boat" ? "ezra" : undefined);
+    expect(pose.driver).toBe(id === "boat" ? "fallyn" : undefined);
+    expect(rides.decorate(driver).hidden).toBe(
+      id === "boat" ? true : undefined,
+    );
+    rides.claim(id, 2800);
+    expect(rides.pose(id)).toBeNull();
+    expect(rides.actorTime(resident.id, 2800)).toBe(20);
+    rides.update(2820, people, "masyn");
+    expect(rides.active(id)).toBe(false);
+  },
+);

@@ -3609,7 +3609,7 @@
     "drawn": true,
     "pixelArt": true,
     "smooth": true,
-    "colors": 128,
+    "colors": 256,
     "detailVersion": 4,
     "detailScale": 2.6666666666666665,
     "layout": "eight",
@@ -3755,8 +3755,9 @@
       63.0,
       63.0
     ],
-    "revision": "33564aac8d4e",
-    "opaqueBody": true
+    "revision": "5e9ad3aaf44f",
+    "opaqueBody": true,
+    "identityVersion": 1
   },
   "costume-skills": {
     "id": "costume-skills",
@@ -3936,7 +3937,7 @@
     "drawn": true,
     "pixelArt": true,
     "smooth": true,
-    "colors": 128,
+    "colors": 256,
     "detailVersion": 4,
     "detailScale": 2.6666666666666665,
     "layout": "eight",
@@ -4082,7 +4083,8 @@
       63.0,
       63.0
     ],
-    "revision": "b240a3f802bf"
+    "revision": "9ca3f5dbd5e7",
+    "identityVersion": 1
   },
   "costume-resume": {
     "id": "costume-resume",
@@ -4440,7 +4442,7 @@
     "drawn": true,
     "pixelArt": true,
     "smooth": true,
-    "colors": 128,
+    "colors": 256,
     "detailVersion": 4,
     "detailScale": 2.6666666666666665,
     "layout": "eight",
@@ -4586,7 +4588,7 @@
       63.0,
       63.0
     ],
-    "revision": "5d41e88bd95a"
+    "revision": "d8abf35d8f9b"
   },
   "masyn-fish-surf": {
     "id": "masyn-fish-surf",
@@ -6495,17 +6497,20 @@
   "fish-dragon": {
     "id": "fish-dragon",
     "src": "/world/sprites/emerald/fish-dragon.png",
-    "cw": 64,
-    "ch": 48,
+    "cw": 128,
+    "ch": 96,
     "columns": 4,
     "rows": 1,
-    "bodyHeight": 25,
-    "footY": 44,
+    "bodyHeight": 50,
+    "footY": 88,
     "pixelArt": true,
     "layout": "eight",
     "action": "walk",
     "frameMs": 220,
-    "revision": "af43ed2b9d3e"
+    "revision": "98e330ed5137",
+    "native": true,
+    "smooth": true,
+    "colors": 64
   },
   "fish-aurora": {
     "id": "fish-aurora",
@@ -6571,12 +6576,13 @@
       85.5
     ],
     "smooth": true,
-    "colors": 128,
+    "colors": 256,
     "detailVersion": 2,
     "detailScale": 2.6666666666666665,
     "canonicalSides": true,
-    "revision": "36027e058745",
-    "opaqueBody": true
+    "revision": "d79fbd2b1f9a",
+    "opaqueBody": true,
+    "identityVersion": 1
   },
   "ability-trident": {
     "id": "ability-trident",
@@ -6737,11 +6743,12 @@
       85.5
     ],
     "smooth": true,
-    "colors": 128,
+    "colors": 256,
     "detailVersion": 2,
     "detailScale": 2.6666666666666665,
     "canonicalSides": true,
-    "revision": "563d15f613ff"
+    "revision": "ee07d855c672",
+    "identityVersion": 1
   },
   "ability-arrow": {
     "id": "ability-arrow",
@@ -6813,7 +6820,7 @@
     "drawn": true,
     "pixelArt": true,
     "smooth": true,
-    "colors": 128,
+    "colors": 256,
     "detailVersion": 4,
     "detailScale": 2.6666666666666665,
     "layout": "eight",
@@ -6959,7 +6966,8 @@
       63.0,
       63.0
     ],
-    "revision": "5d41e88bd95a"
+    "revision": "d8abf35d8f9b",
+    "identityVersion": 1
   },
   "ability-glide": {
     "id": "ability-glide",
@@ -7041,11 +7049,12 @@
       153.5
     ],
     "smooth": true,
-    "colors": 128,
+    "colors": 256,
     "detailVersion": 2,
     "detailScale": 2.4,
     "canonicalDirections": true,
-    "revision": "a41f95a3617f"
+    "revision": "17326cb23869",
+    "identityVersion": 1
   },
   "glide-launch": {
     "id": "glide-launch",
@@ -7095,12 +7104,13 @@
       170.5
     ],
     "smooth": true,
-    "colors": 128,
+    "colors": 256,
     "detailVersion": 2,
     "detailScale": 2.6666666666666665,
     "mirrorWest": false,
     "canonicalSides": true,
-    "revision": "aa441684f11a"
+    "revision": "eccf9bbc730f",
+    "identityVersion": 1
   },
   "glide-land": {
     "id": "glide-land",
@@ -7150,12 +7160,13 @@
       170.5
     ],
     "smooth": true,
-    "colors": 128,
+    "colors": 256,
     "detailVersion": 2,
     "detailScale": 2.6666666666666665,
     "mirrorWest": false,
     "canonicalSides": true,
-    "revision": "c05e97309b82"
+    "revision": "8dfc2b83d4d1",
+    "identityVersion": 1
   },
   "spider-maple": {
     "id": "spider-maple",
@@ -8495,17 +8506,20 @@
   "fish-ghost-shrimp": {
     "id": "fish-ghost-shrimp",
     "src": "/world/sprites/emerald/fish-ghost-shrimp.png",
-    "cw": 64,
-    "ch": 48,
+    "cw": 128,
+    "ch": 96,
     "columns": 4,
     "rows": 1,
-    "bodyHeight": 25,
-    "footY": 44,
+    "bodyHeight": 50,
+    "footY": 88,
     "pixelArt": true,
     "layout": "eight",
     "action": "walk",
     "frameMs": 220,
-    "revision": "5feb9cae9927"
+    "revision": "2cc89cab5268",
+    "native": true,
+    "smooth": true,
+    "colors": 64
   },
   "fish-vampire-crab": {
     "id": "fish-vampire-crab",
@@ -8555,47 +8569,56 @@
   "fish-blue-crayfish": {
     "id": "fish-blue-crayfish",
     "src": "/world/sprites/emerald/fish-blue-crayfish.png",
-    "cw": 64,
-    "ch": 48,
+    "cw": 128,
+    "ch": 96,
     "columns": 4,
     "rows": 1,
-    "bodyHeight": 25,
-    "footY": 44,
+    "bodyHeight": 50,
+    "footY": 88,
     "pixelArt": true,
     "layout": "eight",
     "action": "walk",
     "frameMs": 220,
-    "revision": "81e63437ffa5"
+    "revision": "c3cc5799483c",
+    "native": true,
+    "smooth": true,
+    "colors": 64
   },
   "fish-orange-crayfish": {
     "id": "fish-orange-crayfish",
     "src": "/world/sprites/emerald/fish-orange-crayfish.png",
-    "cw": 64,
-    "ch": 48,
+    "cw": 128,
+    "ch": 96,
     "columns": 4,
     "rows": 1,
-    "bodyHeight": 25,
-    "footY": 44,
+    "bodyHeight": 50,
+    "footY": 88,
     "pixelArt": true,
     "layout": "eight",
     "action": "walk",
     "frameMs": 220,
-    "revision": "fcef84d8151d"
+    "revision": "fb8a8cd0f4e8",
+    "native": true,
+    "smooth": true,
+    "colors": 64
   },
   "fish-spiny-lobster": {
     "id": "fish-spiny-lobster",
     "src": "/world/sprites/emerald/fish-spiny-lobster.png",
-    "cw": 64,
-    "ch": 48,
+    "cw": 128,
+    "ch": 96,
     "columns": 4,
     "rows": 1,
-    "bodyHeight": 25,
-    "footY": 44,
+    "bodyHeight": 50,
+    "footY": 88,
     "pixelArt": true,
     "layout": "eight",
     "action": "walk",
     "frameMs": 220,
-    "revision": "849cf85e14bf"
+    "revision": "1aa9744ae608",
+    "native": true,
+    "smooth": true,
+    "colors": 64
   },
   "fish-mystery-snail": {
     "id": "fish-mystery-snail",
@@ -8630,17 +8653,20 @@
   "fish-ramshorn-snail": {
     "id": "fish-ramshorn-snail",
     "src": "/world/sprites/emerald/fish-ramshorn-snail.png",
-    "cw": 64,
-    "ch": 48,
+    "cw": 128,
+    "ch": 96,
     "columns": 4,
     "rows": 1,
-    "bodyHeight": 25,
-    "footY": 44,
+    "bodyHeight": 50,
+    "footY": 88,
     "pixelArt": true,
     "layout": "eight",
     "action": "walk",
     "frameMs": 220,
-    "revision": "463acd09f63d"
+    "revision": "d53069d2da2c",
+    "native": true,
+    "smooth": true,
+    "colors": 64
   },
   "fish-dumbo-octopus": {
     "id": "fish-dumbo-octopus",
@@ -8870,17 +8896,20 @@
   "fish-cardinalfish": {
     "id": "fish-cardinalfish",
     "src": "/world/sprites/emerald/fish-cardinalfish.png",
-    "cw": 64,
-    "ch": 48,
+    "cw": 128,
+    "ch": 96,
     "columns": 4,
     "rows": 1,
-    "bodyHeight": 25,
-    "footY": 44,
+    "bodyHeight": 50,
+    "footY": 88,
     "pixelArt": true,
     "layout": "eight",
     "action": "walk",
     "frameMs": 220,
-    "revision": "fce5ce4faaea"
+    "revision": "095bd173d2ec",
+    "native": true,
+    "smooth": true,
+    "colors": 64
   },
   "fish-wrasse": {
     "id": "fish-wrasse",
@@ -8915,17 +8944,20 @@
   "fish-firefish": {
     "id": "fish-firefish",
     "src": "/world/sprites/emerald/fish-firefish.png",
-    "cw": 64,
-    "ch": 48,
+    "cw": 128,
+    "ch": 96,
     "columns": 4,
     "rows": 1,
-    "bodyHeight": 25,
-    "footY": 44,
+    "bodyHeight": 50,
+    "footY": 88,
     "pixelArt": true,
     "layout": "eight",
     "action": "walk",
     "frameMs": 220,
-    "revision": "80467566da37"
+    "revision": "92d91bba8f3e",
+    "native": true,
+    "smooth": true,
+    "colors": 64
   },
   "fish-damselfish": {
     "id": "fish-damselfish",
@@ -9095,17 +9127,20 @@
   "fish-swordtail": {
     "id": "fish-swordtail",
     "src": "/world/sprites/emerald/fish-swordtail.png",
-    "cw": 64,
-    "ch": 48,
+    "cw": 128,
+    "ch": 96,
     "columns": 4,
     "rows": 1,
-    "bodyHeight": 25,
-    "footY": 44,
+    "bodyHeight": 50,
+    "footY": 88,
     "pixelArt": true,
     "layout": "eight",
     "action": "walk",
     "frameMs": 220,
-    "revision": "7ed2c4329a4c"
+    "revision": "4a97bc5a92f7",
+    "native": true,
+    "smooth": true,
+    "colors": 64
   },
   "fish-zebra-danio": {
     "id": "fish-zebra-danio",
@@ -11056,77 +11091,92 @@
   "mantis-leaf": {
     "id": "mantis-leaf",
     "src": "/world/sprites/emerald/mantis-leaf.png",
-    "cw": 64,
-    "ch": 64,
+    "cw": 128,
+    "ch": 128,
     "columns": 4,
     "rows": 1,
-    "bodyHeight": 32,
-    "footY": 60,
+    "bodyHeight": 64,
+    "footY": 120,
     "pixelArt": true,
     "layout": "eight",
     "action": "walk",
     "frameMs": 170,
-    "revision": "55679c48776b"
+    "revision": "0e48ebc56d62",
+    "native": true,
+    "smooth": true,
+    "colors": 64
   },
   "mantis-orchid": {
     "id": "mantis-orchid",
     "src": "/world/sprites/emerald/mantis-orchid.png",
-    "cw": 64,
-    "ch": 64,
+    "cw": 128,
+    "ch": 128,
     "columns": 4,
     "rows": 1,
-    "bodyHeight": 32,
-    "footY": 60,
+    "bodyHeight": 64,
+    "footY": 120,
     "pixelArt": true,
     "layout": "eight",
     "action": "walk",
     "frameMs": 170,
-    "revision": "cbb5503db3d2"
+    "revision": "c9dac169c71f",
+    "native": true,
+    "smooth": true,
+    "colors": 64
   },
   "mantis-ghost": {
     "id": "mantis-ghost",
     "src": "/world/sprites/emerald/mantis-ghost.png",
-    "cw": 64,
-    "ch": 64,
+    "cw": 128,
+    "ch": 128,
     "columns": 4,
     "rows": 1,
-    "bodyHeight": 32,
-    "footY": 60,
+    "bodyHeight": 64,
+    "footY": 120,
     "pixelArt": true,
     "layout": "eight",
     "action": "walk",
     "frameMs": 170,
-    "revision": "2cf1f862c971"
+    "revision": "7c293a2ab041",
+    "native": true,
+    "smooth": true,
+    "colors": 64
   },
   "mantis-jade": {
     "id": "mantis-jade",
     "src": "/world/sprites/emerald/mantis-jade.png",
-    "cw": 64,
-    "ch": 64,
+    "cw": 128,
+    "ch": 128,
     "columns": 4,
     "rows": 1,
-    "bodyHeight": 32,
-    "footY": 60,
+    "bodyHeight": 64,
+    "footY": 120,
     "pixelArt": true,
     "layout": "eight",
     "action": "walk",
     "frameMs": 170,
-    "revision": "002a9541593f"
+    "revision": "31b95e160a16",
+    "native": true,
+    "smooth": true,
+    "colors": 64
   },
   "mantis-moon": {
     "id": "mantis-moon",
     "src": "/world/sprites/emerald/mantis-moon.png",
-    "cw": 64,
-    "ch": 64,
+    "cw": 128,
+    "ch": 128,
     "columns": 4,
     "rows": 1,
-    "bodyHeight": 32,
-    "footY": 60,
+    "bodyHeight": 64,
+    "footY": 120,
     "pixelArt": true,
     "layout": "eight",
     "action": "walk",
     "frameMs": 170,
-    "revision": "b6d4c2f5d177"
+    "revision": "fff2c7a5f434",
+    "native": true,
+    "smooth": true,
+    "colors": 64
   },
   "butterfly-monarch": {
     "id": "butterfly-monarch",
@@ -11296,32 +11346,38 @@
   "dragonfly-scarlet": {
     "id": "dragonfly-scarlet",
     "src": "/world/sprites/emerald/dragonfly-scarlet.png",
-    "cw": 64,
-    "ch": 64,
+    "cw": 128,
+    "ch": 128,
     "columns": 4,
     "rows": 1,
-    "bodyHeight": 32,
-    "footY": 60,
+    "bodyHeight": 64,
+    "footY": 120,
     "pixelArt": true,
     "layout": "eight",
     "action": "walk",
     "frameMs": 170,
-    "revision": "e908a05da012"
+    "revision": "9668e1def84a",
+    "native": true,
+    "smooth": true,
+    "colors": 64
   },
   "dragonfly-emperor": {
     "id": "dragonfly-emperor",
     "src": "/world/sprites/emerald/dragonfly-emperor.png",
-    "cw": 64,
-    "ch": 64,
+    "cw": 128,
+    "ch": 128,
     "columns": 4,
     "rows": 1,
-    "bodyHeight": 32,
-    "footY": 60,
+    "bodyHeight": 64,
+    "footY": 120,
     "pixelArt": true,
     "layout": "eight",
     "action": "walk",
     "frameMs": 170,
-    "revision": "5a6e6b16f34b"
+    "revision": "935140a0f706",
+    "native": true,
+    "smooth": true,
+    "colors": 64
   },
   "dragonfly-golden": {
     "id": "dragonfly-golden",
@@ -11601,7 +11657,7 @@
     "drawn": true,
     "pixelArt": true,
     "smooth": true,
-    "colors": 128,
+    "colors": 256,
     "detailVersion": 4,
     "detailScale": 2.6666666666666665,
     "layout": "eight",
@@ -11747,7 +11803,8 @@
       63.0,
       63.0
     ],
-    "revision": "f32dd63a3a52"
+    "revision": "bc8ad3293211",
+    "identityVersion": 1
   },
   "costume-resume-run": {
     "id": "costume-resume-run",
@@ -12090,7 +12147,7 @@
     "drawn": true,
     "pixelArt": true,
     "smooth": true,
-    "colors": 128,
+    "colors": 256,
     "detailVersion": 4,
     "detailScale": 2.6666666666666665,
     "layout": "eight",
@@ -12236,7 +12293,8 @@
       63.0,
       63.0
     ],
-    "revision": "f8288e8a8e11"
+    "revision": "2ab227f80475",
+    "identityVersion": 1
   },
   "link-run": {
     "id": "link-run",
@@ -12253,7 +12311,7 @@
     "drawn": true,
     "pixelArt": true,
     "smooth": true,
-    "colors": 128,
+    "colors": 256,
     "detailVersion": 4,
     "detailScale": 2.6666666666666665,
     "layout": "eight",
@@ -12399,8 +12457,9 @@
       63.0,
       63.0
     ],
-    "revision": "c4d7056e9091",
-    "opaqueBody": true
+    "revision": "35072e5837a9",
+    "opaqueBody": true,
+    "identityVersion": 1
   },
   "costume-ezra-spider-run": {
     "id": "costume-ezra-spider-run",
@@ -13029,17 +13088,20 @@
   "mantis-autumn": {
     "id": "mantis-autumn",
     "src": "/world/sprites/emerald/mantis-autumn.png",
-    "cw": 64,
-    "ch": 64,
+    "cw": 128,
+    "ch": 128,
     "columns": 4,
     "rows": 1,
-    "bodyHeight": 32,
-    "footY": 60,
+    "bodyHeight": 64,
+    "footY": 120,
     "pixelArt": true,
     "layout": "eight",
     "action": "walk",
     "frameMs": 170,
-    "revision": "fbdc19754a7a"
+    "revision": "3c38aee3e4c4",
+    "native": true,
+    "smooth": true,
+    "colors": 64
   },
   "mantis-mint": {
     "id": "mantis-mint",
@@ -13194,17 +13256,20 @@
   "mantis-maple": {
     "id": "mantis-maple",
     "src": "/world/sprites/emerald/mantis-maple.png",
-    "cw": 64,
-    "ch": 64,
+    "cw": 128,
+    "ch": 128,
     "columns": 4,
     "rows": 1,
-    "bodyHeight": 32,
-    "footY": 60,
+    "bodyHeight": 64,
+    "footY": 120,
     "pixelArt": true,
     "layout": "eight",
     "action": "walk",
     "frameMs": 170,
-    "revision": "41f59eb294f0"
+    "revision": "a0536853328c",
+    "native": true,
+    "smooth": true,
+    "colors": 64
   },
   "mantis-silver": {
     "id": "mantis-silver",
@@ -14244,32 +14309,38 @@
   "dragonfly-copper": {
     "id": "dragonfly-copper",
     "src": "/world/sprites/emerald/dragonfly-copper.png",
-    "cw": 64,
-    "ch": 64,
+    "cw": 128,
+    "ch": 128,
     "columns": 4,
     "rows": 1,
-    "bodyHeight": 32,
-    "footY": 60,
+    "bodyHeight": 64,
+    "footY": 120,
     "pixelArt": true,
     "layout": "eight",
     "action": "walk",
     "frameMs": 170,
-    "revision": "64ccd5313895"
+    "revision": "4072f550665a",
+    "native": true,
+    "smooth": true,
+    "colors": 64
   },
   "dragonfly-mint": {
     "id": "dragonfly-mint",
     "src": "/world/sprites/emerald/dragonfly-mint.png",
-    "cw": 64,
-    "ch": 64,
+    "cw": 128,
+    "ch": 128,
     "columns": 4,
     "rows": 1,
-    "bodyHeight": 32,
-    "footY": 60,
+    "bodyHeight": 64,
+    "footY": 120,
     "pixelArt": true,
     "layout": "eight",
     "action": "walk",
     "frameMs": 170,
-    "revision": "51ba82ce3e2b"
+    "revision": "81c33492ebae",
+    "native": true,
+    "smooth": true,
+    "colors": 64
   },
   "dragonfly-azure": {
     "id": "dragonfly-azure",
@@ -14289,17 +14360,20 @@
   "dragonfly-rubywing": {
     "id": "dragonfly-rubywing",
     "src": "/world/sprites/emerald/dragonfly-rubywing.png",
-    "cw": 64,
-    "ch": 64,
+    "cw": 128,
+    "ch": 128,
     "columns": 4,
     "rows": 1,
-    "bodyHeight": 32,
-    "footY": 60,
+    "bodyHeight": 64,
+    "footY": 120,
     "pixelArt": true,
     "layout": "eight",
     "action": "walk",
     "frameMs": 170,
-    "revision": "e04e890120a3"
+    "revision": "aea6d333ddfe",
+    "native": true,
+    "smooth": true,
+    "colors": 64
   },
   "dragonfly-silver": {
     "id": "dragonfly-silver",
@@ -14334,62 +14408,74 @@
   "dragonfly-teal": {
     "id": "dragonfly-teal",
     "src": "/world/sprites/emerald/dragonfly-teal.png",
-    "cw": 64,
-    "ch": 64,
+    "cw": 128,
+    "ch": 128,
     "columns": 4,
     "rows": 1,
-    "bodyHeight": 32,
-    "footY": 60,
+    "bodyHeight": 64,
+    "footY": 120,
     "pixelArt": true,
     "layout": "eight",
     "action": "walk",
     "frameMs": 170,
-    "revision": "bb8bfc45cc81"
+    "revision": "b42df3a8be6b",
+    "native": true,
+    "smooth": true,
+    "colors": 64
   },
   "dragonfly-sunset": {
     "id": "dragonfly-sunset",
     "src": "/world/sprites/emerald/dragonfly-sunset.png",
-    "cw": 64,
-    "ch": 64,
+    "cw": 128,
+    "ch": 128,
     "columns": 4,
     "rows": 1,
-    "bodyHeight": 32,
-    "footY": 60,
+    "bodyHeight": 64,
+    "footY": 120,
     "pixelArt": true,
     "layout": "eight",
     "action": "walk",
     "frameMs": 170,
-    "revision": "f681940c76ac"
+    "revision": "656631342af7",
+    "native": true,
+    "smooth": true,
+    "colors": 64
   },
   "dragonfly-night": {
     "id": "dragonfly-night",
     "src": "/world/sprites/emerald/dragonfly-night.png",
-    "cw": 64,
-    "ch": 64,
+    "cw": 128,
+    "ch": 128,
     "columns": 4,
     "rows": 1,
-    "bodyHeight": 32,
-    "footY": 60,
+    "bodyHeight": 64,
+    "footY": 120,
     "pixelArt": true,
     "layout": "eight",
     "action": "walk",
     "frameMs": 170,
-    "revision": "86dcaf8e2886"
+    "revision": "3d55ff65305f",
+    "native": true,
+    "smooth": true,
+    "colors": 64
   },
   "dragonfly-aurora": {
     "id": "dragonfly-aurora",
     "src": "/world/sprites/emerald/dragonfly-aurora.png",
-    "cw": 64,
-    "ch": 64,
+    "cw": 128,
+    "ch": 128,
     "columns": 4,
     "rows": 1,
-    "bodyHeight": 32,
-    "footY": 60,
+    "bodyHeight": 64,
+    "footY": 120,
     "pixelArt": true,
     "layout": "eight",
     "action": "walk",
     "frameMs": 170,
-    "revision": "e16fdfd46d1e"
+    "revision": "6f3af636f8bd",
+    "native": true,
+    "smooth": true,
+    "colors": 64
   },
   "masyn-wave": {
     "id": "masyn-wave",
@@ -18397,17 +18483,20 @@
   "mantis-willow": {
     "id": "mantis-willow",
     "src": "/world/sprites/emerald/mantis-willow.png",
-    "cw": 64,
-    "ch": 64,
+    "cw": 128,
+    "ch": 128,
     "columns": 4,
     "rows": 1,
-    "bodyHeight": 32,
-    "footY": 60,
+    "bodyHeight": 64,
+    "footY": 120,
     "pixelArt": true,
     "layout": "eight",
     "action": "walk",
     "frameMs": 170,
-    "revision": "a5bd72c4986d"
+    "revision": "95ea4aef24fa",
+    "native": true,
+    "smooth": true,
+    "colors": 64
   },
   "mantis-acorn": {
     "id": "mantis-acorn",
@@ -18517,62 +18606,74 @@
   "mantis-hazel": {
     "id": "mantis-hazel",
     "src": "/world/sprites/emerald/mantis-hazel.png",
-    "cw": 64,
-    "ch": 64,
+    "cw": 128,
+    "ch": 128,
     "columns": 4,
     "rows": 1,
-    "bodyHeight": 32,
-    "footY": 60,
+    "bodyHeight": 64,
+    "footY": 120,
     "pixelArt": true,
     "layout": "eight",
     "action": "walk",
     "frameMs": 170,
-    "revision": "b3c25b99fcba"
+    "revision": "006fe50ea8cc",
+    "native": true,
+    "smooth": true,
+    "colors": 64
   },
   "mantis-rowan": {
     "id": "mantis-rowan",
     "src": "/world/sprites/emerald/mantis-rowan.png",
-    "cw": 64,
-    "ch": 64,
+    "cw": 128,
+    "ch": 128,
     "columns": 4,
     "rows": 1,
-    "bodyHeight": 32,
-    "footY": 60,
+    "bodyHeight": 64,
+    "footY": 120,
     "pixelArt": true,
     "layout": "eight",
     "action": "walk",
     "frameMs": 170,
-    "revision": "cfff4c855f24"
+    "revision": "31be8ed85f50",
+    "native": true,
+    "smooth": true,
+    "colors": 64
   },
   "mantis-poppy": {
     "id": "mantis-poppy",
     "src": "/world/sprites/emerald/mantis-poppy.png",
-    "cw": 64,
-    "ch": 64,
+    "cw": 128,
+    "ch": 128,
     "columns": 4,
     "rows": 1,
-    "bodyHeight": 32,
-    "footY": 60,
+    "bodyHeight": 64,
+    "footY": 120,
     "pixelArt": true,
     "layout": "eight",
     "action": "walk",
     "frameMs": 170,
-    "revision": "d57387d1149e"
+    "revision": "68e83d18e02a",
+    "native": true,
+    "smooth": true,
+    "colors": 64
   },
   "mantis-primrose": {
     "id": "mantis-primrose",
     "src": "/world/sprites/emerald/mantis-primrose.png",
-    "cw": 64,
-    "ch": 64,
+    "cw": 128,
+    "ch": 128,
     "columns": 4,
     "rows": 1,
-    "bodyHeight": 32,
-    "footY": 60,
+    "bodyHeight": 64,
+    "footY": 120,
     "pixelArt": true,
     "layout": "eight",
     "action": "walk",
     "frameMs": 170,
-    "revision": "4c95710f9871"
+    "revision": "cff885d0edfd",
+    "native": true,
+    "smooth": true,
+    "colors": 64
   },
   "mantis-cedar": {
     "id": "mantis-cedar",
@@ -18622,92 +18723,110 @@
   "mantis-sage": {
     "id": "mantis-sage",
     "src": "/world/sprites/emerald/mantis-sage.png",
-    "cw": 64,
-    "ch": 64,
+    "cw": 128,
+    "ch": 128,
     "columns": 4,
     "rows": 1,
-    "bodyHeight": 32,
-    "footY": 60,
+    "bodyHeight": 64,
+    "footY": 120,
     "pixelArt": true,
     "layout": "eight",
     "action": "walk",
     "frameMs": 170,
-    "revision": "110315f3a1ab"
+    "revision": "f56a82a569d3",
+    "native": true,
+    "smooth": true,
+    "colors": 64
   },
   "mantis-brook": {
     "id": "mantis-brook",
     "src": "/world/sprites/emerald/mantis-brook.png",
-    "cw": 64,
-    "ch": 64,
+    "cw": 128,
+    "ch": 128,
     "columns": 4,
     "rows": 1,
-    "bodyHeight": 32,
-    "footY": 60,
+    "bodyHeight": 64,
+    "footY": 120,
     "pixelArt": true,
     "layout": "eight",
     "action": "walk",
     "frameMs": 170,
-    "revision": "598788f75323"
+    "revision": "d8d2ee95c966",
+    "native": true,
+    "smooth": true,
+    "colors": 64
   },
   "mantis-mossbank": {
     "id": "mantis-mossbank",
     "src": "/world/sprites/emerald/mantis-mossbank.png",
-    "cw": 64,
-    "ch": 64,
+    "cw": 128,
+    "ch": 128,
     "columns": 4,
     "rows": 1,
-    "bodyHeight": 32,
-    "footY": 60,
+    "bodyHeight": 64,
+    "footY": 120,
     "pixelArt": true,
     "layout": "eight",
     "action": "walk",
     "frameMs": 170,
-    "revision": "c963dcd41a31"
+    "revision": "09323ef24453",
+    "native": true,
+    "smooth": true,
+    "colors": 64
   },
   "mantis-pebblewood": {
     "id": "mantis-pebblewood",
     "src": "/world/sprites/emerald/mantis-pebblewood.png",
-    "cw": 64,
-    "ch": 64,
+    "cw": 128,
+    "ch": 128,
     "columns": 4,
     "rows": 1,
-    "bodyHeight": 32,
-    "footY": 60,
+    "bodyHeight": 64,
+    "footY": 120,
     "pixelArt": true,
     "layout": "eight",
     "action": "walk",
     "frameMs": 170,
-    "revision": "d61d6d732dde"
+    "revision": "09bc13a12aa2",
+    "native": true,
+    "smooth": true,
+    "colors": 64
   },
   "mantis-dewdrop": {
     "id": "mantis-dewdrop",
     "src": "/world/sprites/emerald/mantis-dewdrop.png",
-    "cw": 64,
-    "ch": 64,
+    "cw": 128,
+    "ch": 128,
     "columns": 4,
     "rows": 1,
-    "bodyHeight": 32,
-    "footY": 60,
+    "bodyHeight": 64,
+    "footY": 120,
     "pixelArt": true,
     "layout": "eight",
     "action": "walk",
     "frameMs": 170,
-    "revision": "63b375b5c975"
+    "revision": "72f48b7b99f5",
+    "native": true,
+    "smooth": true,
+    "colors": 64
   },
   "mantis-sunleaf": {
     "id": "mantis-sunleaf",
     "src": "/world/sprites/emerald/mantis-sunleaf.png",
-    "cw": 64,
-    "ch": 64,
+    "cw": 128,
+    "ch": 128,
     "columns": 4,
     "rows": 1,
-    "bodyHeight": 32,
-    "footY": 60,
+    "bodyHeight": 64,
+    "footY": 120,
     "pixelArt": true,
     "layout": "eight",
     "action": "walk",
     "frameMs": 170,
-    "revision": "d53cd38ff9c0"
+    "revision": "441ccd2619dd",
+    "native": true,
+    "smooth": true,
+    "colors": 64
   },
   "mantis-honeycomb": {
     "id": "mantis-honeycomb",
@@ -18727,92 +18846,110 @@
   "mantis-buttercup": {
     "id": "mantis-buttercup",
     "src": "/world/sprites/emerald/mantis-buttercup.png",
-    "cw": 64,
-    "ch": 64,
+    "cw": 128,
+    "ch": 128,
     "columns": 4,
     "rows": 1,
-    "bodyHeight": 32,
-    "footY": 60,
+    "bodyHeight": 64,
+    "footY": 120,
     "pixelArt": true,
     "layout": "eight",
     "action": "walk",
     "frameMs": 170,
-    "revision": "01e724a30d2a"
+    "revision": "22f0271d1ad0",
+    "native": true,
+    "smooth": true,
+    "colors": 64
   },
   "mantis-rainleaf": {
     "id": "mantis-rainleaf",
     "src": "/world/sprites/emerald/mantis-rainleaf.png",
-    "cw": 64,
-    "ch": 64,
+    "cw": 128,
+    "ch": 128,
     "columns": 4,
     "rows": 1,
-    "bodyHeight": 32,
-    "footY": 60,
+    "bodyHeight": 64,
+    "footY": 120,
     "pixelArt": true,
     "layout": "eight",
     "action": "walk",
     "frameMs": 170,
-    "revision": "38543fb66c3b"
+    "revision": "a7a69ac8defb",
+    "native": true,
+    "smooth": true,
+    "colors": 64
   },
   "mantis-applewood": {
     "id": "mantis-applewood",
     "src": "/world/sprites/emerald/mantis-applewood.png",
-    "cw": 64,
-    "ch": 64,
+    "cw": 128,
+    "ch": 128,
     "columns": 4,
     "rows": 1,
-    "bodyHeight": 32,
-    "footY": 60,
+    "bodyHeight": 64,
+    "footY": 120,
     "pixelArt": true,
     "layout": "eight",
     "action": "walk",
     "frameMs": 170,
-    "revision": "26192f555b38"
+    "revision": "4a1f982b1490",
+    "native": true,
+    "smooth": true,
+    "colors": 64
   },
   "mantis-wildflower": {
     "id": "mantis-wildflower",
     "src": "/world/sprites/emerald/mantis-wildflower.png",
-    "cw": 64,
-    "ch": 64,
+    "cw": 128,
+    "ch": 128,
     "columns": 4,
     "rows": 1,
-    "bodyHeight": 32,
-    "footY": 60,
+    "bodyHeight": 64,
+    "footY": 120,
     "pixelArt": true,
     "layout": "eight",
     "action": "walk",
     "frameMs": 170,
-    "revision": "6adb538cdbc4"
+    "revision": "3be437fe615a",
+    "native": true,
+    "smooth": true,
+    "colors": 64
   },
   "mantis-copperleaf": {
     "id": "mantis-copperleaf",
     "src": "/world/sprites/emerald/mantis-copperleaf.png",
-    "cw": 64,
-    "ch": 64,
+    "cw": 128,
+    "ch": 128,
     "columns": 4,
     "rows": 1,
-    "bodyHeight": 32,
-    "footY": 60,
+    "bodyHeight": 64,
+    "footY": 120,
     "pixelArt": true,
     "layout": "eight",
     "action": "walk",
     "frameMs": 170,
-    "revision": "a8d5ecef2fde"
+    "revision": "0f2756ca32f1",
+    "native": true,
+    "smooth": true,
+    "colors": 64
   },
   "mantis-seaglass": {
     "id": "mantis-seaglass",
     "src": "/world/sprites/emerald/mantis-seaglass.png",
-    "cw": 64,
-    "ch": 64,
+    "cw": 128,
+    "ch": 128,
     "columns": 4,
     "rows": 1,
-    "bodyHeight": 32,
-    "footY": 60,
+    "bodyHeight": 64,
+    "footY": 120,
     "pixelArt": true,
     "layout": "eight",
     "action": "walk",
     "frameMs": 170,
-    "revision": "9499c0b083ad"
+    "revision": "f141350bdfd4",
+    "native": true,
+    "smooth": true,
+    "colors": 64
   },
   "mantis-bluebell": {
     "id": "mantis-bluebell",
@@ -18832,47 +18969,56 @@
   "mantis-orchard": {
     "id": "mantis-orchard",
     "src": "/world/sprites/emerald/mantis-orchard.png",
-    "cw": 64,
-    "ch": 64,
+    "cw": 128,
+    "ch": 128,
     "columns": 4,
     "rows": 1,
-    "bodyHeight": 32,
-    "footY": 60,
+    "bodyHeight": 64,
+    "footY": 120,
     "pixelArt": true,
     "layout": "eight",
     "action": "walk",
     "frameMs": 170,
-    "revision": "364617c5f49d"
+    "revision": "49e7ea17483a",
+    "native": true,
+    "smooth": true,
+    "colors": 64
   },
   "mantis-bayleaf": {
     "id": "mantis-bayleaf",
     "src": "/world/sprites/emerald/mantis-bayleaf.png",
-    "cw": 64,
-    "ch": 64,
+    "cw": 128,
+    "ch": 128,
     "columns": 4,
     "rows": 1,
-    "bodyHeight": 32,
-    "footY": 60,
+    "bodyHeight": 64,
+    "footY": 120,
     "pixelArt": true,
     "layout": "eight",
     "action": "walk",
     "frameMs": 170,
-    "revision": "58a414425b5b"
+    "revision": "d7d05d4ff8d2",
+    "native": true,
+    "smooth": true,
+    "colors": 64
   },
   "mantis-watermint": {
     "id": "mantis-watermint",
     "src": "/world/sprites/emerald/mantis-watermint.png",
-    "cw": 64,
-    "ch": 64,
+    "cw": 128,
+    "ch": 128,
     "columns": 4,
     "rows": 1,
-    "bodyHeight": 32,
-    "footY": 60,
+    "bodyHeight": 64,
+    "footY": 120,
     "pixelArt": true,
     "layout": "eight",
     "action": "walk",
     "frameMs": 170,
-    "revision": "a1a305c4b4f4"
+    "revision": "0441c917a95d",
+    "native": true,
+    "smooth": true,
+    "colors": 64
   },
   "mantis-sunstone": {
     "id": "mantis-sunstone",
@@ -18892,32 +19038,38 @@
   "mantis-driftwood": {
     "id": "mantis-driftwood",
     "src": "/world/sprites/emerald/mantis-driftwood.png",
-    "cw": 64,
-    "ch": 64,
+    "cw": 128,
+    "ch": 128,
     "columns": 4,
     "rows": 1,
-    "bodyHeight": 32,
-    "footY": 60,
+    "bodyHeight": 64,
+    "footY": 120,
     "pixelArt": true,
     "layout": "eight",
     "action": "walk",
     "frameMs": 170,
-    "revision": "e6ed085050b6"
+    "revision": "8d0cc7dc30e5",
+    "native": true,
+    "smooth": true,
+    "colors": 64
   },
   "mantis-moonpetal": {
     "id": "mantis-moonpetal",
     "src": "/world/sprites/emerald/mantis-moonpetal.png",
-    "cw": 64,
-    "ch": 64,
+    "cw": 128,
+    "ch": 128,
     "columns": 4,
     "rows": 1,
-    "bodyHeight": 32,
-    "footY": 60,
+    "bodyHeight": 64,
+    "footY": 120,
     "pixelArt": true,
     "layout": "eight",
     "action": "walk",
     "frameMs": 170,
-    "revision": "22a2baa8c6a3"
+    "revision": "d0eca605e89c",
+    "native": true,
+    "smooth": true,
+    "colors": 64
   },
   "mantis-rosewood": {
     "id": "mantis-rosewood",
@@ -18937,62 +19089,74 @@
   "mantis-amberleaf": {
     "id": "mantis-amberleaf",
     "src": "/world/sprites/emerald/mantis-amberleaf.png",
-    "cw": 64,
-    "ch": 64,
+    "cw": 128,
+    "ch": 128,
     "columns": 4,
     "rows": 1,
-    "bodyHeight": 32,
-    "footY": 60,
+    "bodyHeight": 64,
+    "footY": 120,
     "pixelArt": true,
     "layout": "eight",
     "action": "walk",
     "frameMs": 170,
-    "revision": "de04a7b19d07"
+    "revision": "144122a71bdc",
+    "native": true,
+    "smooth": true,
+    "colors": 64
   },
   "mantis-wildmint": {
     "id": "mantis-wildmint",
     "src": "/world/sprites/emerald/mantis-wildmint.png",
-    "cw": 64,
-    "ch": 64,
+    "cw": 128,
+    "ch": 128,
     "columns": 4,
     "rows": 1,
-    "bodyHeight": 32,
-    "footY": 60,
+    "bodyHeight": 64,
+    "footY": 120,
     "pixelArt": true,
     "layout": "eight",
     "action": "walk",
     "frameMs": 170,
-    "revision": "c2965fbff89a"
+    "revision": "213f2c54fc25",
+    "native": true,
+    "smooth": true,
+    "colors": 64
   },
   "mantis-pinecone": {
     "id": "mantis-pinecone",
     "src": "/world/sprites/emerald/mantis-pinecone.png",
-    "cw": 64,
-    "ch": 64,
+    "cw": 128,
+    "ch": 128,
     "columns": 4,
     "rows": 1,
-    "bodyHeight": 32,
-    "footY": 60,
+    "bodyHeight": 64,
+    "footY": 120,
     "pixelArt": true,
     "layout": "eight",
     "action": "walk",
     "frameMs": 170,
-    "revision": "0adb613ed79e"
+    "revision": "05d37c75be14",
+    "native": true,
+    "smooth": true,
+    "colors": 64
   },
   "mantis-lilypond": {
     "id": "mantis-lilypond",
     "src": "/world/sprites/emerald/mantis-lilypond.png",
-    "cw": 64,
-    "ch": 64,
+    "cw": 128,
+    "ch": 128,
     "columns": 4,
     "rows": 1,
-    "bodyHeight": 32,
-    "footY": 60,
+    "bodyHeight": 64,
+    "footY": 120,
     "pixelArt": true,
     "layout": "eight",
     "action": "walk",
     "frameMs": 170,
-    "revision": "21ad6ab8542f"
+    "revision": "93ccbdc9b743",
+    "native": true,
+    "smooth": true,
+    "colors": 64
   },
   "mantis-meadowmist": {
     "id": "mantis-meadowmist",
@@ -19057,17 +19221,20 @@
   "mantis-sandstone": {
     "id": "mantis-sandstone",
     "src": "/world/sprites/emerald/mantis-sandstone.png",
-    "cw": 64,
-    "ch": 64,
+    "cw": 128,
+    "ch": 128,
     "columns": 4,
     "rows": 1,
-    "bodyHeight": 32,
-    "footY": 60,
+    "bodyHeight": 64,
+    "footY": 120,
     "pixelArt": true,
     "layout": "eight",
     "action": "walk",
     "frameMs": 170,
-    "revision": "f959f0cb43c5"
+    "revision": "a7342070bae9",
+    "native": true,
+    "smooth": true,
+    "colors": 64
   },
   "mantis-snowdrop": {
     "id": "mantis-snowdrop",
@@ -19087,17 +19254,20 @@
   "mantis-firelight": {
     "id": "mantis-firelight",
     "src": "/world/sprites/emerald/mantis-firelight.png",
-    "cw": 64,
-    "ch": 64,
+    "cw": 128,
+    "ch": 128,
     "columns": 4,
     "rows": 1,
-    "bodyHeight": 32,
-    "footY": 60,
+    "bodyHeight": 64,
+    "footY": 120,
     "pixelArt": true,
     "layout": "eight",
     "action": "walk",
     "frameMs": 170,
-    "revision": "827466adbb32"
+    "revision": "c1b7211853e7",
+    "native": true,
+    "smooth": true,
+    "colors": 64
   },
   "mantis-stormleaf": {
     "id": "mantis-stormleaf",
@@ -19132,167 +19302,200 @@
   "mantis-nightbloom": {
     "id": "mantis-nightbloom",
     "src": "/world/sprites/emerald/mantis-nightbloom.png",
-    "cw": 64,
-    "ch": 64,
+    "cw": 128,
+    "ch": 128,
     "columns": 4,
     "rows": 1,
-    "bodyHeight": 32,
-    "footY": 60,
+    "bodyHeight": 64,
+    "footY": 120,
     "pixelArt": true,
     "layout": "eight",
     "action": "walk",
     "frameMs": 170,
-    "revision": "937114d3561e"
+    "revision": "0c657c398954",
+    "native": true,
+    "smooth": true,
+    "colors": 64
   },
   "mantis-moonstone": {
     "id": "mantis-moonstone",
     "src": "/world/sprites/emerald/mantis-moonstone.png",
-    "cw": 64,
-    "ch": 64,
+    "cw": 128,
+    "ch": 128,
     "columns": 4,
     "rows": 1,
-    "bodyHeight": 32,
-    "footY": 60,
+    "bodyHeight": 64,
+    "footY": 120,
     "pixelArt": true,
     "layout": "eight",
     "action": "walk",
     "frameMs": 170,
-    "revision": "1c4da7e80249"
+    "revision": "9e6db728085e",
+    "native": true,
+    "smooth": true,
+    "colors": 64
   },
   "mantis-velvetwing": {
     "id": "mantis-velvetwing",
     "src": "/world/sprites/emerald/mantis-velvetwing.png",
-    "cw": 64,
-    "ch": 64,
+    "cw": 128,
+    "ch": 128,
     "columns": 4,
     "rows": 1,
-    "bodyHeight": 32,
-    "footY": 60,
+    "bodyHeight": 64,
+    "footY": 120,
     "pixelArt": true,
     "layout": "eight",
     "action": "walk",
     "frameMs": 170,
-    "revision": "92b0b523792b"
+    "revision": "1c15c07d512c",
+    "native": true,
+    "smooth": true,
+    "colors": 64
   },
   "mantis-amethyst": {
     "id": "mantis-amethyst",
     "src": "/world/sprites/emerald/mantis-amethyst.png",
-    "cw": 64,
-    "ch": 64,
+    "cw": 128,
+    "ch": 128,
     "columns": 4,
     "rows": 1,
-    "bodyHeight": 32,
-    "footY": 60,
+    "bodyHeight": 64,
+    "footY": 120,
     "pixelArt": true,
     "layout": "eight",
     "action": "walk",
     "frameMs": 170,
-    "revision": "c5d66b6081d0"
+    "revision": "87826f317191",
+    "native": true,
+    "smooth": true,
+    "colors": 64
   },
   "mantis-starfall": {
     "id": "mantis-starfall",
     "src": "/world/sprites/emerald/mantis-starfall.png",
-    "cw": 64,
-    "ch": 64,
+    "cw": 128,
+    "ch": 128,
     "columns": 4,
     "rows": 1,
-    "bodyHeight": 32,
-    "footY": 60,
+    "bodyHeight": 64,
+    "footY": 120,
     "pixelArt": true,
     "layout": "eight",
     "action": "walk",
     "frameMs": 170,
-    "revision": "b983d0432f0e"
+    "revision": "2ded3a2ec2ce",
+    "native": true,
+    "smooth": true,
+    "colors": 64
   },
   "mantis-twilight": {
     "id": "mantis-twilight",
     "src": "/world/sprites/emerald/mantis-twilight.png",
-    "cw": 64,
-    "ch": 64,
+    "cw": 128,
+    "ch": 128,
     "columns": 4,
     "rows": 1,
-    "bodyHeight": 32,
-    "footY": 60,
+    "bodyHeight": 64,
+    "footY": 120,
     "pixelArt": true,
     "layout": "eight",
     "action": "walk",
     "frameMs": 170,
-    "revision": "a9f236625051"
+    "revision": "698ceb81e24f",
+    "native": true,
+    "smooth": true,
+    "colors": 64
   },
   "mantis-opal": {
     "id": "mantis-opal",
     "src": "/world/sprites/emerald/mantis-opal.png",
-    "cw": 64,
-    "ch": 64,
+    "cw": 128,
+    "ch": 128,
     "columns": 4,
     "rows": 1,
-    "bodyHeight": 32,
-    "footY": 60,
+    "bodyHeight": 64,
+    "footY": 120,
     "pixelArt": true,
     "layout": "eight",
     "action": "walk",
     "frameMs": 170,
-    "revision": "f722eb03d162"
+    "revision": "2d6df3eea6ad",
+    "native": true,
+    "smooth": true,
+    "colors": 64
   },
   "mantis-indigo": {
     "id": "mantis-indigo",
     "src": "/world/sprites/emerald/mantis-indigo.png",
-    "cw": 64,
-    "ch": 64,
+    "cw": 128,
+    "ch": 128,
     "columns": 4,
     "rows": 1,
-    "bodyHeight": 32,
-    "footY": 60,
+    "bodyHeight": 64,
+    "footY": 120,
     "pixelArt": true,
     "layout": "eight",
     "action": "walk",
     "frameMs": 170,
-    "revision": "409deff97454"
+    "revision": "1cc442892794",
+    "native": true,
+    "smooth": true,
+    "colors": 64
   },
   "mantis-lantern": {
     "id": "mantis-lantern",
     "src": "/world/sprites/emerald/mantis-lantern.png",
-    "cw": 64,
-    "ch": 64,
+    "cw": 128,
+    "ch": 128,
     "columns": 4,
     "rows": 1,
-    "bodyHeight": 32,
-    "footY": 60,
+    "bodyHeight": 64,
+    "footY": 120,
     "pixelArt": true,
     "layout": "eight",
     "action": "walk",
     "frameMs": 170,
-    "revision": "8aec87c17c23"
+    "revision": "a8e4f6979c93",
+    "native": true,
+    "smooth": true,
+    "colors": 64
   },
   "mantis-frostbloom": {
     "id": "mantis-frostbloom",
     "src": "/world/sprites/emerald/mantis-frostbloom.png",
-    "cw": 64,
-    "ch": 64,
+    "cw": 128,
+    "ch": 128,
     "columns": 4,
     "rows": 1,
-    "bodyHeight": 32,
-    "footY": 60,
+    "bodyHeight": 64,
+    "footY": 120,
     "pixelArt": true,
     "layout": "eight",
     "action": "walk",
     "frameMs": 170,
-    "revision": "1c9330ed3636"
+    "revision": "14af8dcab492",
+    "native": true,
+    "smooth": true,
+    "colors": 64
   },
   "mantis-eclipse": {
     "id": "mantis-eclipse",
     "src": "/world/sprites/emerald/mantis-eclipse.png",
-    "cw": 64,
-    "ch": 64,
+    "cw": 128,
+    "ch": 128,
     "columns": 4,
     "rows": 1,
-    "bodyHeight": 32,
-    "footY": 60,
+    "bodyHeight": 64,
+    "footY": 120,
     "pixelArt": true,
     "layout": "eight",
     "action": "walk",
     "frameMs": 170,
-    "revision": "8cd747d335fb"
+    "revision": "f38c28665e2a",
+    "native": true,
+    "smooth": true,
+    "colors": 64
   },
   "mantis-silvermist": {
     "id": "mantis-silvermist",
@@ -19342,17 +19545,20 @@
   "mantis-pearlglow": {
     "id": "mantis-pearlglow",
     "src": "/world/sprites/emerald/mantis-pearlglow.png",
-    "cw": 64,
-    "ch": 64,
+    "cw": 128,
+    "ch": 128,
     "columns": 4,
     "rows": 1,
-    "bodyHeight": 32,
-    "footY": 60,
+    "bodyHeight": 64,
+    "footY": 120,
     "pixelArt": true,
     "layout": "eight",
     "action": "walk",
     "frameMs": 170,
-    "revision": "10d88847d87c"
+    "revision": "8a332c2f0b3a",
+    "native": true,
+    "smooth": true,
+    "colors": 64
   },
   "mantis-crystal": {
     "id": "mantis-crystal",
@@ -19372,17 +19578,20 @@
   "mantis-mistveil": {
     "id": "mantis-mistveil",
     "src": "/world/sprites/emerald/mantis-mistveil.png",
-    "cw": 64,
-    "ch": 64,
+    "cw": 128,
+    "ch": 128,
     "columns": 4,
     "rows": 1,
-    "bodyHeight": 32,
-    "footY": 60,
+    "bodyHeight": 64,
+    "footY": 120,
     "pixelArt": true,
     "layout": "eight",
     "action": "walk",
     "frameMs": 170,
-    "revision": "b0eb324a47d4"
+    "revision": "dc6958331262",
+    "native": true,
+    "smooth": true,
+    "colors": 64
   },
   "mantis-starlace": {
     "id": "mantis-starlace",
@@ -19402,17 +19611,20 @@
   "mantis-celestial": {
     "id": "mantis-celestial",
     "src": "/world/sprites/emerald/mantis-celestial.png",
-    "cw": 64,
-    "ch": 64,
+    "cw": 128,
+    "ch": 128,
     "columns": 4,
     "rows": 1,
-    "bodyHeight": 32,
-    "footY": 60,
+    "bodyHeight": 64,
+    "footY": 120,
     "pixelArt": true,
     "layout": "eight",
     "action": "walk",
     "frameMs": 170,
-    "revision": "fffb1cd4e751"
+    "revision": "e54ae05b08f1",
+    "native": true,
+    "smooth": true,
+    "colors": 64
   },
   "mantis-rainbow": {
     "id": "mantis-rainbow",
@@ -21562,32 +21774,38 @@
   "dragonfly-acorn": {
     "id": "dragonfly-acorn",
     "src": "/world/sprites/emerald/dragonfly-acorn.png",
-    "cw": 64,
-    "ch": 64,
+    "cw": 128,
+    "ch": 128,
     "columns": 4,
     "rows": 1,
-    "bodyHeight": 32,
-    "footY": 60,
+    "bodyHeight": 64,
+    "footY": 120,
     "pixelArt": true,
     "layout": "eight",
     "action": "walk",
     "frameMs": 170,
-    "revision": "04df6cd6f51e"
+    "revision": "23c5f6d6984a",
+    "native": true,
+    "smooth": true,
+    "colors": 64
   },
   "dragonfly-juniper": {
     "id": "dragonfly-juniper",
     "src": "/world/sprites/emerald/dragonfly-juniper.png",
-    "cw": 64,
-    "ch": 64,
+    "cw": 128,
+    "ch": 128,
     "columns": 4,
     "rows": 1,
-    "bodyHeight": 32,
-    "footY": 60,
+    "bodyHeight": 64,
+    "footY": 120,
     "pixelArt": true,
     "layout": "eight",
     "action": "walk",
     "frameMs": 170,
-    "revision": "3a056a7aa354"
+    "revision": "9f6962f45ed5",
+    "native": true,
+    "smooth": true,
+    "colors": 64
   },
   "dragonfly-marigold": {
     "id": "dragonfly-marigold",
@@ -21637,17 +21855,20 @@
   "dragonfly-spruce": {
     "id": "dragonfly-spruce",
     "src": "/world/sprites/emerald/dragonfly-spruce.png",
-    "cw": 64,
-    "ch": 64,
+    "cw": 128,
+    "ch": 128,
     "columns": 4,
     "rows": 1,
-    "bodyHeight": 32,
-    "footY": 60,
+    "bodyHeight": 64,
+    "footY": 120,
     "pixelArt": true,
     "layout": "eight",
     "action": "walk",
     "frameMs": 170,
-    "revision": "25036590bf52"
+    "revision": "78b66603ab06",
+    "native": true,
+    "smooth": true,
+    "colors": 64
   },
   "dragonfly-dandelion": {
     "id": "dragonfly-dandelion",
@@ -21907,17 +22128,20 @@
   "dragonfly-applewood": {
     "id": "dragonfly-applewood",
     "src": "/world/sprites/emerald/dragonfly-applewood.png",
-    "cw": 64,
-    "ch": 64,
+    "cw": 128,
+    "ch": 128,
     "columns": 4,
     "rows": 1,
-    "bodyHeight": 32,
-    "footY": 60,
+    "bodyHeight": 64,
+    "footY": 120,
     "pixelArt": true,
     "layout": "eight",
     "action": "walk",
     "frameMs": 170,
-    "revision": "08ab0bf1e588"
+    "revision": "bdbe82307c45",
+    "native": true,
+    "smooth": true,
+    "colors": 64
   },
   "dragonfly-wildflower": {
     "id": "dragonfly-wildflower",
@@ -21982,32 +22206,38 @@
   "dragonfly-orchard": {
     "id": "dragonfly-orchard",
     "src": "/world/sprites/emerald/dragonfly-orchard.png",
-    "cw": 64,
-    "ch": 64,
+    "cw": 128,
+    "ch": 128,
     "columns": 4,
     "rows": 1,
-    "bodyHeight": 32,
-    "footY": 60,
+    "bodyHeight": 64,
+    "footY": 120,
     "pixelArt": true,
     "layout": "eight",
     "action": "walk",
     "frameMs": 170,
-    "revision": "d0f2f42c193a"
+    "revision": "05034f09e1cb",
+    "native": true,
+    "smooth": true,
+    "colors": 64
   },
   "dragonfly-bayleaf": {
     "id": "dragonfly-bayleaf",
     "src": "/world/sprites/emerald/dragonfly-bayleaf.png",
-    "cw": 64,
-    "ch": 64,
+    "cw": 128,
+    "ch": 128,
     "columns": 4,
     "rows": 1,
-    "bodyHeight": 32,
-    "footY": 60,
+    "bodyHeight": 64,
+    "footY": 120,
     "pixelArt": true,
     "layout": "eight",
     "action": "walk",
     "frameMs": 170,
-    "revision": "7c2b6a69ab65"
+    "revision": "cb807c3bdf3a",
+    "native": true,
+    "smooth": true,
+    "colors": 64
   },
   "dragonfly-watermint": {
     "id": "dragonfly-watermint",
@@ -22027,32 +22257,38 @@
   "dragonfly-sunstone": {
     "id": "dragonfly-sunstone",
     "src": "/world/sprites/emerald/dragonfly-sunstone.png",
-    "cw": 64,
-    "ch": 64,
+    "cw": 128,
+    "ch": 128,
     "columns": 4,
     "rows": 1,
-    "bodyHeight": 32,
-    "footY": 60,
+    "bodyHeight": 64,
+    "footY": 120,
     "pixelArt": true,
     "layout": "eight",
     "action": "walk",
     "frameMs": 170,
-    "revision": "1acbc972caa2"
+    "revision": "9475d8ac7994",
+    "native": true,
+    "smooth": true,
+    "colors": 64
   },
   "dragonfly-driftwood": {
     "id": "dragonfly-driftwood",
     "src": "/world/sprites/emerald/dragonfly-driftwood.png",
-    "cw": 64,
-    "ch": 64,
+    "cw": 128,
+    "ch": 128,
     "columns": 4,
     "rows": 1,
-    "bodyHeight": 32,
-    "footY": 60,
+    "bodyHeight": 64,
+    "footY": 120,
     "pixelArt": true,
     "layout": "eight",
     "action": "walk",
     "frameMs": 170,
-    "revision": "e751bfaaf1fc"
+    "revision": "a3711d412d41",
+    "native": true,
+    "smooth": true,
+    "colors": 64
   },
   "dragonfly-moonpetal": {
     "id": "dragonfly-moonpetal",
@@ -22072,17 +22308,20 @@
   "dragonfly-rosewood": {
     "id": "dragonfly-rosewood",
     "src": "/world/sprites/emerald/dragonfly-rosewood.png",
-    "cw": 64,
-    "ch": 64,
+    "cw": 128,
+    "ch": 128,
     "columns": 4,
     "rows": 1,
-    "bodyHeight": 32,
-    "footY": 60,
+    "bodyHeight": 64,
+    "footY": 120,
     "pixelArt": true,
     "layout": "eight",
     "action": "walk",
     "frameMs": 170,
-    "revision": "c658d04cf3bc"
+    "revision": "6d9a5d24ad9e",
+    "native": true,
+    "smooth": true,
+    "colors": 64
   },
   "dragonfly-amberleaf": {
     "id": "dragonfly-amberleaf",
@@ -22462,17 +22701,20 @@
   "dragonfly-cinder": {
     "id": "dragonfly-cinder",
     "src": "/world/sprites/emerald/dragonfly-cinder.png",
-    "cw": 64,
-    "ch": 64,
+    "cw": 128,
+    "ch": 128,
     "columns": 4,
     "rows": 1,
-    "bodyHeight": 32,
-    "footY": 60,
+    "bodyHeight": 64,
+    "footY": 120,
     "pixelArt": true,
     "layout": "eight",
     "action": "walk",
     "frameMs": 170,
-    "revision": "760c6c901093"
+    "revision": "1196461b789d",
+    "native": true,
+    "smooth": true,
+    "colors": 64
   },
   "dragonfly-aurora-meadow": {
     "id": "dragonfly-aurora-meadow",
@@ -22552,32 +22794,38 @@
   "dragonfly-celestial": {
     "id": "dragonfly-celestial",
     "src": "/world/sprites/emerald/dragonfly-celestial.png",
-    "cw": 64,
-    "ch": 64,
+    "cw": 128,
+    "ch": 128,
     "columns": 4,
     "rows": 1,
-    "bodyHeight": 32,
-    "footY": 60,
+    "bodyHeight": 64,
+    "footY": 120,
     "pixelArt": true,
     "layout": "eight",
     "action": "walk",
     "frameMs": 170,
-    "revision": "bef15739cc43"
+    "revision": "3a82aff7ecc1",
+    "native": true,
+    "smooth": true,
+    "colors": 64
   },
   "dragonfly-rainbow": {
     "id": "dragonfly-rainbow",
     "src": "/world/sprites/emerald/dragonfly-rainbow.png",
-    "cw": 64,
-    "ch": 64,
+    "cw": 128,
+    "ch": 128,
     "columns": 4,
     "rows": 1,
-    "bodyHeight": 32,
-    "footY": 60,
+    "bodyHeight": 64,
+    "footY": 120,
     "pixelArt": true,
     "layout": "eight",
     "action": "walk",
     "frameMs": 170,
-    "revision": "3cabf0822d15"
+    "revision": "438fe2f1bc0b",
+    "native": true,
+    "smooth": true,
+    "colors": 64
   },
   "costume-airbender-board-ride": {
     "id": "costume-airbender-board-ride",
@@ -22595,7 +22843,7 @@
     "drawn": true,
     "pixelArt": true,
     "smooth": true,
-    "colors": 128,
+    "colors": 256,
     "detailVersion": 4,
     "detailScale": 2.6666666666666665,
     "layout": "eight",
@@ -22677,7 +22925,7 @@
       60.0,
       60.0
     ],
-    "revision": "ab7961a18fec",
+    "revision": "caaf420ffcd0",
     "baselines": [
       123,
       121,
@@ -22825,7 +23073,8 @@
       34,
       35,
       34
-    ]
+    ],
+    "identityVersion": 1
   },
   "costume-airbender-board-trick": {
     "id": "costume-airbender-board-trick",
@@ -22842,7 +23091,7 @@
     "drawn": true,
     "pixelArt": true,
     "smooth": true,
-    "colors": 128,
+    "colors": 256,
     "detailVersion": 4,
     "detailScale": 2.6666666666666665,
     "layout": "eight",
@@ -22924,7 +23173,7 @@
       63.0,
       63.0
     ],
-    "revision": "199735d5d557",
+    "revision": "b201267238df",
     "headTops": [
       32,
       32,
@@ -22998,7 +23247,8 @@
       32,
       33,
       32
-    ]
+    ],
+    "identityVersion": 1
   },
   "costume-airbender-wake-ride": {
     "id": "costume-airbender-wake-ride",
@@ -23015,7 +23265,7 @@
     "drawn": true,
     "pixelArt": true,
     "smooth": true,
-    "colors": 128,
+    "colors": 256,
     "detailVersion": 4,
     "detailScale": 2.6666666666666665,
     "layout": "eight",
@@ -23097,7 +23347,7 @@
       63.0,
       63.0
     ],
-    "revision": "e1bcae5836fc",
+    "revision": "c583b8fc71d4",
     "headTops": [
       34,
       35,
@@ -23171,7 +23421,8 @@
       34,
       34,
       34
-    ]
+    ],
+    "identityVersion": 1
   },
   "costume-airbender-water-ride": {
     "id": "costume-airbender-water-ride",
@@ -23188,7 +23439,7 @@
     "drawn": true,
     "pixelArt": true,
     "smooth": true,
-    "colors": 128,
+    "colors": 256,
     "detailVersion": 4,
     "detailScale": 2.6666666666666665,
     "layout": "eight",
@@ -23270,7 +23521,7 @@
       63.0,
       63.0
     ],
-    "revision": "a845effb9d41",
+    "revision": "613e0409938d",
     "headTops": [
       42,
       42,
@@ -23344,7 +23595,8 @@
       41,
       41,
       41
-    ]
+    ],
+    "identityVersion": 1
   },
   "costume-airbender-bike-acro": {
     "id": "costume-airbender-bike-acro",
@@ -23361,7 +23613,7 @@
     "drawn": true,
     "pixelArt": true,
     "smooth": true,
-    "colors": 128,
+    "colors": 256,
     "detailVersion": 4,
     "detailScale": 2.6666666666666665,
     "layout": "eight",
@@ -23443,7 +23695,7 @@
       95.0,
       95.0
     ],
-    "revision": "50c5bd9a0bd2",
+    "revision": "fcec6ca09f57",
     "bikeHeight": 55.46666666666667,
     "bikeWorldHeight": 1.3,
     "labelTop": 62,
@@ -23520,7 +23772,8 @@
       62,
       62,
       62
-    ]
+    ],
+    "identityVersion": 1
   },
   "costume-airbender-bike-mach": {
     "id": "costume-airbender-bike-mach",
@@ -23537,7 +23790,7 @@
     "drawn": true,
     "pixelArt": true,
     "smooth": true,
-    "colors": 128,
+    "colors": 256,
     "detailVersion": 4,
     "detailScale": 2.6666666666666665,
     "layout": "eight",
@@ -23619,7 +23872,7 @@
       95.0,
       95.0
     ],
-    "revision": "98318687e054",
+    "revision": "bae8868e1789",
     "bikeHeight": 55.46666666666667,
     "bikeWorldHeight": 1.3,
     "labelTop": 62,
@@ -23696,7 +23949,8 @@
       62,
       62,
       62
-    ]
+    ],
+    "identityVersion": 1
   },
   "costume-airbender-surf": {
     "id": "costume-airbender-surf",
@@ -23714,7 +23968,7 @@
     "drawn": true,
     "pixelArt": true,
     "smooth": true,
-    "colors": 128,
+    "colors": 256,
     "detailVersion": 4,
     "detailScale": 2.6666666666666665,
     "layout": "eight",
@@ -23796,7 +24050,7 @@
       95.0,
       95.0
     ],
-    "revision": "67896a1767a1",
+    "revision": "e6e4d9d313a9",
     "headTops": [
       93,
       93,
@@ -23870,7 +24124,8 @@
       93,
       93,
       93
-    ]
+    ],
+    "identityVersion": 1
   },
   "costume-airbender-fish": {
     "id": "costume-airbender-fish",
@@ -23887,7 +24142,7 @@
     "drawn": true,
     "pixelArt": true,
     "smooth": true,
-    "colors": 128,
+    "colors": 256,
     "detailVersion": 4,
     "detailScale": 2.6666666666666665,
     "layout": "eight",
@@ -23969,10 +24224,11 @@
       63.0,
       63.0
     ],
-    "revision": "523162cf78ec",
+    "revision": "35247bfeffb1",
     "illustratedRod": false,
     "holdFrame": 7,
-    "mounted": false
+    "mounted": false,
+    "identityVersion": 1
   },
   "costume-airbender-fish-surf": {
     "id": "costume-airbender-fish-surf",
@@ -23990,7 +24246,7 @@
     "drawn": true,
     "pixelArt": true,
     "smooth": true,
-    "colors": 128,
+    "colors": 256,
     "detailVersion": 4,
     "detailScale": 2.6666666666666665,
     "layout": "eight",
@@ -24072,10 +24328,11 @@
       95.0,
       95.0
     ],
-    "revision": "401af35cb21b",
+    "revision": "3fa859f13237",
     "illustratedRod": false,
     "holdFrame": 7,
-    "mounted": true
+    "mounted": true,
+    "identityVersion": 1
   },
   "costume-skills-board-ride": {
     "id": "costume-skills-board-ride",
@@ -25591,7 +25848,7 @@
     "drawn": true,
     "pixelArt": true,
     "smooth": true,
-    "colors": 128,
+    "colors": 256,
     "detailVersion": 4,
     "detailScale": 2.6666666666666665,
     "layout": "eight",
@@ -25673,7 +25930,7 @@
       60.0,
       60.0
     ],
-    "revision": "98befda06aa1",
+    "revision": "6a72026d2099",
     "baselines": [
       112,
       110,
@@ -25821,7 +26078,8 @@
       34,
       34,
       34
-    ]
+    ],
+    "identityVersion": 1
   },
   "costume-portfolio-board-trick": {
     "id": "costume-portfolio-board-trick",
@@ -25838,7 +26096,7 @@
     "drawn": true,
     "pixelArt": true,
     "smooth": true,
-    "colors": 128,
+    "colors": 256,
     "detailVersion": 4,
     "detailScale": 2.6666666666666665,
     "layout": "eight",
@@ -25920,7 +26178,7 @@
       63.0,
       63.0
     ],
-    "revision": "555eeb1d64ed",
+    "revision": "b279663802f1",
     "headTops": [
       32,
       32,
@@ -25994,7 +26252,8 @@
       32,
       32,
       32
-    ]
+    ],
+    "identityVersion": 1
   },
   "costume-portfolio-wake-ride": {
     "id": "costume-portfolio-wake-ride",
@@ -26011,7 +26270,7 @@
     "drawn": true,
     "pixelArt": true,
     "smooth": true,
-    "colors": 128,
+    "colors": 256,
     "detailVersion": 4,
     "detailScale": 2.6666666666666665,
     "layout": "eight",
@@ -26093,7 +26352,7 @@
       63.0,
       63.0
     ],
-    "revision": "1b1b7543e355",
+    "revision": "709a9fb269f0",
     "headTops": [
       34,
       34,
@@ -26167,7 +26426,8 @@
       34,
       34,
       34
-    ]
+    ],
+    "identityVersion": 1
   },
   "costume-portfolio-water-ride": {
     "id": "costume-portfolio-water-ride",
@@ -26184,7 +26444,7 @@
     "drawn": true,
     "pixelArt": true,
     "smooth": true,
-    "colors": 128,
+    "colors": 256,
     "detailVersion": 4,
     "detailScale": 2.6666666666666665,
     "layout": "eight",
@@ -26266,7 +26526,7 @@
       63.0,
       63.0
     ],
-    "revision": "8d32d9f84ce9",
+    "revision": "16442f9a5127",
     "headTops": [
       41,
       41,
@@ -26340,7 +26600,8 @@
       41,
       41,
       41
-    ]
+    ],
+    "identityVersion": 1
   },
   "costume-portfolio-bike-acro": {
     "id": "costume-portfolio-bike-acro",
@@ -26357,7 +26618,7 @@
     "drawn": true,
     "pixelArt": true,
     "smooth": true,
-    "colors": 128,
+    "colors": 256,
     "detailVersion": 4,
     "detailScale": 2.6666666666666665,
     "layout": "eight",
@@ -26439,7 +26700,7 @@
       95.0,
       95.0
     ],
-    "revision": "eb222d487b42",
+    "revision": "a698bea135d6",
     "bikeHeight": 55.46666666666667,
     "bikeWorldHeight": 1.3,
     "labelTop": 62,
@@ -26516,7 +26777,8 @@
       62,
       62,
       62
-    ]
+    ],
+    "identityVersion": 1
   },
   "costume-portfolio-bike-mach": {
     "id": "costume-portfolio-bike-mach",
@@ -26533,7 +26795,7 @@
     "drawn": true,
     "pixelArt": true,
     "smooth": true,
-    "colors": 128,
+    "colors": 256,
     "detailVersion": 4,
     "detailScale": 2.6666666666666665,
     "layout": "eight",
@@ -26615,7 +26877,7 @@
       95.0,
       95.0
     ],
-    "revision": "6737b47e87eb",
+    "revision": "fa60534f11ec",
     "bikeHeight": 55.46666666666667,
     "bikeWorldHeight": 1.3,
     "labelTop": 62,
@@ -26692,7 +26954,8 @@
       62,
       62,
       62
-    ]
+    ],
+    "identityVersion": 1
   },
   "costume-portfolio-surf": {
     "id": "costume-portfolio-surf",
@@ -26710,7 +26973,7 @@
     "drawn": true,
     "pixelArt": true,
     "smooth": true,
-    "colors": 128,
+    "colors": 256,
     "detailVersion": 4,
     "detailScale": 2.6666666666666665,
     "layout": "eight",
@@ -26792,7 +27055,7 @@
       95.0,
       95.0
     ],
-    "revision": "4e5c17b7e9b0",
+    "revision": "5634bfc6cc80",
     "headTops": [
       93,
       93,
@@ -26866,7 +27129,8 @@
       93,
       93,
       93
-    ]
+    ],
+    "identityVersion": 1
   },
   "costume-portfolio-fish": {
     "id": "costume-portfolio-fish",
@@ -26883,7 +27147,7 @@
     "drawn": true,
     "pixelArt": true,
     "smooth": true,
-    "colors": 128,
+    "colors": 256,
     "detailVersion": 4,
     "detailScale": 2.6666666666666665,
     "layout": "eight",
@@ -26965,10 +27229,11 @@
       63.0,
       63.0
     ],
-    "revision": "f8e0b6172526",
+    "revision": "49b9b3146800",
     "illustratedRod": false,
     "holdFrame": 7,
-    "mounted": false
+    "mounted": false,
+    "identityVersion": 1
   },
   "costume-portfolio-fish-surf": {
     "id": "costume-portfolio-fish-surf",
@@ -26986,7 +27251,7 @@
     "drawn": true,
     "pixelArt": true,
     "smooth": true,
-    "colors": 128,
+    "colors": 256,
     "detailVersion": 4,
     "detailScale": 2.6666666666666665,
     "layout": "eight",
@@ -27068,10 +27333,11 @@
       95.0,
       95.0
     ],
-    "revision": "c0d980ba4414",
+    "revision": "a103c230c91b",
     "illustratedRod": false,
     "holdFrame": 7,
-    "mounted": true
+    "mounted": true,
+    "identityVersion": 1
   },
   "costume-resume-board-ride": {
     "id": "costume-resume-board-ride",
@@ -30085,7 +30351,7 @@
     "drawn": true,
     "pixelArt": true,
     "smooth": true,
-    "colors": 128,
+    "colors": 256,
     "detailVersion": 4,
     "detailScale": 2.6666666666666665,
     "layout": "eight",
@@ -30167,7 +30433,7 @@
       63.5,
       63.5
     ],
-    "revision": "5a440c0d5717",
+    "revision": "d4aae1c4898f",
     "baselines": [
       107,
       106,
@@ -30316,7 +30582,8 @@
       34,
       34,
       34
-    ]
+    ],
+    "identityVersion": 1
   },
   "link-board-trick": {
     "id": "link-board-trick",
@@ -30333,7 +30600,7 @@
     "drawn": true,
     "pixelArt": true,
     "smooth": true,
-    "colors": 128,
+    "colors": 256,
     "detailVersion": 4,
     "detailScale": 2.6666666666666665,
     "layout": "eight",
@@ -30415,7 +30682,7 @@
       63.0,
       63.0
     ],
-    "revision": "7be48516c435",
+    "revision": "7b82e7a7ba86",
     "opaqueBody": true,
     "headTops": [
       32,
@@ -30490,7 +30757,8 @@
       32,
       32,
       32
-    ]
+    ],
+    "identityVersion": 1
   },
   "link-wake-ride": {
     "id": "link-wake-ride",
@@ -30507,7 +30775,7 @@
     "drawn": true,
     "pixelArt": true,
     "smooth": true,
-    "colors": 128,
+    "colors": 256,
     "detailVersion": 4,
     "detailScale": 2.6666666666666665,
     "layout": "eight",
@@ -30589,7 +30857,7 @@
       63.0,
       63.0
     ],
-    "revision": "a1a52aff1a86",
+    "revision": "4e0eefef47bc",
     "opaqueBody": true,
     "headTops": [
       34,
@@ -30664,7 +30932,8 @@
       34,
       34,
       34
-    ]
+    ],
+    "identityVersion": 1
   },
   "link-water-ride": {
     "id": "link-water-ride",
@@ -30681,7 +30950,7 @@
     "drawn": true,
     "pixelArt": true,
     "smooth": true,
-    "colors": 128,
+    "colors": 256,
     "detailVersion": 4,
     "detailScale": 2.6666666666666665,
     "layout": "eight",
@@ -30763,7 +31032,7 @@
       63.0,
       63.0
     ],
-    "revision": "c22784f4a050",
+    "revision": "34951ee89b8d",
     "opaqueBody": true,
     "headTops": [
       41,
@@ -30838,7 +31107,8 @@
       41,
       41,
       41
-    ]
+    ],
+    "identityVersion": 1
   },
   "link-bike-acro": {
     "id": "link-bike-acro",
@@ -30855,7 +31125,7 @@
     "drawn": true,
     "pixelArt": true,
     "smooth": true,
-    "colors": 128,
+    "colors": 256,
     "detailVersion": 4,
     "detailScale": 2.6666666666666665,
     "layout": "eight",
@@ -30937,7 +31207,7 @@
       95.0,
       95.0
     ],
-    "revision": "56d856d451f4",
+    "revision": "0745b7e632ff",
     "bikeHeight": 55.46666666666667,
     "bikeWorldHeight": 1.3,
     "labelTop": 62,
@@ -31015,7 +31285,8 @@
       62,
       62,
       62
-    ]
+    ],
+    "identityVersion": 1
   },
   "link-bike-mach": {
     "id": "link-bike-mach",
@@ -31032,7 +31303,7 @@
     "drawn": true,
     "pixelArt": true,
     "smooth": true,
-    "colors": 128,
+    "colors": 256,
     "detailVersion": 4,
     "detailScale": 2.6666666666666665,
     "layout": "eight",
@@ -31114,7 +31385,7 @@
       95.0,
       95.0
     ],
-    "revision": "870d30cf3861",
+    "revision": "52d3b8d4d7ad",
     "bikeHeight": 55.46666666666667,
     "bikeWorldHeight": 1.3,
     "labelTop": 62,
@@ -31192,7 +31463,8 @@
       62,
       62,
       62
-    ]
+    ],
+    "identityVersion": 1
   },
   "link-surf": {
     "id": "link-surf",
@@ -31210,7 +31482,7 @@
     "drawn": true,
     "pixelArt": true,
     "smooth": true,
-    "colors": 128,
+    "colors": 256,
     "detailVersion": 4,
     "detailScale": 2.6666666666666665,
     "layout": "eight",
@@ -31292,7 +31564,7 @@
       95.0,
       95.0
     ],
-    "revision": "997f121586b3",
+    "revision": "342c8cce2ede",
     "opaqueBody": true,
     "headTops": [
       93,
@@ -31367,7 +31639,8 @@
       93,
       93,
       93
-    ]
+    ],
+    "identityVersion": 1
   },
   "link-fish": {
     "id": "link-fish",
@@ -31384,7 +31657,7 @@
     "drawn": true,
     "pixelArt": true,
     "smooth": true,
-    "colors": 128,
+    "colors": 256,
     "detailVersion": 4,
     "detailScale": 2.6666666666666665,
     "layout": "eight",
@@ -31466,11 +31739,12 @@
       63.0,
       63.0
     ],
-    "revision": "d830357d3b2d",
+    "revision": "98b252dce896",
     "illustratedRod": false,
     "holdFrame": 7,
     "mounted": false,
-    "opaqueBody": true
+    "opaqueBody": true,
+    "identityVersion": 1
   },
   "link-fish-surf": {
     "id": "link-fish-surf",
@@ -31488,7 +31762,7 @@
     "drawn": true,
     "pixelArt": true,
     "smooth": true,
-    "colors": 128,
+    "colors": 256,
     "detailVersion": 4,
     "detailScale": 2.6666666666666665,
     "layout": "eight",
@@ -31570,11 +31844,12 @@
       95.0,
       95.0
     ],
-    "revision": "c1ad92c3aa67",
+    "revision": "e42e6068839a",
     "illustratedRod": false,
     "holdFrame": 7,
     "mounted": true,
-    "opaqueBody": true
+    "opaqueBody": true,
+    "identityVersion": 1
   },
   "costume-ezra-spider-board-ride": {
     "id": "costume-ezra-spider-board-ride",
@@ -36133,17 +36408,20 @@
   "fish-threadfin-cardinalfish": {
     "id": "fish-threadfin-cardinalfish",
     "src": "/world/sprites/emerald/fish-threadfin-cardinalfish.png",
-    "cw": 64,
-    "ch": 48,
+    "cw": 128,
+    "ch": 96,
     "columns": 4,
     "rows": 1,
-    "bodyHeight": 25,
-    "footY": 44,
+    "bodyHeight": 50,
+    "footY": 88,
     "pixelArt": true,
     "layout": "eight",
     "action": "walk",
     "frameMs": 220,
-    "revision": "667091a7004d"
+    "revision": "2f348123185a",
+    "native": true,
+    "smooth": true,
+    "colors": 64
   },
   "fish-flame-angelfish": {
     "id": "fish-flame-angelfish",
@@ -36478,17 +36756,20 @@
   "fish-weedy-dragonet": {
     "id": "fish-weedy-dragonet",
     "src": "/world/sprites/emerald/fish-weedy-dragonet.png",
-    "cw": 64,
-    "ch": 48,
+    "cw": 128,
+    "ch": 96,
     "columns": 4,
     "rows": 1,
-    "bodyHeight": 25,
-    "footY": 44,
+    "bodyHeight": 50,
+    "footY": 88,
     "pixelArt": true,
     "layout": "eight",
     "action": "walk",
     "frameMs": 220,
-    "revision": "769ec719480a"
+    "revision": "abdc8f8017d8",
+    "native": true,
+    "smooth": true,
+    "colors": 64
   },
   "fish-peppermint-angelfish": {
     "id": "fish-peppermint-angelfish",
@@ -37018,17 +37299,20 @@
   "fish-ribbon-oarfish": {
     "id": "fish-ribbon-oarfish",
     "src": "/world/sprites/emerald/fish-ribbon-oarfish.png",
-    "cw": 64,
-    "ch": 48,
+    "cw": 128,
+    "ch": 96,
     "columns": 4,
     "rows": 1,
-    "bodyHeight": 25,
-    "footY": 44,
+    "bodyHeight": 50,
+    "footY": 88,
     "pixelArt": true,
     "layout": "eight",
     "action": "walk",
     "frameMs": 220,
-    "revision": "308d2e65c65c"
+    "revision": "cbfcffd9ee94",
+    "native": true,
+    "smooth": true,
+    "colors": 64
   },
   "fish-gulper-eel": {
     "id": "fish-gulper-eel",
@@ -37048,17 +37332,20 @@
   "fish-violet-anglerfish": {
     "id": "fish-violet-anglerfish",
     "src": "/world/sprites/emerald/fish-violet-anglerfish.png",
-    "cw": 64,
-    "ch": 48,
+    "cw": 128,
+    "ch": 96,
     "columns": 4,
     "rows": 1,
-    "bodyHeight": 25,
-    "footY": 44,
+    "bodyHeight": 50,
+    "footY": 88,
     "pixelArt": true,
     "layout": "eight",
     "action": "walk",
     "frameMs": 220,
-    "revision": "1bf4d71fb01d"
+    "revision": "5fd0477f7393",
+    "native": true,
+    "smooth": true,
+    "colors": 64
   },
   "fish-black-dragonfish": {
     "id": "fish-black-dragonfish",
@@ -37348,17 +37635,20 @@
   "fish-spotted-eagle-ray": {
     "id": "fish-spotted-eagle-ray",
     "src": "/world/sprites/emerald/fish-spotted-eagle-ray.png",
-    "cw": 64,
-    "ch": 48,
+    "cw": 128,
+    "ch": 96,
     "columns": 4,
     "rows": 1,
-    "bodyHeight": 25,
-    "footY": 44,
+    "bodyHeight": 50,
+    "footY": 88,
     "pixelArt": true,
     "layout": "eight",
     "action": "walk",
     "frameMs": 220,
-    "revision": "e8014bacac1d"
+    "revision": "c5c43eb35015",
+    "native": true,
+    "smooth": true,
+    "colors": 64
   },
   "fish-blue-spotted-stingray": {
     "id": "fish-blue-spotted-stingray",
@@ -37378,17 +37668,20 @@
   "fish-cownose-ray": {
     "id": "fish-cownose-ray",
     "src": "/world/sprites/emerald/fish-cownose-ray.png",
-    "cw": 64,
-    "ch": 48,
+    "cw": 128,
+    "ch": 96,
     "columns": 4,
     "rows": 1,
-    "bodyHeight": 25,
-    "footY": 44,
+    "bodyHeight": 50,
+    "footY": 88,
     "pixelArt": true,
     "layout": "eight",
     "action": "walk",
     "frameMs": 220,
-    "revision": "575d9b3e05a4"
+    "revision": "35cbdf319f99",
+    "native": true,
+    "smooth": true,
+    "colors": 64
   },
   "fish-electric-marbled-ray": {
     "id": "fish-electric-marbled-ray",
@@ -37408,17 +37701,20 @@
   "fish-violet-manta-calf": {
     "id": "fish-violet-manta-calf",
     "src": "/world/sprites/emerald/fish-violet-manta-calf.png",
-    "cw": 64,
-    "ch": 48,
+    "cw": 128,
+    "ch": 96,
     "columns": 4,
     "rows": 1,
-    "bodyHeight": 25,
-    "footY": 44,
+    "bodyHeight": 50,
+    "footY": 88,
     "pixelArt": true,
     "layout": "eight",
     "action": "walk",
     "frameMs": 220,
-    "revision": "65ae2ce580c2"
+    "revision": "85f696b95924",
+    "native": true,
+    "smooth": true,
+    "colors": 64
   },
   "fish-pom-pom-crab": {
     "id": "fish-pom-pom-crab",
@@ -37543,17 +37839,20 @@
   "fish-fire-shrimp": {
     "id": "fish-fire-shrimp",
     "src": "/world/sprites/emerald/fish-fire-shrimp.png",
-    "cw": 64,
-    "ch": 48,
+    "cw": 128,
+    "ch": 96,
     "columns": 4,
     "rows": 1,
-    "bodyHeight": 25,
-    "footY": 44,
+    "bodyHeight": 50,
+    "footY": 88,
     "pixelArt": true,
     "layout": "eight",
     "action": "walk",
     "frameMs": 220,
-    "revision": "1d35fcf36cf8"
+    "revision": "1bfb85039372",
+    "native": true,
+    "smooth": true,
+    "colors": 64
   },
   "fish-bumblebee-shrimp": {
     "id": "fish-bumblebee-shrimp",
@@ -37858,17 +38157,20 @@
   "fish-ribbon-sea-dragon": {
     "id": "fish-ribbon-sea-dragon",
     "src": "/world/sprites/emerald/fish-ribbon-sea-dragon.png",
-    "cw": 64,
-    "ch": 48,
+    "cw": 128,
+    "ch": 96,
     "columns": 4,
     "rows": 1,
-    "bodyHeight": 25,
-    "footY": 44,
+    "bodyHeight": 50,
+    "footY": 88,
     "pixelArt": true,
     "layout": "eight",
     "action": "walk",
     "frameMs": 220,
-    "revision": "6275dfa8daca"
+    "revision": "89c41001893b",
+    "native": true,
+    "smooth": true,
+    "colors": 64
   },
   "fish-painted-turtle-hatchling": {
     "id": "fish-painted-turtle-hatchling",
@@ -38450,7 +38752,8 @@
     "detailScale": 2.6666666666666665,
     "frameMs": 350,
     "opaqueBody": true,
-    "revision": "9a3b00a3ebc7"
+    "revision": "01e586cfbeb0",
+    "identityVersion": 1
   },
   "costume-skills-conduct": {
     "id": "costume-skills-conduct",
@@ -38494,7 +38797,8 @@
     "detailScale": 2.6666666666666665,
     "frameMs": 350,
     "opaqueBody": true,
-    "revision": "dd5c61f16340"
+    "revision": "0768fe74332b",
+    "identityVersion": 1
   },
   "costume-resume-conduct": {
     "id": "costume-resume-conduct",
@@ -38560,7 +38864,8 @@
     "detailScale": 2.6666666666666665,
     "frameMs": 350,
     "opaqueBody": true,
-    "revision": "bbb29ac827db"
+    "revision": "770f43ef5c10",
+    "identityVersion": 1
   },
   "costume-ezra-spider-conduct": {
     "id": "costume-ezra-spider-conduct",
@@ -38769,8 +39074,9 @@
     "frameMs": 375,
     "opaqueBody": true,
     "saluteHand": "left",
-    "revision": "2c21cecca35b",
-    "labelTop": 37
+    "revision": "2bb64fe6b8bb",
+    "labelTop": 37,
+    "identityVersion": 1
   },
   "costume-skills-salute": {
     "id": "costume-skills-salute",
@@ -38817,8 +39123,9 @@
     "frameMs": 375,
     "opaqueBody": true,
     "saluteHand": "left",
-    "revision": "d5b133902549",
-    "labelTop": 37
+    "revision": "fc27cd93e581",
+    "labelTop": 37,
+    "identityVersion": 1
   },
   "costume-resume-salute": {
     "id": "costume-resume-salute",
@@ -38889,8 +39196,9 @@
     "frameMs": 375,
     "opaqueBody": true,
     "saluteHand": "left",
-    "revision": "6a47abd9567b",
-    "labelTop": 41
+    "revision": "f0115cbcc84a",
+    "labelTop": 41,
+    "identityVersion": 1
   },
   "costume-ezra-spider-salute": {
     "id": "costume-ezra-spider-salute",
@@ -40930,6 +41238,26 @@
     "ch": 56,
     "columns": 4,
     "rows": 1,
-    "frameMs": 170
+    "frameMs": 170,
+    "softAlpha": true
+  },
+  "fallyn-tumbling": {
+    "id": "fallyn-tumbling",
+    "src": "/world/sprites/emerald/fallyn-tumbling.png",
+    "cw": 160,
+    "ch": 160,
+    "rows": 1,
+    "columns": 24,
+    "frameMs": 95,
+    "bodyHeight": 96,
+    "footY": 144,
+    "mirrorWest": true,
+    "pixelArt": true,
+    "smooth": true,
+    "native": true,
+    "colors": 128,
+    "drawn": true,
+    "action": "tumbling",
+    "revision": "13f5b78dbfce"
   }
 }

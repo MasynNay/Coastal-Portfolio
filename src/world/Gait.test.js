@@ -1,9 +1,44 @@
-import { advanceGait, gaitTimeForSheet, walkCycleMs, runCycleMs } from "./Gait";
+import {
+  advanceGait,
+  createFootfalls,
+  gaitTimeForSheet,
+  walkCycleMs,
+  runCycleMs,
+} from "./Gait";
 import { walkSpeed, runSpeed } from "./Movement";
 import appearances from "./Appearances.json";
 import timing from "./Gait.json";
 import sheets from "./SpriteSheets.json";
 import { spriteFrame } from "./animation";
+
+test("each outfit lands its own last step without moving the player or holding an action", () => {
+  const sample = createFootfalls();
+  for (const { asset } of appearances) {
+    const stride = {
+      id: asset,
+      x: 4,
+      z: 5,
+      art: asset + "-run",
+      moving: true,
+      time: 300,
+      direction: 2,
+    };
+    const standing = { ...stride, art: asset, moving: false, time: 0 };
+    expect(sample(stride, sheets[stride.art], 100)).toBe(stride);
+    expect(sample(standing, sheets[asset], 110)).toMatchObject({
+      x: 4,
+      z: 5,
+      art: stride.art,
+      time: 300,
+    });
+    expect(sample(standing, sheets[asset], 170).time).toBeGreaterThan(300);
+    expect(sample(standing, sheets[asset], 226)).toBe(standing);
+    sample(stride, sheets[stride.art], 250);
+    const fishing = { ...standing, art: asset + "-fish" };
+    expect(sample(fishing, sheets[fishing.art], 260)).toBe(fishing);
+    expect(sample(standing, sheets[asset], 270)).toBe(standing);
+  }
+});
 
 test("a running stride takes its intended real time instead of being accelerated twice", () => {
   const runClock = advanceGait((runSpeed * runCycleMs) / 1000, true);
