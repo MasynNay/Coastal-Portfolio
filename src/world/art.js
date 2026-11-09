@@ -15,6 +15,12 @@ const rawArtwork = {
     height: 864,
     revision: "grove-dance-2",
   },
+  "no-face": {
+    src: "/world/places/no-face.svg",
+    width: 56,
+    height: 82,
+    smooth: true,
+  },
   ...beachArt,
   ...coastArt,
   ...manifest,

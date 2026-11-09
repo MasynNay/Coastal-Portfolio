@@ -33,7 +33,7 @@ import { createTownTerrain } from "./TownTerrain";
 import { watercraft } from "./Harbor";
 import { boardPose } from "./Riding";
 import { drawActivities } from "./ActivityEffects";
-import { townDecor, townProps, mailboxes } from "./TownLayout";
+import { townDecor, townProps, mailboxes, windfallTree } from "./TownLayout";
 import {
   flightFrame,
   flightAppearance,
@@ -691,6 +691,15 @@ export function createCanvasScene(host, invalidate = () => {}) {
                 : h,
           });
     if (!room) {
+      // The mask peeks out on the right. The actual tree still covers the robe.
+      const peek = (1 - Math.cos(state.worldTime / 1250)) / 2;
+      sprites.push({
+        art: "no-face",
+        x: windfallTree.x + 0.84 + peek * 0.9,
+        z: windfallTree.z + 0.14,
+        sortZ: windfallTree.z - 0.01,
+        h: 1.85,
+      });
       for (const spirit of groveSpirits(state.grove))
         sprites.push({ ...spirit, groveSpirit: true });
 
@@ -849,33 +858,37 @@ export function createCanvasScene(host, invalidate = () => {}) {
           state.moving ||
           !!state.action ||
           state.surfing ||
+          state.grove?.playerFrame != null ||
           !!state.beach?.building,
-        time: state.salute
-          ? cycling
-            ? state.bikeRide.time
-            : state.surfing
-              ? 0
-              : state.salute.elapsed
-          : state.beach?.building
-            ? [0, 1, 2, 1][Math.floor(state.worldTime / 230) % 4] *
-              (artwork[costume]?.frameMs || 95)
-            : cycling
-              ? state.bikeRide.time
-              : glide
-                ? glide.frame * artwork[costume].frameMs
-                : acting
-                  ? abilityColumn(state.abilityEffect, state.worldTime) *
-                    artwork[costume].frameMs
-                  : state.action === "fish"
-                    ? Math.min(
-                        state.fishingElapsed || 0,
-                        (artwork[costume]?.frameMs || 160) *
-                          (artwork[costume]?.holdFrame ?? 3) +
-                          1,
-                      )
-                    : state.action || state.surfing
-                      ? time
-                      : state.gaitTime,
+        time:
+          state.grove?.playerFrame != null
+            ? state.grove.playerFrame * (artwork[costume]?.frameMs || 95)
+            : state.salute
+              ? cycling
+                ? state.bikeRide.time
+                : state.surfing
+                  ? 0
+                  : state.salute.elapsed
+              : state.beach?.building
+                ? [0, 1, 2, 1][Math.floor(state.worldTime / 230) % 4] *
+                  (artwork[costume]?.frameMs || 95)
+                : cycling
+                  ? state.bikeRide.time
+                  : glide
+                    ? glide.frame * artwork[costume].frameMs
+                    : acting
+                      ? abilityColumn(state.abilityEffect, state.worldTime) *
+                        artwork[costume].frameMs
+                      : state.action === "fish"
+                        ? Math.min(
+                            state.fishingElapsed || 0,
+                            (artwork[costume]?.frameMs || 160) *
+                              (artwork[costume]?.holdFrame ?? 3) +
+                              1,
+                          )
+                        : state.action || state.surfing
+                          ? time
+                          : state.gaitTime,
         player: true,
       });
     // Ducks keep their own familiar sheet on both terrains; a soft wake makes

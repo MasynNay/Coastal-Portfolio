@@ -2,6 +2,17 @@
 // the preceding production commit, rather than fictional in-game release notes.
 const patchNotes = [
   {
+    version: "1.1.2",
+    date: "November 9, 2026",
+    previousCommit: "b1e5bcc",
+    changes: [
+      "Your character now circles the cedar with Totoro and friends, crouching and reaching in time with the group.",
+      "The dance uses your current outfit and shows a dedicated prompt while the group performs.",
+      "When the dance ends, your character returns to the exact spot and direction where they started.",
+      "No-Face peeks out from behind the tree to the right of Windfall Lodge.",
+    ],
+  },
+  {
     version: "1.1.1",
     date: "November 9, 2026",
     previousCommit: "aa63a2c",

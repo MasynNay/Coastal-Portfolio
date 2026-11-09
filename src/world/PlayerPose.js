@@ -11,6 +11,8 @@ export function playerPose(state) {
     return activityAsset(state.character, state.outfit, "water-ride", sheets);
   if (state.beach?.building)
     return activityAsset(state.character, state.outfit, "board-trick", sheets);
+  if (state.grove?.playerFrame != null)
+    return activityAsset(state.character, state.outfit, "board-trick", sheets);
   if (state.bikeRide?.phase === "riding") {
     return activityAsset(
       state.character,

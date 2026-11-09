@@ -5,6 +5,7 @@ import { createWorld } from "./engine";
 import { gaitTimeForSheet } from "./Gait";
 import sheets from "./SpriteSheets.json";
 import { runSpeed } from "./Movement";
+import { groveInteraction, groveTree } from "./ForestGrove";
 // The 2D game uses screen-aligned movement; no retired 3D projection is needed.
 const screenToWorld = (x, z) => ({
     x,
@@ -108,6 +109,46 @@ test("the jet-ski minimap shortcut walks to its reachable pier boarding point", 
     game.interact();
     frame(16);
     expect(draws[draws.length - 1].waterRide.id).toBe("jetski");
+  } finally {
+    game.dispose();
+  }
+});
+test("the player joins every beat of the grove dance and returns to their starting spot", async () => {
+  const game = createWorld(document.createElement("div"), {});
+  try {
+    await Promise.resolve();
+    frame(16);
+    mockScene.hit = () => groveInteraction;
+    mockScene.canvas.dispatchEvent(
+      new MouseEvent("pointerdown", { button: 0 }),
+    );
+    for (let i = 0; i < 180; i++) frame(50);
+    const before = draws.at(-1);
+    game.interact();
+    const from = draws.length;
+    for (let i = 0; i < 200; i++) frame(50);
+    const dance = draws.slice(from).filter((draw) => draw.grove);
+    expect(dance.some((draw) => draw.position.x < groveTree.x - 1)).toBe(true);
+    expect(dance.some((draw) => draw.position.x > groveTree.x + 1)).toBe(true);
+    expect(dance.some((draw) => draw.position.z < groveTree.z - 1)).toBe(true);
+    expect(dance.some((draw) => draw.position.z > groveTree.z + 1)).toBe(true);
+    expect(dance.some((draw) => draw.grove.playerFrame === 1)).toBe(true);
+    expect(dance.some((draw) => draw.grove.playerFrame === 3)).toBe(true);
+    expect(draws.at(-1)).toMatchObject({
+      grove: null,
+      position: before.position,
+      direction: before.direction,
+      moving: false,
+    });
+    game.interact();
+    for (let i = 0; i < 30; i++) frame(50);
+    expect(draws.at(-1).position).not.toEqual(before.position);
+    game.stop();
+    frame(16);
+    expect(draws.at(-1)).toMatchObject({
+      grove: null,
+      position: before.position,
+    });
   } finally {
     game.dispose();
   }

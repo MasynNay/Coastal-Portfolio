@@ -1,4 +1,9 @@
-import { groveDance, groveInteraction, groveTree } from "./ForestGrove";
+import {
+  groveDance,
+  groveInteraction,
+  grovePlayer,
+  groveStart,
+} from "./ForestGrove";
 import { createRoomInteractions, isLoveOffering } from "./RoomInteractions";
 import { startWindSong } from "./WindStatue";
 import { restSpots, createRestSpots } from "./RestSpots";
@@ -193,7 +198,15 @@ export function createWorld(host, callbacks) {
   const bugSpawns = createBugSpawns();
   let webEffects = [];
   let abilityEffect = null;
-  let groveStarted = null;
+  let groveSession = null;
+  function finishGrove() {
+    if (!groveSession) return;
+    position = groveSession.origin;
+    direction = groveSession.direction;
+    groveSession = null;
+    moving = false;
+    gaitTime = 0;
+  }
   function cancelAbility() {
     if (abilityEffect?.kind === "glide") {
       position = { x: abilityEffect.x, z: abilityEffect.z };
@@ -202,7 +215,7 @@ export function createWorld(host, callbacks) {
     abilityEffect = null;
   }
   const activityBusy = () =>
-    !!groveDance(groveStarted, worldTime) ||
+    !!groveSession ||
     dogPlay.active() ||
     duckPlay.active() ||
     bikeRide.active() ||
@@ -216,7 +229,7 @@ export function createWorld(host, callbacks) {
   const manualCraft = () =>
     manualWatercraft() || skateRide.manual() || surfRide.manual();
   function cancelActivities() {
-    groveStarted = null;
+    finishGrove();
     skySalute.cancel();
     salutePose = null;
     const restingOrigin = rest.stop();
@@ -338,7 +351,10 @@ export function createWorld(host, callbacks) {
       bikeParking: bikeRide.parking(),
       webEffects,
       abilityEffect,
-      grove: room ? null : groveDance(groveStarted, worldTime),
+      grove: groveSession && {
+        ...groveDance(groveSession.started, worldTime),
+        playerAngle: groveSession.angle,
+      },
       treeShake: bugSpawns.treeShake(worldTime),
       worldTime,
       skyTime,
@@ -355,7 +371,7 @@ export function createWorld(host, callbacks) {
       fishingTarget,
       fishingElapsed: performance.now() - fishingStarted,
       surfing,
-      running: wantsRun(),
+      running: !groveSession && wantsRun(),
       loading,
       glassFloats: floatHunt.points(),
       floatHunt: floatHunt.snapshot(),
@@ -545,36 +561,37 @@ export function createWorld(host, callbacks) {
       loading,
       prompt: loading
         ? null
-        : rest.active()
-          ? "Stand up"
-          : axolotlRace.active()
-            ? "Leave the race"
-            : skateRide.active()
-              ? "Return the skateboard"
-              : waterRide.active()
-                ? "Return to pier"
-                : bikeRide.active()
-                  ? "A little ride around the pond…"
-                  : beachActivities.busy()
-                    ? "Building a sandcastle…"
-                    : surfRide.active()
-                      ? "Steer onto a beach to step ashore"
-                      : isBeachInteraction(selected)
-                        ? selected.label
-                        : selected?.type === "duck" && selected.distance < 1.8
+        : groveSession
+          ? "Dancing with Totoro…"
+          : rest.active()
+            ? "Stand up"
+            : axolotlRace.active()
+              ? "Leave the race"
+              : skateRide.active()
+                ? "Return the skateboard"
+                : waterRide.active()
+                  ? "Return to pier"
+                  : bikeRide.active()
+                    ? "A little ride around the pond…"
+                    : beachActivities.busy()
+                      ? "Building a sandcastle…"
+                      : surfRide.active()
+                        ? "Steer onto a beach to step ashore"
+                        : isBeachInteraction(selected)
                           ? selected.label
-                          : ["watercraft", "race", "surfboard"].includes(
-                                selected?.type,
-                              )
+                          : selected?.type === "duck" && selected.distance < 1.8
                             ? selected.label
-                            : surfing
-                              ? "Surfing · return to shore to walk"
-                              : shore()
-                                ? `Surf on your ${axolotlColors[character]} axolotl`
-                                : nearby()?.label || null,
+                            : ["watercraft", "race", "surfboard"].includes(
+                                  selected?.type,
+                                )
+                              ? selected.label
+                              : surfing
+                                ? "Surfing · return to shore to walk"
+                                : shore()
+                                  ? `Surf on your ${axolotlColors[character]} axolotl`
+                                  : nearby()?.label || null,
       fishingPhase,
-      interactionBusy:
-        beachActivities.busy() || !!groveDance(groveStarted, worldTime),
+      interactionBusy: beachActivities.busy() || !!groveSession,
       surfingBoard: surfRide.active(),
       surfTransitioning: surfRide.active() && !surfRide.manual(),
       race: axolotlRace.active()
@@ -732,11 +749,7 @@ export function createWorld(host, callbacks) {
     if (duckTarget?.type === "grove") {
       stop();
       cancelAbility();
-      direction = movementDirection(
-        groveTree.x - position.x,
-        groveTree.z - position.z,
-      );
-      groveStarted = worldTime;
+      groveSession = groveStart(position, direction, worldTime);
       callbacks.onEvent?.({
         type: "notice",
         message: "Reach for the sky with Totoro and friends!",
@@ -1037,7 +1050,11 @@ export function createWorld(host, callbacks) {
     if (!frozen && !loading && !room) skyTime += dt * 1000;
     salutePose = skySalute.update(
       skyTime,
-      !room && !loading && !travelInProgress && !axolotlRace.active(),
+      !room &&
+        !loading &&
+        !travelInProgress &&
+        !axolotlRace.active() &&
+        !groveSession,
       worldTime,
     );
     const saluting = !!salutePose;
@@ -1067,6 +1084,19 @@ export function createWorld(host, callbacks) {
     const wasMoving = moving;
     moving = false;
     let remaining = dt;
+    if (groveSession && !frozen && !loading) {
+      const dance = groveDance(groveSession.started, worldTime);
+      if (!dance) finishGrove();
+      else {
+        const next = grovePlayer(groveSession, dance);
+        const distance = Math.hypot(next.x - position.x, next.z - position.z);
+        moving = distance > 0.0001;
+        gaitTime += advanceGait(distance);
+        position = { x: next.x, z: next.z };
+        direction = next.direction;
+      }
+      dirty = true;
+    }
     if (!frozen && !loading && axolotlRace.active()) {
       const race = axolotlRace.update(worldTime);
       if (race.done) {

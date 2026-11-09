@@ -121,6 +121,7 @@ export const streets = [
 ];
 // Prop roots sit in garden beds or along the quay. Boat roots are the only
 // decorations in water; the central streets and every front door remain clear.
+export const windfallTree = { x: 24, z: 10.5 };
 export const townDecor = [
   ["harbor-bench", -12, 18.1, 1.05],
   ["harbor-bench", 12, 18.1, 1.05],
@@ -150,7 +151,7 @@ export const townDecor = [
     [-25, -5],
     [-25, 1.5],
     [-23, 10],
-    [24, 10.5],
+    [windfallTree.x, windfallTree.z],
   ].map(([x, z], i) => [
     i % 3 === 0 ? "harbor-pine" : "harbor-tree",
     x,

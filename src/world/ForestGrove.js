@@ -1,3 +1,5 @@
+import { movementDirection } from "./animation";
+
 export const groveTree = { x: -24, z: -23 };
 export const groveInteraction = {
   id: "totoro-grove",
@@ -8,9 +10,9 @@ export const groveInteraction = {
 };
 
 const spirits = [
-  { x: -26.2, z: -22.25, h: 2.65, angle: 2.7 },
-  { x: -27.05, z: -22.6, h: 1.85, angle: 2.7 + (Math.PI * 2) / 3 },
-  { x: -25.25, z: -22.05, h: 1.42, angle: 2.7 + (Math.PI * 4) / 3 },
+  { x: -26.2, z: -22.25, h: 2.65 },
+  { x: -27.05, z: -22.6, h: 1.85 },
+  { x: -25.25, z: -22.05, h: 1.42 },
 ];
 const cell = 144;
 const gatherMs = 650;
@@ -21,6 +23,8 @@ const beatCount = 3;
 const returnAt = gatherMs + beatMs * beatCount + 650;
 const returnMs = 1300;
 const duration = returnAt + returnMs;
+const radiusX = 2.2;
+const radiusZ = 1.65;
 const clamp = (value) => Math.min(1, Math.max(0, value));
 const ease = (value) => {
   const t = clamp(value);
@@ -43,6 +47,8 @@ export function groveDance(started, time) {
   const growth =
     ((beat + (reaching ? ease((beatTime - reachMs) / 680) : 0)) / beatCount) *
     (1 - progress);
+  const pose = walking ? 3 : reaching ? 2 : dancing ? 1 : 0;
+  const reachTime = beatTime - reachMs;
 
   return {
     elapsed,
@@ -51,29 +57,90 @@ export function groveDance(started, time) {
     returning,
     progress,
     walking,
-    pose: walking ? 3 : reaching ? 2 : dancing ? 1 : 0,
+    pose,
+    // Use the same-costume crouch and extended-arm frames for the player.
+    playerFrame:
+      pose === 1
+        ? 1
+        : pose === 2
+          ? reachTime < 110 || reachTime > 635
+            ? 2
+            : 3
+          : null,
     bounce: reaching
       ? 0.14 * Math.sin(Math.PI * clamp((beatTime - reachMs) / 620))
       : 0,
   };
 }
 
+export function groveStart(position, direction, started) {
+  return {
+    origin: { ...position },
+    direction,
+    started,
+    angle: Math.atan2(
+      (position.z - groveTree.z) / radiusZ,
+      (position.x - groveTree.x) / radiusX,
+    ),
+  };
+}
+
+function dancePosition(origin, startAngle, dance) {
+  const angle = startAngle + dance.lap * Math.PI * 2;
+  const ringX = groveTree.x + Math.cos(angle) * radiusX;
+  const ringZ = groveTree.z + Math.sin(angle) * radiusZ;
+  const approach = dance.returning
+    ? 1 - dance.progress
+    : ease(dance.elapsed / gatherMs);
+  return {
+    x: origin.x + (ringX - origin.x) * approach,
+    z: origin.z + (ringZ - origin.z) * approach,
+    angle,
+    ringZ,
+    approach,
+  };
+}
+
+export function grovePlayer(session, dance) {
+  const { x, z, angle, approach } = dancePosition(
+    session.origin,
+    session.angle,
+    dance,
+  );
+  let dx = groveTree.x - x;
+  let dz = groveTree.z - z;
+  if (dance.walking) {
+    dx = -Math.sin(angle) * radiusX;
+    dz = Math.cos(angle) * radiusZ;
+  } else if (approach < 1) {
+    const sign = dance.returning ? -1 : 1;
+    dx = (groveTree.x + Math.cos(angle) * radiusX - session.origin.x) * sign;
+    dz = (groveTree.z + Math.sin(angle) * radiusZ - session.origin.z) * sign;
+  }
+  return {
+    x,
+    z,
+    direction: dx || dz ? movementDirection(dx, dz) : session.direction,
+  };
+}
+
 export function groveSpirits(dance) {
   return spirits.map((spirit, index) => {
     if (!dance) return { ...spirit, row: index * 2, pose: 0 };
-    const angle = spirit.angle + dance.lap * Math.PI * 2;
-    const ringX = groveTree.x + Math.cos(angle) * 2.2;
-    const ringZ = groveTree.z + Math.sin(angle) * 1.55;
-    const approach = dance.returning
-      ? 1 - dance.progress
-      : ease(dance.elapsed / gatherMs);
+    // The visitor fills one slot and the spirits take the other three.
+    const startAngle = dance.playerAngle + ((index + 1) * Math.PI) / 2;
+    const { x, z, angle, ringZ, approach } = dancePosition(
+      spirit,
+      startAngle,
+      dance,
+    );
     const stepping = dance.walking || (approach < 1 && approach > 0);
     const footfall = Math.sin(dance.elapsed / 95);
     // During a reach, turn toward the trunk. While circling, follow the tangent.
     const back = dance.walking ? Math.cos(angle) < 0 : ringZ > groveTree.z;
     return {
-      x: spirit.x + (ringX - spirit.x) * approach,
-      z: spirit.z + (ringZ - spirit.z) * approach,
+      x,
+      z,
       h: spirit.h,
       row: index * 2 + Number(back && approach > 0.7),
       pose: stepping ? 3 : dance.pose,
