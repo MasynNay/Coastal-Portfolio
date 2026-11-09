@@ -7,7 +7,7 @@ import "./MacMenu.css";
 
 // The Apple control is a real menu, independent of dock apps and their windows.
 // Dismissal and keyboard focus follow the same rules as a small system menu.
-export function MacMenu({ onAbout, buttonRef }) {
+export function MacMenu({ onAbout, onAppearance, buttonRef }) {
   const [open, setOpen] = useState(false);
   const root = useRef(null),
     menu = useRef(null);
@@ -84,6 +84,17 @@ export function MacMenu({ onAbout, buttonRef }) {
           >
             About this Mac
           </button>
+          {onAppearance && (
+            <button
+              role="menuitem"
+              onClick={() => {
+                setOpen(false);
+                onAppearance();
+              }}
+            >
+              Change Wallpaper &amp; Bezel…
+            </button>
+          )}
           <div className="mac-system-separator" role="separator" />
           <Link
             role="menuitem"

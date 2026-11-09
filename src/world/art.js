@@ -9,6 +9,14 @@ import terrain from "./TerrainArt.json";
 import { spriteFrame } from "./animation";
 const rawArtwork = {
   ...gameArt,
+  "totoro-grove": {
+    src: "/world/places/totoro-grove.svg",
+    cw: 240,
+    ch: 160,
+    columns: 4,
+    rows: 1,
+    frameMs: 220,
+  },
   ...beachArt,
   ...coastArt,
   ...manifest,

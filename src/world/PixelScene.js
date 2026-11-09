@@ -1,3 +1,4 @@
+import { drawGroveLights, groveSpirit, groveTree } from "./ForestGrove";
 import { drawWindSong } from "./WindStatue";
 import { surfboard, drawSurfWave } from "./SurfRide";
 import { skyBirds } from "./Sky";
@@ -688,9 +689,18 @@ export function createCanvasScene(host, invalidate = () => {}) {
                     0.12
                 : x,
             z: art.includes("boat") ? z + Math.sin(time / 1200 + x) * 0.06 : z,
-            h,
+            h:
+              state.grove && x === groveTree.x && z === groveTree.z
+                ? h * (1 + state.grove.growth * 0.72)
+                : h,
           });
     if (!room) {
+      sprites.push({
+        ...groveSpirit,
+        moving: !!state.grove,
+        time: state.grove?.elapsed,
+      });
+
       for (const r of state.residents || residents)
         if (r.id !== state.character && !r.room && !r.hidden)
           sprites.push({
@@ -930,7 +940,7 @@ export function createCanvasScene(host, invalidate = () => {}) {
             a.direction || 0,
             a.moving,
             a.time ?? time,
-            a.lift || 0,
+            (a.lift || 0) + (a.player ? state.grove?.bounce || 0 : 0),
             humanIds.has(a.id),
           );
     if (!room) {
@@ -948,6 +958,7 @@ export function createCanvasScene(host, invalidate = () => {}) {
           bird.time,
           bird.lift,
         );
+      drawGroveLights(ctx, at, unit, state.grove);
       drawPraise(state);
       drawBeachActivities(ctx, at, unit, state, sprite);
     }

@@ -12,11 +12,39 @@ export const webProjects = [
     category: "Software",
     label: "05 / INDEPENDENT DESKTOP SOFTWARE",
     description:
-      "A camera-powered desktop gaming studio that turns tracked objects into controls for classic video games. Released as 2.0 for four consoles; version 3.0 expands native emulation while cross-platform QA continues.",
+      "Turn a webcam into a controller for classic games. Track a chosen color on a hand, toy, or fish and map movement between camera zones to buttons in the built-in emulator. The released 2.0 app supports Game Boy, Game Boy Color, Game Boy Advance, and SNES. Version 3.0 is in active development and previews more consoles, including Nintendo 64 and GameCube.",
     tools:
       "Python · OpenCV · Tkinter · Libretro · PyInstaller · GitHub Actions",
     github: "https://github.com/MasynNay/anything-plays",
     roadmap: "https://github.com/MasynNay/anything-plays/blob/main/ROADMAP.md",
+  },
+  {
+    id: "aftertone",
+    imgUrl: "/images/projects/aftertone.webp",
+    title: "AFTERTONE",
+    category: "Web",
+    label: "WEB APP / MUSIC DISCOVERY",
+    description:
+      "Discover music by listening to short previews and choosing Keep or Pass. Follow a familiar or experimental listening path, search the Deezer catalog, save favorites, or put your music knowledge to the test in tournament-style Music Duels. Preview availability depends on the provider.",
+    tools:
+      "JavaScript modules · Node.js · Deezer API · Browser audio · GitHub Pages",
+    website: "https://aftertone.masynnay.com/demo/",
+    websiteLabel: "Open the app",
+    github: "https://github.com/MasynNay/aftertone",
+  },
+  {
+    id: "keystoria",
+    imgUrl: "/images/projects/keystoria.webp",
+    title: "Keystoria",
+    category: "Web",
+    label: "BROWSER GAME / TYPING PRACTICE",
+    description:
+      "Build typing confidence through synchronized lyrics, timed speed tests, and practical Linux command exercises. The public browser edition includes Lyric Lab, Speed Lab, and Field Academy. The full 24-mission cooperative story campaign runs through a local Python and WebSocket server.",
+    tools:
+      "JavaScript · Python · WebSockets · Real-time multiplayer · GitHub Pages",
+    website: "https://keystoria.masynnay.com/play/",
+    websiteLabel: "Play in browser",
+    github: "https://github.com/MasynNay/Keystoria",
   },
   {
     id: "mixstream",

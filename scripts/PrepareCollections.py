@@ -27,7 +27,9 @@ manifest = (
 for job in json.loads((source / "prompts.json").read_text()):
     if only and job["key"] not in only:
         continue
-    cells, _ = sprites.extract(source / (job["key"] + ".png"), 10)
+    cells, _ = sprites.extract(
+        source / (job["key"] + ".png"), 10, row_cuts=job.get("rowCuts")
+    )
     for row, species in enumerate(job["rows"]):
         item = next(s for s in catalog[job["kind"]] if s["id"] == species)
         poses = cells[row * 4 : row * 4 + 4]

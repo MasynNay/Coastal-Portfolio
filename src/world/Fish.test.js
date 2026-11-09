@@ -6,16 +6,16 @@ import {
   saveAquariums,
 } from "./Fish";
 import sheets from "./SpriteSheets.json";
-test("250 distinct aquatic sprites include exactly one super-rare catch", () => {
-  expect(fishSpecies).toHaveLength(250);
-  expect(new Set(fishSpecies.map((f) => f.art)).size).toBe(250);
-  expect(fishSpecies.filter((f) => f.rarity === "Super rare")).toHaveLength(1);
+test("251 distinct aquatic sprites include two saltwater super-rare catches", () => {
+  expect(fishSpecies).toHaveLength(251);
+  expect(new Set(fishSpecies.map((f) => f.art)).size).toBe(251);
+  expect(fishSpecies.filter((f) => f.rarity === "Super rare")).toHaveLength(2);
   for (const f of fishSpecies) expect(sheets[f.art].columns).toBe(4);
   expect(chooseFish(() => 0.0005).rarity).toBe("Super rare");
   expect(chooseFish(() => 0.001).rarity).not.toBe("Super rare");
   const seen = new Set();
   for (let i = 0; i < 10000; i++) seen.add(chooseFish(() => i / 10000).id);
-  expect(seen.size).toBe(250);
+  expect(seen.size).toBe(251);
 });
 
 test("freshwater creatures are pond-only and cannot leak into ocean rarity rolls", () => {
@@ -40,7 +40,8 @@ test("freshwater creatures are pond-only and cannot leak into ocean rarity rolls
       .filter((f) => f.category === "Sharks")
       .every((f) => f.habitat === "saltwater"),
   ).toBe(true);
-  expect(chooseFish(() => 0.0005, "saltwater").id).toBe("aurora");
+  expect(chooseFish(() => 0.00025, "saltwater").id).toBe("aurora");
+  expect(chooseFish(() => 0.00075, "saltwater").id).toBe("ponyo");
   expect(chooseFish(() => 0.0005, "freshwater").id).not.toBe("aurora");
   expect(chooseFish(() => 0.5, "unknown")).toBeNull();
 });

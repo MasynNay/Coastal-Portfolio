@@ -46,12 +46,15 @@ export function drawRunnerTrack(ctx, image, distance) {
   ctx.lineTo(center - (roadHalfWidth * (bottom - horizon)) / height, bottom);
   ctx.closePath();
   ctx.clip();
+  ctx.fillStyle = "#536668";
+  ctx.fillRect(0, horizon + 28, 600, bottom - horizon);
   // Whole-pixel horizontal strips sample the same continuous floor. Using the
   // simulation distance (rather than wall-clock time) also freezes it on pause.
   ctx.imageSmoothingEnabled = true;
-  for (let y = horizon + 16; y < bottom; y += 2) {
+  for (let y = horizon + 30; y < bottom; ) {
+    const strip = Math.min(y < 480 ? 5 : 3, bottom - y);
     const q = (y - horizon) / height,
-      nextQ = (y + 2 - horizon) / height,
+      nextQ = (y + strip - horizon) / height,
       worldZ = near / q - near,
       span = near / q - near / nextQ,
       pixelsPerStrip = (span / tileMeters) * 512,
@@ -71,8 +74,7 @@ export function drawRunnerTrack(ctx, image, distance) {
     // the vanishing point. The near slabs remain large and readable.
     ctx.globalAlpha = Math.min(1, Math.max(0, (q - 0.07) / 0.15));
     const first = Math.min(sourceSpan, tile.height - sourceY),
-      firstHeight = (2 * first) / sourceSpan;
-    if (q <= 0.07) continue;
+      firstHeight = (strip * first) / sourceSpan;
     if (first > 0)
       ctx.drawImage(
         tile,
@@ -95,8 +97,21 @@ export function drawRunnerTrack(ctx, image, distance) {
         center - halfWidth,
         y + firstHeight,
         halfWidth * 2,
-        2 - firstHeight,
+        strip - firstHeight,
       );
+    y += strip;
+  }
+  // Quiet lane dividers sit on the same perspective plane as the hazards.
+  ctx.globalAlpha = 0.24;
+  ctx.strokeStyle = "#c7ece0";
+  ctx.lineWidth = 1.5;
+  for (const lane of [0.5, 1.5]) {
+    const far = projectRunner(lane, 60);
+    const nearEdge = projectRunner(lane, -1.7);
+    ctx.beginPath();
+    ctx.moveTo(far.x, far.y);
+    ctx.lineTo(nearEdge.x, nearEdge.y);
+    ctx.stroke();
   }
   ctx.restore();
 }

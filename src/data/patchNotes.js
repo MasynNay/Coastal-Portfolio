@@ -2,6 +2,19 @@
 // the preceding production commit, rather than fictional in-game release notes.
 const patchNotes = [
   {
+    version: "1.1.0",
+    date: "November 8, 2026",
+    previousCommit: "c1d7133",
+    changes: [
+      "Coding now opens first in Portfolio. Added AFTERTONE and Keystoria, expanded the Anything Plays card with its 3.0 development status, and added skills from all three projects.",
+      "The Mac menu offers four wallpapers and four bezel colors, with choices saved on this device.",
+      "Added Ponyo as a super-rare ocean catch and a repeatable Totoro dance near the northwest trees.",
+      "Terrariums offer five selectable habitats for each species. Repacked misaligned aquatic frames and removed stray pixels from affected fish and insect artwork.",
+      "World interaction buttons stay compact, and each house has collision boundaries that follow its visible floor.",
+      "Element Runner now responds when a swipe crosses its threshold, uses a low slide pose with matching obstacle clearance, and draws the road with fewer canvas operations. Axolotl Drift has a taller play area and mirrored, seamless eel gates.",
+    ],
+  },
+  {
     version: "1.0.9",
     date: "November 3, 2026",
     previousCommit: "31eed2e",

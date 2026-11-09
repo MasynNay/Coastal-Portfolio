@@ -1,0 +1,96 @@
+/* The wallpaper and the picker use the same palettes. */
+.desktop-studio {
+  --dusk: linear-gradient(155deg, #605286, #292740 60%, #171627);
+  --forest: linear-gradient(155deg, #4d8072, #203e36 58%, #102722);
+  --sunrise: linear-gradient(155deg, #8e5c51, #58384b 58%, #2a2134);
+  --ocean: linear-gradient(155deg, #6ea9a6, #214a65);
+  --silver: linear-gradient(125deg, #f0f2f1, #b5c3ca);
+  --mint: linear-gradient(125deg, #c9f3e1, #579f90);
+  --violet: linear-gradient(125deg, #eee5ff, #9985bc);
+  --graphite: linear-gradient(125deg, #8c99a0, #485760);
+}
+[data-wallpaper="dusk"] {
+  --wallpaper-choice: var(--dusk);
+}
+[data-wallpaper="forest"] {
+  --wallpaper-choice: var(--forest);
+}
+[data-wallpaper="sunrise"] {
+  --wallpaper-choice: var(--sunrise);
+}
+[data-bezel="mint"] {
+  --bezel-choice: var(--mint);
+  --bezel-edge: #477b72;
+}
+[data-bezel="violet"] {
+  --bezel-choice: var(--violet);
+  --bezel-edge: #766294;
+}
+[data-bezel="graphite"] {
+  --bezel-choice: var(--graphite);
+  --bezel-edge: #39464d;
+}
+.desktop-studio[data-wallpaper]:not([data-wallpaper="ocean"])
+  .desktop-workspace {
+  background: var(--wallpaper-choice);
+}
+.desktop-studio[data-wallpaper]:not([data-wallpaper="ocean"])
+  .desktop-wallpaper::before,
+.desktop-studio[data-wallpaper]:not([data-wallpaper="ocean"])
+  .desktop-wallpaper::after {
+  background: var(--wallpaper-choice);
+  opacity: 0.66;
+}
+.desktop-studio[data-bezel]:not([data-bezel="silver"]) .imac-screen-shell {
+  background: linear-gradient(145deg, var(--bezel-edge), #101718 80%);
+  border-color: var(--bezel-edge);
+}
+.desktop-studio[data-bezel]:not([data-bezel="silver"]) .imac-stand::before,
+.desktop-studio[data-bezel]:not([data-bezel="silver"])
+  :is(.imac-chin, .imac-stand span) {
+  background: var(--bezel-choice);
+}
+.mac-appearance-scrim.mac-about-scrim {
+  backdrop-filter: none;
+  background: #101c2c45;
+}
+.mac-appearance-panel {
+  max-height: calc(100dvh - 36px);
+  overflow: auto;
+}
+.mac-appearance-content {
+  padding: 18px 22px;
+}
+.mac-appearance-content fieldset {
+  margin-bottom: 14px;
+}
+.mac-appearance-content legend {
+  font-size: 15px;
+}
+.mac-appearance-options {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+.mac-appearance-options label {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 44px;
+  font-size: 13px;
+  cursor: pointer;
+}
+.mac-appearance-swatch {
+  display: inline-block;
+  flex: 0 0 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 1px solid #ffffff60;
+}
+.mac-appearance-content > button {
+  padding: 8px 12px;
+  color: #ecf7f3;
+  background: #294751;
+  border: 1px solid #94bab9;
+  border-radius: 8px;
+}

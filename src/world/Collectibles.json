@@ -6311,6 +6311,15 @@
       "rarity": "Very rare",
       "art": "fish-feather-star",
       "habitat": "saltwater"
+    },
+    {
+      "id": "ponyo",
+      "name": "Ponyo",
+      "design": "red-gold fish with a spirited little smile and a trail of bubbles",
+      "rarity": "Super rare",
+      "art": "fish-ponyo",
+      "category": "Fish",
+      "habitat": "saltwater"
     }
   ]
 }

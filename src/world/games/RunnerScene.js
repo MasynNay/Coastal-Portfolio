@@ -1,3 +1,4 @@
+import { runnerJumpTime, runnerJumpHeight, runnerSlideAmount } from "./Runner";
 import { artwork, drawSprite } from "../art";
 import { drawRunnerTrack, drawRunnerCoin, projectRunner } from "./RunnerTrack";
 // Temple scenery, illustrated obstacles and costumes share the world's art cache.
@@ -7,6 +8,7 @@ export function drawRunner(ctx, cache, state, asset, time) {
     H = 700,
     bottom = 620;
   const backdrop = cache.get("runner-temple");
+  ctx.imageSmoothingEnabled = true;
   ctx.fillStyle = "#547778";
   ctx.fillRect(0, 0, W, H);
   if (backdrop) ctx.drawImage(backdrop, 0, 0, W, H);
@@ -35,8 +37,7 @@ export function drawRunner(ctx, cache, state, asset, time) {
       );
   }
   const objects = state.objects
-    .filter((o) => !o.checked)
-    .slice()
+    .filter((o) => !o.checked && o.at - state.distance <= 80)
     .sort((a, b) => b.at - a.at);
   for (const object of objects) {
     const ahead = object.at - state.distance;
@@ -61,19 +62,23 @@ export function drawRunner(ctx, cache, state, asset, time) {
         92 * s,
       );
       ctx.restore();
-    } else
-      // Larger silhouettes remain readable on the narrow phone canvas. This
-      // changes presentation only; lane spacing and jump/slide timing stay put.
+    } else {
+      ctx.fillStyle = "#171f2f79";
+      ctx.beginPath();
+      ctx.ellipse(p.x, p.y + 2, 48 * s, 8 * s, 0, 0, Math.PI * 2);
+      ctx.fill();
       sprite(
         "runner-" + object.kind,
         p.x,
         p.y,
         (object.kind === "arch" ? 200 : object.kind === "rail" ? 92 : 112) * s,
       );
+    }
   }
   const p = projectRunner(state.visualLane),
-    progress = state.jump ? 1 - state.jump / 0.9 : 0,
-    jump = Math.sin(progress * Math.PI) * 100;
+    progress = state.jump ? 1 - state.jump / runnerJumpTime : 0,
+    jump = runnerJumpHeight(state),
+    slide = runnerSlideAmount(state);
   ctx.fillStyle = "#17372c66";
   ctx.beginPath();
   ctx.ellipse(p.x, bottom + 3, 23 - jump * 0.08, 7, 0, 0, Math.PI * 2);
@@ -120,15 +125,34 @@ export function drawRunner(ctx, cache, state, asset, time) {
   }
   if (state.magnet > 0)
     sprite("runner-water-aura", p.x, bottom + 2, 148, 0, true, time);
+  if (slide > 0.05) {
+    // The dust stays behind the feet as the character drops under the arch.
+    ctx.save();
+    ctx.strokeStyle = "#e5ebd8aa";
+    ctx.lineWidth = 2;
+    for (let i = 0; i < 6; i++) {
+      const trail = ((state.distance * 28 + i * 13) % 46) * slide;
+      const x = p.x + (i - 2.5) * 12;
+      ctx.beginPath();
+      ctx.moveTo(x, bottom + trail);
+      ctx.lineTo(x + (i - 2.5) * 4, bottom + trail + 12 * slide);
+      ctx.stroke();
+    }
+    ctx.restore();
+  }
   ctx.save();
   ctx.translate(p.x, bottom - jump);
+  // Plant the feet and compress a stable tucked pose instead of cycling run
+  // frames during a slide. The same envelope is used for arch clearance.
+  ctx.scale(1 + slide * 0.1, 1 - slide * 0.48);
+  ctx.rotate((state.lane - state.visualLane) * 0.14);
   if (state.invulnerable > 0) ctx.globalAlpha = 0.7;
   const base = asset.replace(/-run$/, ""),
     pose = state.jump || state.duck ? base + "-board-trick" : asset;
   const poseClock = state.jump
     ? Math.min(7, Math.floor(progress * 8)) * 95
     : state.duck
-      ? 95
+      ? 190
       : time;
   const actorHeight =
     132 * ((artwork[pose]?.ch || 144) / (artwork[pose]?.bodyHeight || 96));

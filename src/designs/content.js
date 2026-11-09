@@ -2,12 +2,12 @@
 import { achievements } from "../data/resume";
 import { webProjects } from "../data/projects";
 export const projects = [
+  ...webProjects,
   ...achievements.map((item) => ({
     ...item,
     category: "IT",
     label: "IT / KEY ACHIEVEMENT",
   })),
-  ...webProjects,
   {
     title: "CompTIA A+",
     category: "IT",
@@ -32,6 +32,8 @@ const skillGroups = [
       "Tailwind CSS",
       "Responsive design",
       "State management",
+      "Browser audio",
+      "Browser storage",
     ],
   },
   {
@@ -39,12 +41,26 @@ const skillGroups = [
     items: [
       "Node.js",
       "Express.js",
+      "Python",
+      "WebSockets",
+      "Third-party API integration",
       "REST APIs",
       "JSON",
       "GraphQL",
       "Apollo",
       "MVC",
       "ORM",
+    ],
+  },
+  {
+    title: "Desktop apps & interactive systems",
+    items: [
+      "Tkinter",
+      "OpenCV color tracking",
+      "Libretro integration",
+      "Cross-platform application packaging",
+      "PyInstaller",
+      "Real-time multiplayer",
     ],
   },
   {
@@ -133,6 +149,8 @@ const skillGroups = [
     items: [
       "Git",
       "GitHub",
+      "GitHub Actions",
+      "GitHub Pages",
       "Agile methodologies",
       "Postman",
       "QA testing",

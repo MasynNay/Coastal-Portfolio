@@ -6,8 +6,8 @@ import {
   leavingRoom,
   roomBounds,
 } from "./WorldLayout";
-import { buildings, obstacles } from "./config";
-import { canStand } from "./navigation";
+import { buildings, obstacles, roomObstacles } from "./config";
+import { canStand, findPath } from "./navigation";
 test("every doorway can be walked into from the arrival point, without automatically re-entering after exit", () => {
   for (const b of buildings) {
     const arrival = doorArrival(b),
@@ -29,7 +29,17 @@ test("every doorway can be walked into from the arrival point, without automatic
 });
 test("expanded rooms have a safe entrance and a walk-out exit", () => {
   expect(roomBounds.halfWidth).toBeGreaterThan(10);
-  expect(canStand(10, 8, [], true)).toBe(true);
+  for (const { id } of buildings) {
+    expect(canStand(roomEntrance.x, roomEntrance.z, roomObstacles, id)).toBe(
+      true,
+    );
+    expect(canStand(10, 8, roomObstacles, id)).toBe(false);
+    expect(canStand(11.5, 0, roomObstacles, id)).toBe(false);
+    expect(canStand(0, -6.8, roomObstacles, id)).toBe(false);
+    expect(
+      findPath(roomEntrance, { x: 0, z: 10 }, roomObstacles, id).length,
+    ).toBeGreaterThan(0);
+  }
   expect(leavingRoom(roomEntrance, roomEntrance)).toBe(false);
   expect(
     leavingRoom(

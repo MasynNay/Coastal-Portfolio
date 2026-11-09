@@ -1,3 +1,4 @@
+import { groveDance, groveInteraction } from "./ForestGrove";
 import { createRoomInteractions, isLoveOffering } from "./RoomInteractions";
 import { startWindSong } from "./WindStatue";
 import { restSpots, createRestSpots } from "./RestSpots";
@@ -192,6 +193,7 @@ export function createWorld(host, callbacks) {
   const bugSpawns = createBugSpawns();
   let webEffects = [];
   let abilityEffect = null;
+  let groveStarted = null;
   function cancelAbility() {
     if (abilityEffect?.kind === "glide") {
       position = { x: abilityEffect.x, z: abilityEffect.z };
@@ -200,6 +202,7 @@ export function createWorld(host, callbacks) {
     abilityEffect = null;
   }
   const activityBusy = () =>
+    !!groveDance(groveStarted, worldTime) ||
     dogPlay.active() ||
     duckPlay.active() ||
     bikeRide.active() ||
@@ -213,6 +216,7 @@ export function createWorld(host, callbacks) {
   const manualCraft = () =>
     manualWatercraft() || skateRide.manual() || surfRide.manual();
   function cancelActivities() {
+    groveStarted = null;
     skySalute.cancel();
     salutePose = null;
     const restingOrigin = rest.stop();
@@ -334,6 +338,7 @@ export function createWorld(host, callbacks) {
       bikeParking: bikeRide.parking(),
       webEffects,
       abilityEffect,
+      grove: room ? null : groveDance(groveStarted, worldTime),
       treeShake: bugSpawns.treeShake(worldTime),
       worldTime,
       skyTime,
@@ -414,6 +419,7 @@ export function createWorld(host, callbacks) {
           : []),
       ];
     return [
+      ...(!surfing ? [groveInteraction] : []),
       ...restSpots.map((p) => ({ ...p, type: "rest" })),
       axolotlRaceMarker,
       { ...surfboard, type: "surfboard", label: "Catch a wave" },
@@ -567,7 +573,8 @@ export function createWorld(host, callbacks) {
                                 ? `Surf on your ${axolotlColors[character]} axolotl`
                                 : nearby()?.label || null,
       fishingPhase,
-      interactionBusy: beachActivities.busy(),
+      interactionBusy:
+        beachActivities.busy() || !!groveDance(groveStarted, worldTime),
       surfingBoard: surfRide.active(),
       surfTransitioning: surfRide.active() && !surfRide.manual(),
       race: axolotlRace.active()
@@ -722,6 +729,19 @@ export function createWorld(host, callbacks) {
     )
       return;
     const duckTarget = nearby();
+    if (duckTarget?.type === "grove") {
+      stop();
+      cancelAbility();
+      direction = 4;
+      groveStarted = worldTime;
+      callbacks.onEvent?.({
+        type: "notice",
+        message: "Reach for the sky with Totoro and friends!",
+      });
+      publish();
+      requestDraw();
+      return;
+    }
     if (duckTarget?.id === "wind-statue") {
       stop();
       cancelAbility();
@@ -980,7 +1000,7 @@ export function createWorld(host, callbacks) {
       if (abilityEffect?.target) direction = abilityEffect.direction;
       if (abilityEffect?.kind === "glide") {
         abilityEffect = planGlide(abilityEffect, (p) =>
-          canStand(p.x, p.z, room ? roomObstacles : obstacles, !!room),
+          canStand(p.x, p.z, room ? roomObstacles : obstacles, room),
         );
         if (!abilityEffect)
           callbacks.onEvent?.({
@@ -1224,7 +1244,7 @@ export function createWorld(host, callbacks) {
             (dx / length) * step,
             (dz / length) * step,
             room ? roomObstacles : obstacles,
-            !!room,
+            room,
             surfing,
           );
           const advanced =
@@ -1390,7 +1410,7 @@ export function createWorld(host, callbacks) {
         target.x,
         target.z,
         room ? roomObstacles : obstacles,
-        !!room,
+        room,
         surfing,
       )
     ) {
@@ -1400,7 +1420,7 @@ export function createWorld(host, callbacks) {
         position,
         target,
         room ? roomObstacles : obstacles,
-        !!room,
+        room,
         surfing,
       );
       requestDraw();

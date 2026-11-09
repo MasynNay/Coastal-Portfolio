@@ -27,7 +27,7 @@ test("passing an opening scores once and safely removes old eels", () => {
   game.flap();
   const state = pilot(game, 20);
   expect(state.phase).toBe("playing");
-  expect(state.score).toBe(9);
+  expect(state.score).toBe(10);
   expect(state.eels.length).toBeLessThanOrEqual(5);
   const oldScore = state.score;
   game.update(1 / 120);

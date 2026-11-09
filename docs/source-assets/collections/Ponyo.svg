@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="896" height="192" viewBox="0 0 896 192">
+<defs>
+  <linearGradient id="red" x2=".15" y2="1"><stop stop-color="#ffb367"/><stop offset=".48" stop-color="#e95a43"/><stop offset="1" stop-color="#ad363b"/></linearGradient>
+  <linearGradient id="cream" x2=".1" y2="1"><stop stop-color="#fff2c9"/><stop offset="1" stop-color="#eca97d"/></linearGradient>
+  <g id="ponyo" stroke="#713138" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round">
+    <path fill="#ffd0a7" d="M101 81C87 80 75 84 64 78c7 17 20 26 37 23z"/>
+    <path fill="url(#red)" d="M92 65c19-16 50-13 67 6 11 12 11 32-3 46-18 20-48 21-73 10-11-5-20-12-28-14-11 8-24 6-33 1 10-8 14-16 12-29-2-9-8-17-16-22 20-7 36 0 46 15 9-3 18-7 28-13z"/>
+    <path fill="url(#cream)" d="M107 84c9-12 33-14 46-4 15 13 14 30 3 40-15 14-38 15-55 7-17-9-19-27-8-37z"/>
+    <path fill="#ed6950" d="M95 72c-8-3-17-5-24-4l5-9-10-3 15-7-4-8c13 4 21 0 28-6 15-11 35-9 48 2l12 5-8 4 13 8-9 4 9 9-12 5-3 13-11-8-9 7-9-10-14 8-4-11-13 1z"/>
+    <path fill="#f7ab69" stroke="none" d="M86 53c18-3 30-15 47-11 9 2 16 5 24 10-28-6-44 10-71 1z"/>
+    <path fill="#ffd0a7" d="M96 107c-13 1-20 8-26 19 12 1 24-5 33-11"/>
+    <ellipse cx="121" cy="99" rx="5.5" ry="8" fill="#40283a" stroke="none"/>
+    <ellipse cx="148" cy="97" rx="5.5" ry="8" fill="#40283a" stroke="none"/>
+    <circle cx="122" cy="96" r="1.8" fill="#fff3d1" stroke="none"/>
+    <circle cx="149" cy="94" r="1.8" fill="#fff3d1" stroke="none"/>
+    <path d="M130 112q7 8 14-1" fill="none" stroke-width="2.5"/>
+    <path d="M109 108l4 1m40-2 4-1" stroke="#e58374" stroke-width="4"/>
+    <path d="M30 74q16 6 22 18M31 106q10-4 19-5" fill="none" stroke="#ffc189" stroke-width="2"/>
+  </g>
+  <g id="bubble" fill="none" stroke="#bceeea" stroke-width="2"><circle cx="179" cy="64" r="7"/><circle cx="192" cy="49" r="4"/><circle cx="184" cy="35" r="3"/></g>
+</defs>
+<use href="#ponyo" transform="translate(15 23) rotate(-3 95 92)"/><use href="#bubble" transform="translate(14 22)"/>
+<use href="#ponyo" transform="translate(239 16) rotate(2 95 92)"/><use href="#bubble" transform="translate(238 15)"/>
+<use href="#ponyo" transform="translate(463 12) rotate(4 95 92)"/><use href="#bubble" transform="translate(462 6)"/>
+<use href="#ponyo" transform="translate(687 18) rotate(1 95 92)"/><use href="#bubble" transform="translate(686 14)"/>
+</svg>

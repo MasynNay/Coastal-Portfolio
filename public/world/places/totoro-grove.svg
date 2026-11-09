@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="160" viewBox="0 0 960 160">
+  <defs>
+    <linearGradient id="fur" x2=".45" y2="1"><stop stop-color="#9aa7a3"/><stop offset="1" stop-color="#586b65"/></linearGradient>
+    <linearGradient id="belly" x2=".1" y2="1"><stop stop-color="#f2ecd1"/><stop offset="1" stop-color="#cec4a1"/></linearGradient>
+    <g id="totoro" stroke="#314443" stroke-width="2.4" stroke-linejoin="round">
+      <path fill="url(#fur)" d="M-21-76c-9-10-13-28-8-34 8-4 15 9 19 25m19-1c5-18 14-27 20-24 6 5 1 23-7 34"/>
+      <path fill="url(#fur)" d="M0-90c20 0 33 13 37 31 4 12 15 27 12 41C47-4 33 0 0 0c-33 0-47-4-49-18-3-14 8-29 12-41C-33-77-20-90 0-90z"/>
+      <ellipse cx="0" cy="-29" rx="32" ry="25" fill="url(#belly)" stroke="none"/>
+      <path d="m-20-40 5-4 5 4m5-2 5-5 5 5m5 2 5-4 5 4m-33 9 5-4 4 4m8 0 5-4 5 4" fill="none" stroke="#6e7b68"/>
+      <ellipse cx="-17" cy="-65" rx="7" ry="7" fill="#fff6dd"/><ellipse cx="17" cy="-65" rx="7" ry="7" fill="#fff6dd"/>
+      <circle cx="-16" cy="-65" r="2.8" fill="#293b3e" stroke="none"/><circle cx="16" cy="-65" r="2.8" fill="#293b3e" stroke="none"/>
+      <path d="M-5-62q5-3 10 0l-5 4z" fill="#314443"/>
+      <path d="M-8-54q8 7 16 0m-34-4-17-4m16 9-18 1m70-6 17-4m-16 9 18 1" fill="none" stroke-linecap="round"/>
+      <path d="M-23-2l2-4m6 4 2-4m27 4 2-4m7 4 2-4" stroke="#eee1bf" stroke-linecap="round"/>
+    </g>
+    <g id="blue" stroke="#315765" stroke-width="3" stroke-linejoin="round">
+      <path d="M-15-56q-11-21-4-27 8-2 15 17m8 0q9-21 16-16 6 6-5 28" fill="#6ba8b7"/>
+      <path d="M0-69q20 0 24 21l9 20C40-10 29 0 0 0s-40-10-33-28l9-20Q-20-69 0-69z" fill="#72aab7"/>
+      <ellipse cy="-19" rx="21" ry="16" fill="#e8e3cb" stroke="none"/>
+      <circle cx="-10" cy="-49" r="5.5" fill="#fff6df"/><circle cx="10" cy="-49" r="5.5" fill="#fff6df"/>
+      <circle cx="-9" cy="-49" r="2.5" fill="#293b3e"/><circle cx="9" cy="-49" r="2.5" fill="#293b3e"/>
+      <path d="m-9-27 4-4 5 4m3-2 4-4 4 4" fill="none" stroke="#658184"/>
+    </g>
+    <g id="white" stroke="#758b82" stroke-width="2.8">
+      <path fill="#e6e8d5" d="M-12-43q-10-17-5-23 6-3 14 16m6 0q8-19 14-16 5 6-5 23M0-52q16 0 21 19l4 10Q31 0 0 0t-25-23l4-10Q-16-52 0-52z"/>
+      <circle cx="-7" cy="-37" r="2.6" fill="#344b4d" stroke="none"/><circle cx="7" cy="-37" r="2.6" fill="#344b4d" stroke="none"/>
+    </g>
+    <g id="arms" fill="none" stroke="#61756c" stroke-width="14" stroke-linecap="round">
+      <path d="M-35-48q-13 9-15 18M35-48q13 9 15 18"/>
+    </g>
+    <g id="raised" fill="none" stroke="#788d80" stroke-width="13" stroke-linecap="round">
+      <path d="M-34-51q-17-1-20-26M34-51q17-1 20-26"/>
+    </g>
+    <g id="group">
+      <use href="#blue" transform="translate(53 142) scale(.91)"/>
+      <use href="#white" transform="translate(192 143) scale(.88)"/>
+      <use href="#totoro" transform="translate(123 147)"/>
+    </g>
+  </defs>
+  <use href="#group"/><use href="#arms" transform="translate(123 147)"/>
+  <g transform="translate(240 -4)"><use href="#group"/><use href="#raised" transform="translate(123 147)"/></g>
+  <g transform="translate(480 -9)"><use href="#group"/><use href="#raised" transform="translate(123 147) rotate(-6)"/></g>
+  <g transform="translate(720 -4)"><use href="#group"/><use href="#raised" transform="translate(123 147) rotate(6)"/></g>
+</svg>

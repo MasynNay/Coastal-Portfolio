@@ -62,9 +62,9 @@
 .arcade-game-large .axolotl-game-stage {
   align-self: center;
   justify-self: center;
-  width: 100%;
+  width: min(100%, calc((100dvh - 132px) * var(--flight-aspect)));
   max-height: 100%;
-  aspect-ratio: 3 / 2;
+  aspect-ratio: var(--flight-aspect);
 }
 .arcade-game-large .axolotl-game-stage canvas {
   height: 100%;

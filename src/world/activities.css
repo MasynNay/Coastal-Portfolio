@@ -931,3 +931,21 @@
   align-items: end;
   gap: 1.5rem;
 }
+
+.bug-home-choice {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 12px;
+  color: #e2ede3;
+}
+.bug-home-choice select {
+  max-width: 100%;
+  padding: 7px 10px;
+  border: 1px solid #b8d8c766;
+  border-radius: 8px;
+  background: #1e3838;
+  color: #e2ede3;
+}

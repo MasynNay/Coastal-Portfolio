@@ -52,11 +52,13 @@ def cuts(weights, count):
     return borders + [len(weights)]
 
 
-def extract(path, rows=8, columns=4):
+def extract(path, rows=8, columns=4, row_cuts=None):
     im = Image.open(path).convert("RGBA")
     # Alpha-only threshold avoids incorporating invisible key-color debris into bounding boxes.
     im.putalpha(im.getchannel("A").point(lambda a: 255 if a >= 160 else 0))
-    ycuts = cuts(projection(im.getchannel("A"), "y"), rows)
+    ycuts = row_cuts or cuts(projection(im.getchannel("A"), "y"), rows)
+    if len(ycuts) != rows + 1 or ycuts[0] != 0 or ycuts[-1] != im.height:
+        raise ValueError(f"Invalid row guides for {path}")
     cells = []
     boxes = []
     for row in range(rows):

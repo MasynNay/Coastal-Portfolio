@@ -1,6 +1,7 @@
 import { Book } from "react-bootstrap-icons";
 import { useState } from "react";
 import HabitatResidents from "./HabitatResidents";
+import { bugHomes, bugHomeFor, readBugHomes, saveBugHomes } from "./BugHomes";
 import HabitatView from "./HabitatView";
 import CollectionSprite from "./CollectionSprite";
 import CollectingHelp from "./CollectingHelp";
@@ -59,13 +60,14 @@ export function Terrariums({ caught, onRelease }) {
   const [inspecting, setInspecting] = useState(null),
     [paused, setPaused] = useState(false),
     [selected, setSelected] = useState(null);
+  const [homes, setHomes] = useState(readBugHomes);
   const spiders = terrariumSpecies.filter((s) => !!caught[s.id]);
   const resident = spiders.find((s) => s.id === selected) || spiders[0];
   return (
     <div className="spider-home">
       <p>
-        Each kind of bug has a home of its own. Swipe or scroll the creature
-        strip to choose one, then tap or click its habitat to look closer.
+        Each species has a home of its own. Swipe or scroll the creature strip
+        to choose one, then tap or click its habitat to look closer.
       </p>
       <CollectingHelp kind="bugs" expanded={!spiders.length} />
       {spiders.some((s) => s.legacy) && (
@@ -112,6 +114,23 @@ export function Terrariums({ caught, onRelease }) {
       <div className="habitat-grid">
         {(resident ? [resident] : []).map((s) => (
           <article key={s.id} data-rarity={s.rarity}>
+            <label className="bug-home-choice">
+              Habitat for {s.name}
+              <select
+                value={bugHomeFor(s, homes)}
+                onChange={(event) => {
+                  const next = { ...homes, [s.id]: event.target.value };
+                  setHomes(next);
+                  saveBugHomes(next);
+                }}
+              >
+                {Object.entries(bugHomes).map(([id, name]) => (
+                  <option key={id} value={id}>
+                    {name}
+                  </option>
+                ))}
+              </select>
+            </label>
             <HabitatView
               name={s.name}
               inspecting={inspecting === s.id}
@@ -122,7 +141,7 @@ export function Terrariums({ caught, onRelease }) {
               <span
                 className="habitat-scenery"
                 style={{
-                  backgroundImage: `url(/world/collections/${s.category && s.category !== "Spiders" ? "habitat-" + s.category.toLowerCase() : "terrarium"}.webp)`,
+                  backgroundImage: `url(/world/collections/${bugHomeFor(s, homes)}.webp)`,
                 }}
               />
               <HabitatResidents

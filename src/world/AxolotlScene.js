@@ -1,45 +1,12 @@
 import { flightSize, flightRules } from "./AxolotlFlight";
 import { drawSprite } from "./art";
 import { movementDirection } from "./animation";
-import eelArt from "./EelArt.json";
+import { drawEelGate } from "./EelGate";
 
 // Canvas artwork is separate from the React dialog, input handlers and physics.
 // The renderer reads the same immutable round snapshot on every device.
 export function createAxolotlScene(ctx, { images, getRider, sheet, ratio }) {
   const { width: w, height: h, floor } = flightSize;
-  function eel(x, tip, upper, time) {
-    const width = flightRules.eelWidth,
-      headH = 78;
-    const length = upper ? tip : floor - tip;
-    ctx.save();
-    ctx.translate(x + width / 2, tip);
-    if (upper) ctx.scale(1, -1);
-    if (images.body) {
-      ctx.drawImage(
-        images.body,
-        -width * 0.29,
-        headH - 5,
-        width * 0.58,
-        Math.max(0, length - headH + 5),
-      );
-    }
-    if (images.heads) {
-      const cell = eelArt.heads;
-      const column = Math.floor(time / 180) % cell.columns;
-      ctx.drawImage(
-        images.heads,
-        column * cell.cw,
-        0,
-        cell.cw,
-        cell.ch,
-        -width / 2,
-        0,
-        width,
-        headH,
-      );
-    }
-    ctx.restore();
-  }
   function paint(state, time) {
     ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
     const bg = ctx.createLinearGradient(0, 0, 0, h);
@@ -50,7 +17,18 @@ export function createAxolotlScene(ctx, { images, getRider, sheet, ratio }) {
     ctx.imageSmoothingEnabled = true;
     if (images.background) {
       ctx.globalAlpha = 0.32;
-      ctx.drawImage(images.background, 0, 0, w, h);
+      const cropWidth = (images.background.height * w) / h;
+      ctx.drawImage(
+        images.background,
+        (images.background.width - cropWidth) / 2,
+        0,
+        cropWidth,
+        images.background.height,
+        0,
+        0,
+        w,
+        h,
+      );
       ctx.globalAlpha = 1;
     }
     // Slow bubbles give depth without masking the obstacle openings.
@@ -64,8 +42,26 @@ export function createAxolotlScene(ctx, { images, getRider, sheet, ratio }) {
       ctx.stroke();
     }
     for (const obstacle of state.eels) {
-      eel(obstacle.x, obstacle.center - flightRules.gap / 2, true, time);
-      eel(obstacle.x, obstacle.center + flightRules.gap / 2, false, time);
+      const upperTip = obstacle.center - flightRules.gap / 2;
+      const lowerTip = obstacle.center + flightRules.gap / 2;
+      drawEelGate(
+        ctx,
+        obstacle.x,
+        upperTip,
+        flightRules.eelWidth,
+        upperTip,
+        true,
+        time,
+      );
+      drawEelGate(
+        ctx,
+        obstacle.x,
+        lowerTip,
+        flightRules.eelWidth,
+        floor - lowerTip,
+        false,
+        time,
+      );
     }
     // Reuse the town's actual rippled-sand tile. Mirrored neighbors meet at
     // matching edges; the scrolling distance follows play and stops on pause.

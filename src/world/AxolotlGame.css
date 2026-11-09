@@ -1,7 +1,7 @@
-/* The logical 720 × 480 world scales as a single surface on phones and iPads.
+/* The portrait course fills the available height on phones and tablets.
    Pointer actions never scroll the page or reach the paused town underneath. */
 .axolotl-game {
-  max-width: 850px;
+  max-width: 720px;
   margin: 0 auto;
   text-align: center;
 }
@@ -21,6 +21,8 @@
 }
 .axolotl-game-stage {
   position: relative;
+  width: min(100%, calc((100dvh - 160px) * var(--flight-aspect)));
+  margin: 0 auto;
   overflow: hidden;
   border-radius: 18px;
   border: 1px solid #9dc9ba80;
@@ -30,7 +32,7 @@
 .axolotl-game canvas {
   display: block;
   width: 100%;
-  aspect-ratio: 3 / 2;
+  aspect-ratio: var(--flight-aspect);
   touch-action: none;
 }
 .axolotl-game canvas:focus-visible {
@@ -113,7 +115,7 @@
     padding: 4px 10px;
   }
   .axolotl-game-stage {
-    max-width: calc((100svh - 135px) * 1.5);
+    max-width: calc((100svh - 135px) * var(--flight-aspect));
     margin: 0 auto;
   }
   .axolotl-game > button {
@@ -133,4 +135,14 @@
   .axolotl-game-message span {
     font-size: 11px;
   }
+}
+
+.world-arcade-dialog:has(.axolotl-game) {
+  max-height: 96dvh;
+}
+.world-arcade-dialog:has(.axolotl-game) > header {
+  padding-block: 12px;
+}
+.world-arcade-dialog:has(.axolotl-game) .world-dialog-body {
+  padding-block: 12px;
 }

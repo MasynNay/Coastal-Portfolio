@@ -94,7 +94,8 @@ export default function RunnerGame({ character = "masyn", outfit }) {
         });
         setMode("over");
       }
-      raf = requestAnimationFrame(tick);
+      if (mode === "playing" && !game.current.over)
+        raf = requestAnimationFrame(tick);
     }
     raf = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(raf);
@@ -187,13 +188,13 @@ export default function RunnerGame({ character = "masyn", outfit }) {
           onPointerCancel={() => {
             gesture.current = null;
           }}
-          onPointerUp={(e) => {
+          onPointerMove={(e) => {
             const start = gesture.current;
-            gesture.current = null;
             if (!start || start.id !== e.pointerId) return;
             const dx = e.clientX - start.x,
               dy = e.clientY - start.y;
-            if (Math.hypot(dx, dy) < 20) return;
+            if (Math.hypot(dx, dy) < 18) return;
+            gesture.current = null;
             action(
               Math.abs(dx) > Math.abs(dy)
                 ? dx > 0
@@ -203,6 +204,9 @@ export default function RunnerGame({ character = "masyn", outfit }) {
                   ? "duck"
                   : "jump",
             );
+          }}
+          onPointerUp={() => {
+            gesture.current = null;
           }}
         />
         {mode !== "playing" && (
@@ -257,7 +261,8 @@ export default function RunnerGame({ character = "masyn", outfit }) {
       <p role="status">
         {mode === "over"
           ? "Run complete. Try again whenever you're ready."
-          : "Airbend over obstacles. Find elemental powers along the path."}
+          : hud.message ||
+            "Airbend over obstacles. Find elemental powers along the path."}
       </p>
     </div>
   );

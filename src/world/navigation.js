@@ -1,19 +1,11 @@
 import { oceanBounds } from "./Coast";
 import { isOcean } from "./TownLayout";
-import { roomBounds } from "./WorldLayout";
+import { onRoomFloor } from "./WorldLayout";
 import { parkedCraftBlocks } from "./Harbor";
 // Pure movement rules used by keyboard movement and click-to-walk; no renderer or React state here.
 export function canStand(x, z, obstacles, inside = false, surfing = false) {
   if (!inside && parkedCraftBlocks(x, z)) return false;
-  if (
-    inside &&
-    !(
-      Math.abs(x) < roomBounds.halfWidth &&
-      z > roomBounds.back &&
-      z < roomBounds.front
-    )
-  )
-    return false;
+  if (inside && !onRoomFloor(inside, x, z)) return false;
   if (
     !inside &&
     (x < oceanBounds.left ||

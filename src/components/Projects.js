@@ -70,10 +70,10 @@ export const Projects = ({ glass = false }) => {
                       id="pills-tab"
                     >
                       <Nav.Item>
-                        <Nav.Link eventKey="first">IT</Nav.Link>
+                        <Nav.Link eventKey="first">Coding</Nav.Link>
                       </Nav.Item>
                       <Nav.Item>
-                        <Nav.Link eventKey="second">Coding</Nav.Link>
+                        <Nav.Link eventKey="second">IT</Nav.Link>
                       </Nav.Item>
                       <Nav.Item>
                         <Nav.Link eventKey="third">First Project</Nav.Link>
@@ -87,7 +87,7 @@ export const Projects = ({ glass = false }) => {
                     >
                       <Tab.Pane eventKey="first">
                         <Row>
-                          {itProjects.map((project) => (
+                          {codingProjects.map((project) => (
                             <ProjectCard
                               key={project.title}
                               {...project}
@@ -98,7 +98,7 @@ export const Projects = ({ glass = false }) => {
                       </Tab.Pane>
                       <Tab.Pane eventKey="second">
                         <Row>
-                          {codingProjects.map((project) => (
+                          {itProjects.map((project) => (
                             <ProjectCard
                               key={project.title}
                               {...project}

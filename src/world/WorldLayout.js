@@ -5,6 +5,24 @@ export const roomBounds = {
   back: -9.5,
   front: 10.5,
 };
+// Feet stay on the painted floor. Each house has a different back wall and
+// side furnishing depth; the central doorway is the only front-wall opening.
+const floorEdges = {
+  home: { halfWidth: 10.5, back: -5.25, front: 7.1 },
+  skills: { halfWidth: 9.8, back: -5.4, front: 7.35 },
+  portfolio: { halfWidth: 9.9, back: -5.55, front: 7.0 },
+  resume: { halfWidth: 9.9, back: -5.35, front: 7.1 },
+  contact: { halfWidth: 8.65, back: -5.5, front: 7.55 },
+  lodge: { halfWidth: 10.05, back: -5.05, front: 7.15 },
+};
+export function onRoomFloor(room, x, z) {
+  const floor = floorEdges[room] || floorEdges.home;
+  return (
+    Math.abs(x) < floor.halfWidth &&
+    z > floor.back &&
+    (z < floor.front || (Math.abs(x) < 1.45 && z < roomBounds.front))
+  );
+}
 export const roomEntrance = {
   x: 0,
   z: 7.8,

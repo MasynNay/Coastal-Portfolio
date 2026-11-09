@@ -14,12 +14,17 @@ const exceptionalChance = 0.001;
 export function chooseByRarity(eligible, random = Math.random) {
   if (!eligible.length) return null;
   const roll = random();
-  const special = eligible.find((species) => species.rarity === "Super rare");
-  if (roll < exceptionalChance && special) return special;
+  const specials = eligible.filter(
+    (species) => species.rarity === "Super rare",
+  );
+  if (roll < exceptionalChance && specials.length) {
+    return specials[Math.floor((roll / exceptionalChance) * specials.length)];
+  }
   const ordinary = eligible.filter(
     (species) => species.rarity !== "Super rare",
   );
-  if (!ordinary.length) return special || null;
+  if (!ordinary.length)
+    return specials[Math.floor(random() * specials.length)] || null;
   const total = ordinary.reduce(
     (sum, species) => sum + weights[species.rarity],
     0,

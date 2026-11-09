@@ -22,6 +22,7 @@ import { Contact } from "../components/Contact";
 import ResumePage from "../pages/ResumePage";
 import { skills } from "./content";
 import { profile } from "../data/resume";
+import MacAppearance, { readAppearance, saveAppearance } from "./MacAppearance";
 import { MacMenu, AboutMac } from "./MacMenu";
 import { GamesApp, GamePlayer, PhotosApp } from "./MacApps";
 import TypingTest from "../typing/TypingTest";
@@ -44,6 +45,8 @@ export function DesktopPortfolio() {
   const [windows, setWindows] = useState([]);
   const [active, setActive] = useState("");
   const [aboutMac, setAboutMac] = useState(false);
+  const [appearanceOpen, setAppearanceOpen] = useState(false);
+  const [appearance, setAppearance] = useState(readAppearance);
   const systemButton = useRef(null);
   const [now, setNow] = useState(new Date());
   const dockButtons = useRef({});
@@ -103,7 +106,11 @@ export function DesktopPortfolio() {
   }
 
   return (
-    <div className="desktop-studio">
+    <div
+      className="desktop-studio"
+      data-wallpaper={appearance.wallpaper}
+      data-bezel={appearance.bezel}
+    >
       {/* The physical frame surrounds the existing interactive desktop; app coordinates stay inside its screen. */}
       <div className="imac-computer">
         <div className="imac-screen-shell">
@@ -113,6 +120,7 @@ export function DesktopPortfolio() {
               <MacMenu
                 buttonRef={systemButton}
                 onAbout={() => setAboutMac(true)}
+                onAppearance={() => setAppearanceOpen(true)}
               />
               <strong>Masyn’s Mac</strong>
               <span className="desktop-menu-caption">
@@ -300,6 +308,17 @@ export function DesktopPortfolio() {
                 </span>
               </Link>
             </nav>
+            {appearanceOpen && (
+              <MacAppearance
+                value={appearance}
+                returnFocusRef={systemButton}
+                onClose={() => setAppearanceOpen(false)}
+                onChange={(next) => {
+                  setAppearance(next);
+                  saveAppearance(next);
+                }}
+              />
+            )}
             {aboutMac && (
               <AboutMac
                 returnFocusRef={systemButton}

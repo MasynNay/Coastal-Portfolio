@@ -12,7 +12,7 @@ export const fishHabitats = {
   saltwater: "Ocean & coast · saltwater",
 };
 const fishIds = new Set(fishSpecies.map((f) => f.id));
-// One exceptional species has its own 1/1000 successful-catch roll. Everything
+// The super-rare tier has a 1/1000 successful-catch roll. Everything
 // else is selected by rarity, independent of whether the current cast succeeds.
 export function chooseFish(random = Math.random, habitat = null) {
   // A cast can award only residents of the water it lands in. Filter before

@@ -417,7 +417,7 @@
     "width": 224,
     "height": 192,
     "frameMs": 220,
-    "revision": "bfd594a377f3"
+    "revision": "03c49edf9d95"
   },
   "spider-maple": {
     "src": "/world/collections/spider-maple.webp",
@@ -578,7 +578,7 @@
     "width": 224,
     "height": 192,
     "frameMs": 170,
-    "revision": "d9cb28486824"
+    "revision": "d56daf1df68c"
   },
   "spider-hydrangea": {
     "src": "/world/collections/spider-hydrangea.webp",
@@ -2083,7 +2083,7 @@
     "width": 224,
     "height": 192,
     "frameMs": 170,
-    "revision": "f35b9aa2f8ae"
+    "revision": "000d3f4732b6"
   },
   "dragonfly-emerald": {
     "src": "/world/collections/dragonfly-emerald.webp",
@@ -2202,7 +2202,7 @@
     "width": 224,
     "height": 192,
     "frameMs": 170,
-    "revision": "21be4712b4de"
+    "revision": "78b904427b04"
   },
   "dragonfly-tiger": {
     "src": "/world/collections/dragonfly-tiger.webp",
@@ -4351,35 +4351,35 @@
     "width": 224,
     "height": 192,
     "frameMs": 220,
-    "revision": "438b8c7e69cb"
+    "revision": "4a3088dcac81"
   },
   "fish-peacock-wrasse": {
     "src": "/world/collections/fish-peacock-wrasse.webp",
     "width": 224,
     "height": 192,
     "frameMs": 220,
-    "revision": "39663c6af8fa"
+    "revision": "3b0b1d55baca"
   },
   "fish-cleaner-wrasse": {
     "src": "/world/collections/fish-cleaner-wrasse.webp",
     "width": 224,
     "height": 192,
     "frameMs": 220,
-    "revision": "13129fc517a7"
+    "revision": "39663c6af8fa"
   },
   "fish-bicolor-parrotfish": {
     "src": "/world/collections/fish-bicolor-parrotfish.webp",
     "width": 224,
     "height": 192,
     "frameMs": 220,
-    "revision": "5d4c956486a2"
+    "revision": "13129fc517a7"
   },
   "fish-leaf-scorpionfish": {
     "src": "/world/collections/fish-leaf-scorpionfish.webp",
     "width": 224,
     "height": 192,
     "frameMs": 220,
-    "revision": "5bed6ac28b6d"
+    "revision": "00fa22e25725"
   },
   "fish-flying-gurnard": {
     "src": "/world/collections/fish-flying-gurnard.webp",
@@ -4393,7 +4393,7 @@
     "width": 224,
     "height": 192,
     "frameMs": 220,
-    "revision": "0a9b4746bab6"
+    "revision": "201bc166b22a"
   },
   "fish-peppermint-angelfish": {
     "src": "/world/collections/fish-peppermint-angelfish.webp",
@@ -5248,5 +5248,11 @@
     "height": 192,
     "frameMs": 220,
     "revision": "a120c6244b4a"
+  },
+  "fish-ponyo": {
+    "src": "/world/collections/fish-ponyo.webp",
+    "width": 224,
+    "height": 192,
+    "frameMs": 170
   }
 }

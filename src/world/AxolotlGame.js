@@ -5,7 +5,6 @@ import { activityAsset } from "./Wardrobe";
 import { imageSource } from "./ImageSource";
 import { createAxolotlScene } from "./AxolotlScene";
 import terrainArt from "./TerrainArt.json";
-import eelArt from "./EelArt.json";
 import "./AxolotlGame.css";
 
 function readBest() {
@@ -47,7 +46,7 @@ export default function AxolotlGame({ character = "masyn", outfit = null }) {
     let previousStatus = "",
       bestScore = readBest();
     const images = {};
-    // Only this rider and three small game images load, not the whole field guide.
+    // Load the rider and two scenery textures. The eel gates are drawn directly.
     const load = (key, src) => {
       return new Promise((resolve, reject) => {
         const im = new Image();
@@ -59,11 +58,8 @@ export default function AxolotlGame({ character = "masyn", outfit = null }) {
         im.src = src;
       });
     };
-    Promise.all([
-      cache.load(asset),
-      load("heads", imageSource(eelArt.heads)),
-      load("body", imageSource(eelArt.body)),
-    ])
+    cache
+      .load(asset)
       .then(() => {
         if (!disposed) {
           loaded = true;
@@ -162,7 +158,10 @@ export default function AxolotlGame({ character = "masyn", outfit = null }) {
     };
   }, [asset]);
   return (
-    <div className="axolotl-game">
+    <div
+      className="axolotl-game"
+      style={{ "--flight-aspect": flightSize.width / flightSize.height }}
+    >
       <div className="axolotl-game-score" aria-live="polite">
         <span>
           Score <strong>{status.score}</strong>

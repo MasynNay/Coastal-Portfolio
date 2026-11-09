@@ -37,5 +37,5 @@ for species in catalog["spiders"] + catalog["fish"]:
 print(
     "Verified",
     frames,
-    "complete map/inspection frames for 500 bugs and 250 aquatic species.",
+    f"complete map/inspection frames for {len(catalog['spiders'])} bugs and {len(catalog['fish'])} aquatic species.",
 )

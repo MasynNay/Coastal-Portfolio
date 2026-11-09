@@ -18,7 +18,7 @@ test("Anything Plays is a truthful, fully linked desktop project", () => {
     "https://github.com/MasynNay/anything-plays/blob/main/ROADMAP.md",
   );
   expect(entry.demo).toBeUndefined();
-  expect(entry.description).toMatch(/version 3\.0.*QA continues/i);
+  expect(entry.description).toMatch(/version 3\.0 is in active development/i);
   expect(webProjects.filter((project) => project.id === entry.id)).toHaveLength(
     1,
   );

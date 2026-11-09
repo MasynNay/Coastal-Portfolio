@@ -36364,11 +36364,26 @@
     "layout": "eight",
     "action": "walk",
     "frameMs": 220,
-    "revision": "666160d77fb4"
+    "revision": "3a45c7b15158"
   },
   "fish-peacock-wrasse": {
     "id": "fish-peacock-wrasse",
     "src": "/world/sprites/emerald/fish-peacock-wrasse.png",
+    "cw": 64,
+    "ch": 48,
+    "columns": 4,
+    "rows": 1,
+    "bodyHeight": 21,
+    "footY": 44,
+    "pixelArt": true,
+    "layout": "eight",
+    "action": "walk",
+    "frameMs": 220,
+    "revision": "8290bd868f92"
+  },
+  "fish-cleaner-wrasse": {
+    "id": "fish-cleaner-wrasse",
+    "src": "/world/sprites/emerald/fish-cleaner-wrasse.png",
     "cw": 64,
     "ch": 48,
     "columns": 4,
@@ -36381,9 +36396,9 @@
     "frameMs": 220,
     "revision": "b6a8c47eabf5"
   },
-  "fish-cleaner-wrasse": {
-    "id": "fish-cleaner-wrasse",
-    "src": "/world/sprites/emerald/fish-cleaner-wrasse.png",
+  "fish-bicolor-parrotfish": {
+    "id": "fish-bicolor-parrotfish",
+    "src": "/world/sprites/emerald/fish-bicolor-parrotfish.png",
     "cw": 64,
     "ch": 48,
     "columns": 4,
@@ -36396,21 +36411,6 @@
     "frameMs": 220,
     "revision": "48a6df69e019"
   },
-  "fish-bicolor-parrotfish": {
-    "id": "fish-bicolor-parrotfish",
-    "src": "/world/sprites/emerald/fish-bicolor-parrotfish.png",
-    "cw": 64,
-    "ch": 48,
-    "columns": 4,
-    "rows": 1,
-    "bodyHeight": 18,
-    "footY": 44,
-    "pixelArt": true,
-    "layout": "eight",
-    "action": "walk",
-    "frameMs": 220,
-    "revision": "adfd8bc1c7af"
-  },
   "fish-leaf-scorpionfish": {
     "id": "fish-leaf-scorpionfish",
     "src": "/world/sprites/emerald/fish-leaf-scorpionfish.png",
@@ -36418,13 +36418,13 @@
     "ch": 48,
     "columns": 4,
     "rows": 1,
-    "bodyHeight": 24,
+    "bodyHeight": 25,
     "footY": 44,
     "pixelArt": true,
     "layout": "eight",
     "action": "walk",
     "frameMs": 220,
-    "revision": "1bf95984b9aa"
+    "revision": "8a49e2eee59d"
   },
   "fish-flying-gurnard": {
     "id": "fish-flying-gurnard",
@@ -36454,7 +36454,7 @@
     "layout": "eight",
     "action": "walk",
     "frameMs": 220,
-    "revision": "6a312b6bc02a"
+    "revision": "769ec719480a"
   },
   "fish-peppermint-angelfish": {
     "id": "fish-peppermint-angelfish",
@@ -40889,5 +40889,13 @@
     "saluteHand": "left",
     "revision": "8512120c5ddf",
     "labelTop": 40
+  },
+  "fish-ponyo": {
+    "src": "/world/collections/fish-ponyo-map.png",
+    "cw": 64,
+    "ch": 56,
+    "columns": 4,
+    "rows": 1,
+    "frameMs": 170
   }
 }

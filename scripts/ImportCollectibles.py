@@ -65,7 +65,7 @@ if __name__ == "__main__":
         source = SOURCE / (job["key"] + ".png")
         if path.resolve() != source.resolve():
             shutil.copyfile(path, source)
-        cells, boxes = sprites.extract(source, 10)
+        cells, boxes = sprites.extract(source, 10, row_cuts=job.get("rowCuts"))
         for row, id in enumerate(job["rows"]):
             spec = next(s for s in catalog[job["kind"]] if s["id"] == id)
             pack(spec, cells[row * 4 : row * 4 + 4], job["kind"])

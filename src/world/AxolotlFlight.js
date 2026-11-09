@@ -1,6 +1,6 @@
 // Fixed logical coordinates let phones, tablets and desktop share the same
 // difficulty. The canvas scales this simulation; screen pixels never affect it.
-export const flightSize = { width: 720, height: 480, floor: 450 };
+export const flightSize = { width: 430, height: 480, floor: 450 };
 // The outdoor fountain keeps the same accessible E/touch arcade label.
 export const axolotlArcade = { label: "Play Axolotl Drift" };
 export const flightRules = {
@@ -45,7 +45,7 @@ export function createAxolotlFlight(random = Math.random) {
     // Exact constant-acceleration integration avoids changing jump height with FPS.
     state.y += state.velocity * dt + (gravity * dt * dt) / 2;
     state.velocity += gravity * dt;
-    if (!state.eels.length) state.eels.push(spawn(780));
+    if (!state.eels.length) state.eels.push(spawn(flightSize.width + 45));
     for (const eel of state.eels) eel.x -= speed * dt;
     const last = state.eels[state.eels.length - 1];
     if (last.x <= flightSize.width + 30)
