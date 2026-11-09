@@ -1,6 +1,7 @@
 // Element Runner connects keyboard/touch actions to Runner.js and paints via
 // RunnerScene.js. It owns loading, pause, animation-loop cleanup and local bests.
 import { useCallback, useEffect, useRef, useState } from "react";
+import { createFrameLoop } from "../frameLoop";
 import { characterAsset } from "../Wardrobe";
 import { createRunnerArt } from "./RunnerArt";
 import { newRunner, runnerAction, runnerActions, stepRunner } from "./Runner";
@@ -54,21 +55,11 @@ export default function RunnerGame({ character = "masyn", outfit }) {
     };
   }, [asset]);
   useEffect(() => {
-    let raf,
-      last = 0,
-      published = 0;
+    let published = -Infinity;
     const ctx = canvas.current.getContext("2d");
-    function tick(now) {
-      const dt = last ? Math.min((now - last) / 1000, 0.05) : 0;
-      last = now;
+    const loop = createFrameLoop((now, dt) => {
       if (mode === "playing") stepRunner(game.current, dt);
-      drawRunner(
-        ctx,
-        art.current,
-        game.current,
-        asset,
-        mode === "playing" ? now : 0,
-      );
+      drawRunner(ctx, art.current, game.current, asset);
       if (now - published > 100 || game.current.over) {
         setHud({
           distance: Math.floor(game.current.distance),
@@ -94,16 +85,17 @@ export default function RunnerGame({ character = "masyn", outfit }) {
         });
         setMode("over");
       }
-      if (mode === "playing" && !game.current.over)
-        raf = requestAnimationFrame(tick);
-    }
-    raf = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(raf);
+      return mode === "playing" && !game.current.over;
+    });
+    loop.wake();
+    return () => loop.dispose();
   }, [asset, mode, loaded]);
   useEffect(() => {
     function key(e) {
       const name = runnerActions[e.key] || runnerActions[e.key.toLowerCase()];
-      if (!name || mode !== "playing") return;
+      if (!name || mode !== "playing" || e.altKey || e.ctrlKey || e.metaKey)
+        return;
+      if (e.key === " " && e.target.closest?.("button, summary")) return;
       e.preventDefault();
       if (!e.repeat) action(name);
     }

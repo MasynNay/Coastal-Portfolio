@@ -29,19 +29,36 @@ test("Element Runner changes lanes without leaving the track, and jumping/slidin
 test("runner sparks score once, obstacle storage is bounded and each row has a safe lane", () => {
   const game = newRunner();
   game.objects = [{ at: 0.1, lane: 1, kind: "coin" }];
-  stepRunner(game, 0.02);
-  stepRunner(game, 0.02);
+  stepRunner(game, 0.02, () => 0.5);
+  stepRunner(game, 0.02, () => 0.5);
   expect(game.coins).toBe(1);
   for (let i = 0; i < 10000; i++) {
     game.over = false;
     stepRunner(game, 0.016, () => 0.5);
     expect(game.objects.length).toBeLessThan(40);
   }
+  const hazards = game.objects.filter((o) =>
+    ["crate", "rail", "arch"].includes(o.kind),
+  );
   expect(
-    game.objects
-      .filter((o) => ["crate", "rail", "arch"].includes(o.kind))
-      .every((o) => o.lane === 1),
+    hazards.some((first) =>
+      hazards.some(
+        (second) => first.at === second.at && first.lane !== second.lane,
+      ),
+    ),
   ).toBe(true);
+  // With steady random input the center coin route must always stay open.
+  expect(hazards.every((hazard) => hazard.lane !== 1)).toBe(true);
+});
+
+test("a slide pressed just before landing starts when the runner touches down", () => {
+  const game = newRunner();
+  game.jump = 0.09;
+  runnerAction(game, "duck");
+  expect(game.duck).toBe(0);
+  stepRunner(game, 0.12);
+  expect(game.duck).toBeGreaterThan(0.8);
+  expect(game.buffered).toBeNull();
 });
 
 test("2048 merges each tile once, scores accurately, and respects all directions", () => {

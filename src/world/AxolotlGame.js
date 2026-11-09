@@ -4,6 +4,8 @@ import { createArtCache, artwork } from "./art";
 import { activityAsset } from "./Wardrobe";
 import { imageSource } from "./ImageSource";
 import { createAxolotlScene } from "./AxolotlScene";
+import { prepareEelFrames } from "./EelGate";
+import eelArt from "./EelArt.json";
 import terrainArt from "./TerrainArt.json";
 import "./AxolotlGame.css";
 
@@ -46,7 +48,7 @@ export default function AxolotlGame({ character = "masyn", outfit = null }) {
     let previousStatus = "",
       bestScore = readBest();
     const images = {};
-    // Load the rider and two scenery textures. The eel gates are drawn directly.
+    // The rider and both parts of the moray must be ready before play.
     const load = (key, src) => {
       return new Promise((resolve, reject) => {
         const im = new Image();
@@ -58,10 +60,16 @@ export default function AxolotlGame({ character = "masyn", outfit = null }) {
         im.src = src;
       });
     };
-    cache
-      .load(asset)
+    Promise.all([
+      cache.load(asset),
+      load("heads", imageSource(eelArt.heads)),
+      load("body", imageSource(eelArt.body)),
+    ])
       .then(() => {
         if (!disposed) {
+          images.eels = prepareEelFrames(images.heads, images.body);
+          delete images.heads;
+          delete images.body;
           loaded = true;
           setReady(true);
         }

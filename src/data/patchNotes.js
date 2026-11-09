@@ -2,6 +2,17 @@
 // the preceding production commit, rather than fictional in-game release notes.
 const patchNotes = [
   {
+    version: "1.1.1",
+    date: "November 9, 2026",
+    previousCommit: "aa63a2c",
+    changes: [
+      "Element Runner now follows a winding Air Temple bridge. The camera follows lane changes, and coin trails mark an open lane through mixed obstacle rows.",
+      "Waterbending coins arc visibly above the runner and award points when they reach the rider. Fire clears obstacles in a burst of embers and leaves the coins in place. All four powers have distinct animated effects.",
+      "Element Runner keeps its animation state when paused and accepts a slide pressed just before landing.",
+      "Axolotl Drift uses the original painted morays again, with a blended neck, full-size scale patterns, and matching animated openings above and below.",
+    ],
+  },
+  {
     version: "1.1.0",
     date: "November 9, 2026",
     previousCommit: "c1d7133",

@@ -46,6 +46,7 @@ export function createAxolotlScene(ctx, { images, getRider, sheet, ratio }) {
       const lowerTip = obstacle.center + flightRules.gap / 2;
       drawEelGate(
         ctx,
+        images.eels,
         obstacle.x,
         upperTip,
         flightRules.eelWidth,
@@ -55,6 +56,7 @@ export function createAxolotlScene(ctx, { images, getRider, sheet, ratio }) {
       );
       drawEelGate(
         ctx,
+        images.eels,
         obstacle.x,
         lowerTip,
         flightRules.eelWidth,
@@ -81,10 +83,10 @@ export function createAxolotlScene(ctx, { images, getRider, sheet, ratio }) {
         if ((first + i) % 2) ctx.scale(-1, 1);
         ctx.drawImage(
           images.sand,
-          cellW * 2,
-          cellH,
-          cellW,
-          cellH,
+          cellW * 2 + 1,
+          cellH + 1,
+          cellW - 2,
+          cellH - 2,
           -tileSize / 2,
           0,
           tileSize,

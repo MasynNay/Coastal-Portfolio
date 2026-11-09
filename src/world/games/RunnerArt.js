@@ -1,8 +1,6 @@
 import { createArtCache } from "../art";
 const scenery = [
   "runner-temple",
-  "runner-floor",
-  "runner-water-aura",
   "runner-air",
   "runner-water",
   "runner-fire",

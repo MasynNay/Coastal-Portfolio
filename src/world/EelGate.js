@@ -1,68 +1,79 @@
-// Both eels use a single continuous silhouette. Reflecting it around the gap
-// gives the ceiling and floor the same mouth, width and collision clearance.
-export function drawEelGate(ctx, x, tip, width, length, upper, time) {
+import eelArt from "./EelArt.json";
+
+const eelWidth = 88;
+const eelLength = 410;
+const headLength = 123;
+const neckStart = 102;
+const jawFrames = [0, 1, 2, 1];
+
+// Assemble the original painted parts once. The neck fades into the aligned
+// body over a few pixels, so the join has neither a line nor stretched scales.
+export function prepareEelFrames(heads, body) {
+  const { cw, columns } = eelArt.heads;
+  const bodyHeight = eelArt.body.height;
+  const head = document.createElement("canvas");
+  head.width = eelWidth;
+  head.height = headLength;
+  const mask = head.getContext("2d");
+
+  return Array.from({ length: columns }, (_, column) => {
+    const eel = document.createElement("canvas");
+    eel.width = eelWidth;
+    eel.height = eelLength;
+    const ctx = eel.getContext("2d");
+    const neckX = column === 2 ? 22 : 20;
+    for (let y = neckStart, tile = 0; y < eelLength; y += bodyHeight, tile++) {
+      ctx.save();
+      ctx.translate(neckX, y + (tile % 2 ? bodyHeight : 0));
+      if (tile % 2) ctx.scale(1, -1);
+      ctx.drawImage(body, 11, 0, 53, bodyHeight, 0, 0, 52, bodyHeight);
+      ctx.restore();
+    }
+
+    mask.clearRect(0, 0, eelWidth, headLength);
+    mask.drawImage(
+      heads,
+      column * cw,
+      4,
+      cw,
+      headLength,
+      -20,
+      0,
+      cw,
+      headLength,
+    );
+    mask.save();
+    mask.globalCompositeOperation = "destination-in";
+    const blend = mask.createLinearGradient(0, 112, 0, headLength);
+    blend.addColorStop(0, "#fff");
+    blend.addColorStop(1, "#fff0");
+    mask.fillStyle = blend;
+    mask.fillRect(0, 0, eelWidth, headLength);
+    mask.restore();
+    ctx.drawImage(head, 0, 0);
+    return eel;
+  });
+}
+
+// Both obstacles use the exact same crop and jaw animation. Flipping only
+// the vertical axis keeps the upper and lower mouths on their collision edges.
+export function drawEelGate(ctx, frames, x, tip, width, length, upper, time) {
+  if (!frames || length <= 0) return;
+  const image = frames[jawFrames[Math.floor(time / 165) % jawFrames.length]];
+  const sourceHeight = (length * eelWidth) / width;
   ctx.save();
   ctx.translate(x + width / 2, tip);
-  ctx.scale(width / 76, upper ? -1 : 1);
-
-  const jaw = 5 + Math.sin(time / 180) * 3;
-  const tail = Math.max(length + 18, 67);
-  const skin = ctx.createLinearGradient(-32, 0, 32, 0);
-  skin.addColorStop(0, "#163342");
-  skin.addColorStop(0.35, "#356d66");
-  skin.addColorStop(0.66, "#82a475");
-  skin.addColorStop(1, "#1c524f");
-
-  ctx.beginPath();
-  ctx.moveTo(-29, tail);
-  ctx.bezierCurveTo(-20, 78, -35, 49, -29, 31);
-  ctx.bezierCurveTo(-32, 18, -22, 5, 2, 4);
-  ctx.quadraticCurveTo(15, 2, 28, 3);
-  ctx.quadraticCurveTo(36, 6, 30, 11);
-  ctx.lineTo(3, 15);
-  ctx.quadraticCurveTo(1, 22, 11, 21 + jaw);
-  ctx.lineTo(28, 18 + jaw);
-  ctx.quadraticCurveTo(34, 23 + jaw, 26, 27 + jaw);
-  ctx.quadraticCurveTo(12, 40, 24, 57);
-  ctx.bezierCurveTo(31, 76, 22, 98, 29, tail);
-  ctx.closePath();
-  ctx.fillStyle = skin;
-  ctx.fill();
-  ctx.strokeStyle = "#122f3e";
-  ctx.lineWidth = 3;
-  ctx.stroke();
-
-  // Paint the pattern inside the silhouette so no scales clip into the water.
-  ctx.save();
-  ctx.clip();
-  ctx.strokeStyle = "#cbe0a34f";
-  ctx.lineWidth = 2;
-  for (let y = 43; y < tail; y += 13) {
-    ctx.beginPath();
-    ctx.moveTo(-24, y);
-    ctx.quadraticCurveTo(-8, y - 10, 2, y - 2);
-    ctx.moveTo(3, y + 5);
-    ctx.quadraticCurveTo(14, y - 4, 27, y + 1);
-    ctx.stroke();
-  }
-  ctx.restore();
-
-  ctx.fillStyle = "#f2c978";
-  ctx.beginPath();
-  ctx.ellipse(-13, 14, 6, 5, -0.25, 0, Math.PI * 2);
-  ctx.fill();
-  ctx.fillStyle = "#19303a";
-  ctx.beginPath();
-  ctx.ellipse(-12, 14, 2, 4, 0, 0, Math.PI * 2);
-  ctx.fill();
-
-  ctx.fillStyle = "#e7dfb8";
-  for (const tooth of [13, 20, 27]) {
-    ctx.beginPath();
-    ctx.moveTo(tooth - 2, 13);
-    ctx.lineTo(tooth, 18);
-    ctx.lineTo(tooth + 2, 12);
-    ctx.fill();
-  }
+  if (upper) ctx.scale(1, -1);
+  ctx.drawImage(
+    image,
+    0,
+    0,
+    eelWidth,
+    sourceHeight,
+    -width / 2,
+    0,
+    width,
+    length,
+  );
   ctx.restore();
 }

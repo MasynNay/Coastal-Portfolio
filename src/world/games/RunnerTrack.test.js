@@ -1,4 +1,16 @@
-import { projectRunner, runnerCamera } from "./RunnerTrack";
+import { projectRunner, runnerCamera, runnerView } from "./RunnerTrack";
+
+test("the winding bridge and follow camera preserve lane alignment", () => {
+  const turnRight = runnerView(0, 1);
+  const turnLeft = runnerView(110, 1);
+  expect(turnRight(1, 28).x).toBeGreaterThan(runnerCamera.center);
+  expect(turnLeft(1, 28).x).toBeLessThan(runnerCamera.center);
+  expect(turnRight(1, 0).y).toBe(runnerCamera.feet);
+  const following = runnerView(0, 2);
+  expect(following(2, 28).x - following(1, 28).x).toBeCloseTo(
+    turnRight(2, 28).x - turnRight(1, 28).x,
+  );
+});
 test("fixed floor landmarks advance toward the feet as the camera travels", () => {
   let previous = -Infinity;
   for (let distance = 0; distance <= 60; distance += 0.25) {

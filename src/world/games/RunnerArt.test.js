@@ -15,7 +15,7 @@ test("every actor, obstacle and power-up survives loader eviction", async () => 
   };
   const art = createRunnerArt("masyn-run", cache);
   await art.load();
-  expect(images.size).toBe(12);
+  expect(images.size).toBe(10);
   for (const [id, image] of images) expect(art.get(id)).toBe(image);
   expect(loaded.size).toBe(0);
   art.clear();

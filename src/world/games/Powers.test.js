@@ -7,7 +7,7 @@ import {
   RAINBOW,
   ballColor,
 } from "./Gems";
-import { newRunner, stepRunner } from "./Runner";
+import { coinDrawTime, fireClearTime, newRunner, stepRunner } from "./Runner";
 function rng() {
   let seed = 401;
   return () => {
@@ -65,14 +65,25 @@ test("runner elemental powers shield hits, draw distant sparks, clear obstacles 
   const magnet = pickup("water");
   magnet.objects = [{ at: magnet.distance + 10, lane: 0, kind: "coin" }];
   stepRunner(magnet, 0.02);
+  expect(magnet.coins).toBe(0);
+  expect(magnet.objects[0].drawnAt).toBeDefined();
+  for (let t = 0; t < coinDrawTime; t += 0.01) stepRunner(magnet, 0.01);
   expect(magnet.coins).toBe(1);
+  expect(magnet.objects.some((item) => item.drawnAt != null)).toBe(false);
   const fire = newRunner();
   fire.objects = [
     { at: 0.1, lane: 1, kind: "fire" },
     { at: 5, lane: 1, kind: "crate" },
+    { at: 5, lane: 0, kind: "coin" },
   ];
   stepRunner(fire, 0.02);
-  expect(fire.objects.find((o) => o.kind === "crate").checked).toBe(true);
+  expect(fire.objects.find((o) => o.kind === "crate").burningAt).toBeDefined();
+  for (let t = 0; t <= fireClearTime + 0.02; t += 0.01) stepRunner(fire, 0.01);
+  expect(fire.hearts).toBe(3);
+  expect(fire.objects.some((o) => o.kind === "crate" && o.at === 5)).toBe(
+    false,
+  );
+  expect(fire.objects.some((o) => o.kind === "coin" && o.at === 5)).toBe(true);
   const earth = pickup("earth");
   earth.objects = [{ at: earth.distance + 0.1, lane: 1, kind: "coin" }];
   stepRunner(earth, 0.02);

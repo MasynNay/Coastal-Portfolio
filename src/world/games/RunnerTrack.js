@@ -1,7 +1,6 @@
-// The floor and approaching objects share one perspective camera. World-space
-// texture coordinates advance with distance, so the runner travels over the
-// paving instead of jogging against a stationary photograph.
-export const runnerCamera = { horizon: 220, feet: 620, near: 10, center: 300 };
+// Stone slabs, bridge rails and approaching objects use the same camera.
+// Geometry moves in world space instead of sampling a texture in scanlines.
+export const runnerCamera = { horizon: 210, feet: 590, near: 13, center: 300 };
 export function projectRunner(lane, ahead = 0) {
   const { horizon, feet, near, center } = runnerCamera,
     scale = near / Math.max(near * 0.6, ahead + near);
@@ -11,159 +10,128 @@ export function projectRunner(lane, ahead = 0) {
     scale,
   };
 }
-// Downsampled copies are made once per decoded texture, never during a frame.
-// Far paving uses a blurred mip level, preventing fine grout from shimmering.
-const floorTextures = new WeakMap();
-function textureLevels(image) {
-  if (floorTextures.has(image)) return floorTextures.get(image);
-  const levels = [];
-  for (let size = 512; size >= 8; size /= 2) {
-    const canvas = document.createElement("canvas");
-    canvas.width = canvas.height = size;
-    const ctx = canvas.getContext("2d");
-    ctx.imageSmoothingEnabled = true;
-    ctx.imageSmoothingQuality = "high";
-    ctx.translate(0, size);
-    ctx.scale(1, -1);
-    ctx.drawImage(image, 0, 0, size, size);
-    levels.push(canvas);
-  }
-  floorTextures.set(image, levels);
-  return levels;
+
+// A single projected curve keeps tiles, pickups and hazards in their lanes.
+const pathCenter = (at) => 2.3 * Math.sin(at / 37) + 0.52 * Math.sin(at / 15);
+
+export function runnerView(distance, visualLane) {
+  const origin = pathCenter(distance);
+  const follow = (visualLane - 1) * 47;
+  // Adjacent slabs share depth samples, so compute the curve once per sample.
+  const centers = new Map();
+  return (lane, ahead = 0) => {
+    if (!centers.has(ahead)) {
+      const curve = pathCenter(distance + ahead) - origin;
+      centers.set(ahead, projectRunner(1 + curve, ahead));
+    }
+    const { x, y, scale } = centers.get(ahead);
+    return { x: x + (lane - 1) * 176 * scale - follow, y, scale };
+  };
 }
-export function drawRunnerTrack(ctx, image, distance) {
-  if (!image) return;
-  const { center, horizon, feet, near } = runnerCamera,
-    levels = textureLevels(image),
-    height = feet - horizon,
-    bottom = 700,
-    tileMeters = 18,
-    roadHalfWidth = 340;
-  ctx.save();
+
+const stone = ["#637771", "#596f69", "#667e76", "#526964"];
+const curb = ["#9a8371", "#ac9380"];
+const stride = 5;
+const roadLeft = -0.84;
+const roadRight = 2.84;
+
+function slab(ctx, project, left, right, near, far, color) {
+  const a = project(left, far),
+    b = project(right, far);
+  const c = project(right, near),
+    d = project(left, near);
+  ctx.fillStyle = color;
   ctx.beginPath();
-  ctx.moveTo(center, horizon);
-  ctx.lineTo(center + (roadHalfWidth * (bottom - horizon)) / height, bottom);
-  ctx.lineTo(center - (roadHalfWidth * (bottom - horizon)) / height, bottom);
+  ctx.moveTo(a.x, a.y);
+  ctx.lineTo(b.x, b.y);
+  ctx.lineTo(c.x, c.y);
+  ctx.lineTo(d.x, d.y);
   ctx.closePath();
-  ctx.clip();
-  ctx.fillStyle = "#536668";
-  ctx.fillRect(0, horizon + 28, 600, bottom - horizon);
-  // Whole-pixel horizontal strips sample the same continuous floor. Using the
-  // simulation distance (rather than wall-clock time) also freezes it on pause.
-  ctx.imageSmoothingEnabled = true;
-  for (let y = horizon + 30; y < bottom; ) {
-    const strip = Math.min(y < 480 ? 5 : 3, bottom - y);
-    const q = (y - horizon) / height,
-      nextQ = (y + strip - horizon) / height,
-      worldZ = near / q - near,
-      span = near / q - near / nextQ,
-      pixelsPerStrip = (span / tileMeters) * 512,
-      level = Math.max(
-        0,
-        Math.min(
-          levels.length - 1,
-          Math.floor(Math.log2(Math.max(1, pixelsPerStrip / 2))),
-        ),
-      ),
-      tile = levels[level],
-      sourceSpan = (span / tileMeters) * tile.height,
-      phase = ((((worldZ + distance) / tileMeters) % 1) + 1) % 1,
-      sourceY = (1 - phase) * tile.height,
-      halfWidth = roadHalfWidth * nextQ;
-    // Blend into the painted horizon; no hard seam or high-frequency detail at
-    // the vanishing point. The near slabs remain large and readable.
-    ctx.globalAlpha = Math.min(1, Math.max(0, (q - 0.07) / 0.15));
-    const first = Math.min(sourceSpan, tile.height - sourceY),
-      firstHeight = (strip * first) / sourceSpan;
-    if (first > 0)
-      ctx.drawImage(
-        tile,
-        0,
-        sourceY,
-        tile.width,
-        first,
-        center - halfWidth,
-        y,
-        halfWidth * 2,
-        firstHeight,
-      );
-    if (first < sourceSpan)
-      ctx.drawImage(
-        tile,
-        0,
-        0,
-        tile.width,
-        sourceSpan - first,
-        center - halfWidth,
-        y + firstHeight,
-        halfWidth * 2,
-        strip - firstHeight,
-      );
-    y += strip;
-  }
-  // Quiet lane dividers sit on the same perspective plane as the hazards.
-  ctx.globalAlpha = 0.24;
-  ctx.strokeStyle = "#c7ece0";
-  ctx.lineWidth = 1.5;
-  for (const lane of [0.5, 1.5]) {
-    const far = projectRunner(lane, 60);
-    const nearEdge = projectRunner(lane, -1.7);
-    ctx.beginPath();
-    ctx.moveTo(far.x, far.y);
-    ctx.lineTo(nearEdge.x, nearEdge.y);
-    ctx.stroke();
-  }
-  ctx.restore();
-}
-// Gold, a bright rim and a recognizable coin silhouette distinguish rewards
-// from the cool stone hazards. This vector icon remains crisp on small phones.
-export function drawRunnerCoin(ctx, x, y, scale, time, id) {
-  const radius = 34 * scale,
-    spin = 0.72 + Math.sin(time / 360 + id) * 0.28;
-  ctx.save();
-  ctx.translate(x, y - 36 * scale + Math.sin(time / 260 + id) * 3 * scale);
-  const halo = ctx.createRadialGradient(
-    0,
-    0,
-    radius * 0.3,
-    0,
-    0,
-    radius * 1.65,
-  );
-  halo.addColorStop(0, "#ffdf8b88");
-  halo.addColorStop(1, "#ffe48500");
-  ctx.fillStyle = halo;
-  ctx.fillRect(-radius * 1.7, -radius * 1.7, radius * 3.4, radius * 3.4);
-  ctx.scale(spin, 1);
-  const gold = ctx.createLinearGradient(-radius, -radius, radius, radius);
-  gold.addColorStop(0, "#fff7bd");
-  gold.addColorStop(0.35, "#ffe36b");
-  gold.addColorStop(1, "#e9a42d");
-  ctx.fillStyle = gold;
-  ctx.strokeStyle = "#71411d";
-  ctx.lineWidth = 3.5 * scale;
-  ctx.beginPath();
-  ctx.arc(0, 0, radius, 0, Math.PI * 2);
   ctx.fill();
-  ctx.stroke();
-  ctx.strokeStyle = "#fff4b5";
-  ctx.lineWidth = 2.5 * scale;
-  ctx.beginPath();
-  ctx.arc(0, 0, radius * 0.8, 0, Math.PI * 2);
-  ctx.stroke();
-  // A small embossed air spiral ties the reward into the Air Temple theme.
-  ctx.strokeStyle = "#966024";
-  ctx.lineWidth = 3.7 * scale;
-  ctx.lineCap = "round";
-  ctx.beginPath();
-  for (let i = 0; i <= 48; i++) {
-    const a = (i / 48) * Math.PI * 3.7,
-      r = (i / 48) * radius * 0.56,
-      px = Math.cos(a) * r,
-      py = Math.sin(a) * r;
-    if (i === 0) ctx.moveTo(px, py);
-    else ctx.lineTo(px, py);
+}
+
+export function drawRunnerTrack(ctx, distance, project) {
+  const cutoff = -3;
+  const start = Math.floor((distance + cutoff) / stride);
+  const end = Math.floor((distance + 95) / stride);
+
+  for (let row = end; row >= start; row--) {
+    const near = Math.max(cutoff, row * stride - distance);
+    const far = (row + 1) * stride - distance;
+    if (far - near <= 0.08) continue;
+    slab(ctx, project, roadLeft, roadRight, near, far + 0.06, "#303d42");
+    for (let lane = 0; lane < 3; lane++) {
+      const tint =
+        (((row * 7 + lane * 5) % stone.length) + stone.length) % stone.length;
+      slab(
+        ctx,
+        project,
+        lane - 0.49,
+        lane + 0.49,
+        near,
+        far - 0.08,
+        stone[tint],
+      );
+      if (near < 35 && far - near > 0.36) {
+        // Broad bevels stay readable close to the camera without a fine grain
+        // that aliases at the horizon.
+        slab(
+          ctx,
+          project,
+          lane - 0.47,
+          lane + 0.47,
+          far - 0.28,
+          far - 0.08,
+          "#a4b0a54d",
+        );
+        slab(
+          ctx,
+          project,
+          lane - 0.46,
+          lane - 0.41,
+          near,
+          far - 0.28,
+          "#b4c1b731",
+        );
+      }
+    }
+    const edge = curb[Math.abs(row) % curb.length];
+    slab(ctx, project, roadLeft, -0.51, near, far - 0.06, edge);
+    slab(ctx, project, 2.51, roadRight, near, far - 0.06, edge);
+    if (near < 55) {
+      slab(ctx, project, -0.81, -0.78, near, far - 0.06, "#d3b883");
+      slab(ctx, project, 2.78, 2.81, near, far - 0.06, "#d3b883");
+    }
   }
-  ctx.stroke();
-  ctx.restore();
+
+  // Paired edge posts give a stronger motion cue than repeating floor grain.
+  // A post has a planted base, a shaded shaft and a warm top marker.
+  for (let row = end; row >= start; row--) {
+    if (row % 2) continue;
+    const ahead = row * stride - distance;
+    if (ahead < cutoff || ahead > 92) continue;
+    for (const lane of [-0.73, 2.73]) {
+      const { x, y, scale: s } = project(lane, ahead);
+      const tall = row % 6 === 0;
+      const h = (tall ? 87 : 39) * s;
+      ctx.fillStyle = "#573f37";
+      ctx.fillRect(x - 9 * s, y - h, 18 * s, h);
+      ctx.fillStyle = "#b28968";
+      ctx.fillRect(x - 9 * s, y - h, 5 * s, h - 5 * s);
+      ctx.fillStyle = "#f4d28a";
+      ctx.fillRect(x - 11 * s, y - h - 4 * s, 22 * s, 5 * s);
+      if (tall) {
+        const side = lane < 1 ? -1 : 1;
+        ctx.fillStyle = "#c96740";
+        ctx.beginPath();
+        ctx.moveTo(x, y - h + 5 * s);
+        ctx.lineTo(x + side * 39 * s, y - h + 8 * s);
+        ctx.lineTo(x + side * 31 * s, y - h + 37 * s);
+        ctx.lineTo(x, y - h + 29 * s);
+        ctx.fill();
+        ctx.fillStyle = "#f8dda4";
+        ctx.fillRect(x + side * 15 * s - 3 * s, y - h + 14 * s, 6 * s, 9 * s);
+      }
+    }
+  }
 }
