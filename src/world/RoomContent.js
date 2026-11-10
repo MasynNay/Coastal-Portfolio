@@ -55,9 +55,9 @@ export default function RoomContent({ id, onHunt, huntActive = false }) {
                 View source ↗
               </a>
             )}
-            {p.roadmap && (
-              <a href={p.roadmap} target="_blank" rel="noreferrer">
-                Development roadmap ↗
+            {p.release && (
+              <a href={p.release} target="_blank" rel="noreferrer">
+                Download desktop app ↗
               </a>
             )}
           </article>

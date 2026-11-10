@@ -2,6 +2,17 @@
 // the preceding production commit, rather than fictional in-game release notes.
 const patchNotes = [
   {
+    version: "1.1.4",
+    date: "November 9, 2026",
+    previousCommit: "ed2a88c",
+    changes: [
+      "Updated the Anything Plays card to reflect the public 3.0 release.",
+      "The card now describes its 18 console profiles and 11 bundled emulator cores.",
+      "Added a direct link to the Windows, macOS, and Linux desktop installers.",
+      "The updated description and download link appear on the main site, in Mac Mode, and in Game Mode.",
+    ],
+  },
+  {
     version: "1.1.3",
     date: "November 9, 2026",
     previousCommit: "21c1b1f",

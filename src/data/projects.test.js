@@ -14,11 +14,11 @@ test("Anything Plays is a truthful, fully linked desktop project", () => {
     "https://anythingplays.masynnay.com/assets/anything-plays-desktop-preview.webp",
   );
   expect(entry.previewKind).toBe("interface");
-  expect(entry.roadmap).toBe(
-    "https://github.com/MasynNay/anything-plays/blob/main/ROADMAP.md",
+  expect(entry.release).toBe(
+    "https://github.com/MasynNay/anything-plays/releases/tag/v3.0.0",
   );
   expect(entry.demo).toBeUndefined();
-  expect(entry.description).toMatch(/version 3\.0 is in active development/i);
+  expect(entry.description).toMatch(/3\.0 release.*18 console profiles/i);
   expect(webProjects.filter((project) => project.id === entry.id)).toHaveLength(
     1,
   );

@@ -240,13 +240,13 @@ export function DesignPortfolio({ expressive }) {
                           View source ↗
                         </a>
                       )}
-                      {project.roadmap && (
+                      {project.release && (
                         <a
-                          href={project.roadmap}
+                          href={project.release}
                           target="_blank"
                           rel="noreferrer"
                         >
-                          Development roadmap ↗
+                          Download desktop app ↗
                         </a>
                       )}
                     </div>

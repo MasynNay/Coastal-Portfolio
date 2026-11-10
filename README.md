@@ -96,7 +96,7 @@ The earlier portfolio keeps its original branding and project screenshots, so it
 ## Live Application
 
 - [masynnay.com](https://masynnay.com)
-- [Anything Plays — cross-platform camera-controlled desktop software](https://anythingplays.masynnay.com/) ([source](https://github.com/MasynNay/anything-plays); stable 2.0 released, 3.0 in active QA)
+- [Anything Plays — camera-controlled desktop gaming](https://anythingplays.masynnay.com/) ([download 3.0](https://github.com/MasynNay/anything-plays/releases/tag/v3.0.0) · [source](https://github.com/MasynNay/anything-plays))
 - [Original portfolio demo](https://masynnay.github.io/React-Portfolio/)
 - [Source repository](https://github.com/MasynNay/Coastal-Portfolio)
 

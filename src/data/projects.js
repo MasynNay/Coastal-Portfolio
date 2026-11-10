@@ -12,11 +12,11 @@ export const webProjects = [
     category: "Software",
     label: "05 / INDEPENDENT DESKTOP SOFTWARE",
     description:
-      "Turn a webcam into a controller for classic games. Track a chosen color on a hand, toy, or fish and map movement between camera zones to buttons in the built-in emulator. The released 2.0 app supports Game Boy, Game Boy Color, Game Boy Advance, and SNES. Version 3.0 is in active development and previews more consoles, including Nintendo 64 and GameCube.",
+      "Turn a webcam into a controller for classic games. Track a color on a hand, toy, or fish and map movement to game inputs, or play with a keyboard. The free 3.0 release bundles 11 emulator cores for 18 console profiles, including Nintendo 64 and GameCube. The desktop app runs offline on Windows, macOS, and Linux.",
     tools:
       "Python · OpenCV · Tkinter · Libretro · PyInstaller · GitHub Actions",
     github: "https://github.com/MasynNay/anything-plays",
-    roadmap: "https://github.com/MasynNay/anything-plays/blob/main/ROADMAP.md",
+    release: "https://github.com/MasynNay/anything-plays/releases/tag/v3.0.0",
   },
   {
     id: "aftertone",

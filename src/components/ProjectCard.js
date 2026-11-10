@@ -12,7 +12,7 @@ export const ProjectCard = ({
   webLink,
   webLabel = "Visit website",
   gitLink,
-  roadmap,
+  release,
   demoLink,
   glass = false,
   iconLabel,
@@ -62,9 +62,9 @@ export const ProjectCard = ({
                   View source ↗
                 </a>
               )}
-              {roadmap && (
-                <a href={roadmap} target="_blank" rel="noreferrer">
-                  Development roadmap ↗
+              {release && (
+                <a href={release} target="_blank" rel="noreferrer">
+                  Download desktop app ↗
                 </a>
               )}
             </div>
@@ -110,14 +110,14 @@ export const ProjectCard = ({
               View GitHub Repo
             </a>
           )}
-          {roadmap && (
+          {release && (
             <a
               className="projectbtn"
-              href={roadmap}
+              href={release}
               target="_blank"
               rel="noopener noreferrer"
             >
-              Development roadmap
+              Download desktop app
             </a>
           )}
         </div>
