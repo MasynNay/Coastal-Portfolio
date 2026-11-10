@@ -1,0 +1,6 @@
+{
+  "purpose": "Verify latest public Cloudflare Pages deployment for Coastal Portfolio",
+  "release": "website-services",
+  "mergedCommit": "21d71aa20423b672b00957ed994baef634163c10",
+  "version": "2026-11-10-services"
+}
