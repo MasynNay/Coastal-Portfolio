@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { NavBar } from "../components/NavBar";
 import { contactEmail, sendContactMessage } from "../components/ContactMail";
@@ -36,6 +36,18 @@ export default function WebsiteServices() {
   const [form, setForm] = useState(initial);
   const [sending, setSending] = useState(false);
   const [feedback, setFeedback] = useState(null);
+
+  useEffect(() => {
+    const oldTitle = document.title;
+    const meta = document.querySelector('meta[name="description"]');
+    const oldDescription = meta?.getAttribute("content");
+    document.title = "Website Design & Development | Masyn Nay";
+    meta?.setAttribute("content", "Custom, mobile-friendly websites for small businesses. Email-first projects with written quotes, domain setup and a clear handoff.");
+    return () => {
+      document.title = oldTitle;
+      if (meta && oldDescription !== null && oldDescription !== undefined) meta.setAttribute("content", oldDescription);
+    };
+  }, []);
   const set = (key, value) => setForm((prev) => ({ ...prev, [key]: value }));
 
   async function submit(event) {
@@ -66,7 +78,7 @@ export default function WebsiteServices() {
         phone: "",
         message,
         website: form.website,
-      });
+      }, window.location.href, "New website development inquiry");
       setForm(initial);
       setFeedback({ ok: true, text: "Thanks! Your request was sent. I'll review it and reply by email." });
     } catch (error) {
