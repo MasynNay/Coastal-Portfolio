@@ -1,0 +1,35 @@
+name: Verify website services build
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "src/pages/WebsiteServices.*"
+      - "src/components/Contact.js"
+      - "src/components/ContactMail.js"
+      - "src/components/NavBar.js"
+      - "src/components/Banner.js"
+      - "src/App.js"
+      - "src/app.css"
+      - ".github/workflows/verify-website-services.yml"
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Production build checks
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - name: Install exact dependencies
+        run: npm ci
+      - name: Verify project imports and assets
+        run: npm run check:project
+      - name: Compile production site
+        env:
+          CI: "true"
+        run: npm run build
