@@ -661,3 +661,50 @@ video {
   background: #102328;
   color: #e0e8df;
 }
+
+/* Keep the working general contact form, while making paid services easy to find. */
+.contact-services-cta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  margin: 20px 0 28px;
+  padding: 18px 20px;
+  border: 1px solid rgba(196, 221, 225, 0.32);
+  border-radius: 18px;
+  background: rgba(130, 170, 180, 0.12);
+}
+.contact-services-cta strong {
+  display: block;
+  font-size: 17px;
+  margin-bottom: 7px;
+}
+.contact-services-cta p {
+  margin: 0;
+  color: #c6d4d7;
+  font-size: 13px;
+  line-height: 1.6;
+  text-align: left;
+}
+.contact-services-cta a {
+  flex-shrink: 0;
+  padding: 12px 15px;
+  border-radius: 12px;
+  border: 1px solid rgba(215, 237, 240, 0.46);
+  background: rgba(220, 240, 242, 0.12);
+  font-size: 13px;
+  font-weight: 650;
+  color: #fff;
+}
+.contact-services-cta a:hover {
+  background: rgba(220, 240, 242, 0.22);
+}
+@media (max-width: 640px) {
+  .contact-services-cta {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .contact-services-cta a {
+    text-align: center;
+  }
+}
