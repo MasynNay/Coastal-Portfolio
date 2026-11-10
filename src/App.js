@@ -4,6 +4,7 @@ import "./app.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { DesignPortfolio } from "./designs/DesignPortfolio";
 import Game from "./pages/Game";
+import WebsiteServices from "./pages/WebsiteServices";
 import { GlassPortfolio } from "./designs/GlassPortfolio";
 import { DesktopPortfolio } from "./designs/DesktopPortfolio";
 
@@ -32,6 +33,7 @@ export default function App() {
           {["/resume", "/design/glass/resume"].map((path) => (
             <Route key={path} path={path} element={<GlassPortfolio resume />} />
           ))}
+          <Route path="/services" element={<WebsiteServices />} />
           <Route path="/design/desktop" element={<DesktopPortfolio />} />
           <Route path="/world" element={<WorldMode />} />
           {["/world/sprites", "/world/characters"].map((path) => (
