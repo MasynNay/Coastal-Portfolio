@@ -1,0 +1,4 @@
+Coastal Portfolio web services deployment check
+GitHub services integration: PR #1, merge commit 21d71aa20423b672b00957ed994baef634163c10
+Check added: 2026-11-10
+This file is a harmless deployment indicator and contains no secrets.
