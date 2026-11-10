@@ -81,6 +81,16 @@ export const Contact = () => {
                     mind, or could use a hand figuring something out, send me a
                     message. You’re welcome to just say hello, too.
                   </p>
+                  <div className="contact-services-cta">
+                    <div>
+                      <strong>Looking to have a website built?</strong>
+                      <p>
+                        Explore design examples, learn about the process, and
+                        request a written quote with no phone call required.
+                      </p>
+                    </div>
+                    <a href="/services">Explore website services <span aria-hidden="true">↗</span></a>
+                  </div>
                   <form onSubmit={handleSubmit}>
                     {/* This hidden field is only a spam trap; it is never a
                         keyboard or screen-reader destination. */}

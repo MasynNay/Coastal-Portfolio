@@ -93,6 +93,7 @@ export const Banner = ({ glass = false }) => {
                       <a href="#projects">
                         Explore my work <span>↗</span>
                       </a>
+                      <a href="/services">Hire me for a website</a>
                       <a href="#contact">Let’s connect</a>
                     </div>
                   )}

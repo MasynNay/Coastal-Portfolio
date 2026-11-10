@@ -7,6 +7,7 @@ export const contactSubject = "Someone sent you a message from your portfolio";
 export async function sendContactMessage(
   details,
   pageUrl = window.location.href,
+  subject = contactSubject,
 ) {
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), 20000);
@@ -27,7 +28,7 @@ export async function sendContactMessage(
         phone: details.phone.trim() || "Not provided",
         message: details.message.trim(),
         _replyto: details.email.trim(),
-        _subject: contactSubject,
+        _subject: subject,
         _template: "table",
         _url: pageUrl,
         _honey: details.website || "",
