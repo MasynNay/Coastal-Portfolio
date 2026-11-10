@@ -30,7 +30,12 @@ import { personHeight, animalHeight } from "./Movement";
 import { createFootfalls, gaitTimeForSheet } from "./Gait";
 import { playerPose } from "./PlayerPose";
 import { activityAsset, characterAsset } from "./Wardrobe";
-import { spriteFrame, runningLift } from "./animation";
+import { authoredFrameTime, spriteFrame, runningLift } from "./animation";
+import {
+  drawWildlifeContact,
+  idleBodyMotion,
+  wildlifePose,
+} from "./WildlifeMotion";
 import { createTownTerrain } from "./TownTerrain";
 import { watercraft } from "./Harbor";
 import { boardPose } from "./Riding";
@@ -62,8 +67,9 @@ export function createCanvasScene(host, invalidate = () => {}) {
     pixels = new Map(),
     requested = new Map();
   const bugArt = new Set(terrariumSpecies.map((s) => s.art));
-  const terrain = createTownTerrain(art);
+  const terrain = createTownTerrain(image);
   const settleFootfall = createFootfalls();
+  const reduceMotion = window.matchMedia?.("(prefers-reduced-motion: reduce)");
   let saluting = null;
   let width = 1,
     height = 1,
@@ -246,8 +252,13 @@ export function createCanvasScene(host, invalidate = () => {}) {
     time = 0,
     lift = 0,
     human = false,
+    motion = null,
   ) {
     let img = image(id);
+    if (!img && id.startsWith("goose-") && id.endsWith("-swim")) {
+      id = id.slice(0, -5);
+      img = image(id);
+    }
     // Keep the matching walking body visible while its run atlas is decoding.
     // New or uncached costumes must never disappear on the first Shift press.
     if (!img && id.endsWith("-run")) {
@@ -328,7 +339,7 @@ export function createCanvasScene(host, invalidate = () => {}) {
     ctx.imageSmoothingQuality = "high";
     // Smoothly sampled art can move at subpixel positions. Ground props and
     // hard pixel edges still use their existing pixel grid.
-    const precise = !!sheet.smooth && (human || sheet.native);
+    const precise = !!motion || (!!sheet.smooth && (human || sheet.native));
     drawSprite(
       ctx,
       img,
@@ -341,6 +352,7 @@ export function createCanvasScene(host, invalidate = () => {}) {
       d,
       moving,
       time,
+      motion,
     );
     ctx.restore();
   }
@@ -542,6 +554,7 @@ export function createCanvasScene(host, invalidate = () => {}) {
     );
   }
   function draw(state, time) {
+    art.beginFrame();
     const saluteBase = characterAsset(state.character, state.outfit);
     saluting = state.salute
       ? {
@@ -728,18 +741,27 @@ export function createCanvasScene(host, invalidate = () => {}) {
             time: r.frog
               ? state.worldTime
               : r.playerFrame != null
-                ? r.playerFrame *
-                  artwork[activityAsset(r.id, r.outfit, "board-trick", artwork)]
-                    .frameMs
+                ? authoredFrameTime(
+                    artwork[
+                      activityAsset(r.id, r.outfit, "board-trick", artwork)
+                    ],
+                    r.playerFrame,
+                  )
                 : r.time,
             lift: r.bounce || 0,
           });
-      for (const a of state.animals || animals)
+      for (const a of state.animals || animals) {
+        const base = a.art || (a.kind === "dog" ? a.id : "duck");
+        const swimming = base + "-swim";
         sprites.push({
           ...a,
-          art: a.art || (a.kind === "dog" ? a.id : "duck"),
+          art: a.inWater && artwork[swimming] ? swimming : base,
           h: animalHeight(a),
+          motion: reduceMotion?.matches
+            ? null
+            : wildlifePose(a, state.worldTime),
         });
+      }
     }
     if (!room)
       for (const b of bikes) {
@@ -892,7 +914,7 @@ export function createCanvasScene(host, invalidate = () => {}) {
           !!state.beach?.building,
         time:
           playerDance?.playerFrame != null
-            ? playerDance.playerFrame * (artwork[costume]?.frameMs || 95)
+            ? authoredFrameTime(artwork[costume], playerDance.playerFrame)
             : state.salute
               ? cycling
                 ? state.bikeRide.time
@@ -900,8 +922,10 @@ export function createCanvasScene(host, invalidate = () => {}) {
                   ? 0
                   : state.salute.elapsed
               : state.beach?.building
-                ? [0, 1, 2, 1][Math.floor(state.worldTime / 230) % 4] *
-                  (artwork[costume]?.frameMs || 95)
+                ? authoredFrameTime(
+                    artwork[costume],
+                    [0, 1, 2, 1][Math.floor(state.worldTime / 230) % 4],
+                  )
                 : cycling
                   ? state.bikeRide.time
                   : glide
@@ -983,6 +1007,16 @@ export function createCanvasScene(host, invalidate = () => {}) {
           const pose = human
             ? settleFootfall(a, artwork[a.art], state.worldTime)
             : a;
+          const motion =
+            a.motion ||
+            (!reduceMotion?.matches &&
+            human &&
+            !pose.moving &&
+            artwork[pose.art]?.action === "walk"
+              ? idleBodyMotion(a.id, state.worldTime)
+              : null);
+          if (a.motion)
+            drawWildlifeContact(ctx, at(a.x, a.z), unit, a, a.motion);
           if (human && ["walk", "run"].includes(artwork[pose.art]?.action)) {
             const ground = at(a.x, a.z);
             // A small contact shadow keeps the feet anchored to the terrain
@@ -1008,8 +1042,11 @@ export function createCanvasScene(host, invalidate = () => {}) {
             pose.direction || 0,
             pose.moving,
             pose.time ?? time,
-            (a.lift || 0) + (a.player ? playerDance?.bounce || 0 : 0),
+            (a.lift || 0) +
+              (motion?.lift || 0) +
+              (a.player ? playerDance?.bounce || 0 : 0),
             human,
+            motion,
           );
         }
     if (!room) {
@@ -1307,6 +1344,7 @@ export function createCanvasScene(host, invalidate = () => {}) {
     canvas.dataset.inputTrace = JSON.stringify(state.inputTrace);
     canvas.dataset.playerX = state.position.x.toFixed(2);
     canvas.dataset.playerZ = state.position.z.toFixed(2);
+    art.endFrame();
   }
   async function loadTown() {
     // Longer character atlases are decoded only when their action/costume is

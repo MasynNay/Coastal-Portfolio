@@ -814,10 +814,6 @@
   width: 90px;
   height: 70px;
   margin: 10px auto 20px;
-  background-position: 0 0;
-  background-size: 360px 560px;
-  background-repeat: no-repeat;
-  image-rendering: pixelated;
 }
 
 /* Keep the lowered minimap clear of touch controls and narrow-screen prompts. */

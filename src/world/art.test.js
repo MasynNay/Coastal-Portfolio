@@ -152,6 +152,34 @@ test("decoded artwork is bounded by memory use and recently drawn costumes stay 
     expect(created).toHaveLength(4); // Eviction really released the old pending promise too.
     cache.clear();
     expect(cache.get("masyn")).toBeUndefined();
+
+    cache.beginFrame();
+    for (const id of ["terrain-tiles", "garden-tiles", "masyn"]) {
+      expect(cache.get(id)).toBeUndefined();
+    }
+    cache.endFrame();
+    await Promise.all(
+      ["terrain-tiles", "garden-tiles", "masyn", "mi-shell"].map((id) =>
+        cache.load(id),
+      ),
+    );
+    // A busy frame may exceed the budget. Loading a new pose must never
+    // displace the ground or anyone still on screen.
+    cache.beginFrame();
+    expect(cache.get("terrain-tiles")).toBeDefined();
+    expect(cache.get("garden-tiles")).toBeDefined();
+    expect(cache.get("masyn")).toBeDefined();
+    cache.endFrame();
+    expect(cache.get("mi-shell")).toBeUndefined();
+
+    // The old town assets become evictable as soon as the scene changes.
+    cache.beginFrame();
+    expect(cache.get("masyn")).toBeDefined();
+    cache.endFrame();
+    await cache.load("ezra");
+    expect(cache.get("masyn")).toBeDefined();
+    expect(cache.get("terrain-tiles")).toBeUndefined();
+    expect(cache.get("garden-tiles")).toBeUndefined();
   } finally {
     global.Image = Original;
   }

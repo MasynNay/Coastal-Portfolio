@@ -6,7 +6,7 @@ import { buildings } from "./config";
 import terrain from "./TerrainArt.json";
 // The static town is painted once into a small cached map. Walking only composites
 // this image and a few animated water highlights; there is no per-frame tile generation.
-export function createTownTerrain(art) {
+export function createTownTerrain(imageFor) {
   let cache = null,
     version = null,
     groundVersion = null,
@@ -14,9 +14,7 @@ export function createTownTerrain(art) {
     seaImage = null;
   const S = 32,
     ORIGIN = 34;
-  function build() {
-    const tile = art.get("terrain-tiles"),
-      ground = art.get("garden-tiles");
+  function build(tile, ground) {
     if (cache && version === tile && groundVersion === ground) return cache;
     const c = document.createElement("canvas");
     c.width = c.height = 68 * S;
@@ -187,7 +185,7 @@ export function createTownTerrain(art) {
       ctx.save();
       ctx.imageSmoothingEnabled = true;
       ctx.imageSmoothingQuality = "high";
-      const tile = art.get("terrain-tiles");
+      const tile = imageFor("terrain-tiles");
       if (tile && seaImage !== tile) {
         const c = document.createElement("canvas");
         c.width = c.height = 128;
@@ -229,7 +227,11 @@ export function createTownTerrain(art) {
         ctx.canvas.height / scale + 128,
       );
       ctx.restore();
-      const image = build(),
+      // Keep the painted terrain on a return visit while its tiles reload.
+      const image = build(
+          tile || version,
+          imageFor("garden-tiles") || groundVersion,
+        ),
         p = at(-34, -34);
       ctx.drawImage(image, p.x, p.y, 68 * unit, 68 * unit);
       ctx.fillStyle = "#b2e0d866";

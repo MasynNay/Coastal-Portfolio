@@ -1,5 +1,6 @@
 import CollectionSprite from "./CollectionSprite";
 import { residentLayout } from "./CollectionCounts";
+import { bugMotionStyle } from "./WildlifeMotion";
 // Species retain their rarity and base markings. Small hue differences distinguish
 // residents without turning common catches into rare discoveries.
 export default function HabitatResidents({
@@ -19,6 +20,7 @@ export default function HabitatResidents({
         <span
           key={i}
           className={"habitat-resident " + (paused ? "is-paused" : "")}
+          data-motion={aquatic ? "swim" : bugMotionStyle(species.category)}
           style={{
             left: r.left + "%",
             top: r.top + "%",

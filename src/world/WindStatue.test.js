@@ -5,6 +5,8 @@ import {
   abilityColumn,
 } from "./Abilities";
 import appearances from "./Appearances.json";
+import sheets from "./SpriteSheets.json";
+import { authoredFrameIndex } from "./animation";
 test("the statue preserves every wearer and holds movement only for the short performance", () => {
   for (const look of appearances) {
     const effect = startWindSong(
@@ -18,7 +20,9 @@ test("the statue preserves every wearer and holds movement only for the short pe
     const frames = new Set();
     for (let t = 0; t < windSongDuration; t += windSongDuration / 12) {
       frames.add(abilityColumn(effect, 100 + t));
-      expect(abilityColumn(effect, 100 + t)).toBe(conductFrame(t));
+      expect(abilityColumn(effect, 100 + t)).toBe(
+        authoredFrameIndex(sheets[effect.asset], conductFrame(t)),
+      );
     }
     expect(frames.size).toBe(12);
   }

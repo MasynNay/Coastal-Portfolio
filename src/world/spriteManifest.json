@@ -5,7 +5,7 @@
     "ch": 80,
     "family": false,
     "costume": false,
-    "revision": "2c49c78e3334",
+    "revision": "7f0309bd4234",
     "directions": [
       [
         0,
@@ -41,7 +41,10 @@
       ]
     ],
     "native": true,
-    "smooth": true
+    "smooth": true,
+    "columns": 8,
+    "frameMs": 45.0,
+    "inbetweenVersion": 1
   },
   "goose": {
     "src": "/world/sprites/goose.webp",
@@ -89,23 +92,29 @@
     "src": "/world/sprites/axolotl.webp",
     "cw": 180,
     "ch": 140,
-    "revision": "5fb8b53227ca",
+    "revision": "cb887f145a94",
     "native": true,
-    "smooth": true
+    "smooth": true,
+    "columns": 8,
+    "frameMs": 45.0,
+    "inbetweenVersion": 1
   },
   "axolotl-blue": {
     "src": "/world/sprites/axolotl-blue.webp",
     "cw": 180,
     "ch": 140,
-    "revision": "07a0fc41b2c7",
+    "revision": "f8fe10912b56",
     "native": true,
-    "smooth": true
+    "smooth": true,
+    "columns": 8,
+    "frameMs": 45.0,
+    "inbetweenVersion": 1
   },
   "fish": {
     "src": "/world/sprites/fish.webp",
     "cw": 180,
     "ch": 140,
-    "revision": "b563db3bd901",
+    "revision": "3ab1e87986c6",
     "directions": [
       [
         0,
@@ -141,13 +150,16 @@
       ]
     ],
     "native": true,
-    "smooth": true
+    "smooth": true,
+    "columns": 8,
+    "frameMs": 45.0,
+    "inbetweenVersion": 1
   },
   "koi": {
     "src": "/world/sprites/koi.webp",
     "cw": 180,
     "ch": 140,
-    "revision": "94677acd852b",
+    "revision": "381ff94c05f1",
     "directions": [
       [
         0,
@@ -183,6 +195,9 @@
       ]
     ],
     "native": true,
-    "smooth": true
+    "smooth": true,
+    "columns": 8,
+    "frameMs": 45.0,
+    "inbetweenVersion": 1
   }
 }

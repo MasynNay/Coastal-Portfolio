@@ -10,7 +10,7 @@ test("251 distinct aquatic sprites include two saltwater super-rare catches", ()
   expect(fishSpecies).toHaveLength(251);
   expect(new Set(fishSpecies.map((f) => f.art)).size).toBe(251);
   expect(fishSpecies.filter((f) => f.rarity === "Super rare")).toHaveLength(2);
-  for (const f of fishSpecies) expect(sheets[f.art].columns).toBe(4);
+  for (const f of fishSpecies) expect(sheets[f.art].columns).toBe(8);
   expect(chooseFish(() => 0.0005).rarity).toBe("Super rare");
   expect(chooseFish(() => 0.001).rarity).not.toBe("Super rare");
   const seen = new Set();

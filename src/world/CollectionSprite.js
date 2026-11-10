@@ -6,7 +6,7 @@ import { artwork } from "./art";
 // Large inspection drawings stay separate from map preloading. If a detailed
 // image fails in a browser, retain the SAME species' map atlas instead of an
 // empty enclosure. The hidden image observes real loading errors; CSS supplies
-// the four-frame animation without per-resident React animation timers.
+// the atlas animation without per-resident React animation timers.
 export default function CollectionSprite({ asset, label, paused = false }) {
   const [fallback, setFallback] = useState(false);
   useEffect(() => setFallback(false), [asset]);
@@ -27,6 +27,7 @@ export default function CollectionSprite({ asset, label, paused = false }) {
       </span>
     );
   const src = imageSource(sheet);
+  const columns = sheet.columns || 4;
   return (
     <span
       role="img"
@@ -35,7 +36,8 @@ export default function CollectionSprite({ asset, label, paused = false }) {
       style={{
         backgroundImage: `url(${src})`,
         aspectRatio: `${sheet.width} / ${sheet.height}`,
-        "--frame-time": `${(sheet.frameMs || 170) * 4}ms`,
+        "--frames": columns,
+        "--frame-time": `${(sheet.frameMs || 170) * columns}ms`,
       }}
     >
       <img

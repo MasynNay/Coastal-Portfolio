@@ -11,6 +11,8 @@ These files support the site; they are not browser code. JavaScript build helper
 | Verify published assets | `VerifyWorldAssets.py`, `VerifySprites.py`, `VerifyDirections.py`, `VerifyCollections.py`, `VerifyArcade.py` |
 | Publish character sheets | `BuildPeople.py`, `BuildActivities.py`, `PreparePeople.py`; see source catalogs and the sprite maintenance guide |
 | Reapply character details | `MatchMasyn.py` matches the costume faces to Everyday Hoodie after packing. `BuildTumbling.py` packs Fallyn's tumbling drawings. |
+| Pack swimming geese | `BuildGooseSwims.py` packs drawn water poses and their in-betweens for eight directions. |
+| Add in-between sprite poses | `BuildInbetweens.py` rebuilds walk/run, wildlife, and collection cycles from the existing key poses at the same playback speed. |
 | Import supplied/generated artwork | `Import*.py`, grouped by asset subject; each module describes its input manifest and output |
 | Clean sprite exports | `CleanSprites.py` checks by default; `--write` repairs exports |
 | Repair audited animal art | `RepairAnimalSprites.py` reapplies atlas corrections and rebuilds the map sprites listed in `FineSprites.json` |

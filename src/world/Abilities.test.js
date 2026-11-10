@@ -7,7 +7,7 @@ import {
   abilityProjectile,
 } from "./Abilities";
 import { playerPose } from "./PlayerPose";
-import { spriteFrame } from "./animation";
+import { authoredFrameIndex, spriteFrame } from "./animation";
 import sheets from "./SpriteSheets.json";
 test("each Masyn costume has its own complete Q sequence and restores its walking pose afterward", () => {
   for (const outfit of ["lodge", "contact", "resume", "portfolio", "skills"]) {
@@ -78,7 +78,7 @@ test("trident returns to the throwing hand before the held trident reappears", (
   expect(abilityProjectile(e, 715).x).toBeGreaterThan(4);
   expect(abilityProjectile(e, 1149).x).toBeCloseTo(0.55, 1);
   expect(abilityProjectile(e, 1150)).toBe(null);
-  expect(abilityColumn(e, 1150)).toBe((3 * sheets[e.asset].columns) / 4);
+  expect(abilityColumn(e, 1150)).toBe(authoredFrameIndex(sheets[e.asset], 6));
 });
 test("archer aim rows follow the same cardinal direction as the released arrow", () => {
   for (const [direction, row, dx, dz] of [
@@ -127,6 +127,6 @@ test("Mi Shell has a four-direction money toss and keeps her surf mount", () => 
   );
   expect(effect.dz).toBeCloseTo(-1);
   expect(abilityColumn(effect, 700)).toBe(
-    (2 * sheets[effect.asset].columns) / 4,
+    authoredFrameIndex(sheets[effect.asset], 4),
   );
 });

@@ -1,4 +1,5 @@
 import { chooseFish } from "./Fish";
+import { authoredFrameIndex } from "./animation";
 // Fishing plays on the map: cast once, hold the last rod pose while waiting,
 // then fade to a small result panel. A single cancellable timer owns each phase.
 export const fishingStages = [
@@ -36,7 +37,7 @@ export function fishingPoseTime(sheet, elapsed, phase) {
   if (phase === "bite" || phase === "fade") {
     // Reverse toward the drawn lift pose when reeling. It works for the same
     // eight directional frames while standing and on the axolotl.
-    const lift = Math.max(0, hold - 4);
+    const lift = Math.max(0, hold - authoredFrameIndex(sheet, 4));
     return (
       (hold - Math.floor(fishingPull(elapsed, phase) * (hold - lift))) *
       sheet.frameMs

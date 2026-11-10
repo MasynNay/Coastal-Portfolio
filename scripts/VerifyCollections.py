@@ -1,4 +1,4 @@
-"""Audit every collectible's real map/detail atlas, including all four frames."""
+"""Audit every collectible's map and inspection atlas, including in-betweens."""
 
 from pathlib import Path
 from PIL import Image
@@ -18,6 +18,7 @@ for species in catalog["spiders"] + catalog["fish"]:
             "ch", sheet.get("height")
         )
         rows, columns = sheet.get("rows", 1), sheet.get("columns", 4)
+        assert columns == 8, (species["id"], kind, "missing in-between poses")
         assert image.size == (cw * columns, ch * rows), (
             species["id"],
             kind,

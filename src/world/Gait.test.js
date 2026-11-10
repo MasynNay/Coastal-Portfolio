@@ -57,8 +57,10 @@ test("every outfit keeps the same leading foot when switching between walk/run o
       run = sheets[asset + "-run"];
     expect(walk.frameMs * walk.cycleFrames).toBe(timing.walkCycleMs);
     expect(run.frameMs * run.cycleFrames).toBe(timing.runCycleMs);
-    for (let phase = 0; phase < 16; phase++) {
-      const clock = ((phase + 0.25) / 16) * walkCycleMs;
+    expect(walk.cycleFrames).toBe(32);
+    expect(run.cycleFrames).toBe(walk.cycleFrames);
+    for (let phase = 0; phase < walk.cycleFrames; phase++) {
+      const clock = ((phase + 0.25) / walk.cycleFrames) * walkCycleMs;
       for (let direction = 0; direction < 8; direction++) {
         const a = spriteFrame(
           walk,

@@ -6,6 +6,7 @@ import {
 } from "./Runner";
 import { drawMagnetCoin, drawTrackCoin } from "./RunnerCoins";
 import { artwork, drawSprite } from "../art";
+import { authoredFrameTime } from "../animation";
 import { drawRunnerTrack, runnerView, runnerCamera } from "./RunnerTrack";
 import {
   drawBurningObstacle,
@@ -127,11 +128,14 @@ export function drawRunner(ctx, cache, state, asset) {
   if (state.invulnerable > 0) ctx.globalAlpha = 0.7;
   const base = asset.replace(/-run$/, "");
   const pose = state.jump || state.duck ? base + "-board-trick" : asset;
+  const sheet = artwork[pose];
+  const trickFrames = sheet?.cycleFrames || 8;
   const progress = state.jump ? 1 - state.jump / runnerJumpTime : 0;
   const poseClock = state.jump
-    ? Math.min(7, Math.floor(progress * 8)) * 95
+    ? Math.min(trickFrames - 1, Math.floor(progress * trickFrames)) *
+      (sheet?.frameMs || 95)
     : state.duck
-      ? 190
+      ? authoredFrameTime(sheet, 2)
       : time;
   const actorHeight =
     132 * ((artwork[pose]?.ch || 144) / (artwork[pose]?.bodyHeight || 96));

@@ -3,8 +3,7 @@
 export const webProjects = [
   {
     id: "anything-plays",
-    imgUrl:
-      "https://anythingplays.masynnay.com/assets/anything-plays-desktop-preview.webp",
+    imgUrl: "/images/projects/anything-plays-ocarina.webp",
     previewKind: "interface",
     title: "Anything Plays",
     website: "https://anythingplays.masynnay.com/",

@@ -1,4 +1,6 @@
 # Artwork importers and read-only sprite validation.
 Pillow>=10.2
+# Optical-flow matching for BuildInbetweens.py. Never loaded by the website.
+opencv-python-headless==4.12.0.88
 # Formatting only; not part of the deployed website.
 black==25.1.0

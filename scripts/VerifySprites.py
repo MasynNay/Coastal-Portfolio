@@ -89,7 +89,7 @@ for look in looks:
     for suffix in ["", "-run"]:
         sheet = sheets[look + suffix]
         assert (
-            sheet.get("drawn") and sheet["cycleFrames"] == 16 and sheet["rows"] == 8
+            sheet.get("drawn") and sheet["cycleFrames"] == 32 and sheet["rows"] == 8
         ), (look + suffix, "incomplete complete-body redraw")
         assert (sheet["cw"], sheet["ch"], sheet["bodyHeight"], sheet["footY"]) == (
             128,
@@ -126,6 +126,6 @@ print("Verified", len(sheets), "atlases and", frames, "nonempty transparent fram
 print(
     "All",
     len(looks),
-    "appearances have complete 16-pose, eight-direction walk/run drawings.",
+    "appearances have 32-pose walk/run cycles in all eight directions.",
 )
 print("All family/costume activity atlases use complete-body drawings.")

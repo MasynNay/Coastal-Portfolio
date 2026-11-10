@@ -25,6 +25,8 @@ jest.mock("./art", () => {
   return {
     artwork,
     createArtCache: () => ({
+      beginFrame: () => {},
+      endFrame: () => {},
       get: (id) =>
         mockMissing.has(id) ? undefined : { width: 1024, height: 1152 },
       load: async (id) => {
@@ -70,7 +72,7 @@ const drawn = () => drawSprite.mock.calls.map((call) => call[2].id);
 test("the goose couple keeps its artwork without announcing names above the pond", () => {
   scene.draw({ ...state, animals: roamingAnimals(1000) }, 1000);
   expect(drawn()).toEqual(
-    expect.arrayContaining(["goose-white", "goose-canada"]),
+    expect.arrayContaining(["goose-white-swim", "goose-canada-swim"]),
   );
   const ctx = HTMLCanvasElement.prototype.getContext.mock.results[0].value;
   expect(

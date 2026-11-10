@@ -88,8 +88,24 @@ export function roamingPeople(time, clock = (id, t) => t) {
   });
 }
 const animalIndex = new Map(animals.map((a, i) => [a.id, i]));
+const ducks = animals.filter((a) => a.kind === "duck");
+const duckIndex = new Map(ducks.map((duck, i) => [duck.id, i]));
+const dogLapMs = 11200;
+const dogSniffMs = 1900;
+function dogRoute(time, index) {
+  const lap = (time + index * 1379) / (dogLapMs + dogSniffMs);
+  const elapsed = (lap % 1) * (dogLapMs + dogSniffMs);
+  const progress = Math.min(1, elapsed / dogLapMs);
+  // Slow into the sniff break and ease out of it without changing the route.
+  const t = Math.PI * 2 * (Math.floor(lap) + progress);
+  const distance = t - Math.sin(t) * 0.92;
+  return {
+    angle: distance + index * 1.7,
+    sniffing: elapsed >= dogLapMs,
+    stride: distance * 210,
+  };
+}
 export function roamingAnimals(time, visibleSpiders = null) {
-  const ducks = animals.filter((a) => a.kind === "duck");
   return animals
     .filter((a) => !visibleSpiders || !a.chance || visibleSpiders.has(a.id))
     .map((a) => {
@@ -100,13 +116,10 @@ export function roamingAnimals(time, visibleSpiders = null) {
       if (a.kind === "duck")
         return {
           ...a,
-          ...duckRoutine(
-            time,
-            ducks.findIndex((d) => d.id === a.id),
-            ducks.length,
-          ),
+          ...duckRoutine(time, duckIndex.get(a.id), ducks.length),
         };
-      const t = time / 2400 + i * 1.7,
+      const dog = a.kind === "dog" ? dogRoute(time, i) : null;
+      const t = dog?.angle ?? time / 2400 + i * 1.7,
         water = a.kind !== "dog" && a.kind !== "land";
       const radius = a.chance ? 0.8 : 1.8,
         depth = a.chance ? 0.6 : 1.4;
@@ -120,12 +133,13 @@ export function roamingAnimals(time, visibleSpiders = null) {
         ...a,
         x,
         z,
-        moving: true,
+        moving: !dog?.sniffing,
+        sniffing: !!dog?.sniffing,
         direction: movementDirection(
           Math.cos(t) * (water ? pond.rx * 0.76 : radius),
           -Math.sin(t) * (water ? pond.rz * 0.7 : depth),
         ),
-        time: time * 0.7,
+        time: dog?.stride ?? time * 0.7,
       };
     });
 }

@@ -128,16 +128,9 @@ function FishingResult({ result, onClose, onAgain, onAquariums }) {
         className={
           "fishing-result-icon " + (result.caught ? "has-fish" : "has-ripple")
         }
-        style={
-          result.caught
-            ? {
-                backgroundImage: "url(/world/sprites/fish.webp)",
-              }
-            : undefined
-        }
         aria-hidden="true"
       >
-        {result.caught ? "" : "〰"}
+        {result.caught ? <SpritePose asset="fish" scale={0.5} /> : "〰"}
       </span>
       <h3>{result.caught ? "You caught a fish!" : "It got away!"}</h3>
       <p>

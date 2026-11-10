@@ -2,6 +2,7 @@ import { conductFrame } from "./WindStatue";
 import sheets from "./SpriteSheets.json";
 import { glideDurationMs } from "./Glide";
 import { tumblingDuration, tumblingPose } from "./Tumbling";
+import { authoredFrameIndex } from "./animation";
 // One definition feeds the Q button, engine timing, action sprites and effects.
 // Outfit actions briefly plant Masyn's feet; held movement resumes afterward.
 const costumeAbilities = {
@@ -111,16 +112,28 @@ export function startAbility(actor, time) {
   };
 }
 export function abilityColumn(effect, time) {
-  if (effect.kind === "conduct") return conductFrame(time - effect.started);
-  if (effect.kind === "tumbling") return tumblingPose(effect, time)?.frame || 0;
+  const sheet = sheets[effect.asset];
+  if (effect.kind === "conduct")
+    return conductFrame(time - effect.started, sheet);
+  if (effect.kind === "tumbling") {
+    const pose = tumblingPose(effect, time);
+    return pose && sheet?.inbetweenVersion
+      ? authoredFrameIndex(sheet, pose.frame) + Number(pose.between)
+      : pose?.frame || 0;
+  }
   const age = Math.max(0, time - effect.started);
   const stage = effect.cuts?.filter((cut) => age >= cut).length || 0;
-  const columns = sheets[effect.asset]?.columns || 4;
-  if (columns <= 4 || !effect.cuts) return stage;
+  if (!effect.cuts) return stage;
+  const columns = sheet?.columns || 4;
+  const posesPerStage = Math.ceil(columns / 4);
   const boundaries = [0, ...effect.cuts, effect.duration];
   const progress =
     (age - boundaries[stage]) / (boundaries[stage + 1] - boundaries[stage]);
-  return Math.min(columns - 1, stage * 2 + (progress >= 0.5 ? 1 : 0));
+  return Math.min(
+    columns - 1,
+    stage * posesPerStage +
+      Math.min(posesPerStage - 1, Math.floor(progress * posesPerStage)),
+  );
 }
 // Projectile positions are independent of the render rate. The trident makes
 // one out-and-back trip and meets the hand exactly when its return pose starts.

@@ -105,7 +105,7 @@ test("parked hulls are solid and all five family members have complete direction
     expect(sheets[name + "-water-ride"]).toMatchObject({
       rows: 8,
       drawn: true,
-      columns: 9,
+      columns: 17,
       canonicalDirections: true,
       layout: "eight",
     });

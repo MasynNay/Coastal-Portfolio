@@ -46,7 +46,7 @@ test("species, rarity rolls and old saved collections remain valid", () => {
   expect(bugSpecies).toHaveLength(500);
   expect(terrariumSpecies.filter((s) => s.legacy)).toHaveLength(0);
   expect(new Set(bugSpecies.map((s) => s.art)).size).toBe(bugSpecies.length);
-  for (const s of bugSpecies) expect(sheets[s.art]?.columns).toBe(4);
+  for (const s of bugSpecies) expect(sheets[s.art]?.columns).toBe(8);
   expect(chooseBug(() => 0).rarity).toBe("Super rare");
   // Independent category/rarity rolls: the same within-group roll must yield
   // the same rarity, and each fifth of the category roll selects a different group.

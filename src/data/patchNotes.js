@@ -2,6 +2,18 @@
 // the preceding production commit, rather than fictional in-game release notes.
 const patchNotes = [
   {
+    version: "1.1.5",
+    date: "November 10, 2026",
+    previousCommit: "6f5f2ae",
+    changes: [
+      "Fixed island flickering by keeping the scenery and sprites in use loaded, including when you return from a house.",
+      "Added frames between existing poses for walking, running, rides, and character abilities across all 15 appearances.",
+      "Haymitch and Lenore Dove now use separate swimming poses. Birds leave wakes, dogs pause to sniff, and insects move differently by species.",
+      "Fish and bugs have smoother animations in the field guide and their habitats.",
+      "The Anything Plays project card now shows its Ocarina of Time screenshot.",
+    ],
+  },
+  {
     version: "1.1.4",
     date: "November 9, 2026",
     previousCommit: "ed2a88c",

@@ -25,7 +25,7 @@ test("the salute holds for three seconds, cannot repeat within one flock and ret
   expect(salute.active()).toBe(false);
   expect(salute.update(19 * flyoverPeriod + 8600)).toBeNull();
 });
-test("every family appearance has eight native salute poses and retains its costume", () => {
+test("every family appearance has a sixteen-pose salute and retains its costume", () => {
   for (const look of looks) {
     const state = {
       character: look.character,
@@ -34,7 +34,7 @@ test("every family appearance has eight native salute poses and retains its cost
     };
     expect(playerPose(state)).toBe(look.asset + "-salute");
     const sheet = sheets[look.asset + "-salute"];
-    expect(sheet.columns).toBe(8);
+    expect(sheet.columns).toBe(16);
     expect(sheet.columns * sheet.frameMs).toBe(3000);
     // Water/bike sheets retain their mount for upper-body compositing.
     expect(playerPose({ ...state, surfing: true })).toBe(look.asset + "-surf");

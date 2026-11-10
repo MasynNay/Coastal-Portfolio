@@ -30,7 +30,7 @@ test("the two board rental markers point at reachable land and complete distinct
       expect(sheet).toMatchObject({
         rows: 8,
         drawn: true,
-        columns: 9,
+        columns: action === "board-trick" ? 16 : 17,
         canonicalDirections: true,
         layout: "eight",
       });

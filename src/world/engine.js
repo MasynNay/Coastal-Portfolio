@@ -282,6 +282,8 @@ export function createWorld(host, callbacks) {
           return {
             ...a,
             ...play.dog,
+            time: worldTime * 0.9,
+            sniffing: false,
           };
         const playingBird = duck?.members?.find((member) => member.id === a.id);
         if (playingBird && !duck.done)

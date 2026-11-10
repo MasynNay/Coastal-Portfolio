@@ -48,20 +48,32 @@ export const artwork = Object.fromEntries(
     },
   ]),
 );
-// Decode only requested artwork and retain a bounded set of recently used
-// images. Costume/activity changes must not accumulate hundreds of decoded
-// atlases during a long visit. The browser can still cache their small PNGs.
+// Keep the artwork used by the current scene, plus recently used images when
+// there is room. Costume changes must not accumulate unused decoded atlases.
 export function createArtCache({ maxBytes = 192 * 1024 * 1024 } = {}) {
   const images = new Map(),
-    pending = new Map();
+    pending = new Map(),
+    active = new Set();
   let usedBytes = 0,
-    generation = 0;
+    generation = 0,
+    drawing = false;
   function get(key) {
     const item = images.get(key);
     if (!item) return undefined;
     images.delete(key);
     images.set(key, item);
     return item.image;
+  }
+  function trim(keep) {
+    if (usedBytes <= maxBytes) return;
+    // Evict unused art first, even if the active scene alone exceeds the budget.
+    // Evicting an active image would make it vanish and queue another decode.
+    for (const [key, item] of images) {
+      if (images.size <= 1 || usedBytes <= maxBytes) break;
+      if (key === keep || active.has(key)) continue;
+      usedBytes -= item.bytes;
+      images.delete(key);
+    }
   }
   function retain(key, image, data) {
     const width =
@@ -79,16 +91,25 @@ export function createArtCache({ maxBytes = 192 * 1024 * 1024 } = {}) {
     const bytes = width * height * 4;
     images.set(key, { image, bytes });
     usedBytes += bytes;
-    // Always keep the image just requested, including a single oversized atlas.
-    // Everything else is evicted oldest-first; drawing an image refreshes it.
-    while (usedBytes > maxBytes && images.size > 1) {
-      const oldest = images.keys().next().value;
-      usedBytes -= images.get(oldest).bytes;
-      images.delete(oldest);
-    }
+    trim(key);
   }
   return {
-    get: (id) => get(imageSource(artwork[id] || { src: "" })),
+    beginFrame() {
+      active.clear();
+      drawing = true;
+    },
+    endFrame() {
+      drawing = false;
+      trim();
+    },
+    get(id) {
+      const data = artwork[id];
+      if (!data) return undefined;
+      const key = imageSource(data);
+      // Include pending textures. They may finish decoding between draws.
+      if (drawing) active.add(key);
+      return get(key);
+    },
     async load(id) {
       const data = artwork[id];
       const key = data && imageSource(data);
@@ -123,6 +144,8 @@ export function createArtCache({ maxBytes = 192 * 1024 * 1024 } = {}) {
       generation++;
       images.clear();
       pending.clear();
+      active.clear();
+      drawing = false;
       usedBytes = 0;
     },
   };
@@ -137,6 +160,7 @@ export function drawSprite(
   direction,
   moving,
   time,
+  motion,
 ) {
   const width = Math.round(
     (height * (sheet.cw || sheet.width)) / (sheet.ch || sheet.height),
@@ -148,6 +172,9 @@ export function drawSprite(
   const baseline = originY ? originY / sheet.ch : 1;
   ctx.save();
   ctx.translate(x, y);
+  if (motion?.rotate) ctx.rotate(motion.rotate);
+  if (motion?.scaleX || motion?.scaleY)
+    ctx.scale(motion.scaleX ?? 1, motion.scaleY ?? 1);
   const anchor =
     sheet.anchors?.[frame.row * (sheet.columns || 4) + frame.column] ??
     sheet.cw / 2;

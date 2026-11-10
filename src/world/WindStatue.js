@@ -14,8 +14,11 @@ export function startWindSong(actor, time) {
     duration: windSongDuration,
   };
 }
-export function conductFrame(time) {
-  return Math.min(11, Math.floor(Math.max(0, time) / (windSongDuration / 12)));
+export function conductFrame(time, sheet) {
+  return Math.min(
+    (sheet?.columns || 12) - 1,
+    Math.floor(Math.max(0, time) / (sheet?.frameMs || windSongDuration / 12)),
+  );
 }
 // An original short bell melody, started only by E/tap on the statue. The
 // browser may decline audio; the complete visible performance still plays.

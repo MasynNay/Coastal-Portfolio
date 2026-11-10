@@ -63,7 +63,7 @@ export function tumblingPose(effect, time) {
   const next = routine.findIndex(([at]) => at > age);
   const [from, frame, travel, lift] =
     routine[next < 0 ? routine.length - 1 : next - 1];
-  const [until, , to, peak] =
+  const [until, nextFrame, to, peak] =
     next < 0 ? [age + 1, frame, travel, lift] : routine[next];
   const t = (age - from) / (until - from);
   return {
@@ -71,5 +71,6 @@ export function tumblingPose(effect, time) {
     z: effect.z,
     lift: lift + (peak - lift) * t,
     frame,
+    between: nextFrame === frame + 1 && t >= 0.5,
   };
 }

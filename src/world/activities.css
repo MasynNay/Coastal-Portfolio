@@ -241,9 +241,10 @@
 .collection-sprite {
   display: block;
   width: clamp(105px, 16dvh, 165px);
-  background-size: 400% 100%;
+  background-size: calc(100% * var(--frames, 4)) 100%;
   background-repeat: no-repeat;
-  animation: collection-frames var(--frame-time) step-end infinite;
+  animation: collection-frames var(--frame-time)
+    steps(var(--frames, 4), jump-none) infinite;
 }
 .is-close .habitat-spider .collection-sprite {
   width: clamp(140px, 22dvh, 215px);
@@ -306,20 +307,13 @@
   height: 44px;
   padding: 8px;
 }
-/* Explicit atlas positions keep the fourth pose inside the image, including
-   paused/reduced-motion previews. The old endpoint could expose a blank cell. */
+/* jump-none shows each packed cell exactly once and keeps paused frames
+   inside the strip at either end. */
 @keyframes collection-frames {
-  0% {
+  from {
     background-position-x: 0%;
   }
-  25% {
-    background-position-x: 33.333333%;
-  }
-  50% {
-    background-position-x: 66.666667%;
-  }
-  75%,
-  100% {
+  to {
     background-position-x: 100%;
   }
 }
@@ -781,7 +775,8 @@
   translate: -50% -50%;
   scale: var(--resident-scale);
   transform-origin: center;
-  animation: resident-explore 5s ease-in-out infinite;
+  animation: var(--resident-motion, resident-hop) var(--resident-period, 4.8s)
+    ease-in-out infinite;
   animation-delay: var(--resident-delay);
   width: clamp(60px, 32%, 165px);
 }
@@ -800,13 +795,116 @@
 .habitat-resident.is-paused {
   animation-play-state: paused;
 }
-@keyframes resident-explore {
+.habitat-resident[data-motion="sway"] {
+  --resident-motion: resident-sway;
+  --resident-period: 3.9s;
+}
+.habitat-resident[data-motion="flutter"] {
+  --resident-motion: resident-flutter;
+  --resident-period: 3.4s;
+}
+.habitat-resident[data-motion="scuttle"] {
+  --resident-motion: resident-scuttle;
+  --resident-period: 4.6s;
+}
+.habitat-resident[data-motion="hover"] {
+  --resident-motion: resident-hover;
+  --resident-period: 3.2s;
+}
+.habitat-resident[data-motion="swim"] {
+  --resident-motion: resident-swim;
+  --resident-period: 5.6s;
+}
+
+/* Short excursions fit each creature's lane, including groups at phone size. */
+@keyframes resident-hop {
+  0%,
+  30%,
+  100% {
+    transform: translate(-5px, 1px);
+  }
+  37% {
+    transform: translate(-5px, 2px) scaleY(0.96);
+  }
+  46% {
+    transform: translate(1px, -9px) rotate(-4deg);
+  }
+  54%,
+  71% {
+    transform: translate(6px, 1px);
+  }
+  79% {
+    transform: translate(1px, -6px) rotate(4deg);
+  }
+  88% {
+    transform: translate(-5px, 1px) scaleY(0.98);
+  }
+}
+@keyframes resident-sway {
   0%,
   100% {
-    transform: translate(-5px, 2px);
+    transform: translateX(-2px) rotate(-5deg);
   }
   50% {
-    transform: translate(5px, -5px);
+    transform: translateX(2px) rotate(5deg);
+  }
+}
+@keyframes resident-flutter {
+  0%,
+  100% {
+    transform: translate(-7px, 2px) rotate(-7deg);
+  }
+  30% {
+    transform: translate(0, -11px) rotate(6deg);
+  }
+  60% {
+    transform: translate(7px, -3px) rotate(4deg);
+  }
+  80% {
+    transform: translate(0, -6px) rotate(-4deg);
+  }
+}
+@keyframes resident-scuttle {
+  0%,
+  20%,
+  100% {
+    transform: translateX(-7px);
+  }
+  45%,
+  65% {
+    transform: translate(6px, 2px) rotate(4deg);
+  }
+  76% {
+    transform: translate(1px, -1px) rotate(-4deg);
+  }
+}
+@keyframes resident-hover {
+  0%,
+  20%,
+  100% {
+    transform: translate(-7px, -5px) rotate(-4deg);
+  }
+  42%,
+  58% {
+    transform: translate(8px, -8px) rotate(5deg);
+  }
+  77% {
+    transform: translate(4px, 0) rotate(-5deg);
+  }
+}
+@keyframes resident-swim {
+  0%,
+  100% {
+    transform: translate(-8px, 3px) rotate(-3deg);
+  }
+  24% {
+    transform: translate(-3px, -6px) rotate(-5deg);
+  }
+  50% {
+    transform: translate(8px, -4px) rotate(3deg);
+  }
+  76% {
+    transform: translate(4px, 5px) rotate(5deg);
   }
 }
 @media (prefers-reduced-motion: reduce) {

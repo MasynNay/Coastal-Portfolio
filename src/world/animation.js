@@ -95,6 +95,16 @@ export function movementDirection(dx, dz) {
   return (Math.round(Math.atan2(dx, dz) / (Math.PI / 4)) + 8) % 8;
 }
 
+// Choreography still addresses the original key poses after an atlas gains
+// in-betweens. A fixed cue like a crouch should land on the same drawing.
+export function authoredFrameTime(sheet, frame) {
+  return authoredFrameIndex(sheet, frame) * (sheet?.frameMs || 95);
+}
+
+export function authoredFrameIndex(sheet, frame) {
+  return frame * (sheet?.inbetweenVersion ? 2 : 1);
+}
+
 // A run has two airborne phases per stride. This small continuous lift preserves
 // stable sprite anchors while giving the knees/arms an actual running bounce.
 export function runningLift(sheet, moving, time) {
