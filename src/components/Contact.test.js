@@ -41,6 +41,12 @@ const submit = () =>
     .querySelector("form")
     .dispatchEvent(new Event("submit", { bubbles: true, cancelable: true }));
 
+test("the contact section is an entry point to Hire Me", () => {
+  expect(
+    host.querySelector('#contact a[href="/services"]').textContent,
+  ).toContain("Hire Me for a Website");
+});
+
 test("failed delivery keeps the visitor's message and offers the correct direct-email fallback", async () => {
   const log = jest.spyOn(console, "error").mockImplementation(() => {});
   sendContactMessage.mockRejectedValue(new Error("Service unavailable"));

@@ -38,6 +38,7 @@ function show(path) {
 }
 test("collapsed navigation closes after choosing a section and respects reduced motion", () => {
   show("/design/glass");
+  expect(host.querySelector('a[href="/services"]')).toBeNull();
   const toggle = host.querySelector(".navbar-toggler");
   expect(toggle.getAttribute("aria-label")).toBe("Toggle navigation");
   act(() => toggle.click());

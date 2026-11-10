@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <title>Stillform Ceramics | Website Concept</title>
+    <link rel="stylesheet" href="examples.css" />
+    <script src="examples.js" defer></script>
+  </head>
+  <body class="demo stillform">
+    <div class="demo-bar">
+      <a href="/services#designs">← Back to Website Examples</a
+      ><span>Fictional Business · Interactive Concept</span>
+    </div>
+    <header class="demo-nav wrap">
+      <a class="brand" href="#home">STILLFORM</a>
+      <nav aria-label="Stillform Ceramics navigation">
+        <a href="#collection">The Collection</a><a href="#bag">Sample Bag</a>
+      </nav>
+    </header>
+    <main id="home">
+      <section class="still-hero">
+        <img
+          src="stillform-hero.webp"
+          width="1200"
+          height="800"
+          alt="Handmade ceramic pitcher, cups, and a green bowl on limestone"
+        />
+        <div class="wrap">
+          <p class="eyebrow">THE EVERYDAY COLLECTION / 01</p>
+          <h1>Made to<br />be used.</h1>
+          <a class="demo-action" href="#collection">Shop the Collection</a>
+        </div>
+      </section>
+      <section class="still-collection wrap" id="collection" data-cart>
+        <div class="still-intro">
+          <div>
+            <p class="eyebrow">SMALL-BATCH STONEWARE</p>
+            <h2>Objects for the table.</h2>
+          </div>
+          <p>
+            A compact store concept with a working sample bag. Prices and
+            products are illustrative.
+          </p>
+        </div>
+        <div class="still-items">
+          <article>
+            <div class="pot pot-cup" aria-hidden="true"><i></i></div>
+            <h3>Everyday Cup</h3>
+            <p><data value="28">$28</data></p>
+            <button type="button" data-add="cup">Add to Bag</button>
+          </article>
+          <article>
+            <div class="pot pot-bowl" aria-hidden="true"><i></i></div>
+            <h3>Shallow Bowl</h3>
+            <p><data value="42">$42</data></p>
+            <button type="button" data-add="bowl">Add to Bag</button>
+          </article>
+          <article>
+            <div class="pot pot-pitcher" aria-hidden="true"><i></i></div>
+            <h3>Sunday Pitcher</h3>
+            <p><data value="64">$64</data></p>
+            <button type="button" data-add="pitcher">Add to Bag</button>
+          </article>
+        </div>
+        <aside id="bag" class="still-bag">
+          <div>
+            <p class="eyebrow">STORE DEMO</p>
+            <h2>Sample Bag</h2>
+          </div>
+          <div>
+            <ul data-bag-items></ul>
+            <p role="status" data-bag-total>Your bag is empty.</p>
+          </div>
+        </aside>
+      </section>
+    </main>
+    <footer class="demo-footer wrap">
+      <span>Website concept by Masyn Nay</span
+      ><a href="/services?direction=stillform#request"
+        >Use This Design Direction ↗</a
+      >
+    </footer>
+  </body>
+</html>

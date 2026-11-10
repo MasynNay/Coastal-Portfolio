@@ -2,6 +2,17 @@
 // the preceding production commit, rather than fictional in-game release notes.
 const patchNotes = [
   {
+    version: "1.1.6",
+    date: "November 10, 2026",
+    previousCommit: "307a90d",
+    changes: [
+      "Find Hire Me for a Website in Contact Me. The main navigation and homepage keep their focus on the portfolio.",
+      "The website services page now features the preserved Mother Goose Tumbling site as a past client project.",
+      "Explore six interactive website concepts, including a class timetable, estimate planner, sample shopping bag, pantry, consulting practice, and bakery.",
+      "Pick a concept to carry its design direction into the written quote form.",
+    ],
+  },
+  {
     version: "1.1.5",
     date: "November 10, 2026",
     previousCommit: "6f5f2ae",

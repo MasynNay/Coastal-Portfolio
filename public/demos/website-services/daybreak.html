@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <title>Daybreak Bakehouse | Website Concept</title>
+    <link rel="stylesheet" href="examples.css" />
+    <script src="examples.js" defer></script>
+  </head>
+  <body class="demo daybreak">
+    <div class="demo-bar">
+      <a href="/services#designs">← Back to Website Examples</a
+      ><span>Fictional Business · Interactive Concept</span>
+    </div>
+    <header class="demo-nav wrap">
+      <a class="brand" href="#home"
+        ><span aria-hidden="true">☀</span> DAYBREAK<span class="brand-sub"
+          >BAKEHOUSE &amp; COFFEE</span
+        ></a
+      >
+      <nav aria-label="Daybreak Bakehouse navigation">
+        <a href="#menu">Menu</a><a href="#find-us">Find Us</a>
+      </nav>
+    </header>
+    <main id="home">
+      <section class="daybreak-hero">
+        <div class="daybreak-copy">
+          <p class="eyebrow">SMALL BATCH · FRESH EVERY MORNING</p>
+          <h1>Early looks<br />good on you.</h1>
+          <p>Butter, good coffee, and something to bring home.</p>
+          <a class="demo-action" href="#menu">See What’s Baking ↓</a>
+        </div>
+        <img
+          src="daybreak-hero.webp"
+          width="1200"
+          height="800"
+          alt="Fresh croissants and coffee on a bakery counter"
+        />
+      </section>
+      <section class="daybreak-menu wrap" id="menu" data-filter>
+        <p class="eyebrow">ORDER AT THE COUNTER</p>
+        <h2>The Morning Menu</h2>
+        <div class="demo-tabs" role="group" aria-label="Filter menu">
+          <button type="button" data-filter-value="all" aria-pressed="true">
+            Full Menu</button
+          ><button type="button" data-filter-value="bakes" aria-pressed="false">
+            Bakes</button
+          ><button
+            type="button"
+            data-filter-value="coffee"
+            aria-pressed="false"
+          >
+            Coffee
+          </button>
+        </div>
+        <div class="daybreak-menu-items">
+          <article data-choice="bakes">
+            <h3>Butter Croissant</h3>
+            <strong>$4.50</strong>
+            <p>Flaky, golden, and baked before sunrise.</p>
+          </article>
+          <article data-choice="bakes">
+            <h3>Maple Morning Bun</h3>
+            <strong>$5</strong>
+            <p>Rolled with maple sugar and a little cinnamon.</p>
+          </article>
+          <article data-choice="coffee">
+            <h3>House Drip</h3>
+            <strong>$3.50</strong>
+            <p>A rotating local roast, served hot.</p>
+          </article>
+          <article data-choice="coffee">
+            <h3>Oat Latte</h3>
+            <strong>$5.50</strong>
+            <p>Espresso and silky steamed oat milk.</p>
+          </article>
+        </div>
+        <p class="demo-caption" role="status" data-filter-status="item"></p>
+      </section>
+      <section class="daybreak-visit wrap" id="find-us">
+        <div>
+          <p class="eyebrow">WALK IN OR TAKE IT TO GO</p>
+          <h2>See you early.</h2>
+        </div>
+        <dl>
+          <dt>Tuesday–Friday</dt>
+          <dd>7 AM–1 PM</dd>
+          <dt>Saturday &amp; Sunday</dt>
+          <dd>8 AM–2 PM</dd>
+        </dl>
+      </section>
+    </main>
+    <footer class="demo-footer wrap">
+      <span>Website concept by Masyn Nay</span
+      ><a href="/services?direction=daybreak#request"
+        >Use This Design Direction ↗</a
+      >
+    </footer>
+  </body>
+</html>

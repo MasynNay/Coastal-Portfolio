@@ -1,0 +1,670 @@
+/* Shared frame, focus states, and controls. Each concept owns its layout below. */
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font:
+    16px/1.6 system-ui,
+    sans-serif;
+}
+[hidden] {
+  display: none !important;
+}
+h1,
+h2,
+h3,
+p,
+dl,
+dd {
+  margin: 0;
+}
+h1,
+h2,
+h3 {
+  line-height: 1.04;
+}
+h1 {
+  font-size: clamp(48px, 7.1vw, 108px);
+  letter-spacing: -0.075em;
+}
+h2 {
+  font-size: clamp(31px, 4vw, 59px);
+  letter-spacing: -0.055em;
+}
+h3 {
+  font-size: 22px;
+}
+a,
+button,
+select {
+  color: inherit;
+}
+a:focus-visible,
+button:focus-visible,
+select:focus-visible,
+summary:focus-visible {
+  outline: 3px solid currentColor;
+  outline-offset: 4px;
+}
+button,
+select {
+  font: inherit;
+}
+button,
+summary {
+  cursor: pointer;
+}
+button,
+select {
+  min-height: 44px;
+}
+.wrap {
+  width: min(1190px, calc(100% - 2 * clamp(20px, 5vw, 70px)));
+  margin-inline: auto;
+}
+.demo-bar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 4px 16px;
+  padding: 9px clamp(20px, 5vw, 70px);
+  background: #242728;
+  color: #fff;
+  font-size: 12px;
+}
+.demo-nav,
+.demo-nav nav,
+.demo-footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px 26px;
+}
+.demo-nav {
+  min-height: 85px;
+  padding-block: 16px;
+  border-bottom: 1px solid var(--line);
+}
+.demo-nav a,
+.demo-action {
+  text-decoration: none;
+}
+.demo-nav nav a:hover,
+.demo-action:hover {
+  text-decoration: underline;
+}
+.brand {
+  font-size: 24px;
+  font-weight: 850;
+  letter-spacing: -0.055em;
+  line-height: 1;
+}
+.brand-sub {
+  display: block;
+  margin-top: 7px;
+  font-size: 9px;
+  font-weight: 750;
+  letter-spacing: 0.2em;
+}
+.eyebrow {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+  margin-bottom: 14px;
+}
+.demo-action {
+  display: inline-flex;
+  width: fit-content;
+  gap: 12px;
+  align-items: center;
+  min-height: 44px;
+  padding: 11px 17px;
+  font-size: 14px;
+  font-weight: 750;
+  background: var(--action);
+  color: var(--action-ink);
+}
+.demo-footer {
+  padding-block: 22px;
+  border-top: 1px solid var(--line);
+  font-size: 13px;
+}
+.demo-caption {
+  min-height: 1.6em;
+  margin-top: 10px;
+  font-size: 13px;
+}
+.demo-links,
+.demo-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 16px;
+}
+.demo-tabs button,
+.still-items button,
+.still-bag button {
+  background: transparent;
+  border: 1px solid currentColor;
+  padding: 7px 13px;
+}
+.demo-tabs button[aria-pressed="true"] {
+  color: var(--action-ink);
+  background: var(--action);
+  border-color: var(--action);
+}
+section[id],
+aside[id] {
+  scroll-margin-top: 20px;
+}
+details {
+  padding: 9px 0 12px;
+  border-bottom: 1px solid var(--line);
+}
+details summary {
+  padding: 8px 0;
+  min-height: 44px;
+  font-weight: 750;
+}
+details p {
+  padding-left: 18px;
+}
+h1 + p,
+h2 + p {
+  margin-block: 16px 22px;
+  max-width: 42ch;
+}
+.demo img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Brightside pairs industrial typography with a quick estimate checklist. */
+.brightside {
+  --paper: #111824;
+  --ink: #eff3ed;
+  --line: #ffffff42;
+  --action: #d5f263;
+  --action-ink: #141c23;
+}
+.brightside .brand > span:first-child,
+.bright-copy h1 span,
+.bright-cards article > span {
+  color: var(--action);
+}
+.bright-hero {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  align-items: center;
+  padding-block: 48px;
+}
+.bright-copy h1 {
+  font-family: "Arial Black", system-ui, sans-serif;
+  font-weight: 900;
+}
+.bright-hero img {
+  aspect-ratio: 1.25;
+  object-fit: cover;
+  border-radius: 0 34px 0 0;
+}
+.bright-services {
+  padding-block: 28px 56px;
+}
+.bright-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-top: 24px;
+}
+.bright-cards article {
+  border-top: 2px solid var(--action);
+  background: #1d293b;
+  padding: 20px;
+}
+.bright-cards h3 {
+  margin-block: 12px 8px;
+}
+.bright-estimate {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22px;
+  padding-block: 30px 60px;
+  border-top: 1px solid var(--line);
+}
+.demo-panel {
+  background: #1d293b;
+  padding: 22px;
+}
+.demo-panel label {
+  display: block;
+  font-weight: 700;
+}
+.demo-panel select {
+  color-scheme: dark;
+  width: 100%;
+  margin: 10px 0 20px;
+  background: #111824;
+  border: 1px solid var(--line);
+  padding: 7px 12px;
+}
+.demo-panel h3 {
+  margin-bottom: 7px;
+}
+
+/* Juniper is intentionally softer and leads directly to a filterable timetable. */
+.juniper {
+  --paper: #f5e6dc;
+  --ink: #472921;
+  --line: #47292148;
+  --action: #82382b;
+  --action-ink: #fff6ee;
+}
+.juniper :is(.brand, h1, h2) {
+  font-family: Georgia, serif;
+  font-weight: 400;
+}
+.juniper-hero {
+  display: grid;
+  grid-template-columns: 1.05fr 1fr;
+  gap: clamp(22px, 6vw, 90px);
+  align-items: center;
+  padding-block: 40px;
+}
+.juniper-hero img {
+  aspect-ratio: 1.2;
+  object-fit: cover;
+  border-radius: 49% 49% 10px 10px;
+}
+.juniper-hero em {
+  color: #82382b;
+}
+.juniper .demo-action,
+.juniper button {
+  border-radius: 999px;
+}
+.juniper-schedule {
+  padding-block: 40px;
+}
+.juniper-schedule .demo-tabs {
+  margin: 22px 0 16px;
+}
+.juniper-classes article {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr auto;
+  align-items: center;
+  gap: 8px 12px;
+  min-height: 66px;
+  padding: 10px 0;
+  border-top: 1px solid var(--line);
+}
+.juniper-classes .class-time {
+  font-size: 13px;
+  font-weight: 700;
+}
+.juniper-classes article span:not(.class-time) {
+  background: #fff6ee;
+  padding: 4px 9px;
+  border-radius: 9px;
+  font-size: 12px;
+}
+.juniper-first {
+  padding-block: 32px 52px;
+  border-top: 1px solid var(--line);
+}
+
+/* Stillform uses a photo-led storefront and a local, reversible sample cart. */
+.stillform {
+  --paper: #f5f0e6;
+  --ink: #34342a;
+  --line: #34342a42;
+  --action: #34342a;
+  --action-ink: #fffdf4;
+}
+.stillform .brand {
+  font-size: 20px;
+  letter-spacing: 0.25em;
+}
+.stillform :is(h1, h2) {
+  font-family: Georgia, serif;
+  font-weight: 400;
+}
+.still-hero {
+  position: relative;
+  isolation: isolate;
+  min-height: clamp(370px, 48vw, 650px);
+  display: grid;
+  align-items: center;
+  color: #fffdf4;
+  background: #4b473b;
+}
+.still-hero img,
+.still-hero::after {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+  z-index: -1;
+}
+.still-hero img {
+  object-fit: cover;
+  object-position: 58% center;
+}
+.still-hero::after {
+  content: "";
+  width: 100%;
+  background: linear-gradient(90deg, #221d16e8, #221d167d 58%, #221d1612);
+}
+.still-hero .demo-action {
+  margin-top: 26px;
+  background: #fffdf4;
+  color: #34342a;
+}
+.still-collection {
+  padding-block: 52px;
+}
+.still-intro {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 12px 24px;
+  align-items: end;
+}
+.still-intro > p {
+  max-width: 38ch;
+}
+.still-items {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  margin-block: 24px 38px;
+}
+.still-items h3 {
+  margin-block: 14px 6px;
+}
+.still-items button {
+  margin-top: 12px;
+}
+.pot {
+  height: clamp(108px, 22vw, 220px);
+  display: grid;
+  place-items: center;
+  background: #e4dbca;
+}
+.pot i {
+  width: 32%;
+  height: 58%;
+  background: linear-gradient(100deg, #c0a887, #eee2cd 42%, #b79a76);
+  box-shadow: 5px 7px 11px #55432645;
+  border-radius: 14% 14% 35% 35%;
+}
+.pot-bowl i {
+  width: 55%;
+  height: 27%;
+  background: linear-gradient(100deg, #6f806c, #a1aa91 42%, #5d6f5a);
+  border-radius: 6% 6% 44% 44%;
+}
+.pot-pitcher i {
+  height: 69%;
+  border-radius: 11% 17% 33% 33%;
+}
+.still-bag {
+  display: grid;
+  grid-template-columns: 1fr 1.25fr;
+  gap: 18px;
+  background: #e9e1d3;
+  padding: 22px;
+}
+.still-bag ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.still-bag li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 5px 12px;
+  margin-bottom: 8px;
+}
+.still-bag p[role="status"] {
+  font-weight: 700;
+}
+
+/* Open Table uses two clear paths for different community audiences. */
+.open-table {
+  --paper: #fff9e8;
+  --ink: #231e42;
+  --line: #231e4242;
+  --action: #ffcd54;
+  --action-ink: #221d39;
+}
+.open-table .brand {
+  color: #423495;
+}
+.pantry-hero {
+  display: grid;
+  grid-template-columns: 1fr 1.03fr;
+  gap: 18px 26px;
+  align-items: center;
+  padding-block: 42px;
+}
+.pantry-hero h1 {
+  font-weight: 900;
+  color: #4935a0;
+}
+.pantry-hero img {
+  aspect-ratio: 1.33;
+  object-fit: cover;
+  border-radius: 40px;
+  border: 7px solid #ebe2ff;
+}
+.pantry-hero .demo-action {
+  border-radius: 999px;
+}
+.plain-action {
+  font-size: 14px;
+  font-weight: 750;
+  padding-block: 10px;
+}
+.pantry-help {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 18px;
+  background: #e9e1ff;
+  border-radius: 18px;
+  padding: 25px;
+}
+.pantry-help dl {
+  display: flex;
+  gap: 14px 28px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.pantry-help dt {
+  font-weight: 800;
+}
+.pantry-volunteer {
+  padding-block: 52px;
+}
+.pantry-roles {
+  margin-top: 20px;
+  max-width: 690px;
+}
+
+/* Alder has an editorial grid and a written example engagement. */
+.alder {
+  --paper: #e8e8de;
+  --ink: #1a2a31;
+  --line: #1a2a3154;
+  --action: #234857;
+  --action-ink: #f8f6e9;
+}
+.alder .brand {
+  letter-spacing: 0.23em;
+}
+.alder :is(h1, h2) {
+  font-family: Georgia, serif;
+  font-weight: 400;
+}
+.alder h1 em {
+  color: #416472;
+}
+.alder-hero {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 34px;
+  align-items: stretch;
+  padding-block: clamp(35px, 7vw, 105px);
+}
+.alder-index {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 24px;
+  padding: clamp(20px, 4vw, 40px);
+  background: #284b58;
+  color: #fbfaeb;
+}
+.alder-index ol {
+  margin: 0;
+  padding-left: 25px;
+  font-size: clamp(18px, 2.2vw, 28px);
+}
+.alder-index li {
+  border-bottom: 1px solid #fcf4df54;
+  padding-block: 9px;
+}
+.alder-index p {
+  max-width: 35ch;
+}
+.alder-expertise {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 18px;
+  padding-block: 35px 50px;
+  border-top: 1px solid var(--line);
+}
+.alder-approach {
+  padding-block: 36px 55px;
+  border-top: 1px solid var(--line);
+}
+
+@media (max-width: 720px) {
+  .demo-nav nav {
+    gap: 10px 16px;
+    font-size: 14px;
+  }
+  .bright-hero,
+  .bright-estimate,
+  .juniper-hero,
+  .still-bag,
+  .pantry-hero,
+  .pantry-help,
+  .alder-hero,
+  .alder-expertise {
+    grid-template-columns: 1fr;
+  }
+  .bright-cards,
+  .still-items {
+    grid-template-columns: repeat(auto-fit, minmax(min(180px, 100%), 1fr));
+  }
+  .juniper-hero img {
+    order: 1;
+    max-height: 320px;
+  }
+  .juniper-classes article {
+    grid-template-columns: 1fr auto;
+  }
+  .juniper-classes article h3 {
+    grid-row: 2;
+    font-size: 19px;
+  }
+  .juniper-classes article span:not(.class-time) {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+  }
+}
+
+/* Daybreak puts menu and hours up front with a bold corner-shop palette. */
+.daybreak {
+  --paper: #fff3d2;
+  --ink: #672918;
+  --line: #67291852;
+  --action: #fff3d2;
+  --action-ink: #672918;
+}
+.daybreak .brand {
+  color: #8d3524;
+}
+.daybreak-hero {
+  display: grid;
+  grid-template-columns: 1.08fr 0.92fr;
+  background: #a3372a;
+  color: #fff3d2;
+}
+.daybreak-copy {
+  padding: clamp(26px, 5.2vw, 82px);
+  align-self: center;
+}
+.daybreak-hero h1 {
+  font-weight: 900;
+  font-size: clamp(48px, 6.4vw, 100px);
+}
+.daybreak-hero img {
+  height: 100%;
+  min-height: 285px;
+  object-fit: cover;
+}
+.daybreak-menu {
+  padding-block: 45px;
+}
+.daybreak-menu .demo-tabs {
+  margin: 20px 0;
+}
+.daybreak-menu .demo-tabs button[aria-pressed="true"] {
+  background: #a3372a;
+  border-color: #a3372a;
+  color: #fff3d2;
+}
+.daybreak-menu-items {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 15px 30px;
+}
+.daybreak-menu-items article {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 8px;
+  border-top: 1px dashed var(--line);
+  padding-block: 17px;
+}
+.daybreak-menu-items p {
+  grid-column: 1 / -1;
+}
+.daybreak-visit {
+  border-top: 8px solid #a3372a;
+  padding-block: 30px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 15px 40px;
+}
+.daybreak-visit dt {
+  font-weight: 800;
+}
+@media (max-width: 720px) {
+  .daybreak-hero,
+  .daybreak-menu-items {
+    grid-template-columns: 1fr;
+  }
+  .daybreak-hero img {
+    min-height: 0;
+    max-height: 270px;
+  }
+}

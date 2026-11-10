@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <title>Brightside Electric | Website Concept</title>
+    <link rel="stylesheet" href="examples.css" />
+    <script src="examples.js" defer></script>
+  </head>
+  <body class="demo brightside">
+    <div class="demo-bar">
+      <a href="/services#designs">← Back to Website Examples</a
+      ><span>Fictional Business · Interactive Concept</span>
+    </div>
+    <header class="demo-nav wrap">
+      <a class="brand" href="#home"
+        ><span aria-hidden="true">✳</span> Brightside<span class="brand-sub"
+          >ELECTRIC</span
+        ></a
+      >
+      <nav aria-label="Brightside Electric navigation">
+        <a href="#services">Services</a><a href="#estimate">Get an Estimate</a>
+      </nav>
+    </header>
+    <main id="home">
+      <section class="bright-hero wrap">
+        <div class="bright-copy">
+          <p class="eyebrow">RESIDENTIAL ELECTRICAL · NORTHERN UTAH</p>
+          <h1>Power for<br />real life<span>.</span></h1>
+          <p>
+            Thoughtful electrical upgrades for homes that have a lot going on.
+          </p>
+          <a class="demo-action" href="#estimate"
+            >Plan an Estimate <span aria-hidden="true">↗</span></a
+          >
+        </div>
+        <img
+          src="brightside-hero.webp"
+          width="1200"
+          height="675"
+          alt="An electrician inspecting a panel inside a home"
+        />
+      </section>
+      <section class="bright-services wrap" id="services">
+        <p class="eyebrow">01 / WHAT WE DO</p>
+        <h2>Pick a starting point.</h2>
+        <div class="bright-cards">
+          <article>
+            <span>01</span>
+            <h3>EV Charging</h3>
+            <p>Home chargers, circuit planning, and clean cable routing.</p>
+          </article>
+          <article>
+            <span>02</span>
+            <h3>Panel Upgrades</h3>
+            <p>
+              Space and capacity for additions, appliances, and future needs.
+            </p>
+          </article>
+          <article>
+            <span>03</span>
+            <h3>Lighting</h3>
+            <p>Task lighting, exterior fixtures, and dimming controls.</p>
+          </article>
+        </div>
+      </section>
+      <section class="bright-estimate wrap" id="estimate">
+        <div>
+          <p class="eyebrow">02 / ESTIMATE PLANNER</p>
+          <h2>Know what to bring.</h2>
+          <p>
+            Choose a service to see what helps a contractor prepare an estimate.
+          </p>
+        </div>
+        <div class="demo-panel" data-filter>
+          <label for="project-type">What are you planning?</label>
+          <select id="project-type" data-filter-select>
+            <option value="charging">EV charger</option>
+            <option value="panel">Panel upgrade</option>
+            <option value="lighting">Lighting</option>
+          </select>
+          <div data-choice="charging">
+            <h3>EV Charger Checklist</h3>
+            <p>
+              Vehicle model, charger location, and the approximate distance to
+              your electrical panel.
+            </p>
+          </div>
+          <div data-choice="panel" hidden>
+            <h3>Panel Upgrade Checklist</h3>
+            <p>
+              Existing panel rating if known, plus the appliances or additions
+              you’re planning.
+            </p>
+          </div>
+          <div data-choice="lighting" hidden>
+            <h3>Lighting Checklist</h3>
+            <p>
+              Rooms or outdoor areas, fixture count, and any dimmer or switch
+              preferences.
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer class="demo-footer wrap">
+      <span>Website concept by Masyn Nay</span
+      ><a href="/services?direction=brightside#request"
+        >Use This Design Direction ↗</a
+      >
+    </footer>
+  </body>
+</html>

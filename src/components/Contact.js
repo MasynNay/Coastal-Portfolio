@@ -85,11 +85,13 @@ export const Contact = () => {
                     <div>
                       <strong>Looking to have a website built?</strong>
                       <p>
-                        Explore design examples, learn about the process, and
-                        request a written quote with no phone call required.
+                        Browse working website examples, see published projects,
+                        or request a written quote by email.
                       </p>
                     </div>
-                    <a href="/services">Explore website services <span aria-hidden="true">↗</span></a>
+                    <a href="/services">
+                      Hire Me for a Website <span aria-hidden="true">↗</span>
+                    </a>
                   </div>
                   <form onSubmit={handleSubmit}>
                     {/* This hidden field is only a spam trap; it is never a

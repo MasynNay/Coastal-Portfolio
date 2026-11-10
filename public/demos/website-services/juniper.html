@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <title>Juniper Movement | Website Concept</title>
+    <link rel="stylesheet" href="examples.css" />
+    <script src="examples.js" defer></script>
+  </head>
+  <body class="demo juniper">
+    <div class="demo-bar">
+      <a href="/services#designs">← Back to Website Examples</a
+      ><span>Fictional Business · Interactive Concept</span>
+    </div>
+    <header class="demo-nav wrap">
+      <a class="brand" href="#home"
+        >Juniper<span class="brand-sub">MOVEMENT STUDIO</span></a
+      >
+      <nav aria-label="Juniper Movement navigation">
+        <a href="#schedule">Class Schedule</a
+        ><a href="#first-class">First Visit</a>
+      </nav>
+    </header>
+    <main id="home">
+      <section class="juniper-hero wrap">
+        <img
+          src="juniper-hero.webp"
+          width="1200"
+          height="675"
+          alt="A Pilates studio with walnut reformers in morning sunlight"
+        />
+        <div>
+          <p class="eyebrow">A REFORMER PILATES STUDIO</p>
+          <h1>Find your<br /><em>own pace.</em></h1>
+          <p>
+            Small classes, a little encouragement, and space to get stronger.
+          </p>
+          <a class="demo-action" href="#schedule"
+            >Find a Class <span aria-hidden="true">↓</span></a
+          >
+        </div>
+      </section>
+      <section class="juniper-schedule wrap" id="schedule" data-filter>
+        <p class="eyebrow">THIS WEEK AT JUNIPER</p>
+        <h2>Studio Schedule</h2>
+        <div class="demo-tabs" role="group" aria-label="Filter by class level">
+          <button type="button" data-filter-value="all" aria-pressed="true">
+            All Classes
+          </button>
+          <button
+            type="button"
+            data-filter-value="beginner"
+            aria-pressed="false"
+          >
+            Beginner
+          </button>
+          <button
+            type="button"
+            data-filter-value="all-levels"
+            aria-pressed="false"
+          >
+            All Levels
+          </button>
+        </div>
+        <div class="juniper-classes">
+          <article data-choice="beginner">
+            <span class="class-time">Mon · 9:00 AM</span>
+            <h3>Reformer Foundations</h3>
+            <span>Beginner</span>
+          </article>
+          <article data-choice="all-levels">
+            <span class="class-time">Wed · 5:30 PM</span>
+            <h3>Flow &amp; Control</h3>
+            <span>All Levels</span>
+          </article>
+          <article data-choice="beginner">
+            <span class="class-time">Sat · 10:00 AM</span>
+            <h3>First Reformer</h3>
+            <span>Beginner</span>
+          </article>
+        </div>
+        <p class="demo-caption" role="status" data-filter-status="class"></p>
+      </section>
+      <section class="juniper-first wrap" id="first-class">
+        <p class="eyebrow">YOUR FIRST CLASS</p>
+        <h2>Come as you are.</h2>
+        <p>
+          Arrive ten minutes early. Wear something comfortable and bring socks
+          with grip. The instructor walks you through the reformer before class
+          begins.
+        </p>
+      </section>
+    </main>
+    <footer class="demo-footer wrap">
+      <span>Website concept by Masyn Nay</span
+      ><a href="/services?direction=juniper#request"
+        >Use This Design Direction ↗</a
+      >
+    </footer>
+  </body>
+</html>
