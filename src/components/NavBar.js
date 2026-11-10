@@ -17,9 +17,11 @@ export const NavBar = ({ glass = false }) => {
 
   useEffect(() => {
     setActiveLink(
-      location.pathname.endsWith("/resume")
-        ? "resume"
-        : location.hash.slice(1) || "home",
+      location.pathname === "/services"
+        ? "services"
+        : location.pathname.endsWith("/resume")
+          ? "resume"
+          : location.hash.slice(1) || "home",
     );
   }, [location.pathname, location.hash]);
 
@@ -39,18 +41,20 @@ export const NavBar = ({ glass = false }) => {
 
   const homePath = glass ? "/design/glass" : "/";
   const resumePath = glass ? "/design/glass/resume" : "/resume";
-  const shortNavigation = ["/resume", "/game", "/design/glass/resume"].includes(
+  const shortNavigation = ["/resume", "/game", "/design/glass/resume", "/services"].includes(
     location.pathname,
   );
   const links = shortNavigation
     ? [
         ["home", "Home", homePath],
         ["resume", "Resume", resumePath],
+        ["services", "Hire Me", "/services"],
       ]
     : [
         ["home", "Home"],
         ["skills", "Skills"],
         ["projects", "Portfolio"],
+        ["services", "Hire Me", "/services"],
         ["contact", "Contact"],
         ["resume", "Resume", resumePath],
       ];
