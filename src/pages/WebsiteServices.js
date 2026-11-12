@@ -161,10 +161,10 @@ export default function WebsiteServices() {
     const oldTitle = document.title;
     const meta = document.querySelector('meta[name="description"]');
     const oldDescription = meta?.getAttribute("content");
-    document.title = "Website Design & Development | Masyn Nay";
+    document.title = "Utah Website Design for Small Businesses | Masyn Nay";
     meta?.setAttribute(
       "content",
-      "Custom, mobile-friendly websites for small businesses. Email-first projects with written quotes, domain setup and a clear handoff.",
+      "Utah website design and development for small businesses in Weber, Davis and Utah counties. Custom mobile-friendly websites, clear proposals and written quotes.",
     );
     return () => {
       document.title = oldTitle;
@@ -245,12 +245,13 @@ export default function WebsiteServices() {
             <div className="service-hero-grid">
               <div>
                 <h1>
-                  A website that feels like <em>your</em> business.
+                  Utah website design that feels like <em>your</em> business.
                 </h1>
                 <p>
-                  Custom, mobile-friendly websites for small businesses and
-                  independent creators. You share what you need. I take care of
-                  the design, code, domain setup, and launch.
+                  Custom, mobile-friendly websites for small businesses in
+                  Weber County, Davis County, Utah County, and across Utah.
+                  You share what you need. I handle the design, code, domain setup, and launch.
+                  Remote projects elsewhere in the United States are welcome, too.
                 </p>
                 <div className="service-actions">
                   <a className="service-primary" href="#request">
@@ -414,6 +415,45 @@ export default function WebsiteServices() {
                 </p>
               </div>
               <a href="#request">Tell Me About Your Project ↗</a>
+            </div>
+          </div>
+        </section>
+
+
+        <section className="service-section service-areas" id="service-areas">
+          <div className="container">
+            <div className="service-heading">
+              <span className="glass-eyebrow">UTAH WEBSITE DESIGN</span>
+              <h2>Building websites for Utah businesses.</h2>
+              <p>
+                Based in northern Utah, I work remotely with small businesses
+                across the state. Whether you're opening your first business,
+                improving an outdated website, or need an easy way for customers
+                to contact you, I can help plan and build a site that fits.
+              </p>
+            </div>
+            <div className="service-area-grid">
+              <article>
+                <h3>Weber County</h3>
+                <p>Websites for businesses around Ogden, Roy, Hooper, and surrounding Weber County communities. Clear services, fast mobile layouts, and simple ways for customers to reach you.</p>
+              </article>
+              <article>
+                <h3>Davis County</h3>
+                <p>Website design for Layton, Syracuse, Clearfield, Farmington, Bountiful, and nearby Davis County businesses. A useful online presence without a complicated maintenance workflow.</p>
+              </article>
+              <article>
+                <h3>Utah County</h3>
+                <p>Websites for Provo, Orem, Lehi, American Fork, and Utah County businesses. Present your services and portfolio, collect inquiries, and make your business easier to understand.</p>
+              </article>
+            </div>
+            <p className="service-area-note">
+              Also serving Salt Lake County, the rest of Utah, and remote clients
+              throughout the United States. Projects are managed online and by email.
+              No local office visits are implied or required.
+            </p>
+            <div className="service-area-actions">
+              <a href="/utah-web-design/">Read my Utah website design guide ↗</a>
+              <a href="#request">Request a free written quote ↗</a>
             </div>
           </div>
         </section>

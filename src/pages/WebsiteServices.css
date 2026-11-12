@@ -493,3 +493,13 @@
     font-size: 43px;
   }
 }
+
+.website-services .service-areas{background:linear-gradient(135deg,#101e24,#1b2930)}
+.service-area-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:17px}
+.service-area-grid article{padding:25px;border:1px solid #d4e3e432;border-radius:18px;background:#ffffff08}
+.service-area-grid h3{font-size:20px;color:#d4e8e6;letter-spacing:-.02em;margin-bottom:13px}
+.website-services .service-area-grid p,.website-services .service-area-note{font-size:14px;line-height:1.8;text-align:left;color:#c2d1d1}
+.website-services .service-area-note{margin:25px 0 18px;max-width:900px}
+.service-area-actions{display:flex;gap:17px;flex-wrap:wrap}
+.service-area-actions a{display:inline-block;padding:11px 0;color:#c5e2e5;font-weight:700;text-decoration:underline;text-underline-offset:5px}
+@media(max-width:800px){.service-area-grid{grid-template-columns:1fr}}
