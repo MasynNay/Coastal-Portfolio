@@ -746,6 +746,21 @@ html,body{background:#0b0d12}
 .top-button:hover,.top-round:hover{background:#303847}
 button:focus-visible,input:focus-visible,textarea:focus-visible{outline-color:#ff795b}
 
+/* A focused onramp from authored words to actual playable music. */
+.song-starter-panel{padding:29px;margin:24px 0;border:1px solid #715d7f;border-radius:19px;background:radial-gradient(circle at 90% 10%,#503c5b85,transparent 48%),linear-gradient(135deg,#24222f,#1a1c26);box-shadow:0 14px 40px #0002}
+.song-starter-intro{display:flex;justify-content:space-between;align-items:start;gap:15px}
+.song-starter-intro h3{font:400 clamp(25px,3vw,34px)/1.16 Georgia,serif;letter-spacing:-.6px;color:#fbe9ed;margin:12px 0}
+.song-starter-intro p{font-size:13px;line-height:1.7;color:#beb3c7;max-width:680px;margin:0 0 23px}
+.song-starter-badge{font-size:10px;color:#e7cddf;white-space:nowrap;background:#ffffff0e;border:1px solid #ffffff25;border-radius:30px;padding:8px 12px}
+.song-starter-fields{display:grid;grid-template-columns:minmax(0,1fr) minmax(170px,.4fr);gap:16px;align-items:end}
+.song-starter-fields label{display:block;margin:0 0 8px;font-size:11px;font-weight:700;color:#ebe1ec}
+.song-starter-fields input,.song-starter-fields select{width:100%;min-height:50px;padding:12px 14px;background:#12141c;border:1px solid #6b6077;border-radius:10px;color:#f9f3fa;font:500 13px 'Avenir Next',Avenir,system-ui,sans-serif}
+.song-starter-fields input:focus-visible,.song-starter-fields select:focus-visible{outline:2px solid #cdb9fd;outline-offset:2px}
+.song-starter-bottom{display:flex;align-items:center;flex-wrap:wrap;gap:22px;margin-top:19px}
+.song-starter-bottom small{max-width:460px;color:#a9a0b4;font-size:11px;line-height:1.65}
+.song-starter-bottom .button-primary{color:#201923;background:#eec1b1}.song-starter-bottom .button-primary:hover{background:#f7d7cb}
+@media(max-width:690px){.song-starter-panel{padding:20px}.song-starter-intro{display:block}.song-starter-badge{display:inline-block;margin-bottom:15px}.song-starter-fields{grid-template-columns:minmax(0,1fr)}}
+
 </style>
 </head>
 <body>
@@ -3381,6 +3396,88 @@ function blueprintProgress(raw){
  const complete=BLUEPRINT_FIELDS.filter(x=>data[x.id].trim().length>=3).length;
  return {complete,total:BLUEPRINT_FIELDS.length,ready:complete>0,hasMessage:!!data.message.trim()};
 }
+/**
+ * Song Starter: immediately audible, locally assembled, original musical guide.
+ * No lyric generation, emotional inference, remote requests, or user-data uploads.
+ */
+
+
+
+
+
+const STARTER_FEELS=Object.freeze([
+ {id:'warm',label:'Warm and honest',bpm:88,drums:'soft',lead:'felt'},
+ {id:'pulse',label:'Alive and moving',bpm:112,drums:'steady',lead:'pluck'},
+ {id:'air',label:'Quiet and spacious',bpm:76,drums:'bare',lead:'pad'},
+ {id:'cinema',label:'Big and cinematic',bpm:96,drums:'lift',lead:'felt'}
+]);
+function normalizeStarterLine(raw){
+ return String(raw??'').replace(/[\r\n\t]+/g,' ').replace(/ {2,}/g,' ').trim().slice(0,160);
+}
+function safeInput(raw){
+ const line=normalizeStarterLine(raw);
+ if(line.length<4)throw new Error('Write at least four characters of your own words.');
+ if(/^\[[^\]]+\]$/.test(line))throw new Error('Write a lyric line, not a section heading.');
+ return line;
+}
+function signature(s){let hash=2166136261;for(const char of s){hash=Math.imul(hash^char.codePointAt(0),16777619)>>>0;}return hash>>>0;}
+const chordTones=[[67,71,74],[66,69,74],[64,67,71],[64,67,72]];
+const shapes=[[0,1,2],[1,2,0],[2,0,1],[0,2,1]];
+function starterMelody(line,feel='warm'){
+ const seed=signature(safeInput(line));
+ const chosen=STARTER_FEELS.find(f=>f.id===feel)||STARTER_FEELS[0];
+ const notes=[];
+ for(let section=0;section<4;section++){
+  const chorus=section===1||section===3,baseBeat=8+section*16;
+  for(let bar=0;bar<4;bar++){
+   const chord=chordTones[(bar+(section===2?2:0))%4];
+   const shape=shapes[(seed%3+bar+(chorus?1:0))%shapes.length];
+   [0,1.5,2.5].forEach((offset,j)=>{
+    let midi=chord[shape[j]];
+    if(chosen.id==='air'&&midi>73)midi-=12;
+    if(chorus&&midi<69)midi+=12;
+    notes.push({midi,startBeat:baseBeat+bar*4+offset,durationBeats:[1.25,.75,1.25][j]});
+   });
+  }
+ }
+ return normalizeMelody(notes);
+}
+/** Return a completely new project, never mutating the current song. */
+function starterProject(rawLine,feel='warm'){
+ const line=safeInput(rawLine);
+ const chosen=STARTER_FEELS.find(f=>f.id===feel)||STARTER_FEELS[0];
+ const p=newProject('import');
+ p.title=line.slice(0,62);
+ p.story=line;p.creativeTruth=line;p.blueprint.message=line;
+ p.style=chosen.id;p.bpm=chosen.bpm;p.leadSound=chosen.lead;
+ p.sketchChosen=true;p.sketchMode='use';
+ p.melodyNotes=starterMelody(line,chosen.id);
+ p.melodyOrigin='Original editable Song Starter tune (not voice transcription)';
+ p.lyrics=['Verse 1','Chorus','Verse 2','Final Chorus'].map(section=>'['+section+']\n'+line).join('\n\n');
+ p.lyricOrigins=[{text:line,source:'Your original Song Starter line',addedAt:Date.now()}];
+ p.arrangement=normalizeArrangement([
+  {kind:'intro',title:'Intro',bars:2,level:'quiet',drums:false,melody:false},
+  {kind:'verse',title:'Verse 1',bars:4,level:'steady',drums:true,melody:true},
+  {kind:'chorus',title:'Chorus',bars:4,level:'lift',drums:true,melody:true,transition:'pickup'},
+  {kind:'verse',title:'Verse 2',bars:4,level:'steady',drums:true,melody:true},
+  {kind:'chorus',title:'Final Chorus',bars:4,level:'lift',drums:true,melody:true,transition:'fill'},
+  {kind:'outro',title:'Outro',bars:2,level:'quiet',drums:false,melody:false}
+ ]);
+ p.arrangementEnabled=true;
+ p.drumsEnabled=chosen.drums!=='bare';
+ p.drums4=rhythmPreset(chosen.drums,4);
+ p.flowGroove='anchor';p.backingGain=.72;
+ const plan=arrangementPlan(p.arrangement,p.bpm,4);let index=0;
+ for(const item of lyricLines(p.lyrics)){
+  if(item.section||item.empty)continue;
+  const scene=plan[index+1];
+  if(scene)p.cues[item.index]=Math.round(scene.startSeconds*10)/10;
+  index++;
+ }
+ p.starter={version:1,source:'authored-line',feel:chosen.id,isGuideOnly:true};
+ return p;
+}
+
 const HEADINGS={
  moment:['Verse 1','Chorus','Verse 2','Bridge','Final Chorus'],
  letter:['Verse 1','Chorus','Verse 2','Bridge','Final Chorus'],
@@ -5288,6 +5385,18 @@ async function inspectSavedAudio(){
 
 function setView(value){if(value!=='story'){interviewAiGeneration++;interviewAiBusy=false;}stopMelodyPreview();melodyIsPlaying=false;stopPhrasePreview();phraseIsPlaying=false;if(micRequestPending||recording?.state==='recording'||isSavingTake){toast('Finish saving the recording before leaving this screen.',true);return;}cancelCountdown();stopInputMeter();stopGuide();stopTransport();view=value;render();}
 function createProject(mode){mixRecallUndo=null;storyPane='tell';lineWorkbenchOpen=false;interviewAiGeneration++;interviewAiBusy=false;if(micRequestPending||recording||isSavingTake){toast('Finish the current recording before creating a new song.',true);return;}stopMelodyPreview();melodyIsPlaying=false;stopInputMeter();cancelCountdown();const p=newProject(mode);projects.unshift(p);activeId=p.id;persist();currentQuestion='';media={backing:null,vocal:null,backingURL:null,vocalURL:null,compActive:false};timeline.clear();waveform={};setView('story');}
+function openStarterSong(line,feel){
+ if(micRequestPending||recording||isSavingTake){toast('Finish saving the current recording first.',true);return;}
+ let next;try{next=starterProject(line,feel);}catch(error){toast(error.message,true);return;}
+ mixRecallUndo=null;interviewAiGeneration++;interviewAiBusy=false;storyPane='tell';lineWorkbenchOpen=false;
+ stopMelodyPreview();melodyIsPlaying=false;stopPhrasePreview();phraseIsPlaying=false;
+ stopInputMeter();cancelCountdown();stopTransport();
+ projects.unshift(next);activeId=next.id;persist();currentQuestion='';
+ media={backing:null,vocal:null,backingURL:null,vocalURL:null,compActive:false};
+ timeline.clear();waveform={};
+ setView('guide');
+ toast('Your music is ready. Press Hear your sketch, then change the lyrics, melody or arrangement.');
+}
 function openPracticeSong(){mixRecallUndo=null;interviewAiGeneration++;interviewAiBusy=false;
  if(micRequestPending||recording||isSavingTake){toast('Finish recording before opening a practice song.',true);return;}
  const p=practiceProject();
@@ -5352,6 +5461,24 @@ function practicePreviewPanel(p){
  <div class="practice-preview-actions"><button class="button button-primary" data-view="lyrics">See all lyrics ${I('arrow',16)}</button><button class="button button-outline" data-view="record">Try singing a verse ${I('arrow',16)}</button></div>
  </section>`;
 }
+function songStarterPanel(){
+ const current=active();
+ const seed=current.practice?'':String(current.blueprint?.message||current.creativeTruth||'').slice(0,160);
+ const options=STARTER_FEELS.map(f=>'<option value="'+f.id+'">'+h(f.label)+'</option>').join('');
+ return `<section class="song-starter-panel" aria-labelledby="song-starter-heading">
+ <div class="song-starter-intro"><div><span class="tiny-overline">MAKE IT MUSICAL · NO EXPERIENCE NEEDED</span>
+ <h3 id="song-starter-heading">Hear your own first idea.</h3>
+ <p>Write one line. Pick the sound. Chordlore builds an editable original musical sketch with chords, melody, drums and real section changes. Your words are the only lyric material. No AI, accounts or uploads.</p></div>
+ <span class="song-starter-badge">About a minute · Local</span></div>
+ <div class="song-starter-fields">
+  <div><label for="starter-line">One line you could sing</label>
+  <input id="starter-line" maxlength="160" autocomplete="off" placeholder="The one thing I still want to say…" value="${h(seed)}"/></div>
+  <div><label for="starter-feel">Choose the feel</label><select id="starter-feel">${options}</select></div>
+ </div>
+ <div class="song-starter-bottom"><button class="button button-primary" data-action="starter-create">${I('play',16)} Make my first sketch ${I('arrow',16)}</button>
+ <small>This creates a new project and leaves your existing work untouched. Your line repeats as a working refrain, not a fabricated song. You can change every part.</small></div>
+ </section>`;
+}
 function guidePage(){
  const p=active();const info=blueprintProgress(p.blueprint);const {steps,complete}=songMilestones(p,{backing:!!media.backing,vocal:!!media.vocal});
  const plan=normalizeBlueprint(p.blueprint);
@@ -5364,8 +5491,9 @@ function guidePage(){
  ];
  return `<div class="studio-page first-song-page">${studioToolbar()}
  <section class="first-song-hero"><div><span class="micro-label">YOUR FIRST SONG · THE CLEAR PATH</span><h1>${p.practice?'An example you can hear.':'One song. One step at a time.'}</h1><p>${p.practice?'This is a fictional, editable example. Its lyrics, musical sections, and percussion are already in place. Hear the synthetic accompaniment, change it, then try singing a verse yourself.':'You do not need to know what a chorus, chord, or time signature is. Start with a real detail or a creative prompt. We will introduce the other tools only when you need them.'}</p>
- <div class="first-song-hero-actions">${p.practice?`<button class="button button-primary" data-action="practice-audition">${I('play',16)} ${transportPlaying?'Pause practice backing':'Hear the practice backing'}</button>`:`<button class="button button-primary" data-view="story">Tell my story ${I('arrow',16)}</button>`}<button class="button button-outline" data-action="practice-song">${I('music',16)} ${p.practice?'Make another practice copy':'Open a playable example'}</button>${p.practice?`<button class="button button-outline" data-action="practice-guide-toggle">${I('audio',16)} ${p.arrangement.every(scene=>scene.melody===false)?'Turn melody guide on':'Turn melody guide off'}</button>`:''}</div>
+ <div class="first-song-hero-actions">${p.practice?`<button class="button button-primary" data-action="practice-audition">${I('play',16)} ${transportPlaying?'Pause practice backing':'Hear the practice backing'}</button>`:`<button class="button button-primary" data-view="story">Tell my story ${I('arrow',16)}</button>`}<button class="button button-outline" data-action="practice-song">${I('music',16)} ${p.practice?'Make another practice copy':'Open a playable example'}</button>${p.starter?`<button class="button button-primary" data-action="starter-audition">${I('play',16)} ${transportPlaying?'Pause your sketch':'Hear your sketch'}</button>`:''}${p.practice?`<button class="button button-outline" data-action="practice-guide-toggle">${I('audio',16)} ${p.arrangement.every(scene=>scene.melody===false)?'Turn melody guide on':'Turn melody guide off'}</button>`:''}</div>
  <span class="first-song-disclosure">${p.practice?'Practice track is synthesized accompaniment, not a fully recorded commercial song. The lyrics are fictional, not AI-generated from your family.':'AI is optional. Local writing guides do not pretend to be AI-generated lyrics.'}</span></div><div class="first-song-disc"><span class="disc-ring"></span><span class="disc-center">${I('music',32)}</span></div></section>
+ ${songStarterPanel()}
  <div class="first-song-columns">${p.practice?practicePreviewPanel(p):`<section class="work-card blueprint-card"><div class="card-top"><div><span class="tiny-overline">THE SONG COMPASS</span><h3>Bring the part only you know.</h3></div><span class="small-tag">${info.complete} / ${info.total} ideas</span></div>
  <p>These notes are private and optional. They are not lyrics, a questionnaire you must finish, or a request to relive anything difficult. A single honest sentence is enough.</p>
  <div class="blueprint-fields">${BLUEPRINT_FIELDS.map(x=>`<label class="blueprint-field" for="blueprint-${x.id}"><strong>${h(x.label)}</strong><span>${h(x.hint)}</span><textarea id="blueprint-${x.id}" data-blueprint="${x.id}" maxlength="1200" rows="2" placeholder="${h(x.placeholder)}">${h(plan[x.id])}</textarea></label>`).join('')}</div>
@@ -6276,6 +6404,7 @@ async function handleClick(e){
   case 'drum-enable':{const p=active();p.drumsEnabled=!p.drumsEnabled;stopGuide();stopTransport();persist();render();break;}
   case 'drum-clear':{const p=active(),beats=p.flowGroove==='sway'?3:4,key=beats===3?'drums3':'drums4',undoKey=beats===3?'drumUndo3':'drumUndo4';p[undoKey]=currentDrumPattern(p);p[key]=rhythmPreset('bare',beats);stopGuide();stopTransport();persist();render();break;}
   case 'drum-undo':{const p=active(),beats=p.flowGroove==='sway'?3:4,key=beats===3?'drums3':'drums4',undoKey=beats===3?'drumUndo3':'drumUndo4';if(p[undoKey]){const last=currentDrumPattern(p);p[key]=normalizeRhythm(p[undoKey],beats);p[undoKey]=last;stopGuide();stopTransport();persist();render();}break;}
+  case 'starter-create':{const line=document.getElementById('starter-line')?.value||'';const feel=document.getElementById('starter-feel')?.value||'warm';openStarterSong(line,feel);break;}
   case 'practice-song':openPracticeSong();break;
   case 'guide-start':{if(active().demo && !active().practice){createProject('pour');setView('guide');}else setView('guide');break;}
   case 'practice-guide-toggle':{
@@ -6285,6 +6414,7 @@ async function handleClick(e){
     stopTransport();persist();render();
     toast(off?'Practice melody muted; backing and drums remain.':'Practice melody restored.');break;
   }
+  case 'starter-audition':{if(!active().starter){toast('Create a sketch first.',true);break;}await toggleTransport();break;}
   case 'practice-audition':{
     const p=active();
     if(!p.practice){toast('Open the fictional practice song first.');break;}
