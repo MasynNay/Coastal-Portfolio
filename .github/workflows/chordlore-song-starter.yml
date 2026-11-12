@@ -64,6 +64,22 @@ jobs:
                   with open(wav.path(),'rb') as audio:
                       head=audio.read(12)
                   assert head[:4]==b'RIFF' and head[8:12]==b'WAVE','Downloaded file is not a WAV'
+                  import wave,array,zipfile
+                  with wave.open(wav.path(),'rb') as audio:
+                      assert audio.getnchannels()==2
+                      assert audio.getsampwidth()==2
+                      duration=audio.getnframes()/audio.getframerate()
+                      assert 30<duration<90,('Unexpected song duration',duration)
+                      audio.setpos(int(audio.getframerate()*min(12,duration/2)))
+                      samples=array.array('h')
+                      samples.frombytes(audio.readframes(audio.getframerate()*6))
+                      assert max(abs(v) for v in samples)>200,'Song Starter audio was effectively silent'
+                  with page.expect_download(timeout=60000) as backup_event:
+                      page.get_by_role('button',name='Back up song project').click()
+                  backup=backup_event.value
+                  assert backup.suggested_filename.endswith('.chordlore.zip')
+                  with zipfile.ZipFile(backup.path()) as archive:
+                      assert archive.testzip() is None,'Project backup is corrupt'
                   page.locator('[data-action="starter-audition"]').click()
                   page.wait_for_timeout(600)
                   assert page.locator('[data-action="starter-audition"]').is_visible()
