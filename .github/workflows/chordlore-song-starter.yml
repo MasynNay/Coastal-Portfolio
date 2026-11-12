@@ -65,7 +65,7 @@ jobs:
                       head=audio.read(12)
                   assert head[:4]==b'RIFF' and head[8:12]==b'WAVE','Downloaded file is not a WAV'
                   import wave,array,zipfile
-                  with wave.open(wav.path(),'rb') as audio:
+                  with wave.open(str(wav.path()),'rb') as audio:
                       assert audio.getnchannels()==2
                       assert audio.getsampwidth()==2
                       duration=audio.getnframes()/audio.getframerate()
