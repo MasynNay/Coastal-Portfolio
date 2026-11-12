@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f6f0e6">
+<meta name="description" content="Chordlore is a story-first music studio. Begin with a memory, a feeling, a prompt, or your own lyrics. Try the free browser preview.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Chordlore — Your story. Your sound.">
+<meta property="og:description" content="Some songs begin with a melody. Yours can begin with a story. Explore the Chordlore music studio in your browser.">
+<meta property="og:url" content="https://masynnay.com/chordlore/">
+<link rel="icon" href="/chordlore/mark.svg" type="image/svg+xml">
+<title>Chordlore — Your story. Your sound.</title>
+<style>
+:root{font-family:"Avenir Next",Avenir,"Segoe UI",system-ui,sans-serif;color:#2b2536;background:#f6f0e6;font-synthesis:none;--ink:#282137;--paper:#f6f0e6;--cream:#fffaf2;--muted:#6f6770;--line:#d9d0c5;--rose:#ba6d52;--violet:#6f5a85}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;min-width:320px;background:var(--paper)}a{color:inherit}a:focus-visible{outline:3px solid #8e6bcd;outline-offset:4px;border-radius:3px}::selection{background:#e9c8c1;color:var(--ink)}
+.page{overflow:hidden}header{position:relative;z-index:3;border-bottom:1px solid var(--line);background:rgba(250,246,238,.92)}.nav,.wrap{max-width:1240px;margin:auto;padding-left:clamp(22px,5vw,74px);padding-right:clamp(22px,5vw,74px)}
+.nav{display:flex;align-items:center;min-height:92px;justify-content:space-between;gap:24px}.identity{display:flex;align-items:center;gap:12px;text-decoration:none}.identity strong{display:block;font-family:Georgia,"Times New Roman",serif;font-weight:600;font-size:28px;letter-spacing:-1px;line-height:1}.identity small{font-size:10px;letter-spacing:1.8px;text-transform:uppercase;display:block;margin-top:6px;color:var(--muted)}.nav-links{display:flex;align-items:center;gap:32px}.nav-links a{text-decoration:none;font-size:13px;font-weight:650}.nav-links a:not(.nav-cta):hover{text-decoration:underline;text-underline-offset:6px}
+.nav-cta,.button{display:inline-flex;align-items:center;justify-content:center;gap:13px;text-decoration:none;border-radius:100px;font-weight:650;transition:transform .18s ease,background .18s ease}.nav-cta{background:var(--ink);color:#fffaf2;padding:15px 20px}.nav-cta:hover,.button:hover{transform:translateY(-2px)}.hero{position:relative;padding-top:100px;padding-bottom:110px}.hero:before{content:"";position:absolute;inset:0;z-index:0;background:radial-gradient(circle at 75% 38%,#e8d9d0 0,transparent 43%),linear-gradient(125deg,transparent 65%,rgba(197,171,198,.20))}.hero-grid{position:relative;display:grid;grid-template-columns:minmax(0,1.12fr) minmax(360px,.88fr);gap:40px;align-items:center}.eyebrow{display:inline-flex;gap:12px;align-items:center;font-size:11px;font-weight:750;letter-spacing:2.2px;text-transform:uppercase;color:#8e5949}.eyebrow:before{content:"";width:34px;height:1px;background:currentColor}h1,h2,h3,p{margin-top:0}h1,h2,h3{font-family:Georgia,"Times New Roman",serif;font-weight:500;letter-spacing:-.055em}h1{font-size:clamp(62px,7.2vw,112px);line-height:.99;max-width:780px;margin:26px 0 29px}h1 em{font-weight:400;color:#ad705e}.hero-copy{max-width:515px;font-size:18px;line-height:1.8;color:#645d65}.hero-actions{display:flex;flex-wrap:wrap;gap:14px;margin-top:33px}.button{min-height:55px;padding:15px 25px;font-size:13px;border:1px solid var(--ink)}.button.primary{background:var(--ink);color:white}.button.secondary{background:transparent;color:var(--ink)}.button.secondary:hover{background:white}.micro-note{display:flex;align-items:center;gap:11px;margin-top:28px;font-size:12px;color:#726a6e}.micro-note i{width:7px;height:7px;background:#8aa68c;border-radius:50%;flex:none}
+.artwork{position:relative;min-height:565px;display:flex;align-items:center;justify-content:center}.record{position:absolute;width:480px;height:480px;border-radius:50%;background:repeating-radial-gradient(circle at center,#262034 0 3px,#30283b 4px 6px,#262034 7px 10px);box-shadow:16px 25px 65px #3520393b;transform:rotate(-15deg);border:13px solid #262034}.record:before{content:"";position:absolute;inset:35%;border-radius:50%;background:#d9a58e;border:1px solid #f2cbb9}.record:after{content:"";position:absolute;inset:48%;border-radius:50%;background:#f6f0e6}.paper-card{position:absolute;left:0;bottom:10px;width:min(340px,80%);background:#fffdf6;padding:28px 29px 23px;box-shadow:12px 21px 45px #3c2b4126;transform:rotate(-7deg);border:1px solid #ded2c5}.paper-card .smallcaps{font-size:10px;letter-spacing:2px;color:#936954}.paper-card h2{font-size:39px;line-height:1.1;margin:17px 0}.paper-card p{font-family:Georgia,serif;font-style:italic;font-size:18px;color:#74626b;margin-bottom:30px}.staff{height:48px;background:repeating-linear-gradient(to bottom,transparent 0,transparent 8px,#c9bdb3 9px,#c9bdb3 10px);position:relative}.staff span{position:absolute;font-family:Georgia,serif;font-size:30px;color:#786184}.staff span:nth-child(1){left:14%;top:-2px}.staff span:nth-child(2){left:49%;top:8px}.staff span:nth-child(3){left:79%;top:-7px}.sticker{position:absolute;top:35px;right:-5px;width:150px;height:150px;border:1px solid #b79b98;border-radius:50%;display:flex;align-items:center;justify-content:center;transform:rotate(19deg);text-align:center;font-family:Georgia,serif;font-style:italic;line-height:1.5;font-size:17px;background:#f6f0e6d9;color:#8d5961}.sticker:after{content:"";position:absolute;inset:7px;border:1px dashed #bfaba4;border-radius:50%}
+.chapter-strip{border-top:1px solid #d7cabc;border-bottom:1px solid #d7cabc;background:#efe5d9}.chapter-grid{display:grid;grid-template-columns:repeat(4,1fr)}.chapter-grid div{padding:33px 23px;border-right:1px solid #d6c8ba}.chapter-grid div:first-child{padding-left:0}.chapter-grid div:last-child{border-right:0}.chapter-grid b{font-size:10px;letter-spacing:2px;color:#a27669;font-weight:750}.chapter-grid span{display:block;font-family:Georgia,serif;font-size:25px;margin-top:9px;letter-spacing:-1px}
+.section{padding-top:110px;padding-bottom:110px}.section-heading{display:flex;align-items:end;justify-content:space-between;gap:40px;margin-bottom:48px}.section-heading h2{font-size:clamp(42px,5vw,72px);line-height:1.07;margin:19px 0 0;max-width:630px}.section-heading p{max-width:350px;line-height:1.75;color:var(--muted);margin-bottom:6px}.routes{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.route{border:1px solid #ddd1c5;background:#fffaf3;min-height:275px;padding:30px 29px;display:flex;flex-direction:column;transition:transform .2s,box-shadow .2s}.route:hover{transform:translateY(-4px);box-shadow:0 16px 35px #51404b13}.route .num{font-size:11px;letter-spacing:2px;font-weight:700;color:#a97e70}.route h3{font-size:36px;line-height:1.13;margin:42px 0 14px}.route p{color:#706773;line-height:1.7;font-size:14px;margin:0}.route:first-child{background:#e8dce0}.route:nth-child(2){background:#e9e7e0}.route:nth-child(3){background:#e6e1f0}
+.split{display:grid;grid-template-columns:.75fr 1fr;gap:clamp(35px,8vw,120px);align-items:start}.line-art{min-height:360px;position:relative;display:grid;place-items:center}.line-art svg{max-width:100%;width:390px}.split-copy h2{font-size:clamp(42px,5vw,67px);line-height:1.05;margin:20px 0 26px}.split-copy p{font-size:16px;line-height:1.9;color:#6d6570}.feature-list{border-top:1px solid var(--line);margin-top:29px}.feature-list div{border-bottom:1px solid var(--line);padding:20px 0;display:flex;align-items:baseline;gap:21px}.feature-list strong{font-family:Georgia,serif;font-size:20px;font-weight:500}.feature-list span{font-size:12px;color:#998c8c;min-width:25px}
+.dark{background:var(--ink);color:#fff7ed;position:relative;overflow:hidden}.dark:after{content:"";position:absolute;width:350px;height:350px;border:1px solid #745b75;border-radius:50%;right:-100px;top:-160px;box-shadow:0 0 0 50px #ffffff06,0 0 0 100px #ffffff04}.dark .wrap{position:relative;z-index:1}.door{padding-top:103px;padding-bottom:108px;display:flex;justify-content:space-between;gap:60px;align-items:end}.door h2{font-size:clamp(50px,6.5vw,95px);line-height:1.05;margin:20px 0 22px;max-width:770px}.door h2 em{color:#e5b3a4}.door p{line-height:1.8;color:#d0c4d1;max-width:520px}.door .button{white-space:nowrap;background:#edc7ad;border-color:#edc7ad;color:var(--ink);min-width:190px}.dark .eyebrow{color:#e5b6a5}
+.practical{display:grid;grid-template-columns:1fr 1fr;gap:50px;padding-top:75px;padding-bottom:85px}.practical h2{font-size:39px;margin-bottom:22px}.practical p{line-height:1.85;color:#6f6672}.practical ul{padding-left:22px;color:#6f6672;line-height:2}.practical a{text-decoration-color:#bf9b84;text-underline-offset:4px}footer{border-top:1px solid var(--line)}.footer-grid{display:flex;gap:25px;justify-content:space-between;padding-top:30px;padding-bottom:40px;align-items:center;color:#736a70;font-size:12px}.footer-grid a{text-underline-offset:4px}
+@media(max-width:1000px){.hero-grid{grid-template-columns:1fr}.hero{padding-top:75px}.hero h1{max-width:720px}.artwork{min-height:480px}.record{width:420px;height:420px}.paper-card{left:7%}.sticker{right:5%;top:0}.door{align-items:start;flex-direction:column}.section-heading{align-items:start;flex-direction:column}.nav-links{gap:17px}}
+@media(max-width:650px){.nav{min-height:82px}.identity small{display:none}.identity strong{font-size:25px}.nav-links a:not(.nav-cta){display:none}.nav-cta{padding:13px 15px;font-size:12px}.hero{padding-top:54px;padding-bottom:68px}h1{font-size:clamp(51px,13vw,75px)}.hero-copy{font-size:16px}.artwork{min-height:385px}.record{width:320px;height:320px}.paper-card{width:250px;padding:18px;bottom:0;left:0}.paper-card h2{font-size:30px}.paper-card p{font-size:14px;margin-bottom:20px}.sticker{width:110px;height:110px;right:0;top:12px;font-size:14px}.chapter-grid{grid-template-columns:1fr 1fr}.chapter-grid div{padding:21px 10px;border-bottom:1px solid #d6c8ba}.chapter-grid div:nth-child(2){border-right:0}.chapter-grid div:nth-child(n+3){border-bottom:0}.chapter-grid div:nth-child(3){padding-left:0}.chapter-grid span{font-size:22px}.section{padding-top:72px;padding-bottom:72px}.routes{grid-template-columns:1fr}.route{min-height:200px}.route h3{margin:28px 0 11px}.split{grid-template-columns:1fr}.line-art{min-height:220px}.line-art svg{max-height:220px}.practical{grid-template-columns:1fr;gap:10px;padding-top:55px;padding-bottom:60px}.footer-grid{align-items:start;flex-direction:column}.door{padding-top:74px;padding-bottom:78px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.button,.nav-cta,.route{transition:none}}
+</style>
+</head>
+<body>
+<div class="page">
+<header>
+<nav class="nav" aria-label="Primary navigation">
+<a class="identity" href="/chordlore/" aria-label="Chordlore home"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" aria-hidden="true"><rect width="48" height="48" rx="15" fill="#2A2238"/><path d="M13 12C21 9 27 16 35 12M13 21C21 18 27 25 35 21M13 30C21 27 27 34 35 30" stroke="#E7BA9B" stroke-width="3" stroke-linecap="round"/><circle cx="35" cy="38" r="3" fill="#C4B6E7"/></svg><span><strong>chordlore.</strong><small>Your story. Your sound.</small></span></a>
+<div class="nav-links"><a href="#begin">The idea</a><a href="#inside">Inside the studio</a><a class="nav-cta" href="/chordlore/studio/">Open studio <span aria-hidden="true">↗</span></a></div>
+</nav>
+</header>
+<main>
+<section class="hero">
+<div class="wrap hero-grid">
+<div>
+<span class="eyebrow">A story-first music studio</span>
+<h1>Every song starts <em>somewhere.</em></h1>
+<p class="hero-copy">Maybe yours starts with a memory, a feeling you can't quite explain, or a line you've been carrying around for years. Chordlore helps you turn it into something you can hear.</p>
+<div class="hero-actions">
+<a class="button primary" href="/chordlore/studio/">Explore the studio <span aria-hidden="true">↗</span></a>
+<a class="button secondary" href="#begin">How it works <span aria-hidden="true">↓</span></a>
+</div>
+<p class="micro-note"><i aria-hidden="true"></i> Public browser preview · No account required</p>
+</div>
+<div class="artwork" aria-label="Illustration of a vinyl record and hand-written song notes" role="img">
+<div class="record" aria-hidden="true"></div><div class="sticker" aria-hidden="true">the sound<br>of your story</div>
+<div class="paper-card" aria-hidden="true"><span class="smallcaps">STUDIO NOTE · NO. 001</span><h2>A song called<br>home</h2><p>“And then it sounded like me.”</p><div class="staff"><span>♪</span><span>♫</span><span>♩</span></div></div>
+</div>
+</div>
+</section>
+<div class="chapter-strip" aria-label="Four steps in the studio"><div class="wrap chapter-grid"><div><b>01 / BEGIN</b><span>Tell your story.</span></div><div><b>02 / SHAPE</b><span>Find the words.</span></div><div><b>03 / CREATE</b><span>Give it sound.</span></div><div><b>04 / KEEP</b><span>Make it yours.</span></div></div></div>
+<section id="begin" class="section wrap">
+<div class="section-heading"><div><span class="eyebrow">There is no wrong starting point</span><h2>Begin with whatever<br>you have.</h2></div><p>Some people know their lyrics. Some only know what happened. Some just want to make something new. Each is a way in.</p></div>
+<div class="routes">
+<article class="route"><span class="num">ENTRY 01 · STORY</span><h3>A moment<br>you remember.</h3><p>Put your thoughts into words, however messy. Discover lines and themes worth carrying into a song.</p></article>
+<article class="route"><span class="num">ENTRY 02 · WORDS</span><h3>Lyrics you<br>already wrote.</h3><p>Bring your own writing and build around it. Edit, rearrange, and keep control of your original voice.</p></article>
+<article class="route"><span class="num">ENTRY 03 · IDEA</span><h3>Something<br>out of the blue.</h3><p>Start with a feeling, a fictional premise, or a simple creative prompt. Explore a direction before you commit.</p></article>
+</div>
+</section>
+<section id="inside" class="section wrap">
+<div class="split">
+<div class="line-art" aria-hidden="true"><svg viewBox="0 0 430 350" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="42" y="34" width="310" height="255" rx="6" transform="rotate(-9 42 34)" fill="#E9D9D0" stroke="#BDA8AC"/><rect x="73" y="58" width="300" height="253" rx="5" fill="#FFFBF5" stroke="#CBBCAF"/><path d="M103 127H343M103 143H343M103 159H343M103 175H343M103 191H343" stroke="#D8CBBE"/><path d="M113 180C148 121 173 229 207 159S256 159 282 141 316 206 332 155" stroke="#796484" stroke-width="3" stroke-linecap="round"/><circle cx="113" cy="180" r="5" fill="#BA7967"/><circle cx="207" cy="159" r="5" fill="#BA7967"/><circle cx="282" cy="141" r="5" fill="#BA7967"/><path d="M103 240H297M103 256H275" stroke="#D8CBBE" stroke-width="2"/><path d="M343 281l24 30 30-28" stroke="#C68176" stroke-width="6" stroke-linejoin="round"/><circle cx="355" cy="65" r="25" fill="#CDBBDE" opacity=".7"/></svg></div>
+<div class="split-copy">
+<span class="eyebrow">More than a lyric notebook</span>
+<h2>From first thought<br>to first listen.</h2>
+<p>Chordlore brings writing, melody exploration, simple arrangement, rehearsal, recording, and export into one creative space. You make the calls; the studio gives you somewhere to work them out.</p>
+<div class="feature-list"><div><span>01</span><strong>Write and shape your lyrics</strong></div><div><span>02</span><strong>Experiment with melody and chords</strong></div><div><span>03</span><strong>Record and organize vocal takes</strong></div><div><span>04</span><strong>Build a mix and save a backup</strong></div></div>
+</div>
+</div>
+</section>
+<section class="dark">
+<div class="wrap door"><div><span class="eyebrow">Your writing room is open</span><h2>See where your <em>story</em> takes you.</h2><p>Try the public browser edition. Explore the writing room, make a melody sketch, and save your work on this device.</p></div><a class="button" href="/chordlore/studio/">Enter the studio <span aria-hidden="true">↗</span></a></div>
+</section>
+<section class="wrap practical" id="before-you-begin">
+<div><span class="eyebrow">Good to know</span><h2>Made for experimenting.</h2><p>This is an early portfolio preview, not a finished recording service. It works best in a modern desktop browser over HTTPS. Some features available in the desktop app, including its native audio engine and local AI bridge, are not available on the public website.</p></div>
+<div><span class="eyebrow">Your work belongs to you</span><h2>Save what matters.</h2><p>Projects and recordings are stored in your browser on this device, not in an online account. Clearing browser storage or using private browsing may erase them. Use the studio's project export to create a backup you control.</p><p>Microphone access is optional and requested by your browser when you choose to record. This preview does not provide cloud sync or automatic AI song generation.</p></div>
+</section>
+</main>
+<footer><div class="wrap footer-grid"><span>© 2026 Chordlore Studio · A portfolio project by Masyn Nay</span><span>Made for your words, your sound, your pace.</span><a href="https://masynnay.com/">Back to the portfolio ↗</a></div></footer>
+</div>
+</body>
+</html>

@@ -27,7 +27,18 @@ test("project catalog uses distinct stable IDs and working project destinations"
     webProjects.length,
   );
   webProjects.forEach(({ github, demo, website }) => {
-    expect(github).toMatch(/^https:\/\/github\.com\//);
+    if (github !== undefined) expect(github).toMatch(/^https:\/\/github\.com\//);
     expect(Boolean(demo || website)).toBe(true);
   });
+});
+
+test("Chordlore preview is publicly accessible without exposing the private source repository", () => {
+  const entry = projectById.chordlore;
+  expect(entry).toBeDefined();
+  expect(entry.website).toBe("https://masynnay.com/chordlore/");
+  expect(entry.github).toBeUndefined();
+  expect(entry.release).toBeUndefined();
+  expect(entry.previewKind).toBe("artwork");
+  expect(entry.description).toMatch(/browser preview/i);
+  expect(webProjects.filter((project) => project.id === entry.id)).toHaveLength(1);
 });

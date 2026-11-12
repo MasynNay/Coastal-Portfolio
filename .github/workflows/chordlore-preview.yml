@@ -1,0 +1,46 @@
+name: Verify public Chordlore browser preview
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'public/chordlore/**'
+      - 'public/images/projects/chordlore.svg'
+      - 'src/data/projects.js'
+      - 'src/data/projects.test.js'
+      - '.github/workflows/chordlore-preview.yml'
+  pull_request:
+    paths:
+      - 'public/chordlore/**'
+      - 'public/images/projects/chordlore.svg'
+      - 'src/data/projects.js'
+      - 'src/data/projects.test.js'
+      - '.github/workflows/chordlore-preview.yml'
+permissions:
+  contents: read
+jobs:
+  preview:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify public preview is self-contained and correctly linked
+        run: |
+          node - <<'NODE'
+          const fs=require('node:fs');
+          const landing=fs.readFileSync('public/chordlore/index.html','utf8');
+          const studio=fs.readFileSync('public/chordlore/studio/index.html','utf8');
+          const catalog=fs.readFileSync('src/data/projects.js','utf8');
+          if(!landing.includes('href="/chordlore/studio/"'))throw Error('Landing has no correct studio link');
+          if(!landing.includes('browser preview'))throw Error('Missing public preview disclosure');
+          if(!landing.includes('stored in your browser'))throw Error('Missing local storage disclosure');
+          if(!studio.includes('<title>Chordlore — Your story. Your sound.</title>'))throw Error('Wrong preview');
+          if(/<script\b[^>]*\bsrc\s*=|<link\b[^>]*\bhref\s*=/i.test(studio))throw Error('Studio requires external assets');
+          if(!catalog.includes('https://masynnay.com/chordlore/'))throw Error('Project is not linked');
+          console.log('Chordlore static browser preview checks passed');
+          NODE
+      - name: Validate portfolio project catalog
+        run: |
+          npm ci --no-audit --no-fund
+          CI=true npm test -- --watchAll=false --runInBand --testPathPattern=src/data/projects.test.js

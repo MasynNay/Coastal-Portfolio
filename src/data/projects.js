@@ -46,6 +46,19 @@ export const webProjects = [
     github: "https://github.com/MasynNay/Keystoria",
   },
   {
+    id: "chordlore",
+    imgUrl: "/images/projects/chordlore.svg",
+    previewKind: "artwork",
+    title: "Chordlore Studio",
+    category: "Web",
+    label: "MUSIC CREATION / BROWSER PREVIEW",
+    description:
+      "A story-first music studio for turning memories, prompts, and lyrics into original song sketches. Explore songwriting, melody, recording, and local project backups in the public browser preview. The desktop application is still in private development.",
+    tools: "JavaScript · Web Audio · Electron · C++ · MIDI · GitHub Actions",
+    website: "https://masynnay.com/chordlore/",
+    websiteLabel: "Try the browser studio",
+  },
+  {
     id: "mixstream",
     imgUrl: "/images/projects/mixstream.svg",
     title: "MixStream",
