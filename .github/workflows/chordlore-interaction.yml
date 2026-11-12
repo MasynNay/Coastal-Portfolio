@@ -43,16 +43,16 @@ jobs:
                   page.on("pageerror",lambda e:errs.append(str(e)))
                   response=page.goto(f"http://127.0.0.1:{srv.server_port}/chordlore/",wait_until="domcontentloaded")
                   assert response.status==200
-                  assert page.title()=="Chordlore — Your words have a sound."
+                  assert page.title()=="Chordlore — Every story has a sound."
                   assert page.locator("#notes button").count()==12
                   assert page.locator('a[href="/chordlore/studio/"]').count()>=2
                   page.locator("#sketch-text").fill("A little moon over the river")
                   assert page.locator("#char-count").inner_text()=="28 / 140"
-                  page.locator('button[data-mood="reflective"]').click()
-                  assert page.locator('button[data-mood="reflective"]').get_attribute("aria-pressed")=="true"
+                  page.locator('button[data-mood="wistful"]').click()
+                  assert page.locator('button[data-mood="wistful"]').get_attribute("aria-pressed")=="true"
                   page.locator("#play-sketch").click()
                   page.wait_for_timeout(500)
-                  assert "Playing twelve notes" in page.locator("#status").inner_text()
+                  assert "Playing your twelve notes" in page.locator("#status").inner_text()
                   page.locator("#stop-sketch").click()
                   assert "Stopped" in page.locator("#status").inner_text()
                   page.set_viewport_size({"width":390,"height":844})
