@@ -1,200 +1,124 @@
 <!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#0b0d12">
-<meta name="description" content="Chordlore is the music studio for your story. Turn thoughts, lyrics, and ideas into a song of your own. Explore the browser preview.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Chordlore — Make it sound like you.">
-<meta property="og:description" content="A different way to make music. Bring the story. Find the sound. Try Chordlore in your browser.">
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#d7fb64">
+<meta name="description" content="Chordlore: your story-first music studio. Give a line of writing its own little original melody, then make a full song in the browser studio.">
+<meta property="og:title" content="Chordlore — Your words have a sound."><meta property="og:description" content="Give your story the space to become music. Try the interactive Chordlore songwriting workbench.">
 <meta property="og:url" content="https://masynnay.com/chordlore/">
-<meta property="og:site_name" content="Chordlore">
 <link rel="canonical" href="https://masynnay.com/chordlore/">
-<link rel="icon" type="image/svg+xml" href="/chordlore/mark.svg">
-<title>Chordlore — Make it sound like you.</title>
+<link rel="icon" href="/chordlore/mark.svg" type="image/svg+xml">
+<title>Chordlore — Your words have a sound.</title>
 <style>
-:root{color-scheme:dark;--bg:#0b0d12;--surface:#11141b;--surface2:#171b25;--surface3:#202533;--ink:#f2f2f2;--muted:#a4a9b5;--quiet:#707784;--line:#303642;--accent:#ff795b;--accent2:#f29f85;--blue:#8bb8e8;--violet:#a9a3cf;font-family:Inter,"Helvetica Neue",Helvetica,Arial,system-ui,sans-serif;font-synthesis:none;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;min-width:320px;background:var(--bg);color:var(--ink)}
-button,a{font:inherit}a{color:inherit}a:focus-visible{outline:2px solid var(--accent);outline-offset:5px;border-radius:2px}::selection{background:var(--accent);color:#16171c}
-.container{max-width:1450px;margin-inline:auto;padding-inline:clamp(24px,5.5vw,94px)}
-.site-header{height:94px;border-bottom:1px solid rgba(255,255,255,.09);display:flex;align-items:center;position:relative;z-index:10;background:#0b0d12}
-.nav{display:flex;align-items:center;justify-content:space-between;gap:28px;width:100%}
-.brand{display:flex;align-items:baseline;gap:4px;text-decoration:none;white-space:nowrap;letter-spacing:-1.65px;font-size:29px;font-weight:790;line-height:1}
-.brand b{color:var(--accent);font-weight:800}
-.nav-links{display:flex;align-items:center;gap:38px}
-.nav-links a{font-size:13px;font-weight:570;color:#b7bbc5;text-decoration:none;transition:color .16s}
-.nav-links a:hover{color:#fff}
-.nav-links a.nav-button{padding:14px 19px;border:1px solid #555967;border-radius:5px;color:#fff;background:#161923}
-.nav-links a.nav-button:hover{border-color:#ff795b}
-.utility{font:600 10px/1.5 ui-monospace,SFMono-Regular,Consolas,monospace;color:#9299a5;letter-spacing:1.5px;text-transform:uppercase}
-.hero{position:relative;overflow:hidden;background:radial-gradient(ellipse 54% 60% at 80% 44%,rgba(76,85,113,.15),transparent 75%),var(--bg)}
-.hero:before{content:"";position:absolute;inset:0;opacity:.16;background-image:linear-gradient(#26303d 1px,transparent 1px),linear-gradient(90deg,#26303d 1px,transparent 1px);background-size:80px 80px;mask-image:linear-gradient(90deg,transparent 25%,black)}
-.hero-inner{position:relative;min-height:742px;display:grid;grid-template-columns:minmax(0,.94fr) minmax(0,1.06fr);align-items:center;gap:clamp(34px,5vw,85px);padding-top:82px;padding-bottom:97px}
-.hero-content{position:relative;z-index:2}
-.eyebrow{display:flex;align-items:center;gap:11px;color:var(--accent);font:650 11px ui-monospace,SFMono-Regular,Consolas,monospace;letter-spacing:2px;text-transform:uppercase}
-.eyebrow:before{content:"";width:25px;height:2px;background:currentColor}
-.hero h1{font-size:clamp(59px,6.7vw,105px);letter-spacing:-.085em;line-height:.97;margin:28px 0 29px;font-weight:790;max-width:760px}
-.hero h1 span{display:block}
-.hero h1 span:last-child{color:var(--accent)}
-.hero-description{font-size:clamp(17px,1.5vw,20px);line-height:1.75;color:#b2b6c0;max-width:510px;margin:0}
-.hero-cta{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-top:38px}
-.button{display:inline-flex;align-items:center;justify-content:center;gap:34px;min-height:57px;padding:0 24px;border-radius:5px;text-decoration:none;font-weight:720;font-size:13px;letter-spacing:.1px;transition:background .16s,transform .16s,border-color .16s}
-.button:hover{transform:translateY(-2px)}
-.button-primary{background:var(--accent);color:#191318;border:1px solid var(--accent)}
-.button-primary:hover{background:#ff957b}
-.button-outline{border:1px solid #464a55;background:transparent;color:#e6e8eb}
-.button-outline:hover{border-color:#a7adba}
-.button span:last-child{font-size:20px;font-weight:400;line-height:1}
-.hero-footnote{display:flex;flex-wrap:wrap;gap:11px;align-items:center;margin-top:31px;color:#858c99;font:550 11px/1.6 ui-monospace,SFMono-Regular,Consolas,monospace;letter-spacing:.4px}
-.hero-footnote i{width:4px;height:4px;background:#5c6470;border-radius:50%}
-.studio-visual{position:relative;align-self:center;min-width:0;filter:drop-shadow(0 38px 50px #0203078a)}
-.studio-visual:before{content:"";position:absolute;inset:12% -5% -6% 12%;background:#ff795b14;filter:blur(60px);border-radius:30%}
-.session-card{position:relative;border:1px solid #454b56;border-radius:11px;background:#11151e;overflow:hidden;box-shadow:0 30px 80px #0009;transform:perspective(1400px) rotateY(-4deg) rotateX(3deg)}
-.session-toolbar{display:flex;justify-content:space-between;align-items:center;padding:16px 20px;background:#1b202b;border-bottom:1px solid #383e4b;gap:12px}
-.toolbar-brand{display:flex;gap:10px;align-items:center;font-weight:710;letter-spacing:-.7px;font-size:16px}
-.toolbar-brand:before{content:"";width:11px;height:11px;background:var(--accent);border-radius:2px;box-shadow:0 0 20px #ff795b48}
-.session-toolbar .utility{font-size:9px;letter-spacing:1px}
-.session-meta{display:flex;gap:27px;align-items:center;padding:19px 19px 18px;border-bottom:1px solid #363d4c;background:#141923}
-.meta-item span{display:block;font-size:9px;letter-spacing:1.3px;color:#848b99;margin-bottom:5px;text-transform:uppercase}
-.meta-item strong{font:600 15px ui-monospace,SFMono-Regular,Consolas,monospace;color:#f1f3f5}
-.play-label{margin-left:auto;display:flex;align-items:center;gap:9px;background:#2a303c;border:1px solid #424959;padding:9px 11px;border-radius:4px;font:650 10px ui-monospace,monospace;letter-spacing:1px}
-.play-label:before{content:"";border-top:6px solid transparent;border-bottom:6px solid transparent;border-left:8px solid var(--accent)}
-.timeline-header{display:grid;grid-template-columns:111px 1fr;border-bottom:1px solid #333b49}
-.timeline-title{padding:14px 14px;font:600 10px ui-monospace,monospace;color:#9199a7;border-right:1px solid #333b49}
-.time-markers{display:flex;justify-content:space-between;padding:15px 16px;color:#818a98;font:600 10px ui-monospace,monospace;background:repeating-linear-gradient(90deg,transparent,transparent calc(25% - 1px),#303746 25%);position:relative}
-.track{min-height:91px;display:grid;grid-template-columns:111px 1fr;border-bottom:1px solid #343c4a}
-.track:last-of-type{border-bottom:0}
-.track-name{border-right:1px solid #343c4a;padding:23px 11px 12px 16px;font:720 10px ui-monospace,monospace;color:#e2e5ec;letter-spacing:.5px}
-.track-name small{display:block;color:#7d8696;font-size:9px;font-weight:480;letter-spacing:0;margin-top:9px}
-.track-content{padding:14px 15px;background:repeating-linear-gradient(90deg,transparent,transparent calc(25% - 1px),#303746 25%);display:flex;gap:7px;align-items:center;min-width:0}
-.waveform-region{width:100%;background:#8d423d36;border:1px solid #a8574d55;border-radius:4px;display:flex;align-items:center;min-height:60px;overflow:hidden}
-.waveform-region svg{height:59px;min-width:100%;width:100%;fill:#ff8d75}
-.melody-block{height:42px;background:#304562;border:1px solid #4a698c;border-radius:3px;position:relative;flex:1;min-width:0}
-.melody-block:after{content:"";position:absolute;left:12%;top:50%;height:5px;width:55%;background:#86b9e8;border-radius:2px}
-.melody-block:nth-child(2):after{top:32%;width:72%}
-.melody-block:nth-child(3):after{top:63%;width:46%}
-.melody-block:nth-child(4):after{top:42%;width:62%}
-.chord-block{height:45px;flex:1;display:grid;place-items:center;min-width:0;border-radius:3px;background:#49435e;border:1px solid #6c6384;font:700 clamp(8px,.7vw,11px) ui-monospace,monospace;color:#d1caed;letter-spacing:.1px}
-.drum-pattern{display:flex;align-items:center;gap:5px;width:100%}
-.drum-pattern b{flex:1;height:21px;border:1px solid #444d5d;border-radius:2px;background:#2b313f}
-.drum-pattern b.hit{background:#f4b59f;border-color:#ef987b}
-.drum-pattern b.soft{background:#9c786e;border-color:#9c786e}
-.session-bottom{display:flex;justify-content:space-between;gap:12px;background:#171c26;border-top:1px solid #3b4251;padding:15px 20px;color:#8a93a3;font:600 9px/1.4 ui-monospace,monospace;letter-spacing:1px;text-transform:uppercase}
-.session-bottom strong{color:#c6ccd8;font-weight:600}
-.visual-caption{position:absolute;right:-12px;bottom:-32px;background:#202735;border:1px solid #4b5362;border-radius:5px;padding:14px 17px;font:700 10px ui-monospace,monospace;letter-spacing:1.2px;color:#d6dce7}
-.visual-caption:before{content:"";display:inline-block;width:6px;height:6px;margin-right:9px;background:var(--accent);vertical-align:middle}
-.intro-strip{background:#151920;border-top:1px solid #333a46;border-bottom:1px solid #333a46}
-.strip-inner{display:flex;align-items:center;gap:25px;justify-content:space-between;min-height:106px}
-.strip-inner p{margin:0;font-size:clamp(16px,1.65vw,21px);color:#d4d7dd;letter-spacing:-.03em;font-weight:550}
-.strip-inner span{white-space:nowrap;font:650 10px ui-monospace,monospace;letter-spacing:1.3px;color:#8c94a2}
-.section{padding-top:130px;padding-bottom:130px}
-.section-kicker{font:670 11px ui-monospace,SFMono-Regular,monospace;letter-spacing:2px;text-transform:uppercase;color:var(--accent)}
-.section-heading{display:grid;grid-template-columns:.9fr 1fr;align-items:end;gap:70px;margin-bottom:58px}
-.section-heading h2{font-size:clamp(45px,5.3vw,78px);line-height:1.04;letter-spacing:-.075em;margin:21px 0 0;font-weight:740}
-.section-heading p{font-size:18px;color:#b1b7c2;line-height:1.7;max-width:490px;justify-self:end;margin:0}
-.workflow{border-top:1px solid #424752}
-.workflow-row{display:grid;grid-template-columns:90px minmax(0,1fr) minmax(0,.7fr);gap:30px;align-items:start;padding:46px 0;border-bottom:1px solid #424752}
-.workflow-index{font:650 13px ui-monospace,monospace;color:var(--accent);padding-top:10px}
-.workflow-row h3{font-size:clamp(27px,3vw,44px);font-weight:680;letter-spacing:-.055em;line-height:1.15;margin:0}
-.workflow-row p{font-size:15px;line-height:1.8;color:#aab1bc;max-width:420px;margin:1px 0 0}
-.philosophy{background:#f2f1ee;color:#1a2028;position:relative;overflow:hidden}
-.philosophy:after{content:"";width:46vw;height:46vw;position:absolute;right:-15vw;top:-15vw;border:1px solid #dadcda;border-radius:50%;box-shadow:0 0 0 75px #eef0ee,0 0 0 76px #dadcda,0 0 0 150px #eef0ee,0 0 0 151px #dadcda;pointer-events:none}
-.philosophy .container{position:relative;z-index:1;padding-top:127px;padding-bottom:127px}
-.philosophy .section-kicker{color:#bc4e37}
-.philosophy h2{font-size:clamp(48px,6.4vw,94px);letter-spacing:-.075em;font-weight:750;line-height:1.02;max-width:920px;margin:27px 0}
-.philosophy h2 em{font-style:normal;color:#d75942}
-.philosophy p{max-width:620px;color:#5c626b;font-size:18px;line-height:1.8}
-.features-section{background:#12161e;border-top:1px solid #2d3340}
-.features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-top:57px}
-.feature{padding:30px;background:#1b202b;border:1px solid #394151;border-radius:5px;min-height:270px;display:flex;flex-direction:column}
-.feature .top{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #3c4553;padding-bottom:29px;color:#9da5b5;font:650 10px ui-monospace,monospace;letter-spacing:1.2px}
-.feature .top b{color:var(--accent);font-weight:650}
-.feature h3{font-size:24px;letter-spacing:-.04em;line-height:1.2;font-weight:650;margin:35px 0 14px}
-.feature p{color:#aab1bf;font-size:14px;line-height:1.75;margin:0}
-.callout{padding-top:123px;padding-bottom:125px;display:grid;grid-template-columns:1.1fr .9fr;gap:70px;align-items:center}
-.callout h2{font-size:clamp(52px,6vw,88px);letter-spacing:-.078em;line-height:1.02;font-weight:760;margin:20px 0 28px}
-.callout .button{margin-top:8px}
-.callout-aside{border-left:1px solid #414958;padding-left:42px}
-.callout-aside h3{font:680 13px ui-monospace,monospace;letter-spacing:.6px;margin-bottom:20px}
-.callout-aside p{color:#aab1bf;line-height:1.75;font-size:15px}
-.callout-aside strong{color:#e7eaf1}
-.footer{border-top:1px solid #373e49;background:#090b10}
-.footer-inner{display:flex;gap:30px;justify-content:space-between;align-items:center;min-height:130px;font-size:12px;color:#9299a8}
-.footer-inner a{color:#b5bcc9;text-underline-offset:5px}
-.footer-inner .brand{font-size:22px;color:#e9eaf0}
-@media(max-width:1250px){.hero-inner{grid-template-columns:1fr 1fr}.hero h1{font-size:clamp(54px,6.5vw,88px)}.track{grid-template-columns:95px 1fr}.timeline-header{grid-template-columns:95px 1fr}.session-meta{gap:16px}.meta-item strong{font-size:13px}}
-@media(max-width:1000px){.hero-inner{grid-template-columns:1fr;gap:75px;padding-top:78px}.hero h1{font-size:clamp(68px,9vw,102px)}.hero-description{max-width:710px}.studio-visual{max-width:780px;width:100%;margin:auto}.session-card{transform:none}.section-heading{grid-template-columns:1fr;gap:23px}.section-heading p{justify-self:start}.workflow-row{grid-template-columns:60px 1fr;gap:20px}.workflow-row p{grid-column:2}.features-grid{grid-template-columns:1fr 1fr}.callout{grid-template-columns:1fr;gap:50px}.callout-aside{max-width:650px}}
-@media(max-width:640px){.site-header{height:75px}.brand{font-size:25px}.nav-links a:not(.nav-button){display:none}.nav-links{gap:0}.nav-links a.nav-button{padding:12px 13px;font-size:11px}.hero-inner{padding-top:70px;padding-bottom:90px;gap:55px}.hero h1{font-size:clamp(54px,12vw,82px)}.hero-description{font-size:16px}.hero-cta{align-items:stretch}.hero-cta a{width:100%}.studio-visual{width:calc(100% + 12px);margin-left:-6px}.session-card{border-radius:6px}.session-toolbar{padding:12px}.session-toolbar .utility{font-size:8px}.session-meta{padding:13px 11px;gap:13px}.meta-item strong{font-size:11px}.play-label{font-size:9px;padding:7px}.timeline-header,.track{grid-template-columns:72px 1fr}.track-name{padding:20px 8px;font-size:8px}.track-name small{font-size:8px}.track-content{padding:11px 7px;gap:4px}.track{min-height:78px}.session-bottom{padding:11px;font-size:8px}.visual-caption{bottom:-25px;right:0;padding:10px;font-size:8px}.intro-strip .strip-inner{min-height:110px;align-items:start;justify-content:center;flex-direction:column;gap:9px;padding-top:19px;padding-bottom:19px}.section{padding-top:83px;padding-bottom:83px}.section-heading h2{font-size:48px}.section-heading p{font-size:16px}.workflow-row{grid-template-columns:40px 1fr;padding:32px 0;gap:14px}.workflow-row h3{font-size:29px}.workflow-row p{font-size:14px}.philosophy .container{padding-top:87px;padding-bottom:89px}.philosophy h2{font-size:48px}.philosophy p{font-size:16px}.features-grid{grid-template-columns:1fr;gap:12px}.feature{min-height:220px}.callout{padding-top:88px;padding-bottom:88px}.callout h2{font-size:54px}.callout-aside{padding-left:23px}.footer-inner{flex-wrap:wrap;justify-content:flex-start;padding-top:32px;padding-bottom:34px;gap:20px}}
-@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.button,.nav-links a{transition:none}}
-</style>
-</head>
+:root{--lime:#d7fb64;--ink:#171b25;--cobalt:#424cd6;--paper:#f5f5ee;--text:#3e4653;--lilac:#e8e5fb;--sage:#e2eddd;--ice:#dfe9ff;--peach:#f39372;--mono:ui-monospace,SFMono-Regular,Consolas,monospace;font-family:Arial,"Helvetica Neue",Helvetica,sans-serif;background:var(--lime);color:var(--ink);font-synthesis:none;-webkit-font-smoothing:antialiased}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;min-width:320px}button,textarea{font:inherit}button{cursor:pointer}a{color:inherit}button:focus-visible,a:focus-visible,textarea:focus-visible{outline:3px solid var(--cobalt);outline-offset:4px}::selection{background:var(--ink);color:var(--lime)}
+header{min-height:79px;border-bottom:2px solid var(--ink);display:flex;align-items:stretch}
+.logo{flex:1;display:flex;align-items:center;gap:11px;padding:12px clamp(19px,4vw,65px);text-decoration:none;font-size:clamp(23px,2.4vw,31px);font-weight:900;letter-spacing:-1.9px}
+.logo b{color:var(--cobalt)}.mark{display:grid;place-items:center;width:26px;height:26px;background:var(--ink);color:var(--lime);font-size:19px;font-weight:900}
+.issue{align-self:center;padding:0 26px;font:750 10px var(--mono);letter-spacing:1px}
+.header-cta{min-width:185px;padding:15px 23px;background:var(--ink);color:var(--lime);text-decoration:none;display:grid;place-items:center;font-size:12px;font-weight:850}.header-cta:hover{background:var(--cobalt)}
+.cover{display:grid;grid-template-columns:1.08fr .92fr;border-bottom:2px solid var(--ink)}
+.lead{padding:clamp(45px,5.5vw,82px) clamp(24px,5vw,75px) 56px;min-height:690px;border-right:2px solid var(--ink);display:flex;align-items:flex-start;flex-direction:column;position:relative;overflow:hidden}
+.eyebrow{font:750 11px/1.4 var(--mono);letter-spacing:1.3px;text-transform:uppercase}
+h1,h2,h3,p{margin-top:0}.lead h1{font-size:clamp(76px,8vw,140px);line-height:.92;letter-spacing:-.103em;font-weight:900;margin:68px 0 36px}
+.lead h1 span{display:block}.lead h1 .hollow{color:transparent;-webkit-text-stroke:2px var(--ink)}.lead h1 .color{color:var(--cobalt)}
+.lead p{font-size:clamp(17px,1.65vw,21px);line-height:1.56;max-width:510px;letter-spacing:-.4px;margin:0 0 30px}
+.lead .buttons{display:flex;align-items:center;flex-wrap:wrap;gap:26px;margin-top:auto}
+.enter{display:inline-flex;align-items:center;gap:32px;justify-content:space-between;background:var(--ink);color:white;text-decoration:none;border:2px solid var(--ink);padding:17px 22px;font-size:13px;font-weight:800;transition:background .15s}.enter:hover{background:var(--cobalt)}.enter b{font-size:21px}
+.learn{font-size:12px;font-weight:800;text-decoration:none;border-bottom:2px solid var(--ink);padding-bottom:6px}
+.instrument{background:var(--paper);display:flex;flex-direction:column;min-width:0}
+.instrument-head{background:var(--cobalt);color:white;border-bottom:2px solid var(--ink);padding:20px 25px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.instrument-head .eyebrow{font-size:10px}.live{font:700 10px var(--mono);display:flex;gap:8px;align-items:center}.live:before{content:"";width:8px;height:8px;border-radius:50%;background:var(--lime)}
+.instrument-main{flex:1;display:flex;flex-direction:column;gap:20px;padding:clamp(25px,3.4vw,45px)}
+.instrument h2{font-weight:900;font-size:clamp(29px,3vw,43px);letter-spacing:-2px;line-height:1.04;max-width:390px;margin:0}
+.instrument p{font-size:13px;line-height:1.58;color:var(--text);margin:0}
+.input-head{display:flex;justify-content:space-between;border-bottom:1px solid #b9c0b5;padding-bottom:9px;font:750 10px var(--mono)}
+.input-head output{font-weight:500}
+#sketch-text{width:100%;min-height:105px;resize:vertical;padding:17px;border:2px solid var(--ink);border-radius:0;color:var(--ink);font-size:18px;font-weight:700;letter-spacing:-.25px;line-height:1.4;background:white}
+.moods{display:flex;gap:8px}.moods button{flex:1;padding:12px 6px;border:1.5px solid var(--ink);background:transparent;color:var(--ink);font-size:12px;font-weight:750}
+.moods button[aria-pressed="true"]{background:var(--ink);color:var(--lime)}
+.score{border:2px solid var(--ink);background:#ebf0e6}
+.score-head{display:flex;align-items:center;justify-content:space-between;gap:8px;border-bottom:1px solid #bfc4b8;padding:10px 12px;font:750 10px var(--mono)}
+#notes{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));align-items:end;gap:5px;min-height:123px;padding:13px 10px}
+.note{min-width:0;height:70px;position:relative;background:var(--cobalt);border:0;border-radius:2px 2px 0 0;color:white;transition:transform .11s}
+.note:nth-child(3n+1){background:#6b74f2}.note:nth-child(3n+2){background:#3941b6}.note.active{background:var(--peach)!important;transform:translateY(-8px)}
+.note small{position:absolute;bottom:7px;left:0;right:0;text-align:center;font:750 9px var(--mono)}
+.transport{display:flex;gap:8px}.transport button{border:2px solid var(--ink);min-height:53px}
+#play-sketch{flex:1;background:var(--cobalt);color:white;font-weight:850;font-size:13px}
+#play-sketch:hover{background:#3039b4}
+#stop-sketch{width:63px;background:var(--ink);color:white;font-size:19px}
+#stop-sketch:disabled{opacity:.35;cursor:not-allowed}
+#status{min-height:33px;font:650 11px/1.5 var(--mono);color:var(--text)}
+.instrument-foot{display:flex;justify-content:space-between;gap:10px;padding:14px 25px;background:#e3ebdc;border-top:2px solid var(--ink);font:750 10px var(--mono)}
+.instrument-foot:after{content:"";background:var(--cobalt);border:1px solid var(--ink);height:8px;width:8px;border-radius:50%}
+.ticker{background:var(--ink);color:var(--lime);overflow:hidden;padding:19px 0}
+.track{display:flex;gap:55px;align-items:center;white-space:nowrap;width:max-content;animation:slide 32s linear infinite}
+.track strong{font-size:clamp(24px,3vw,39px);font-weight:900;letter-spacing:-1.7px}.track i{font-style:normal;color:white;font-size:30px}
+@keyframes slide{to{transform:translateX(-50%)}}
+.story{display:grid;grid-template-columns:37% 63%;background:var(--paper);border-bottom:2px solid var(--ink)}
+.story-intro{padding:clamp(44px,5vw,80px) clamp(25px,4vw,61px);border-right:2px solid var(--ink);display:flex;flex-direction:column}
+.story-intro .eyebrow{color:var(--cobalt)}
+.story-intro h2{font-size:clamp(49px,5.4vw,79px);font-weight:900;line-height:.98;letter-spacing:-.087em;margin:36px 0 25px}
+.story-intro p{line-height:1.7;color:var(--text);font-size:16px;max-width:340px}
+.story-intro .caption{margin-top:auto;padding-top:35px;font:750 11px var(--mono)}
+.stages{display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}
+.stages article{min-height:365px;padding:clamp(20px,2.6vw,39px);border-right:2px solid var(--ink);display:flex;flex-direction:column}
+.stages article:last-child{border-right:0}.stages article:nth-child(1){background:var(--lilac)}.stages article:nth-child(2){background:var(--sage)}.stages article:nth-child(3){background:var(--ice)}
+.stages .index{font:750 11px var(--mono)}.stages h3{font-size:clamp(28px,3.1vw,44px);font-weight:900;line-height:1.05;letter-spacing:-.065em;margin:auto 0 18px}
+.stages p{color:var(--text);font-size:13px;line-height:1.7;margin:0}
+.manifesto{display:grid;grid-template-columns:1fr 32%;background:var(--cobalt);color:white;border-bottom:2px solid var(--ink)}
+.manifesto-main{padding:clamp(55px,8vw,120px) clamp(24px,5vw,78px)}.manifesto-main h2{font-size:clamp(65px,8.5vw,145px);font-weight:900;line-height:.89;letter-spacing:-.1em;margin:44px 0 35px}.manifesto-main h2 em{color:var(--lime);font-style:normal}
+.manifesto-main p{font-size:17px;line-height:1.65;color:#e5e5ff;max-width:630px}
+.manifesto-aside{padding:clamp(35px,4vw,58px);border-left:2px solid #ffffff8c;display:flex;flex-direction:column;justify-content:space-between}
+.manifesto-aside .eyebrow{color:var(--lime)}
+.tape{display:flex;flex-direction:column;gap:10px;transform:rotate(-5deg);margin:45px 0}
+.tape b{display:block;background:var(--lime);color:var(--ink);font-size:clamp(19px,2vw,29px);padding:13px 15px;font-weight:900}
+.tape b:nth-child(2){background:white;margin-left:22px}.tape b:nth-child(3){background:var(--peach);margin-left:43px}
+.manifesto-aside p{font-size:14px;line-height:1.75;color:#e4e5ff}
+.final{display:grid;grid-template-columns:1fr .75fr;gap:72px;padding:clamp(63px,7vw,115px) clamp(24px,5vw,77px)}
+.final h2{font-size:clamp(67px,8vw,116px);line-height:.95;letter-spacing:-.1em;font-weight:900;margin:28px 0 37px}
+.disclosure{border-left:2px solid var(--ink);padding-left:33px}
+.disclosure h3{font:800 11px var(--mono);letter-spacing:.8px;margin:3px 0 22px}
+.disclosure p{font-size:14px;line-height:1.82;color:#364535;margin:0 0 19px}
+footer{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:15px;padding:31px clamp(23px,5vw,76px);background:var(--ink);color:white;font:750 11px var(--mono)}
+footer a{color:var(--lime)}
+@media(max-width:1110px){.cover{grid-template-columns:1fr}.lead{min-height:620px;border-right:0;border-bottom:2px solid var(--ink)}.lead h1{font-size:clamp(80px,11vw,140px)}.instrument-main{display:grid;grid-template-columns:1fr 1fr}.instrument h2,.instrument p,.input-head,#sketch-text{grid-column:1}.moods,.score,.transport,#status{grid-column:2}.moods{grid-row:1}.score{grid-row:2/span 3}.story{grid-template-columns:1fr}.story-intro{border-right:0;border-bottom:2px solid var(--ink)}.story-intro h2{max-width:680px}.manifesto{grid-template-columns:1fr}.manifesto-aside{border-left:0;border-top:2px solid #ffffff8c}.tape{max-width:400px}.final{grid-template-columns:1fr}}
+@media(max-width:660px){header{min-height:69px}.logo{font-size:24px;padding-inline:16px}.issue{display:none}.header-cta{min-width:0;font-size:11px;padding:12px 14px}.lead{min-height:575px;padding:42px 22px 48px}.lead h1{font-size:clamp(66px,13.5vw,92px);margin:66px 0 32px}.lead p{font-size:17px}.instrument-main{display:flex;padding:28px 22px}.instrument h2{font-size:37px}.stages{grid-template-columns:1fr}.story-intro{padding:61px 24px 42px}.story-intro h2{font-size:59px}.stages article{min-height:205px;border-right:0;border-bottom:2px solid var(--ink);padding:28px}.stages article:last-child{border-bottom:0}.stages h3{font-size:42px;margin:35px 0 13px}.manifesto-main{padding:72px 24px}.manifesto-main h2{font-size:clamp(65px,12.5vw,100px)}.manifesto-aside{padding:40px 24px}.final{padding:75px 24px;gap:48px}.final h2{font-size:clamp(70px,14vw,96px)}.disclosure{padding-left:21px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.track{animation:none}.enter,.note{transition:none}}
+</style></head>
 <body>
-<header class="site-header">
-  <nav class="container nav" aria-label="Main">
-    <a class="brand" href="/chordlore/" aria-label="Chordlore home">chordlore<b>.</b></a>
-    <div class="nav-links">
-      <a href="#how-it-works">How it works</a><a href="#capabilities">The studio</a><a href="#about-preview">About this preview</a>
-      <a class="nav-button" href="/chordlore/studio/">Open studio ↗</a>
-    </div>
-  </nav>
-</header>
+<header><a class="logo" href="/chordlore/" aria-label="Chordlore home"><span class="mark" aria-hidden="true">c</span><span>chordlore<b>.</b></span></a><span class="issue">THE STORY FIRST MUSIC STUDIO / NO.01</span><a class="header-cta" href="/chordlore/studio/">OPEN THE STUDIO ↗</a></header>
 <main>
-<section class="hero">
- <div class="container hero-inner">
-  <div class="hero-content">
-   <div class="eyebrow">CREATIVE MUSIC STUDIO / BROWSER PREVIEW</div>
-   <h1><span>Make it</span><span>sound like</span><span>you.</span></h1>
-   <p class="hero-description">A song can start with a moment, a feeling, a few words, or a half-formed idea. Chordlore gives you the space to turn it into music, on your terms.</p>
-   <div class="hero-cta"><a class="button button-primary" href="/chordlore/studio/">Explore the studio <span aria-hidden="true">↗</span></a><a class="button button-outline" href="#how-it-works">See how it works <span aria-hidden="true">↓</span></a></div>
-   <div class="hero-footnote"><span>NO ACCOUNT</span><i></i><span>WORK SAVED ON THIS DEVICE</span><i></i><span>EARLY BROWSER PREVIEW</span></div>
-  </div>
-  <div class="studio-visual">
-   <div class="session-card" role="img" aria-label="Illustrative four-track music session with a vocal waveform, melody blocks, chord arrangement, and beat pattern. This visualization is not an interactive player.">
-    <div class="session-toolbar"><div class="toolbar-brand">chordlore.</div><span class="utility">SESSION / ORIGINAL SONG</span></div>
-    <div class="session-meta"><div class="meta-item"><span>TEMPO</span><strong>92 BPM</strong></div><div class="meta-item"><span>KEY</span><strong>C MINOR</strong></div><div class="meta-item"><span>TIME</span><strong>4 / 4</strong></div><div class="play-label">ARRANGEMENT</div></div>
-    <div class="timeline-header"><div class="timeline-title">TRACKS</div><div class="time-markers"><span>01</span><span>02</span><span>03</span><span>04</span></div></div>
-    <div class="track"><div class="track-name">VOICE<small>Recorded idea</small></div><div class="track-content"><div class="waveform-region"><svg viewBox="0 0 608 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="28" width="2.5" height="5" rx="1.25" /><rect x="7.4" y="18" width="2.5" height="25" rx="1.25" /><rect x="12.8" y="12" width="2.5" height="37" rx="1.25" /><rect x="18.200000000000003" y="11" width="2.5" height="39" rx="1.25" /><rect x="23.6" y="9" width="2.5" height="43" rx="1.25" /><rect x="29" y="8" width="2.5" height="44" rx="1.25" /><rect x="34.400000000000006" y="13" width="2.5" height="34" rx="1.25" /><rect x="39.800000000000004" y="19" width="2.5" height="23" rx="1.25" /><rect x="45.2" y="20" width="2.5" height="20" rx="1.25" /><rect x="50.6" y="24" width="2.5" height="12" rx="1.25" /><rect x="56" y="26" width="2.5" height="9" rx="1.25" /><rect x="61.400000000000006" y="23" width="2.5" height="15" rx="1.25" /><rect x="66.80000000000001" y="23" width="2.5" height="14" rx="1.25" /><rect x="72.2" y="24" width="2.5" height="12" rx="1.25" /><rect x="77.60000000000001" y="21" width="2.5" height="19" rx="1.25" /><rect x="83" y="17" width="2.5" height="26" rx="1.25" /><rect x="88.4" y="19" width="2.5" height="22" rx="1.25" /><rect x="93.80000000000001" y="23" width="2.5" height="15" rx="1.25" /><rect x="99.2" y="24" width="2.5" height="13" rx="1.25" /><rect x="104.60000000000001" y="19" width="2.5" height="23" rx="1.25" /><rect x="110" y="17" width="2.5" height="27" rx="1.25" /><rect x="115.4" y="9" width="2.5" height="43" rx="1.25" /><rect x="120.80000000000001" y="8" width="2.5" height="44" rx="1.25" /><rect x="126.2" y="8" width="2.5" height="44" rx="1.25" /><rect x="131.60000000000002" y="9" width="2.5" height="43" rx="1.25" /><rect x="137" y="11" width="2.5" height="38" rx="1.25" /><rect x="142.4" y="19" width="2.5" height="23" rx="1.25" /><rect x="147.8" y="26" width="2.5" height="8" rx="1.25" /><rect x="153.20000000000002" y="17" width="2.5" height="26" rx="1.25" /><rect x="158.60000000000002" y="14" width="2.5" height="33" rx="1.25" /><rect x="164" y="15" width="2.5" height="31" rx="1.25" /><rect x="169.4" y="12" width="2.5" height="36" rx="1.25" /><rect x="174.8" y="14" width="2.5" height="33" rx="1.25" /><rect x="180.20000000000002" y="19" width="2.5" height="22" rx="1.25" /><rect x="185.60000000000002" y="22" width="2.5" height="16" rx="1.25" /><rect x="191" y="22" width="2.5" height="16" rx="1.25" /><rect x="196.4" y="25" width="2.5" height="11" rx="1.25" /><rect x="201.8" y="26" width="2.5" height="8" rx="1.25" /><rect x="207.20000000000002" y="21" width="2.5" height="19" rx="1.25" /><rect x="212.60000000000002" y="18" width="2.5" height="24" rx="1.25" /><rect x="218" y="18" width="2.5" height="24" rx="1.25" /><rect x="223.4" y="14" width="2.5" height="33" rx="1.25" /><rect x="228.8" y="12" width="2.5" height="36" rx="1.25" /><rect x="234.20000000000002" y="17" width="2.5" height="27" rx="1.25" /><rect x="239.60000000000002" y="21" width="2.5" height="19" rx="1.25" /><rect x="245.00000000000003" y="23" width="2.5" height="15" rx="1.25" /><rect x="250.4" y="18" width="2.5" height="25" rx="1.25" /><rect x="255.8" y="14" width="2.5" height="33" rx="1.25" /><rect x="261.20000000000005" y="8" width="2.5" height="44" rx="1.25" /><rect x="266.6" y="8" width="2.5" height="44" rx="1.25" /><rect x="272" y="9" width="2.5" height="43" rx="1.25" /><rect x="277.40000000000003" y="9" width="2.5" height="42" rx="1.25" /><rect x="282.8" y="13" width="2.5" height="34" rx="1.25" /><rect x="288.20000000000005" y="21" width="2.5" height="18" rx="1.25" /><rect x="293.6" y="25" width="2.5" height="11" rx="1.25" /><rect x="299" y="19" width="2.5" height="23" rx="1.25" /><rect x="304.40000000000003" y="18" width="2.5" height="25" rx="1.25" /><rect x="309.8" y="20" width="2.5" height="21" rx="1.25" /><rect x="315.20000000000005" y="18" width="2.5" height="25" rx="1.25" /><rect x="320.6" y="20" width="2.5" height="20" rx="1.25" /><rect x="326" y="26" width="2.5" height="8" rx="1.25" /><rect x="331.40000000000003" y="24" width="2.5" height="13" rx="1.25" /><rect x="336.8" y="22" width="2.5" height="16" rx="1.25" /><rect x="342.20000000000005" y="25" width="2.5" height="10" rx="1.25" /><rect x="347.6" y="22" width="2.5" height="16" rx="1.25" /><rect x="353" y="16" width="2.5" height="29" rx="1.25" /><rect x="358.40000000000003" y="13" width="2.5" height="34" rx="1.25" /><rect x="363.8" y="12" width="2.5" height="36" rx="1.25" /><rect x="369.20000000000005" y="8" width="2.5" height="44" rx="1.25" /><rect x="374.6" y="9" width="2.5" height="42" rx="1.25" /><rect x="380" y="16" width="2.5" height="28" rx="1.25" /><rect x="385.40000000000003" y="19" width="2.5" height="22" rx="1.25" /><rect x="390.8" y="22" width="2.5" height="16" rx="1.25" /><rect x="396.20000000000005" y="18" width="2.5" height="25" rx="1.25" /><rect x="401.6" y="13" width="2.5" height="35" rx="1.25" /><rect x="407" y="8" width="2.5" height="44" rx="1.25" /><rect x="412.40000000000003" y="8" width="2.5" height="44" rx="1.25" /><rect x="417.8" y="11" width="2.5" height="38" rx="1.25" /><rect x="423.20000000000005" y="12" width="2.5" height="37" rx="1.25" /><rect x="428.6" y="16" width="2.5" height="28" rx="1.25" /><rect x="434" y="24" width="2.5" height="13" rx="1.25" /><rect x="439.40000000000003" y="24" width="2.5" height="12" rx="1.25" /><rect x="444.8" y="21" width="2.5" height="19" rx="1.25" /><rect x="450.20000000000005" y="23" width="2.5" height="15" rx="1.25" /><rect x="455.6" y="25" width="2.5" height="11" rx="1.25" /><rect x="461.00000000000006" y="22" width="2.5" height="16" rx="1.25" /><rect x="466.40000000000003" y="21" width="2.5" height="18" rx="1.25" /><rect x="471.8" y="22" width="2.5" height="16" rx="1.25" /><rect x="477.20000000000005" y="19" width="2.5" height="22" rx="1.25" /><rect x="482.6" y="21" width="2.5" height="18" rx="1.25" /><rect x="488.00000000000006" y="26" width="2.5" height="9" rx="1.25" /><rect x="493.40000000000003" y="19" width="2.5" height="23" rx="1.25" /><rect x="498.8" y="12" width="2.5" height="36" rx="1.25" /><rect x="504.20000000000005" y="10" width="2.5" height="41" rx="1.25" /><rect x="509.6" y="8" width="2.5" height="44" rx="1.25" /><rect x="515" y="8" width="2.5" height="44" rx="1.25" /><rect x="520.4000000000001" y="9" width="2.5" height="43" rx="1.25" /><rect x="525.8000000000001" y="16" width="2.5" height="28" rx="1.25" /><rect x="531.2" y="19" width="2.5" height="22" rx="1.25" /><rect x="536.6" y="22" width="2.5" height="16" rx="1.25" /><rect x="542" y="19" width="2.5" height="22" rx="1.25" /><rect x="547.4000000000001" y="13" width="2.5" height="34" rx="1.25" /><rect x="552.8000000000001" y="10" width="2.5" height="41" rx="1.25" /><rect x="558.2" y="12" width="2.5" height="36" rx="1.25" /><rect x="563.6" y="15" width="2.5" height="30" rx="1.25" /><rect x="569" y="16" width="2.5" height="28" rx="1.25" /><rect x="574.4000000000001" y="21" width="2.5" height="19" rx="1.25" /><rect x="579.8000000000001" y="26" width="2.5" height="8" rx="1.25" /><rect x="585.2" y="24" width="2.5" height="13" rx="1.25" /><rect x="590.6" y="23" width="2.5" height="14" rx="1.25" /><rect x="596" y="24" width="2.5" height="12" rx="1.25" /><rect x="601.4000000000001" y="20" width="2.5" height="21" rx="1.25" /></svg></div></div></div>
-    <div class="track"><div class="track-name">MELODY<small>Piano sketch</small></div><div class="track-content"><div class="melody-block"></div><div class="melody-block"></div><div class="melody-block"></div><div class="melody-block"></div></div></div>
-    <div class="track"><div class="track-name">CHORDS<small>Song harmony</small></div><div class="track-content"><div class="chord-block">Cm9</div><div class="chord-block">Abmaj7</div><div class="chord-block">Eb</div><div class="chord-block">Bb</div></div></div>
-    <div class="track"><div class="track-name">RHYTHM<small>Beat sketch</small></div><div class="track-content"><div class="drum-pattern"><b class="hit"></b><b></b><b class="soft"></b><b></b><b class="hit"></b><b></b><b class="soft"></b><b></b><b class="hit"></b><b></b><b class="soft"></b><b></b><b class="hit"></b><b></b><b class="soft"></b><b></b></div></div></div>
-    <div class="session-bottom"><strong>IDEA → ARRANGEMENT → EXPORT</strong><span>VISUAL CONCEPT / NOT AUDIO PLAYBACK</span></div>
-   </div>
-   <div class="visual-caption">YOUR STORY / YOUR SOUND</div>
-  </div>
- </div>
-</section>
-<div class="intro-strip"><div class="container strip-inner"><p>More than a place to write lyrics. A place to find the song.</p><span>NO RULES FOR HOW TO BEGIN / 001</span></div></div>
-<section id="how-it-works" class="section container">
- <div class="section-kicker">THE CREATIVE PROCESS / 01—03</div>
- <div class="section-heading"><h2>Start anywhere.<br>Follow the sound.</h2><p>You don't need to know music theory or arrive with a finished idea. Chordlore helps you shape the process without taking over the creative decisions.</p></div>
- <div class="workflow">
-  <article class="workflow-row"><div class="workflow-index">01 /</div><h3>Put the idea into words.</h3><p>Start with a story, lyrics you already wrote, a personal memory, or a made-up prompt. Work in whatever order feels natural.</p></article>
-  <article class="workflow-row"><div class="workflow-index">02 /</div><h3>Find its musical shape.</h3><p>Explore melody, rhythm, and chord sketches. Rearrange the parts until the idea starts to sound like the one in your head.</p></article>
-  <article class="workflow-row"><div class="workflow-index">03 /</div><h3>Record. Refine. Keep it.</h3><p>Make vocal takes where your browser permits, experiment with a mix, and export a backup so your work is never tied to this website.</p></article>
- </div>
-</section>
-<section class="philosophy">
- <div class="container"><div class="section-kicker">MADE FOR THE PERSON BEHIND THE MUSIC</div>
- <h2>The best songs don't sound like everyone else.<br><em>They sound like you.</em></h2>
- <p>Chordlore is built around one idea: the person making the music matters more than the software. Use all the guidance you want, or ignore it and create your own way.</p></div>
-</section>
-<section id="capabilities" class="section features-section">
- <div class="container"><div class="section-kicker">INSIDE THE WORKSPACE</div>
- <div class="section-heading"><h2>The tools are there.<br>The direction is yours.</h2><p>A connected creative workspace for the moments between the first idea and a song you can take with you.</p></div>
- <div class="features-grid">
-  <article class="feature"><div class="top">01 <b>WRITE</b></div><h3>Story & lyrics</h3><p>Organize your thoughts, shape lyrical sections, and keep the original words that matter most.</p></article>
-  <article class="feature"><div class="top">02 <b>COMPOSE</b></div><h3>Melody & arrangement</h3><p>Build musical sketches using notes, harmony, beat patterns, and a timeline you can change.</p></article>
-  <article class="feature"><div class="top">03 <b>FINISH</b></div><h3>Record & export</h3><p>Capture takes where supported, experiment with a mix, and create local files or project backups.</p></article>
- </div></div>
-</section>
-<section class="container callout" id="about-preview">
- <div><div class="section-kicker">READY WHEN YOU ARE</div><h2>Start a song.<br>See what happens.</h2><a class="button button-primary" href="/chordlore/studio/">Open the browser studio <span aria-hidden="true">↗</span></a></div>
- <aside class="callout-aside"><h3>ABOUT THE BROWSER PREVIEW</h3><p>This is a working, early portfolio preview, not a finished audio production service. <strong>No account is required.</strong> Your projects and recordings are stored in your browser on this device, not in an online account. Clearing site data or using private browsing can remove them. Export project backups you want to keep.</p><p>Microphone access is optional and controlled by your browser. The public web edition does not include the desktop native audio engine, local AI bridge, cloud sync, or all desktop capabilities.</p></aside>
-</section>
-</main>
-<footer class="footer"><div class="container footer-inner"><a class="brand" href="/chordlore/" aria-label="Chordlore home">chordlore<b>.</b></a><span>YOUR STORY. YOUR SOUND. &nbsp; © 2026 CHORDLORE</span><a href="https://masynnay.com/">A project by Masyn Nay ↗</a></div></footer>
-</body>
-</html>
+<section class="cover" id="begin"><div class="lead"><span class="eyebrow">FOR THE SONG YOU HAVEN'T MADE YET / 001</span><h1><span>YOUR</span><span>WORDS.</span><span class="hollow">YOUR</span><span class="color">SOUND.</span></h1><p><strong>Music doesn't have to start with music.</strong> Start with a memory, a feeling, or something you've been trying to say. Chordlore gives you a place to make it into something you can hear.</p><div class="buttons"><a class="enter" href="/chordlore/studio/">Make a song in Chordlore <b aria-hidden="true">↗</b></a><a class="learn" href="#the-process">How it works ↓</a></div></div>
+<div class="instrument" aria-label="Interactive original melody sketch"><div class="instrument-head"><span class="eyebrow">SIDE B / THE SOUND LAB</span><span class="live">LIVE · LOCAL</span></div>
+<div class="instrument-main"><h2>A line into a melody.</h2><p>Give this little instrument a sentence. Its letters become an original twelve-note melody sketch. Nothing is uploaded or saved.</p><div class="input-head"><label for="sketch-text">YOUR LINE</label><output id="char-count" for="sketch-text">0 / 140</output></div>
+<textarea id="sketch-text" rows="3" maxlength="140" spellcheck="true">I kept the light on for you</textarea>
+<div class="moods" role="group" aria-label="Melody mood"><button data-mood="bright" type="button" aria-pressed="true">Bright / open</button><button data-mood="reflective" type="button" aria-pressed="false">Reflective / low</button></div>
+<div class="score"><div class="score-head"><span>YOUR MELODY</span><span>12 NOTES</span></div><div id="notes" aria-label="Play notes individually"></div></div>
+<div class="transport"><button id="play-sketch" type="button">▶ &nbsp; HEAR YOUR LINE</button><button id="stop-sketch" type="button" disabled aria-label="Stop melody">■</button></div><p id="status" role="status" aria-live="polite">Ready when you are. Sound begins after you press play.</p></div><div class="instrument-foot">LOCAL SOUND SKETCH / NOT AI SONG GENERATION</div></div></section>
+<div class="ticker" aria-hidden="true"><div class="track"><strong>START WITH A FEELING</strong><i>✳</i><strong>FIND THE SOUND</strong><i>✳</i><strong>MAKE IT YOURS</strong><i>✳</i><strong>START WITH A FEELING</strong><i>✳</i><strong>FIND THE SOUND</strong><i>✳</i><strong>MAKE IT YOURS</strong><i>✳</i></div></div>
+<section class="story" id="the-process"><div class="story-intro"><span class="eyebrow">NOT A FORMULA / JUST A WAY IN</span><h2>Go at your own rhythm.</h2><p>Some people arrive with finished lyrics. Others have three words and no clue. Both belong here.</p><span class="caption">WRITE IT. CHANGE IT. OWN IT.</span></div>
+<div class="stages"><article><span class="index">01 / THE THOUGHT</span><h3>Bring the<br>story.</h3><p>Your own words, a conversation, or a prompt. No music theory needed.</p></article><article><span class="index">02 / THE SHAPE</span><h3>Find the<br>song.</h3><p>Explore lyrics, melody, chords, and rhythm. Keep what fits.</p></article><article><span class="index">03 / THE TAKE</span><h3>Make it<br>yours.</h3><p>Explore recording, mixing, arranging, and exporting inside the studio.</p></article></div></section>
+<section class="manifesto"><div class="manifesto-main"><span class="eyebrow">THE CHORDLORE WAY / NO RULEBOOK</span><h2>There isn't<br>one right<br>way to <em>create.</em></h2><p>Take the long way through a memory. Skip straight to the melody. Bring lyrics you've spent years on. Give every starting point room to become a song.</p></div><div class="manifesto-aside"><span class="eyebrow">INSIDE THE REAL STUDIO</span><div class="tape"><b>WORDS</b><b>MELODY</b><b>ARRANGEMENT</b></div><p>The little sound lab above is a playful taste. The full browser studio includes writing, composition, supported recording tools, and project backups.</p></div></section>
+<section class="final"><div><span class="eyebrow">YOUR NEXT SONG IS AN OPEN PAGE</span><h2>MAKE IT<br>YOURS.</h2><a class="enter" href="/chordlore/studio/">Enter the full studio <b aria-hidden="true">↗</b></a></div><aside class="disclosure"><h3>ABOUT THIS BROWSER PREVIEW</h3><p>This is an early browser preview. Projects and recordings are <strong>stored in your browser</strong> on this device, not in an online account. Clearing site data or using private browsing can erase them. Export project backups you want to keep.</p><p>Microphone access is optional and controlled by your browser. The public edition has no cloud sync, desktop native audio engine, or local AI bridge. The sound sketch above does not store or upload your words.</p></aside></section>
+</main><footer><span>CHORDLORE / YOUR STORY. YOUR SOUND.</span><span>INDEPENDENT MUSIC STUDIO / PUBLIC BROWSER PREVIEW</span><a href="https://masynnay.com/">MADE BY MASYN NAY ↗</a></footer>
+<script>
+(()=>{
+"use strict";
+const input=document.getElementById("sketch-text"),count=document.getElementById("char-count"),grid=document.getElementById("notes"),status=document.getElementById("status"),play=document.getElementById("play-sketch"),stopButton=document.getElementById("stop-sketch"),moods=[...document.querySelectorAll("[data-mood]")];
+let mood="bright",audio=null,voices=[],timers=[],generation=0,cells=[],playing=false;
+const scales={bright:[0,2,4,7,9,12,14,16,19],reflective:[0,3,5,7,10,12,15,17,19]},names={bright:["C","D","E","G","A","C","D","E","G"],reflective:["A","C","D","E","G","A","C","D","E"]};
+function sequence(){const chars=[...input.value.toLowerCase()].filter(ch=>/[a-z0-9]/i.test(ch));const codes=(chars.length?chars:[..."chordlore"]).map(ch=>ch.charCodeAt(0));return Array.from({length:12},(_,i)=>{const k=(codes[i%codes.length]+3*i+codes[(i+3)%codes.length])%9;return {step:k,pitch:scales[mood][k],label:names[mood][k]};});}
+function stop(){generation++;timers.forEach(clearTimeout);timers=[];voices.forEach(v=>{try{v.stop();}catch(e){}try{v.disconnect();}catch(e){}});voices=[];cells.forEach(c=>c.classList.remove("active"));playing=false;play.disabled=false;stopButton.disabled=true;}
+async function audioReady(){const C=window.AudioContext||window.webkitAudioContext;if(!C)throw Error("unsupported");if(!audio||audio.state==="closed")audio=new C();if(audio.state==="suspended")await audio.resume();}
+function tone(note,offset,length){const t=audio.currentTime+offset,osc=audio.createOscillator(),volume=audio.createGain();osc.type="triangle";osc.frequency.setValueAtTime(220*Math.pow(2,note.pitch/12),t);volume.gain.setValueAtTime(.0001,t);volume.gain.exponentialRampToValueAtTime(.12,t+.028);volume.gain.exponentialRampToValueAtTime(.0001,t+length);osc.connect(volume);volume.connect(audio.destination);osc.start(t);osc.stop(t+length+.04);voices.push(osc);}
+function light(i,ms,token){cells[i].classList.add("active");timers.push(setTimeout(()=>{if(generation===token)cells[i].classList.remove("active");},ms));}
+function render(){count.textContent=input.value.length+" / 140";grid.replaceChildren();cells=sequence().map((n,i)=>{const btn=document.createElement("button");btn.type="button";btn.className="note";btn.style.height=(45+n.step*6)+"px";btn.setAttribute("aria-label","Play note "+(i+1)+", "+n.label);const cap=document.createElement("small");cap.textContent=String(i+1).padStart(2,"0");btn.append(cap);btn.addEventListener("click",async()=>{stop();try{await audioReady();tone(n,0,.28);light(i,320,generation);status.textContent="Played note "+(i+1)+".";}catch(e){status.textContent="Web Audio unavailable in this browser.";}});grid.append(btn);return btn;});}
+play.addEventListener("click",async()=>{stop();if(!input.value.trim()){status.textContent="Write a line first.";input.focus();return;}const token=generation;try{await audioReady();if(generation!==token)return;const seq=sequence(),beat=.32;playing=true;play.disabled=true;stopButton.disabled=false;status.textContent="Playing twelve notes from your line. Tap stop at any time.";seq.forEach((n,i)=>{tone(n,i*beat,.29);timers.push(setTimeout(()=>{if(generation===token)light(i,270,token);},i*beat*1000));});timers.push(setTimeout(()=>{if(generation===token){stop();status.textContent="Finished. Change a word or mood and hear what happens."; }},(seq.length*beat+.2)*1000));}catch(e){stop();status.textContent="Sound playback is unavailable here. You can still enter the full studio."; }});
+stopButton.addEventListener("click",()=>{stop();status.textContent="Stopped. Your line is still here.";});
+input.addEventListener("input",()=>{stop();render();status.textContent="Line updated. Ready for a new melody.";});
+moods.forEach(b=>b.addEventListener("click",()=>{stop();mood=b.dataset.mood;moods.forEach(x=>x.setAttribute("aria-pressed",String(x===b)));render();status.textContent="Mood changed. Hear the new melody."; }));
+document.addEventListener("visibilitychange",()=>{if(document.hidden&&playing)stop();});
+window.addEventListener("pagehide",()=>{stop();if(audio){audio.close().catch(()=>{});audio=null;}});
+render();
+})();
+</script></body></html>

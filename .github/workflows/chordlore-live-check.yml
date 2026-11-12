@@ -24,7 +24,7 @@ jobs:
             landing_code="$(curl --location --silent --show-error --max-time 20 --output /tmp/chordlore-landing.html --write-out '%{http_code}' https://masynnay.com/chordlore/ || true)"
             studio_code="$(curl --location --silent --show-error --max-time 20 --output /tmp/chordlore-studio.html --write-out '%{http_code}' https://masynnay.com/chordlore/studio/ || true)"
             if [ "$landing_code" = 200 ] && [ "$studio_code" = 200 ] &&
-               grep -Fq 'Make it' /tmp/chordlore-landing.html &&
+               grep -Fq 'A line into a melody.' /tmp/chordlore-landing.html &&
                grep -Fq '<title>Chordlore — Your story. Your sound.</title>' /tmp/chordlore-studio.html; then
               echo "Live Chordlore landing and standalone browser studio verified over HTTPS."
               exit 0
