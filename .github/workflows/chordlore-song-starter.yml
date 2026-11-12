@@ -57,6 +57,13 @@ jobs:
                   assert page.locator('[data-action="export-project"]').is_visible()
                   assert 'Your first musical direction' not in page.content() or page.locator('.song-starter-panel').count()==1
                   assert 'The porch light is still on for you' in page.content()
+                  with page.expect_download(timeout=90000) as wav_event:
+                      page.locator('[data-action="export-wav"]').click()
+                  wav=wav_event.value
+                  assert wav.suggested_filename.endswith('-mix.wav'),wav.suggested_filename
+                  with open(wav.path(),'rb') as audio:
+                      head=audio.read(12)
+                  assert head[:4]==b'RIFF' and head[8:12]==b'WAVE','Downloaded file is not a WAV'
                   page.locator('[data-action="starter-audition"]').click()
                   page.wait_for_timeout(600)
                   assert page.locator('[data-action="starter-audition"]').is_visible()
