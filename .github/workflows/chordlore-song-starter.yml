@@ -43,9 +43,8 @@ jobs:
                   page=browser.new_page(viewport={'width':1440,'height':900},reduced_motion='reduce')
                   errors=[]
                   page.on('pageerror',lambda e:errors.append(str(e)))
-                  response=page.goto(f'http://127.0.0.1:{srv.server_port}/chordlore/studio/',wait_until='domcontentloaded')
+                  response=page.goto(f'http://127.0.0.1:{srv.server_port}/chordlore/studio/#start',wait_until='domcontentloaded')
                   assert response.status==200
-                  page.locator('[data-view="guide"]').first.click()
                   starter=page.locator('#starter-line')
                   starter.wait_for(state='visible')
                   lyric='The porch light is still on for you'
@@ -54,6 +53,8 @@ jobs:
                   page.locator('[data-action="starter-create"]').click()
                   assert page.locator('#song-title').input_value()==lyric
                   assert page.locator('[data-action="starter-audition"]').is_visible()
+                  assert page.locator('[data-action="export-wav"]').is_visible()
+                  assert page.locator('[data-action="export-project"]').is_visible()
                   assert 'Your first musical direction' not in page.content() or page.locator('.song-starter-panel').count()==1
                   assert 'The porch light is still on for you' in page.content()
                   page.locator('[data-action="starter-audition"]').click()
