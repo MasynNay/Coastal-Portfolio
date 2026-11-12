@@ -1,0 +1,64 @@
+name: Verify free Utah website design discovery page
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'public/utah-web-design/**'
+      - 'public/sitemap.xml'
+      - 'src/pages/WebsiteServices.js'
+      - 'src/pages/WebsiteServices.css'
+      - '.github/workflows/utah-website-seo.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  seo-content:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check Utah page indexing metadata, service claims and quote links
+        run: |
+          python - <<'PY'
+          from html.parser import HTMLParser
+          from pathlib import Path
+          import json,re,xml.etree.ElementTree as ET
+          page=Path('public/utah-web-design/index.html').read_text()
+          sitemap=Path('public/sitemap.xml').read_text()
+          services=Path('src/pages/WebsiteServices.js').read_text()
+          assert '<title>Utah Website Design for Small Businesses | Masyn Nay</title>' in page
+          assert '<link rel="canonical" href="https://masynnay.com/utah-web-design/">' in page
+          assert '/utah-web-design/' in sitemap
+          assert 'href="/services#request"' in page
+          assert 'https://masynnay.com/utah-web-design/' in [x.text for x in ET.fromstring(sitemap).findall('.//{*}loc')]
+          assert 'id="service-areas"' in services
+          assert 'Weber County' in services and 'Davis County' in services and 'Utah County' in services
+          assert not re.search(r'itemprop="(streetAddress|postalCode)"',page), 'No fabricated office'
+          script=re.search(r'<script type="application/ld\+json">(.*?)</script>',page,re.S)
+          assert script
+          data=json.loads(script.group(1))
+          assert data['@type']=='Service' and data['provider']['@type']=='Person'
+          assert len(data['areaServed'])>=4
+          assert 'No local office visits are implied' in services
+          print('Utah SEO page and county coverage are accurate and navigable.')
+          PY
+  live:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Verify new Utah site page is publicly readable
+        shell: bash
+        run: |
+          set -euo pipefail
+          for attempt in $(seq 1 30); do
+            status="$(curl -LsS --max-time 15 -o /tmp/utah-web-design.html -w '%{http_code}' https://masynnay.com/utah-web-design/ || true)"
+            if [ "$status" = "200" ] &&
+              grep -Fq 'Utah Website Design for Small Businesses' /tmp/utah-web-design.html &&
+              grep -Fq '/services#request' /tmp/utah-web-design.html; then
+              echo 'Utah web design discovery page is live over HTTPS.'
+              exit 0
+            fi
+            echo "Attempt $attempt: HTTP $status; waiting for Cloudflare build."
+            sleep 12
+          done
+          echo '::error::Utah web design landing page not yet deployed'
+          exit 1
