@@ -5271,7 +5271,7 @@ let audioHealth={state:'checking',checked:0,missing:[]};
 let audioHealthGeneration=0;
 let activeId=readActive()||projects[0].id;
 if(!projects.find(p=>p.id===activeId))activeId=projects[0].id;
-let view='home', currentQuestion='', toastTimer, recording=null, countdownHandle=null, countdown=0, tapHistory=[], waveform={}, transportPlaying=false, transportTimer=null, startedAt=0, isHydrating=false;
+let view=globalThis.location?.hash==='#start'?'guide':'home', currentQuestion='', toastTimer, recording=null, countdownHandle=null, countdown=0, tapHistory=[], waveform={}, transportPlaying=false, transportTimer=null, startedAt=0, isHydrating=false;
 let media={backing:null,vocal:null,backingURL:null,vocalURL:null,compActive:false};
 let hydrationGeneration=0;
 const timeline=createUnifiedTransport();
