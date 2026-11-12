@@ -1,0 +1,36 @@
+name: Verify deployed Chordlore browser edition
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'public/chordlore/**'
+      - '.github/workflows/chordlore-live-check.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  live-preview:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Verify Cloudflare serves both public Chordlore pages
+        shell: bash
+        run: |
+          set -euo pipefail
+          for attempt in $(seq 1 30); do
+            landing_code="$(curl --location --silent --show-error --max-time 20 --output /tmp/chordlore-landing.html --write-out '%{http_code}' https://masynnay.com/chordlore/ || true)"
+            studio_code="$(curl --location --silent --show-error --max-time 20 --output /tmp/chordlore-studio.html --write-out '%{http_code}' https://masynnay.com/chordlore/studio/ || true)"
+            if [ "$landing_code" = 200 ] && [ "$studio_code" = 200 ] &&
+               grep -Fq 'Every song starts' /tmp/chordlore-landing.html &&
+               grep -Fq '<title>Chordlore — Your story. Your sound.</title>' /tmp/chordlore-studio.html; then
+              echo "Live Chordlore landing and standalone browser studio verified over HTTPS."
+              exit 0
+            fi
+            echo "Attempt $attempt: landing HTTP $landing_code, studio HTTP $studio_code; awaiting Cloudflare deployment."
+            sleep 15
+          done
+          echo "::error::Cloudflare did not serve both expected Chordlore pages in the deployment verification window."
+          exit 1
