@@ -1,0 +1,103 @@
+name: Chordlore search visibility and SEO checks
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'public/robots.txt'
+      - 'public/sitemap.xml'
+      - 'public/chordlore/**'
+      - '.github/workflows/chordlore-search-discovery.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  metadata:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate discoverable pages, canonical URLs and schema
+        run: |
+          python - <<'PY'
+          import json,re,xml.etree.ElementTree as ET
+          from pathlib import Path
+          from html.parser import HTMLParser
+
+          root=Path('public')
+          urls={
+            'https://masynnay.com/chordlore/':root/'chordlore/index.html',
+            'https://masynnay.com/chordlore/studio/':root/'chordlore/studio/index.html',
+            'https://masynnay.com/chordlore/how-it-works/':root/'chordlore/how-it-works/index.html',
+          }
+          sitemap=root/'sitemap.xml'
+          assert sitemap.exists(),'Missing sitemap.xml'
+          tree=ET.parse(sitemap)
+          locations=[x.text for x in tree.findall('.//{*}loc')]
+          assert len(locations)==len(set(locations)),'Duplicate sitemap URLs'
+          assert all(u.startswith('https://masynnay.com/') for u in locations)
+          assert all(u in locations for u in urls),'Chordlore URLs missing from sitemap'
+          assert 'Sitemap: https://masynnay.com/sitemap.xml' in (root/'robots.txt').read_text()
+
+          class Head(HTMLParser):
+            def __init__(self):
+              super().__init__();self.title='';self.inside=False;self.description=[];self.canonicals=[];self.scripts=[];self.script=''
+            def handle_starttag(self,tag,attrs):
+              attrs=dict(attrs)
+              if tag=='title':self.inside=True
+              if tag=='meta' and attrs.get('name')=='description':self.description.append(attrs.get('content',''))
+              if tag=='link' and attrs.get('rel')=='canonical':self.canonicals.append(attrs.get('href'))
+              if tag=='script' and attrs.get('type')=='application/ld+json':self.script='ld'
+            def handle_endtag(self,tag):
+              if tag=='title':self.inside=False
+              if tag=='script':self.script=''
+            def handle_data(self,data):
+              if self.inside:self.title+=data
+              if self.script=='ld':self.scripts.append(data)
+          for url,path in urls.items():
+            assert path.exists(),f'Missing page: {path}'
+            raw=path.read_text()
+            parsed=Head();parsed.feed(raw)
+            assert parsed.title.strip(),f'Missing title: {path}'
+            assert len(parsed.description)==1 and len(parsed.description[0])>=65,f'Missing useful description: {path}'
+            assert parsed.canonicals==[url],f'Incorrect canonical on {path}: {parsed.canonicals}'
+            assert not re.search(r'<meta[^>]+noindex',raw,re.I),f'Unexpected noindex: {path}'
+          landing=(root/'chordlore/index.html').read_text()
+          script=re.search(r'<script type="application/ld\+json">(.*?)</script>',landing,re.S)
+          assert script,'No structured application description'
+          data=json.loads(script.group(1))
+          assert data['@type']=='WebApplication'
+          assert data['url']=='https://masynnay.com/chordlore/'
+          assert 'href="/chordlore/how-it-works/"' in landing
+          assert 'href="/chordlore/studio/#start"' in landing
+          guide=(root/'chordlore/how-it-works/index.html').read_text()
+          assert guide.count('href="/chordlore/studio/#start"')>=2
+          assert 'instrumental' in guide.lower() and 'not a full ai-produced recording' in guide.lower()
+          print('SEO metadata, structured data, internal links and sitemap pass.')
+          PY
+
+  live:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Confirm public sitemap, robots and beginner guide over HTTPS
+        shell: bash
+        run: |
+          set -euo pipefail
+          for attempt in $(seq 1 30); do
+            robot_code="$(curl -L -sS --max-time 12 -o /tmp/cl-robots.txt -w '%{http_code}' https://masynnay.com/robots.txt || true)"
+            map_code="$(curl -L -sS --max-time 12 -o /tmp/cl-map.xml -w '%{http_code}' https://masynnay.com/sitemap.xml || true)"
+            guide_code="$(curl -L -sS --max-time 12 -o /tmp/cl-guide.html -w '%{http_code}' https://masynnay.com/chordlore/how-it-works/ || true)"
+            if [ "$robot_code" = 200 ] && [ "$map_code" = 200 ] && [ "$guide_code" = 200 ] &&
+              grep -Fq "Sitemap: https://masynnay.com/sitemap.xml" /tmp/cl-robots.txt &&
+              grep -Fq "https://masynnay.com/chordlore/" /tmp/cl-map.xml &&
+              grep -Fq "How to Make Your First Song" /tmp/cl-guide.html; then
+              echo "Public robots, sitemap and beginner guide are accessible."
+              exit 0
+            fi
+            echo "Attempt $attempt: robots $robot_code, sitemap $map_code, guide $guide_code; waiting for site deployment."
+            sleep 12
+          done
+          echo "::error::New Chordlore discoverability assets were not visible in the public deployment."
+          exit 1
