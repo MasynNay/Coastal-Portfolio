@@ -34,18 +34,13 @@ test("project catalog uses distinct stable IDs and working project destinations"
   });
 });
 
-test(
-  "Chordlore preview is publicly accessible without exposing the private source repository",
-  () => {
-    const entry = projectById.chordlore;
-    expect(entry).toBeDefined();
-    expect(entry.website).toBe("https://masynnay.com/chordlore/");
-    expect(entry.github).toBeUndefined();
-    expect(entry.release).toBeUndefined();
-    expect(entry.previewKind).toBe("artwork");
-    expect(entry.description).toMatch(/browser preview/i);
-    expect(
-      webProjects.filter((project) => project.id === entry.id),
-    ).toHaveLength(1);
-  },
-);
+test("Chordlore exposes its browser preview without the private source", () => {
+  const entry = projectById.chordlore;
+  expect(entry).toBeDefined();
+  expect(entry.website).toBe("https://masynnay.com/chordlore/");
+  expect(entry.github).toBeUndefined();
+  expect(entry.release).toBeUndefined();
+  expect(entry.previewKind).toBe("artwork");
+  expect(entry.description).toMatch(/browser preview/i);
+  expect(webProjects.filter(({ id }) => id === "chordlore")).toHaveLength(1);
+});
