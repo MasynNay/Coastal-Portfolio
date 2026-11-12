@@ -1,0 +1,74 @@
+name: Chordlore Song Starter browser acceptance
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'public/chordlore/studio/**'
+      - '.github/workflows/chordlore-song-starter.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  song-starter:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install Chromium and Playwright
+        run: |
+          python -m pip install playwright==1.56.0
+          python -m playwright install --with-deps chromium
+      - name: Create, audition, save and reopen an original musical sketch
+        run: |
+          python - <<'PY'
+          from functools import partial
+          from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
+          from threading import Thread
+          from pathlib import Path
+          from playwright.sync_api import sync_playwright
+
+          class Quiet(SimpleHTTPRequestHandler):
+              def log_message(self,*args): pass
+
+          srv=ThreadingHTTPServer(('127.0.0.1',0),partial(Quiet,directory=str(Path('public').resolve())))
+          Thread(target=srv.serve_forever,daemon=True).start()
+          try:
+              with sync_playwright() as p:
+                  browser=p.chromium.launch(headless=True,args=['--autoplay-policy=no-user-gesture-required'])
+                  page=browser.new_page(viewport={'width':1440,'height':900},reduced_motion='reduce')
+                  errors=[]
+                  page.on('pageerror',lambda e:errors.append(str(e)))
+                  response=page.goto(f'http://127.0.0.1:{srv.server_port}/chordlore/studio/',wait_until='domcontentloaded')
+                  assert response.status==200
+                  page.locator('[data-view="guide"]').first.click()
+                  starter=page.locator('#starter-line')
+                  starter.wait_for(state='visible')
+                  lyric='The porch light is still on for you'
+                  starter.fill(lyric)
+                  page.locator('#starter-feel').select_option('pulse')
+                  page.locator('[data-action="starter-create"]').click()
+                  assert page.locator('#song-title').input_value()==lyric
+                  assert page.locator('[data-action="starter-audition"]').is_visible()
+                  assert 'Your first musical direction' not in page.content() or page.locator('.song-starter-panel').count()==1
+                  assert 'The porch light is still on for you' in page.content()
+                  page.locator('[data-action="starter-audition"]').click()
+                  page.wait_for_timeout(600)
+                  assert page.locator('[data-action="starter-audition"]').is_visible()
+                  page.reload(wait_until='domcontentloaded')
+                  page.locator('[data-view="guide"]').first.click()
+                  assert page.locator('#song-title').input_value()==lyric
+                  assert page.locator('[data-action="starter-audition"]').is_visible()
+                  page.set_viewport_size({'width':390,'height':844})
+                  page.wait_for_timeout(100)
+                  assert page.evaluate('document.documentElement.scrollWidth')<=391,'Song Starter horizontal mobile overflow'
+                  assert not errors,errors
+                  browser.close()
+                  print('Public Chordlore Song Starter browser acceptance passed.')
+          finally:
+              srv.shutdown()
+          PY
