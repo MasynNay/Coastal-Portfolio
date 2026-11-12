@@ -27,9 +27,9 @@ test("project catalog uses distinct stable IDs and working project destinations"
     webProjects.length,
   );
   webProjects.forEach(({ github, demo, website }) => {
-    if (github !== undefined) {
-      expect(github).toMatch(/^https:\/\/github\.com\//);
-    }
+    const githubValid =
+      github === undefined || github.startsWith("https://github.com/");
+    expect(githubValid).toBe(true);
     expect(Boolean(demo || website)).toBe(true);
   });
 });
