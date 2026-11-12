@@ -54,7 +54,7 @@ jobs:
                   assert page.locator('#song-title').input_value()==lyric
                   assert page.locator('[data-action="starter-audition"]').is_visible()
                   assert page.locator('[data-action="export-wav"]').is_visible()
-                  assert page.locator('[data-action="export-project"]').is_visible()
+                  assert page.get_by_role('button',name='Back up song project').is_visible()
                   assert 'Your first musical direction' not in page.content() or page.locator('.song-starter-panel').count()==1
                   assert 'The porch light is still on for you' in page.content()
                   with page.expect_download(timeout=90000) as wav_event:
