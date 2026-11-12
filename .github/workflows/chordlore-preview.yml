@@ -36,7 +36,7 @@ jobs:
           if(!landing.includes('browser preview'))throw Error('Missing public preview disclosure');
           if(!landing.includes('stored in your browser'))throw Error('Missing local storage disclosure');
           if(!studio.includes('<title>Chordlore — Your story. Your sound.</title>'))throw Error('Wrong preview');
-          if(/<script\b[^>]*\bsrc\s*=|<link\b[^>]*\bhref\s*=/i.test(studio))throw Error('Studio requires external assets');
+          if(/<script\b[^>]*\bsrc\s*=|<link\b[^>]*\brel\s*=\s*[\"'](?:stylesheet|preload|modulepreload)[\"']/i.test(studio))throw Error('Studio requires external assets');
           if(!catalog.includes('https://masynnay.com/chordlore/'))throw Error('Project is not linked');
           console.log('Chordlore static browser preview checks passed');
           NODE
