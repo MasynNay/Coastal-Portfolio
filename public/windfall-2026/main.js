@@ -470,12 +470,25 @@ void main(){vec3 N=normalize(vNormal);vec3 L=normalize(uSun);vec3 V=normalize(uE
   N=normalize(N+perturb*.036);
  }
  float nd=max(dot(N,L),0.),sh=shadow(N);
+ // Large drifting cloud shadows follow world coordinates rather than the screen.
+ // Low-frequency layers keep the pattern coherent across mountains, paths and foliage.
+ // Software renderers retain their less expensive unshadowed directional light.
+ float cloudOcclusion=0.;
+ if(uLowQuality<.5){
+  vec2 cloudP=vPos.xz*.021+vec2(uTime*.00165,uTime*.00054);
+  float layerA=sin(cloudP.x*2.31+sin(cloudP.y*1.41)*.86);
+  float layerB=sin(cloudP.y*2.07-cloudP.x*.72);
+  float layerC=sin(dot(cloudP,vec2(2.74,-1.83))+.65);
+  float cloudField=layerA*.51+layerB*.34+layerC*.15;
+  cloudOcclusion=smoothstep(.14,.53,cloudField)*.32;
+ }
+ float cloudSun=1.-cloudOcclusion;
  float hemi=.43+.22*max(N.y,0.);vec3 skyFill=vec3(.69,.77,.88)*hemi*.82;
- vec3 sunLight=vec3(1.0,.82,.66)*nd*sh*1.18;
+ vec3 sunLight=vec3(1.0,.82,.66)*nd*sh*cloudSun*1.18;
  vec3 bounce=vec3(.26,.21,.16)*(.3+.7*max(-N.y,0.));
  vec3 c=albedo*(skyFill+sunLight+bounce);
  vec3 H=normalize(L+V);float NdotH=max(dot(N,H),0.),NdotV=max(dot(N,V),.01);
- float shininess=mix(120.,9.,roughness*roughness);float spec=pow(NdotH,shininess)*sh;
+ float shininess=mix(120.,9.,roughness*roughness);float spec=pow(NdotH,shininess)*sh*cloudSun;
  float F0=mix(.038,.35,metallic);float fresnel=F0+(1.-F0)*pow(1.-NdotV,5.);
  c+=vec3(1.,.82,.62)*spec*(.10+.38*(1.-roughness)+metallic*.32)*fresnel*3.;
  if(vKind==3)c+=albedo*vec3(.65,.45,.13)*transmission*pow(max(dot(-N,L),0.),2.);
