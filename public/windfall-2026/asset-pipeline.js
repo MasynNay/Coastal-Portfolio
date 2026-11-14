@@ -186,7 +186,7 @@
   uniform sampler2D uBase,uNormal,uORM,uEmissive,uShadowFar,uShadowNear;
   uniform mat4 uFarVP,uNearVP;
   uniform vec3 uEye,uSun,uFog,uEmission;
-  uniform float uTime,uLowQuality;
+  uniform float uTime,uLowQuality,uSurfaceClass;
   uniform vec4 uBaseFactor;
   uniform vec2 uMetalRough;
   uniform float uHasBase,uHasNormal,uHasORM,uHasEmissive,uHasShadows,uAlphaCutoff,uAlphaMasked;
@@ -229,8 +229,33 @@
    vec3 hemisphere=base.rgb*mix(vec3(.20,.24,.27),vec3(.48,.55,.58),clamp(n.y*.5+.5,0.,1.))*(1.-metal)*.60*ambientOcclusion;
    // Thin alpha-masked foliage receives a small, warm backlit transmission term.
    float leafBacklight=max(dot(-n,l),0.)*uAlphaMasked*.31;
-   vec3 leafTransmission=base.rgb*vec3(.46,.66,.29)*leafBacklight*shadow(n)*cloudSun;
-   vec3 color=direct+hemisphere+leafTransmission+uEmission*(uHasEmissive>.5?texture(uEmissive,vUV).rgb:vec3(1.));
+   // Backlit cutout petals keep their authored color, rather than acquiring
+   // the same green tint as foliage.
+   vec3 leafTransmission=base.rgb*vec3(.53,.51,.43)*leafBacklight*shadow(n)*cloudSun;
+   // Approximate reflected sky/ground radiance with roughness-dependent
+   // Fresnel. This gives weathered metals, glazed windows and eye surfaces
+   // environment response without online cubemaps or an expensive ray pass.
+   vec3 reflected=reflect(-v,n);
+   float skyWeight=smoothstep(-.22,.66,reflected.y);
+   vec3 ambientRadiance=mix(vec3(.22,.19,.155),vec3(.36,.52,.70),skyWeight);
+   float grazing=pow(1.-max(dot(n,v),0.),5.);
+   vec3 environmentFresnel=F0+(1.-F0)*grazing;
+   float environmentWeight=(.085+.30*pow(1.-rough,2.4))*ambientOcclusion;
+   vec3 environmentSpecular=ambientRadiance*environmentFresnel*environmentWeight;
+   // The original skin and hair surfaces have separate subtle lighting cues:
+   // warm soft wrap at shadow boundaries, directional micro-strand glints.
+   float skinWrap=clamp((dot(n,l)+.25)/1.25,0.,1.);
+   vec3 skinScattering=base.rgb*vec3(.14,.078,.056)*(1.-nl)*skinWrap*
+      (1.-metal)*step(.5,uSurfaceClass)*(1.-step(1.5,uSurfaceClass));
+   vec3 strandTangent=normalize(vTangent);
+   float hairGlint=pow(clamp(1.-abs(dot(strandTangent,h)),0.,1.),8.);
+   vec3 hairSheen=base.rgb*vec3(.24,.19,.16)*hairGlint*cloudSun*
+      step(1.5,uSurfaceClass)*(1.-step(2.5,uSurfaceClass))*.18;
+   // Window glass stays opaque for now, but earns a stronger sky reflection.
+   environmentSpecular*=mix(1.,2.2,step(2.5,uSurfaceClass)*(1.-step(3.5,uSurfaceClass)));
+   vec3 color=direct+hemisphere+leafTransmission+environmentSpecular+
+      skinScattering+hairSheen+
+      uEmission*(uHasEmissive>.5?texture(uEmissive,vUV).rgb:vec3(1.));
    float dist=length(uEye-vPosition);
    float heightFog=exp(-max(vPosition.y,0.)*.052);
    float fog=1.-exp(-pow(dist*.0086,1.52)*(.68+.40*heightFog));
@@ -304,7 +329,7 @@
     const standard=link(gl,VERTEX,FRAGMENT),depth=link(gl,SHADOW_VERTEX,SHADOW_FRAGMENT);
     const uniform=(program,name)=>gl.getUniformLocation(program,name);
     const u={};for(const [name,prog] of [['standard',standard],['depth',depth]]){
-      u[name]={};for(const n of ['uVP','uModel','uBase','uNormal','uORM','uEmissive','uShadowFar','uShadowNear','uFarVP','uNearVP','uEye','uSun','uFog','uEmission','uBaseFactor','uMetalRough','uHasBase','uHasNormal','uHasORM','uHasEmissive','uHasShadows','uAlphaCutoff','uAlphaMasked','uWindTime','uWindWeight','uWindBaseY','uWindInvHeight','uWindMotionScale','uTime','uLowQuality'])u[name][n]=uniform(prog,n);
+      u[name]={};for(const n of ['uSurfaceClass','uVP','uModel','uBase','uNormal','uORM','uEmissive','uShadowFar','uShadowNear','uFarVP','uNearVP','uEye','uSun','uFog','uEmission','uBaseFactor','uMetalRough','uHasBase','uHasNormal','uHasORM','uHasEmissive','uHasShadows','uAlphaCutoff','uAlphaMasked','uWindTime','uWindWeight','uWindBaseY','uWindInvHeight','uWindMotionScale','uTime','uLowQuality'])u[name][n]=uniform(prog,n);
     }
     const records=[],statuses=[],colliders=[];
     let dynamicPlayer=null;
@@ -352,7 +377,8 @@
         }
         return {base:await texture(base,true),normal:await texture(normal,false),orm:await texture(orm,false),emissive:await texture(emissive,true),
           baseFactor:pbr.baseColorFactor||[1,1,1,1],metal:pbr.metallicFactor??1,rough:pbr.roughnessFactor??1,emission:m.emissiveFactor||[0,0,0],
-          alpha:m.alphaMode||'OPAQUE',cutoff:m.alphaCutoff??.5,doubleSided:!!m.doubleSided};
+          alpha:m.alphaMode||'OPAQUE',cutoff:m.alphaCutoff??.5,doubleSided:!!m.doubleSided,
+          surfaceClass:/\bskin\b/i.test(m.name||'')?1:/\bhair\b/i.test(m.name||'')?2:/\bglass\b/i.test(m.name||'')?3:0};
       }
       const resolvedMaterials=await Promise.all(materials.map((_,i)=>materialAt(i)));
       const primitiveMesh=(doc.json.meshes||[]).map(mesh=>(mesh.primitives||[]).map(p=>({gpu:addGeometry(geometry(doc,p)),mat:resolvedMaterials[p.material||0]})));
@@ -435,6 +461,7 @@
       gl.uniform4fv(uniforms.uBaseFactor,m.mat.baseFactor);
       gl.uniform1f(uniforms.uHasBase,m.mat.base?1:0);
       gl.uniform1f(uniforms.uAlphaMasked,m.mat.alpha==='MASK'?1:0);
+      gl.uniform1f(uniforms.uSurfaceClass,m.mat.surfaceClass||0);
       gl.uniform1f(uniforms.uAlphaCutoff,m.mat.cutoff);
       gl.uniform1f(uniforms.uWindWeight,m.mat.alpha==='MASK'?1:0);
       const height=m.gpu.bounds.heightSpan;
