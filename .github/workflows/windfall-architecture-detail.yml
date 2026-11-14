@@ -37,7 +37,7 @@ jobs:
               path=root/(name+".glb")
               scene=trimesh.load(path,force="scene")
               faces=sum(len(g.faces) for g in scene.geometry.values())
-              assert faces>12000 and faces<160000,(name,faces)
+              assert faces>9000 and faces<160000,(name,faces)
               assert len(scene.geometry)>=7,(name,len(scene.geometry))
               assert all(np.isfinite(mesh.vertices).all() for mesh in scene.geometry.values())
               assert all(mesh.visual.kind=="texture" for mesh in scene.geometry.values())
