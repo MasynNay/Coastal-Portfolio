@@ -995,6 +995,7 @@ function frame(now){let dt=last?Math.max(0,Math.min(.75,(now-last)/1000)):0;last
  // The new PBR wayfarer animates in the model hierarchy; keep primitive fallback.
  const hasAuthoredHero=!!(authoredAssets&&authoredAssets.hasLoaded('windfall-wayfarer'));
  if(hasAuthoredHero)authoredAssets.updatePlayer({x,y:y+.07,z,heading:player.heading,phase:player.phase,motion:player.motion,turn:player.turn,time:elapsed});
+ if(authoredAssets)authoredAssets.updateCompanions(elapsed);
  const hero=hasAuthoredHero?null:character(elapsed);
  if(hero){
   const heroArray=new Float32Array(hero.a);gl.bindBuffer(gl.ARRAY_BUFFER,dynamicGeo.buffer);
