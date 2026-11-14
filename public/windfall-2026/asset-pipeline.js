@@ -18,8 +18,8 @@
       if (typeof a.src !== 'string' || !/^models\/[\w/.-]+\.glb$/.test(a.src) || a.src.includes('..')) throw new Error('Models must be local .glb files under models/');
       if (!supportedLicenses.has(a.license) || typeof a.creator !== 'string' || !a.creator.trim() || !a.provenance)
         throw new Error(`Asset ${a.id} needs rights, creator, and provenance`);
-      if (a.role !== undefined && a.role !== 'player') throw new Error('Unsupported dynamic model role');
-      if (!Array.isArray(a.instances) || !a.instances.length || a.instances.length > 150 || (a.role==='player'&&a.instances.length!==1)) throw new Error('Specify 1-150 instances (one for player)');
+      if (a.role !== undefined && !['player','companion'].includes(a.role)) throw new Error('Unsupported dynamic model role');
+      if (!Array.isArray(a.instances) || !a.instances.length || a.instances.length > 150 || (a.role==='player'||a.role==='companion')&&a.instances.length!==1) throw new Error('Specify 1-150 instances (one for player)');
       if (a.collisionRadius !== undefined && (!Number.isFinite(a.collisionRadius) || a.collisionRadius < 0 || a.collisionRadius > 60)) throw new Error('Invalid model collision radius');
       if (a.collisionBox !== undefined && (!Array.isArray(a.collisionBox) || a.collisionBox.length !== 2 || !a.collisionBox.every(n => Number.isFinite(n) && n > 0 && n <= 50))) throw new Error('Invalid building collision box');
       for (const inst of a.instances) {
@@ -306,6 +306,7 @@
     }
     const records=[],statuses=[],colliders=[];
     let dynamicPlayer=null;
+    const companionRigs=[];
     const drawStats={colorSubmitted:0,colorCulled:0,shadowSubmitted:0,shadowCulled:0,instances:0};
     function beginFrame(){
       drawStats.colorSubmitted=0;drawStats.colorCulled=0;
@@ -376,6 +377,23 @@
         dynamicPlayer={doc,roots,parts:localNodes,nodeMeshes};
         statuses.push({id:entry.id,loaded:true,meshes:localNodes.length,instances:1,role:'player'});
         return localNodes.length;
+      }
+      if(entry.role==='companion'){
+        const instance=entry.instances[0],scale=instance.scale??1,angle=instance.rotationY??0;
+        const base=trs(instance.position,[0,Math.sin(angle/2),0,Math.cos(angle/2)],[scale,scale,scale]);
+        const nodeMeshes=new Map(),parts=[];
+        for(const m of localNodes){
+          const model=multiply(base,m.model);
+          const part={...m,model,bounds:transformSphere(m.gpu.bounds,model,.08)};
+          parts.push(part);records.push(part);
+          if(!nodeMeshes.has(m.nodeIndex))nodeMeshes.set(m.nodeIndex,[]);
+          nodeMeshes.get(m.nodeIndex).push(part);
+        }
+        const index=companionRigs.length;
+        companionRigs.push({doc,roots,base,nodeMeshes,parts,index});
+        if(entry.collisionRadius>0)colliders.push({x:instance.position[0],z:instance.position[2],radius:entry.collisionRadius*scale});
+        statuses.push({id:entry.id,loaded:true,meshes:parts.length,instances:1,role:'companion'});
+        return parts.length;
       }
       for(const instance of entry.instances){
         const scale=instance.scale??1,angle=instance.rotationY??0;
@@ -461,6 +479,39 @@
       const actor=multiply(root,trs([0,bob,0]));
       for(const i of rig.roots)walk(i,actor);
     }
+    // Separate idle pose for every companion. Named original GLB pivots move,
+    // and bounds are updated before shadow and color culling.
+    function updateCompanions(time){
+      const rotX=a=>trs([0,0,0],[Math.sin(a*.5),0,0,Math.cos(a*.5)]);
+      const rotY=a=>trs([0,0,0],[0,Math.sin(a*.5),0,Math.cos(a*.5)]);
+      const rotZ=a=>trs([0,0,0],[0,0,Math.sin(a*.5),Math.cos(a*.5)]);
+      for(const rig of companionRigs){
+        const seed=rig.index*1.71,breath=Math.sin(time*1.48+seed)*.009;
+        const swing=(name)=>{
+          if(name==='body')return multiply(rotZ(.018*Math.sin(time*.77+seed)),rotX(breath));
+          if(name==='head')return rotY(Math.sin(time*.51+seed)*.12);
+          if(name==='arm-L')return rotX(.075*Math.sin(time*.92+seed));
+          if(name==='arm-R')return rotX(-.075*Math.sin(time*.92+seed+.8));
+          if(name==='forearm-L')return rotX(-.11+.035*Math.sin(time*1.4+seed));
+          if(name==='forearm-R')return rotX(-.10-.035*Math.sin(time*1.4+seed));
+          if(name==='cape')return rotX(.06+Math.sin(time*1.48+seed)*.045);
+          return identity();
+        };
+        function visit(i,parent,depthCount=0){
+          if(depthCount>50)throw new Error('Invalid companion node hierarchy');
+          const node=rig.doc.json.nodes[i];
+          const local=node.matrix||trs(node.translation,node.rotation,node.scale);
+          const model=multiply(parent,multiply(local,swing(node.name||'')));
+          for(const part of rig.nodeMeshes.get(i)||[]){
+            part.model=model;
+            part.bounds=transformSphere(part.gpu.bounds,model,.08);
+          }
+          for(const child of node.children||[])visit(child,model,depthCount+1);
+        }
+        const root=multiply(rig.base,trs([0,breath,0]));
+        for(const i of rig.roots)visit(i,root);
+      }
+    }
     function drawShadow(vp,includePlayer=false,time=0){
       if(!records.length && !(includePlayer&&dynamicPlayer))return;
       gl.useProgram(depth);gl.uniformMatrix4fv(u.depth.uVP,false,new Float32Array(vp));gl.uniform1f(u.depth.uWindTime,time);
@@ -510,7 +561,7 @@
       }
       gl.disable(gl.CULL_FACE);
     }
-    return {addGLB,loadManifest,draw,drawShadow,updatePlayer,beginFrame,getStatus:()=>statuses.slice(),getMeshCount:()=>records.length+(dynamicPlayer?.parts.length||0),
+    return {addGLB,loadManifest,draw,drawShadow,updatePlayer,updateCompanions,beginFrame,getStatus:()=>statuses.slice(),getMeshCount:()=>records.length+(dynamicPlayer?.parts.length||0),
       hasLoaded:(id)=>statuses.some(s=>s.id===id&&s.loaded),
       getDrawStats:()=>({...drawStats}),
       collides:(x,z,padding=.28)=>colliders.some(c=>{
