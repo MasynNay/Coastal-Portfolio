@@ -330,6 +330,22 @@ function makeMaterialAtlas(gl){
  gl.generateMipmap(gl.TEXTURE_2D);gl.bindTexture(gl.TEXTURE_2D,null);
  return tex;
 }
+// Height lookup for water lets foam and color follow the ACTUAL coastline.
+// Built from the same terrain function as the land mesh, not a hardcoded z stripe.
+function createCoastHeightmap(gl){
+ const side=256,data=new Uint8Array(side*side);
+ for(let row=0;row<side;row++)for(let col=0;col<side;col++){
+  let x=mix(XMIN,XMAX,col/(side-1)),z=mix(ZMIN,ZMAX,row/(side-1));
+  data[row*side+col]=Math.round(clamp((terrain(x,z)+8)/56,0,1)*255);
+ }
+ const t=gl.createTexture();gl.bindTexture(gl.TEXTURE_2D,t);
+ gl.texImage2D(gl.TEXTURE_2D,0,gl.R8,side,side,0,gl.RED,gl.UNSIGNED_BYTE,data);
+ gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,gl.LINEAR);
+ gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MAG_FILTER,gl.LINEAR);
+ gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_S,gl.CLAMP_TO_EDGE);
+ gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_T,gl.CLAMP_TO_EDGE);
+ gl.bindTexture(gl.TEXTURE_2D,null);return t;
+}
 const VS=`#version 300 es
 precision highp float;
 layout(location=0)in vec3 aPos;layout(location=1)in vec3 aNormal;layout(location=2)in vec3 aColor;layout(location=3)in float aKind;
@@ -463,7 +479,7 @@ void main(){
 const WATER_VS=`#version 300 es
 precision highp float;layout(location=0)in vec3 aPos;uniform mat4 uVP;out vec3 vPos;void main(){vPos=aPos;gl_Position=uVP*vec4(aPos,1.);}`;
 const WATER_FS=`#version 300 es
-precision highp float;in vec3 vPos;uniform vec3 uEye;uniform vec3 uSun;uniform vec3 uFog;uniform float uTime;out vec4 frag;
+precision highp float;in vec3 vPos;uniform vec3 uEye;uniform vec3 uSun;uniform vec3 uFog;uniform float uTime;uniform sampler2D uCoastHeight;out vec4 frag;
 float hash(vec2 x){return fract(sin(dot(x,vec2(127.1,311.7)))*43758.5453);}
 float noise(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);return mix(mix(hash(i),hash(i+vec2(1,0)),f.x),mix(hash(i+vec2(0,1)),hash(i+vec2(1,1)),f.x),f.y);}
 float wave(vec2 p){float t=uTime;
@@ -484,18 +500,24 @@ void main(){vec2 p=vPos.xz;
  // Eddying foam patches are a noisy bounded field, not straight parallel bands.
  float warp=noise(p*.34+vec2(uTime*.07,-uTime*.04));
  float f=noise(p*.47+vec2(warp*2.,uTime*.085))*.65+noise(p*.89+vec2(-uTime*.04,uTime*.1))*.35;
- float nearShore=1.-smoothstep(8.,25.,p.y);nearShore*=smoothstep(1.,4.,p.y);
- float foam=smoothstep(.59,.76,f+sin(p.x*.13+p.y*.25+warp*3.+uTime*.4)*.06)*nearShore;
- c=mix(c,vec3(.83,.84,.73),foam*.54);
+ vec2 coastUV=(p-vec2(-95.,-97.))/vec2(190.,173.);
+ float coastValid=step(0.,coastUV.x)*step(0.,coastUV.y)*step(coastUV.x,1.)*step(coastUV.y,1.);
+ float height=texture(uCoastHeight,clamp(coastUV,.0,1.)).r*56.-8.;
+ float waterDepth=max(0.,.035-height);
+ float shallows=(1.-smoothstep(.15,3.20,waterDepth))*coastValid;
+ c=mix(c,vec3(.23,.48,.42),shallows*.48);
+ // Wave edge breaks on local seabed depth; coast foam follows every island inlet.
+ float foam=smoothstep(.56,.77,f+sin(p.x*.13+p.y*.25+warp*3.+uTime*.4)*.07)*shallows;
+ c=mix(c,vec3(.83,.86,.75),foam*.66);
  float dist=length(uEye-vPos),fog=1.-exp(-pow(dist*.0092,1.52));c=mix(c,uFog,clamp(fog,0.,.92));
- c=clamp((c*(2.51*c+.03))/(c*(2.43*c+.59)+.14),0.,1.);frag=vec4(pow(c,vec3(1./2.16)),.94);
+ c=clamp((c*(2.51*c+.03))/(c*(2.43*c+.59)+.14),0.,1.);frag=vec4(pow(c,vec3(1./2.16)),clamp(.94-shallows*.29,.56,.96));
 }`;
 function shader(type,src){let s=gl.createShader(type);gl.shaderSource(s,src);gl.compileShader(s);if(!gl.getShaderParameter(s,gl.COMPILE_STATUS))throw Error(gl.getShaderInfoLog(s));return s}
 function program(v,f){let p=gl.createProgram();gl.attachShader(p,shader(gl.VERTEX_SHADER,v));gl.attachShader(p,shader(gl.FRAGMENT_SHADER,f));gl.linkProgram(p);if(!gl.getProgramParameter(p,gl.LINK_STATUS))throw Error(gl.getProgramInfoLog(p));return p}
 function geometryBuffer(geometry){let vao=gl.createVertexArray(),buffer=gl.createBuffer();gl.bindVertexArray(vao);gl.bindBuffer(gl.ARRAY_BUFFER,buffer);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array(geometry.a),gl.STATIC_DRAW);for(let i=0;i<4;i++){gl.enableVertexAttribArray(i);gl.vertexAttribPointer(i,i===0||i===1||i===2?3:1,gl.FLOAT,false,40,[0,12,24,36][i])}gl.bindVertexArray(null);return {vao,buffer,count:geometry.count}}
-let mainProgram,shadowProgram,skyProgram,waterProgram,staticGeo,dynamicGeo,waterGeo,fullscreen,depthTex,depthFbo,lightVP,materialAtlas;
+let mainProgram,shadowProgram,skyProgram,waterProgram,staticGeo,dynamicGeo,waterGeo,fullscreen,depthTex,depthFbo,lightVP,materialAtlas,coastHeightmap;
 try{
- mainProgram=program(VS,FS);materialAtlas=makeMaterialAtlas(gl);shadowProgram=program(SHADOW_VS,SHADOW_FS);skyProgram=program(SKY_VS,SKY_FS);waterProgram=program(WATER_VS,WATER_FS);
+ mainProgram=program(VS,FS);materialAtlas=makeMaterialAtlas(gl);coastHeightmap=createCoastHeightmap(gl);shadowProgram=program(SHADOW_VS,SHADOW_FS);skyProgram=program(SKY_VS,SKY_FS);waterProgram=program(WATER_VS,WATER_FS);
  staticGeo=geometryBuffer(world);world.a=null;
  const water=new Geometry();water.quad([-155,.035,-155],[155,.035,-155],[155,.035,155],[-155,.035,155],colors.water,8);waterGeo=geometryBuffer(water);
  fullscreen=gl.createVertexArray();gl.bindVertexArray(fullscreen);let b=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,b);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,3,-1,-1,3]),gl.STATIC_DRAW);gl.enableVertexAttribArray(0);gl.vertexAttribPointer(0,2,gl.FLOAT,false,0,0);gl.bindVertexArray(null);
@@ -509,7 +531,7 @@ try{
 }catch(e){error(String(e));return}
 const u=(p,name)=>gl.getUniformLocation(p,name);
 const mainU={vp:u(mainProgram,'uVP'),eye:u(mainProgram,'uEye'),sun:u(mainProgram,'uSun'),fog:u(mainProgram,'uFog'),time:u(mainProgram,'uTime'),shadow:u(mainProgram,'uShadow'),materials:u(mainProgram,'uMaterialAtlas'),shadowSize:u(mainProgram,'uShadowMapSize'),lowQuality:u(mainProgram,'uLowQuality'),lvp:u(mainProgram,'uLightVP'),enabled:u(mainProgram,'uShadowEnabled')};
-const waterU={vp:u(waterProgram,'uVP'),eye:u(waterProgram,'uEye'),sun:u(waterProgram,'uSun'),fog:u(waterProgram,'uFog'),time:u(waterProgram,'uTime')};
+const waterU={vp:u(waterProgram,'uVP'),eye:u(waterProgram,'uEye'),sun:u(waterProgram,'uSun'),fog:u(waterProgram,'uFog'),time:u(waterProgram,'uTime'),coast:u(waterProgram,'uCoastHeight')};
 const skyU={time:u(skyProgram,'uTime'),aspect:u(skyProgram,'uSkyAspect'),fov:u(skyProgram,'uSkyFov'),forward:u(skyProgram,'uSkyForward'),right:u(skyProgram,'uSkyRight'),up:u(skyProgram,'uSkyUp'),sun:u(skyProgram,'uSkySun')};
 const sun=norm([-0.55,.70,.46]),fog=[.63,.70,.73];
 const player={x:0,z:7,y:0,heading:0.16,phase:0,motion:0};let cameraYaw=0.16,cameraPitch=.27,cameraDist=10.9,drag=null,aimX=0,aimY=0,runTouch=false;
@@ -641,7 +663,7 @@ function frame(now){let dt=last?Math.max(0,Math.min(.045,(now-last)/1000)):0;las
  let ch=character(elapsed),arr=new Float32Array(ch.a);gl.bindBuffer(gl.ARRAY_BUFFER,dynamicGeo.buffer);if(arr.byteLength>dynamicByteCapacity){dynamicByteCapacity=2*arr.byteLength;gl.bufferData(gl.ARRAY_BUFFER,dynamicByteCapacity,gl.DYNAMIC_DRAW)}gl.bufferSubData(gl.ARRAY_BUFFER,0,arr);gl.bindVertexArray(dynamicGeo.vao);gl.drawArrays(gl.TRIANGLES,0,ch.count);
  // Water after terrain: its depth test naturally exposes shoreline and submerged sand.
  gl.enable(gl.BLEND);gl.blendFunc(gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);gl.depthMask(false);gl.useProgram(waterProgram);
- gl.uniformMatrix4fv(waterU.vp,false,new Float32Array(vp));gl.uniform3fv(waterU.eye,eye);gl.uniform3fv(waterU.sun,sun);gl.uniform3fv(waterU.fog,fog);gl.uniform1f(waterU.time,elapsed);gl.bindVertexArray(waterGeo.vao);gl.drawArrays(gl.TRIANGLES,0,waterGeo.count);gl.depthMask(true);gl.disable(gl.BLEND);
+ gl.uniformMatrix4fv(waterU.vp,false,new Float32Array(vp));gl.uniform3fv(waterU.eye,eye);gl.uniform3fv(waterU.sun,sun);gl.uniform3fv(waterU.fog,fog);gl.uniform1f(waterU.time,elapsed);gl.activeTexture(gl.TEXTURE2);gl.bindTexture(gl.TEXTURE_2D,coastHeightmap);gl.uniform1i(waterU.coast,2);gl.bindVertexArray(waterGeo.vao);gl.drawArrays(gl.TRIANGLES,0,waterGeo.count);gl.depthMask(true);gl.disable(gl.BLEND);
  frames++;if(frames===2){loading.classList.add('off');document.documentElement.dataset.windfallReady='1';}
  if(Math.abs(x-11)<7&&z>12){document.getElementById('placeName').textContent='The Lantern Harbor';document.getElementById('placeDescription').textContent='The wooden pier leads toward the sea arch and the breaking surf.'}
  else if(x<-13){document.getElementById('placeName').textContent='Briarwood Grove';document.getElementById('placeDescription').textContent='Follow the old tree line beneath the soft mountain light.'}
