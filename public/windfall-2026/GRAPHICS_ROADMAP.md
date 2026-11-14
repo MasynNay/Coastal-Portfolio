@@ -1,3 +1,15 @@
+## November 14 — Village art direction rebuild (unreleased)
+
+This iteration responds to the actual Chromium QA screenshots, where repetitive white paving, bright floating lamps, and stone-white pergola beams overwhelmed the scene. All work is confined to `feature/windfall-2026-graphics-preview`.
+
+- **Roads:** replaced identical tiny white tile courses with wider, irregular polygonal stone footprints, subdued earth-toned stone colors, shallow edge geometry on the detailed renderer, and continuous terrain-following earth roadbeds. The software renderer now fills each complete eight-sided polygon instead of using a four-wedge diamond shortcut. Human-scale paving is still procedural and needs production surface scans.
+- **Walkway:** re-authored the Glassmaker's Walk as a dark timber trellis with stone footings, diagonal knee braces, sparse hanging foliage, weathered crossbeams and considerably smaller enclosed amber lamps. This replaces the highly repetitive white colonnade that dominated the earlier preview.
+- **Light sources:** reduced glowing streetlight geometry and overbright emissive terms in software/hardware shaders; removed the incorrect emissive treatment from the fountain's water surface.
+- **Market:** replaced the bare flat-market canopy with original pitched fabric panels, seams, timber supports, plank counter, woven basket bands, subdued produce and crates.
+- **Landscape visibility:** added low-cost software-renderer ground color variation and reduced the overly dark full-screen vignette. These remain stylized color treatments, not a photogrammetry-grade environmental material pipeline.
+- **Verification:** the first village pass and the roadbed pass both passed the GitHub Actions Windfall source/GLB and Chromium SwiftShader movement/fallback tests; six original GLB families loaded successfully, with no browser JavaScript errors. The final market/vignette version requires a fresh successful run and screenshot inspection before acceptance.
+- **Release HOLD:** although legibility and scene composition are improved, this still falls substantially short of cinematic 2026 adventure-game realism. Missing: production-quality character sculpts (including full family), skinning and captured/retargeted animation, high-density authored geology/vegetation, photographic PBR surfaces, global illumination, GPU and mobile validation. No merge, production deployment or claim of visual approval.
+
 ## November 14 — coherent authored-model atmosphere, camera, character, coast and geology
 
 This is an **unreleased engineering checkpoint**, not a 2026-remake-quality acceptance.
