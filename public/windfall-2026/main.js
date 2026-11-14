@@ -556,7 +556,7 @@ void main(){vec2 p=vPos.xz;
  // Subtle wind-driven capillary waves resolve only near the camera.
  float microFade=1.-smoothstep(8.,43.,distToCamera);
  float microX=sin(p.x*11.7+p.y*2.9+uTime*1.4)*cos(p.y*8.6-uTime*1.05);
- float microZ=cos(p.z*11.1-p.x*1.8-uTime*.92)*sin(p.x*9.8+uTime*.72);
+ float microZ=cos(p.y*11.1-p.x*1.8-uTime*.92)*sin(p.x*9.8+uTime*.72);
  vec3 N=normalize(vec3(-dx*7.+microX*.095*microFade,1.,-dz*7.+microZ*.095*microFade));
  vec3 H=normalize(V+L),reflection=reflect(-V,N);
  float fresnel=pow(1.-max(dot(N,V),0.),5.);
