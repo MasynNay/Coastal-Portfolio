@@ -33,6 +33,26 @@ for(const id of ['windfall-hazel-shrub','windfall-fern-understory','windfall-wil
 // Surface scans are CC0, self-hosted, dimension-checked and SHA-verified.
 // A missing or changed tile must not be silently accepted as an approved asset.
 const crypto=require('node:crypto');
+const rocks=manifest.assets.find(x=>x.id==='windfall-cc0-mossy-rock-set');
+assert.ok(rocks&&rocks.license==='CC0-1.0'&&rocks.instances.length===3,
+  'Photogrammetric CC0 rock-set placement and license missing');
+const rockProvenance=JSON.parse(fs.readFileSync(path.join(root,'models',
+  'windfall-cc0-mossy-rock-set.SOURCES.json'),'utf8'));
+assert.equal(rockProvenance.id,'rock_moss_set_01');
+assert.equal(rockProvenance.author,'Kless Gyzen');
+assert.equal(rockProvenance.license,'CC0-1.0');
+assert.equal(rockProvenance.runtime_network,false);
+assert.ok(rockProvenance.triangles>60000&&rockProvenance.triangles<70000);
+assert.equal(rockProvenance.runtime_size,fs.statSync(path.join(root,rocks.src)).size);
+assert.equal(crypto.createHash('sha256').update(fs.readFileSync(path.join(root,rocks.src)))
+  .digest('hex'),rockProvenance.runtime_sha256);
+assert.ok(rockProvenance.files.length>=2);
+for(const part of rockProvenance.files){
+ assert.match(part.source_url,/^https:\/\/dl\.polyhaven\.org\//);
+ assert.match(part.sha256,/^[0-9a-f]{64}$/);
+ assert.match(part.md5,/^[0-9a-f]{32}$/);
+}
+
 const scanned=JSON.parse(fs.readFileSync(path.join(root,'materials','SOURCES.json'),'utf8'));
 assert.equal(scanned.license,'CC0-1.0');
 assert.equal(scanned.assets.length,3);
