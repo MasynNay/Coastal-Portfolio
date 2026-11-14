@@ -1,0 +1,59 @@
+name: Build Windfall high-detail architecture (unreleased)
+
+on:
+  push:
+    branches:
+      - feature/windfall-2026-graphics-preview
+    paths:
+      - "public/windfall-2026/tools/build_architecture.py"
+      - ".github/workflows/windfall-architecture-detail.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  buildings:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install local model authoring dependencies
+        run: python -m pip install --disable-pip-version-check numpy Pillow trimesh
+      - name: Rebuild original cottages and workshop with revised architectural details
+        working-directory: public/windfall-2026
+        run: python tools/build_architecture.py
+      - name: Validate geometry, model textures and visual assets
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import numpy as np
+          import trimesh
+          root=Path("public/windfall-2026/models")
+          for name in ("windfall-timber-cottage","windfall-harbor-workshop"):
+              path=root/(name+".glb")
+              scene=trimesh.load(path,force="scene")
+              faces=sum(len(g.faces) for g in scene.geometry.values())
+              assert faces>12000 and faces<160000,(name,faces)
+              assert len(scene.geometry)>=7,(name,len(scene.geometry))
+              assert all(np.isfinite(mesh.vertices).all() for mesh in scene.geometry.values())
+              assert all(mesh.visual.kind=="texture" for mesh in scene.geometry.values())
+              assert 0<path.stat().st_size<30*1024*1024
+              assert path.read_bytes()[:4]==b"glTF"
+              print(name,faces,"triangles",len(scene.geometry),"materials",path.stat().st_size,"bytes")
+          PY
+      - name: Commit validated GLBs only on isolated branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add public/windfall-2026/models/windfall-timber-cottage.glb
+          git add public/windfall-2026/models/windfall-harbor-workshop.glb
+          if git diff --cached --quiet; then
+            echo "Buildings already up to date"
+          else
+            git commit -m "Stage detailed authored gable, masonry and shingled architecture GLBs"
+            git push origin "HEAD:${GITHUB_REF_NAME}"
+          fi
