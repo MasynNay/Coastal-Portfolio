@@ -1,0 +1,44 @@
+name: Windfall graphics QA (unreleased)
+
+on:
+  push:
+    branches:
+      - feature/windfall-2026-graphics-preview
+    paths:
+      - "public/windfall-2026/**"
+      - ".github/workflows/windfall-graphics-qa.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  graphics:
+    name: Verify source, GLBs and Chromium WebGL2
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Checkout unreleased graphics branch
+        uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Validate renderer contracts and original GLB assets
+        run: npm run verify:windfall-graphics
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install browser QA dependency
+        run: python -m pip install --disable-pip-version-check playwright
+      - name: Run original scene, fallback and movement browser tests
+        run: python public/windfall-2026/tools/browser_graphics_ci.py
+      - name: Store private-review QA screenshots and diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: windfall-graphics-qa
+          path: public/windfall-2026/qa-artifacts/
+          if-no-files-found: ignore
+          retention-days: 7
