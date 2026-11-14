@@ -657,7 +657,8 @@
           "rotationY": 1.26685,
           "grounded": true
         }
-      ]
+      ],
+      "detailDistance": 49
     },
     {
       "id": "windfall-fern-understory",
@@ -806,7 +807,8 @@
           "rotationY": 6.06678,
           "grounded": true
         }
-      ]
+      ],
+      "detailDistance": 37
     },
     {
       "id": "windfall-wildflower-patch",
@@ -955,7 +957,8 @@
           "rotationY": 6.06678,
           "grounded": true
         }
-      ]
+      ],
+      "detailDistance": 34
     }
   ]
 }
