@@ -33,4 +33,4 @@ Run `node verify-assets.cjs` to verify the bundled GLB structure and rights meta
 No original files from the previous unreleased local session were recovered. This is a clean, separately versioned replacement.
 
 
-**Character pipeline checkpoint:** the new original textured GLB wayfarer replaces per-frame generated character geometry when available and supports hierarchical head/arm/knee/cape motion plus moving shadows; an older procedural character remains the automatic fallback. It is a technical/art prototype, not the requested final remake-level hero art. See `ASSET_PIPELINE.md`.
+**Forest checkpoint:** added a reusable original PBR mountain conifer with cutout foliage, branch modeling and sixteen grounded forest placements. The procedural landscape remains the fallback and is not yet remake-level realism.

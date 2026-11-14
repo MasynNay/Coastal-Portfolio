@@ -38,7 +38,7 @@ async def main():
         await browser.close()
         loaded=json.loads(state['assets'])
         if missing_hero:
-            assert len(loaded)==5 and sum(item['loaded'] for item in loaded)==4 and not next(item for item in loaded if item['id']=='windfall-wayfarer')['loaded']
+            assert len(loaded)==6 and sum(item['loaded'] for item in loaded)==5 and not next(item for item in loaded if item['id']=='windfall-wayfarer')['loaded']
         else:
             assert all(item['loaded'] for item in loaded),state['assets']
         assert state['gl']==0 and after['gl']==0

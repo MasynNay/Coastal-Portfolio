@@ -53,9 +53,6 @@ Software WebGL is a validation fallback, **not** a reliable performance benchmar
 - `tools/qa_architecture_integration.py` runs three browser smoke tests: all four assets present, only the cottage model unavailable, and only the workshop model unavailable. All cases must reach the first render with 0 JS errors and the expected status count.
 - **Not release-ready:** production-quality interiors/entrances, accurate masonry/roof/wood materials, close-range silhouettes, original rigged family, environmental lighting, world composition, and real desktop-GPU profiling all remain outstanding.
 
+## Original mountain conifer
 
-## Original animated wayfarer (November 2026)
-
-The optional `windfall-wayfarer.glb` is authored from scratch by `tools/build_wayfarer.py` (NumPy, Pillow, trimesh). It contains named pivots for torso, head, cape, arm, elbow, thigh, knee and boot articulation. The world computes a frame-driven walk/run pose by updating GLB node matrices, not rebuilding the character triangles every frame. This is hierarchical articulation, **not** full skeletal skinning or a photorealistic human. An older procedural character remains the fallback if the GLB fails to load.
-
-Render checks: Xvfb/Chromium WebGL2 with SwiftShader. All five assets imported, `gl.getError()==0`, no page errors, and a visible movement change after W input. With the hero GLB intentionally unavailable, four assets imported, the fallback rendered and moved with no page/WebGL errors. `tools/qa_wayfarer.py` reproduces both checks. These QA results establish runtime stability, not hardware FPS or cinematic art quality.
+`tools/build_conifer.py` creates `windfall-mountain-conifer.glb` with two material surfaces: individually modeled tapered bark branches and alpha-mask needle fans. The source mesh is 4,896 triangles per unique tree and is reused for sixteen placements (no borrowed imagery). It casts alpha-tested shadows through the same GLB pipeline. This is an authored textured vegetation improvement, not a substitute for the full forest vegetation, terrain, and photoreal reference targets.
