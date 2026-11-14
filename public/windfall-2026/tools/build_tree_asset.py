@@ -3,7 +3,8 @@ import numpy as np, trimesh
 from PIL import Image, ImageDraw
 from trimesh.visual.material import PBRMaterial
 from trimesh.visual.texture import TextureVisuals
-root=Path('/mnt/data/windfall-development');r=np.random.default_rng(2946)
+root=Path(__file__).resolve().parents[1];r=np.random.default_rng(2946)
+(root/'models').mkdir(parents=True,exist_ok=True)
 verts=[];faces=[];uvs=[]
 def frustum(a,b,ra,rb,sides=10):
  a=np.array(a,float);b=np.array(b,float);axis=b-a;axis/=np.linalg.norm(axis)
@@ -55,6 +56,18 @@ bark_height=np.clip(.43+.23*seams+.24*veins+.11*noise,0,1)
 base=np.stack([.32+.25*bark_height,.20+.18*bark_height,.12+.15*bark_height],axis=-1)
 base+=noise[:,:,None]*.10
 bark_color=Image.fromarray(np.uint8(np.clip(base,0,1)*255),'RGB')
+# Use the verified, locally committed CC0 Poly Haven bark scan when available.
+# Authoring never downloads a texture; the fully original procedural fallback
+# remains available if the scan is omitted in a lightweight source checkout.
+scan=root/'materials'/'tree-bark-rgba.png'
+if scan.is_file():
+ with Image.open(scan) as image:
+  tile=image.convert('RGBA').resize((res,res),Image.Resampling.LANCZOS)
+ bark_color=tile.convert('RGB')
+ bark_height=np.asarray(tile.getchannel('A'),dtype=np.float32)/255.
+ print('Broadleaf bark: local CC0 scan and height-alpha from materials/SOURCES.json')
+else:
+ print('Broadleaf bark: deterministic original procedural texture fallback')
 dy,dx=np.gradient(bark_height);normals=np.stack([-dx*3,-dy*3,np.ones_like(dx)],axis=-1);normals/=np.linalg.norm(normals,axis=2,keepdims=True)
 bark_normal=Image.fromarray(np.uint8((normals*.5+.5)*255),'RGB')
 bark_orm=np.zeros((res,res,3),np.uint8);bark_orm[:,:,0]=242;bark_orm[:,:,1]=220;bark_orm[:,:,2]=0
