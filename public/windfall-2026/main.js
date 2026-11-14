@@ -11,7 +11,7 @@ const smooth=(a,b,x)=>{let t=clamp((x-a)/(b-a),0,1);return t*t*(3-2*t)};
 const v3=(x,y,z)=>[x,y,z], sub=(a,b)=>[a[0]-b[0],a[1]-b[1],a[2]-b[2]], cross=(a,b)=>[a[1]*b[2]-a[2]*b[1],a[2]*b[0]-a[0]*b[2],a[0]*b[1]-a[1]*b[0]], norm=(a)=>{let s=Math.hypot(...a)||1;return a.map(x=>x/s)};
 function rng(seed){let s=seed>>>0;return()=>{s=(s*1664525+1013904223)>>>0;return s/4294967296}};
 const rand=rng(201126), jitter=(amount)=> (rand()-.5)*amount;
-const colors={grass:[.24,.39,.23],darkGrass:[.16,.31,.22],sand:[.61,.50,.35],stone:[.54,.55,.51],paleStone:[.73,.71,.59],road:[.52,.51,.45],rock:[.39,.45,.43],wood:[.32,.23,.16],timber:[.25,.18,.13],plaster:[.78,.70,.54],roof:[.55,.25,.21],deepRoof:[.24,.35,.37],slate:[.34,.38,.41],leaf:[.32,.47,.27],lightLeaf:[.48,.58,.30],redLeaf:[.64,.37,.24],gold:[.91,.66,.30],water:[.21,.54,.64],linen:[.86,.72,.47],cloth:[.20,.36,.36],skin:[.72,.49,.33],leather:[.29,.20,.17],iron:[.27,.34,.35],glass:[.71,.84,.85]};
+const colors={grass:[.20,.33,.20],darkGrass:[.10,.26,.18],sand:[.62,.52,.38],stone:[.48,.49,.47],paleStone:[.66,.66,.57],road:[.51,.50,.44],rock:[.38,.44,.43],wood:[.32,.23,.16],timber:[.25,.18,.13],plaster:[.78,.70,.54],roof:[.43,.22,.20],deepRoof:[.22,.31,.36],slate:[.34,.38,.41],leaf:[.22,.43,.25],lightLeaf:[.38,.55,.27],redLeaf:[.64,.37,.24],gold:[.91,.66,.30],water:[.21,.54,.64],linen:[.86,.72,.47],cloth:[.20,.36,.36],skin:[.72,.49,.33],leather:[.29,.20,.17],iron:[.27,.34,.35],glass:[.71,.84,.85]};
 function tint(col,t){return [col[0]*t,col[1]*t,col[2]*t]}
 function terrain(x,z){
  const wav=Math.sin(x*.18+Math.cos(z*.12)*1.9)*.42+Math.sin(z*.23-x*.09)*.27+Math.sin(x*.61+z*.29)*.12;
@@ -47,7 +47,7 @@ class Geometry {
 function groundNormal(x,z){return norm([terrain(x-.2,z)-terrain(x+.2,z),.4,terrain(x,z-.2)-terrain(x,z+.2)])}
 const world=new Geometry();
 // Terrain with smoothly interpolated normals and material transitions.
-const NX=137,NZ=135,XMIN=-95,XMAX=95,ZMIN=-97,ZMAX=76;
+const NX=101,NZ=103,XMIN=-95,XMAX=95,ZMIN=-97,ZMAX=76;
 for(let j=0;j<NZ-1;j++)for(let i=0;i<NX-1;i++){
  let x=mix(XMIN,XMAX,i/(NX-1)),x2=mix(XMIN,XMAX,(i+1)/(NX-1));let z=mix(ZMIN,ZMAX,j/(NZ-1)),z2=mix(ZMIN,ZMAX,(j+1)/(NZ-1));
  let a=[x,terrain(x,z),z],b=[x2,terrain(x2,z),z],c=[x2,terrain(x2,z2),z2],d=[x,terrain(x,z2),z2];
@@ -57,32 +57,115 @@ for(let j=0;j<NZ-1;j++)for(let i=0;i<NX-1;i++){
  world.triN(a,c,d,groundNormal(x,z),groundNormal(x2,z2),groundNormal(x,z2),col,beach>.5?7:0);
 }
 // Long winding cobblestone paths, made of individually varied, uneven stones.
-function stonesAlong(ax,az,bx,bz,count,width=3){let dx=bx-ax,dz=bz-az,dist=Math.hypot(dx,dz),nx=-dz/dist,nz=dx/dist;
- for(let n=0;n<count;n++){let t=(n+.5)/count, x=mix(ax,bx,t),z=mix(az,bz,t);for(let q=-2;q<=2;q++){
-  let xx=x+nx*(q/2)*width/2+jitter(.16),zz=z+nz*(q/2)*width/2+jitter(.16),y=terrain(xx,zz)+.065;let sx=dist/count*(.39+jitter(.1)),sw=width/5*(.77+rand()*.2),col=tint(colors.paleStone,.79+rand()*.36);
-  world.quad([xx-sx,y,zz-sw],[xx-sx,y,zz+sw],[xx+sx,y,zz+sw],[xx+sx,y,zz-sw],col,1);
- }}
+function stonesAlong(ax,az,bx,bz,count,width=3){
+ const dx=bx-ax,dz=bz-az,dist=Math.hypot(dx,dz),ux=dx/dist,uz=dz/dist,sideX=-uz,sideZ=ux;
+ let steps=count*2,stepLength=dist/steps;
+ for(let n=0;n<steps;n++){
+  const t=(n+.5)/steps,cx=mix(ax,bx,t),cz=mix(az,bz,t);
+  for(let row=-3;row<=3;row++){
+   const offset=(row+(n%2)*.12)*(width/7.5),j=jitter(.035),lx=cx+sideX*offset+ux*j,lz=cz+sideZ*offset+uz*j;
+   const side=(width/7.6)*(.40+rand()*.07),half=stepLength*(.35+rand()*.07);
+   const corners=[[-half,-side],[-half,side],[half,side],[half,-side]];
+   const polygon=corners.map(([forward,across])=>{let x=lx+ux*forward+sideX*across,z=lz+uz*forward+sideZ*across;return [x,terrain(x,z)+.055+jitter(.009),z]});
+   const shade=.66+rand()*.44;
+   world.quad(...polygon,tint(colors.paleStone,shade),1);
+   if(rand()<.08){let a=polygon[0],b=polygon[1];world.beam([a[0],a[1]+.008,a[2]],[b[0],b[1]+.008,b[2]],.011,tint(colors.rock,.74),1,3)}
+  }
+ }
 }
 stonesAlong(0,10,0,-13,28,4.0);stonesAlong(-1,-3,-15,-6,18,3.0);stonesAlong(2,-4,13,-4,18,3.2);stonesAlong(0,2,11,17,24,3.3);stonesAlong(-3,-11,4,-23,18,2.7);
 function plaza(cx,cz,r){for(let n=0;n<175;n++){let theta=rand()*Math.PI*2,rr=Math.sqrt(rand())*r,x=cx+Math.cos(theta)*rr,z=cz+Math.sin(theta)*rr,y=terrain(x,z)+.045;world.box(x,y,z,.60+rand()*.66,.03,.55+rand()*.5,tint(colors.paleStone,.72+rand()*.4),1)}}
 plaza(-6,-4,4.4);
 // Landscape rocks are clustered rather than distributed on an obvious grid.
 function rock(x,z,r){let y=terrain(x,z)-.05;world.ellipsoid(x,y+r*.42,z,r,.75*r,r*.82,tint(colors.rock,.75+rand()*.48),1,4,7);if(r>.75)world.ellipsoid(x+r*.52,y+r*.20,z-r*.18,r*.46,.35*r,.43*r,tint(colors.stone,.78+rand()*.25),1,4,6)}
-for(let i=0;i<260;i++){let x=mix(-83,83,rand()),z=mix(-85,40,rand());if(Math.hypot(x,z-3)<12 || (x>-17&&x<24&&z>-18&&z<13))continue;rock(x,z,.25+rand()*1.45)}
+for(let i=0;i<155;i++){let x=mix(-83,83,rand()),z=mix(-85,40,rand());if(Math.hypot(x,z-3)<12 || (x>-17&&x<24&&z>-18&&z<13))continue;rock(x,z,.25+rand()*1.45)}
 // Trees: branching trunks, multiple canopy lobes, tonal variation and occasional flowers.
-function tree(x,z,scale=1,style=0){let y=terrain(x,z),trunk=3.0*scale,co=style===2?colors.redLeaf:style===1?colors.lightLeaf:colors.leaf;
- world.cylinder(x,y-.15,z,.28*scale,.20*scale,trunk,colors.wood,2,8);
- for(let j=0;j<3;j++){let a=j*Math.PI*2/3+.6,b=[x+Math.cos(a)*1.5*scale,y+trunk*(.68+j*.07),z+Math.sin(a)*1.5*scale],root=[x,y+trunk*.55,z];world.beam(root,b,.10*scale,colors.wood);world.ellipsoid(b[0],b[1]+.55*scale,b[2],1.25*scale,1.45*scale,1.32*scale,tint(co,.80+rand()*.27),3,6,8)}
- world.ellipsoid(x,y+trunk+1.2*scale,z,1.95*scale,2.10*scale,1.85*scale,co,3,7,10);
- world.ellipsoid(x-.75*scale,y+trunk+.95*scale,z+.70*scale,1.21*scale,1.35*scale,1.14*scale,tint(co,1.12),3,5,8);
+function tree(x,z,scale=1,style=0){
+ let y=terrain(x,z),trunk=(3.5+rand()*.6)*scale;
+ let co=style===2?colors.redLeaf:style===1?colors.lightLeaf:colors.leaf;
+ const base=[x,y-.1,z],crown=[x+jitter(.25)*scale,y+trunk,z+jitter(.25)*scale];
+ world.cylinder(x,y-.13,z,.34*scale,.20*scale,trunk,colors.wood,2,11);
+ // Root flare and visible branch architecture, rather than a floating green sphere.
+ for(let i=0;i<5;i++){let a=i*Math.PI*2/5+.3;world.beam([x,y+.36*scale,z],[x+Math.cos(a)*.58*scale,y+.04*scale,z+Math.sin(a)*.58*scale],.085*scale,colors.wood,2,5)}
+ const canopy=[];
+ for(let i=0;i<9;i++){
+  let a=i*2.399+rand()*.65,r=(1.0+rand()*.99)*scale,high=(.57+rand()*.77)*scale;
+  let tip=[x+Math.cos(a)*r,y+trunk+high,z+Math.sin(a)*r];
+  const pivot=[x+.22*Math.cos(a)*scale,y+trunk*.74,z+.22*Math.sin(a)*scale];
+  world.beam(pivot,tip,(.065+rand()*.04)*scale,tint(colors.wood,.80+rand()*.24),2,6);
+  canopy.push(tip);
+  for(let j=0;j<2;j++){
+   let dir=a+j*.98,rr=(.5+rand()*.47)*scale;
+   let sprig=[tip[0]+Math.cos(dir)*rr,tip[1]+jitter(.53)*scale,tip[2]+Math.sin(dir)*rr];
+   world.beam(tip,sprig,.029*scale,colors.wood,2,4);
+   canopy.push(sprig);
+  }
+ }
+ // Leaf meshes have irregular silhouettes, two-sided orientation and translucent-looking edges.
+ for(let tip of canopy){
+  let cluster=5+Math.floor(rand()*4);
+  for(let j=0;j<cluster;j++){
+   let phi=rand()*Math.PI*2,rad=Math.sqrt(rand())*.67*scale,px=tip[0]+Math.cos(phi)*rad,pz=tip[2]+Math.sin(phi)*rad,py=tip[1]+jitter(.95)*scale;
+   let leafScale=(.22+rand()*.23)*scale,twist=rand()*Math.PI*2;
+   let normal=norm([Math.cos(twist),.52+rand()*.6,Math.sin(twist)]),side=norm(cross(normal,[0,1,0]));
+   let tipA=[px+side[0]*leafScale,py+leafScale*.25,pz+side[2]*leafScale];
+   let tipB=[px-side[0]*leafScale,py+leafScale*.22,pz-side[2]*leafScale];
+   let point=[px+normal[0]*leafScale*.32,py+leafScale*(.8+rand()*.4),pz+normal[2]*leafScale*.32];
+   let col=tint(co,.72+rand()*.58);world.tri([px,py-.08*scale,pz],tipA,point,col,3);world.tri([px,py-.08*scale,pz],point,tipB,col,3);
+  }
+ }
 }
-for(let i=0;i<55;i++){let x=-22-rand()*42,z=-29+rand()*54;if(Math.hypot(x+8,z+5)<10)continue;tree(x,z,.63+rand()*.78,i%11===0?2:i%5===0?1:0)}
-for(let i=0;i<38;i++){let x=22+rand()*50,z=-42+rand()*42;if(Math.hypot(x-20,z+10)<12)continue;tree(x,z,.8+rand()*.9,i%9===0?2:0)}
+function spruce(x,z,scale=1){
+ let y=terrain(x,z),h=(4.8+rand()*2.4)*scale;
+ world.cylinder(x,y,z,.24*scale,.085*scale,h,colors.wood,2,7);
+ for(let tier=0;tier<5;tier++){
+  let t=tier/5,yy=y+h*(.24+.69*t),width=(1.28-t*.98)*scale;
+  for(let a=0;a<7;a++){
+   let ang=(a+tier*.34)*Math.PI*2/7,sx=Math.cos(ang),sz=Math.sin(ang),end=[x+sx*width,yy-.36*scale,z+sz*width];
+   world.beam([x,yy+.23*scale,z],end,.038*scale,colors.wood,2,4);
+   let col=tint(tier%3===0?colors.darkGrass:colors.leaf,.61+rand()*.30);
+   for(let r=0;r<2;r++){
+    let tt=(r+.6)/2,px=mix(x,end[0],tt),pz=mix(z,end[2],tt),py=mix(yy+.23*scale,end[1],tt);
+    world.tri([px-sz*.18*scale,py-.09*scale,pz+sx*.18*scale],[px+sz*.18*scale,py-.09*scale,pz-sx*.18*scale],[px+sx*.25*scale,py+.27*scale,pz+sz*.25*scale],col,3);
+   }
+  }
+ }
+}
+// A dense, varied forest breaks up the previously bare distant hillside.
+for(let i=0;i<96;i++){
+ let x=-76+rand()*152,z=-76+rand()*44;
+ if(z>-46 && Math.abs(x)<24)continue;
+ let yy=terrain(x,z);if(yy<4||yy>31)continue;
+ spruce(x,z,.55+rand()*1.14);
+}
+for(let i=0;i<35;i++){let x=-22-rand()*42,z=-29+rand()*54;if(Math.hypot(x+8,z+5)<10)continue;tree(x,z,.63+rand()*.78,i%11===0?2:i%5===0?1:0)}
+for(let i=0;i<26;i++){let x=22+rand()*50,z=-42+rand()*42;if(Math.hypot(x-20,z+10)<12)continue;tree(x,z,.8+rand()*.9,i%9===0?2:0)}
 for(let [x,z,s,kind] of [[-15,0,1.15,1],[-20,6,1.10,0],[12,6,1.10,1],[22,-8,1.35,0],[-12,-19,1.4,2],[8,-19,1.15,1],[25,13,1.15,0]])tree(x,z,s,kind);
 // Individual grass tufts and flowers, concentrated away from paving.
-for(let i=0;i<4200;i++){let x=-75+rand()*150,z=-65+rand()*94;if(x>-17&&x<20&&z>-18&&z<12)continue;let y=terrain(x,z);if(y<.45||y>17)continue;let s=.10+rand()*.24,c=rand()>.6?colors.lightLeaf:colors.darkGrass;
+for(let i=0;i<3400;i++){let x=-75+rand()*150,z=-65+rand()*94;if(x>-17&&x<20&&z>-18&&z<12)continue;let y=terrain(x,z);if(y<.45||y>17)continue;let s=.14+rand()*.26,c=rand()>.6?colors.lightLeaf:colors.darkGrass;
  for(let k=0;k<2;k++){let dx=Math.cos(k*1.5+rand()*.4)*s,dz=Math.sin(k*1.8+rand()*.4)*s;world.tri([x-dx,y,z-dz],[x+dx,y,z+dz],[x+jitter(.2),y+s*(2+rand()),z+jitter(.2)],tint(c,.80+rand()*.55),3)}
  if(i%18===0){world.beam([x,y,z],[x,y+.43,z],.018,colors.leaf,3,4);world.ellipsoid(x,y+.47,z,.10,.10,.10,i%36===0?colors.gold:colors.linen,8,3,5)}
+}
+// Human-scale vegetation is sparse around the town path, thickens naturally at its edges.
+for(let i=0;i<950;i++){
+ let x=-28+rand()*60,z=-27+rand()*49;
+ const inTown=x>-19&&x<23&&z>-19&&z<14,nearRoad=(Math.abs(x)<2.5&&z>-15&&z<15),nearHouses=(x>-19&&x<23&&z>-25&&z<-8);
+ if(nearRoad||nearHouses||inTown&&rand()>.40)continue;
+ const y=terrain(x,z)+.026;if(y<.3||y>13)continue;
+ const a=rand()*6.283,s=.10+rand()*.25;
+ const grow=[x,y,z],top=[x+Math.cos(a)*s*.32,y+s*(2.1+rand()),z+Math.sin(a)*s*.32];
+ world.beam(grow,top,.015,colors.darkGrass,3,4);
+ for(let j=0;j<4;j++){
+  const p=a+j*1.57,r=(.25+rand()*.8)*s;
+  world.tri([x,y,z],[x+Math.cos(p)*r,y+.23*s,z+Math.sin(p)*r],[x+Math.cos(p+.35)*r*.63,y+s*(1.1+rand()),z+Math.sin(p+.35)*r*.63],tint(j%2?colors.lightLeaf:colors.leaf,.78+rand()*.33),3);
+ }
+ if(i%11===0){world.ellipsoid(top[0],top[1]+.04,top[2],.065,.09,.072,i%3===0?colors.gold:colors.linen,8,4,6)}
+}
+// Wind-blown shore pebbles, naturally varied in clustering rather than even scattering.
+for(let i=0;i<130;i++){
+ const x=-37+rand()*80,z=11+rand()*27,y=terrain(x,z);
+ if(y<-.4||y>2.5)continue;
+ world.ellipsoid(x,y+.035,z,.06+rand()*.20,.025+rand()*.08,.06+rand()*.17,tint(i%3?colors.stone:colors.sand,.75+rand()*.39),1,4,7);
 }
 // Village houses. Rich silhouettes, paired windows, stone foundations, timber frames, and tiled gables.
 function house(x,z,w,d,h,roofColor=colors.roof,angle=0){let y=terrain(x,z)+.04;
@@ -112,6 +195,15 @@ function house(x,z,w,d,h,roofColor=colors.roof,angle=0){let y=terrain(x,z)+.04;
  world.beam([xx,yy,wz+.16],[xx+.05,yy+.19,wz+.16],.025,colors.leaf,3,5);
  world.ellipsoid(xx+.06,yy+.20,wz+.18,.12,.09,.08,k%3===0?colors.redLeaf:colors.leaf,3,4,6);
  }}
+ // Raised window sills, shutters and stepped door thresholds add a human scale.
+ for(let side of [-1,1]){const wx=x+side*w*.31,wz=z+d*.585,wy=y+h*.62;
+   world.box(wx+side*w*.13,wy,z+d*.545,w*.075,h*.26,.08,tint(colors.wood,.93),2);
+   for(let k=0;k<3;k++){let yy=wy-h*.10+k*h*.067;
+     world.beam([wx+side*w*.11,yy,wz],[wx+side*w*.15,yy,wz],.016,tint(colors.leather,.90),2,4)}
+ }
+ for(let k=0;k<3;k++)world.box(x,y+.57+k*.065,z+d*.56+(2-k)*.22,w*.36,.08,.43,tint(colors.stone,.88+k*.055),1);
+ for(let k=0;k<8;k++){let sx=mix(x-w*.48,x+w*.48,(k+.5)/8);
+   world.beam([sx,y+.61,z+d*.519],[sx,y+.75,z+d*.519],.014,tint(colors.rock,.55),1,4)}
  // chimney and roof ridge details
  world.box(x+w*.25,y+h*.96,z-d*.15,.48,1.32,.56,colors.stone,1);world.box(x+w*.25,y+h*1.25,z-d*.15,.60,.18,.69,colors.rock,1);
  for(let k=0;k<4;k++){let q=mix(back+.24,front-.24,(k+.5)/4);world.beam([left,yTop+.04,q],[x,ridge+.04,q],.024,tint(roofColor,.64),5);world.beam([x,ridge+.04,q],[right,yTop+.04,q],.024,tint(roofColor,.64),5)}
@@ -190,21 +282,44 @@ uniform vec3 uEye;uniform vec3 uSun;uniform vec3 uFog;uniform float uTime;unifor
 out vec4 frag;
 float hash(vec3 p){p=fract(p*.1031);p+=dot(p,p.yxz+33.33);return fract((p.x+p.y)*p.z);}
 float noise(vec3 x){vec3 i=floor(x),f=fract(x);f=f*f*(3.-2.*f);return mix(mix(mix(hash(i),hash(i+vec3(1,0,0)),f.x),mix(hash(i+vec3(0,1,0)),hash(i+vec3(1,1,0)),f.x),f.y),mix(mix(hash(i+vec3(0,0,1)),hash(i+vec3(1,0,1)),f.x),mix(hash(i+vec3(0,1,1)),hash(i+vec3(1,1,1)),f.x),f.y),f.z);}
-float shadow(vec3 n){if(uShadowEnabled<.5)return 1.;vec4 p=uLightVP*vec4(vPos+n*.03,1.);vec3 q=p.xyz/p.w*.5+.5;if(q.x<=.0||q.x>=1.||q.y<=.0||q.y>=1.||q.z>=1.)return 1.;float bias=max(.00012,.001*(1.-dot(n,normalize(uSun))));float val=0.;for(int i=-1;i<=1;i++)for(int j=-1;j<=1;j++){float depth=texture(uShadow,q.xy+vec2(float(i),float(j))/2048.).r;val+=(q.z-bias<=depth?1.:0.);}return .46+.54*val/9.;}
-void main(){vec3 N=normalize(vNormal);vec3 L=normalize(uSun);float nd=max(dot(N,L),0.);float sh=shadow(N), ambient=.72;float micro=noise(vPos*vec3(2.4,2.4,2.4));vec3 albedo=vColor;
- if(vKind==0){albedo*=mix(.82,1.16,micro);albedo+=vec3(.015,.026,-.01)*noise(vPos*6.);}
- if(vKind==1){albedo*=mix(.77,1.13,micro);float cracks=pow(1.-abs(sin(vPos.x*3.1+vPos.z*2.3)),22.);albedo*=1.-cracks*.10;}
- if(vKind==2){float grain=noise(vPos*vec3(8.,1.4,8.));albedo*=mix(.69,1.18,grain);}
- if(vKind==3){float leaf=noise(vPos*5.2)*.58+noise(vPos*14.)*.42;albedo*=mix(.64,1.36,leaf);albedo+=vec3(.035,.042,-.010)*leaf;}
- if(vKind==4){albedo*=mix(.86,1.12,noise(vPos*vec3(1.8,2.5,1.8)));}
- if(vKind==5){float tiles=sin(vPos.x*8.)*sin(vPos.z*10.);albedo*=.92+.10*tiles+.10*micro;}
- if(vKind==7){albedo*=.81+.29*micro;}
- vec3 light=vec3(.99,.79,.56)*(nd*sh*.89)+vec3(.62,.74,.79)*ambient+vec3(.20,.17,.14)*max(N.y,0.);
- vec3 c=albedo*light*1.46;
- if(vKind==6){vec3 V=normalize(uEye-vPos),H=normalize(V+L);c+=vec3(.94,.86,.66)*pow(max(dot(N,H),0.),75.)*.32*sh;}
- if(vKind==8){c=albedo*1.65+vec3(.30,.16,.06)*(.5+.5*sin(uTime*2.5+vPos.x*3.));}
- float dist=length(uEye-vPos);float fog=1.-exp(-pow(dist*.0078,1.55));c=mix(c,uFog,clamp(fog,0.,.91));
- c=1.-exp(-c*1.31);c=pow(c,vec3(.92));frag=vec4(c,1.);
+float fbm(vec3 p){float n=0.,a=.55;for(int i=0;i<3;i++){n+=a*noise(p);p=p*2.07+vec3(3.4,7.2,1.1);a*=.51;}return n;}
+float shadow(vec3 n){if(uShadowEnabled<.5)return 1.;vec4 p=uLightVP*vec4(vPos+n*.04,1.);vec3 q=p.xyz/p.w*.5+.5;if(q.x<=.002||q.x>=.998||q.y<=.002||q.y>=.998||q.z>=1.)return 1.;
+ float bias=max(.00019,.00125*(1.-max(dot(n,normalize(uSun)),0.)));float val=0.;
+ for(int i=-1;i<=1;i++)for(int j=-1;j<=1;j++){vec2 offset=(vec2(float(i),float(j))+.24*vec2(sin(dot(vPos.xz,vec2(13.,7.))),cos(dot(vPos.xz,vec2(11.,17.)))))/2048.;float depth=texture(uShadow,q.xy+offset).r;val+=q.z-bias<=depth?1.:0.;}
+ return .33+.67*val/9.;}
+vec3 aces(vec3 x){return clamp((x*(2.51*x+.03))/(x*(2.43*x+.59)+.14),0.,1.);}
+void main(){vec3 N=normalize(vNormal);vec3 L=normalize(uSun);vec3 V=normalize(uEye-vPos);
+ float micro=fbm(vPos*4.1),macro=fbm(vPos*.83),roughness=.92,metallic=0.,transmission=0.;vec3 albedo=vColor;
+ if(vKind==0){float grain=fbm(vPos*vec3(2.6,2.6,2.6));albedo*=mix(.57,1.23,grain);albedo=mix(albedo,vec3(.02,.08,.018),smoothstep(.71,.90,macro)*.35);roughness=.99;}
+ if(vKind==1){float grit=fbm(vPos*6.);albedo*=mix(.68,1.25,grit);albedo*=mix(.91,1.06,macro);float cracks=pow(1.-abs(sin(vPos.x*2.9+vPos.z*2.3)),27.);albedo*=1.-cracks*.12;roughness=.96;}
+ if(vKind==2){float rings=.5+.5*sin(vPos.y*17.+noise(vPos*3.)*3.+vPos.z*6.5);albedo*=mix(.66,1.22,rings*.55+.45*macro);roughness=.78;}
+ if(vKind==3){albedo*=mix(.70,1.24,micro*.6+macro*.4);roughness=.84;transmission=.18;}
+ if(vKind==4){albedo*=mix(.77,1.13,fbm(vPos*3.));roughness=.96;}
+ if(vKind==5){albedo*=mix(.73,1.16,micro*.5+macro*.5);roughness=.85;}
+ if(vKind==6){metallic=.65;roughness=.38;albedo*=.95;}
+ if(vKind==7){albedo*=mix(.68,1.24,micro);roughness=.96;}
+ if(vKind==9){albedo*=mix(.87,1.08,noise(vPos*17.));roughness=.95;}
+ if(vKind==10){albedo*=mix(.92,1.06,micro);roughness=.69;}
+ if(vKind==11){albedo*=mix(.78,1.21,noise(vPos*vec3(9.,24.,9.)));roughness=.64;}
+ if(vKind==12){albedo*=mix(.71,1.16,fbm(vPos*9.));roughness=.73;}
+ if(vKind>=13){frag=vec4(.035,.035,.034,vKind==13?.20:vKind==14?.13:.04);return;}
+ // Procedural bump microstructure without derivative-based dependencies or texture downloads.
+ float bump=fbm(vPos*(vKind==1?18.:vKind==2?11.:8.));
+ vec3 perturb=vec3(fbm(vPos*8.+vec3(.1,2.4,1.7))-.5,fbm(vPos*8.+vec3(1.7,3.9,.1))-.5,fbm(vPos*8.+vec3(4.1,.3,2.6))-.5);
+ N=normalize(N+perturb*(vKind==1?.24:vKind==0?.10:vKind==3?.10:.055));
+ float nd=max(dot(N,L),0.),sh=shadow(N);
+ float hemi=.43+.22*max(N.y,0.);vec3 skyFill=vec3(.69,.77,.91)*hemi;
+ vec3 sunLight=vec3(1.0,.84,.68)*nd*sh*1.52;
+ vec3 bounce=vec3(.26,.21,.16)*(.3+.7*max(-N.y,0.));
+ vec3 c=albedo*(skyFill+sunLight+bounce);
+ vec3 H=normalize(L+V);float NdotH=max(dot(N,H),0.),NdotV=max(dot(N,V),.01);
+ float shininess=mix(120.,9.,roughness*roughness);float spec=pow(NdotH,shininess)*sh;
+ float F0=mix(.038,.35,metallic);float fresnel=F0+(1.-F0)*pow(1.-NdotV,5.);
+ c+=vec3(1.,.82,.62)*spec*(.10+.38*(1.-roughness)+metallic*.32)*fresnel*3.;
+ if(vKind==3)c+=albedo*vec3(.65,.45,.13)*transmission*pow(max(dot(-N,L),0.),2.);
+ if(vKind==8){c=albedo*2.05+vec3(.40,.18,.035)*(.5+.5*sin(uTime*2.5+vPos.x*3.));}
+ float dist=length(uEye-vPos);float heightFog=exp(-max(vPos.y,0.)*.052);float fog=1.-exp(-pow(dist*.0086,1.52)*(.68+.40*heightFog));
+ c=mix(c,pow(uFog,vec3(2.2)),clamp(fog*.74,0.,.84));c=aces(c*1.20);c=pow(c,vec3(1./2.20));frag=vec4(c,1.);
 }`;
 const SHADOW_VS=`#version 300 es
 layout(location=0)in vec3 aPos;uniform mat4 uLightVP;void main(){gl_Position=uLightVP*vec4(aPos,1.);}`;
@@ -216,16 +331,50 @@ const SKY_FS=`#version 300 es
 precision highp float;in vec2 vUV;uniform float uTime;out vec4 frag;
 float hash(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}
 float no(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);return mix(mix(hash(i),hash(i+vec2(1,0)),f.x),mix(hash(i+vec2(0,1)),hash(i+vec2(1,1)),f.x),f.y);}
-void main(){float h=vUV.y;vec3 c=mix(vec3(.91,.70,.49),vec3(.30,.52,.62),smoothstep(.03,.92,h));c=mix(c,vec3(.38,.59,.71),smoothstep(.40,1.,h)*.42);float cloud=no(vec2(vUV.x*5.6+uTime*.002,h*8.0))*0.62+no(vec2(vUV.x*12.,h*15.))*0.38;float clouds=smoothstep(.54,.74,cloud)*smoothstep(.17,.43,h);c=mix(c,vec3(.96,.85,.67),clouds*.39);float glow=exp(-pow(length((vUV-vec2(.74,.77))*vec2(1.5,1.0))*5.0,2.));c+=vec3(.62,.38,.17)*glow*.42;c=pow(c,vec3(.92));frag=vec4(c,1.);}`;
+float fBm(vec2 p){float v=0.,a=.52;for(int i=0;i<5;i++){v+=a*no(p);p=p*2.13+vec2(5.6,3.2);a*=.53;}return v;}
+void main(){float h=vUV.y;
+ vec3 horizon=vec3(.91,.70,.54),zenith=vec3(.19,.37,.54);
+ vec3 c=mix(horizon,zenith,smoothstep(.05,1.05,h));
+ c+=vec3(.15,.12,.09)*exp(-pow((h-.28)*4.,2.));
+ vec2 cloudUV=vec2(vUV.x*5.4+uTime*.0011,(h-.3)*5.1);
+ float strata=fBm(cloudUV+vec2(no(cloudUV*1.6)*.41,0.));
+ float cloud=smoothstep(.47,.68,strata)*smoothstep(.24,.48,h)*(1.-smoothstep(.79,1.02,h));
+ c=mix(c,vec3(.97,.88,.74),cloud*.65);
+ float sundist=length((vUV-vec2(.76,.76))*vec2(1.6,1.));
+ float halo=exp(-sundist*9.)*.51,disc=smoothstep(.045,.015,sundist);
+ c+=vec3(.95,.66,.38)*halo+vec3(1.,.79,.52)*disc*.8;
+ c=pow(clamp(c,0.,1.),vec3(.92));frag=vec4(c,1.);
+}`;
 const WATER_VS=`#version 300 es
 precision highp float;layout(location=0)in vec3 aPos;uniform mat4 uVP;out vec3 vPos;void main(){vPos=aPos;gl_Position=uVP*vec4(aPos,1.);}`;
 const WATER_FS=`#version 300 es
 precision highp float;in vec3 vPos;uniform vec3 uEye;uniform vec3 uSun;uniform vec3 uFog;uniform float uTime;out vec4 frag;
-float wave(vec2 p){float a=sin(p.x*.79+p.y*.23+uTime*.82)*.17,b=sin(p.y*1.14-p.x*.31+uTime*1.16)*.12,c=sin(p.x*.23+p.y*.97+sin(p.x*.39)*1.4-uTime*.54)*.15;return a+b+c;}
-void main(){vec2 p=vPos.xz;float h=wave(p),dx=wave(p+vec2(.09,0.))-h,dz=wave(p+vec2(0.,.09))-h;vec3 N=normalize(vec3(-dx*5.3,1.,-dz*5.3));vec3 V=normalize(uEye-vPos);vec3 L=normalize(uSun);vec3 H=normalize(V+L);float fresnel=pow(1.-max(dot(N,V),0.),2.6);float spec=pow(max(dot(N,H),0.),190.)*.95+pow(max(dot(N,H),0.),34.)*.17;vec3 base=mix(vec3(.06,.28,.35),vec3(.20,.46,.50),.5+.5*sin(p.x*.05+p.y*.02));vec3 color=mix(base,vec3(.58,.72,.70),fresnel*.55)+spec*vec3(1.,.83,.57);
- float warp=sin(p.x*.47+sin(p.y*.34)*1.7+p.y*.13),foam=smoothstep(.55,.85,sin(p.y*.48+uTime*.41+warp*1.3)*sin(p.x*.27-p.y*.34+uTime*.31));
- float nearCoast=1.-smoothstep(12.,21.,p.y);nearCoast*=smoothstep(2.,7.,p.y);color=mix(color,vec3(.75,.84,.75),foam*nearCoast*.42);
- float dist=length(uEye-vPos),fog=1.-exp(-pow(dist*.0078,1.55));color=mix(color,uFog,clamp(fog,0.,.93));color=1.-exp(-color*1.43);frag=vec4(pow(color,vec3(.92)),.94);}`;
+float hash(vec2 x){return fract(sin(dot(x,vec2(127.1,311.7)))*43758.5453);}
+float noise(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);return mix(mix(hash(i),hash(i+vec2(1,0)),f.x),mix(hash(i+vec2(0,1)),hash(i+vec2(1,1)),f.x),f.y);}
+float wave(vec2 p){float t=uTime;
+ float warp=noise(p*.15+vec2(.03*t,-.01*t));p+=vec2(warp-.5,noise(p*.24+vec2(-.02*t,.04*t))-.5)*2.3;
+ float a=sin(dot(p,vec2(.82,.57))+t*.76)*.10;
+ float b=sin(dot(p,vec2(-.38,.93))-t*.62)*.085;
+ float c=sin(dot(p,vec2(.32,-.48))+t*.36+sin(p.x*.21+p.y*.32))*.12;
+ float d=sin(dot(p,vec2(.17,.29))+t*.29)*.21;
+ return a+b+c+d;}
+void main(){vec2 p=vPos.xz;
+ float h=wave(p),dx=wave(p+vec2(.05,0.))-h,dz=wave(p+vec2(0.,.05))-h;
+ vec3 N=normalize(vec3(-dx*7.,1.,-dz*7.));vec3 V=normalize(uEye-vPos),L=normalize(uSun),H=normalize(V+L);
+ float fresnel=pow(1.-max(dot(N,V),0.),5.),spec=pow(max(dot(N,H),0.),135.)*1.3+pow(max(dot(N,H),0.),22.)*.12;
+ vec3 deep=vec3(.035,.18,.23),surface=vec3(.13,.35,.42);
+ float turbidity=noise(p*.19+vec2(uTime*.007));vec3 c=mix(deep,surface,.21+.65*turbidity);
+ c=mix(c,vec3(.55,.70,.75),.18+fresnel*.62);
+ c+=spec*vec3(1.,.82,.56);
+ // Eddying foam patches are a noisy bounded field, not straight parallel bands.
+ float warp=noise(p*.34+vec2(uTime*.07,-uTime*.04));
+ float f=noise(p*.47+vec2(warp*2.,uTime*.085))*.65+noise(p*.89+vec2(-uTime*.04,uTime*.1))*.35;
+ float nearShore=1.-smoothstep(8.,25.,p.y);nearShore*=smoothstep(1.,4.,p.y);
+ float foam=smoothstep(.59,.76,f+sin(p.x*.13+p.y*.25+warp*3.+uTime*.4)*.06)*nearShore;
+ c=mix(c,vec3(.83,.84,.73),foam*.54);
+ float dist=length(uEye-vPos),fog=1.-exp(-pow(dist*.0092,1.52));c=mix(c,uFog,clamp(fog,0.,.92));
+ c=clamp((c*(2.51*c+.03))/(c*(2.43*c+.59)+.14),0.,1.);frag=vec4(pow(c,vec3(1./2.16)),.94);
+}`;
 function shader(type,src){let s=gl.createShader(type);gl.shaderSource(s,src);gl.compileShader(s);if(!gl.getShaderParameter(s,gl.COMPILE_STATUS))throw Error(gl.getShaderInfoLog(s));return s}
 function program(v,f){let p=gl.createProgram();gl.attachShader(p,shader(gl.VERTEX_SHADER,v));gl.attachShader(p,shader(gl.FRAGMENT_SHADER,f));gl.linkProgram(p);if(!gl.getProgramParameter(p,gl.LINK_STATUS))throw Error(gl.getProgramInfoLog(p));return p}
 function geometryBuffer(geometry){let vao=gl.createVertexArray(),buffer=gl.createBuffer();gl.bindVertexArray(vao);gl.bindBuffer(gl.ARRAY_BUFFER,buffer);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array(geometry.a),gl.STATIC_DRAW);for(let i=0;i<4;i++){gl.enableVertexAttribArray(i);gl.vertexAttribPointer(i,i===0||i===1||i===2?3:1,gl.FLOAT,false,40,[0,12,24,36][i])}gl.bindVertexArray(null);return {vao,buffer,count:geometry.count}}
@@ -246,7 +395,7 @@ try{
 const u=(p,name)=>gl.getUniformLocation(p,name);
 const mainU={vp:u(mainProgram,'uVP'),eye:u(mainProgram,'uEye'),sun:u(mainProgram,'uSun'),fog:u(mainProgram,'uFog'),time:u(mainProgram,'uTime'),shadow:u(mainProgram,'uShadow'),lvp:u(mainProgram,'uLightVP'),enabled:u(mainProgram,'uShadowEnabled')};
 const waterU={vp:u(waterProgram,'uVP'),eye:u(waterProgram,'uEye'),sun:u(waterProgram,'uSun'),fog:u(waterProgram,'uFog'),time:u(waterProgram,'uTime')};
-const sun=norm([-0.55,.70,.46]),fog=[.61,.66,.63];
+const sun=norm([-0.55,.70,.46]),fog=[.63,.70,.73];
 const player={x:0,z:7,y:0,heading:0.16,phase:0,motion:0};let cameraYaw=0.16,cameraPitch=.27,cameraDist=10.9,drag=null,aimX=0,aimY=0,runTouch=false;
 const key={};window.addEventListener('keydown',e=>{if(['ArrowUp','ArrowDown','ArrowLeft','ArrowRight','Space'].includes(e.key))e.preventDefault();key[e.key.toLowerCase()]=true});window.addEventListener('keyup',e=>key[e.key.toLowerCase()]=false);window.addEventListener('blur',()=>{for(let k in key)key[k]=false;runTouch=false});
 canvas.addEventListener('pointerdown',e=>{if(e.pointerType==='touch'&&e.clientX<innerWidth*.25)return;drag={x:e.clientX,y:e.clientY,id:e.pointerId};canvas.setPointerCapture(e.pointerId)});
@@ -256,36 +405,95 @@ canvas.addEventListener('wheel',e=>{e.preventDefault();cameraDist=clamp(cameraDi
 const joy=document.getElementById('mobileControls'),stick=document.getElementById('stick');let joyID=null;function joyMove(e){if(e.pointerId!==joyID)return;let r=joy.getBoundingClientRect(),dx=e.clientX-(r.left+r.width/2),dy=e.clientY-(r.top+r.height/2),m=Math.max(1,Math.hypot(dx,dy)),s=Math.min(1,m/41);aimX=dx/m*s;aimY=-dy/m*s;stick.style.transform=`translate(${aimX*34}px,${-aimY*34}px)`}
 joy.addEventListener('pointerdown',e=>{joyID=e.pointerId;joy.setPointerCapture(e.pointerId);joyMove(e)});joy.addEventListener('pointermove',joyMove);const stopJoy=()=>{joyID=null;aimX=0;aimY=0;stick.style.transform='translate(0,0)'};joy.addEventListener('pointerup',stopJoy);joy.addEventListener('pointercancel',stopJoy);
 const run=document.getElementById('runTouch');run.addEventListener('pointerdown',e=>{runTouch=true;run.setPointerCapture(e.pointerId)});run.addEventListener('pointerup',()=>runTouch=false);run.addEventListener('pointercancel',()=>runTouch=false);
+// The pier is a real walkable surface, not merely scenery floating over the terrain.
+function walkingHeight(x,z){
+ const ground=terrain(x,z);
+ return x>8.5&&x<14.5&&z>=12.7&&z<32.3?Math.max(ground,1.055):ground;
+}
 // Character reconstructed from original primitives, not a borrowed game character.
-function character(t){let g=new Geometry(),x=player.x,z=player.z,y=terrain(x,z)+.07,spin=player.heading;
- let s=Math.sin(player.phase)*player.motion,walkBob=Math.abs(Math.sin(player.phase))*.09*player.motion;
- const point=(xx,yy,zz)=>[x+Math.cos(spin)*xx+Math.sin(spin)*zz,y+yy,z-Math.sin(spin)*xx+Math.cos(spin)*zz];
- const box=(xx,yy,zz,w,h,d,col,k=0)=>{let p=point(xx,yy,zz);g.box(...p,w,h,d,col,k)};
- const oval=(xx,yy,zz,rx,ry,rz,col,k=0,rows=6,cols=9)=>{let p=point(xx,yy,zz);g.ellipsoid(...p,rx,ry,rz,col,k,rows,cols)};
- const bone=(a,b,r,col,k=0)=>g.beam(point(...a),point(...b),r,col,k,7);
- // Boots, shin guards, knees and independently swinging limbs.
- for(let side of [-1,1]){let ph=s*side,hip=[side*.29,1.17,.0],knee=[side*.30,.71,ph*.27],foot=[side*.30,.13,-ph*.42+.05];bone(hip,knee,.21,colors.cloth);bone(knee,foot,.18,colors.leather);oval(side*.30,.12,-ph*.42-.17,.23,.19,.41,colors.leather,2);oval(side*.30,.64,ph*.23,.23,.15,.21,colors.iron,6,5,7)}
- // Tunic, waist sash, sculpted chest plate, cape and natural cloth folds.
- oval(0,1.61,0,.53,.72,.34,[.18,.38,.36],4,8,11);
- let chest=point(0,1.62,-.30);g.box(chest[0],chest[1]-.33,chest[2],.79,.72,.15,[.24,.46,.43],4);
- for(let side of [-1,1]){let sw=-s*side;bone([side*.46,1.93,0],[side*.63,1.40,sw*.31],.20,colors.cloth,4);bone([side*.63,1.40,sw*.31],[side*.58,1.01,sw*.55],.17,colors.skin,4);oval(side*.56,1.06,sw*.54,.14,.18,.15,colors.skin,4)}
- oval(0,1.34,0,.52,.12,.38,colors.leather,2);box(0,1.31,-.36,.25,.20,.09,colors.gold,6);
- // Cape: asymmetric and gently fluttering, with a sharp upper silhouette.
- let flap=Math.sin(t*2.2)*.11;g.quad(point(-.39,2.08,.23),point(.39,2.08,.23),point(.57,.81,.45+flap),point(-.47,.82,.51-flap),[.27,.26,.40],4);
- // Neck, head, hair fringe and friendly original facial proportions.
- bone([0,2.12,0],[0,2.44,0],.19,colors.skin,4);oval(0,2.62,-.035,.40,.49,.37,colors.skin,4,10,13);
- oval(0,2.93,.045,.44,.28,.39,colors.leather,2,6,10);
- for(let side of [-1,1]){oval(side*.26,2.72,-.14,.19,.22,.23,colors.leather,2,5,7);oval(side*.18,2.67,-.367,.066,.065,.040,colors.iron,6,4,6)}
- oval(0,2.46,-.42,.10,.13,.12,tint(colors.skin,1.09),4,4,7);
- oval(0,2.38,-.36,.19,.042,.042,[.41,.22,.18],2,4,7);
- // Hair at the back and small scarf tail, avoiding recognizable copyrighted character design.
- oval(-.14,2.80,.32,.20,.29,.16,colors.leather,2,5,7);
+function character(t){
+ const g=new Geometry(),x=player.x,z=player.z,y=walkingHeight(x,z)+.07,spin=player.heading;
+ const s=Math.sin(player.phase)*player.motion;
+ const bob=Math.abs(Math.sin(player.phase))*.055*player.motion;
+ const point=(xx,yy,zz)=>[x+Math.cos(spin)*xx+Math.sin(spin)*zz,y+yy+bob,z-Math.sin(spin)*xx+Math.cos(spin)*zz];
+ const oval=(xx,yy,zz,rx,ry,rz,col,k=9,rows=9,cols=13)=>{let p=point(xx,yy,zz);g.ellipsoid(...p,rx,ry,rz,col,k,rows,cols)};
+ const bone=(a,b,r,col,k=9,n=9)=>g.beam(point(...a),point(...b),r,col,k,n);
+ const fabric=[.23,.34,.42],hem=[.16,.24,.32],denim=[.19,.25,.30],skin=[.70,.47,.34],hair=[.20,.14,.12],sole=[.14,.13,.13];
+ // Anatomically tapered trousers, rolling feet and knees at independent positions.
+ for(let side of [-1,1]){
+  const swing=side*s,hip=[side*.20,1.07,0],knee=[side*.22,.66,swing*.30],ankle=[side*.23,.18,-swing*.48];
+  bone(hip,knee,.185,denim,9,11);bone(knee,ankle,.148,denim,9,11);
+  oval(side*.23,.23,-swing*.48,.19,.20,.22,denim,9,7,11);
+  oval(side*.23,.11,-swing*.48-.14,.21,.13,.34,sole,12,7,11);
+  oval(side*.23,.15,-swing*.48-.20,.185,.09,.25,[.27,.24,.21],12,6,11);
+  for(let i=0;i<3;i++){let cy=.35+i*.17;oval(side*.23,cy,-swing*.35,.147,.028,.153,tint(denim,.89+i*.07),9,4,10)}
+ }
+ // Torso and layered hoodie with a real collar, pocket, cuffs and soft cloth folds.
+ oval(0,1.58,0,.425,.66,.26,fabric,9,11,15);
+ oval(0,1.12,.025,.40,.15,.28,hem,9,7,13);
+ oval(0,2.01,.05,.42,.19,.29,tint(fabric,.84),9,7,13);
+ for(let side of [-1,1]){
+  const sw=-side*s,shoulder=[side*.42,1.95,0],elbow=[side*.55,1.53,sw*.25],wrist=[side*.54,1.07,sw*.46];
+  bone(shoulder,elbow,.18,fabric,9,11);bone(elbow,wrist,.15,fabric,9,11);
+  oval(side*.54,1.07,sw*.46,.17,.10,.17,hem,9,6,10);
+  oval(side*.54,1.00,sw*.48,.112,.14,.12,skin,10,8,10);
+ }
+ // Hood gathers behind the neck; drawcords are actual thin, dangling geometry.
+ oval(0,2.11,.20,.36,.31,.25,tint(fabric,.81),9,8,13);
+ oval(0,1.80,-.20,.20,.10,.12,tint(fabric,.91),9,6,11);
+ for(let side of [-1,1]){
+  const xCord=side*.115,gust=.018*Math.sin(t*3.1+side);
+  bone([xCord,2.13,-.272],[xCord+gust,1.80,-.31],.018,[.75,.71,.60],12,6);
+  oval(xCord+gust,1.78,-.31,.032,.025,.03,colors.gold,6,4,6);
+ }
+ // Front hand pocket with curved pouch seams.
+ oval(0,1.38,-.265,.276,.158,.063,tint(fabric,.81),9,7,11);
+ bone([-.23,1.40,-.302],[-.32,1.48,-.276],.012,tint(fabric,.58),9,5);
+ bone([.23,1.40,-.302],[.32,1.48,-.276],.012,tint(fabric,.58),9,5);
+ // Neck, ears and head silhouette with refined nose, brow and beard.
+ bone([0,2.11,0],[0,2.43,0],.152,skin,10,10);
+ oval(0,2.63,-.045,.31,.405,.29,skin,10,14,18);
+ for(let side of [-1,1]){
+  oval(side*.31,2.65,-.032,.075,.105,.072,skin,10,7,10);
+  oval(side*.145,2.66,-.332,.079,.045,.026,[.25,.20,.17],11,6,9);
+  oval(side*.146,2.66,-.355,.030,.026,.018,[.73,.62,.49],10,6,8);
+  oval(side*.145,2.68,-.369,.013,.015,.009,[.07,.09,.10],11,5,7);
+  // Brows don't cross the eyes or erase facial proportions.
+  bone([side*.08,2.755,-.327],[side*.23,2.752,-.308],.023,hair,11,6);
+ }
+ oval(0,2.57,-.337,.073,.14,.092,tint(skin,1.08),10,9,12);
+ oval(0,2.47,-.326,.12,.023,.045,[.34,.18,.16],10,5,9);
+ // Hair follows the head, with irregular tufts and a subtle beard contour.
+ oval(0,2.923,.045,.338,.179,.292,hair,11,10,16);
+ oval(-.17,2.91,-.171,.174,.109,.17,hair,11,7,11);
+ for(let i=0;i<13;i++){
+  let a=i*Math.PI*2/13,r=.22+.06*(.5+.5*Math.sin(i*7.38)),tx=Math.cos(a)*r,tz=Math.sin(a)*r;
+  oval(tx,2.973+Math.sin(a)*.022,tz,.083,.068,.11,tint(hair,.79+.21*(.5+.5*Math.sin(i*11.43))),11,5,9);
+ }
+ for(let side of [-1,1])oval(side*.21,2.477,-.204,.135,.117,.085,tint(hair,.98),11,6,10);
+ oval(0,2.397,-.21,.209,.092,.127,hair,11,6,12);
+ return g;
+}
+// Soft contact shadow: three fading concentric rings rendered into the scene depth.
+function characterShadow(){
+ const g=new Geometry(),n=24,xc=player.x,zc=player.z,center=[xc,walkingHeight(xc,zc)+.11,zc];
+ const rings=[0,.25,.43,.64];
+ for(let k=1;k<rings.length;k++){
+  for(let i=0;i<n;i++){
+   let a=i*2*Math.PI/n,b=(i+1)*2*Math.PI/n;
+   const v=(r,t)=>{const xx=xc+Math.cos(t)*r,zz=zc+Math.sin(t)*r;return [xx,walkingHeight(xx,zz)+.11,zz]};
+   const c0=v(rings[k-1],a),c1=v(rings[k-1],b),e0=v(rings[k],a),e1=v(rings[k],b);
+   g.tri(c0,e0,e1,[.06,.07,.06],12+k);g.tri(c0,e1,c1,[.06,.07,.06],12+k);
+  }
+ }
  return g;
 }
 // One persistent VAO for character, replacing only its small dynamic data each frame.
-dynamicGeo=geometryBuffer(character(0));gl.bindBuffer(gl.ARRAY_BUFFER,dynamicGeo.buffer);gl.bufferData(gl.ARRAY_BUFFER,220000,gl.DYNAMIC_DRAW);
-let last=performance.now(),then=last,elapsed=0,frames=0,phase=0;
-function frame(now){let dt=Math.min(.045,(now-last)/1000);last=now;elapsed+=dt;
+dynamicGeo=geometryBuffer(character(0));gl.bindBuffer(gl.ARRAY_BUFFER,dynamicGeo.buffer);let dynamicByteCapacity=Math.ceil(dynamicGeo.count*40*1.6);gl.bufferData(gl.ARRAY_BUFFER,dynamicByteCapacity,gl.DYNAMIC_DRAW);
+const shadowDecalGeo=geometryBuffer(characterShadow());let shadowByteCapacity=Math.ceil(shadowDecalGeo.count*40*1.4);
+gl.bindBuffer(gl.ARRAY_BUFFER,shadowDecalGeo.buffer);gl.bufferData(gl.ARRAY_BUFFER,shadowByteCapacity,gl.DYNAMIC_DRAW);
+let last=0,elapsed=0,frames=0,phase=0;
+function frame(now){let dt=last?Math.max(0,Math.min(.045,(now-last)/1000)):0;last=now;elapsed+=dt;
  let dx=(key.d||key.arrowright?1:0)-(key.a||key.arrowleft?1:0)+aimX,forward=(key.w||key.arrowup?1:0)-(key.s||key.arrowdown?1:0)+aimY;
  let len=Math.hypot(dx,forward);if(len>1){dx/=len;forward/=len;len=1}
  let moving=len>.04,fast=key.shift||runTouch,speed=fast?7.5:4.0;
@@ -297,14 +505,20 @@ function frame(now){let dt=Math.min(.045,(now-last)/1000);last=now;elapsed+=dt;
  player.phase+=dt*(fast?13.2:9.0)*len;
  }
  player.motion=mix(player.motion,moving?1:0,Math.min(1,dt*8));
- const x=player.x,z=player.z,y=terrain(x,z),eye=[x+Math.sin(cameraYaw)*cameraDist*Math.cos(cameraPitch),y+2.0+cameraDist*Math.sin(cameraPitch),z+Math.cos(cameraYaw)*cameraDist*Math.cos(cameraPitch)];
+ const x=player.x,z=player.z,y=walkingHeight(x,z),eye=[x+Math.sin(cameraYaw)*cameraDist*Math.cos(cameraPitch),y+2.0+cameraDist*Math.sin(cameraPitch),z+Math.cos(cameraYaw)*cameraDist*Math.cos(cameraPitch)];
  const target=[x,y+1.7,z],view=viewMat(eye,target),vp=mul(projection(.98,canvas.width/canvas.height,.12,340),view);
  gl.viewport(0,0,canvas.width,canvas.height);gl.clearColor(.54,.67,.67,1);gl.clear(gl.COLOR_BUFFER_BIT|gl.DEPTH_BUFFER_BIT);
  gl.disable(gl.DEPTH_TEST);gl.depthMask(false);gl.useProgram(skyProgram);gl.uniform1f(u(skyProgram,'uTime'),elapsed);gl.bindVertexArray(fullscreen);gl.drawArrays(gl.TRIANGLES,0,3);gl.depthMask(true);gl.enable(gl.DEPTH_TEST);
  gl.useProgram(mainProgram);gl.uniformMatrix4fv(mainU.vp,false,new Float32Array(vp));gl.uniformMatrix4fv(mainU.lvp,false,new Float32Array(lightVP));gl.uniform3fv(mainU.eye,eye);gl.uniform3fv(mainU.sun,sun);gl.uniform3fv(mainU.fog,fog);gl.uniform1f(mainU.time,elapsed);gl.uniform1f(mainU.enabled,1);gl.activeTexture(gl.TEXTURE0);gl.bindTexture(gl.TEXTURE_2D,depthTex);gl.uniform1i(mainU.shadow,0);
  gl.bindVertexArray(staticGeo.vao);gl.drawArrays(gl.TRIANGLES,0,staticGeo.count);
+ // A soft, fading, ground-following contact shadow anchors the moving feet.
+ gl.enable(gl.BLEND);gl.blendFunc(gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);gl.depthMask(false);
+ const sd=new Float32Array(characterShadow().a);gl.bindBuffer(gl.ARRAY_BUFFER,shadowDecalGeo.buffer);
+ if(sd.byteLength>shadowByteCapacity){shadowByteCapacity=sd.byteLength*2;gl.bufferData(gl.ARRAY_BUFFER,shadowByteCapacity,gl.DYNAMIC_DRAW)}
+ gl.bufferSubData(gl.ARRAY_BUFFER,0,sd);gl.bindVertexArray(shadowDecalGeo.vao);gl.drawArrays(gl.TRIANGLES,0,sd.length/10);
+ gl.depthMask(true);gl.disable(gl.BLEND);
  // Dynamic hero geometry is small; regenerate poses rather than deform all of the scenery.
- let ch=character(elapsed),arr=new Float32Array(ch.a);gl.bindBuffer(gl.ARRAY_BUFFER,dynamicGeo.buffer);gl.bufferSubData(gl.ARRAY_BUFFER,0,arr);gl.bindVertexArray(dynamicGeo.vao);gl.drawArrays(gl.TRIANGLES,0,ch.count);
+ let ch=character(elapsed),arr=new Float32Array(ch.a);gl.bindBuffer(gl.ARRAY_BUFFER,dynamicGeo.buffer);if(arr.byteLength>dynamicByteCapacity){dynamicByteCapacity=2*arr.byteLength;gl.bufferData(gl.ARRAY_BUFFER,dynamicByteCapacity,gl.DYNAMIC_DRAW)}gl.bufferSubData(gl.ARRAY_BUFFER,0,arr);gl.bindVertexArray(dynamicGeo.vao);gl.drawArrays(gl.TRIANGLES,0,ch.count);
  // Water after terrain: its depth test naturally exposes shoreline and submerged sand.
  gl.enable(gl.BLEND);gl.blendFunc(gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);gl.depthMask(false);gl.useProgram(waterProgram);
  gl.uniformMatrix4fv(waterU.vp,false,new Float32Array(vp));gl.uniform3fv(waterU.eye,eye);gl.uniform3fv(waterU.sun,sun);gl.uniform3fv(waterU.fog,fog);gl.uniform1f(waterU.time,elapsed);gl.bindVertexArray(waterGeo.vao);gl.drawArrays(gl.TRIANGLES,0,waterGeo.count);gl.depthMask(true);gl.disable(gl.BLEND);
