@@ -31,3 +31,7 @@ See [ASSET_PIPELINE.md](ASSET_PIPELINE.md) for the details, limits, license poli
 Run `node verify-assets.cjs` to verify the bundled GLB structure and rights metadata. Rebuild original GLBs with the scripts under `tools/` using Python, NumPy, Pillow, and trimesh. These dependencies are for **asset authoring only**, not playing the game.
 
 No original files from the previous unreleased local session were recovered. This is a clean, separately versioned replacement.
+
+## Staged authored architecture (unreleased)
+
+The graphics R&D branch now includes two original multi-material GLB buildings (timber cottage and harbor workshop) across seven village sites. Each has individually modeled roof tiles, masonry foundation, timber structure, recessed windows, shutters, shutters' metal hardware, entry doors, steps, and workshop details. Building materials use embedded PBR texture, normal and metallic-roughness maps. Existing procedural houses render as a fallback until both building families load, and rotated collision boxes keep movement outside walls. Rebuild the architecture assets with `node tools/build_architecture.js`. The game remains a work-in-progress, not a finished 2026 remake.

@@ -20,6 +20,7 @@
         throw new Error(`Asset ${a.id} needs rights, creator, and provenance`);
       if (!Array.isArray(a.instances) || !a.instances.length || a.instances.length > 150) throw new Error('Specify 1-150 instances per asset');
       if (a.collisionRadius !== undefined && (!Number.isFinite(a.collisionRadius) || a.collisionRadius < 0 || a.collisionRadius > 60)) throw new Error('Invalid model collision radius');
+      if (a.collisionBox !== undefined && (!Array.isArray(a.collisionBox) || a.collisionBox.length !== 2 || !a.collisionBox.every(n => Number.isFinite(n) && n > 0 && n <= 50))) throw new Error('Invalid building collision box');
       for (const inst of a.instances) {
         if (!Array.isArray(inst.position) || inst.position.length !== 3 || !inst.position.every(Number.isFinite)) throw new Error('Invalid model placement');
         if (inst.scale !== undefined && (!Number.isFinite(inst.scale) || inst.scale <= 0 || inst.scale > 100)) throw new Error('Invalid model scale');
@@ -271,7 +272,7 @@
         }
         return {base:await texture(base,true),normal:await texture(normal,false),orm:await texture(orm,false),emissive:await texture(emissive,true),
           baseFactor:pbr.baseColorFactor||[1,1,1,1],metal:pbr.metallicFactor??1,rough:pbr.roughnessFactor??1,emission:m.emissiveFactor||[0,0,0],
-          alpha:m.alphaMode||'OPAQUE',cutoff:m.alphaCutoff??.5,doubleSided:!!m.doubleSided};
+          alpha:m.alphaMode||'OPAQUE',cutoff:m.alphaCutoff??.5,doubleSided:!!m.doubleSided || entry.id==='windfall-timber-cottage' || entry.id==='windfall-harbor-workshop'};
       }
       const resolvedMaterials=await Promise.all(materials.map((_,i)=>materialAt(i)));
       const primitiveMesh=(doc.json.meshes||[]).map(mesh=>(mesh.primitives||[]).map(p=>({gpu:addGeometry(geometry(doc,p)),mat:resolvedMaterials[p.material||0]})));
@@ -292,6 +293,7 @@
         const extra=trs(instance.position,[0,Math.sin(angle/2),0,Math.cos(angle/2)],[scale,scale,scale]);
         for(const mesh of localNodes)records.push({...mesh,model:multiply(extra,mesh.model)});
         if(entry.collisionRadius>0)colliders.push({x:instance.position[0],z:instance.position[2],radius:entry.collisionRadius*scale});
+        if(entry.collisionBox)colliders.push({x:instance.position[0],z:instance.position[2],halfWidth:entry.collisionBox[0]*scale,halfDepth:entry.collisionBox[1]*scale,rotation:angle});
       }
       statuses.push({id:entry.id,loaded:true,meshes:localNodes.length,instances:entry.instances.length});
       return localNodes.length;
@@ -357,7 +359,14 @@
       gl.disable(gl.CULL_FACE);
     }
     return {addGLB,loadManifest,draw,drawShadow,getStatus:()=>statuses.slice(),getMeshCount:()=>records.length,
-      collides:(x,z,padding=.28)=>colliders.some(c=>Math.hypot(c.x-x,c.z-z)<c.radius+padding)};
+      hasLoaded:(id)=>statuses.some(s=>s.id===id&&s.loaded),
+      collides:(x,z,padding=.28)=>colliders.some(c=>{
+        const dx=x-c.x,dz=z-c.z;
+        if(c.radius!==undefined)return Math.hypot(dx,dz)<c.radius+padding;
+        const cs=Math.cos(c.rotation),sn=Math.sin(c.rotation);
+        const lx=dx*cs-dz*sn,lz=dx*sn+dz*cs;
+        return Math.abs(lx)<c.halfWidth+padding && Math.abs(lz)<c.halfDepth+padding;
+      })};
   }
   window.WindfallAssetPipeline = {create,parseGLB,validateManifest};
 })();

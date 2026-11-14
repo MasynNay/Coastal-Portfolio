@@ -44,3 +44,7 @@ Software WebGL is a validation fallback, **not** a reliable performance benchmar
 - Upgrade to high-resolution fully PBR textures and believable global illumination/indirect light, high-quality foliage shadows and reflections. Validate under day/night lighting.
 - Complete camera/building collision, portfolio room integration, accessibility, mobile controls, self-hosted distribution and clear attribution/asset rights records.
 - Compare side-by-side against the requested **2026 remake-style** art target; no publish until the user explicitly approves the visual fidelity.
+
+## Staged authored buildings
+
+The same self-hosted original-model pipeline now loads `windfall-timber-cottage.glb` and `windfall-harbor-workshop.glb` at seven house sites. The reproducible source is `tools/build_architecture.js`; launch `node tools/build_architecture.js` to rebuild locally. Generated base-color, tangent normal and metallic-roughness PNGs are embedded in the GLBs. These are procedural art studies, not photogrammetry or production-ready AAA meshes. The manifest supports `collisionBox: [halfWidth,halfDepth]` for rotated rectangular building obstacles. Existing procedural houses only disappear when both new house families load, avoiding empty streets if a model download fails.

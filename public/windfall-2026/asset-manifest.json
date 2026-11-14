@@ -40,9 +40,9 @@
         },
         {
           "position": [
-            -28.0,
+            -28,
             -0.5,
-            -19.0
+            -19
           ],
           "scale": 1.5,
           "rotationY": -0.7,
@@ -52,7 +52,7 @@
           "position": [
             28.7,
             -0.5,
-            -28.0
+            -28
           ],
           "scale": 1.9,
           "rotationY": 0.1,
@@ -60,7 +60,7 @@
         },
         {
           "position": [
-            18.0,
+            18,
             -0.5,
             8.8
           ],
@@ -150,6 +150,102 @@
         }
       ],
       "collisionRadius": 0.27
+    },
+    {
+      "id": "windfall-timber-cottage",
+      "src": "models/windfall-timber-cottage.glb",
+      "creator": "Windfall: original procedural architecture and PBR authoring",
+      "license": "OWNED-ORIGINAL",
+      "provenance": "tools/build_architecture.js: self-contained original geometry, tile textures and material maps; no third-party assets",
+      "collisionBox": [
+        3.1,
+        3
+      ],
+      "instances": [
+        {
+          "position": [
+            -13,
+            0.12,
+            -12
+          ],
+          "scale": 0.95,
+          "rotationY": 0,
+          "grounded": true
+        },
+        {
+          "position": [
+            -5,
+            0.12,
+            -17
+          ],
+          "scale": 0.88,
+          "rotationY": 0,
+          "grounded": true
+        },
+        {
+          "position": [
+            5,
+            0.12,
+            -15
+          ],
+          "scale": 0.97,
+          "rotationY": 0,
+          "grounded": true
+        },
+        {
+          "position": [
+            -18,
+            0.12,
+            -2
+          ],
+          "scale": 0.95,
+          "rotationY": 0,
+          "grounded": true
+        },
+        {
+          "position": [
+            18,
+            0.12,
+            3
+          ],
+          "scale": 0.9,
+          "rotationY": 0,
+          "grounded": true
+        }
+      ]
+    },
+    {
+      "id": "windfall-harbor-workshop",
+      "src": "models/windfall-harbor-workshop.glb",
+      "creator": "Windfall: original procedural architecture and PBR authoring",
+      "license": "OWNED-ORIGINAL",
+      "provenance": "tools/build_architecture.js: self-contained original geometry, tile textures and material maps; no third-party assets",
+      "collisionBox": [
+        3.85,
+        3.55
+      ],
+      "instances": [
+        {
+          "position": [
+            16,
+            0.12,
+            -10
+          ],
+          "scale": 1.02,
+          "rotationY": 0,
+          "grounded": true
+        },
+        {
+          "position": [
+            7,
+            0.12,
+            -25
+          ],
+          "scale": 1.05,
+          "rotationY": 0,
+          "grounded": true
+        }
+      ]
     }
   ]
 }

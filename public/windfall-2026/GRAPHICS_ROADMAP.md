@@ -1,3 +1,11 @@
+## Current checkpoint — original village architecture replacement
+
+- Two new original PBR GLB building families: timber cottage (~6,934 triangles) and harbor workshop (~6,978 triangles), seven placed instances. These replace the old primitive houses when both assets load successfully. The previous house geometry remains available as a runtime fallback.
+- Original architecture generator checked in at `tools/build_architecture.js`, with no external dependencies. No Nintendo or other franchise-specific meshes or textures are included.
+- Modeled overlapping roof tiles, stone foundations, structural beams and braces, gable details, doors and hardware, window depth, shutters, steps, roof gutters and chimney courses; baked texture, normal and ORM maps included.
+- Added optional rotated building collision boxes and model-loader success checks. Isolated and complete-scene software-WebGL2 smoke checks confirmed the model families load, but this does **not** demonstrate AAA visual quality or target GPU performance.
+- **RELEASE REMAINS BLOCKED**: hero and family need professional sculpting, rigging and animations; environment requires considerably better authored materials, trees, cliffs and photoreal lighting. Do not merge or publish as the requested 2026 Ocarina of Time remake experience.
+
 # Windfall: 2026 Remake Visual Quality Gate
 
 **Status: R&D only, not approved to ship.** The current procedural WebGL scene is a compatibility prototype, not equivalent to a modern high-fidelity third-person adventure remake.

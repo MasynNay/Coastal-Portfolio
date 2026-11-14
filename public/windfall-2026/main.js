@@ -48,7 +48,7 @@ class Geometry {
  beam(a,b,r,col,k=2,sides=6){let dir=norm(sub(b,a));let axis=Math.abs(dir[1])>.92?[1,0,0]:[0,1,0];let u=norm(cross(dir,axis)),w=norm(cross(dir,u));let p=(v,t)=>[v[0]+r*(u[0]*Math.cos(t)+w[0]*Math.sin(t)),v[1]+r*(u[1]*Math.cos(t)+w[1]*Math.sin(t)),v[2]+r*(u[2]*Math.cos(t)+w[2]*Math.sin(t))];for(let j=0;j<sides;j++){let t=j*Math.PI*2/sides,q=(j+1)*Math.PI*2/sides;this.quad(p(a,t),p(a,q),p(b,q),p(b,t),tint(col,.88+.17*Math.sin(t)),k)}}
 }
 function groundNormal(x,z){return norm([terrain(x-.2,z)-terrain(x+.2,z),.4,terrain(x,z-.2)-terrain(x,z+.2)])}
-const world=new Geometry();
+let world=new Geometry();
 // Terrain biome blending happens at each vertex, not once per terrain tile.
 // This avoids hard triangles at beach/grass/rock boundaries and supports real materials.
 function terrainColor(x,z,normal){
@@ -238,7 +238,14 @@ function house(x,z,w,d,h,roofColor=colors.roof,angle=0){let y=terrain(x,z)+.04;
  world.box(x+w*.25,y+h*.96,z-d*.15,.48,1.32,.56,colors.stone,1);world.box(x+w*.25,y+h*1.25,z-d*.15,.60,.18,.69,colors.rock,1);
  for(let k=0;k<4;k++){let q=mix(back+.24,front-.24,(k+.5)/4);world.beam([left,yTop+.04,q],[x,ridge+.04,q],.024,tint(roofColor,.64),5);world.beam([x,ridge+.04,q],[right,yTop+.04,q],.024,tint(roofColor,.64),5)}
 }
-house(-13,-12,5.7,5.5,4.5);house(-5,-17,5.0,4.8,4.3,colors.deepRoof);house(5,-15,5.4,6.6,5.0);house(16,-10,7.0,6.0,4.8,colors.deepRoof);house(-18,-2,5.8,5.5,4.9);house(18,3,5.4,5.3,4.1);house(7,-25,7.4,5.5,5.1);
+// Keep the old houses in a separate fallback mesh. Imported architecture replaces
+// them atomically when both original house families load successfully.
+const mainWorld=world;world=new Geometry();
+house(-13,-12,5.7,5.5,4.5);house(-5,-17,5.0,4.8,4.3,colors.deepRoof);
+house(5,-15,5.4,6.6,5.0);house(16,-10,7.0,6.0,4.8,colors.deepRoof);
+house(-18,-2,5.8,5.5,4.9);house(18,3,5.4,5.3,4.1);house(7,-25,7.4,5.5,5.1);
+const legacyHouses=world;world=mainWorld;
+function needsLegacyHouses(){return !authoredAssets || !authoredAssets.hasLoaded('windfall-timber-cottage') || !authoredAssets.hasLoaded('windfall-harbor-workshop');}
 // Castle lookout in the northeastern hills.
 function tower(x,z){let y=terrain(x,z),r=3.1;world.cylinder(x,y,z,r*1.14,r,14.0,colors.stone,1,14);
  for(let i=0;i<11;i++){let a=i*2*Math.PI/11;world.box(x+Math.cos(a)*r,y+13.7,z+Math.sin(a)*r,.85,1.25,.87,colors.paleStone,1)}
@@ -538,14 +545,14 @@ void main(){vec2 p=vPos.xz;
 function shader(type,src){let s=gl.createShader(type);gl.shaderSource(s,src);gl.compileShader(s);if(!gl.getShaderParameter(s,gl.COMPILE_STATUS))throw Error(gl.getShaderInfoLog(s));return s}
 function program(v,f){let p=gl.createProgram();gl.attachShader(p,shader(gl.VERTEX_SHADER,v));gl.attachShader(p,shader(gl.FRAGMENT_SHADER,f));gl.linkProgram(p);if(!gl.getProgramParameter(p,gl.LINK_STATUS))throw Error(gl.getProgramInfoLog(p));return p}
 function geometryBuffer(geometry){let vao=gl.createVertexArray(),buffer=gl.createBuffer();gl.bindVertexArray(vao);gl.bindBuffer(gl.ARRAY_BUFFER,buffer);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array(geometry.a),gl.STATIC_DRAW);for(let i=0;i<4;i++){gl.enableVertexAttribArray(i);gl.vertexAttribPointer(i,i===0||i===1||i===2?3:1,gl.FLOAT,false,40,[0,12,24,36][i])}gl.bindVertexArray(null);return {vao,buffer,count:geometry.count}}
-let mainProgram,shadowProgram,skyProgram,waterProgram,staticGeo,dynamicGeo,waterGeo,fullscreen,depthTex,depthFbo,lightVP,nearDepthTex,nearDepthFbo,nearLightVP,nearShadowSize,materialAtlas,coastHeightmap;
+let mainProgram,shadowProgram,skyProgram,waterProgram,staticGeo,legacyHouseGeo,dynamicGeo,waterGeo,fullscreen,depthTex,depthFbo,lightVP,nearDepthTex,nearDepthFbo,nearLightVP,nearShadowSize,materialAtlas,coastHeightmap;
 let authoredAssets=null;
 try{
  // A separate glTF/GLB PBR path supports actually authored assets with normal and ORM maps.
  // Any import failure leaves the existing exploratory world playable.
  if(window.WindfallAssetPipeline){try{authoredAssets=window.WindfallAssetPipeline.create(gl);}catch(e){console.warn('Optional PBR model system unavailable',e);}}
  mainProgram=program(VS,FS);materialAtlas=makeMaterialAtlas(gl);coastHeightmap=createCoastHeightmap(gl);shadowProgram=program(SHADOW_VS,SHADOW_FS);skyProgram=program(SKY_VS,SKY_FS);waterProgram=program(WATER_VS,WATER_FS);
- staticGeo=geometryBuffer(world);world.a=null;
+ staticGeo=geometryBuffer(world);world.a=null;legacyHouseGeo=geometryBuffer(legacyHouses);legacyHouses.a=null;
  const water=new Geometry();water.quad([-155,.035,-155],[155,.035,-155],[155,.035,155],[-155,.035,155],colors.water,8);waterGeo=geometryBuffer(water);
  fullscreen=gl.createVertexArray();gl.bindVertexArray(fullscreen);let b=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,b);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,3,-1,-1,3]),gl.STATIC_DRAW);gl.enableVertexAttribArray(0);gl.vertexAttribPointer(0,2,gl.FLOAT,false,0,0);gl.bindVertexArray(null);
  const S=softwareRenderer?512:window.matchMedia('(pointer:coarse)').matches?1024:2048;depthTex=gl.createTexture();gl.bindTexture(gl.TEXTURE_2D,depthTex);gl.texImage2D(gl.TEXTURE_2D,0,gl.DEPTH_COMPONENT24,S,S,0,gl.DEPTH_COMPONENT,gl.UNSIGNED_INT,null);
@@ -690,6 +697,7 @@ function renderNearSunShadow(x,z,y,heroCount,now){
  gl.useProgram(shadowProgram);
  gl.uniformMatrix4fv(gl.getUniformLocation(shadowProgram,'uLightVP'),false,new Float32Array(nearLightVP));
  gl.bindVertexArray(staticGeo.vao);gl.drawArrays(gl.TRIANGLES,0,staticGeo.count);
+ if(needsLegacyHouses()){gl.bindVertexArray(legacyHouseGeo.vao);gl.drawArrays(gl.TRIANGLES,0,legacyHouseGeo.count);}
  // Unlike the previous fixed-circle shadow, the complete animated silhouette casts light.
  gl.bindVertexArray(dynamicGeo.vao);gl.drawArrays(gl.TRIANGLES,0,heroCount);
  if(authoredAssets)authoredAssets.drawShadow(nearLightVP);
@@ -731,6 +739,7 @@ function frame(now){let dt=last?Math.max(0,Math.min(.75,(now-last)/1000)):0;last
  if(!softwareRenderer)gl.uniformMatrix4fv(mainU.nearLvp,false,new Float32Array(nearLightVP));gl.uniform3fv(mainU.eye,eye);gl.uniform3fv(mainU.sun,sun);gl.uniform3fv(mainU.fog,fog);gl.uniform1f(mainU.time,elapsed);gl.uniform1f(mainU.enabled,softwareRenderer?0:1);gl.uniform1f(mainU.lowQuality,softwareRenderer?1:0);gl.activeTexture(gl.TEXTURE0);gl.bindTexture(gl.TEXTURE_2D,depthTex);gl.uniform1i(mainU.shadow,0);gl.activeTexture(gl.TEXTURE1);gl.bindTexture(gl.TEXTURE_2D,materialAtlas);gl.uniform1i(mainU.materials,1);gl.uniform1f(mainU.shadowSize,softwareRenderer?512:window.matchMedia('(pointer:coarse)').matches?1024:2048);
  if(!softwareRenderer){gl.activeTexture(gl.TEXTURE3);gl.bindTexture(gl.TEXTURE_2D,nearDepthTex);gl.uniform1i(mainU.nearShadow,3);gl.uniform1f(mainU.nearShadowSize,nearShadowSize);}
  gl.bindVertexArray(staticGeo.vao);gl.drawArrays(gl.TRIANGLES,0,staticGeo.count);
+ if(needsLegacyHouses()){gl.bindVertexArray(legacyHouseGeo.vao);gl.drawArrays(gl.TRIANGLES,0,legacyHouseGeo.count);}
  if(authoredAssets){
   authoredAssets.draw({vp,eye,sun,fog,farVP:lightVP,nearVP:nearLightVP,farMap:depthTex,nearMap:nearDepthTex});
   // Third-party material draw paths must never leak shader or texture bindings
