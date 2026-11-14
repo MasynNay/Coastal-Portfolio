@@ -11,6 +11,12 @@ const root=__dirname;
 const main=fs.readFileSync(path.join(root,'main.js'),'utf8');
 const models=fs.readFileSync(path.join(root,'asset-pipeline.js'),'utf8');
 const manifest=JSON.parse(fs.readFileSync(path.join(root,'asset-manifest.json'),'utf8'));
+const characterAuthoring=fs.readFileSync(path.join(root,'tools','build_wayfarer.py'),'utf8');
+assert.match(characterAuthoring,/CHARACTER=os\.environ\.get/);
+assert.match(characterAuthoring,/piece\('fitted-beard','hair',beard,'head'\)/);
+assert.ok(characterAuthoring.includes('faces.extend([(a,c,b),(a,d,c)])'),
+  'Character facial-hair sculpt must use outward-facing front normals');
+
 new Function(main);
 new Function(models);
 function shader(text,name){
