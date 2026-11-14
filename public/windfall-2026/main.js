@@ -808,6 +808,7 @@ function renderNearSunShadow(x,z,y,heroCount,now){
 }
 // Movement uses elapsed real time; clamping to 45 ms made controls nearly freeze on low FPS.
 function frame(now){let dt=last?Math.max(0,Math.min(.75,(now-last)/1000)):0;last=now;elapsed+=dt;
+ if(authoredAssets)authoredAssets.beginFrame();
  let dx=(key.d||key.arrowright?1:0)-(key.a||key.arrowleft?1:0)+aimX,forward=(key.w||key.arrowup?1:0)-(key.s||key.arrowdown?1:0)+aimY;
  let len=Math.hypot(dx,forward);if(len>1){dx/=len;forward/=len;len=1}
  let moving=len>.04,fast=key.shift||runTouch,speed=fast?7.5:4.0;
@@ -878,7 +879,12 @@ function frame(now){let dt=last?Math.max(0,Math.min(.75,(now-last)/1000)):0;last
  // Water after terrain: its depth test naturally exposes shoreline and submerged sand.
  gl.enable(gl.BLEND);gl.blendFunc(gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);gl.depthMask(false);gl.useProgram(waterProgram);
  gl.uniformMatrix4fv(waterU.vp,false,new Float32Array(vp));gl.uniform3fv(waterU.eye,eye);gl.uniform3fv(waterU.sun,sun);gl.uniform3fv(waterU.fog,fog);gl.uniform1f(waterU.time,elapsed);gl.activeTexture(gl.TEXTURE2);gl.bindTexture(gl.TEXTURE_2D,coastHeightmap);gl.uniform1i(waterU.coast,2);gl.bindVertexArray(waterGeo.vao);gl.drawArrays(gl.TRIANGLES,0,waterGeo.count);gl.depthMask(true);gl.disable(gl.BLEND);
- frames++;if(frames===2){loading.classList.add('off');document.documentElement.dataset.windfallReady='1';}
+ frames++;
+ // Sampling this occasionally avoids a DOM write on every animation frame.
+ if(authoredAssets&&(frames===3||frames%45===0)){
+  document.documentElement.dataset.windfallDrawStats=JSON.stringify(authoredAssets.getDrawStats());
+ }
+ if(frames===2){loading.classList.add('off');document.documentElement.dataset.windfallReady='1';}
  if(Math.abs(x-11)<7&&z>12){document.getElementById('placeName').textContent='The Lantern Harbor';document.getElementById('placeDescription').textContent='The wooden pier leads toward the sea arch and the breaking surf.'}
  else if(x<-13){document.getElementById('placeName').textContent='Briarwood Grove';document.getElementById('placeDescription').textContent='Follow the old tree line beneath the soft mountain light.'}
  else if(z<-19){document.getElementById('placeName').textContent='The Northern Ascent';document.getElementById('placeDescription').textContent='A distant stone lookout watches over the valley.'}
