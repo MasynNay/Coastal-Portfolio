@@ -355,15 +355,37 @@ void main(){vPos=aPos;vNormal=aNormal;vColor=aColor;vKind=int(aKind+.5);gl_Posit
 const FS=`#version 300 es
 precision highp float;
 in vec3 vPos;in vec3 vNormal;in vec3 vColor;flat in int vKind;
-uniform vec3 uEye;uniform vec3 uSun;uniform vec3 uFog;uniform float uTime;uniform sampler2D uShadow;uniform sampler2D uMaterialAtlas;uniform mat4 uLightVP;uniform float uShadowEnabled;uniform float uShadowMapSize;uniform float uLowQuality;
+uniform vec3 uEye;uniform vec3 uSun;uniform vec3 uFog;uniform float uTime;uniform sampler2D uShadow;uniform sampler2D uShadowNear;uniform sampler2D uMaterialAtlas;uniform mat4 uLightVP;uniform mat4 uLightVPNear;uniform float uShadowEnabled;uniform float uShadowMapSize;uniform float uShadowNearSize;uniform float uLowQuality;
 out vec4 frag;
 float hash(vec3 p){p=fract(p*.1031);p+=dot(p,p.yxz+33.33);return fract((p.x+p.y)*p.z);}
 float noise(vec3 x){vec3 i=floor(x),f=fract(x);f=f*f*(3.-2.*f);return mix(mix(mix(hash(i),hash(i+vec3(1,0,0)),f.x),mix(hash(i+vec3(0,1,0)),hash(i+vec3(1,1,0)),f.x),f.y),mix(mix(hash(i+vec3(0,0,1)),hash(i+vec3(1,0,1)),f.x),mix(hash(i+vec3(0,1,1)),hash(i+vec3(1,1,1)),f.x),f.y),f.z);}
 float fbm(vec3 p){float n=0.,a=.55;for(int i=0;i<3;i++){n+=a*noise(p);p=p*2.07+vec3(3.4,7.2,1.1);a*=.51;}return n;}
-float shadow(vec3 n){if(uShadowEnabled<.5)return 1.;vec4 p=uLightVP*vec4(vPos+n*.04,1.);vec3 q=p.xyz/p.w*.5+.5;if(q.x<=.002||q.x>=.998||q.y<=.002||q.y>=.998||q.z>=1.)return 1.;
- float bias=max(.00019,.00125*(1.-max(dot(n,normalize(uSun)),0.)));float val=0.;
- for(int i=-1;i<=1;i++)for(int j=-1;j<=1;j++){vec2 offset=(vec2(float(i),float(j))+.24*vec2(sin(dot(vPos.xz,vec2(13.,7.))),cos(dot(vPos.xz,vec2(11.,17.)))))/uShadowMapSize;float depth=texture(uShadow,q.xy+offset).r;val+=q.z-bias<=depth?1.:0.;}
- return .33+.67*val/9.;}
+// Two stabilized sunlight shadow cascades: 52 m around the player, full island beyond.
+// PCF uses a small rotated Poisson disk rather than square-grid shadow aliases.
+float filteredShadow(sampler2D map,vec3 q,float size,float bias,float radius){
+ if(q.x<=.002||q.x>=.998||q.y<=.002||q.y>=.998||q.z<=0.||q.z>=1.)return 1.;
+ const vec2 poisson[12]=vec2[12](vec2(-.326,-.406),vec2(-.840,-.074),vec2(-.696,.457),vec2(-.203,.621),vec2(.962,-.195),vec2(.473,-.480),vec2(.519,.767),vec2(.185,-.893),vec2(.507,.064),vec2(.896,.412),vec2(-.322,-.933),vec2(-.792,-.598));
+ float a=fract(sin(dot(floor(gl_FragCoord.xy),vec2(12.9898,78.233)))*43758.5453)*6.283185;
+ mat2 rot=mat2(cos(a),-sin(a),sin(a),cos(a));float lit=0.;
+ for(int i=0;i<12;i++){
+  float depth=texture(map,q.xy+rot*poisson[i]*radius/size).r;
+  lit+=step(q.z-bias,depth);
+ }
+ return lit/12.;
+}
+float shadow(vec3 n){
+ if(uShadowEnabled<.5)return 1.;
+ float bias=max(.00013,.00072*(1.-max(dot(n,normalize(uSun)),0.)));
+ vec4 broad=uLightVP*vec4(vPos+n*.03,1.);
+ vec3 q=broad.xyz/broad.w*.5+.5;
+ float farValue=filteredShadow(uShadow,q,uShadowMapSize,bias,1.9);
+ vec4 close=uLightVPNear*vec4(vPos+n*.025,1.);
+ vec3 nq=close.xyz/close.w*.5+.5;
+ float edge=max(abs(nq.x-.5),abs(nq.y-.5));
+ float weight=1.-smoothstep(.36,.465,edge);
+ float nearValue=filteredShadow(uShadowNear,nq,uShadowNearSize,bias*.66,1.6);
+ return mix(.29+.71*farValue,.26+.74*nearValue,weight);
+}
 vec3 aces(vec3 x){return clamp((x*(2.51*x+.03))/(x*(2.43*x+.59)+.14),0.,1.);}
 // UVs are derived in stable world coordinates. TextureGrad prevents mip seams
 // when the tile coordinate wraps, while triplanar weights hide sharp transitions.
@@ -516,7 +538,7 @@ void main(){vec2 p=vPos.xz;
 function shader(type,src){let s=gl.createShader(type);gl.shaderSource(s,src);gl.compileShader(s);if(!gl.getShaderParameter(s,gl.COMPILE_STATUS))throw Error(gl.getShaderInfoLog(s));return s}
 function program(v,f){let p=gl.createProgram();gl.attachShader(p,shader(gl.VERTEX_SHADER,v));gl.attachShader(p,shader(gl.FRAGMENT_SHADER,f));gl.linkProgram(p);if(!gl.getProgramParameter(p,gl.LINK_STATUS))throw Error(gl.getProgramInfoLog(p));return p}
 function geometryBuffer(geometry){let vao=gl.createVertexArray(),buffer=gl.createBuffer();gl.bindVertexArray(vao);gl.bindBuffer(gl.ARRAY_BUFFER,buffer);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array(geometry.a),gl.STATIC_DRAW);for(let i=0;i<4;i++){gl.enableVertexAttribArray(i);gl.vertexAttribPointer(i,i===0||i===1||i===2?3:1,gl.FLOAT,false,40,[0,12,24,36][i])}gl.bindVertexArray(null);return {vao,buffer,count:geometry.count}}
-let mainProgram,shadowProgram,skyProgram,waterProgram,staticGeo,dynamicGeo,waterGeo,fullscreen,depthTex,depthFbo,lightVP,materialAtlas,coastHeightmap;
+let mainProgram,shadowProgram,skyProgram,waterProgram,staticGeo,dynamicGeo,waterGeo,fullscreen,depthTex,depthFbo,lightVP,nearDepthTex,nearDepthFbo,nearLightVP,nearShadowSize,materialAtlas,coastHeightmap;
 try{
  mainProgram=program(VS,FS);materialAtlas=makeMaterialAtlas(gl);coastHeightmap=createCoastHeightmap(gl);shadowProgram=program(SHADOW_VS,SHADOW_FS);skyProgram=program(SKY_VS,SKY_FS);waterProgram=program(WATER_VS,WATER_FS);
  staticGeo=geometryBuffer(world);world.a=null;
@@ -526,12 +548,26 @@ try{
  gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,gl.NEAREST);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MAG_FILTER,gl.NEAREST);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_S,gl.CLAMP_TO_EDGE);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_T,gl.CLAMP_TO_EDGE);
  depthFbo=gl.createFramebuffer();gl.bindFramebuffer(gl.FRAMEBUFFER,depthFbo);gl.framebufferTexture2D(gl.FRAMEBUFFER,gl.DEPTH_ATTACHMENT,gl.TEXTURE_2D,depthTex,0);gl.drawBuffers([gl.NONE]);gl.readBuffer(gl.NONE);
  if(gl.checkFramebufferStatus(gl.FRAMEBUFFER)!==gl.FRAMEBUFFER_COMPLETE)throw Error('Shadow map framebuffer could not be created');gl.bindFramebuffer(gl.FRAMEBUFFER,null);
+ if(!softwareRenderer){
+  nearShadowSize=window.matchMedia('(pointer:coarse)').matches?1024:1536;
+  nearDepthTex=gl.createTexture();gl.bindTexture(gl.TEXTURE_2D,nearDepthTex);
+  gl.texImage2D(gl.TEXTURE_2D,0,gl.DEPTH_COMPONENT24,nearShadowSize,nearShadowSize,0,gl.DEPTH_COMPONENT,gl.UNSIGNED_INT,null);
+  gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,gl.NEAREST);
+  gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MAG_FILTER,gl.NEAREST);
+  gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_S,gl.CLAMP_TO_EDGE);
+  gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_T,gl.CLAMP_TO_EDGE);
+  nearDepthFbo=gl.createFramebuffer();gl.bindFramebuffer(gl.FRAMEBUFFER,nearDepthFbo);
+  gl.framebufferTexture2D(gl.FRAMEBUFFER,gl.DEPTH_ATTACHMENT,gl.TEXTURE_2D,nearDepthTex,0);
+  gl.drawBuffers([gl.NONE]);gl.readBuffer(gl.NONE);
+  if(gl.checkFramebufferStatus(gl.FRAMEBUFFER)!==gl.FRAMEBUFFER_COMPLETE)throw Error('Near-cascade shadow framebuffer unavailable');
+  gl.bindFramebuffer(gl.FRAMEBUFFER,null);
+ }
  const shadowEye=[-65,80,56],focus=[0,4,-9];lightVP=mul(ortho(-113,113,-115,115,1,250),viewMat(shadowEye,focus));
  gl.viewport(0,0,S,S);gl.bindFramebuffer(gl.FRAMEBUFFER,depthFbo);gl.clearDepth(1);gl.clear(gl.DEPTH_BUFFER_BIT);gl.enable(gl.DEPTH_TEST);
  gl.useProgram(shadowProgram);gl.uniformMatrix4fv(gl.getUniformLocation(shadowProgram,'uLightVP'),false,new Float32Array(lightVP));if(!softwareRenderer){gl.bindVertexArray(staticGeo.vao);gl.drawArrays(gl.TRIANGLES,0,staticGeo.count)}gl.bindFramebuffer(gl.FRAMEBUFFER,null);
 }catch(e){error(String(e));return}
 const u=(p,name)=>gl.getUniformLocation(p,name);
-const mainU={vp:u(mainProgram,'uVP'),eye:u(mainProgram,'uEye'),sun:u(mainProgram,'uSun'),fog:u(mainProgram,'uFog'),time:u(mainProgram,'uTime'),shadow:u(mainProgram,'uShadow'),materials:u(mainProgram,'uMaterialAtlas'),shadowSize:u(mainProgram,'uShadowMapSize'),lowQuality:u(mainProgram,'uLowQuality'),lvp:u(mainProgram,'uLightVP'),enabled:u(mainProgram,'uShadowEnabled')};
+const mainU={vp:u(mainProgram,'uVP'),eye:u(mainProgram,'uEye'),sun:u(mainProgram,'uSun'),fog:u(mainProgram,'uFog'),time:u(mainProgram,'uTime'),shadow:u(mainProgram,'uShadow'),nearShadow:u(mainProgram,'uShadowNear'),materials:u(mainProgram,'uMaterialAtlas'),shadowSize:u(mainProgram,'uShadowMapSize'),nearShadowSize:u(mainProgram,'uShadowNearSize'),lowQuality:u(mainProgram,'uLowQuality'),lvp:u(mainProgram,'uLightVP'),nearLvp:u(mainProgram,'uLightVPNear'),enabled:u(mainProgram,'uShadowEnabled')};
 const waterU={vp:u(waterProgram,'uVP'),eye:u(waterProgram,'uEye'),sun:u(waterProgram,'uSun'),fog:u(waterProgram,'uFog'),time:u(waterProgram,'uTime'),coast:u(waterProgram,'uCoastHeight')};
 const skyU={time:u(skyProgram,'uTime'),aspect:u(skyProgram,'uSkyAspect'),fov:u(skyProgram,'uSkyFov'),forward:u(skyProgram,'uSkyForward'),right:u(skyProgram,'uSkyRight'),up:u(skyProgram,'uSkyUp'),sun:u(skyProgram,'uSkySun')};
 const sun=norm([-0.55,.70,.46]),fog=[.63,.70,.73];
@@ -631,7 +667,26 @@ function characterShadow(){
 dynamicGeo=geometryBuffer(character(0));gl.bindBuffer(gl.ARRAY_BUFFER,dynamicGeo.buffer);let dynamicByteCapacity=Math.ceil(dynamicGeo.count*40*1.6);gl.bufferData(gl.ARRAY_BUFFER,dynamicByteCapacity,gl.DYNAMIC_DRAW);
 const shadowDecalGeo=geometryBuffer(characterShadow());let shadowByteCapacity=Math.ceil(shadowDecalGeo.count*40*1.4);
 gl.bindBuffer(gl.ARRAY_BUFFER,shadowDecalGeo.buffer);gl.bufferData(gl.ARRAY_BUFFER,shadowByteCapacity,gl.DYNAMIC_DRAW);
-let last=0,elapsed=0,frames=0,phase=0;
+let last=0,elapsed=0,frames=0,phase=0,lastNearRender=-100;
+function renderNearSunShadow(x,z,y,heroCount,now){
+ if(softwareRenderer)return;
+ // A snapped center prevents shimmer as the character moves by fractions of a texel.
+ if(now-lastNearRender<.034 && frames>1)return;
+ lastNearRender=now;
+ const cell=52/nearShadowSize;
+ const focus=[Math.round(x/cell)*cell,Math.round((y+2)/cell)*cell,Math.round(z/cell)*cell];
+ const sunEye=[focus[0]+sun[0]*90,focus[1]+sun[1]*90,focus[2]+sun[2]*90];
+ nearLightVP=mul(ortho(-26,26,-26,26,1,195),viewMat(sunEye,focus));
+ gl.bindFramebuffer(gl.FRAMEBUFFER,nearDepthFbo);
+ gl.viewport(0,0,nearShadowSize,nearShadowSize);gl.depthMask(true);
+ gl.clearDepth(1);gl.clear(gl.DEPTH_BUFFER_BIT);gl.enable(gl.DEPTH_TEST);
+ gl.useProgram(shadowProgram);
+ gl.uniformMatrix4fv(gl.getUniformLocation(shadowProgram,'uLightVP'),false,new Float32Array(nearLightVP));
+ gl.bindVertexArray(staticGeo.vao);gl.drawArrays(gl.TRIANGLES,0,staticGeo.count);
+ // Unlike the previous fixed-circle shadow, the complete animated silhouette casts light.
+ gl.bindVertexArray(dynamicGeo.vao);gl.drawArrays(gl.TRIANGLES,0,heroCount);
+ gl.bindFramebuffer(gl.FRAMEBUFFER,null);
+}
 // Movement uses elapsed real time; clamping to 45 ms made controls nearly freeze on low FPS.
 function frame(now){let dt=last?Math.max(0,Math.min(.75,(now-last)/1000)):0;last=now;elapsed+=dt;
  let dx=(key.d||key.arrowright?1:0)-(key.a||key.arrowleft?1:0)+aimX,forward=(key.w||key.arrowup?1:0)-(key.s||key.arrowdown?1:0)+aimY;
@@ -652,13 +707,21 @@ function frame(now){let dt=last?Math.max(0,Math.min(.75,(now-last)/1000)):0;last
  player.motion=mix(player.motion,moving?1:0,Math.min(1,dt*8));
  const x=player.x,z=player.z,y=walkingHeight(x,z),eye=[x+Math.sin(cameraYaw)*cameraDist*Math.cos(cameraPitch),y+2.0+cameraDist*Math.sin(cameraPitch),z+Math.cos(cameraYaw)*cameraDist*Math.cos(cameraPitch)];
  const target=[x,y+1.7,z],view=viewMat(eye,target),vp=mul(projection(.98,canvas.width/canvas.height,.12,340),view);
+ // Update actor geometry before both sunlight shadow and visible color passes.
+ const hero=character(elapsed),heroArray=new Float32Array(hero.a);
+ gl.bindBuffer(gl.ARRAY_BUFFER,dynamicGeo.buffer);
+ if(heroArray.byteLength>dynamicByteCapacity){dynamicByteCapacity=2*heroArray.byteLength;gl.bufferData(gl.ARRAY_BUFFER,dynamicByteCapacity,gl.DYNAMIC_DRAW)}
+ gl.bufferSubData(gl.ARRAY_BUFFER,0,heroArray);
+ renderNearSunShadow(x,z,y,hero.count,now*.001);
  gl.viewport(0,0,canvas.width,canvas.height);gl.clearColor(.54,.67,.67,1);gl.clear(gl.COLOR_BUFFER_BIT|gl.DEPTH_BUFFER_BIT);
  const skyForward=norm(sub(target,eye)),skyRight=norm(cross(skyForward,[0,1,0])),skyUp=cross(skyRight,skyForward);
  gl.disable(gl.DEPTH_TEST);gl.depthMask(false);gl.useProgram(skyProgram);
  gl.uniform1f(skyU.time,elapsed);gl.uniform1f(skyU.aspect,canvas.width/canvas.height);gl.uniform1f(skyU.fov,.98);
  gl.uniform3fv(skyU.forward,skyForward);gl.uniform3fv(skyU.right,skyRight);gl.uniform3fv(skyU.up,skyUp);gl.uniform3fv(skyU.sun,sun);
  gl.bindVertexArray(fullscreen);gl.drawArrays(gl.TRIANGLES,0,3);gl.depthMask(true);gl.enable(gl.DEPTH_TEST);
- gl.useProgram(mainProgram);gl.uniformMatrix4fv(mainU.vp,false,new Float32Array(vp));gl.uniformMatrix4fv(mainU.lvp,false,new Float32Array(lightVP));gl.uniform3fv(mainU.eye,eye);gl.uniform3fv(mainU.sun,sun);gl.uniform3fv(mainU.fog,fog);gl.uniform1f(mainU.time,elapsed);gl.uniform1f(mainU.enabled,softwareRenderer?0:1);gl.uniform1f(mainU.lowQuality,softwareRenderer?1:0);gl.activeTexture(gl.TEXTURE0);gl.bindTexture(gl.TEXTURE_2D,depthTex);gl.uniform1i(mainU.shadow,0);gl.activeTexture(gl.TEXTURE1);gl.bindTexture(gl.TEXTURE_2D,materialAtlas);gl.uniform1i(mainU.materials,1);gl.uniform1f(mainU.shadowSize,softwareRenderer?512:window.matchMedia('(pointer:coarse)').matches?1024:2048);
+ gl.useProgram(mainProgram);gl.uniformMatrix4fv(mainU.vp,false,new Float32Array(vp));gl.uniformMatrix4fv(mainU.lvp,false,new Float32Array(lightVP));
+ if(!softwareRenderer)gl.uniformMatrix4fv(mainU.nearLvp,false,new Float32Array(nearLightVP));gl.uniform3fv(mainU.eye,eye);gl.uniform3fv(mainU.sun,sun);gl.uniform3fv(mainU.fog,fog);gl.uniform1f(mainU.time,elapsed);gl.uniform1f(mainU.enabled,softwareRenderer?0:1);gl.uniform1f(mainU.lowQuality,softwareRenderer?1:0);gl.activeTexture(gl.TEXTURE0);gl.bindTexture(gl.TEXTURE_2D,depthTex);gl.uniform1i(mainU.shadow,0);gl.activeTexture(gl.TEXTURE1);gl.bindTexture(gl.TEXTURE_2D,materialAtlas);gl.uniform1i(mainU.materials,1);gl.uniform1f(mainU.shadowSize,softwareRenderer?512:window.matchMedia('(pointer:coarse)').matches?1024:2048);
+ if(!softwareRenderer){gl.activeTexture(gl.TEXTURE3);gl.bindTexture(gl.TEXTURE_2D,nearDepthTex);gl.uniform1i(mainU.nearShadow,3);gl.uniform1f(mainU.nearShadowSize,nearShadowSize);}
  gl.bindVertexArray(staticGeo.vao);gl.drawArrays(gl.TRIANGLES,0,staticGeo.count);
  // A soft, fading, ground-following contact shadow anchors the moving feet.
  gl.enable(gl.BLEND);gl.blendFunc(gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);gl.depthMask(false);
@@ -667,7 +730,7 @@ function frame(now){let dt=last?Math.max(0,Math.min(.75,(now-last)/1000)):0;last
  gl.bufferSubData(gl.ARRAY_BUFFER,0,sd);gl.bindVertexArray(shadowDecalGeo.vao);gl.drawArrays(gl.TRIANGLES,0,sd.length/10);
  gl.depthMask(true);gl.disable(gl.BLEND);
  // Dynamic hero geometry is small; regenerate poses rather than deform all of the scenery.
- let ch=character(elapsed),arr=new Float32Array(ch.a);gl.bindBuffer(gl.ARRAY_BUFFER,dynamicGeo.buffer);if(arr.byteLength>dynamicByteCapacity){dynamicByteCapacity=2*arr.byteLength;gl.bufferData(gl.ARRAY_BUFFER,dynamicByteCapacity,gl.DYNAMIC_DRAW)}gl.bufferSubData(gl.ARRAY_BUFFER,0,arr);gl.bindVertexArray(dynamicGeo.vao);gl.drawArrays(gl.TRIANGLES,0,ch.count);
+ gl.bindVertexArray(dynamicGeo.vao);gl.drawArrays(gl.TRIANGLES,0,hero.count);
  // Water after terrain: its depth test naturally exposes shoreline and submerged sand.
  gl.enable(gl.BLEND);gl.blendFunc(gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);gl.depthMask(false);gl.useProgram(waterProgram);
  gl.uniformMatrix4fv(waterU.vp,false,new Float32Array(vp));gl.uniform3fv(waterU.eye,eye);gl.uniform3fv(waterU.sun,sun);gl.uniform3fv(waterU.fog,fog);gl.uniform1f(waterU.time,elapsed);gl.activeTexture(gl.TEXTURE2);gl.bindTexture(gl.TEXTURE_2D,coastHeightmap);gl.uniform1i(waterU.coast,2);gl.bindVertexArray(waterGeo.vao);gl.drawArrays(gl.TRIANGLES,0,waterGeo.count);gl.depthMask(true);gl.disable(gl.BLEND);
