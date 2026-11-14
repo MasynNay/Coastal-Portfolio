@@ -299,10 +299,11 @@ function viewMat(eye,target,up=[0,1,0]){let z=norm(sub(eye,target)),x=norm(cross
 function projection(fov,aspect,near,far){let s=1/Math.tan(fov/2),a=1/(near-far);return [s/aspect,0,0,0,0,s,0,0,0,0,(far+near)*a,-1,0,0,2*far*near*a,0]}
 function ortho(l,r,b,t,n,f){return [2/(r-l),0,0,0,0,2/(t-b),0,0,0,0,-2/(f-n),0,-(r+l)/(r-l),-(t+b)/(t-b),-(f+n)/(f-n),1]}
 function mul(a,b){let o=new Array(16);for(let c=0;c<4;c++)for(let r=0;r<4;r++){o[c*4+r]=0;for(let k=0;k<4;k++)o[c*4+r]+=a[k*4+r]*b[c*4+k]}return o}
-// Seamless, locally generated material atlas: no third-party network calls or downloaded textures.
-// Eight 256px tiles (grass, stone, wood, foliage, plaster, roof, metal, sand).
+// Self-contained 8-surface color + height atlas: grass, stone, wood, foliage,
+// plaster, roof, metal and sand. Its alpha channel is used for geometric bump detail.
+// Authored scanned textures can replace these slots without changing scene topology.
 function makeMaterialAtlas(gl){
- const side=256,w=1024,h=512,data=new Uint8Array(w*h*4);
+ const side=softwareRenderer?128:384,w=side*4,h=side*2,data=new Uint8Array(w*h*4);
  function hash2(x,y,seed){let v=Math.imul(x^seed,374761393)+Math.imul(y+seed,668265263);v=(v^(v>>>13))|0;v=Math.imul(v,1274126177);return ((v^(v>>>16))>>>0)/4294967295}
  function noise2(x,y,seed){let i=Math.floor(x),j=Math.floor(y),fx=x-i,fy=y-j;fx=fx*fx*(3-2*fx);fy=fy*fy*(3-2*fy);let a=hash2(i,j,seed),b=hash2(i+1,j,seed),c=hash2(i,j+1,seed),d=hash2(i+1,j+1,seed);return mix(mix(a,b,fx),mix(c,d,fx),fy)}
  for(let k=0;k<8;k++)for(let y=0;y<side;y++)for(let x=0;x<side;x++){
@@ -318,7 +319,7 @@ function makeMaterialAtlas(gl){
   if(k===7){let t=.33+.40*n+.21*micro+.06*fine;rgb=[t+.08,t+.05,t-.04]}
   let ix=k%4*side+x,iy=Math.floor(k/4)*side+y,o=(iy*w+ix)*4;
   for(let c=0;c<3;c++)data[o+c]=Math.round(clamp(rgb[c],0,1)*255);
-  data[o+3]=255;
+  data[o+3]=Math.round(clamp(.18+.52*n+.22*micro+.08*fine,0,1)*255);
  }
  const tex=gl.createTexture();gl.bindTexture(gl.TEXTURE_2D,tex);
  gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA8,w,h,0,gl.RGBA,gl.UNSIGNED_BYTE,data);
@@ -347,6 +348,20 @@ float shadow(vec3 n){if(uShadowEnabled<.5)return 1.;vec4 p=uLightVP*vec4(vPos+n*
  for(int i=-1;i<=1;i++)for(int j=-1;j<=1;j++){vec2 offset=(vec2(float(i),float(j))+.24*vec2(sin(dot(vPos.xz,vec2(13.,7.))),cos(dot(vPos.xz,vec2(11.,17.)))))/uShadowMapSize;float depth=texture(uShadow,q.xy+offset).r;val+=q.z-bias<=depth?1.:0.;}
  return .33+.67*val/9.;}
 vec3 aces(vec3 x){return clamp((x*(2.51*x+.03))/(x*(2.43*x+.59)+.14),0.,1.);}
+// UVs are derived in stable world coordinates. TextureGrad prevents mip seams
+// when the tile coordinate wraps, while triplanar weights hide sharp transitions.
+vec4 surfaceTile(vec2 local,float layer){
+ vec2 tile=vec2(mod(layer,4.),floor(layer*.25));
+ vec2 atlasUV=(tile+mix(vec2(.004),vec2(.996),fract(local)))*vec2(.25,.5);
+ return textureGrad(uMaterialAtlas,atlasUV,dFdx(local)*vec2(.25,.5),dFdy(local)*vec2(.25,.5));
+}
+vec4 triplanar(vec3 position,vec3 n,float layer,float scale){
+ vec3 weights=pow(abs(n),vec3(4.));weights/=max(weights.x+weights.y+weights.z,.001);
+ return surfaceTile(position.yz*scale,layer)*weights.x+
+        surfaceTile(position.xz*scale,layer)*weights.y+
+        surfaceTile(position.xy*scale,layer)*weights.z;
+}
+
 void main(){vec3 N=normalize(vNormal);vec3 L=normalize(uSun);vec3 V=normalize(uEye-vPos);
  if(uLowQuality>.5){
   if(vKind>=13){frag=vec4(.025,.025,.025,vKind==13?.19:vKind==14?.12:.04);return;}
@@ -373,13 +388,34 @@ void main(){vec3 N=normalize(vNormal);vec3 L=normalize(uSun);vec3 V=normalize(uE
  if(vKind==11){albedo*=mix(.78,1.21,noise(vPos*vec3(9.,24.,9.)));roughness=.64;}
  if(vKind==12){albedo*=mix(.71,1.16,fbm(vPos*9.));roughness=.73;}
  if(vKind>=13){frag=vec4(.035,.035,.034,vKind==13?.20:vKind==14?.13:.04);return;}
- // Procedural bump microstructure without derivative-based dependencies or texture downloads.
- float bump=fbm(vPos*(vKind==1?18.:vKind==2?11.:8.));
- vec3 perturb=vec3(fbm(vPos*8.+vec3(.1,2.4,1.7))-.5,fbm(vPos*8.+vec3(1.7,3.9,.1))-.5,fbm(vPos*8.+vec3(4.1,.3,2.6))-.5);
- N=normalize(N+perturb*(vKind==1?.24:vKind==0?.10:vKind==3?.10:.055));
+ // Actual triplanar color and height textures now influence all environment surfaces.
+ // Height derivatives turn the atlas alpha into micro-normal relief (without mesh subdivision).
+ if(vKind<=7){
+  float layer=vKind==0?0.:vKind==1?1.:vKind==2?2.:vKind==3?3.:vKind==4?4.:vKind==5?5.:vKind==6?6.:7.;
+  float scale=vKind==0?.62:vKind==1?.78:vKind==2?.32:vKind==3?1.2:vKind==4?.52:vKind==5?.60:vKind==6?1.1:1.22;
+  vec4 surface=triplanar(vPos,N,layer,scale);
+  if(vKind==0){
+   float sandMix=1.-smoothstep(.70,2.80,vPos.y);
+   float stoneMix=clamp((.84-N.y)*2.3,0.,.92)*smoothstep(5.,20.,vPos.y);
+   surface=mix(surface,triplanar(vPos,N,7.,1.20),sandMix);
+   surface=mix(surface,triplanar(vPos,N,1.,.72),stoneMix*(1.-sandMix));
+  }
+  albedo*=mix(vec3(1.),surface.rgb*1.80,.66);
+  float ht=surface.a;
+  vec3 sigmaX=dFdx(vPos),sigmaY=dFdy(vPos);
+  vec3 R=cross(sigmaY,N),S=cross(N,sigmaX);
+  float det=dot(sigmaX,R);
+  float strength=vKind==1?.17:vKind==2?.13:vKind==3?.055:vKind==0?.11:.09;
+  vec3 gradient=sign(det)*(dFdx(ht)*R+dFdy(ht)*S);
+  if(abs(det)>.000001)N=normalize(abs(det)*N-gradient*strength);
+  roughness=clamp(roughness+(ht-.5)*.12,.15,1.);
+ }else{
+  vec3 perturb=vec3(fbm(vPos*8.+vec3(.1,2.4,1.7))-.5,fbm(vPos*8.+vec3(1.7,3.9,.1))-.5,fbm(vPos*8.+vec3(4.1,.3,2.6))-.5);
+  N=normalize(N+perturb*.036);
+ }
  float nd=max(dot(N,L),0.),sh=shadow(N);
- float hemi=.43+.22*max(N.y,0.);vec3 skyFill=vec3(.69,.77,.91)*hemi;
- vec3 sunLight=vec3(1.0,.84,.68)*nd*sh*1.52;
+ float hemi=.43+.22*max(N.y,0.);vec3 skyFill=vec3(.69,.77,.88)*hemi*.82;
+ vec3 sunLight=vec3(1.0,.82,.66)*nd*sh*1.18;
  vec3 bounce=vec3(.26,.21,.16)*(.3+.7*max(-N.y,0.));
  vec3 c=albedo*(skyFill+sunLight+bounce);
  vec3 H=normalize(L+V);float NdotH=max(dot(N,H),0.),NdotV=max(dot(N,V),.01);
@@ -389,7 +425,7 @@ void main(){vec3 N=normalize(vNormal);vec3 L=normalize(uSun);vec3 V=normalize(uE
  if(vKind==3)c+=albedo*vec3(.65,.45,.13)*transmission*pow(max(dot(-N,L),0.),2.);
  if(vKind==8){c=albedo*2.05+vec3(.40,.18,.035)*(.5+.5*sin(uTime*2.5+vPos.x*3.));}
  float dist=length(uEye-vPos);float heightFog=exp(-max(vPos.y,0.)*.052);float fog=1.-exp(-pow(dist*.0086,1.52)*(.68+.40*heightFog));
- c=mix(c,pow(uFog,vec3(2.2)),clamp(fog*.74,0.,.84));c=aces(c*1.20);c=pow(c,vec3(1./2.20));frag=vec4(c,1.);
+ c=mix(c,pow(uFog,vec3(2.2)),clamp(fog*.74,0.,.84));c=aces(c*.78);c=pow(c,vec3(1./2.20));frag=vec4(c,1.);
 }`;
 const SHADOW_VS=`#version 300 es
 layout(location=0)in vec3 aPos;uniform mat4 uLightVP;void main(){gl_Position=uLightVP*vec4(aPos,1.);}`;
@@ -398,21 +434,30 @@ precision highp float;void main(){} `;
 const SKY_VS=`#version 300 es
 layout(location=0)in vec2 aPos;out vec2 vUV;void main(){vUV=aPos*.5+.5;gl_Position=vec4(aPos,1.,1.);}`;
 const SKY_FS=`#version 300 es
-precision highp float;in vec2 vUV;uniform float uTime;out vec4 frag;
+precision highp float;
+in vec2 vUV;
+uniform float uTime,uSkyAspect,uSkyFov;
+uniform vec3 uSkyForward,uSkyRight,uSkyUp,uSkySun;
+out vec4 frag;
 float hash(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}
 float no(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);return mix(mix(hash(i),hash(i+vec2(1,0)),f.x),mix(hash(i+vec2(0,1)),hash(i+vec2(1,1)),f.x),f.y);}
 float fBm(vec2 p){float v=0.,a=.52;for(int i=0;i<5;i++){v+=a*no(p);p=p*2.13+vec2(5.6,3.2);a*=.53;}return v;}
-void main(){float h=vUV.y;
+void main(){
+ vec2 xy=(vUV*2.-1.)*vec2(uSkyAspect,1.)*tan(uSkyFov*.5);
+ vec3 ray=normalize(uSkyForward+uSkyRight*xy.x+uSkyUp*xy.y);
+ float elevation=ray.y;
  vec3 horizon=vec3(.91,.70,.54),zenith=vec3(.19,.37,.54);
- vec3 c=mix(horizon,zenith,smoothstep(.05,1.05,h));
- c+=vec3(.15,.12,.09)*exp(-pow((h-.28)*4.,2.));
- vec2 cloudUV=vec2(vUV.x*5.4+uTime*.0011,(h-.3)*5.1);
- float strata=fBm(cloudUV+vec2(no(cloudUV*1.6)*.41,0.));
- float cloud=smoothstep(.47,.68,strata)*smoothstep(.24,.48,h)*(1.-smoothstep(.79,1.02,h));
- c=mix(c,vec3(.97,.88,.74),cloud*.65);
- float sundist=length((vUV-vec2(.76,.76))*vec2(1.6,1.));
- float halo=exp(-sundist*9.)*.51,disc=smoothstep(.045,.015,sundist);
- c+=vec3(.95,.66,.38)*halo+vec3(1.,.79,.52)*disc*.8;
+ vec3 c=mix(horizon,zenith,smoothstep(-.10,.78,elevation));
+ c+=vec3(.14,.10,.08)*exp(-pow((elevation-.06)*5.,2.));
+ float az=atan(ray.z,ray.x);
+ vec2 cloudUV=vec2(az*3.8+uTime*.0014,elevation*6.8);
+ float strata=fBm(cloudUV+vec2(no(cloudUV*1.6)*.38,.0));
+ float cloud=smoothstep(.47,.67,strata)*smoothstep(.02,.23,elevation)*(1.-smoothstep(.81,.98,elevation));
+ c=mix(c,vec3(.96,.87,.77),cloud*.66);
+ float angle=max(dot(ray,normalize(uSkySun)),0.);
+ float sunDisk=smoothstep(.9997,.99994,angle);
+ float halo=pow(angle,240.)*.52+pow(angle,20.)*.18;
+ c+=vec3(1.,.74,.43)*halo+vec3(1.,.84,.59)*sunDisk*.88;
  c=pow(clamp(c,0.,1.),vec3(.92));frag=vec4(c,1.);
 }`;
 const WATER_VS=`#version 300 es
@@ -465,6 +510,7 @@ try{
 const u=(p,name)=>gl.getUniformLocation(p,name);
 const mainU={vp:u(mainProgram,'uVP'),eye:u(mainProgram,'uEye'),sun:u(mainProgram,'uSun'),fog:u(mainProgram,'uFog'),time:u(mainProgram,'uTime'),shadow:u(mainProgram,'uShadow'),materials:u(mainProgram,'uMaterialAtlas'),shadowSize:u(mainProgram,'uShadowMapSize'),lowQuality:u(mainProgram,'uLowQuality'),lvp:u(mainProgram,'uLightVP'),enabled:u(mainProgram,'uShadowEnabled')};
 const waterU={vp:u(waterProgram,'uVP'),eye:u(waterProgram,'uEye'),sun:u(waterProgram,'uSun'),fog:u(waterProgram,'uFog'),time:u(waterProgram,'uTime')};
+const skyU={time:u(skyProgram,'uTime'),aspect:u(skyProgram,'uSkyAspect'),fov:u(skyProgram,'uSkyFov'),forward:u(skyProgram,'uSkyForward'),right:u(skyProgram,'uSkyRight'),up:u(skyProgram,'uSkyUp'),sun:u(skyProgram,'uSkySun')};
 const sun=norm([-0.55,.70,.46]),fog=[.63,.70,.73];
 const player={x:0,z:7,y:0,heading:0.16,phase:0,motion:0};let cameraYaw=0.16,cameraPitch=.27,cameraDist=10.9,drag=null,aimX=0,aimY=0,runTouch=false;
 const key={};window.addEventListener('keydown',e=>{if(['ArrowUp','ArrowDown','ArrowLeft','ArrowRight','Space'].includes(e.key))e.preventDefault();key[e.key.toLowerCase()]=true});window.addEventListener('keyup',e=>key[e.key.toLowerCase()]=false);window.addEventListener('blur',()=>{for(let k in key)key[k]=false;runTouch=false});
@@ -578,7 +624,11 @@ function frame(now){let dt=last?Math.max(0,Math.min(.045,(now-last)/1000)):0;las
  const x=player.x,z=player.z,y=walkingHeight(x,z),eye=[x+Math.sin(cameraYaw)*cameraDist*Math.cos(cameraPitch),y+2.0+cameraDist*Math.sin(cameraPitch),z+Math.cos(cameraYaw)*cameraDist*Math.cos(cameraPitch)];
  const target=[x,y+1.7,z],view=viewMat(eye,target),vp=mul(projection(.98,canvas.width/canvas.height,.12,340),view);
  gl.viewport(0,0,canvas.width,canvas.height);gl.clearColor(.54,.67,.67,1);gl.clear(gl.COLOR_BUFFER_BIT|gl.DEPTH_BUFFER_BIT);
- gl.disable(gl.DEPTH_TEST);gl.depthMask(false);gl.useProgram(skyProgram);gl.uniform1f(u(skyProgram,'uTime'),elapsed);gl.bindVertexArray(fullscreen);gl.drawArrays(gl.TRIANGLES,0,3);gl.depthMask(true);gl.enable(gl.DEPTH_TEST);
+ const skyForward=norm(sub(target,eye)),skyRight=norm(cross(skyForward,[0,1,0])),skyUp=cross(skyRight,skyForward);
+ gl.disable(gl.DEPTH_TEST);gl.depthMask(false);gl.useProgram(skyProgram);
+ gl.uniform1f(skyU.time,elapsed);gl.uniform1f(skyU.aspect,canvas.width/canvas.height);gl.uniform1f(skyU.fov,.98);
+ gl.uniform3fv(skyU.forward,skyForward);gl.uniform3fv(skyU.right,skyRight);gl.uniform3fv(skyU.up,skyUp);gl.uniform3fv(skyU.sun,sun);
+ gl.bindVertexArray(fullscreen);gl.drawArrays(gl.TRIANGLES,0,3);gl.depthMask(true);gl.enable(gl.DEPTH_TEST);
  gl.useProgram(mainProgram);gl.uniformMatrix4fv(mainU.vp,false,new Float32Array(vp));gl.uniformMatrix4fv(mainU.lvp,false,new Float32Array(lightVP));gl.uniform3fv(mainU.eye,eye);gl.uniform3fv(mainU.sun,sun);gl.uniform3fv(mainU.fog,fog);gl.uniform1f(mainU.time,elapsed);gl.uniform1f(mainU.enabled,softwareRenderer?0:1);gl.uniform1f(mainU.lowQuality,softwareRenderer?1:0);gl.activeTexture(gl.TEXTURE0);gl.bindTexture(gl.TEXTURE_2D,depthTex);gl.uniform1i(mainU.shadow,0);gl.activeTexture(gl.TEXTURE1);gl.bindTexture(gl.TEXTURE_2D,materialAtlas);gl.uniform1i(mainU.materials,1);gl.uniform1f(mainU.shadowSize,softwareRenderer?512:window.matchMedia('(pointer:coarse)').matches?1024:2048);
  gl.bindVertexArray(staticGeo.vao);gl.drawArrays(gl.TRIANGLES,0,staticGeo.count);
  // A soft, fading, ground-following contact shadow anchors the moving feet.
@@ -592,7 +642,7 @@ function frame(now){let dt=last?Math.max(0,Math.min(.045,(now-last)/1000)):0;las
  // Water after terrain: its depth test naturally exposes shoreline and submerged sand.
  gl.enable(gl.BLEND);gl.blendFunc(gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);gl.depthMask(false);gl.useProgram(waterProgram);
  gl.uniformMatrix4fv(waterU.vp,false,new Float32Array(vp));gl.uniform3fv(waterU.eye,eye);gl.uniform3fv(waterU.sun,sun);gl.uniform3fv(waterU.fog,fog);gl.uniform1f(waterU.time,elapsed);gl.bindVertexArray(waterGeo.vao);gl.drawArrays(gl.TRIANGLES,0,waterGeo.count);gl.depthMask(true);gl.disable(gl.BLEND);
- frames++;if(frames===2)loading.classList.add('off');
+ frames++;if(frames===2){loading.classList.add('off');document.documentElement.dataset.windfallReady='1';}
  if(Math.abs(x-11)<7&&z>12){document.getElementById('placeName').textContent='The Lantern Harbor';document.getElementById('placeDescription').textContent='The wooden pier leads toward the sea arch and the breaking surf.'}
  else if(x<-13){document.getElementById('placeName').textContent='Briarwood Grove';document.getElementById('placeDescription').textContent='Follow the old tree line beneath the soft mountain light.'}
  else if(z<-19){document.getElementById('placeName').textContent='The Northern Ascent';document.getElementById('placeDescription').textContent='A distant stone lookout watches over the valley.'}
