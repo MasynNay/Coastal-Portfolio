@@ -246,6 +246,21 @@
       u[name]={};for(const n of ['uVP','uModel','uBase','uNormal','uORM','uEmissive','uShadowFar','uShadowNear','uFarVP','uNearVP','uEye','uSun','uFog','uEmission','uBaseFactor','uMetalRough','uHasBase','uHasNormal','uHasORM','uHasEmissive','uHasShadows','uAlphaCutoff','uAlphaMasked'])u[name][n]=uniform(prog,n);
     }
     const records=[],statuses=[],colliders=[];
+    const drawStats={visible:0,culled:0,shadowVisible:0,shadowCulled:0};
+    // Culling against six conservative view planes, with one bounding sphere
+    // per model instance. Matrix layout is WebGL column-major.
+    function frustumPlanes(m){
+      const p=[];
+      for(const [a,b,sgn] of [[3,0,1],[3,0,-1],[3,1,1],[3,1,-1],[3,2,1],[3,2,-1]]){
+        const x=m[a]+sgn*m[b],y=m[a+4]+sgn*m[b+4],z=m[a+8]+sgn*m[b+8],w=m[a+12]+sgn*m[b+12];
+        const inv=1/(Math.hypot(x,y,z)||1);p.push([x*inv,y*inv,z*inv,w*inv]);
+      }
+      return p;
+    }
+    function inView(m,planes){
+      const c=m.anchor,r=m.boundRadius;
+      return planes.every(p=>p[0]*c[0]+p[1]*c[1]+p[2]*c[2]+p[3]>=-r);
+    }
     const defaultWhite=gl.createTexture();gl.bindTexture(gl.TEXTURE_2D,defaultWhite);
     gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA8,1,1,0,gl.RGBA,gl.UNSIGNED_BYTE,new Uint8Array([255,255,255,255]));
     gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,gl.LINEAR);
@@ -291,7 +306,7 @@
       for(const instance of entry.instances){
         const scale=instance.scale??1,angle=instance.rotationY??0;
         const extra=trs(instance.position,[0,Math.sin(angle/2),0,Math.cos(angle/2)],[scale,scale,scale]);
-        for(const mesh of localNodes)records.push({...mesh,model:multiply(extra,mesh.model)});
+        for(const mesh of localNodes)records.push({...mesh,model:multiply(extra,mesh.model),anchor:instance.position.slice(),boundRadius:(entry.boundsRadius||16)*scale});
         if(entry.collisionRadius>0)colliders.push({x:instance.position[0],z:instance.position[2],radius:entry.collisionRadius*scale});
         if(entry.collisionBox)colliders.push({x:instance.position[0],z:instance.position[2],halfWidth:entry.collisionBox[0]*scale,halfDepth:entry.collisionBox[1]*scale,rotation:angle});
       }
@@ -327,7 +342,9 @@
     function drawShadow(vp){
       if(!records.length)return;
       gl.useProgram(depth);gl.uniformMatrix4fv(u.depth.uVP,false,new Float32Array(vp));
+      const planes=frustumPlanes(vp);drawStats.shadowVisible=0;drawStats.shadowCulled=0;
       for(const m of records){if(m.mat.alpha==='BLEND')continue;
+        if(!inView(m,planes)){drawStats.shadowCulled++;continue;}drawStats.shadowVisible++;
         setCommon(u.depth,m);if(m.mat.doubleSided)gl.disable(gl.CULL_FACE);else gl.enable(gl.CULL_FACE);
         drawGeometry(m);
       }
@@ -343,9 +360,11 @@
       gl.uniform1f(u.standard.uHasShadows,render.nearMap?1:0);
       gl.activeTexture(gl.TEXTURE4);gl.bindTexture(gl.TEXTURE_2D,render.farMap);gl.uniform1i(u.standard.uShadowFar,4);
       gl.activeTexture(gl.TEXTURE5);gl.bindTexture(gl.TEXTURE_2D,render.nearMap||defaultWhite);gl.uniform1i(u.standard.uShadowNear,5);
+      const planes=frustumPlanes(render.vp);drawStats.visible=0;drawStats.culled=0;
       for(const layer of ['OPAQUE','MASK','BLEND']){
         if(layer==='BLEND'){gl.enable(gl.BLEND);gl.blendFunc(gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);gl.depthMask(false);}
         for(const m of records){if(m.mat.alpha!==layer)continue;
+          if(!inView(m,planes)){drawStats.culled++;continue;}drawStats.visible++;
           setCommon(u.standard,m);gl.uniform2fv(u.standard.uMetalRough,[m.mat.metal,m.mat.rough]);
           gl.uniform3fv(u.standard.uEmission,m.mat.emission);
           for(const [slot,texture,name,has] of [[1,m.mat.normal,'uNormal','uHasNormal'],[2,m.mat.orm,'uORM','uHasORM'],[3,m.mat.emissive,'uEmissive','uHasEmissive']]){
@@ -358,7 +377,7 @@
       }
       gl.disable(gl.CULL_FACE);
     }
-    return {addGLB,loadManifest,draw,drawShadow,getStatus:()=>statuses.slice(),getMeshCount:()=>records.length,
+    return {addGLB,loadManifest,draw,drawShadow,getStatus:()=>statuses.slice(),getMeshCount:()=>records.length,getDrawStats:()=>({...drawStats}),
       hasLoaded:(id)=>statuses.some(s=>s.id===id&&s.loaded),
       collides:(x,z,padding=.28)=>colliders.some(c=>{
         const dx=x-c.x,dz=z-c.z;
