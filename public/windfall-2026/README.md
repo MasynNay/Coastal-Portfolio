@@ -23,19 +23,11 @@ This preview has **no hosted server processing**, external asset CDN, user accou
 - A **stabilized higher-resolution near-field shadow cascade** for the player's surroundings, retaining a broader island-wide shadow map
 - Animated hero casts a dynamic silhouette shadow; low-cost fallback for software WebGL
 - **New WebGL2 glTF/GLB asset pipeline** supporting embedded PBR color, normal, and metallic/roughness textures, alpha-masked leaves, shared model instances, sunlight shadows, and model collision boundaries
-- Two original authored test assets, a weathered standing stone and broadleaf tree, each with local embedded textures and reproducible generator scripts
-- Validation of both models loading in Chromium software WebGL, depth-only shadow and PBR rendering, and manifest/GLB rejection rules
+- Four original authored asset families: weathered standing stone, broadleaf tree, detailed timber cottage and harbor workshop, each with embedded PBR textures and reproducible generators. Five cottages and two workshops replace the previous procedural house geometry, with independent fallbacks on partial model failures.
+- Chromium software WebGL integration verified with all four assets loaded, and again with each building model deliberately failing to load; original house geometry is used only for the failed family. GLB format/provenance and collision checks also pass.
 
-See [ASSET_PIPELINE.md](ASSET_PIPELINE.md) for the details, limits, license policy, and **unmet release gates**, and [GRAPHICS_ROADMAP.md](GRAPHICS_ROADMAP.md) for the broader high-fidelity art plan. The hero, buildings, many terrain meshes, and other scene elements remain procedural placeholders rather than production art.
+See [ASSET_PIPELINE.md](ASSET_PIPELINE.md) for the details, limits, license policy, and **unmet release gates**, and [GRAPHICS_ROADMAP.md](GRAPHICS_ROADMAP.md) for the broader high-fidelity art plan. The hero, tower, many terrain meshes, and other scene elements remain procedural placeholders rather than production art. The cottage and workshop models are now textured authored geometry, but they are still prototype-grade relative to the requested modern remake fidelity.
 
 Run `node verify-assets.cjs` to verify the bundled GLB structure and rights metadata. Rebuild original GLBs with the scripts under `tools/` using Python, NumPy, Pillow, and trimesh. These dependencies are for **asset authoring only**, not playing the game.
 
 No original files from the previous unreleased local session were recovered. This is a clean, separately versioned replacement.
-
-## Staged authored architecture (unreleased)
-
-The graphics R&D branch now includes two original multi-material GLB buildings (timber cottage and harbor workshop) across seven village sites. Each has individually modeled roof tiles, masonry foundation, timber structure, recessed windows, shutters, shutters' metal hardware, entry doors, steps, and workshop details. Building materials use embedded PBR texture, normal and metallic-roughness maps. Existing procedural houses render as a fallback until both building families load, and rotated collision boxes keep movement outside walls. Rebuild the architecture assets with `node tools/build_architecture.js`. The game remains a work-in-progress, not a finished 2026 remake.
-
-## Architecture checkpoint QA
-
-Run `node tools/verify-architecture.cjs` from this directory. It checks the two authored building GLBs, embedded texture references, all seven placements, model provenance, collision bounds, independent legacy fallbacks, and distant shadow refresh hooks. This is a structural guard; it does **not** establish the requested high-fidelity art quality or GPU performance. The live site remains untouched.

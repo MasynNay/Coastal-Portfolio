@@ -26,7 +26,7 @@ Each entry in the manifest requires `id`, local `src` under `models/`, `creator`
 
 ### Source of included art
 
-Both GLBs are **original assets generated for this project** from the included Python authoring scripts `tools/build_stone_asset.py` and `tools/build_tree_asset.py` using `numpy`, `Pillow`, and `trimesh`. Source geometry, leaf textures and PBR maps were procedurally authored; there are no Nintendo or third-party model or texture files in these GLBs. License metadata appears in the manifest as `OWNED-ORIGINAL`. This does not imply the art is sufficiently detailed for public release.
+All four GLBs are **original assets generated for this project** from the included Python authoring scripts `tools/build_stone_asset.py`, `tools/build_tree_asset.py`, and `tools/build_architecture.py` using `numpy`, `Pillow`, and `trimesh`. Source geometry, leaf textures and PBR maps were procedurally authored; there are no Nintendo or third-party model or texture files in these GLBs. License metadata appears in the manifest as `OWNED-ORIGINAL`. This does not imply the art is sufficiently detailed for public release.
 
 ## Acceptance checks already exercised
 
@@ -45,6 +45,10 @@ Software WebGL is a validation fallback, **not** a reliable performance benchmar
 - Complete camera/building collision, portfolio room integration, accessibility, mobile controls, self-hosted distribution and clear attribution/asset rights records.
 - Compare side-by-side against the requested **2026 remake-style** art target; no publish until the user explicitly approves the visual fidelity.
 
-## Staged authored buildings
+## November 13 architecture integration checkpoint
 
-The same self-hosted original-model pipeline now loads `windfall-timber-cottage.glb` and `windfall-harbor-workshop.glb` at seven house sites. The reproducible source is `tools/build_architecture.js`; launch `node tools/build_architecture.js` to rebuild locally. Generated base-color, tangent normal and metallic-roughness PNGs are embedded in the GLBs. These are procedural art studies, not photogrammetry or production-ready AAA meshes. The manifest supports `collisionBox: [halfWidth,halfDepth]` for rotated rectangular building obstacles. Existing procedural houses only disappear when both new house families load, avoiding empty streets if a model download fails.
+- New original source-authored PBR cottage and harbor-workshop GLBs, each with eight independent material groups and embedded base-color/normal/metallic-roughness textures. Original source and geometry-generation procedure are in `tools/build_architecture.py`.
+- Five cottage and two workshop placements replace the corresponding house placeholders; the procedural fallback geometry is split into **two independent groups** so a partial model download failure does not render overlapping buildings.
+- Architecture uses oriented rectangular collision proxies (rotation applied), in addition to the existing cylindrical collision radius for stones and trees.
+- `tools/qa_architecture_integration.py` runs three browser smoke tests: all four assets present, only the cottage model unavailable, and only the workshop model unavailable. All cases must reach the first render with 0 JS errors and the expected status count.
+- **Not release-ready:** production-quality interiors/entrances, accurate masonry/roof/wood materials, close-range silhouettes, original rigged family, environmental lighting, world composition, and real desktop-GPU profiling all remain outstanding.

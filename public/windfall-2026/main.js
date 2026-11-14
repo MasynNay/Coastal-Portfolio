@@ -238,14 +238,18 @@ function house(x,z,w,d,h,roofColor=colors.roof,angle=0){let y=terrain(x,z)+.04;
  world.box(x+w*.25,y+h*.96,z-d*.15,.48,1.32,.56,colors.stone,1);world.box(x+w*.25,y+h*1.25,z-d*.15,.60,.18,.69,colors.rock,1);
  for(let k=0;k<4;k++){let q=mix(back+.24,front-.24,(k+.5)/4);world.beam([left,yTop+.04,q],[x,ridge+.04,q],.024,tint(roofColor,.64),5);world.beam([x,ridge+.04,q],[right,yTop+.04,q],.024,tint(roofColor,.64),5)}
 }
-// Keep the old houses in a separate fallback mesh. Imported architecture replaces
-// them atomically when both original house families load successfully.
-const mainWorld=world;world=new Geometry();
+// Keep old houses as a separately-rendered fallback so authored architecture can
+// replace them without gaps if a model fails, and without overlapping walls.
+const mainWorld=world;
+world=new Geometry();
 house(-13,-12,5.7,5.5,4.5);house(-5,-17,5.0,4.8,4.3,colors.deepRoof);
 house(5,-15,5.4,6.6,5.0);house(-18,-2,5.8,5.5,4.9);house(18,3,5.4,5.3,4.1);
-const legacyCottages=world;world=new Geometry();
+const legacyCottages=world;
+world=new Geometry();
 house(16,-10,7.0,6.0,4.8,colors.deepRoof);house(7,-25,7.4,5.5,5.1);
 const legacyWorkshops=world;world=mainWorld;
+// Independent fallbacks ensure partial model download failures never duplicate a
+// successful imported family with the original procedural counterpart.
 function needsLegacyCottages(){return !authoredAssets || !authoredAssets.hasLoaded('windfall-timber-cottage');}
 function needsLegacyWorkshops(){return !authoredAssets || !authoredAssets.hasLoaded('windfall-harbor-workshop');}
 function drawLegacyBuildings(){
@@ -687,15 +691,16 @@ function characterShadow(){
 dynamicGeo=geometryBuffer(character(0));gl.bindBuffer(gl.ARRAY_BUFFER,dynamicGeo.buffer);let dynamicByteCapacity=Math.ceil(dynamicGeo.count*40*1.6);gl.bufferData(gl.ARRAY_BUFFER,dynamicByteCapacity,gl.DYNAMIC_DRAW);
 if(authoredAssets)authoredAssets.loadManifest('asset-manifest.json',terrain).then(status=>{
  document.documentElement.dataset.windfallAssets=String(status.filter(s=>s.loaded).length);farShadowDirty=true;
-}).catch(err=>console.warn('Authored asset manifest unavailable; using procedural scene:',String(err)));
-// Rebuild the distant sunlight map after asset import, so authored rooftops and foliage
-// cast actual distant shadows rather than only in the near-field cascade.
+ document.documentElement.dataset.windfallAssetStatus=JSON.stringify(status.map(s=>({id:s.id,loaded:s.loaded,error:s.error||null})));
+}).catch(err=>{document.documentElement.dataset.windfallAssets='0';document.documentElement.dataset.windfallAssetStatus=JSON.stringify([{id:'manifest',loaded:false,error:String(err)}]);console.warn('Authored asset manifest unavailable; using procedural scene:',String(err));});
+// The distant shadow texture is rebuilt after GLB models finish loading. Otherwise
+// authored buildings and foliage cast no shadows beyond the player cascade.
 let farShadowDirty=true;
 function rebuildFarSunShadow(){
  if(softwareRenderer)return;
  gl.bindFramebuffer(gl.FRAMEBUFFER,depthFbo);
- gl.viewport(0,0,farShadowSize,farShadowSize);gl.depthMask(true);
- gl.clearDepth(1);gl.clear(gl.DEPTH_BUFFER_BIT);gl.enable(gl.DEPTH_TEST);
+ gl.viewport(0,0,farShadowSize,farShadowSize);
+ gl.depthMask(true);gl.clearDepth(1);gl.clear(gl.DEPTH_BUFFER_BIT);gl.enable(gl.DEPTH_TEST);
  gl.useProgram(shadowProgram);
  gl.uniformMatrix4fv(gl.getUniformLocation(shadowProgram,'uLightVP'),false,new Float32Array(lightVP));
  gl.bindVertexArray(staticGeo.vao);gl.drawArrays(gl.TRIANGLES,0,staticGeo.count);
