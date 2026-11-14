@@ -365,27 +365,31 @@
     }
     // Drive the named authored GLB pivot nodes from the existing frame-independent gait.
     // No JS-side vertex regeneration is needed: only a few matrices are updated.
-    function updatePlayer({x,y,z,heading,phase,motion,time}){
+    function updatePlayer({x,y,z,heading,phase,motion,turn=0,time}){
       const rig=dynamicPlayer;if(!rig)return;
       const cycle=Math.sin(phase)*motion,heel=Math.cos(phase)*motion;
+      // Secondary reactions are independent of frame rate and smoothly fade at rest.
+      const lean=Math.max(-.85,Math.min(.85,turn));
+      const breath=Math.sin(time*1.58)*.0065*(1.-motion);
+      const sway=Math.sin(time*1.22+phase*.17)*.023;
       const root=trs([x,y,z],[0,Math.sin(heading*.5),0,Math.cos(heading*.5)]);
       const rotX=a=>trs([0,0,0],[Math.sin(a*.5),0,0,Math.cos(a*.5)]);
       const rotY=a=>trs([0,0,0],[0,Math.sin(a*.5),0,Math.cos(a*.5)]);
       const rotZ=a=>trs([0,0,0],[0,0,Math.sin(a*.5),Math.cos(a*.5)]);
       const swing=(name)=>{
-        if(name==='leg-L')return rotX(.43*cycle);
-        if(name==='leg-R')return rotX(-.43*cycle);
+        if(name==='leg-L')return rotX(.43*cycle+.035*heel*motion);
+        if(name==='leg-R')return rotX(-.43*cycle-.035*heel*motion);
         if(name==='shin-L')return rotX(-.12+.52*Math.max(0,-cycle));
         if(name==='shin-R')return rotX(-.12+.52*Math.max(0,cycle));
         if(name==='foot-L')return rotX(-.22*Math.sin(phase+.4)*motion);
         if(name==='foot-R')return rotX(.22*Math.sin(phase+.4)*motion);
-        if(name==='arm-L')return rotX(-.34*cycle);
-        if(name==='arm-R')return rotX(.34*cycle);
+        if(name==='arm-L')return multiply(rotX(-.34*cycle+.025*motion),rotZ(.035*motion));
+        if(name==='arm-R')return multiply(rotX(.34*cycle+.025*motion),rotZ(-.035*motion));
         if(name==='forearm-L')return rotX(-.13-.09*heel);
         if(name==='forearm-R')return rotX(-.13+.09*heel);
-        if(name==='body')return rotZ(.022*cycle);
-        if(name==='cape')return rotX(.06+Math.sin(time*2.3)*.055+.08*motion);
-        if(name==='head')return rotY(Math.sin(time*.73)*.026);
+        if(name==='body')return multiply(rotZ(.026*cycle-.12*lean+sway*.25),rotX(.015*Math.sin(phase*2.)*motion));
+        if(name==='cape')return multiply(rotX(.07+Math.sin(time*2.3)*.053+.11*motion+.035*heel),rotZ(-.08*lean+.02*Math.sin(time*1.6)));
+        if(name==='head')return multiply(rotY(Math.sin(time*.73)*.026-.12*lean),rotZ(lean*.026));
         return identity();
       };
       function walk(i,parent,depth=0){
@@ -397,7 +401,7 @@
         for(const mesh of rig.nodeMeshes.get(i)||[])mesh.model=model;
         for(const child of node.children||[])walk(child,model,depth+1);
       }
-      const bob=Math.abs(Math.sin(phase))*.042*motion;
+      const bob=Math.abs(Math.sin(phase))*.042*motion+breath;
       const actor=multiply(root,trs([0,bob,0]));
       for(const i of rig.roots)walk(i,actor);
     }
