@@ -61,7 +61,7 @@ function terrainColor(x,z,normal){
  const variation=.92+.05*Math.sin(x*.53+Math.cos(z*.46))+.035*Math.sin(z*.31-x*.27);
  return [0,1,2].map(i=>(mix(mix(grass[i],sand[i],beach),rock[i],stone))*variation);
 }
-const NX=127,NZ=129,XMIN=-95,XMAX=95,ZMIN=-97,ZMAX=76;
+const NX=softwareRenderer?57:127,NZ=softwareRenderer?59:129,XMIN=-95,XMAX=95,ZMIN=-97,ZMAX=76;
 for(let j=0;j<NZ-1;j++)for(let i=0;i<NX-1;i++){
  const x=mix(XMIN,XMAX,i/(NX-1)),x2=mix(XMIN,XMAX,(i+1)/(NX-1));
  const z=mix(ZMIN,ZMAX,j/(NZ-1)),z2=mix(ZMIN,ZMAX,(j+1)/(NZ-1));
@@ -88,6 +88,7 @@ function stonesAlong(ax,az,bx,bz,count,width=3){
    const center=[lx,terrain(lx,lz)+.067+stoneHeight,lz];
    const shade=.77+rand()*.31;
    const stoneColor=tint(colors.stone,shade);
+   if(softwareRenderer){world.quad(vertices[0],vertices[2],vertices[4],vertices[6],stoneColor,1);continue;}
    for(let k=0;k<vertices.length;k++){
     const next=(k+1)%vertices.length,v=vertices[k],w=vertices[next];
     world.tri(center,v,w,stoneColor,1);
@@ -132,7 +133,7 @@ function tree(x,z,scale=1,style=0){
  }
  // Leaf meshes have irregular silhouettes, two-sided orientation and translucent-looking edges.
  for(let tip of canopy){
-  let cluster=5+Math.floor(rand()*4);
+  let cluster=(softwareRenderer?2:5+Math.floor(rand()*4));
   for(let j=0;j<cluster;j++){
    let phi=rand()*Math.PI*2,rad=Math.sqrt(rand())*.67*scale,px=tip[0]+Math.cos(phi)*rad,pz=tip[2]+Math.sin(phi)*rad,py=tip[1]+jitter(.95)*scale;
    let leafScale=(.22+rand()*.23)*scale,twist=rand()*Math.PI*2;
@@ -161,22 +162,22 @@ function spruce(x,z,scale=1){
  }
 }
 // A dense, varied forest breaks up the previously bare distant hillside.
-for(let i=0;i<96;i++){
+for(let i=0;i<(softwareRenderer?28:96);i++){
  let x=-76+rand()*152,z=-76+rand()*44;
  if(z>-46 && Math.abs(x)<24)continue;
  let yy=terrain(x,z);if(yy<4||yy>31)continue;
  spruce(x,z,.55+rand()*1.14);
 }
-for(let i=0;i<35;i++){let x=-22-rand()*42,z=-29+rand()*54;if(Math.hypot(x+8,z+5)<10)continue;tree(x,z,.63+rand()*.78,i%11===0?2:i%5===0?1:0)}
-for(let i=0;i<26;i++){let x=22+rand()*50,z=-42+rand()*42;if(Math.hypot(x-20,z+10)<12)continue;tree(x,z,.8+rand()*.9,i%9===0?2:0)}
+for(let i=0;i<(softwareRenderer?12:35);i++){let x=-22-rand()*42,z=-29+rand()*54;if(Math.hypot(x+8,z+5)<10)continue;tree(x,z,.63+rand()*.78,i%11===0?2:i%5===0?1:0)}
+for(let i=0;i<(softwareRenderer?11:26);i++){let x=22+rand()*50,z=-42+rand()*42;if(Math.hypot(x-20,z+10)<12)continue;tree(x,z,.8+rand()*.9,i%9===0?2:0)}
 for(let [x,z,s,kind] of [[-15,0,1.15,1],[-20,6,1.10,0],[12,6,1.10,1],[22,-8,1.35,0],[-12,-19,1.4,2],[8,-19,1.15,1],[25,13,1.15,0]])tree(x,z,s,kind);
 // Individual grass tufts and flowers, concentrated away from paving.
-for(let i=0;i<3400;i++){let x=-75+rand()*150,z=-65+rand()*94;if(x>-17&&x<20&&z>-18&&z<12)continue;let y=terrain(x,z);if(y<.45||y>17)continue;let s=.14+rand()*.26,c=rand()>.6?colors.lightLeaf:colors.darkGrass;
+for(let i=0;i<(softwareRenderer?850:3400);i++){let x=-75+rand()*150,z=-65+rand()*94;if(x>-17&&x<20&&z>-18&&z<12)continue;let y=terrain(x,z);if(y<.45||y>17)continue;let s=.14+rand()*.26,c=rand()>.6?colors.lightLeaf:colors.darkGrass;
  for(let k=0;k<2;k++){let dx=Math.cos(k*1.5+rand()*.4)*s,dz=Math.sin(k*1.8+rand()*.4)*s;world.tri([x-dx,y,z-dz],[x+dx,y,z+dz],[x+jitter(.2),y+s*(2+rand()),z+jitter(.2)],tint(c,.80+rand()*.55),3)}
  if(i%18===0){world.beam([x,y,z],[x,y+.43,z],.018,colors.leaf,3,4);world.ellipsoid(x,y+.47,z,.10,.10,.10,i%36===0?colors.gold:colors.linen,8,3,5)}
 }
 // Human-scale vegetation is sparse around the town path, thickens naturally at its edges.
-for(let i=0;i<950;i++){
+for(let i=0;i<(softwareRenderer?200:950);i++){
  let x=-28+rand()*60,z=-27+rand()*49;
  const inTown=x>-19&&x<23&&z>-19&&z<14,nearRoad=(Math.abs(x)<2.5&&z>-15&&z<15),nearHouses=(x>-19&&x<23&&z>-25&&z<-8);
  if(nearRoad||nearHouses||inTown&&rand()>.40)continue;
@@ -631,14 +632,20 @@ dynamicGeo=geometryBuffer(character(0));gl.bindBuffer(gl.ARRAY_BUFFER,dynamicGeo
 const shadowDecalGeo=geometryBuffer(characterShadow());let shadowByteCapacity=Math.ceil(shadowDecalGeo.count*40*1.4);
 gl.bindBuffer(gl.ARRAY_BUFFER,shadowDecalGeo.buffer);gl.bufferData(gl.ARRAY_BUFFER,shadowByteCapacity,gl.DYNAMIC_DRAW);
 let last=0,elapsed=0,frames=0,phase=0;
-function frame(now){let dt=last?Math.max(0,Math.min(.045,(now-last)/1000)):0;last=now;elapsed+=dt;
+// Movement uses elapsed real time; clamping to 45 ms made controls nearly freeze on low FPS.
+function frame(now){let dt=last?Math.max(0,Math.min(.75,(now-last)/1000)):0;last=now;elapsed+=dt;
  let dx=(key.d||key.arrowright?1:0)-(key.a||key.arrowleft?1:0)+aimX,forward=(key.w||key.arrowup?1:0)-(key.s||key.arrowdown?1:0)+aimY;
  let len=Math.hypot(dx,forward);if(len>1){dx/=len;forward/=len;len=1}
  let moving=len>.04,fast=key.shift||runTouch,speed=fast?7.5:4.0;
  if(moving){let wx=dx*Math.cos(cameraYaw)-forward*Math.sin(cameraYaw),wz=-dx*Math.sin(cameraYaw)-forward*Math.cos(cameraYaw);
- player.x=clamp(player.x+wx*dt*speed*len,-85,85);player.z=clamp(player.z+wz*dt*speed*len,-86,68);
- // Avoid advancing into deep water while retaining pier access.
- if(terrain(player.x,player.z)<.18&&!(player.x>8&&player.x<15&&player.z<33)){player.x-=wx*dt*speed*len;player.z-=wz*dt*speed*len}
+ // Substep movement so longer frames never tunnel through sea or shoreline.
+ const distance=dt*speed*len,steps=Math.max(1,Math.ceil(distance/.42)),stride=distance/steps;
+ for(let step=0;step<steps;step++){
+  const nextX=clamp(player.x+wx*stride,-85,85),nextZ=clamp(player.z+wz*stride,-86,68);
+  const onPier=nextX>8.5&&nextX<14.5&&nextZ>=12.7&&nextZ<32.3;
+  if(terrain(nextX,nextZ)<.18&&!onPier)break;
+  player.x=nextX;player.z=nextZ;
+ }
  let target=Math.atan2(-wx,-wz),diff=Math.atan2(Math.sin(target-player.heading),Math.cos(target-player.heading));player.heading+=diff*Math.min(1,dt*12);
  player.phase+=dt*(fast?13.2:9.0)*len;
  }
@@ -671,6 +678,6 @@ function frame(now){let dt=last?Math.max(0,Math.min(.045,(now-last)/1000)):0;las
  else{document.getElementById('placeName').textContent='Old Village Square';document.getElementById('placeDescription').textContent='Follow the lanterns past the market toward the harbor. There is more beyond the hills.'}
  requestAnimationFrame(frame)
 }
-function resize(){let ratio=Math.min(window.devicePixelRatio||1,window.matchMedia('(pointer:coarse)').matches?1.25:1.5),w=Math.max(320,Math.round(innerWidth*ratio)),h=Math.max(220,Math.round(innerHeight*ratio));canvas.width=w;canvas.height=h}
+function resize(){let ratio=softwareRenderer?.66:Math.min(window.devicePixelRatio||1,window.matchMedia('(pointer:coarse)').matches?1.25:1.5),w=Math.max(320,Math.round(innerWidth*ratio)),h=Math.max(220,Math.round(innerHeight*ratio));canvas.width=w;canvas.height=h}
 window.addEventListener('resize',resize);resize();requestAnimationFrame(frame);
 })();
