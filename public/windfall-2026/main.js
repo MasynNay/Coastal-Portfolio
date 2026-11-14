@@ -919,7 +919,7 @@ function characterShadow(){
 dynamicGeo=geometryBuffer(character(0));gl.bindBuffer(gl.ARRAY_BUFFER,dynamicGeo.buffer);let dynamicByteCapacity=Math.ceil(dynamicGeo.count*40*1.6);gl.bufferData(gl.ARRAY_BUFFER,dynamicByteCapacity,gl.DYNAMIC_DRAW);
 if(authoredAssets)authoredAssets.loadManifest('asset-manifest.json',terrain).then(status=>{
  document.documentElement.dataset.windfallAssets=String(status.filter(s=>s.loaded).length);farShadowDirty=true;
- document.documentElement.dataset.windfallAssetStatus=JSON.stringify(status.map(s=>({id:s.id,loaded:s.loaded,error:s.error||null})));
+ document.documentElement.dataset.windfallAssetStatus=JSON.stringify(status.map(s=>({id:s.id,loaded:s.loaded,role:s.role||null,error:s.error||null})));
 }).catch(err=>{document.documentElement.dataset.windfallAssets='0';document.documentElement.dataset.windfallAssetStatus=JSON.stringify([{id:'manifest',loaded:false,error:String(err)}]);console.warn('Authored asset manifest unavailable; using procedural scene:',String(err));});
 // The distant shadow texture is rebuilt after GLB models finish loading. Otherwise
 // authored buildings and foliage cast no shadows beyond the player cascade.
