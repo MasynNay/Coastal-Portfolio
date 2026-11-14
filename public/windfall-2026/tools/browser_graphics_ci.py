@@ -20,6 +20,8 @@ EXPECTED = {
     "weathered-standing-stone", "windfall-broadleaf-tree",
     "windfall-timber-cottage", "windfall-harbor-workshop",
     "windfall-wayfarer", "windfall-mountain-conifer",
+    "windfall-companion-a", "windfall-companion-b",
+    "windfall-companion-c", "windfall-companion-d",
 }
 
 
@@ -74,6 +76,8 @@ async def run_case(browser, base, fallback):
         diagnostics = initial["diagnostics"]
         assert diagnostics, initial
         assert diagnostics["modelDraws"]["instances"] > 0, diagnostics
+        companions=[item for item in initial["assets"] if item.get("role")=="companion"]
+        assert len(companions)==4 and all(x["loaded"] for x in companions), companions
         assert diagnostics["modelDraws"]["colorSubmitted"] > 0, diagnostics
         assert diagnostics["modelDraws"]["colorCulled"] >= 0, diagnostics
         prefix = "fallback" if fallback else "authored"
