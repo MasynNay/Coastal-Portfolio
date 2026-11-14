@@ -10,8 +10,9 @@ const rendererExtension=gl.getExtension('WEBGL_debug_renderer_info');
 const rendererName=rendererExtension?gl.getParameter(rendererExtension.UNMASKED_RENDERER_WEBGL):gl.getParameter(gl.RENDERER);
 // The explicit low-quality switch is used by browser QA and slower devices.
 // It never changes the production/default quality choice on normal URLs.
-const softwareRenderer=new URLSearchParams(location.search).get('quality')==='software'||
-  /swiftshader|llvmpipe|software rasterizer/i.test(rendererName||'');
+const requestedQuality=new URLSearchParams(location.search).get('quality');
+const softwareRenderer=requestedQuality==='software'||
+  (requestedQuality!=='full'&&/swiftshader|llvmpipe|software rasterizer/i.test(rendererName||''));
 const clamp=(a,b,c)=>Math.max(b,Math.min(c,a)), mix=(a,b,t)=>a+(b-a)*t;
 const smooth=(a,b,x)=>{let t=clamp((x-a)/(b-a),0,1);return t*t*(3-2*t)};
 const v3=(x,y,z)=>[x,y,z], sub=(a,b)=>[a[0]-b[0],a[1]-b[1],a[2]-b[2]], cross=(a,b)=>[a[1]*b[2]-a[2]*b[1],a[2]*b[0]-a[0]*b[2],a[0]*b[1]-a[1]*b[0]], norm=(a)=>{let s=Math.hypot(...a)||1;return a.map(x=>x/s)};
