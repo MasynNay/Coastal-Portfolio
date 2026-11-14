@@ -22,7 +22,14 @@ function terrain(x,z){
  const hills=smooth(-12,-35,z)*3.0; // inverted smooth intentionally works as a descending range
  const mountain=(cx,cz,sx,sz,h)=>h*Math.exp(-(((x-cx)/sx)**2)-(((z-cz)/sz)**2));
  const high=mountain(-46,-58,17,21,23)+mountain(-12,-62,19,20,16)+mountain(29,-59,19,23,26)+mountain(64,-60,17,23,20);
- return 2.5+wav*(.35+smooth(-14,-43,z)*2.6)+hills+high-shore*6.6;
+ // Height-correlated, long-wavelength erosion ridges soften the repeated
+ // Gaussian mountain silhouette without damaging the beach or village paths.
+ const ridgeZone=smooth(-31,-62,z);
+ const eroded=(Math.sin(x*.37+z*.13+Math.sin(z*.19))*.60+
+               Math.sin(x*.68-z*.31)*.22+
+               Math.sin(x*.13+z*.57)*.18);
+ const ridges=ridgeZone*(.47+Math.min(high,24)*.055)*eroded;
+ return 2.5+wav*(.35+smooth(-14,-43,z)*2.6)+hills+high+ridges-shore*6.6;
 }
 class Geometry {
  constructor(){this.a=[];this.count=0;}
@@ -107,7 +114,28 @@ stonesAlong(0,10,0,-13,28,4.0);stonesAlong(-1,-3,-15,-6,18,3.0);stonesAlong(2,-4
 function plaza(cx,cz,r){for(let n=0;n<175;n++){let theta=rand()*Math.PI*2,rr=Math.sqrt(rand())*r,x=cx+Math.cos(theta)*rr,z=cz+Math.sin(theta)*rr,y=terrain(x,z)+.045;world.box(x,y,z,.60+rand()*.66,.03,.55+rand()*.5,tint(colors.paleStone,.72+rand()*.4),1)}}
 plaza(-6,-4,4.4);
 // Landscape rocks are clustered rather than distributed on an obvious grid.
-function rock(x,z,r){let y=terrain(x,z)-.05;world.ellipsoid(x,y+r*.42,z,r,.75*r,r*.82,tint(colors.rock,.75+rand()*.48),1,4,7);if(r>.75)world.ellipsoid(x+r*.52,y+r*.20,z-r*.18,r*.46,.35*r,.43*r,tint(colors.stone,.78+rand()*.25),1,4,6)}
+function rock(x,z,r){
+ // Three uneven sculptural rings create faceted boulders rather than smooth eggs.
+ const count=9,y=terrain(x,z)-.065,spin=rand()*Math.PI*2;
+ const aspect=.75+rand()*.44,height=(.62+rand()*.34)*r;
+ const base=[],shoulder=[],cap=[];
+ for(let i=0;i<count;i++){
+  const t=i*2*Math.PI/count+spin,rx=Math.cos(t),rz=Math.sin(t);
+  const irregular=.78+rand()*.36,wide=r*irregular;
+  const xx=x+rx*wide,zz=z+rz*wide*aspect;
+  base.push([xx,terrain(xx,zz)-.09,zz]);
+  const lift=.46+rand()*.19;
+  shoulder.push([x+rx*wide*.90,y+height*lift,z+rz*wide*.92*aspect]);
+  cap.push([x+rx*wide*(.18+rand()*.22),y+height*(.91+rand()*.12),z+rz*wide*.23*aspect]);
+ }
+ const middle=[x+jitter(.12)*r,y+height*1.05,z+jitter(.12)*r];
+ for(let i=0;i<count;i++){
+  const j=(i+1)%count,shade=.76+rand()*.30,c=tint(colors.rock,shade);
+  world.quad(base[i],base[j],shoulder[j],shoulder[i],c,1);
+  world.quad(shoulder[i],shoulder[j],cap[j],cap[i],tint(c,.88+rand()*.2),1);
+  world.tri(cap[i],cap[j],middle,tint(colors.stone,.78+rand()*.30),1);
+ }
+}
 for(let i=0;i<155;i++){let x=mix(-83,83,rand()),z=mix(-85,40,rand());if(Math.hypot(x,z-3)<12 || (x>-17&&x<24&&z>-18&&z<13))continue;rock(x,z,.25+rand()*1.45)}
 // Trees: branching trunks, multiple canopy lobes, tonal variation and occasional flowers.
 function tree(x,z,scale=1,style=0){
