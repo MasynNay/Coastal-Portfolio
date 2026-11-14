@@ -35,3 +35,7 @@ No original files from the previous unreleased local session were recovered. Thi
 ## Staged authored architecture (unreleased)
 
 The graphics R&D branch now includes two original multi-material GLB buildings (timber cottage and harbor workshop) across seven village sites. Each has individually modeled roof tiles, masonry foundation, timber structure, recessed windows, shutters, shutters' metal hardware, entry doors, steps, and workshop details. Building materials use embedded PBR texture, normal and metallic-roughness maps. Existing procedural houses render as a fallback until both building families load, and rotated collision boxes keep movement outside walls. Rebuild the architecture assets with `node tools/build_architecture.js`. The game remains a work-in-progress, not a finished 2026 remake.
+
+## Architecture checkpoint QA
+
+Run `node tools/verify-architecture.cjs` from this directory. It checks the two authored building GLBs, embedded texture references, all seven placements, model provenance, collision bounds, independent legacy fallbacks, and distant shadow refresh hooks. This is a structural guard; it does **not** establish the requested high-fidelity art quality or GPU performance. The live site remains untouched.
