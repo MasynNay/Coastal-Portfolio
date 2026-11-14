@@ -6,6 +6,9 @@ const errorNode=document.getElementById('error');
 const error=(msg)=>{console.error(msg);errorNode.textContent='Graphics preview: '+msg;errorNode.style.display='block';loading.classList.add('off')};
 const gl=canvas.getContext('webgl2',{antialias:true,alpha:false,powerPreference:'high-performance'});
 if(!gl){error('WebGL 2 is unavailable. Enable hardware acceleration or try a recent Firefox/Chrome browser.');return;}
+const rendererExtension=gl.getExtension('WEBGL_debug_renderer_info');
+const rendererName=rendererExtension?gl.getParameter(rendererExtension.UNMASKED_RENDERER_WEBGL):gl.getParameter(gl.RENDERER);
+const softwareRenderer=/swiftshader|llvmpipe|software rasterizer/i.test(rendererName||'');
 const clamp=(a,b,c)=>Math.max(b,Math.min(c,a)), mix=(a,b,t)=>a+(b-a)*t;
 const smooth=(a,b,x)=>{let t=clamp((x-a)/(b-a),0,1);return t*t*(3-2*t)};
 const v3=(x,y,z)=>[x,y,z], sub=(a,b)=>[a[0]-b[0],a[1]-b[1],a[2]-b[2]], cross=(a,b)=>[a[1]*b[2]-a[2]*b[1],a[2]*b[0]-a[0]*b[2],a[0]*b[1]-a[1]*b[0]], norm=(a)=>{let s=Math.hypot(...a)||1;return a.map(x=>x/s)};
@@ -270,6 +273,36 @@ function viewMat(eye,target,up=[0,1,0]){let z=norm(sub(eye,target)),x=norm(cross
 function projection(fov,aspect,near,far){let s=1/Math.tan(fov/2),a=1/(near-far);return [s/aspect,0,0,0,0,s,0,0,0,0,(far+near)*a,-1,0,0,2*far*near*a,0]}
 function ortho(l,r,b,t,n,f){return [2/(r-l),0,0,0,0,2/(t-b),0,0,0,0,-2/(f-n),0,-(r+l)/(r-l),-(t+b)/(t-b),-(f+n)/(f-n),1]}
 function mul(a,b){let o=new Array(16);for(let c=0;c<4;c++)for(let r=0;r<4;r++){o[c*4+r]=0;for(let k=0;k<4;k++)o[c*4+r]+=a[k*4+r]*b[c*4+k]}return o}
+// Seamless, locally generated material atlas: no third-party network calls or downloaded textures.
+// Eight 256px tiles (grass, stone, wood, foliage, plaster, roof, metal, sand).
+function makeMaterialAtlas(gl){
+ const side=256,w=1024,h=512,data=new Uint8Array(w*h*4);
+ function hash2(x,y,seed){let v=Math.imul(x^seed,374761393)+Math.imul(y+seed,668265263);v=(v^(v>>>13))|0;v=Math.imul(v,1274126177);return ((v^(v>>>16))>>>0)/4294967295}
+ function noise2(x,y,seed){let i=Math.floor(x),j=Math.floor(y),fx=x-i,fy=y-j;fx=fx*fx*(3-2*fx);fy=fy*fy*(3-2*fy);let a=hash2(i,j,seed),b=hash2(i+1,j,seed),c=hash2(i,j+1,seed),d=hash2(i+1,j+1,seed);return mix(mix(a,b,fx),mix(c,d,fx),fy)}
+ for(let k=0;k<8;k++)for(let y=0;y<side;y++)for(let x=0;x<side;x++){
+  let u=x/side,v=y/side,n=noise2(u*7,v*7,k*91+3),micro=noise2(u*49,v*49,k*83+4),fine=hash2(x,y,k*91+10);
+  let rgb;
+  if(k===0){let stripe=Math.abs(Math.sin(u*60+v*18));let t=.18+.53*n+.20*micro+.06*fine;rgb=[.28+.54*t,.27+.57*t,.18+.40*t];if(stripe>.92&&fine>.45)rgb=[.35,.37,.22]}
+  if(k===1){let veining=Math.abs(Math.sin((u+v*.54)*24+n*4));let t=.24+.48*n+.16*micro+.08*fine;rgb=[t+.04,t+.032,t+.01];if(veining>.99)rgb=rgb.map(a=>a*.75)}
+  if(k===2){let grain=.5+.5*Math.sin(u*64+v*2+n*5);let t=.16+.33*n+.32*grain+.10*micro;rgb=[t+.07,t+.02,t*.77]}
+  if(k===3){let t=.13+.45*n+.33*micro+.09*fine;rgb=[t*.84,t+.12,t*.67]}
+  if(k===4){let t=.54+.30*n+.14*micro;rgb=[t+.045,t+.028,t-.025]}
+  if(k===5){let t=.24+.42*n+.23*micro+.11*fine;rgb=[t+.09,t*.80,t*.68]}
+  if(k===6){let t=.33+.39*n+.16*micro;rgb=[t*.95,t,t+.07]}
+  if(k===7){let t=.33+.40*n+.21*micro+.06*fine;rgb=[t+.08,t+.05,t-.04]}
+  let ix=k%4*side+x,iy=Math.floor(k/4)*side+y,o=(iy*w+ix)*4;
+  for(let c=0;c<3;c++)data[o+c]=Math.round(clamp(rgb[c],0,1)*255);
+  data[o+3]=255;
+ }
+ const tex=gl.createTexture();gl.bindTexture(gl.TEXTURE_2D,tex);
+ gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA8,w,h,0,gl.RGBA,gl.UNSIGNED_BYTE,data);
+ gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,gl.LINEAR_MIPMAP_LINEAR);
+ gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MAG_FILTER,gl.LINEAR);
+ gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_S,gl.CLAMP_TO_EDGE);
+ gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_T,gl.CLAMP_TO_EDGE);
+ gl.generateMipmap(gl.TEXTURE_2D);gl.bindTexture(gl.TEXTURE_2D,null);
+ return tex;
+}
 const VS=`#version 300 es
 precision highp float;
 layout(location=0)in vec3 aPos;layout(location=1)in vec3 aNormal;layout(location=2)in vec3 aColor;layout(location=3)in float aKind;
@@ -278,17 +311,28 @@ void main(){vPos=aPos;vNormal=aNormal;vColor=aColor;vKind=int(aKind+.5);gl_Posit
 const FS=`#version 300 es
 precision highp float;
 in vec3 vPos;in vec3 vNormal;in vec3 vColor;flat in int vKind;
-uniform vec3 uEye;uniform vec3 uSun;uniform vec3 uFog;uniform float uTime;uniform sampler2D uShadow;uniform mat4 uLightVP;uniform float uShadowEnabled;
+uniform vec3 uEye;uniform vec3 uSun;uniform vec3 uFog;uniform float uTime;uniform sampler2D uShadow;uniform sampler2D uMaterialAtlas;uniform mat4 uLightVP;uniform float uShadowEnabled;uniform float uShadowMapSize;uniform float uLowQuality;
 out vec4 frag;
 float hash(vec3 p){p=fract(p*.1031);p+=dot(p,p.yxz+33.33);return fract((p.x+p.y)*p.z);}
 float noise(vec3 x){vec3 i=floor(x),f=fract(x);f=f*f*(3.-2.*f);return mix(mix(mix(hash(i),hash(i+vec3(1,0,0)),f.x),mix(hash(i+vec3(0,1,0)),hash(i+vec3(1,1,0)),f.x),f.y),mix(mix(hash(i+vec3(0,0,1)),hash(i+vec3(1,0,1)),f.x),mix(hash(i+vec3(0,1,1)),hash(i+vec3(1,1,1)),f.x),f.y),f.z);}
 float fbm(vec3 p){float n=0.,a=.55;for(int i=0;i<3;i++){n+=a*noise(p);p=p*2.07+vec3(3.4,7.2,1.1);a*=.51;}return n;}
 float shadow(vec3 n){if(uShadowEnabled<.5)return 1.;vec4 p=uLightVP*vec4(vPos+n*.04,1.);vec3 q=p.xyz/p.w*.5+.5;if(q.x<=.002||q.x>=.998||q.y<=.002||q.y>=.998||q.z>=1.)return 1.;
  float bias=max(.00019,.00125*(1.-max(dot(n,normalize(uSun)),0.)));float val=0.;
- for(int i=-1;i<=1;i++)for(int j=-1;j<=1;j++){vec2 offset=(vec2(float(i),float(j))+.24*vec2(sin(dot(vPos.xz,vec2(13.,7.))),cos(dot(vPos.xz,vec2(11.,17.)))))/2048.;float depth=texture(uShadow,q.xy+offset).r;val+=q.z-bias<=depth?1.:0.;}
+ for(int i=-1;i<=1;i++)for(int j=-1;j<=1;j++){vec2 offset=(vec2(float(i),float(j))+.24*vec2(sin(dot(vPos.xz,vec2(13.,7.))),cos(dot(vPos.xz,vec2(11.,17.)))))/uShadowMapSize;float depth=texture(uShadow,q.xy+offset).r;val+=q.z-bias<=depth?1.:0.;}
  return .33+.67*val/9.;}
 vec3 aces(vec3 x){return clamp((x*(2.51*x+.03))/(x*(2.43*x+.59)+.14),0.,1.);}
 void main(){vec3 N=normalize(vNormal);vec3 L=normalize(uSun);vec3 V=normalize(uEye-vPos);
+ if(uLowQuality>.5){
+  if(vKind>=13){frag=vec4(.025,.025,.025,vKind==13?.19:vKind==14?.12:.04);return;}
+  vec3 base=pow(max(vColor,vec3(.001)),vec3(2.2));
+  float direct=max(dot(N,L),0.);
+  vec3 c=base*(vec3(.48,.55,.62)*( .68+.22*max(N.y,0.))+vec3(1.12,.84,.64)*direct*.99);
+  if(vKind==8)c=base*2.9;
+  float fog=1.-exp(-pow(length(uEye-vPos)*.0083,1.42));
+  c=mix(c,pow(uFog,vec3(2.2)),fog*.69);
+  c=clamp((c*(2.51*c+.03))/(c*(2.43*c+.59)+.14),0.,1.);
+  frag=vec4(pow(c,vec3(1./2.2)),1.);return;
+ }
  float micro=fbm(vPos*4.1),macro=fbm(vPos*.83),roughness=.92,metallic=0.,transmission=0.;vec3 albedo=vColor;
  if(vKind==0){float grain=fbm(vPos*vec3(2.6,2.6,2.6));albedo*=mix(.57,1.23,grain);albedo=mix(albedo,vec3(.02,.08,.018),smoothstep(.71,.90,macro)*.35);roughness=.99;}
  if(vKind==1){float grit=fbm(vPos*6.);albedo*=mix(.68,1.25,grit);albedo*=mix(.91,1.06,macro);float cracks=pow(1.-abs(sin(vPos.x*2.9+vPos.z*2.3)),27.);albedo*=1.-cracks*.12;roughness=.96;}
@@ -378,22 +422,22 @@ void main(){vec2 p=vPos.xz;
 function shader(type,src){let s=gl.createShader(type);gl.shaderSource(s,src);gl.compileShader(s);if(!gl.getShaderParameter(s,gl.COMPILE_STATUS))throw Error(gl.getShaderInfoLog(s));return s}
 function program(v,f){let p=gl.createProgram();gl.attachShader(p,shader(gl.VERTEX_SHADER,v));gl.attachShader(p,shader(gl.FRAGMENT_SHADER,f));gl.linkProgram(p);if(!gl.getProgramParameter(p,gl.LINK_STATUS))throw Error(gl.getProgramInfoLog(p));return p}
 function geometryBuffer(geometry){let vao=gl.createVertexArray(),buffer=gl.createBuffer();gl.bindVertexArray(vao);gl.bindBuffer(gl.ARRAY_BUFFER,buffer);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array(geometry.a),gl.STATIC_DRAW);for(let i=0;i<4;i++){gl.enableVertexAttribArray(i);gl.vertexAttribPointer(i,i===0||i===1||i===2?3:1,gl.FLOAT,false,40,[0,12,24,36][i])}gl.bindVertexArray(null);return {vao,buffer,count:geometry.count}}
-let mainProgram,shadowProgram,skyProgram,waterProgram,staticGeo,dynamicGeo,waterGeo,fullscreen,depthTex,depthFbo,lightVP;
+let mainProgram,shadowProgram,skyProgram,waterProgram,staticGeo,dynamicGeo,waterGeo,fullscreen,depthTex,depthFbo,lightVP,materialAtlas;
 try{
- mainProgram=program(VS,FS);shadowProgram=program(SHADOW_VS,SHADOW_FS);skyProgram=program(SKY_VS,SKY_FS);waterProgram=program(WATER_VS,WATER_FS);
+ mainProgram=program(VS,FS);materialAtlas=makeMaterialAtlas(gl);shadowProgram=program(SHADOW_VS,SHADOW_FS);skyProgram=program(SKY_VS,SKY_FS);waterProgram=program(WATER_VS,WATER_FS);
  staticGeo=geometryBuffer(world);world.a=null;
  const water=new Geometry();water.quad([-155,.035,-155],[155,.035,-155],[155,.035,155],[-155,.035,155],colors.water,8);waterGeo=geometryBuffer(water);
  fullscreen=gl.createVertexArray();gl.bindVertexArray(fullscreen);let b=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,b);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,3,-1,-1,3]),gl.STATIC_DRAW);gl.enableVertexAttribArray(0);gl.vertexAttribPointer(0,2,gl.FLOAT,false,0,0);gl.bindVertexArray(null);
- const S=2048;depthTex=gl.createTexture();gl.bindTexture(gl.TEXTURE_2D,depthTex);gl.texImage2D(gl.TEXTURE_2D,0,gl.DEPTH_COMPONENT24,S,S,0,gl.DEPTH_COMPONENT,gl.UNSIGNED_INT,null);
+ const S=softwareRenderer?512:window.matchMedia('(pointer:coarse)').matches?1024:2048;depthTex=gl.createTexture();gl.bindTexture(gl.TEXTURE_2D,depthTex);gl.texImage2D(gl.TEXTURE_2D,0,gl.DEPTH_COMPONENT24,S,S,0,gl.DEPTH_COMPONENT,gl.UNSIGNED_INT,null);
  gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,gl.NEAREST);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MAG_FILTER,gl.NEAREST);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_S,gl.CLAMP_TO_EDGE);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_T,gl.CLAMP_TO_EDGE);
  depthFbo=gl.createFramebuffer();gl.bindFramebuffer(gl.FRAMEBUFFER,depthFbo);gl.framebufferTexture2D(gl.FRAMEBUFFER,gl.DEPTH_ATTACHMENT,gl.TEXTURE_2D,depthTex,0);gl.drawBuffers([gl.NONE]);gl.readBuffer(gl.NONE);
  if(gl.checkFramebufferStatus(gl.FRAMEBUFFER)!==gl.FRAMEBUFFER_COMPLETE)throw Error('Shadow map framebuffer could not be created');gl.bindFramebuffer(gl.FRAMEBUFFER,null);
  const shadowEye=[-65,80,56],focus=[0,4,-9];lightVP=mul(ortho(-113,113,-115,115,1,250),viewMat(shadowEye,focus));
  gl.viewport(0,0,S,S);gl.bindFramebuffer(gl.FRAMEBUFFER,depthFbo);gl.clearDepth(1);gl.clear(gl.DEPTH_BUFFER_BIT);gl.enable(gl.DEPTH_TEST);
- gl.useProgram(shadowProgram);gl.uniformMatrix4fv(gl.getUniformLocation(shadowProgram,'uLightVP'),false,new Float32Array(lightVP));gl.bindVertexArray(staticGeo.vao);gl.drawArrays(gl.TRIANGLES,0,staticGeo.count);gl.bindFramebuffer(gl.FRAMEBUFFER,null);
+ gl.useProgram(shadowProgram);gl.uniformMatrix4fv(gl.getUniformLocation(shadowProgram,'uLightVP'),false,new Float32Array(lightVP));if(!softwareRenderer){gl.bindVertexArray(staticGeo.vao);gl.drawArrays(gl.TRIANGLES,0,staticGeo.count)}gl.bindFramebuffer(gl.FRAMEBUFFER,null);
 }catch(e){error(String(e));return}
 const u=(p,name)=>gl.getUniformLocation(p,name);
-const mainU={vp:u(mainProgram,'uVP'),eye:u(mainProgram,'uEye'),sun:u(mainProgram,'uSun'),fog:u(mainProgram,'uFog'),time:u(mainProgram,'uTime'),shadow:u(mainProgram,'uShadow'),lvp:u(mainProgram,'uLightVP'),enabled:u(mainProgram,'uShadowEnabled')};
+const mainU={vp:u(mainProgram,'uVP'),eye:u(mainProgram,'uEye'),sun:u(mainProgram,'uSun'),fog:u(mainProgram,'uFog'),time:u(mainProgram,'uTime'),shadow:u(mainProgram,'uShadow'),materials:u(mainProgram,'uMaterialAtlas'),shadowSize:u(mainProgram,'uShadowMapSize'),lowQuality:u(mainProgram,'uLowQuality'),lvp:u(mainProgram,'uLightVP'),enabled:u(mainProgram,'uShadowEnabled')};
 const waterU={vp:u(waterProgram,'uVP'),eye:u(waterProgram,'uEye'),sun:u(waterProgram,'uSun'),fog:u(waterProgram,'uFog'),time:u(waterProgram,'uTime')};
 const sun=norm([-0.55,.70,.46]),fog=[.63,.70,.73];
 const player={x:0,z:7,y:0,heading:0.16,phase:0,motion:0};let cameraYaw=0.16,cameraPitch=.27,cameraDist=10.9,drag=null,aimX=0,aimY=0,runTouch=false;
@@ -509,7 +553,7 @@ function frame(now){let dt=last?Math.max(0,Math.min(.045,(now-last)/1000)):0;las
  const target=[x,y+1.7,z],view=viewMat(eye,target),vp=mul(projection(.98,canvas.width/canvas.height,.12,340),view);
  gl.viewport(0,0,canvas.width,canvas.height);gl.clearColor(.54,.67,.67,1);gl.clear(gl.COLOR_BUFFER_BIT|gl.DEPTH_BUFFER_BIT);
  gl.disable(gl.DEPTH_TEST);gl.depthMask(false);gl.useProgram(skyProgram);gl.uniform1f(u(skyProgram,'uTime'),elapsed);gl.bindVertexArray(fullscreen);gl.drawArrays(gl.TRIANGLES,0,3);gl.depthMask(true);gl.enable(gl.DEPTH_TEST);
- gl.useProgram(mainProgram);gl.uniformMatrix4fv(mainU.vp,false,new Float32Array(vp));gl.uniformMatrix4fv(mainU.lvp,false,new Float32Array(lightVP));gl.uniform3fv(mainU.eye,eye);gl.uniform3fv(mainU.sun,sun);gl.uniform3fv(mainU.fog,fog);gl.uniform1f(mainU.time,elapsed);gl.uniform1f(mainU.enabled,1);gl.activeTexture(gl.TEXTURE0);gl.bindTexture(gl.TEXTURE_2D,depthTex);gl.uniform1i(mainU.shadow,0);
+ gl.useProgram(mainProgram);gl.uniformMatrix4fv(mainU.vp,false,new Float32Array(vp));gl.uniformMatrix4fv(mainU.lvp,false,new Float32Array(lightVP));gl.uniform3fv(mainU.eye,eye);gl.uniform3fv(mainU.sun,sun);gl.uniform3fv(mainU.fog,fog);gl.uniform1f(mainU.time,elapsed);gl.uniform1f(mainU.enabled,softwareRenderer?0:1);gl.uniform1f(mainU.lowQuality,softwareRenderer?1:0);gl.activeTexture(gl.TEXTURE0);gl.bindTexture(gl.TEXTURE_2D,depthTex);gl.uniform1i(mainU.shadow,0);gl.activeTexture(gl.TEXTURE1);gl.bindTexture(gl.TEXTURE_2D,materialAtlas);gl.uniform1i(mainU.materials,1);gl.uniform1f(mainU.shadowSize,softwareRenderer?512:window.matchMedia('(pointer:coarse)').matches?1024:2048);
  gl.bindVertexArray(staticGeo.vao);gl.drawArrays(gl.TRIANGLES,0,staticGeo.count);
  // A soft, fading, ground-following contact shadow anchors the moving feet.
  gl.enable(gl.BLEND);gl.blendFunc(gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);gl.depthMask(false);
@@ -529,6 +573,6 @@ function frame(now){let dt=last?Math.max(0,Math.min(.045,(now-last)/1000)):0;las
  else{document.getElementById('placeName').textContent='Old Village Square';document.getElementById('placeDescription').textContent='Follow the lanterns past the market toward the harbor. There is more beyond the hills.'}
  requestAnimationFrame(frame)
 }
-function resize(){let ratio=Math.min(window.devicePixelRatio||1,1.65),w=Math.max(320,Math.round(innerWidth*ratio)),h=Math.max(220,Math.round(innerHeight*ratio));canvas.width=w;canvas.height=h}
+function resize(){let ratio=Math.min(window.devicePixelRatio||1,window.matchMedia('(pointer:coarse)').matches?1.25:1.5),w=Math.max(320,Math.round(innerWidth*ratio)),h=Math.max(220,Math.round(innerHeight*ratio));canvas.width=w;canvas.height=h}
 window.addEventListener('resize',resize);resize();requestAnimationFrame(frame);
 })();
