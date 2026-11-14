@@ -1,3 +1,10 @@
+## November 14 — material-specific character PBR and distant foliage draw budgets
+
+- Regenerated all five original fictional characters with material-specific PBR normal maps and roughness: low-amplitude procedural skin pores, woven fabric threads, strand-direction hair grain, wrinkled leather, subtle iris fibers and brushed metallic highlights. These are self-authored procedural textures, **not photoreal reference skins or captured fabric scans**.
+- Added conservative camera-distance visibility ceilings for tiny forest-floor clusters (hazel 49, fern 37, wildflower 34 world units, extended by each mesh's bounding radius). The authored renderer filters these in camera and sunlight-depth passes, without changing buildings, trees or characters. This reduces submissions of distant low-value detail; it is not geometric mesh LOD or an approved GPU optimization budget.
+- Added regression contracts for the new texture authoring channels, per-height wind, and the exact mathematical visibility boundary. Existing ten-model-fallback gameplay and newer thirteen-model loading tests still apply.
+- The new character rebuild and original broadleaf/undergrowth asset builds passed independently. A fresh Chromium software and full-detail smoke test for the combined draw-distance changes has been started. **Full acceptance is not implied; release HOLD remains.**
+
 ## November 14 — coastal understory and scanned-bark forest checkpoint
 
 **Development branch only. Keep the public site and release gate unchanged.**
