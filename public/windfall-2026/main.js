@@ -474,6 +474,45 @@ function makeMaterialAtlas(gl){
  gl.generateMipmap(gl.TEXTURE_2D);gl.bindTexture(gl.TEXTURE_2D,null);
  return tex;
 }
+// Load locally committed, CC0-photographed albedo/height tiles over the
+// procedural atlas. This is optional: offline builds or missing files retain
+// the deterministic generated materials. No CDN or API is accessed at runtime.
+async function upgradeAtlasWithScans(gl,atlas){
+ const candidates=[
+  {index:0,file:'forest-floor-rgba.png'},
+  {index:1,file:'cobblestone-rgba.png'},
+  {index:2,file:'tree-bark-rgba.png'}
+ ];
+ if(softwareRenderer){
+  document.documentElement.dataset.windfallScannedMaterials='software-fallback';
+  return [];
+ }
+ const size=384,loaded=[];
+ for(const item of candidates){
+  try{
+   const response=await fetch('materials/'+item.file,{credentials:'same-origin'});
+   if(!response.ok)continue;
+   const image=await createImageBitmap(await response.blob(),{
+    resizeWidth:size,resizeHeight:size,resizeQuality:'high'
+   });
+   gl.bindTexture(gl.TEXTURE_2D,atlas);
+   gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL,false);
+   gl.texSubImage2D(gl.TEXTURE_2D,0,(item.index%4)*size,Math.floor(item.index/4)*size,
+     gl.RGBA,gl.UNSIGNED_BYTE,image);
+   image.close();
+   loaded.push(item.file);
+  }catch(err){
+   console.warn('Optional local CC0 material unavailable:',item.file,String(err));
+  }
+ }
+ if(loaded.length){
+  gl.bindTexture(gl.TEXTURE_2D,atlas);
+  gl.generateMipmap(gl.TEXTURE_2D);
+  gl.bindTexture(gl.TEXTURE_2D,null);
+ }
+ document.documentElement.dataset.windfallScannedMaterials=loaded.join(',')||'procedural-fallback';
+ return loaded;
+}
 // Height lookup for water lets foam and color follow the ACTUAL coastline.
 // Built from the same terrain function as the land mesh, not a hardcoded z stripe.
 function createCoastHeightmap(gl){
@@ -725,6 +764,7 @@ try{
  // Any import failure leaves the existing exploratory world playable.
  if(window.WindfallAssetPipeline){try{authoredAssets=window.WindfallAssetPipeline.create(gl);}catch(e){console.warn('Optional PBR model system unavailable',e);}}
  mainProgram=program(VS,FS);materialAtlas=makeMaterialAtlas(gl);coastHeightmap=createCoastHeightmap(gl);shadowProgram=program(SHADOW_VS,SHADOW_FS);skyProgram=program(SKY_VS,SKY_FS);waterProgram=program(WATER_VS,WATER_FS);
+ upgradeAtlasWithScans(gl,materialAtlas).catch(err=>console.warn('Optional PBR atlas overlay skipped:',err));
  staticGeo=geometryBuffer(world);world.a=null;
  legacyCottageGeo=geometryBuffer(legacyCottages);legacyCottages.a=null;
  legacyWorkshopGeo=geometryBuffer(legacyWorkshops);legacyWorkshops.a=null;
