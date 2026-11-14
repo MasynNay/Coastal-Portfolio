@@ -165,14 +165,14 @@
   layout(location=2)in vec2 aUV;
   layout(location=3)in vec4 aTangent;
   uniform mat4 uVP,uModel;
-  uniform float uWindTime,uWindWeight;
+  uniform float uWindTime,uWindWeight,uWindBaseY,uWindInvHeight,uWindMotionScale;
   out vec3 vPosition,vNormal,vTangent,vBitangent;
   out vec2 vUV;
   void main(){
    vec4 world=uModel*vec4(aPosition,1.);
-   float tip=clamp((aPosition.y-.7)*.30,0.,1.);
+   float tip=pow(clamp((aPosition.y-uWindBaseY)*uWindInvHeight,0.,1.),1.35);
    float gust=sin(uWindTime*.91+world.x*.17+world.z*.13)+.38*sin(uWindTime*1.71+world.x*.34-world.z*.23);
-   world.xz+=vec2(.16,.085)*gust*tip*uWindWeight;
+   world.xz+=vec2(.16,.085)*gust*tip*uWindWeight*uWindMotionScale;
    vPosition=world.xyz;mat3 invTrans=transpose(inverse(mat3(uModel)));
    vNormal=normalize(invTrans*aNormal);vTangent=normalize(mat3(uModel)*aTangent.xyz);
    vBitangent=normalize(cross(vNormal,vTangent)*aTangent.w);
@@ -237,12 +237,12 @@
   }`;
   const SHADOW_VERTEX = `#version 300 es
   precision highp float;layout(location=0)in vec3 aPosition;layout(location=2)in vec2 aUV;
-  uniform mat4 uVP,uModel;uniform float uWindTime,uWindWeight;out vec2 vUV;
+  uniform mat4 uVP,uModel;uniform float uWindTime,uWindWeight,uWindBaseY,uWindInvHeight,uWindMotionScale;out vec2 vUV;
   void main(){
    vUV=aUV;vec4 world=uModel*vec4(aPosition,1.);
-   float tip=clamp((aPosition.y-.7)*.30,0.,1.);
+   float tip=pow(clamp((aPosition.y-uWindBaseY)*uWindInvHeight,0.,1.),1.35);
    float gust=sin(uWindTime*.91+world.x*.17+world.z*.13)+.38*sin(uWindTime*1.71+world.x*.34-world.z*.23);
-   world.xz+=vec2(.16,.085)*gust*tip*uWindWeight;
+   world.xz+=vec2(.16,.085)*gust*tip*uWindWeight*uWindMotionScale;
    gl_Position=uVP*world;
   }`;
   const SHADOW_FRAGMENT = `#version 300 es
@@ -302,7 +302,7 @@
     const standard=link(gl,VERTEX,FRAGMENT),depth=link(gl,SHADOW_VERTEX,SHADOW_FRAGMENT);
     const uniform=(program,name)=>gl.getUniformLocation(program,name);
     const u={};for(const [name,prog] of [['standard',standard],['depth',depth]]){
-      u[name]={};for(const n of ['uVP','uModel','uBase','uNormal','uORM','uEmissive','uShadowFar','uShadowNear','uFarVP','uNearVP','uEye','uSun','uFog','uEmission','uBaseFactor','uMetalRough','uHasBase','uHasNormal','uHasORM','uHasEmissive','uHasShadows','uAlphaCutoff','uAlphaMasked','uWindTime','uWindWeight','uTime','uLowQuality'])u[name][n]=uniform(prog,n);
+      u[name]={};for(const n of ['uVP','uModel','uBase','uNormal','uORM','uEmissive','uShadowFar','uShadowNear','uFarVP','uNearVP','uEye','uSun','uFog','uEmission','uBaseFactor','uMetalRough','uHasBase','uHasNormal','uHasORM','uHasEmissive','uHasShadows','uAlphaCutoff','uAlphaMasked','uWindTime','uWindWeight','uWindBaseY','uWindInvHeight','uWindMotionScale','uTime','uLowQuality'])u[name][n]=uniform(prog,n);
     }
     const records=[],statuses=[],colliders=[];
     let dynamicPlayer=null;
@@ -334,7 +334,7 @@
       let radius=0;
       for(let i=0;i<vertices.length;i+=12)radius=Math.max(radius,Math.hypot(
         vertices[i]-center[0],vertices[i+1]-center[1],vertices[i+2]-center[2]));
-      gl.bindVertexArray(null);return {vao,indices:indices.length,bounds:{center,radius}};
+      gl.bindVertexArray(null);return {vao,indices:indices.length,bounds:{center,radius,heightStart:lo[1],heightSpan:Math.max(.15,hi[1]-lo[1])}};
     }
     async function addGLB(buffer,entry){
       validateManifest({version:MANIFEST_VERSION,assets:[entry]});
@@ -435,6 +435,10 @@
       gl.uniform1f(uniforms.uAlphaMasked,m.mat.alpha==='MASK'?1:0);
       gl.uniform1f(uniforms.uAlphaCutoff,m.mat.cutoff);
       gl.uniform1f(uniforms.uWindWeight,m.mat.alpha==='MASK'?1:0);
+      const height=m.gpu.bounds.heightSpan;
+      gl.uniform1f(uniforms.uWindBaseY,m.gpu.bounds.heightStart);
+      gl.uniform1f(uniforms.uWindInvHeight,1/height);
+      gl.uniform1f(uniforms.uWindMotionScale,Math.min(1.,Math.max(.045,height*.21)));
       gl.activeTexture(gl.TEXTURE0);gl.bindTexture(gl.TEXTURE_2D,m.mat.base||defaultWhite);gl.uniform1i(uniforms.uBase,0);
     }
     // Drive the named authored GLB pivot nodes from the existing frame-independent gait.
