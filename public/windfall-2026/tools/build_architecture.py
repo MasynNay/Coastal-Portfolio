@@ -91,7 +91,18 @@ class MeshParts:
         verts.extend([a,b,c,d]);faces.extend([(i,i+1,i+2),(i,i+2,i+3)])
         # World-space texture appearance but no huge UV frequencies
         ab=np.linalg.norm(np.asarray(b)-a);ad=np.linalg.norm(np.asarray(d)-a)
-        uv.extend([(0,0),(ab*tile,0),(ab*tile,ad*tile),(0,ad*tile)])
+        # Offset each face into a stable part of the repeating photographed-like
+        # material pattern; roofs and walls no longer all sample the same square.
+        u0=(a[0]*.373+a[2]*.127+a[1]*.061)*tile
+        v0=(a[2]*.341+a[1]*.173-a[0]*.092)*tile
+        uv.extend([(u0,v0),(u0+ab*tile,v0),(u0+ab*tile,v0+ad*tile),(u0,v0+ad*tile)])
+    def tri(self,a,b,c,mat='plaster',tile=1):
+        verts,faces,uv=self.parts[mat];i=len(verts)
+        verts.extend([a,b,c]);faces.append((i,i+1,i+2))
+        ab=np.linalg.norm(np.asarray(b)-a);ac=np.linalg.norm(np.asarray(c)-a)
+        u0=(a[0]*.373+a[2]*.127+a[1]*.061)*tile
+        v0=(a[2]*.341+a[1]*.173-a[0]*.092)*tile
+        uv.extend([(u0,v0),(u0+ab*tile,v0),(u0+ab*.5*tile,v0+ac*tile)])
     def box(self,x,y,z,w,h,d,mat='plaster',tile=1):
         X=[x-w/2,x+w/2];Y=[y,y+h];Z=[z-d/2,z+d/2]
         self.quad([X[0],Y[0],Z[1]],[X[1],Y[0],Z[1]],[X[1],Y[1],Z[1]],[X[0],Y[1],Z[1]],mat,tile)
@@ -151,6 +162,34 @@ def make_house(variant):
     for sign in [-1,1]:
         for z in [z0,z1]:g.box(sign*(w/2+.06),.20,z,.20,wall-.1,.20,'timber')
         for y in [1.15,2.5,wall-.16]:g.box(sign*(w/2+.07),y,0,.21,.15,d+.4,'timber')
+    # Weatherworn stone quoins interrupt the smooth corner plaster and visually
+    # anchor the timber structure; staggered courses avoid a repeated cube stack.
+    for cornerX in (x0,x1):
+        for cornerZ in (z0,z1):
+            for row in range(9):
+                yy=.22+row*.43
+                offset=.055 if row%2 else -.035
+                g.box(cornerX+(-1 if cornerX>0 else 1)*offset,yy,cornerZ,
+                      .31+(.06 if row%3==0 else 0),.36,.34,'stone',1.15)
+    # Randomized original limewash stains and mortar chips near the damp base.
+    for k in range(28):
+        side=1 if k%2 else -1
+        xx=R.uniform(x0+.42,x1-.42)
+        yy=R.uniform(.30,1.20)
+        zz=side*(d*.50+.023)
+        g.box(xx,yy,zz,R.uniform(.07,.24),R.uniform(.018,.08),.018,
+              'stone',2.1)
+    # Exposed frame uprights and diagonal knee-braces around sheltered corners.
+    for side in (-1,1):
+        for z in (z0+.25,z1-.25):
+            for sign in (-1,1):
+                xx=side*(w*.50+.13)
+                g.segment([xx,.68,z],[xx-sign*.65,1.44,z],.081,'timber',6)
+    # Window header drip lips cast real short-contact shadows.
+    for side in (-1,1):
+        for xx in (-w*.32,w*.32):
+            zz=side*(d*.50+.27)
+            g.box(xx,3.63,zz,1.14,.11,.36,'stone',.85)
     # Entry with carved planks, lintel, forged bands, aged metal studs and stone steps.
     doorW=1.35;front=z1+.13
     g.box(0,.02,front,doorW+0.3,2.6,.22,'timber',.48)
@@ -182,8 +221,8 @@ def make_house(variant):
                         g.segment([px,2.21,face+zsign*.52],[px+.07,2.34+.20*np.sin(i*1.6),face+zsign*(.53+.05*i/9)],.018,'leaf',4)
                         for leafSign in [-1,1]:g.box(px+leafSign*.055,2.35,face+zsign*.55,.14,.034,.08,'leaf',1)
     # Gable end supports, rafters, carved edges.
-    g.quad([x0,wall,z1],[x1,wall,z1],[0,ridge,z1],[0,ridge,z1],'plaster',.3)
-    g.quad([x1,wall,z0],[x0,wall,z0],[0,ridge,z0],[0,ridge,z0],'plaster',.3)
+    g.tri([x0,wall,z1],[x1,wall,z1],[0,ridge,z1],'plaster',.3)
+    g.tri([x1,wall,z0],[x0,wall,z0],[0,ridge,z0],'plaster',.3)
     for side in [-1,1]:
         for z in [z0-.12,z1+.12]:g.segment([0,ridge,z],[side*(w/2+.42),wall-.1,z],.15,'timber',7)
     g.segment([0,ridge,z0-.30],[0,ridge,z1+.30],.17,'timber',8)
@@ -207,6 +246,16 @@ def make_house(variant):
                 g.quad(mid1,p2,p3,mid2,'roof',2.0)
                 g.quad(p2,[p2[0],p2[1]-.055,p2[2]],[p3[0],p3[1]-.055,p3[2]],p3,'roof',2.0)
     for z in np.linspace(z0-.35,z1+.35,38):g.cylinder(0,ridge-.016,z,.17,.27,'roof',10)
+    # Ridge and apron flashing, verge boards and irregular cap tiles keep the
+    # pitched roof from appearing like a perfectly flat repetitive plastic cone.
+    for side in (-1,1):
+        x=side*(w/2+.35)
+        for z in np.linspace(z0-.30,z1+.30,22):
+            g.box(x,wall-.04,z,.12,.13,.17,'timber',1.25)
+        for z in (z0-.37,z1+.37):
+            g.segment([0,ridge+.04,z],[x,wall-.08,z],.105,'timber',8)
+    for z in np.linspace(z0-.32,z1+.32,18):
+        g.box(0,ridge+.14,z,.42,.038,(d+.74)/20.,'roof',2.1)
     # Rain gutters and iron hardware at roof eaves.
     for side in [-1,1]:
         eave=side*(w/2+.40)
@@ -218,6 +267,20 @@ def make_house(variant):
         for sign in [-1,1]:g.box(cx+sign*.40,wall-.40+row*.26,cz,.10,.18,.70,'stone',1.2)
     g.box(cx,wall+1.66,cz,1.07,.21,1.09,'stone',.7)
     g.box(cx,wall+1.85,cz,.72,.09,.75,'iron',1)
+    # Sparse creeping ivy, with stems anchored at the shaded side wall.
+    # The leaf material is opaque to match the original builder's simple PBR
+    # pipeline; tiny details contribute depth without transparent overdraw.
+    for side in (-1,1):
+        x=side*(w*.5+.15)
+        for stem in range(3):
+            z=z0+.75+stem*(d-1.5)/2
+            h=1.15+.38*np.sin(stem*1.37+(.2 if workshop else 1.))
+            g.segment([x,.12,z],[x+.06*np.sin(stem*2.),h,z+.12],.021,'leaf',5)
+            for l in range(7):
+                yy=.26+l*(h-.26)/7
+                taper=.13*(1-l/8)
+                g.box(x+side*.047,yy,z+(-1 if l%2 else 1)*taper,
+                      .045,.095,.15,'leaf',1.3)
     # Additional hanging signs and workshop-specific structures.
     if workshop:
         signX=-w*.37
