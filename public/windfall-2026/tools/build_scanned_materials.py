@@ -25,7 +25,7 @@ SIZE = 384
 MAX_SOURCE_BYTES = 10 * 1024 * 1024
 API_ROOT = "https://api.polyhaven.com"
 ASSETS = [
-    ("forest_ground_01", "forest-floor-rgba.png", "grass surface"),
+    ("forrest_ground_01", "forest-floor-rgba.png", "grass surface"),
     ("cobblestone_floor_04", "cobblestone-rgba.png", "village masonry"),
     ("bark_brown_02", "tree-bark-rgba.png", "weathered timber"),
 ]
@@ -149,6 +149,7 @@ def main() -> None:
         "assets": [],
     }
     for slug, output, purpose in ASSETS:
+        print(f"Fetching verified CC0 material: {slug}", flush=True)
         asset = build(slug, output, purpose)
         print(f"Built {output}: {asset['generated_sha256'][:12]} from {slug}")
         manifest["assets"].append(asset)
