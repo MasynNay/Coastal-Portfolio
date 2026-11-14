@@ -1,3 +1,17 @@
+## November 14 — coherent authored-model atmosphere, camera, character, coast and geology
+
+This is an **unreleased engineering checkpoint**, not a 2026-remake-quality acceptance.
+
+- **Coherent lighting:** the authored glTF PBR fragment shader now shares the procedural terrain's moving, world-space cloud-occlusion field and the same height-sensitive atmospheric fog. Cloud drift was increased from nearly imperceptible offsets to slow visible motion; low-quality/software mode omits the extra cloud field.
+- **Foliage and shadows:** alpha-masked authored foliage uses the same deterministic, modest world-position sway in both the color and depth passes, with elapsed time wired through each pass. PBR ORM red-channel ambient occlusion and a restrained backlit leaf-transmission term enrich existing original plant assets without downloading external textures.
+- **Third-person camera:** exponential frame-independent following, look-target smoothing, and a multi-sample eye-line sweep against terrain and coarse authored model colliders reduce cliff/structure clipping. It is not yet a full camera physics, navigation or occlusion system and must be visually assessed around narrow alleys.
+- **Wayfarer movement:** idle breathing, stride timing adjustments, arm counter-swing, turning lean, head counter-turn, and cape follow-through are driven through the original named glTF hierarchy. This remains articulated procedural motion, **not skin-weighted skeletal animation**.
+- **Atmosphere and shore:** continuous directional sky-cloud coordinates (avoiding the azimuth seam), sunlit haze, brighter cloud rims, Fresnel-dependent sampled-sky sea reflection, near-camera capillary ripples, shallow-water scatter and softer horizon blending.
+- **Terrain:** longer-wave erosion changes to the northern mountain ridgelines; 155 placeholder ellipsoid boulders were changed to uneven layered mesh rings with corrected outward-facing triangle normals. Terrain and collision queries still share the same height function.
+- **Verification so far:** both modified JavaScript files parse; seven selected shaders were manually checked for balanced GLSL source delimiters, and the repo now includes a 12-shader source-contract suite, cloud/wind/shadow plumbing assertions, camera terrain/building test cases, and license-provenance checks for six GLB families. The suite passed in an isolated in-memory execution against the current branch sources; a hosted/browser execution of the committed test file is still pending.
+- **Still unverified:** actual WebGL2 shader compilation and screenshots for these latest changes, hardware FPS and frame-time distributions, cliff obstruction QA, character/terrain proportions, mobile runtime, memory, and long sessions.
+- **Release gate: CLOSED.** Five distinctive professionally modeled family members, actual skinning and animation blending, authored biome/terrain art, filmic lighting/HDR environment reflection, visual composition and performance approvals are missing. Keep `/world` untouched and do not merge into main.
+
 ## November 14 — drifting world-space cloud shadows (unreleased)
 
 - Added animated, world-space cloud occlusion to the high-quality terrain/prop sunlight shader: three broad low-frequency layers produce soft moving patches without screen-space sliding.
