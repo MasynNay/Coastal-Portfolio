@@ -80,35 +80,41 @@ for(let j=0;j<NZ-1;j++)for(let i=0;i<NX-1;i++){
  const emit=(p,n)=>world.vertex(p,n,terrainColor(p[0],p[2],n),0);
  emit(a,na);emit(b,nb);emit(c,nc);emit(a,na);emit(c,nc);emit(d,nd);
 }
-// Long winding cobblestone paths, made of individually varied, uneven stones.
+// Human-scale flagstone roads: broken edges, variable courses, irregular widths,
+// recessed joints and muted warm-gray stones rather than a bright tile grid.
 function stonesAlong(ax,az,bx,bz,count,width=3){
  const dx=bx-ax,dz=bz-az,dist=Math.hypot(dx,dz),ux=dx/dist,uz=dz/dist,sideX=-uz,sideZ=ux;
- let steps=count*2,stepLength=dist/steps;
+ const steps=Math.max(8,Math.round(count*1.35)),stride=dist/steps;
  for(let n=0;n<steps;n++){
-  const t=(n+.5)/steps,cx=mix(ax,bx,t),cz=mix(az,bz,t);
-  for(let row=-3;row<=3;row++){
-   const offset=(row+(n%2)*.12)*(width/7.5),j=jitter(.035),lx=cx+sideX*offset+ux*j,lz=cz+sideZ*offset+uz*j;
-   const side=(width/7.6)*(.40+rand()*.07),half=stepLength*(.35+rand()*.07);
-   const corners=[[-half,-side*.65],[-half,side*.62],[-half*.79,side],[half*.76,side],[half,side*.70],[half,-side*.68],[half*.78,-side],[-half*.76,-side]];
-   const stoneHeight=.037+rand()*.041;
-   const vertices=corners.map(([forward,across])=>{
-     const xx=lx+ux*forward+sideX*across,zz=lz+uz*forward+sideZ*across;
-     return [xx,terrain(xx,zz)+.062+stoneHeight,zz];
+  let t=(n+.5)/steps,cx=mix(ax,bx,t),cz=mix(az,bz,t);
+  for(let row=-2;row<=2;row++){
+   if(row!==0&&rand()<.065)continue;
+   const irregularX=jitter(stride*.17),irregularZ=jitter(width*.065);
+   const offset=(row+(n%2?.22:-.20))*(width/5.3);
+   const lx=cx+sideX*offset+ux*irregularX,lz=cz+sideZ*offset+uz*irregularX+irregularZ;
+   const half=stride*(.40+rand()*.13),side=(width/5.4)*(.38+rand()*.13);
+   const corner=[[-1,-.55],[-.83,.68],[-.26,1.02],[.55,.93],[1,.43],[.88,-.64],[.15,-1.02],[-.62,-.92]];
+   const rim=corner.map(([a,b])=>{
+    let forward=half*(a+jitter(.18)),across=side*(b+jitter(.17));
+    let xx=lx+ux*forward+sideX*across,zz=lz+uz*forward+sideZ*across;
+    return [xx,terrain(xx,zz)+.038,zz];
    });
-   const center=[lx,terrain(lx,lz)+.067+stoneHeight,lz];
-   const shade=.77+rand()*.31;
-   const stoneColor=tint(colors.stone,shade);
-   if(softwareRenderer){world.quad(vertices[0],vertices[2],vertices[4],vertices[6],stoneColor,1);continue;}
-   for(let k=0;k<vertices.length;k++){
-    const next=(k+1)%vertices.length,v=vertices[k],w=vertices[next];
-    world.tri(center,v,w,stoneColor,1);
-    const footV=[v[0],v[1]-stoneHeight,v[2]],footW=[w[0],w[1]-stoneHeight,w[2]];
-    world.quad(w,v,footV,footW,tint(stoneColor,.73),1);
-   }
-   if(rand()<.09){const crack=rand()*Math.PI*2;
-    world.beam([lx-Math.cos(crack)*half*.27,center[1]+.003,lz-Math.sin(crack)*side*.25],
-      [lx+Math.cos(crack)*half*.27,center[1]+.003,lz+Math.sin(crack)*side*.25],
-      .008,tint(colors.rock,.63),1,3);
+   const color=tint([.31,.32,.29],.74+rand()*.43);
+   const center=[lx,terrain(lx,lz)+.060+rand()*.013,lz];
+   if(softwareRenderer){
+    // Four wedges retain nonrectangular silhouettes without dense sidewalls.
+    for(let k=0;k<8;k+=2)world.tri(center,rim[k],rim[(k+2)%8],color,1);
+   }else{
+    for(let k=0;k<rim.length;k++){
+     let j=(k+1)%rim.length;
+     world.tri(center,rim[k],rim[j],color,1);
+     // Shallow stone thickness provides a grounded, weathered edge.
+     const a=[rim[k][0],rim[k][1]-.026,rim[k][2]];
+     const b=[rim[j][0],rim[j][1]-.026,rim[j][2]];
+     world.quad(rim[j],rim[k],a,b,tint(color,.77),1);
+    }
+    if(rand()<.13)world.beam([lx-half*.20,center[1]+.006,lz-side*.18],
+      [lx+half*.26,center[1]+.006,lz+side*.21],.006,tint(colors.rock,.60),1,3);
    }
   }
  }
@@ -295,13 +301,41 @@ function tower(x,z){let y=terrain(x,z),r=3.1;world.cylinder(x,y,z,r*1.14,r,14.0,
  world.beam([x,y+20.5,z],[x,y+26,z],.12,colors.wood);world.quad([x,y+24.6,z],[x+2.2,y+24.1,z],[x+2.2,y+22.6,z],[x,y+23,z],colors.roof,5);
 }
 tower(31,-38);
-// Glassmaker's Walk: stone portico with vines and hanging lamps.
-function portico(){for(let i=0;i<5;i++){let z=4-i*2.65;for(let x of [-3.5,3.5]){
-  let y=terrain(x,z);world.cylinder(x,y,z,.30,.28,4.0,colors.paleStone,1,8);world.box(x,y+3.7,z,.75,.38,.8,colors.stone,1);
-  for(let k=0;k<6;k++){let yy=y+.3+k*.55,offset=.39*Math.sin(k*1.9+i);world.beam([x+.32*Math.sin(k),yy,z+offset],[x+.32*Math.sin(k+1),yy+.52,z+offset+.27],.035,colors.leaf,3)}
- }let y=Math.max(terrain(-3.5,z),terrain(3.5,z));world.beam([-3.5,y+4.12,z],[3.5,y+4.12,z],.23,colors.wood);
- for(let b=0;b<3;b++){let x=-2.5+b*2.5;world.beam([x,y+4.10,z],[x,y+3.17,z],.028,colors.iron,6);world.ellipsoid(x,y+3.12,z,.26,.33,.26,b===1?colors.gold:colors.glass,8,5,8)}
-}}
+// Glassmaker's Walk rebuilt in dark weathered timber: lower-density trellis,
+// stone feet, diagonal braces, small enclosed amber lamps and creeping vines.
+function portico(){
+ const zPositions=[4.0,.50,-3.0,-6.5];
+ for(const z of zPositions){
+  const left=terrain(-3.5,z),right=terrain(3.5,z);
+  const high=Math.max(left,right)+3.80;
+  for(const x of [-3.5,3.5]){
+   const y=terrain(x,z);
+   world.box(x,y-.02,z,.72,.36,.70,tint(colors.rock,.83),1);
+   world.beam([x,y+.16,z],[x,high,z],.205,tint(colors.wood,.71),2,9);
+   world.box(x,high-.04,z,.54,.21,.55,colors.timber,2);
+   const inward=x<0?1:-1;
+   world.beam([x,high-1.2,z],[x+inward*1.12,high+.02,z],.115,colors.timber,2,7);
+   // A few leaf clusters follow each support rather than filling the entrance with rods.
+   for(let k=0;k<4;k++){
+    let yy=y+.9+k*.51,xx=x+(x<0?.23:-.23)+Math.sin(k*2.1)*.08;
+    world.beam([xx,yy,z],[xx+inward*.21,yy+.35,z+.14],.031,colors.wood,2,5);
+    world.ellipsoid(xx+inward*.23,yy+.34,z+.14,.18,.09,.13,tint(colors.leaf,.80+rand()*.30),3,4,7);
+   }
+  }
+  world.beam([-3.68,high+.08,z],[3.68,high+.08,z],.20,tint(colors.timber,.87),2,9);
+  world.beam([-3.5,high+.32,z],[3.5,high+.32,z],.068,colors.wood,2,6);
+  // Three small shielded lanterns illuminate the walk without floating white disks.
+  for(const x of [-2.25,0,2.25]){
+   world.beam([x,high,z],[x,high-.59,z],.018,colors.iron,6,5);
+   const ly=high-.79;
+   world.box(x,ly-.23,z,.35,.055,.35,colors.iron,6);
+   world.box(x,ly+.25,z,.40,.065,.40,colors.iron,6);
+   for(const sx of [-1,1])for(const sz of [-1,1])world.beam([x+sx*.16,ly-.19,z+sz*.16],
+      [x+sx*.16,ly+.23,z+sz*.16],.024,colors.iron,6,5);
+   world.ellipsoid(x,ly,z,.095,.18,.095,tint(colors.gold,.65),8,5,8);
+  }
+ }
+}
 portico();
 // Fountain built from stacked carved stone and water bowls.
 function fountain(x,z){let y=terrain(x,z)+.05;world.cylinder(x,y,z,3.3,3.3,.58,colors.paleStone,1,19);world.cylinder(x,y+.55,z,2.9,2.8,.14,colors.rock,1,19);
@@ -340,7 +374,7 @@ function seaArch(){let y=-1.5;for(let [x,z,s] of [[40,32,1.0],[51,37,.87],[29,40
 }
 seaArch();
 // Warm light sources and suspended ornaments between street corners.
-function lantern(x,z,lit=1){let y=terrain(x,z);world.cylinder(x,y,z,.18,.13,3.5,colors.wood,2,6);world.beam([x,y+3.38,z],[x+.72,y+3.38,z],.07,colors.wood,2);world.beam([x+.72,y+3.38,z],[x+.72,y+2.85,z],.035,colors.iron,6);world.ellipsoid(x+.72,y+2.72,z,.30,.37,.30,colors.gold,8,6,7)}
+function lantern(x,z,lit=1){let y=terrain(x,z);world.cylinder(x,y,z,.18,.13,3.5,colors.wood,2,6);world.beam([x,y+3.38,z],[x+.72,y+3.38,z],.07,colors.wood,2);world.beam([x+.72,y+3.38,z],[x+.72,y+2.85,z],.035,colors.iron,6);world.ellipsoid(x+.72,y+2.72,z,.15,.22,.15,tint(colors.gold,.76),8,6,7)}
 for(let [x,z] of [[-4,8],[4,8],[-9,-11],[3,-10],[7,-2],[18,7],[10,12],[13,20],[-17,10]])lantern(x,z);
 // Color accents: banners, potted shrubs, garden beds and glass floats.
 for(let [x,z] of [[-11,-1],[-15,-1],[6,-12],[9,-11],[18,-6],[-19,4]]){let y=terrain(x,z);world.cylinder(x,y,z,.57,.46,.65,colors.stone,1,8);world.ellipsoid(x,y+.95,z,.9,.94,.85,x<-10?colors.lightLeaf:colors.leaf,3,6,9);for(let k=0;k<5;k++){let a=k*Math.PI*2/5;world.ellipsoid(x+Math.cos(a)*.45,y+1.3,z+Math.sin(a)*.45,.13,.14,.13,colors.redLeaf,8,4,6)}}
@@ -454,8 +488,12 @@ void main(){vec3 N=normalize(vNormal);vec3 L=normalize(uSun);vec3 V=normalize(uE
   if(vKind>=13){frag=vec4(.025,.025,.025,vKind==13?.19:vKind==14?.12:.04);return;}
   vec3 base=pow(max(vColor,vec3(.001)),vec3(2.2));
   float direct=max(dot(N,L),0.);
+  // Inexpensive color variation gives software previews local terrain/stone texture.
+  float macro=.5+.5*sin(vPos.x*.29+sin(vPos.z*.23))*cos(vPos.z*.33);
+  if(vKind==0)base*=mix(.76,1.14,macro);
+  if(vKind==1)base*=mix(.74,1.03,macro);
   vec3 c=base*(vec3(.48,.55,.62)*( .68+.22*max(N.y,0.))+vec3(1.12,.84,.64)*direct*.99);
-  if(vKind==8)c=base*2.9;
+  if(vKind==8)c=base*1.30+vec3(.045,.020,.006);
   float fog=1.-exp(-pow(length(uEye-vPos)*.0083,1.42));
   c=mix(c,pow(uFog,vec3(2.2)),fog*.69);
   c=clamp((c*(2.51*c+.03))/(c*(2.43*c+.59)+.14),0.,1.);
@@ -523,7 +561,7 @@ void main(){vec3 N=normalize(vNormal);vec3 L=normalize(uSun);vec3 V=normalize(uE
  float F0=mix(.038,.35,metallic);float fresnel=F0+(1.-F0)*pow(1.-NdotV,5.);
  c+=vec3(1.,.82,.62)*spec*(.10+.38*(1.-roughness)+metallic*.32)*fresnel*3.;
  if(vKind==3)c+=albedo*vec3(.65,.45,.13)*transmission*pow(max(dot(-N,L),0.),2.);
- if(vKind==8){c=albedo*2.05+vec3(.40,.18,.035)*(.5+.5*sin(uTime*2.5+vPos.x*3.));}
+ if(vKind==8){c=albedo*.90+vec3(.15,.073,.016)*(.65+.35*sin(uTime*2.5+vPos.x*3.));}
  float dist=length(uEye-vPos);float heightFog=exp(-max(vPos.y,0.)*.052);float fog=1.-exp(-pow(dist*.0086,1.52)*(.68+.40*heightFog));
  c=mix(c,pow(uFog,vec3(2.2)),clamp(fog*.74,0.,.84));c=aces(c*.78);c=pow(c,vec3(1./2.20));frag=vec4(c,1.);
 }`;
