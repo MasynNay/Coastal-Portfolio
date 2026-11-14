@@ -36,7 +36,7 @@ These improvements add botanical variety but do not constitute realistic high-de
 
 ## Five-character original fantasy ensemble (staged)
 
-The playable wayfarer now has a continuous fitted head-and-jaw shell, thinner eye contours, separate fingers and swept hair-lock geometry. Four further GLBs introduce different body scale, head-to-body ratio, beard choices, textured clothing and hairstyle profiles. They stand at intentionally separate village locations and use the runtime's original named-pivot idle animation rather than being immobile statues.
+The playable wayfarer now has a continuous fitted head-and-jaw shell, thinner eye contours, separate fingers and swept hair-lock geometry. The five generated meshes have also been rebuilt with **material-specific original PBR textures**: finer skin pores and pigmentation, woven fabric normal detail, long hair strands, leathery creases, subtle iris fibers and brushed metallic relief. These are procedural authoring maps, not scanned or captured human skin. Four further GLBs introduce different body scale, head-to-body ratio, beard choices, textured clothing and hairstyle profiles. They stand at intentionally separate village locations and use the runtime's original named-pivot idle animation rather than being immobile statues.
 
 Run `WINDFALL_CHARACTER=windfall-companion-b python tools/build_wayfarer.py` to regenerate one model; run all five `WINDFALL_CHARACTER` values in the dedicated [character asset GitHub workflow](../../.github/workflows/windfall-character-assets.yml) to rebuild the cast. All assets are generated with NumPy, Pillow and trimesh; runtime uses WebGL2 without a subscription.
 
