@@ -91,6 +91,19 @@ async def main():
                     "()=>document.getElementById('scene').getContext('webgl2').getError()"
                 ) == 0
                 await page.screenshot(path=str(ARTIFACTS/"authored-full-detail-world.png"))
+                # Inspect the rebuilt lead's face from a close opposite camera angle.
+                # Camera position is driven through real canvas pointer controls.
+                await page.mouse.move(700,250)
+                await page.mouse.down()
+                await page.mouse.move(175,250,steps=16)
+                await page.mouse.up()
+                for _ in range(6):
+                    await page.mouse.wheel(0,-150)
+                await page.wait_for_timeout(1200)
+                assert await page.evaluate(
+                    "()=>document.getElementById('scene').getContext('webgl2').getError()"
+                ) == 0
+                await page.screenshot(path=str(ARTIFACTS/"authored-face-review.png"))
                 (ARTIFACTS/"full-detail-results.json").write_text(
                     json.dumps({
                         "disclaimer":"Full shader feature path on SwiftShader, NOT a physical GPU or AAA visual approval",
