@@ -518,15 +518,22 @@ void main(){
  vec3 horizon=vec3(.91,.70,.54),zenith=vec3(.19,.37,.54);
  vec3 c=mix(horizon,zenith,smoothstep(-.10,.78,elevation));
  c+=vec3(.14,.10,.08)*exp(-pow((elevation-.06)*5.,2.));
- float az=atan(ray.z,ray.x);
- vec2 cloudUV=vec2(az*3.8+uTime*.0014,elevation*6.8);
- float strata=fBm(cloudUV+vec2(no(cloudUV*1.6)*.38,.0));
- float cloud=smoothstep(.47,.67,strata)*smoothstep(.02,.23,elevation)*(1.-smoothstep(.81,.98,elevation));
- c=mix(c,vec3(.96,.87,.77),cloud*.66);
+ // Directional sky scattering: warm haze near the light, clear cool zenith.
  float angle=max(dot(ray,normalize(uSkySun)),0.);
+ float horizonHaze=exp(-pow((elevation-.035)*7.,2.));
+ c+=vec3(.24,.13,.064)*horizonHaze*pow(angle,8.)*.62;
+ // Project cloud layers onto a continuous world direction (no azimuth seam).
+ // Warped value noise supplies layered, visibly sunlit cloud masses.
+ vec2 cloudUV=ray.xz/(max(elevation,.045)+.26)*.42+vec2(uTime*.007,uTime*.0024);
+ float strata=fBm(cloudUV+vec2(no(cloudUV*1.6)*.38,no(cloudUV*1.12)*.22));
+ float cloud=smoothstep(.48,.66,strata)*smoothstep(.012,.16,elevation)*(1.-smoothstep(.86,1.,elevation));
+ vec3 cloudShade=mix(vec3(.54,.67,.73),vec3(1.,.87,.68),pow(angle,3.));
+ float cloudEdge=smoothstep(.46,.60,strata)-smoothstep(.59,.70,strata);
+ c=mix(c,cloudShade,cloud*.80);
+ c+=vec3(1.,.78,.56)*cloudEdge*pow(angle,10.)*.21;
  float sunDisk=smoothstep(.9997,.99994,angle);
  float halo=pow(angle,240.)*.52+pow(angle,20.)*.18;
- c+=vec3(1.,.74,.43)*halo+vec3(1.,.84,.59)*sunDisk*.88;
+ c+=vec3(1.,.74,.43)*halo*(1.-cloud*.55)+vec3(1.,.84,.59)*sunDisk*.88*(1.-cloud*.5);
  c=pow(clamp(c,0.,1.),vec3(.92));frag=vec4(c,1.);
 }`;
 const WATER_VS=`#version 300 es
@@ -544,11 +551,20 @@ float wave(vec2 p){float t=uTime;
  return a+b+c+d;}
 void main(){vec2 p=vPos.xz;
  float h=wave(p),dx=wave(p+vec2(.05,0.))-h,dz=wave(p+vec2(0.,.05))-h;
- vec3 N=normalize(vec3(-dx*7.,1.,-dz*7.));vec3 V=normalize(uEye-vPos),L=normalize(uSun),H=normalize(V+L);
- float fresnel=pow(1.-max(dot(N,V),0.),5.),spec=pow(max(dot(N,H),0.),135.)*1.3+pow(max(dot(N,H),0.),22.)*.12;
+ vec3 V=normalize(uEye-vPos),L=normalize(uSun);
+ float distToCamera=length(uEye-vPos);
+ // Subtle wind-driven capillary waves resolve only near the camera.
+ float microFade=1.-smoothstep(8.,43.,distToCamera);
+ float microX=sin(p.x*11.7+p.y*2.9+uTime*1.4)*cos(p.y*8.6-uTime*1.05);
+ float microZ=cos(p.z*11.1-p.x*1.8-uTime*.92)*sin(p.x*9.8+uTime*.72);
+ vec3 N=normalize(vec3(-dx*7.+microX*.095*microFade,1.,-dz*7.+microZ*.095*microFade));
+ vec3 H=normalize(V+L),reflection=reflect(-V,N);
+ float fresnel=pow(1.-max(dot(N,V),0.),5.);
+ float spec=pow(max(dot(N,H),0.),150.)*1.15+pow(max(dot(N,H),0.),26.)*.14;
  vec3 deep=vec3(.035,.18,.23),surface=vec3(.13,.35,.42);
  float turbidity=noise(p*.19+vec2(uTime*.007));vec3 c=mix(deep,surface,.21+.65*turbidity);
- c=mix(c,vec3(.55,.70,.75),.18+fresnel*.62);
+ vec3 reflectedSky=mix(vec3(.77,.65,.51),vec3(.19,.39,.59),smoothstep(-.06,.76,reflection.y));
+ c=mix(c,reflectedSky,clamp(.19+.65*fresnel,0.,.89));
  c+=spec*vec3(1.,.82,.56);
  // Eddying foam patches are a noisy bounded field, not straight parallel bands.
  float warp=noise(p*.34+vec2(uTime*.07,-uTime*.04));
@@ -559,10 +575,13 @@ void main(){vec2 p=vPos.xz;
  float waterDepth=max(0.,.035-height);
  float shallows=(1.-smoothstep(.15,3.20,waterDepth))*coastValid;
  c=mix(c,vec3(.23,.48,.42),shallows*.48);
+ // The shallow seabed lifts saturation and softens the silhouette near shore.
+ c+=vec3(.035,.072,.032)*shallows*(1.-fresnel);
  // Wave edge breaks on local seabed depth; coast foam follows every island inlet.
  float foam=smoothstep(.56,.77,f+sin(p.x*.13+p.y*.25+warp*3.+uTime*.4)*.07)*shallows;
  c=mix(c,vec3(.83,.86,.75),foam*.66);
- float dist=length(uEye-vPos),fog=1.-exp(-pow(dist*.0092,1.52));c=mix(c,uFog,clamp(fog,0.,.92));
+ float dist=length(uEye-vPos),fog=1.-exp(-pow(dist*.0092,1.52));
+ c=mix(c,uFog,clamp(fog*.83,0.,.88));
  c=clamp((c*(2.51*c+.03))/(c*(2.43*c+.59)+.14),0.,1.);frag=vec4(pow(c,vec3(1./2.16)),clamp(.94-shallows*.29,.56,.96));
 }`;
 function shader(type,src){let s=gl.createShader(type);gl.shaderSource(s,src);gl.compileShader(s);if(!gl.getShaderParameter(s,gl.COMPILE_STATUS))throw Error(gl.getShaderInfoLog(s));return s}
