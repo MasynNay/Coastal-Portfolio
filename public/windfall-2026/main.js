@@ -242,10 +242,16 @@ function house(x,z,w,d,h,roofColor=colors.roof,angle=0){let y=terrain(x,z)+.04;
 // them atomically when both original house families load successfully.
 const mainWorld=world;world=new Geometry();
 house(-13,-12,5.7,5.5,4.5);house(-5,-17,5.0,4.8,4.3,colors.deepRoof);
-house(5,-15,5.4,6.6,5.0);house(16,-10,7.0,6.0,4.8,colors.deepRoof);
-house(-18,-2,5.8,5.5,4.9);house(18,3,5.4,5.3,4.1);house(7,-25,7.4,5.5,5.1);
-const legacyHouses=world;world=mainWorld;
-function needsLegacyHouses(){return !authoredAssets || !authoredAssets.hasLoaded('windfall-timber-cottage') || !authoredAssets.hasLoaded('windfall-harbor-workshop');}
+house(5,-15,5.4,6.6,5.0);house(-18,-2,5.8,5.5,4.9);house(18,3,5.4,5.3,4.1);
+const legacyCottages=world;world=new Geometry();
+house(16,-10,7.0,6.0,4.8,colors.deepRoof);house(7,-25,7.4,5.5,5.1);
+const legacyWorkshops=world;world=mainWorld;
+function needsLegacyCottages(){return !authoredAssets || !authoredAssets.hasLoaded('windfall-timber-cottage');}
+function needsLegacyWorkshops(){return !authoredAssets || !authoredAssets.hasLoaded('windfall-harbor-workshop');}
+function drawLegacyBuildings(){
+ if(needsLegacyCottages()){gl.bindVertexArray(legacyCottageGeo.vao);gl.drawArrays(gl.TRIANGLES,0,legacyCottageGeo.count);}
+ if(needsLegacyWorkshops()){gl.bindVertexArray(legacyWorkshopGeo.vao);gl.drawArrays(gl.TRIANGLES,0,legacyWorkshopGeo.count);}
+}
 // Castle lookout in the northeastern hills.
 function tower(x,z){let y=terrain(x,z),r=3.1;world.cylinder(x,y,z,r*1.14,r,14.0,colors.stone,1,14);
  for(let i=0;i<11;i++){let a=i*2*Math.PI/11;world.box(x+Math.cos(a)*r,y+13.7,z+Math.sin(a)*r,.85,1.25,.87,colors.paleStone,1)}
@@ -545,17 +551,20 @@ void main(){vec2 p=vPos.xz;
 function shader(type,src){let s=gl.createShader(type);gl.shaderSource(s,src);gl.compileShader(s);if(!gl.getShaderParameter(s,gl.COMPILE_STATUS))throw Error(gl.getShaderInfoLog(s));return s}
 function program(v,f){let p=gl.createProgram();gl.attachShader(p,shader(gl.VERTEX_SHADER,v));gl.attachShader(p,shader(gl.FRAGMENT_SHADER,f));gl.linkProgram(p);if(!gl.getProgramParameter(p,gl.LINK_STATUS))throw Error(gl.getProgramInfoLog(p));return p}
 function geometryBuffer(geometry){let vao=gl.createVertexArray(),buffer=gl.createBuffer();gl.bindVertexArray(vao);gl.bindBuffer(gl.ARRAY_BUFFER,buffer);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array(geometry.a),gl.STATIC_DRAW);for(let i=0;i<4;i++){gl.enableVertexAttribArray(i);gl.vertexAttribPointer(i,i===0||i===1||i===2?3:1,gl.FLOAT,false,40,[0,12,24,36][i])}gl.bindVertexArray(null);return {vao,buffer,count:geometry.count}}
-let mainProgram,shadowProgram,skyProgram,waterProgram,staticGeo,legacyHouseGeo,dynamicGeo,waterGeo,fullscreen,depthTex,depthFbo,lightVP,nearDepthTex,nearDepthFbo,nearLightVP,nearShadowSize,materialAtlas,coastHeightmap;
+let farShadowSize=512;
+let mainProgram,shadowProgram,skyProgram,waterProgram,staticGeo,legacyCottageGeo,legacyWorkshopGeo,dynamicGeo,waterGeo,fullscreen,depthTex,depthFbo,lightVP,nearDepthTex,nearDepthFbo,nearLightVP,nearShadowSize,materialAtlas,coastHeightmap;
 let authoredAssets=null;
 try{
  // A separate glTF/GLB PBR path supports actually authored assets with normal and ORM maps.
  // Any import failure leaves the existing exploratory world playable.
  if(window.WindfallAssetPipeline){try{authoredAssets=window.WindfallAssetPipeline.create(gl);}catch(e){console.warn('Optional PBR model system unavailable',e);}}
  mainProgram=program(VS,FS);materialAtlas=makeMaterialAtlas(gl);coastHeightmap=createCoastHeightmap(gl);shadowProgram=program(SHADOW_VS,SHADOW_FS);skyProgram=program(SKY_VS,SKY_FS);waterProgram=program(WATER_VS,WATER_FS);
- staticGeo=geometryBuffer(world);world.a=null;legacyHouseGeo=geometryBuffer(legacyHouses);legacyHouses.a=null;
+ staticGeo=geometryBuffer(world);world.a=null;
+ legacyCottageGeo=geometryBuffer(legacyCottages);legacyCottages.a=null;
+ legacyWorkshopGeo=geometryBuffer(legacyWorkshops);legacyWorkshops.a=null;
  const water=new Geometry();water.quad([-155,.035,-155],[155,.035,-155],[155,.035,155],[-155,.035,155],colors.water,8);waterGeo=geometryBuffer(water);
  fullscreen=gl.createVertexArray();gl.bindVertexArray(fullscreen);let b=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,b);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,3,-1,-1,3]),gl.STATIC_DRAW);gl.enableVertexAttribArray(0);gl.vertexAttribPointer(0,2,gl.FLOAT,false,0,0);gl.bindVertexArray(null);
- const S=softwareRenderer?512:window.matchMedia('(pointer:coarse)').matches?1024:2048;depthTex=gl.createTexture();gl.bindTexture(gl.TEXTURE_2D,depthTex);gl.texImage2D(gl.TEXTURE_2D,0,gl.DEPTH_COMPONENT24,S,S,0,gl.DEPTH_COMPONENT,gl.UNSIGNED_INT,null);
+ const S=softwareRenderer?512:window.matchMedia('(pointer:coarse)').matches?1024:2048;farShadowSize=S;depthTex=gl.createTexture();gl.bindTexture(gl.TEXTURE_2D,depthTex);gl.texImage2D(gl.TEXTURE_2D,0,gl.DEPTH_COMPONENT24,S,S,0,gl.DEPTH_COMPONENT,gl.UNSIGNED_INT,null);
  gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,gl.NEAREST);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MAG_FILTER,gl.NEAREST);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_S,gl.CLAMP_TO_EDGE);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_T,gl.CLAMP_TO_EDGE);
  depthFbo=gl.createFramebuffer();gl.bindFramebuffer(gl.FRAMEBUFFER,depthFbo);gl.framebufferTexture2D(gl.FRAMEBUFFER,gl.DEPTH_ATTACHMENT,gl.TEXTURE_2D,depthTex,0);gl.drawBuffers([gl.NONE]);gl.readBuffer(gl.NONE);
  if(gl.checkFramebufferStatus(gl.FRAMEBUFFER)!==gl.FRAMEBUFFER_COMPLETE)throw Error('Shadow map framebuffer could not be created');gl.bindFramebuffer(gl.FRAMEBUFFER,null);
@@ -677,8 +686,23 @@ function characterShadow(){
 // One persistent VAO for character, replacing only its small dynamic data each frame.
 dynamicGeo=geometryBuffer(character(0));gl.bindBuffer(gl.ARRAY_BUFFER,dynamicGeo.buffer);let dynamicByteCapacity=Math.ceil(dynamicGeo.count*40*1.6);gl.bufferData(gl.ARRAY_BUFFER,dynamicByteCapacity,gl.DYNAMIC_DRAW);
 if(authoredAssets)authoredAssets.loadManifest('asset-manifest.json',terrain).then(status=>{
- document.documentElement.dataset.windfallAssets=String(status.filter(s=>s.loaded).length);
+ document.documentElement.dataset.windfallAssets=String(status.filter(s=>s.loaded).length);farShadowDirty=true;
 }).catch(err=>console.warn('Authored asset manifest unavailable; using procedural scene:',String(err)));
+// Rebuild the distant sunlight map after asset import, so authored rooftops and foliage
+// cast actual distant shadows rather than only in the near-field cascade.
+let farShadowDirty=true;
+function rebuildFarSunShadow(){
+ if(softwareRenderer)return;
+ gl.bindFramebuffer(gl.FRAMEBUFFER,depthFbo);
+ gl.viewport(0,0,farShadowSize,farShadowSize);gl.depthMask(true);
+ gl.clearDepth(1);gl.clear(gl.DEPTH_BUFFER_BIT);gl.enable(gl.DEPTH_TEST);
+ gl.useProgram(shadowProgram);
+ gl.uniformMatrix4fv(gl.getUniformLocation(shadowProgram,'uLightVP'),false,new Float32Array(lightVP));
+ gl.bindVertexArray(staticGeo.vao);gl.drawArrays(gl.TRIANGLES,0,staticGeo.count);
+ drawLegacyBuildings();
+ if(authoredAssets)authoredAssets.drawShadow(lightVP);
+ gl.bindFramebuffer(gl.FRAMEBUFFER,null);
+}
 const shadowDecalGeo=geometryBuffer(characterShadow());let shadowByteCapacity=Math.ceil(shadowDecalGeo.count*40*1.4);
 gl.bindBuffer(gl.ARRAY_BUFFER,shadowDecalGeo.buffer);gl.bufferData(gl.ARRAY_BUFFER,shadowByteCapacity,gl.DYNAMIC_DRAW);
 let last=0,elapsed=0,frames=0,phase=0,lastNearRender=-100;
@@ -697,7 +721,7 @@ function renderNearSunShadow(x,z,y,heroCount,now){
  gl.useProgram(shadowProgram);
  gl.uniformMatrix4fv(gl.getUniformLocation(shadowProgram,'uLightVP'),false,new Float32Array(nearLightVP));
  gl.bindVertexArray(staticGeo.vao);gl.drawArrays(gl.TRIANGLES,0,staticGeo.count);
- if(needsLegacyHouses()){gl.bindVertexArray(legacyHouseGeo.vao);gl.drawArrays(gl.TRIANGLES,0,legacyHouseGeo.count);}
+ drawLegacyBuildings();
  // Unlike the previous fixed-circle shadow, the complete animated silhouette casts light.
  gl.bindVertexArray(dynamicGeo.vao);gl.drawArrays(gl.TRIANGLES,0,heroCount);
  if(authoredAssets)authoredAssets.drawShadow(nearLightVP);
@@ -728,6 +752,7 @@ function frame(now){let dt=last?Math.max(0,Math.min(.75,(now-last)/1000)):0;last
  gl.bindBuffer(gl.ARRAY_BUFFER,dynamicGeo.buffer);
  if(heroArray.byteLength>dynamicByteCapacity){dynamicByteCapacity=2*heroArray.byteLength;gl.bufferData(gl.ARRAY_BUFFER,dynamicByteCapacity,gl.DYNAMIC_DRAW)}
  gl.bufferSubData(gl.ARRAY_BUFFER,0,heroArray);
+ if(farShadowDirty&&!softwareRenderer){rebuildFarSunShadow();farShadowDirty=false;}
  renderNearSunShadow(x,z,y,hero.count,now*.001);
  gl.viewport(0,0,canvas.width,canvas.height);gl.clearColor(.54,.67,.67,1);gl.clear(gl.COLOR_BUFFER_BIT|gl.DEPTH_BUFFER_BIT);
  const skyForward=norm(sub(target,eye)),skyRight=norm(cross(skyForward,[0,1,0])),skyUp=cross(skyRight,skyForward);
@@ -739,7 +764,7 @@ function frame(now){let dt=last?Math.max(0,Math.min(.75,(now-last)/1000)):0;last
  if(!softwareRenderer)gl.uniformMatrix4fv(mainU.nearLvp,false,new Float32Array(nearLightVP));gl.uniform3fv(mainU.eye,eye);gl.uniform3fv(mainU.sun,sun);gl.uniform3fv(mainU.fog,fog);gl.uniform1f(mainU.time,elapsed);gl.uniform1f(mainU.enabled,softwareRenderer?0:1);gl.uniform1f(mainU.lowQuality,softwareRenderer?1:0);gl.activeTexture(gl.TEXTURE0);gl.bindTexture(gl.TEXTURE_2D,depthTex);gl.uniform1i(mainU.shadow,0);gl.activeTexture(gl.TEXTURE1);gl.bindTexture(gl.TEXTURE_2D,materialAtlas);gl.uniform1i(mainU.materials,1);gl.uniform1f(mainU.shadowSize,softwareRenderer?512:window.matchMedia('(pointer:coarse)').matches?1024:2048);
  if(!softwareRenderer){gl.activeTexture(gl.TEXTURE3);gl.bindTexture(gl.TEXTURE_2D,nearDepthTex);gl.uniform1i(mainU.nearShadow,3);gl.uniform1f(mainU.nearShadowSize,nearShadowSize);}
  gl.bindVertexArray(staticGeo.vao);gl.drawArrays(gl.TRIANGLES,0,staticGeo.count);
- if(needsLegacyHouses()){gl.bindVertexArray(legacyHouseGeo.vao);gl.drawArrays(gl.TRIANGLES,0,legacyHouseGeo.count);}
+ drawLegacyBuildings();
  if(authoredAssets){
   authoredAssets.draw({vp,eye,sun,fog,farVP:lightVP,nearVP:nearLightVP,farMap:depthTex,nearMap:nearDepthTex});
   // Third-party material draw paths must never leak shader or texture bindings
