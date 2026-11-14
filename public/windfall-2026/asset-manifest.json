@@ -74,9 +74,9 @@
     {
       "id": "windfall-broadleaf-tree",
       "src": "models/windfall-broadleaf-tree.glb",
-      "creator": "Windfall project - original procedural branch sculpture and hand-authored leaf textures",
+      "creator": "Windfall original branch geometry and hand-authored leaf texture; scanned bark photograph by Rob Tuytel (Poly Haven)",
       "license": "OWNED-ORIGINAL",
-      "provenance": "Generated locally from original Python tree mesh and PBR bark/leaf images; no borrowed models or textures",
+      "provenance": "Reproducible tools/build_tree_asset.py. Original Windfall geometry and leaf textures; embedded bark color and derived height-normal from locally verified Poly Haven Bark Brown 02 CC0 scan (materials/SOURCES.json), by Rob Tuytel. No third-party mesh.",
       "instances": [
         {
           "position": [
@@ -149,7 +149,16 @@
           "grounded": true
         }
       ],
-      "collisionRadius": 0.27
+      "collisionRadius": 0.27,
+      "thirdPartyComponents": [
+        {
+          "type": "embedded bark texture",
+          "name": "Bark Brown 02",
+          "creator": "Rob Tuytel",
+          "license": "CC0-1.0",
+          "source": "https://polyhaven.com/a/bark_brown_02"
+        }
+      ]
     },
     {
       "id": "windfall-timber-cottage",
