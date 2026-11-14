@@ -475,7 +475,7 @@ void main(){vec3 N=normalize(vNormal);vec3 L=normalize(uSun);vec3 V=normalize(uE
  // Software renderers retain their less expensive unshadowed directional light.
  float cloudOcclusion=0.;
  if(uLowQuality<.5){
-  vec2 cloudP=vPos.xz*.021+vec2(uTime*.00165,uTime*.00054);
+  vec2 cloudP=vPos.xz*.021+vec2(uTime*.018,uTime*.006);
   float layerA=sin(cloudP.x*2.31+sin(cloudP.y*1.41)*.86);
   float layerB=sin(cloudP.y*2.07-cloudP.x*.72);
   float layerC=sin(dot(cloudP,vec2(2.74,-1.83))+.65);
@@ -608,7 +608,21 @@ const mainU={vp:u(mainProgram,'uVP'),eye:u(mainProgram,'uEye'),sun:u(mainProgram
 const waterU={vp:u(waterProgram,'uVP'),eye:u(waterProgram,'uEye'),sun:u(waterProgram,'uSun'),fog:u(waterProgram,'uFog'),time:u(waterProgram,'uTime'),coast:u(waterProgram,'uCoastHeight')};
 const skyU={time:u(skyProgram,'uTime'),aspect:u(skyProgram,'uSkyAspect'),fov:u(skyProgram,'uSkyFov'),forward:u(skyProgram,'uSkyForward'),right:u(skyProgram,'uSkyRight'),up:u(skyProgram,'uSkyUp'),sun:u(skyProgram,'uSkySun')};
 const sun=norm([-0.55,.70,.46]),fog=[.63,.70,.73];
-const player={x:0,z:7,y:0,heading:0.16,phase:0,motion:0};let cameraYaw=0.16,cameraPitch=.27,cameraDist=10.9,drag=null,aimX=0,aimY=0,runTouch=false;
+const player={x:0,z:7,y:0,heading:0.16,phase:0,motion:0,turn:0};
+let cameraYaw=0.16,cameraPitch=.27,cameraDist=10.9,drag=null,aimX=0,aimY=0,runTouch=false;
+let cameraEye=null,cameraLook=null;
+// Sample the full look-to-eye segment so a cliff or building never hides the player.
+function cameraSafeEye(target,desired){
+ const vx=desired[0]-target[0],vy=desired[1]-target[1],vz=desired[2]-target[2];
+ let safe=1;
+ for(let i=1;i<=18;i++){
+  const t=i/18,x=target[0]+vx*t,z=target[2]+vz*t,y=target[1]+vy*t;
+  const earth=walkingHeight(x,z)+.52;
+  const building=authoredAssets&&y<earth+6&&authoredAssets.collides(x,z,.10);
+  if(y<earth||building){safe=Math.max(.16,(i-2)/18);break;}
+ }
+ return [target[0]+vx*safe,target[1]+vy*safe,target[2]+vz*safe];
+}
 const key={};window.addEventListener('keydown',e=>{if(['ArrowUp','ArrowDown','ArrowLeft','ArrowRight','Space'].includes(e.key))e.preventDefault();key[e.key.toLowerCase()]=true});window.addEventListener('keyup',e=>key[e.key.toLowerCase()]=false);window.addEventListener('blur',()=>{for(let k in key)key[k]=false;runTouch=false});
 canvas.addEventListener('pointerdown',e=>{if(e.pointerType==='touch'&&e.clientX<innerWidth*.25)return;drag={x:e.clientX,y:e.clientY,id:e.pointerId};canvas.setPointerCapture(e.pointerId)});
 canvas.addEventListener('pointermove',e=>{if(drag&&e.pointerId===drag.id){cameraYaw+=(e.clientX-drag.x)*.006;cameraPitch=clamp(cameraPitch+(e.clientY-drag.y)*.0045,.08,.68);drag.x=e.clientX;drag.y=e.clientY}});
@@ -718,7 +732,7 @@ function rebuildFarSunShadow(){
  gl.uniformMatrix4fv(gl.getUniformLocation(shadowProgram,'uLightVP'),false,new Float32Array(lightVP));
  gl.bindVertexArray(staticGeo.vao);gl.drawArrays(gl.TRIANGLES,0,staticGeo.count);
  drawLegacyBuildings();
- if(authoredAssets)authoredAssets.drawShadow(lightVP);
+ if(authoredAssets)authoredAssets.drawShadow(lightVP,false,elapsed);
  gl.bindFramebuffer(gl.FRAMEBUFFER,null);
 }
 const shadowDecalGeo=geometryBuffer(characterShadow());let shadowByteCapacity=Math.ceil(shadowDecalGeo.count*40*1.4);
@@ -742,7 +756,7 @@ function renderNearSunShadow(x,z,y,heroCount,now){
  drawLegacyBuildings();
  // Unlike the previous fixed-circle shadow, the complete animated silhouette casts light.
  if(heroCount){gl.bindVertexArray(dynamicGeo.vao);gl.drawArrays(gl.TRIANGLES,0,heroCount);}
- if(authoredAssets)authoredAssets.drawShadow(nearLightVP,true);
+ if(authoredAssets)authoredAssets.drawShadow(nearLightVP,true,elapsed);
  gl.bindFramebuffer(gl.FRAMEBUFFER,null);
 }
 // Movement uses elapsed real time; clamping to 45 ms made controls nearly freeze on low FPS.
@@ -759,15 +773,26 @@ function frame(now){let dt=last?Math.max(0,Math.min(.75,(now-last)/1000)):0;last
   if((terrain(nextX,nextZ)<.18&&!onPier)||(authoredAssets&&authoredAssets.collides(nextX,nextZ)))break;
   player.x=nextX;player.z=nextZ;
  }
- let target=Math.atan2(-wx,-wz),diff=Math.atan2(Math.sin(target-player.heading),Math.cos(target-player.heading));player.heading+=diff*Math.min(1,dt*12);
+ let target=Math.atan2(-wx,-wz),diff=Math.atan2(Math.sin(target-player.heading),Math.cos(target-player.heading));
+  player.turn=mix(player.turn,clamp(diff,-.85,.85),1.-Math.exp(-dt*8));
+  player.heading+=diff*Math.min(1,dt*12);
  player.phase+=dt*(fast?13.2:9.0)*len;
  }
  player.motion=mix(player.motion,moving?1:0,Math.min(1,dt*8));
- const x=player.x,z=player.z,y=walkingHeight(x,z),eye=[x+Math.sin(cameraYaw)*cameraDist*Math.cos(cameraPitch),y+2.0+cameraDist*Math.sin(cameraPitch),z+Math.cos(cameraYaw)*cameraDist*Math.cos(cameraPitch)];
- const target=[x,y+1.7,z],view=viewMat(eye,target),vp=mul(projection(.98,canvas.width/canvas.height,.12,340),view);
+ if(!moving)player.turn*=Math.exp(-dt*7);
+ const x=player.x,z=player.z,y=walkingHeight(x,z);
+ const desiredLook=[x,y+1.7,z];
+ const desiredEye=[x+Math.sin(cameraYaw)*cameraDist*Math.cos(cameraPitch),y+2.0+cameraDist*Math.sin(cameraPitch),z+Math.cos(cameraYaw)*cameraDist*Math.cos(cameraPitch)];
+ const unobstructed=cameraSafeEye(desiredLook,desiredEye);
+ const follow=1.-Math.exp(-dt*8.5),lookFollow=1.-Math.exp(-dt*13);
+ cameraLook=cameraLook?cameraLook.map((v,i)=>mix(v,desiredLook[i],lookFollow)):desiredLook.slice();
+ cameraEye=cameraEye?cameraEye.map((v,i)=>mix(v,unobstructed[i],follow)):unobstructed.slice();
+ // Prevent interpolation from carrying the lens through an obstacle.
+ cameraEye=cameraSafeEye(cameraLook,cameraEye);
+ const eye=cameraEye,target=cameraLook,view=viewMat(eye,target),vp=mul(projection(.98,canvas.width/canvas.height,.12,340),view);
  // The new PBR wayfarer animates in the model hierarchy; keep primitive fallback.
  const hasAuthoredHero=!!(authoredAssets&&authoredAssets.hasLoaded('windfall-wayfarer'));
- if(hasAuthoredHero)authoredAssets.updatePlayer({x,y:y+.07,z,heading:player.heading,phase:player.phase,motion:player.motion,time:elapsed});
+ if(hasAuthoredHero)authoredAssets.updatePlayer({x,y:y+.07,z,heading:player.heading,phase:player.phase,motion:player.motion,turn:player.turn,time:elapsed});
  const hero=hasAuthoredHero?null:character(elapsed);
  if(hero){
   const heroArray=new Float32Array(hero.a);gl.bindBuffer(gl.ARRAY_BUFFER,dynamicGeo.buffer);
@@ -788,7 +813,7 @@ function frame(now){let dt=last?Math.max(0,Math.min(.75,(now-last)/1000)):0;last
  gl.bindVertexArray(staticGeo.vao);gl.drawArrays(gl.TRIANGLES,0,staticGeo.count);
  drawLegacyBuildings();
  if(authoredAssets){
-  authoredAssets.draw({vp,eye,sun,fog,farVP:lightVP,nearVP:nearLightVP,farMap:depthTex,nearMap:nearDepthTex});
+  authoredAssets.draw({vp,eye,sun,fog,time:elapsed,lowQuality:softwareRenderer,farVP:lightVP,nearVP:nearLightVP,farMap:depthTex,nearMap:nearDepthTex});
   // Third-party material draw paths must never leak shader or texture bindings
   // into the procedural hero, decals, or water passes.
   gl.useProgram(mainProgram);
