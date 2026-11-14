@@ -6,6 +6,7 @@ photorealistic. Rebuild with: python tools/build_wayfarer.py
 """
 from __future__ import annotations
 import math
+import os
 from collections import defaultdict
 from pathlib import Path
 import numpy as np
@@ -16,6 +17,17 @@ from trimesh.visual.texture import TextureVisuals
 
 ROOT=Path(__file__).resolve().parents[1];OUT=ROOT/'models';OUT.mkdir(exist_ok=True)
 SEED=20261114
+# Original fictional five-character fantasy ensemble; no inferred real likenesses.
+CHARACTER=os.environ.get('WINDFALL_CHARACTER','windfall-wayfarer')
+CAST={
+ 'windfall-wayfarer':{'height':1.,'width':1.,'hairStyle':'short','beard':True,'hair':[.14,.091,.070],'skin':[.65,.42,.31],'coat':[.18,.30,.32],'pants':[.16,.22,.26],'scarf':[.35,.22,.25]},
+ 'windfall-companion-a':{'height':.96,'width':.88,'hairStyle':'long','beard':False,'hair':[.26,.145,.102],'skin':[.68,.45,.35],'coat':[.34,.26,.36],'pants':[.25,.27,.25],'scarf':[.36,.39,.23]},
+ 'windfall-companion-b':{'height':.76,'width':.80,'hairStyle':'braid','beard':False,'hair':[.22,.15,.104],'skin':[.69,.47,.37],'coat':[.22,.37,.38],'pants':[.34,.31,.27],'scarf':[.42,.27,.30]},
+ 'windfall-companion-c':{'height':.65,'width':.82,'hairStyle':'short','beard':False,'hair':[.17,.12,.09],'skin':[.69,.47,.34],'coat':[.38,.29,.21],'pants':[.23,.30,.29],'scarf':[.26,.32,.38]},
+ 'windfall-companion-d':{'height':.54,'width':.85,'hairStyle':'tousled','beard':False,'hair':[.28,.18,.11],'skin':[.73,.50,.37],'coat':[.37,.35,.23],'pants':[.29,.27,.24],'scarf':[.28,.35,.27]},
+}
+if CHARACTER not in CAST:raise ValueError('Unknown Windfall character variant')
+VARIANT=CAST[CHARACTER]
 
 
 def surface(label,seed):
@@ -32,7 +44,8 @@ def surface(label,seed):
       'brass':([.60,.44,.22],.36,.84),'dark':([.080,.095,.10],.72,.15),
       'iris':([.20,.37,.35],.40,.03),'scarf':([.35,.22,.25],.87,.0)
     }
-    base,rough,metal=colors[label];rgb=np.array(base)[None,None,:]
+    palette={'coat':VARIANT['coat'],'pants':VARIANT['pants'],'scarf':VARIANT['scarf'],'skin':VARIANT['skin'],'hair':VARIANT['hair']}
+    base,rough,metal=colors[label];base=palette.get(label,base);rgb=np.array(base)[None,None,:]
     micro=grain*.12+waves*.15+slubs*.11
     if label=='skin':micro=grain*.045+waves*.035+slubs*.06
     if label in ['hair','leather']:micro=grain*.08+waves*.20+slubs*.05
@@ -116,6 +129,15 @@ def anchor(name,parent='world',offset=(0,0,0)):
     scene.graph.update(frame_to=name,frame_from=parent,matrix=T(*offset))
 
 def piece(name,material,mesh,parent):
+    # Child head-to-body ratio and shoulder width are intentionally distinct.
+    if CHARACTER!='windfall-wayfarer':
+        if parent=='head':
+            factor=1.09 if VARIANT['height']<.8 else 1.01
+            mesh.vertices*=np.array([factor,factor,factor])
+        elif parent=='body':
+            mesh.vertices*=np.array([VARIANT['width'],1.,.94])
+        elif parent.startswith(('arm-','forearm-','leg-','shin-','foot-')):
+            mesh.vertices*=np.array([.95,1.,.94])
     PARTS[(parent,material)].append(mesh)
 
 anchor('rig-root')
@@ -157,20 +179,47 @@ piece('chin','skin',ellipsoid((0,-.215,-.21),(.16,.083,.114),2),'head')
 for sign in [-1,1]:
     piece('ear-'+str(sign),'skin',ellipsoid((sign*.30,.09,-.016),(.073,.119,.079),2),'head')
     piece('cheek-'+str(sign),'skin',ellipsoid((sign*.21,-.064,-.184),(.102,.108,.11),2),'head')
-    piece('eye-white-'+str(sign),'linen',ellipsoid((sign*.124,.125,-.281),(.072,.044,.030),2),'head')
-    piece('iris-'+str(sign),'iris',ellipsoid((sign*.124,.124,-.307),(.026,.028,.016),2),'head')
-    piece('pupil-'+str(sign),'dark',ellipsoid((sign*.124,.126,-.323),(.013,.017,.006),1),'head')
+    piece('eye-white-'+str(sign),'linen',ellipsoid((sign*.124,.125,-.281),(.057,.028,.020),3),'head')
+    piece('iris-'+str(sign),'iris',ellipsoid((sign*.124,.124,-.305),(.020,.022,.011),3),'head')
+    piece('pupil-'+str(sign),'dark',ellipsoid((sign*.124,.126,-.316),(.010,.014,.005),2),'head')
+    piece('upper-lid-'+str(sign),'skin',segment((sign*.068,.155,-.285),(sign*.182,.146,-.275),.011,.009,10),'head')
     piece('eyebrow-'+str(sign),'hair',segment((sign*.067,.229,-.279),(sign*.214,.218,-.266),.026,.022,8),'head')
     piece('sideburn-'+str(sign),'hair',ellipsoid((sign*.278,-.045,-.018),(.064,.152,.094),2),'head')
-    piece('beard-cheek-'+str(sign),'hair',ellipsoid((sign*.197,-.185,-.157),(.115,.13,.115),2),'head')
-piece('lip','scarf',ellipsoid((0,-.177,-.292),(.097,.020,.020),2),'head')
-piece('beard-chin','hair',ellipsoid((0,-.260,-.174),(.192,.094,.16),2),'head')
-piece('hair-scalp','hair',ellipsoid((0,.396,.022),(.319,.165,.296),3),'head')
-for i in range(13):
-    theta=(i/13)*math.tau
-    xx=.27*math.cos(theta);zz=.22*math.sin(theta)
-    piece('hair-tuft-%02d'%i,'hair',ellipsoid((xx,.412+.027*math.sin(theta*5),zz-.038),(.095,.09,.113),2),'head')
-piece('forelock','hair',ellipsoid((-.105,.360,-.253),(.205,.096,.130),2),'head')
+    if VARIANT['beard']:
+        piece('beard-cheek-'+str(sign),'hair',ellipsoid((sign*.197,-.185,-.157),(.105,.12,.09),2),'head')
+piece('lip','skin',ellipsoid((0,-.177,-.292),(.097,.015,.018),2),'head')
+if VARIANT['beard']:
+    piece('beard-chin','hair',ellipsoid((0,-.260,-.174),(.177,.085,.13),2),'head')
+piece('hair-cap','hair',ellipsoid((0,.39,.018),(.309,.147,.292),3),'head')
+# Tapered, flowing locks instead of a uniform ring of spherical clumps.
+style=VARIANT['hairStyle']
+count=16 if style in ('long','braid') else 11 if style=='tousled' else 8
+for i in range(count):
+    side=i/(count-1)*2-1
+    xx=side*.274
+    ridge=[(.44,.067,.10,xx*.55,-.12),(.38,.079,.077,xx*.75,-.19),
+           (.29,.060,.055,xx-.012,-.259),(.17,.016,.019,xx-.038,-.258)]
+    if style in ('long','braid'):
+        ridge=[(.43,.071,.086,xx,-.13),(.27,.081,.077,xx,-.23),
+               (.09,.075,.062,xx*1.05,-.19),(-.17,.073,.061,xx*1.15,-.105),
+               (-.52,.019,.025,xx*1.09+.03*math.sin(i*2.2),-.06)]
+    elif style=='tousled':
+        ridge=[(.43,.071,.088,xx*.53,-.11),(.36,.074,.064,xx*.76,-.225),
+               (.26,.049,.043,xx+.04*math.sin(i*2),-.26),(.12,.012,.016,xx+.08*math.sin(i*1.9),-.24)]
+    piece(f'hair-lock-{i:02d}','hair',loft(ridge,12),'head')
+if style=='long':
+    for side in [-1,1]:
+        piece(f'shoulder-hair-{side}','hair',loft([
+            (.16,.085,.10,side*.29,.065),(-.12,.12,.115,side*.32,.10),
+            (-.43,.105,.10,side*.34,.17),(-.72,.025,.035,side*.28,.25)
+        ],12),'head')
+elif style=='braid':
+    for side in [-1,1]:
+        for j in range(9):
+            piece(f'braid-{side}-{j}','hair',ellipsoid((side*(.29+.06*math.sin(j*.75)),
+                .10-j*.104,.09+.05*math.sin(j*.42)),(.067,.070,.066),2),'head')
+piece('forelock','hair',loft([(.45,.12,.10,-.13,-.17),(.39,.14,.086,-.16,-.245),
+    (.29,.12,.063,-.19,-.298),(.19,.014,.024,-.22,-.305)],16),'head')
 
 for side,label in [(-1,'L'),(1,'R')]:
     # Upper and lower arm are separate pivoted nodes (elbow bend authored in runtime).
@@ -198,7 +247,9 @@ for (parent,material),shapes in PARTS.items():
     node_name=parent+'-surface-'+material
     scene.add_geometry(model,geom_name=node_name,node_name=node_name,parent_node_name=parent)
 
-path=OUT/'windfall-wayfarer.glb'
+scale=VARIANT['height']
+scene.graph.update(frame_to='rig-root',frame_from='world',matrix=np.diag([scale,scale,scale,1.]))
+path=OUT/(CHARACTER+'.glb')
 blob=scene.export(file_type='glb')
 path.write_bytes(blob)
 loaded=trimesh.load(path,force='scene')
