@@ -52,6 +52,15 @@ assert.ok(camera((x,z)=>z>4.7&&z<6?4:0,null)(target,eye)[2]<5,'Camera crossed cl
 assert.ok(camera(()=>0,{collides:(x,z)=>z>=3.2&&z<=4.2})(target,eye)[2]<3.2,'Camera crossed structure');
 const required=['windfall-wayfarer','windfall-broadleaf-tree','windfall-mountain-conifer','windfall-timber-cottage','windfall-harbor-workshop','weathered-standing-stone','windfall-companion-a','windfall-companion-b','windfall-companion-c','windfall-companion-d'];
 for(const id of required)assert.ok(manifest.assets.some(a=>a.id===id),'Missing asset '+id);
+const companions=manifest.assets.filter(item=>item.role==='companion');
+assert.equal(companions.length,4,'Expected exactly four authored companion rigs');
+for(const item of companions){
+ assert.equal(item.instances.length,1);
+ assert.ok(item.instances[0].grounded,'Companion must be terrain-grounded');
+ assert.ok(item.collisionRadius>0,'Companion needs physical collision proxy');
+}
+assert.equal(manifest.assets.filter(item=>item.role==='player').length,1,'One playable wayfarer');
+
 for(const a of manifest.assets){
  assert.match(a.src,/^models\/[\w.-]+\.glb$/);
  assert.ok(['OWNED-ORIGINAL','CC0-1.0','CC-BY-4.0'].includes(a.license));
