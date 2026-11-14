@@ -933,7 +933,7 @@ function rebuildFarSunShadow(){
  gl.uniformMatrix4fv(gl.getUniformLocation(shadowProgram,'uLightVP'),false,new Float32Array(lightVP));
  gl.bindVertexArray(staticGeo.vao);gl.drawArrays(gl.TRIANGLES,0,staticGeo.count);
  drawLegacyBuildings();
- if(authoredAssets)authoredAssets.drawShadow(lightVP,false,elapsed);
+ if(authoredAssets)authoredAssets.drawShadow(lightVP,false,elapsed,eye);
  gl.bindFramebuffer(gl.FRAMEBUFFER,null);
 }
 const shadowDecalGeo=geometryBuffer(characterShadow());let shadowByteCapacity=Math.ceil(shadowDecalGeo.count*40*1.4);
@@ -957,7 +957,7 @@ function renderNearSunShadow(x,z,y,heroCount,now){
  drawLegacyBuildings();
  // Unlike the previous fixed-circle shadow, the complete animated silhouette casts light.
  if(heroCount){gl.bindVertexArray(dynamicGeo.vao);gl.drawArrays(gl.TRIANGLES,0,heroCount);}
- if(authoredAssets)authoredAssets.drawShadow(nearLightVP,true,elapsed);
+ if(authoredAssets)authoredAssets.drawShadow(nearLightVP,true,elapsed,eye);
  gl.bindFramebuffer(gl.FRAMEBUFFER,null);
 }
 // Movement uses elapsed real time; clamping to 45 ms made controls nearly freeze on low FPS.
