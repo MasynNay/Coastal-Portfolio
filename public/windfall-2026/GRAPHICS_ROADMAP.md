@@ -1,3 +1,11 @@
+## November 14 — authored forest density and visible-only model rendering
+
+- Kept the original, self-hosted PBR cottage and harbor workshop models, with per-family fallback geometry and rotated building collision volumes.
+- Added conservative six-plane frustum culling to both imported-model color and shadow passes. Off-screen instances no longer submit their model meshes; model draw statistics are available for QA. An isolated WebGL2 test showed eight visible building sections when in view and zero visible/eight culled once moved outside the camera, with no GL error.
+- Expanded authored broadleaf-tree placements from 7 to 27 and standing-stone placements from 6 to 18, biased toward the outer forest and away from village paths; placements use varied size and rotation without duplicating model downloads.
+- Full-island Chromium SwiftShader check reached the ready state with all four model families loaded, and no reported JavaScript exceptions. A real graphics-card benchmark and high-resolution cinematic visual approval are still outstanding.
+- **Release gate remains CLOSED:** authored assets, facial likeness/animation, environmental detail, physically based sky and water, volumetrics and cinematic polish are not yet comparable to a polished 2026 fantasy remake.
+
 ## Current checkpoint — original village architecture replacement
 
 - Two new original PBR GLB building families: timber cottage (~6,934 triangles) and harbor workshop (~6,978 triangles), seven placed instances. These replace the old primitive houses when both assets load successfully. The previous house geometry remains available as a runtime fallback.
