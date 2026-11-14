@@ -246,6 +246,25 @@
           "grounded": true
         }
       ]
+    },
+    {
+      "id": "windfall-wayfarer",
+      "src": "models/windfall-wayfarer.glb",
+      "role": "player",
+      "creator": "Windfall original original articulated adventurer",
+      "license": "OWNED-ORIGINAL",
+      "provenance": "tools/build_wayfarer.py; original procedural character sculpture, generated PBR maps, hierarchical named pivots; no borrowed artwork",
+      "instances": [
+        {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "scale": 1,
+          "rotationY": 0
+        }
+      ]
     }
   ]
 }

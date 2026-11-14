@@ -728,8 +728,8 @@ function renderNearSunShadow(x,z,y,heroCount,now){
  gl.bindVertexArray(staticGeo.vao);gl.drawArrays(gl.TRIANGLES,0,staticGeo.count);
  drawLegacyBuildings();
  // Unlike the previous fixed-circle shadow, the complete animated silhouette casts light.
- gl.bindVertexArray(dynamicGeo.vao);gl.drawArrays(gl.TRIANGLES,0,heroCount);
- if(authoredAssets)authoredAssets.drawShadow(nearLightVP);
+ if(heroCount){gl.bindVertexArray(dynamicGeo.vao);gl.drawArrays(gl.TRIANGLES,0,heroCount);}
+ if(authoredAssets)authoredAssets.drawShadow(nearLightVP,true);
  gl.bindFramebuffer(gl.FRAMEBUFFER,null);
 }
 // Movement uses elapsed real time; clamping to 45 ms made controls nearly freeze on low FPS.
@@ -752,13 +752,17 @@ function frame(now){let dt=last?Math.max(0,Math.min(.75,(now-last)/1000)):0;last
  player.motion=mix(player.motion,moving?1:0,Math.min(1,dt*8));
  const x=player.x,z=player.z,y=walkingHeight(x,z),eye=[x+Math.sin(cameraYaw)*cameraDist*Math.cos(cameraPitch),y+2.0+cameraDist*Math.sin(cameraPitch),z+Math.cos(cameraYaw)*cameraDist*Math.cos(cameraPitch)];
  const target=[x,y+1.7,z],view=viewMat(eye,target),vp=mul(projection(.98,canvas.width/canvas.height,.12,340),view);
- // Update actor geometry before both sunlight shadow and visible color passes.
- const hero=character(elapsed),heroArray=new Float32Array(hero.a);
- gl.bindBuffer(gl.ARRAY_BUFFER,dynamicGeo.buffer);
- if(heroArray.byteLength>dynamicByteCapacity){dynamicByteCapacity=2*heroArray.byteLength;gl.bufferData(gl.ARRAY_BUFFER,dynamicByteCapacity,gl.DYNAMIC_DRAW)}
- gl.bufferSubData(gl.ARRAY_BUFFER,0,heroArray);
+ // The new PBR wayfarer animates in the model hierarchy; keep primitive fallback.
+ const hasAuthoredHero=!!(authoredAssets&&authoredAssets.hasLoaded('windfall-wayfarer'));
+ if(hasAuthoredHero)authoredAssets.updatePlayer({x,y:y+.07,z,heading:player.heading,phase:player.phase,motion:player.motion,time:elapsed});
+ const hero=hasAuthoredHero?null:character(elapsed);
+ if(hero){
+  const heroArray=new Float32Array(hero.a);gl.bindBuffer(gl.ARRAY_BUFFER,dynamicGeo.buffer);
+  if(heroArray.byteLength>dynamicByteCapacity){dynamicByteCapacity=2*heroArray.byteLength;gl.bufferData(gl.ARRAY_BUFFER,dynamicByteCapacity,gl.DYNAMIC_DRAW)}
+  gl.bufferSubData(gl.ARRAY_BUFFER,0,heroArray);
+ }
  if(farShadowDirty&&!softwareRenderer){rebuildFarSunShadow();farShadowDirty=false;}
- renderNearSunShadow(x,z,y,hero.count,now*.001);
+ renderNearSunShadow(x,z,y,hero?hero.count:0,now*.001);
  gl.viewport(0,0,canvas.width,canvas.height);gl.clearColor(.54,.67,.67,1);gl.clear(gl.COLOR_BUFFER_BIT|gl.DEPTH_BUFFER_BIT);
  const skyForward=norm(sub(target,eye)),skyRight=norm(cross(skyForward,[0,1,0])),skyUp=cross(skyRight,skyForward);
  gl.disable(gl.DEPTH_TEST);gl.depthMask(false);gl.useProgram(skyProgram);
@@ -784,8 +788,8 @@ function frame(now){let dt=last?Math.max(0,Math.min(.75,(now-last)/1000)):0;last
  if(sd.byteLength>shadowByteCapacity){shadowByteCapacity=sd.byteLength*2;gl.bufferData(gl.ARRAY_BUFFER,shadowByteCapacity,gl.DYNAMIC_DRAW)}
  gl.bufferSubData(gl.ARRAY_BUFFER,0,sd);gl.bindVertexArray(shadowDecalGeo.vao);gl.drawArrays(gl.TRIANGLES,0,sd.length/10);
  gl.depthMask(true);gl.disable(gl.BLEND);
- // Dynamic hero geometry is small; regenerate poses rather than deform all of the scenery.
- gl.bindVertexArray(dynamicGeo.vao);gl.drawArrays(gl.TRIANGLES,0,hero.count);
+ // Draw a procedural character only when the authored GLB is absent or fails.
+ if(hero){gl.bindVertexArray(dynamicGeo.vao);gl.drawArrays(gl.TRIANGLES,0,hero.count);}
  // Water after terrain: its depth test naturally exposes shoreline and submerged sand.
  gl.enable(gl.BLEND);gl.blendFunc(gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);gl.depthMask(false);gl.useProgram(waterProgram);
  gl.uniformMatrix4fv(waterU.vp,false,new Float32Array(vp));gl.uniform3fv(waterU.eye,eye);gl.uniform3fv(waterU.sun,sun);gl.uniform3fv(waterU.fog,fog);gl.uniform1f(waterU.time,elapsed);gl.activeTexture(gl.TEXTURE2);gl.bindTexture(gl.TEXTURE_2D,coastHeightmap);gl.uniform1i(waterU.coast,2);gl.bindVertexArray(waterGeo.vao);gl.drawArrays(gl.TRIANGLES,0,waterGeo.count);gl.depthMask(true);gl.disable(gl.BLEND);

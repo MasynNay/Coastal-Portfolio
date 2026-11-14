@@ -31,3 +31,6 @@ See [ASSET_PIPELINE.md](ASSET_PIPELINE.md) for the details, limits, license poli
 Run `node verify-assets.cjs` to verify the bundled GLB structure and rights metadata. Rebuild original GLBs with the scripts under `tools/` using Python, NumPy, Pillow, and trimesh. These dependencies are for **asset authoring only**, not playing the game.
 
 No original files from the previous unreleased local session were recovered. This is a clean, separately versioned replacement.
+
+
+**Character pipeline checkpoint:** the new original textured GLB wayfarer replaces per-frame generated character geometry when available and supports hierarchical head/arm/knee/cape motion plus moving shadows; an older procedural character remains the automatic fallback. It is a technical/art prototype, not the requested final remake-level hero art. See `ASSET_PIPELINE.md`.

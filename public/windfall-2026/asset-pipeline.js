@@ -18,7 +18,8 @@
       if (typeof a.src !== 'string' || !/^models\/[\w/.-]+\.glb$/.test(a.src) || a.src.includes('..')) throw new Error('Models must be local .glb files under models/');
       if (!supportedLicenses.has(a.license) || typeof a.creator !== 'string' || !a.creator.trim() || !a.provenance)
         throw new Error(`Asset ${a.id} needs rights, creator, and provenance`);
-      if (!Array.isArray(a.instances) || !a.instances.length || a.instances.length > 150) throw new Error('Specify 1-150 instances per asset');
+      if (a.role !== undefined && a.role !== 'player') throw new Error('Unsupported dynamic model role');
+      if (!Array.isArray(a.instances) || !a.instances.length || a.instances.length > 150 || (a.role==='player'&&a.instances.length!==1)) throw new Error('Specify 1-150 instances (one for player)');
       if (a.collisionRadius !== undefined && (!Number.isFinite(a.collisionRadius) || a.collisionRadius < 0 || a.collisionRadius > 60)) throw new Error('Invalid model collision radius');
       if (a.collisionBox !== undefined && (!Array.isArray(a.collisionBox) || a.collisionBox.length !== 2 || !a.collisionBox.every(n => Number.isFinite(n) && n > 0 && n <= 50))) throw new Error('Invalid building collision box');
       for (const inst of a.instances) {
@@ -246,6 +247,7 @@
       u[name]={};for(const n of ['uVP','uModel','uBase','uNormal','uORM','uEmissive','uShadowFar','uShadowNear','uFarVP','uNearVP','uEye','uSun','uFog','uEmission','uBaseFactor','uMetalRough','uHasBase','uHasNormal','uHasORM','uHasEmissive','uHasShadows','uAlphaCutoff','uAlphaMasked'])u[name][n]=uniform(prog,n);
     }
     const records=[],statuses=[],colliders=[];
+    let dynamicPlayer=null;
     const defaultWhite=gl.createTexture();gl.bindTexture(gl.TEXTURE_2D,defaultWhite);
     gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA8,1,1,0,gl.RGBA,gl.UNSIGNED_BYTE,new Uint8Array([255,255,255,255]));
     gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,gl.LINEAR);
@@ -283,11 +285,23 @@
         const node=doc.json.nodes?.[index];if(!node)throw new Error('Invalid glTF node reference');
         const local=node.matrix||trs(node.translation,node.rotation,node.scale),world=multiply(parent,local);
         if(node.mesh!==undefined){const primitives=primitiveMesh[node.mesh];if(!primitives)throw new Error('Invalid mesh reference');
-          for(const primitive of primitives)localNodes.push({...primitive,model:world});}
+          for(const primitive of primitives)localNodes.push({...primitive,model:world,nodeIndex:index});}
         for(const child of node.children||[])visit(child,world,depthCount+1);
       }
       for(const root of roots)visit(root,identity());
       if(!localNodes.length)throw new Error('GLB has no renderable triangle meshes');
+      if(entry.role==='player'){
+        // Hierarchical mesh-node articulation (not skinned mesh deformation).
+        // The original procedural hero remains visible until GLB validation succeeds.
+        const nodeMeshes=new Map();
+        for(const mesh of localNodes){
+          if(!nodeMeshes.has(mesh.nodeIndex))nodeMeshes.set(mesh.nodeIndex,[]);
+          nodeMeshes.get(mesh.nodeIndex).push(mesh);
+        }
+        dynamicPlayer={doc,roots,parts:localNodes,nodeMeshes};
+        statuses.push({id:entry.id,loaded:true,meshes:localNodes.length,instances:1,role:'player'});
+        return localNodes.length;
+      }
       for(const instance of entry.instances){
         const scale=instance.scale??1,angle=instance.rotationY??0;
         const extra=trs(instance.position,[0,Math.sin(angle/2),0,Math.cos(angle/2)],[scale,scale,scale]);
@@ -324,17 +338,56 @@
       gl.uniform1f(uniforms.uAlphaCutoff,m.mat.cutoff);
       gl.activeTexture(gl.TEXTURE0);gl.bindTexture(gl.TEXTURE_2D,m.mat.base||defaultWhite);gl.uniform1i(uniforms.uBase,0);
     }
-    function drawShadow(vp){
-      if(!records.length)return;
+    // Drive the named authored GLB pivot nodes from the existing frame-independent gait.
+    // No JS-side vertex regeneration is needed: only a few matrices are updated.
+    function updatePlayer({x,y,z,heading,phase,motion,time}){
+      const rig=dynamicPlayer;if(!rig)return;
+      const cycle=Math.sin(phase)*motion,heel=Math.cos(phase)*motion;
+      const root=trs([x,y,z],[0,Math.sin(heading*.5),0,Math.cos(heading*.5)]);
+      const rotX=a=>trs([0,0,0],[Math.sin(a*.5),0,0,Math.cos(a*.5)]);
+      const rotY=a=>trs([0,0,0],[0,Math.sin(a*.5),0,Math.cos(a*.5)]);
+      const rotZ=a=>trs([0,0,0],[0,0,Math.sin(a*.5),Math.cos(a*.5)]);
+      const swing=(name)=>{
+        if(name==='leg-L')return rotX(.43*cycle);
+        if(name==='leg-R')return rotX(-.43*cycle);
+        if(name==='shin-L')return rotX(-.12+.52*Math.max(0,-cycle));
+        if(name==='shin-R')return rotX(-.12+.52*Math.max(0,cycle));
+        if(name==='foot-L')return rotX(-.22*Math.sin(phase+.4)*motion);
+        if(name==='foot-R')return rotX(.22*Math.sin(phase+.4)*motion);
+        if(name==='arm-L')return rotX(-.34*cycle);
+        if(name==='arm-R')return rotX(.34*cycle);
+        if(name==='forearm-L')return rotX(-.13-.09*heel);
+        if(name==='forearm-R')return rotX(-.13+.09*heel);
+        if(name==='body')return rotZ(.022*cycle);
+        if(name==='cape')return rotX(.06+Math.sin(time*2.3)*.055+.08*motion);
+        if(name==='head')return rotY(Math.sin(time*.73)*.026);
+        return identity();
+      };
+      function walk(i,parent,depth=0){
+        if(depth>50)throw new Error('Invalid articulated character hierarchy');
+        const node=rig.doc.json.nodes[i];
+        const original=node.matrix||trs(node.translation,node.rotation,node.scale);
+        const local=multiply(original,swing(node.name||''));
+        const model=multiply(parent,local);
+        for(const mesh of rig.nodeMeshes.get(i)||[])mesh.model=model;
+        for(const child of node.children||[])walk(child,model,depth+1);
+      }
+      const bob=Math.abs(Math.sin(phase))*.042*motion;
+      const actor=multiply(root,trs([0,bob,0]));
+      for(const i of rig.roots)walk(i,actor);
+    }
+    function drawShadow(vp,includePlayer=false){
+      if(!records.length && !(includePlayer&&dynamicPlayer))return;
       gl.useProgram(depth);gl.uniformMatrix4fv(u.depth.uVP,false,new Float32Array(vp));
-      for(const m of records){if(m.mat.alpha==='BLEND')continue;
+      for(const m of (includePlayer&&dynamicPlayer ? records.concat(dynamicPlayer.parts) : records)){if(m.mat.alpha==='BLEND')continue;
         setCommon(u.depth,m);if(m.mat.doubleSided)gl.disable(gl.CULL_FACE);else gl.enable(gl.CULL_FACE);
         drawGeometry(m);
       }
       gl.disable(gl.CULL_FACE);
     }
     function draw(render){
-      if(!records.length)return;
+      if(!records.length && !dynamicPlayer)return;
+      const visible=dynamicPlayer?records.concat(dynamicPlayer.parts):records;
       gl.useProgram(standard);
       gl.uniformMatrix4fv(u.standard.uVP,false,new Float32Array(render.vp));
       gl.uniformMatrix4fv(u.standard.uFarVP,false,new Float32Array(render.farVP));
@@ -345,7 +398,7 @@
       gl.activeTexture(gl.TEXTURE5);gl.bindTexture(gl.TEXTURE_2D,render.nearMap||defaultWhite);gl.uniform1i(u.standard.uShadowNear,5);
       for(const layer of ['OPAQUE','MASK','BLEND']){
         if(layer==='BLEND'){gl.enable(gl.BLEND);gl.blendFunc(gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);gl.depthMask(false);}
-        for(const m of records){if(m.mat.alpha!==layer)continue;
+        for(const m of visible){if(m.mat.alpha!==layer)continue;
           setCommon(u.standard,m);gl.uniform2fv(u.standard.uMetalRough,[m.mat.metal,m.mat.rough]);
           gl.uniform3fv(u.standard.uEmission,m.mat.emission);
           for(const [slot,texture,name,has] of [[1,m.mat.normal,'uNormal','uHasNormal'],[2,m.mat.orm,'uORM','uHasORM'],[3,m.mat.emissive,'uEmissive','uHasEmissive']]){
@@ -358,7 +411,7 @@
       }
       gl.disable(gl.CULL_FACE);
     }
-    return {addGLB,loadManifest,draw,drawShadow,getStatus:()=>statuses.slice(),getMeshCount:()=>records.length,
+    return {addGLB,loadManifest,draw,drawShadow,updatePlayer,getStatus:()=>statuses.slice(),getMeshCount:()=>records.length+(dynamicPlayer?.parts.length||0),
       hasLoaded:(id)=>statuses.some(s=>s.id===id&&s.loaded),
       collides:(x,z,padding=.28)=>colliders.some(c=>{
         const dx=x-c.x,dz=z-c.z;
