@@ -1,3 +1,12 @@
+## November 14 — photographed local surface scans and full-detail browser QA
+
+- Integrated three **verified CC0 scanned material sources**, all by Rob Tuytel at Poly Haven: Forest Ground 01, Cobblestone Floor 04 and Bark Brown 02. Generated 384×384 RGBA color + subdued displacement tiles using verified MD5 downloads, with exact SHA256 of resulting files and source URLs recorded in `materials/SOURCES.json`. The files are self-hosted; the browser never calls Poly Haven.
+- A small asynchronous atlas-upgrade layer replaces only material slots 0, 1 and 2 when local tiles are available. The previous deterministic procedural atlas remains the fallback for offline, missing files and software-quality rendering. This is **not yet** a complete metallic-roughness/normal/IBL scanned material workflow; those are still outstanding.
+- Added a source-and-provenance verifier that checks all three committed PNGs' dimensions, encoding and SHA256.
+- A separate Chromium SwiftShader test exercised the **full-detail** shader path (without the normal software-quality downgrade). It loaded all six original GLB model families and all three local scanned textures, issued 103 authored color draws with 41 culled model sections, 220 shadow submissions with 32 culled, and reported zero WebGL and JavaScript errors. This is a software-rendered compatibility test, not a hardware FPS claim.
+- The new QA captures both the in-game layout and a HUD-free desktop-aspect frame for independent visual review; screenshots and diagnostic JSON are retained as GitHub Actions artifacts, not used as release approval.
+- **RELEASE STILL BLOCKED.** The actual photographed textures improve material variety, but do not change the underlying need for authored hero/family character sculpts and rigs, professional foliage/cottages/cliffs, better ground topology, indirect illumination, measured hardware budgets and final art direction.
+
 ## November 14 — Village art direction rebuild (unreleased)
 
 This iteration responds to the actual Chromium QA screenshots, where repetitive white paving, bright floating lamps, and stone-white pergola beams overwhelmed the scene. All work is confined to `feature/windfall-2026-graphics-preview`.
