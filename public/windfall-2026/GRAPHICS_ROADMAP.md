@@ -1,3 +1,5 @@
+**Final November 14 verification:** GitHub Actions run `43619525382` completed successfully in both jobs after the fourteenth model was integrated. The software-mode browser test loaded all 14 models, tested character movement and the authored-player fallback. The full-detail SwiftShader run also loaded all 14 models and all three local photographed atlas textures; it reported 0 WebGL errors and no JavaScript page errors. In its sampled opening view: 288 submitted and 107 culled authored color sections, 647 submitted and 108 culled shadow sections. These are renderer submission counts on software WebGL, **not FPS or an artist's visual-quality approval**. Both jobs archived screenshot and diagnostics artifacts. Public release remains blocked.
+
 ## November 14 — verified photogrammetric mossy rocks, staged
 
 - Imported a physically measured, photogrammetric six-stone set `rock_moss_set_01` by Kless Gyzen (Poly Haven, **CC0-1.0**), converted offline from source glTF and four dependencies into a **2.25 MB, approximately 63K-triangle self-contained GLB**. Verified source MD5 hashes and final SHA256 are saved at `models/windfall-cc0-mossy-rock-set.SOURCES.json`.
