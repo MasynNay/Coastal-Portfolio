@@ -131,9 +131,9 @@ function rock(x,z,r){
  const middle=[x+jitter(.12)*r,y+height*1.05,z+jitter(.12)*r];
  for(let i=0;i<count;i++){
   const j=(i+1)%count,shade=.76+rand()*.30,c=tint(colors.rock,shade);
-  world.quad(base[i],base[j],shoulder[j],shoulder[i],c,1);
-  world.quad(shoulder[i],shoulder[j],cap[j],cap[i],tint(c,.88+rand()*.2),1);
-  world.tri(cap[i],cap[j],middle,tint(colors.stone,.78+rand()*.30),1);
+  world.quad(base[j],base[i],shoulder[i],shoulder[j],c,1);
+  world.quad(shoulder[j],shoulder[i],cap[i],cap[j],tint(c,.88+rand()*.2),1);
+  world.tri(cap[j],cap[i],middle,tint(colors.stone,.78+rand()*.30),1);
  }
 }
 for(let i=0;i<155;i++){let x=mix(-83,83,rand()),z=mix(-85,40,rand());if(Math.hypot(x,z-3)<12 || (x>-17&&x<24&&z>-18&&z<13))continue;rock(x,z,.25+rand()*1.45)}
