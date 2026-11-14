@@ -20,6 +20,8 @@
         throw new Error(`Asset ${a.id} needs rights, creator, and provenance`);
       if (a.role !== undefined && !['player','companion'].includes(a.role)) throw new Error('Unsupported dynamic model role');
       if (!Array.isArray(a.instances) || !a.instances.length || a.instances.length > 150 || (a.role==='player'||a.role==='companion')&&a.instances.length!==1) throw new Error('Specify 1-150 instances (one for player)');
+      if (a.detailDistance !== undefined && (!Number.isFinite(a.detailDistance) || a.detailDistance < 10 || a.detailDistance > 200))
+        throw new Error('Invalid foliage detail draw distance');
       if (a.collisionRadius !== undefined && (!Number.isFinite(a.collisionRadius) || a.collisionRadius < 0 || a.collisionRadius > 60)) throw new Error('Invalid model collision radius');
       if (a.collisionBox !== undefined && (!Array.isArray(a.collisionBox) || a.collisionBox.length !== 2 || !a.collisionBox.every(n => Number.isFinite(n) && n > 0 && n <= 50))) throw new Error('Invalid building collision box');
       for (const inst of a.instances) {
@@ -402,7 +404,7 @@
           const model=multiply(extra,mesh.model);
           // Keep a margin for procedural wind and small transform rounding.
           const margin=mesh.mat.alpha==='MASK'?.48:.06;
-          records.push({...mesh,model,bounds:transformSphere(mesh.gpu.bounds,model,margin)});
+          records.push({...mesh,model,bounds:transformSphere(mesh.gpu.bounds,model,margin),detailDistance:entry.detailDistance??Infinity});
         }
         if(entry.collisionRadius>0)colliders.push({x:instance.position[0],z:instance.position[2],radius:entry.collisionRadius*scale});
         if(entry.collisionBox)colliders.push({x:instance.position[0],z:instance.position[2],halfWidth:entry.collisionBox[0]*scale,halfDepth:entry.collisionBox[1]*scale,rotation:angle});
@@ -516,11 +518,19 @@
         for(const i of rig.roots)visit(i,root);
       }
     }
-    function drawShadow(vp,includePlayer=false,time=0){
+    // Small ground-cover clusters do not need to render over the whole island.
+    // The sphere-radius margin protects silhouettes and minimizes edge popping.
+    function inDetailRange(mesh,eye){
+      if(!eye||!Number.isFinite(mesh.detailDistance))return true;
+      const c=mesh.bounds.center,limit=mesh.detailDistance+mesh.bounds.radius;
+      const dx=eye[0]-c[0],dy=eye[1]-c[1],dz=eye[2]-c[2];
+      return dx*dx+dy*dy+dz*dz<=limit*limit;
+    }
+    function drawShadow(vp,includePlayer=false,time=0,eye=null){
       if(!records.length && !(includePlayer&&dynamicPlayer))return;
       gl.useProgram(depth);gl.uniformMatrix4fv(u.depth.uVP,false,new Float32Array(vp));gl.uniform1f(u.depth.uWindTime,time);
       const planes=frustumPlanes(vp);
-      const visible=records.filter(m=>sphereVisible(m.bounds,planes));
+      const visible=records.filter(m=>sphereVisible(m.bounds,planes)&&inDetailRange(m,eye));
       drawStats.shadowCulled+=records.length-visible.length;
       if(includePlayer&&dynamicPlayer)visible.push(...dynamicPlayer.parts);
       for(const m of visible){if(m.mat.alpha==='BLEND')continue;
@@ -533,7 +543,7 @@
       if(!records.length && !dynamicPlayer)return;
       // Cull static instances once per frame, not once for each material layer.
       const planes=frustumPlanes(render.vp);
-      const visible=records.filter(m=>sphereVisible(m.bounds,planes));
+      const visible=records.filter(m=>sphereVisible(m.bounds,planes)&&inDetailRange(m,render.eye));
       drawStats.colorSubmitted=0;
       drawStats.colorCulled=records.length-visible.length;
       drawStats.instances=records.length;
