@@ -165,9 +165,15 @@
   layout(location=2)in vec2 aUV;
   layout(location=3)in vec4 aTangent;
   uniform mat4 uVP,uModel;
+  uniform float uWindTime,uWindWeight;
   out vec3 vPosition,vNormal,vTangent,vBitangent;
   out vec2 vUV;
-  void main(){vec4 world=uModel*vec4(aPosition,1.);vPosition=world.xyz;mat3 invTrans=transpose(inverse(mat3(uModel)));
+  void main(){
+   vec4 world=uModel*vec4(aPosition,1.);
+   float tip=clamp((aPosition.y-.7)*.30,0.,1.);
+   float gust=sin(uWindTime*.91+world.x*.17+world.z*.13)+.38*sin(uWindTime*1.71+world.x*.34-world.z*.23);
+   world.xz+=vec2(.16,.085)*gust*tip*uWindWeight;
+   vPosition=world.xyz;mat3 invTrans=transpose(inverse(mat3(uModel)));
    vNormal=normalize(invTrans*aNormal);vTangent=normalize(mat3(uModel)*aTangent.xyz);
    vBitangent=normalize(cross(vNormal,vTangent)*aTangent.w);
    vUV=aUV;gl_Position=uVP*world;}`;
@@ -178,6 +184,7 @@
   uniform sampler2D uBase,uNormal,uORM,uEmissive,uShadowFar,uShadowNear;
   uniform mat4 uFarVP,uNearVP;
   uniform vec3 uEye,uSun,uFog,uEmission;
+  uniform float uTime,uLowQuality;
   uniform vec4 uBaseFactor;
   uniform vec2 uMetalRough;
   uniform float uHasBase,uHasNormal,uHasORM,uHasEmissive,uHasShadows,uAlphaCutoff,uAlphaMasked;
@@ -207,17 +214,34 @@
    vec3 F=F0+(1.-F0)*pow(1.-vh,5.);
    vec3 spec=(D*G*F)/max(4.*nv*nl,.0005);
    vec3 kd=(1.-F)*(1.-metal);
-   vec3 direct=(kd*base.rgb/3.14159+spec)*vec3(1.,.80,.60)*nl*shadow(n)*2.5;
+   // Same world-space cloud field as terrain; ambient light remains beneath clouds.
+   float cloudSun=1.;
+   if(uLowQuality<.5){
+    vec2 p=vPosition.xz*.021+vec2(uTime*.018,uTime*.006);
+    float a=sin(p.x*2.31+sin(p.y*1.41)*.86);
+    float b=sin(p.y*2.07-p.x*.72);
+    float c=sin(dot(p,vec2(2.74,-1.83))+.65);
+    cloudSun-=smoothstep(.14,.53,a*.51+b*.34+c*.15)*.32;
+   }
+   vec3 direct=(kd*base.rgb/3.14159+spec)*vec3(1.,.80,.60)*nl*shadow(n)*cloudSun*2.5;
    vec3 hemisphere=base.rgb*mix(vec3(.20,.24,.27),vec3(.48,.55,.58),clamp(n.y*.5+.5,0.,1.))*(1.-metal)*.60;
    vec3 color=direct+hemisphere+uEmission*(uHasEmissive>.5?texture(uEmissive,vUV).rgb:vec3(1.));
-   float dist=length(uEye-vPosition);float fog=1.-exp(-pow(dist*.0086,1.52));
-   color=mix(color,pow(uFog,vec3(2.2)),fog*.69);
+   float dist=length(uEye-vPosition);
+   float heightFog=exp(-max(vPosition.y,0.)*.052);
+   float fog=1.-exp(-pow(dist*.0086,1.52)*(.68+.40*heightFog));
+   color=mix(color,pow(uFog,vec3(2.2)),clamp(fog*.74,0.,.84));
    frag=vec4(pow(aces(color*.82),vec3(1./2.2)),base.a);
   }`;
   const SHADOW_VERTEX = `#version 300 es
   precision highp float;layout(location=0)in vec3 aPosition;layout(location=2)in vec2 aUV;
-  uniform mat4 uVP,uModel;out vec2 vUV;
-  void main(){vUV=aUV;gl_Position=uVP*uModel*vec4(aPosition,1.);}`;
+  uniform mat4 uVP,uModel;uniform float uWindTime,uWindWeight;out vec2 vUV;
+  void main(){
+   vUV=aUV;vec4 world=uModel*vec4(aPosition,1.);
+   float tip=clamp((aPosition.y-.7)*.30,0.,1.);
+   float gust=sin(uWindTime*.91+world.x*.17+world.z*.13)+.38*sin(uWindTime*1.71+world.x*.34-world.z*.23);
+   world.xz+=vec2(.16,.085)*gust*tip*uWindWeight;
+   gl_Position=uVP*world;
+  }`;
   const SHADOW_FRAGMENT = `#version 300 es
   precision highp float;in vec2 vUV;uniform sampler2D uBase;uniform vec4 uBaseFactor;
   uniform float uHasBase,uAlphaMasked,uAlphaCutoff;
@@ -244,7 +268,7 @@
     const standard=link(gl,VERTEX,FRAGMENT),depth=link(gl,SHADOW_VERTEX,SHADOW_FRAGMENT);
     const uniform=(program,name)=>gl.getUniformLocation(program,name);
     const u={};for(const [name,prog] of [['standard',standard],['depth',depth]]){
-      u[name]={};for(const n of ['uVP','uModel','uBase','uNormal','uORM','uEmissive','uShadowFar','uShadowNear','uFarVP','uNearVP','uEye','uSun','uFog','uEmission','uBaseFactor','uMetalRough','uHasBase','uHasNormal','uHasORM','uHasEmissive','uHasShadows','uAlphaCutoff','uAlphaMasked'])u[name][n]=uniform(prog,n);
+      u[name]={};for(const n of ['uVP','uModel','uBase','uNormal','uORM','uEmissive','uShadowFar','uShadowNear','uFarVP','uNearVP','uEye','uSun','uFog','uEmission','uBaseFactor','uMetalRough','uHasBase','uHasNormal','uHasORM','uHasEmissive','uHasShadows','uAlphaCutoff','uAlphaMasked','uWindTime','uWindWeight','uTime','uLowQuality'])u[name][n]=uniform(prog,n);
     }
     const records=[],statuses=[],colliders=[];
     let dynamicPlayer=null;
@@ -336,6 +360,7 @@
       gl.uniform1f(uniforms.uHasBase,m.mat.base?1:0);
       gl.uniform1f(uniforms.uAlphaMasked,m.mat.alpha==='MASK'?1:0);
       gl.uniform1f(uniforms.uAlphaCutoff,m.mat.cutoff);
+      gl.uniform1f(uniforms.uWindWeight,m.mat.alpha==='MASK'?1:0);
       gl.activeTexture(gl.TEXTURE0);gl.bindTexture(gl.TEXTURE_2D,m.mat.base||defaultWhite);gl.uniform1i(uniforms.uBase,0);
     }
     // Drive the named authored GLB pivot nodes from the existing frame-independent gait.
@@ -376,9 +401,9 @@
       const actor=multiply(root,trs([0,bob,0]));
       for(const i of rig.roots)walk(i,actor);
     }
-    function drawShadow(vp,includePlayer=false){
+    function drawShadow(vp,includePlayer=false,time=0){
       if(!records.length && !(includePlayer&&dynamicPlayer))return;
-      gl.useProgram(depth);gl.uniformMatrix4fv(u.depth.uVP,false,new Float32Array(vp));
+      gl.useProgram(depth);gl.uniformMatrix4fv(u.depth.uVP,false,new Float32Array(vp));gl.uniform1f(u.depth.uWindTime,time);
       for(const m of (includePlayer&&dynamicPlayer ? records.concat(dynamicPlayer.parts) : records)){if(m.mat.alpha==='BLEND')continue;
         setCommon(u.depth,m);if(m.mat.doubleSided)gl.disable(gl.CULL_FACE);else gl.enable(gl.CULL_FACE);
         drawGeometry(m);
@@ -394,6 +419,9 @@
       gl.uniformMatrix4fv(u.standard.uNearVP,false,new Float32Array(render.nearVP||identity()));
       gl.uniform3fv(u.standard.uEye,render.eye);gl.uniform3fv(u.standard.uSun,render.sun);gl.uniform3fv(u.standard.uFog,render.fog);
       gl.uniform1f(u.standard.uHasShadows,render.nearMap?1:0);
+      gl.uniform1f(u.standard.uTime,render.time||0);
+      gl.uniform1f(u.standard.uLowQuality,render.lowQuality?1:0);
+      gl.uniform1f(u.standard.uWindTime,render.time||0);
       gl.activeTexture(gl.TEXTURE4);gl.bindTexture(gl.TEXTURE_2D,render.farMap);gl.uniform1i(u.standard.uShadowFar,4);
       gl.activeTexture(gl.TEXTURE5);gl.bindTexture(gl.TEXTURE_2D,render.nearMap||defaultWhite);gl.uniform1i(u.standard.uShadowNear,5);
       for(const layer of ['OPAQUE','MASK','BLEND']){
