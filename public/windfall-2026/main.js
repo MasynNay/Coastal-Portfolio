@@ -49,15 +49,26 @@ class Geometry {
 }
 function groundNormal(x,z){return norm([terrain(x-.2,z)-terrain(x+.2,z),.4,terrain(x,z-.2)-terrain(x,z+.2)])}
 const world=new Geometry();
-// Terrain with smoothly interpolated normals and material transitions.
-const NX=101,NZ=103,XMIN=-95,XMAX=95,ZMIN=-97,ZMAX=76;
+// Terrain biome blending happens at each vertex, not once per terrain tile.
+// This avoids hard triangles at beach/grass/rock boundaries and supports real materials.
+function terrainColor(x,z,normal){
+ const y=terrain(x,z);
+ const beach=1-smooth(.65,2.65,y);
+ const cliff=clamp((.86-normal[1])*1.85,0,1)*smooth(6.5,15,y);
+ const high=smooth(14,29,y)*.48;
+ const stone=clamp(Math.max(cliff,high)*(1-beach),0,.85);
+ const grass=colors.grass,sand=colors.sand,rock=colors.rock;
+ const variation=.92+.05*Math.sin(x*.53+Math.cos(z*.46))+.035*Math.sin(z*.31-x*.27);
+ return [0,1,2].map(i=>(mix(mix(grass[i],sand[i],beach),rock[i],stone))*variation);
+}
+const NX=127,NZ=129,XMIN=-95,XMAX=95,ZMIN=-97,ZMAX=76;
 for(let j=0;j<NZ-1;j++)for(let i=0;i<NX-1;i++){
- let x=mix(XMIN,XMAX,i/(NX-1)),x2=mix(XMIN,XMAX,(i+1)/(NX-1));let z=mix(ZMIN,ZMAX,j/(NZ-1)),z2=mix(ZMIN,ZMAX,(j+1)/(NZ-1));
- let a=[x,terrain(x,z),z],b=[x2,terrain(x2,z),z],c=[x2,terrain(x2,z2),z2],d=[x,terrain(x,z2),z2];
- let h=(a[1]+b[1]+c[1]+d[1])*.25,beach=smooth(2.7,.0,h),cold=smooth(9,20,h),variation=.87+.16*Math.sin(x*.56+z*.71)*Math.sin(z*.34-x*.18);
- let col=beach>.5? tint(colors.sand,variation):cold>.45?tint(colors.rock,variation):tint(colors.grass,variation*(.8+Math.sin(x*.13)*.1));
- world.triN(a,b,c,groundNormal(x,z),groundNormal(x2,z),groundNormal(x2,z2),col,beach>.5?7:0);
- world.triN(a,c,d,groundNormal(x,z),groundNormal(x2,z2),groundNormal(x,z2),col,beach>.5?7:0);
+ const x=mix(XMIN,XMAX,i/(NX-1)),x2=mix(XMIN,XMAX,(i+1)/(NX-1));
+ const z=mix(ZMIN,ZMAX,j/(NZ-1)),z2=mix(ZMIN,ZMAX,(j+1)/(NZ-1));
+ const a=[x,terrain(x,z),z],b=[x2,terrain(x2,z),z],c=[x2,terrain(x2,z2),z2],d=[x,terrain(x,z2),z2];
+ const na=groundNormal(x,z),nb=groundNormal(x2,z),nc=groundNormal(x2,z2),nd=groundNormal(x,z2);
+ const emit=(p,n)=>world.vertex(p,n,terrainColor(p[0],p[2],n),0);
+ emit(a,na);emit(b,nb);emit(c,nc);emit(a,na);emit(c,nc);emit(d,nd);
 }
 // Long winding cobblestone paths, made of individually varied, uneven stones.
 function stonesAlong(ax,az,bx,bz,count,width=3){
@@ -68,11 +79,26 @@ function stonesAlong(ax,az,bx,bz,count,width=3){
   for(let row=-3;row<=3;row++){
    const offset=(row+(n%2)*.12)*(width/7.5),j=jitter(.035),lx=cx+sideX*offset+ux*j,lz=cz+sideZ*offset+uz*j;
    const side=(width/7.6)*(.40+rand()*.07),half=stepLength*(.35+rand()*.07);
-   const corners=[[-half,-side],[-half,side],[half,side],[half,-side]];
-   const polygon=corners.map(([forward,across])=>{let x=lx+ux*forward+sideX*across,z=lz+uz*forward+sideZ*across;return [x,terrain(x,z)+.055+jitter(.009),z]});
-   const shade=.66+rand()*.44;
-   world.quad(...polygon,tint(colors.paleStone,shade),1);
-   if(rand()<.08){let a=polygon[0],b=polygon[1];world.beam([a[0],a[1]+.008,a[2]],[b[0],b[1]+.008,b[2]],.011,tint(colors.rock,.74),1,3)}
+   const corners=[[-half,-side*.65],[-half,side*.62],[-half*.79,side],[half*.76,side],[half,side*.70],[half,-side*.68],[half*.78,-side],[-half*.76,-side]];
+   const stoneHeight=.037+rand()*.041;
+   const vertices=corners.map(([forward,across])=>{
+     const xx=lx+ux*forward+sideX*across,zz=lz+uz*forward+sideZ*across;
+     return [xx,terrain(xx,zz)+.062+stoneHeight,zz];
+   });
+   const center=[lx,terrain(lx,lz)+.067+stoneHeight,lz];
+   const shade=.77+rand()*.31;
+   const stoneColor=tint(colors.stone,shade);
+   for(let k=0;k<vertices.length;k++){
+    const next=(k+1)%vertices.length,v=vertices[k],w=vertices[next];
+    world.tri(center,v,w,stoneColor,1);
+    const footV=[v[0],v[1]-stoneHeight,v[2]],footW=[w[0],w[1]-stoneHeight,w[2]];
+    world.quad(w,v,footV,footW,tint(stoneColor,.73),1);
+   }
+   if(rand()<.09){const crack=rand()*Math.PI*2;
+    world.beam([lx-Math.cos(crack)*half*.27,center[1]+.003,lz-Math.sin(crack)*side*.25],
+      [lx+Math.cos(crack)*half*.27,center[1]+.003,lz+Math.sin(crack)*side*.25],
+      .008,tint(colors.rock,.63),1,3);
+   }
   }
  }
 }
