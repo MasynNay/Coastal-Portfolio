@@ -33,7 +33,16 @@ function terrain(x,z){
                Math.sin(x*.68-z*.31)*.22+
                Math.sin(x*.13+z*.57)*.18);
  const ridges=ridgeZone*(.47+Math.min(high,24)*.055)*eroded;
- return 2.5+wav*(.35+smooth(-14,-43,z)*2.6)+hills+high+ridges-shore*6.6;
+ // Sculpt eroded spurs and dry drainage gullies ONLY in the alpine zone.
+ // Village streets, harbor, and beach preserve their original ground heights.
+ const alpine=ridgeZone*smooth(6,18,high);
+ const spur=Math.abs(Math.sin(x*.19-z*.077+Math.sin(z*.11)*.86));
+ const needles=Math.pow(spur,4.6)*(.80+Math.min(high,27)*.036);
+ const channel=Math.sin(x*.31+z*.13+Math.sin(z*.17)*1.23);
+ const gullies=Math.pow(Math.max(channel,0),5.)*(.46+Math.min(high,25)*.060);
+ const crossCut=Math.sin(x*.70-z*.21)*Math.sin(z*.37+x*.08)*.22;
+ return 2.5+wav*(.35+smooth(-14,-43,z)*2.6)+hills+high+ridges-shore*6.6+
+     alpine*(needles-gullies+crossCut);
 }
 class Geometry {
  constructor(){this.a=[];this.count=0;}
@@ -70,7 +79,13 @@ function terrainColor(x,z,normal){
  const stone=clamp(Math.max(cliff,high)*(1-beach),0,.85);
  const grass=colors.grass,sand=colors.sand,rock=colors.rock;
  const variation=.92+.05*Math.sin(x*.53+Math.cos(z*.46))+.035*Math.sin(z*.31-x*.27);
- return [0,1,2].map(i=>(mix(mix(grass[i],sand[i],beach),rock[i],stone))*variation);
+ const ledges=smooth(11,22,y)*clamp((.95-normal[1])*1.7,0,.73);
+ const snow=smooth(23,34,y)*smooth(.54,.89,normal[1])*(.73+.23*Math.sin(x*.27+z*.22));
+ const scree=[.38,.40,.38],frost=[.73,.78,.78];
+ return [0,1,2].map(i=>{
+  const base=mix(mix(grass[i],sand[i],beach),rock[i],stone);
+  return mix(mix(base,scree[i],ledges),frost[i],snow)*variation;
+ });
 }
 const NX=softwareRenderer?57:127,NZ=softwareRenderer?59:129,XMIN=-95,XMAX=95,ZMIN=-97,ZMAX=76;
 for(let j=0;j<NZ-1;j++)for(let i=0;i<NX-1;i++){
@@ -158,6 +173,23 @@ function rock(x,z,r){
  }
 }
 for(let i=0;i<155;i++){let x=mix(-83,83,rand()),z=mix(-85,40,rand());if(Math.hypot(x,z-3)<12 || (x>-17&&x<24&&z>-18&&z<13))continue;rock(x,z,.25+rand()*1.45)}
+ // Original alpine talus fields follow drainage, below the tallest cliffs.
+ function talusFan(cx,cz,span,count){
+  for(let i=0;i<count;i++){
+   const t=Math.sqrt(rand()),a=rand()*Math.PI*2;
+   const px=cx+Math.cos(a)*span*t,pz=cz+Math.sin(a)*span*.60*t;
+   if(terrain(px,pz)<12||pz>-33)continue;
+   const size=(.30+rand()*1.02)*(1.15-t*.35);
+   rock(px,pz,size);
+   if(!softwareRenderer&&rand()<.42){
+    const sx=px+jitter(1.2),sz=pz+jitter(.95);
+    if(terrain(sx,sz)>12)rock(sx,sz,size*(.25+rand()*.33));
+   }
+  }
+ }
+ talusFan(-46,-49,15,34);talusFan(-12,-55,13,28);
+ talusFan(29,-53,18,38);talusFan(64,-55,14,27);
+
 // Trees: branching trunks, multiple canopy lobes, tonal variation and occasional flowers.
 function tree(x,z,scale=1,style=0){
  let y=terrain(x,z),trunk=(3.5+rand()*.6)*scale;
@@ -625,6 +657,9 @@ void main(){vec3 N=normalize(vNormal);vec3 L=normalize(uSun);vec3 V=normalize(uE
    float stoneMix=clamp((.84-N.y)*2.3,0.,.92)*smoothstep(5.,20.,vPos.y);
    surface=mix(surface,triplanar(vPos,N,7.,1.20),sandMix);
    surface=mix(surface,triplanar(vPos,N,1.,.72),stoneMix*(1.-sandMix));
+    // Frost settles on flatter alpine shelves rather than upright cliffs.
+    float frostMask=smoothstep(23.,34.,vPos.y)*smoothstep(.55,.88,N.y);
+    surface=mix(surface,vec4(.78,.81,.82,.57),clamp(frostMask*.69,0.,.69));
   }
   albedo*=mix(vec3(1.),surface.rgb*1.80,.66);
   float ht=surface.a;
