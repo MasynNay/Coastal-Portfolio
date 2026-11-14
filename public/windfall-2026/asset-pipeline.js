@@ -307,6 +307,11 @@
     const records=[],statuses=[],colliders=[];
     let dynamicPlayer=null;
     const drawStats={colorSubmitted:0,colorCulled:0,shadowSubmitted:0,shadowCulled:0,instances:0};
+    function beginFrame(){
+      drawStats.colorSubmitted=0;drawStats.colorCulled=0;
+      drawStats.shadowSubmitted=0;drawStats.shadowCulled=0;
+      drawStats.instances=records.length;
+    }
     const defaultWhite=gl.createTexture();gl.bindTexture(gl.TEXTURE_2D,defaultWhite);
     gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA8,1,1,0,gl.RGBA,gl.UNSIGNED_BYTE,new Uint8Array([255,255,255,255]));
     gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,gl.LINEAR);
@@ -505,7 +510,7 @@
       }
       gl.disable(gl.CULL_FACE);
     }
-    return {addGLB,loadManifest,draw,drawShadow,updatePlayer,getStatus:()=>statuses.slice(),getMeshCount:()=>records.length+(dynamicPlayer?.parts.length||0),
+    return {addGLB,loadManifest,draw,drawShadow,updatePlayer,beginFrame,getStatus:()=>statuses.slice(),getMeshCount:()=>records.length+(dynamicPlayer?.parts.length||0),
       hasLoaded:(id)=>statuses.some(s=>s.id===id&&s.loaded),
       getDrawStats:()=>({...drawStats}),
       collides:(x,z,padding=.28)=>colliders.some(c=>{
