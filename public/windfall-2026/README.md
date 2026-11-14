@@ -24,6 +24,10 @@ Then visit http://127.0.0.1:3001. (Run the command inside this folder.)
 - Responsive presentation and touch controls
 - Seeded procedural placement so the visual layout is stable between runs
 
+## Status
+
+**Unreleased experimental branch. Do not deploy this in place of `/world`.** The player, terrain and props are generated from procedural mesh construction. The graphics still lack the high-quality authored/photogrammetry PBR models required for modern 2026 remake fidelity. See [`GRAPHICS_ROADMAP.md`](GRAPHICS_ROADMAP.md) for the production art pipeline and acceptance criteria. A self-contained procedural material atlas is present, but it is **not** a substitute for scanned textures.
+
 ## Scope and limits
 
 This is a complete *interactive visual prototype*, not the lost local copy from another ChatGPT session. It is not equivalent to an Unreal Engine 5 AAA game: meshes are hand-authored/procedural rather than film-grade scanned assets, and there is no Lumen, ray tracing, advanced skeletal rig, or gameplay/portfolio-room integration yet. Keep the existing portfolio `/world` untouched until the new experience is visually approved.
