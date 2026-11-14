@@ -24,6 +24,7 @@ EXPECTED = {
     "windfall-companion-c", "windfall-companion-d",
     "windfall-hazel-shrub", "windfall-fern-understory",
     "windfall-wildflower-patch",
+    "windfall-cc0-mossy-rock-set",
 }
 
 
