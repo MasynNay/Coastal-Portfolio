@@ -12,6 +12,17 @@
 6. Establish measured browser budgets on desktop/mobile; implement geometry and texture LOD, frustum culling and compression. Use photo references and screenshot regression with the exact same camera paths.
 7. Replace old portfolio `/world` **only after** side-by-side visual approval. Keep `/world` intact during development.
 
+## November 13–14, 2026 — Grounded shading and software movement QA
+
+- **Terrain:** replaced tile-level material assignments with interpolated per-vertex sand, grass, and mountain-rock biome colors. Increased terrain tessellation for the hardware path.
+- **Walkways:** replaced perfectly rectangular paving faces with irregular eight-corner stones, raised edges, stone relief and reduced the chalk-white appearance.
+- **Materials:** fixed a material atlas that had been generated but never sampled. The hardware shader now uses world-space triplanar tile sampling and a separate atlas height field for micro-surface normal relief. Corrected overexposure after observing a washed-out hardware-quality simulation.
+- **Sky and sea:** rebuilt the sky shader so sunlight follows a world-space sun vector rather than remaining fixed to screen coordinates. Shoreline color, foam and transparency now depend on a locally generated seabed heightmap instead of an arbitrary straight ocean band.
+- **Software fallback:** introduced lower scene tessellation, reduced detail/foliage budgets, lower framebuffer resolution, and more efficient paving rendering while preserving the full hardware-detail route.
+- **Movement:** removed a 45 ms frame-time cap that effectively froze travel when software rasterization was slow. Movement now consumes elapsed time with a bounded long-frame cap and substeps for collision against the sea.
+- **Browser checks:** in Chromium's SwiftShader/WebGL2 renderer, all eight GLSL shaders compiled successfully; the village initialized without JavaScript or shader errors; desktop travel reached the harbor; the mobile-quality layout initialized with joystick and run controls visible. No real-GPU FPS claim is made.
+- **Release gate remains CLOSED.** Although the surfacing and gameplay pipeline has improved, the houses, hero, foliage, cliffs and architectural meshes still use original procedural primitives. Cinematic graphics require original sculpted/retopologized/rigged hero and family models, authored high-detail environment meshes, genuinely sourced PBR base-color/normal/ORM maps, lighting upgrades and GPU performance measurements. No third-party production models have been imported during this pass.
+
 ## November 2026 procedural foundation hardening
 
 - Changed repetitive paving-strip mesh into discrete offset stone courses with gaps.
