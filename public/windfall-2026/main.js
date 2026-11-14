@@ -924,7 +924,7 @@ if(authoredAssets)authoredAssets.loadManifest('asset-manifest.json',terrain).the
 // The distant shadow texture is rebuilt after GLB models finish loading. Otherwise
 // authored buildings and foliage cast no shadows beyond the player cascade.
 let farShadowDirty=true;
-function rebuildFarSunShadow(){
+function rebuildFarSunShadow(eye){
  if(softwareRenderer)return;
  gl.bindFramebuffer(gl.FRAMEBUFFER,depthFbo);
  gl.viewport(0,0,farShadowSize,farShadowSize);
@@ -939,7 +939,7 @@ function rebuildFarSunShadow(){
 const shadowDecalGeo=geometryBuffer(characterShadow());let shadowByteCapacity=Math.ceil(shadowDecalGeo.count*40*1.4);
 gl.bindBuffer(gl.ARRAY_BUFFER,shadowDecalGeo.buffer);gl.bufferData(gl.ARRAY_BUFFER,shadowByteCapacity,gl.DYNAMIC_DRAW);
 let last=0,elapsed=0,frames=0,phase=0,lastNearRender=-100;
-function renderNearSunShadow(x,z,y,heroCount,now){
+function renderNearSunShadow(x,z,y,heroCount,now,eye){
  if(softwareRenderer)return;
  // A snapped center prevents shimmer as the character moves by fractions of a texel.
  if(now-lastNearRender<.034 && frames>1)return;
@@ -1002,8 +1002,8 @@ function frame(now){let dt=last?Math.max(0,Math.min(.75,(now-last)/1000)):0;last
   if(heroArray.byteLength>dynamicByteCapacity){dynamicByteCapacity=2*heroArray.byteLength;gl.bufferData(gl.ARRAY_BUFFER,dynamicByteCapacity,gl.DYNAMIC_DRAW)}
   gl.bufferSubData(gl.ARRAY_BUFFER,0,heroArray);
  }
- if(farShadowDirty&&!softwareRenderer){rebuildFarSunShadow();farShadowDirty=false;}
- renderNearSunShadow(x,z,y,hero?hero.count:0,now*.001);
+ if(farShadowDirty&&!softwareRenderer){rebuildFarSunShadow(eye);farShadowDirty=false;}
+ renderNearSunShadow(x,z,y,hero?hero.count:0,now*.001,eye);
  gl.viewport(0,0,canvas.width,canvas.height);gl.clearColor(.54,.67,.67,1);gl.clear(gl.COLOR_BUFFER_BIT|gl.DEPTH_BUFFER_BIT);
  const skyForward=norm(sub(target,eye)),skyRight=norm(cross(skyForward,[0,1,0])),skyUp=cross(skyRight,skyForward);
  gl.disable(gl.DEPTH_TEST);gl.depthMask(false);gl.useProgram(skyProgram);
