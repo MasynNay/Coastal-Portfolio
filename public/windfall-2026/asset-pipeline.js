@@ -267,6 +267,37 @@
     gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MAG_FILTER,gl.LINEAR);
     image.close();return out;
   }
+  // OpenGL clip planes extracted from the column-major view-projection matrix.
+  // The six normalized planes are shared by the color and shadow passes.
+  function frustumPlanes(m) {
+    if (!m || m.length !== 16) throw new Error('Expected a 4x4 clip matrix');
+    const pairs = [[0,1],[0,-1],[1,1],[1,-1],[2,1],[2,-1]];
+    return pairs.map(([axis,sign])=>{
+      const p=[m[3]+sign*m[axis],m[7]+sign*m[4+axis],
+               m[11]+sign*m[8+axis],m[15]+sign*m[12+axis]];
+      const length=Math.hypot(p[0],p[1],p[2]);
+      if(!Number.isFinite(length)||length<1e-10)throw new Error('Degenerate clip plane');
+      return p.map(v=>v/length);
+    });
+  }
+  function transformSphere(local,model,margin=0) {
+    const c=local.center;
+    const center=[
+      model[0]*c[0]+model[4]*c[1]+model[8]*c[2]+model[12],
+      model[1]*c[0]+model[5]*c[1]+model[9]*c[2]+model[13],
+      model[2]*c[0]+model[6]*c[1]+model[10]*c[2]+model[14]
+    ];
+    // A maximum column length bounds rotation+scaling for our glTF TRS models.
+    // Nonuniform scale and procedural wind displacement get extra slack.
+    const scale=Math.max(Math.hypot(model[0],model[1],model[2]),
+      Math.hypot(model[4],model[5],model[6]),
+      Math.hypot(model[8],model[9],model[10]));
+    return {center,radius:local.radius*scale+margin};
+  }
+  function sphereVisible(sphere,planes) {
+    const c=sphere.center;
+    return planes.every(p=>p[0]*c[0]+p[1]*c[1]+p[2]*c[2]+p[3]>=-sphere.radius);
+  }
   function create(gl) {
     const standard=link(gl,VERTEX,FRAGMENT),depth=link(gl,SHADOW_VERTEX,SHADOW_FRAGMENT);
     const uniform=(program,name)=>gl.getUniformLocation(program,name);
@@ -275,6 +306,7 @@
     }
     const records=[],statuses=[],colliders=[];
     let dynamicPlayer=null;
+    const drawStats={colorSubmitted:0,colorCulled:0,shadowSubmitted:0,shadowCulled:0,instances:0};
     const defaultWhite=gl.createTexture();gl.bindTexture(gl.TEXTURE_2D,defaultWhite);
     gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA8,1,1,0,gl.RGBA,gl.UNSIGNED_BYTE,new Uint8Array([255,255,255,255]));
     gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,gl.LINEAR);
@@ -285,7 +317,18 @@
       gl.bindVertexArray(vao);gl.bindBuffer(gl.ARRAY_BUFFER,vbo);gl.bufferData(gl.ARRAY_BUFFER,vertices,gl.STATIC_DRAW);
       gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER,ibo);gl.bufferData(gl.ELEMENT_ARRAY_BUFFER,indices,gl.STATIC_DRAW);
       for(let i=0;i<4;i++){gl.enableVertexAttribArray(i);gl.vertexAttribPointer(i,i===2?2:i===3?4:3,gl.FLOAT,false,48,[0,12,24,32][i]);}
-      gl.bindVertexArray(null);return {vao,indices:indices.length};
+      // Scan mesh positions once; reuse transformed bounds across every instance.
+      const lo=[Infinity,Infinity,Infinity],hi=[-Infinity,-Infinity,-Infinity];
+      for(let i=0;i<vertices.length;i+=12)for(let k=0;k<3;k++){
+        const value=vertices[i+k];
+        if(!Number.isFinite(value))throw new Error('Non-finite GLB vertex position');
+        lo[k]=Math.min(lo[k],value);hi[k]=Math.max(hi[k],value);
+      }
+      const center=lo.map((v,k)=>(v+hi[k])*.5);
+      let radius=0;
+      for(let i=0;i<vertices.length;i+=12)radius=Math.max(radius,Math.hypot(
+        vertices[i]-center[0],vertices[i+1]-center[1],vertices[i+2]-center[2]));
+      gl.bindVertexArray(null);return {vao,indices:indices.length,bounds:{center,radius}};
     }
     async function addGLB(buffer,entry){
       validateManifest({version:MANIFEST_VERSION,assets:[entry]});
@@ -332,7 +375,12 @@
       for(const instance of entry.instances){
         const scale=instance.scale??1,angle=instance.rotationY??0;
         const extra=trs(instance.position,[0,Math.sin(angle/2),0,Math.cos(angle/2)],[scale,scale,scale]);
-        for(const mesh of localNodes)records.push({...mesh,model:multiply(extra,mesh.model)});
+        for(const mesh of localNodes){
+          const model=multiply(extra,mesh.model);
+          // Keep a margin for procedural wind and small transform rounding.
+          const margin=mesh.mat.alpha==='MASK'?.48:.06;
+          records.push({...mesh,model,bounds:transformSphere(mesh.gpu.bounds,model,margin)});
+        }
         if(entry.collisionRadius>0)colliders.push({x:instance.position[0],z:instance.position[2],radius:entry.collisionRadius*scale});
         if(entry.collisionBox)colliders.push({x:instance.position[0],z:instance.position[2],halfWidth:entry.collisionBox[0]*scale,halfDepth:entry.collisionBox[1]*scale,rotation:angle});
       }
@@ -411,15 +459,26 @@
     function drawShadow(vp,includePlayer=false,time=0){
       if(!records.length && !(includePlayer&&dynamicPlayer))return;
       gl.useProgram(depth);gl.uniformMatrix4fv(u.depth.uVP,false,new Float32Array(vp));gl.uniform1f(u.depth.uWindTime,time);
-      for(const m of (includePlayer&&dynamicPlayer ? records.concat(dynamicPlayer.parts) : records)){if(m.mat.alpha==='BLEND')continue;
+      const planes=frustumPlanes(vp);
+      const visible=records.filter(m=>sphereVisible(m.bounds,planes));
+      drawStats.shadowCulled+=records.length-visible.length;
+      if(includePlayer&&dynamicPlayer)visible.push(...dynamicPlayer.parts);
+      for(const m of visible){if(m.mat.alpha==='BLEND')continue;
         setCommon(u.depth,m);if(m.mat.doubleSided)gl.disable(gl.CULL_FACE);else gl.enable(gl.CULL_FACE);
-        drawGeometry(m);
+        drawGeometry(m);drawStats.shadowSubmitted++;
       }
       gl.disable(gl.CULL_FACE);
     }
     function draw(render){
       if(!records.length && !dynamicPlayer)return;
-      const visible=dynamicPlayer?records.concat(dynamicPlayer.parts):records;
+      // Cull static instances once per frame, not once for each material layer.
+      const planes=frustumPlanes(render.vp);
+      const visible=records.filter(m=>sphereVisible(m.bounds,planes));
+      drawStats.colorSubmitted=0;
+      drawStats.colorCulled=records.length-visible.length;
+      drawStats.instances=records.length;
+      // The player remains rendered regardless of transient camera transitions.
+      if(dynamicPlayer)visible.push(...dynamicPlayer.parts);
       gl.useProgram(standard);
       gl.uniformMatrix4fv(u.standard.uVP,false,new Float32Array(render.vp));
       gl.uniformMatrix4fv(u.standard.uFarVP,false,new Float32Array(render.farVP));
@@ -440,7 +499,7 @@
             gl.activeTexture(gl.TEXTURE0+slot);gl.bindTexture(gl.TEXTURE_2D,texture||defaultWhite);gl.uniform1i(u.standard[name],slot);gl.uniform1f(u.standard[has],texture?1:0);
           }
           if(m.mat.doubleSided)gl.disable(gl.CULL_FACE);else gl.enable(gl.CULL_FACE);
-          drawGeometry(m);
+          drawGeometry(m);drawStats.colorSubmitted++;
         }
         if(layer==='BLEND'){gl.depthMask(true);gl.disable(gl.BLEND);}
       }
@@ -448,6 +507,7 @@
     }
     return {addGLB,loadManifest,draw,drawShadow,updatePlayer,getStatus:()=>statuses.slice(),getMeshCount:()=>records.length+(dynamicPlayer?.parts.length||0),
       hasLoaded:(id)=>statuses.some(s=>s.id===id&&s.loaded),
+      getDrawStats:()=>({...drawStats}),
       collides:(x,z,padding=.28)=>colliders.some(c=>{
         const dx=x-c.x,dz=z-c.z;
         if(c.radius!==undefined)return Math.hypot(dx,dz)<c.radius+padding;
@@ -456,5 +516,6 @@
         return Math.abs(lx)<c.halfWidth+padding && Math.abs(lz)<c.halfDepth+padding;
       })};
   }
-  window.WindfallAssetPipeline = {create,parseGLB,validateManifest};
+  window.WindfallAssetPipeline = {create,parseGLB,validateManifest,
+    culling:{frustumPlanes,transformSphere,sphereVisible}};
 })();
