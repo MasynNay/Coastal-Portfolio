@@ -50,7 +50,7 @@ const eye=[0,3,10],target=[0,2,0];
 assert.deepEqual(camera(()=>0,null)(target,eye),eye,'Unobstructed camera changes position');
 assert.ok(camera((x,z)=>z>4.7&&z<6?4:0,null)(target,eye)[2]<5,'Camera crossed cliff');
 assert.ok(camera(()=>0,{collides:(x,z)=>z>=3.2&&z<=4.2})(target,eye)[2]<3.2,'Camera crossed structure');
-const required=['windfall-wayfarer','windfall-broadleaf-tree','windfall-mountain-conifer','windfall-timber-cottage','windfall-harbor-workshop','weathered-standing-stone'];
+const required=['windfall-wayfarer','windfall-broadleaf-tree','windfall-mountain-conifer','windfall-timber-cottage','windfall-harbor-workshop','weathered-standing-stone','windfall-companion-a','windfall-companion-b','windfall-companion-c','windfall-companion-d'];
 for(const id of required)assert.ok(manifest.assets.some(a=>a.id===id),'Missing asset '+id);
 for(const a of manifest.assets){
  assert.match(a.src,/^models\/[\w.-]+\.glb$/);
@@ -82,5 +82,7 @@ assert.equal(bounds.radius,8.5);
 assert.match(models,/getDrawStats:/);
 assert.match(main,/windfallDrawStats/);
 assert.match(main,/authoredAssets\.beginFrame\(\)/);
-console.log('Windfall graphics contracts: JS syntax, 12 GLSL sources, weather, foliage, camera, culling, six model families PASS.');
+assert.match(main,/authoredAssets\.updateCompanions\(elapsed\)/);
+assert.match(models,/function updateCompanions\(time\)/);
+console.log('Windfall graphics contracts: JS syntax, 12 GLSL sources, weather, foliage, camera, culling, ten model families PASS.');
 console.log('Still required: headed WebGL2 shader compilation, screenshot review, and physical GPU profiling.');
