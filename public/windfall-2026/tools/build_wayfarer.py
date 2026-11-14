@@ -194,11 +194,30 @@ for sign in [-1,1]:
     piece('upper-lid-'+str(sign),'skin',segment((sign*.068,.155,-.285),(sign*.182,.146,-.275),.011,.009,10),'head')
     piece('eyebrow-'+str(sign),'hair',segment((sign*.067,.229,-.279),(sign*.214,.218,-.266),.026,.022,8),'head')
     piece('sideburn-'+str(sign),'hair',ellipsoid((sign*.278,-.045,-.018),(.064,.152,.094),2),'head')
-    if VARIANT['beard']:
-        piece('beard-cheek-'+str(sign),'hair',ellipsoid((sign*.197,-.185,-.157),(.105,.12,.09),2),'head')
 piece('lip','skin',ellipsoid((0,-.177,-.292),(.097,.015,.018),2),'head')
 if VARIANT['beard']:
-    piece('beard-chin','hair',ellipsoid((0,-.260,-.174),(.177,.085,.13),2),'head')
+    # A single frontal jaw shell replaces separate round beard blobs.
+    rings=[(-.325,.065,.105,-.115),(-.296,.124,.151,-.096),
+           (-.240,.177,.196,-.078),(-.166,.206,.225,-.047),
+           (-.084,.221,.236,-.032),(-.028,.215,.222,-.016)]
+    sides=26;v=[];faces=[]
+    for ri,(yy,rx,rz,cz) in enumerate(rings):
+        for j in range(sides):
+            theta=-math.pi*.51+math.pi*1.02*j/(sides-1)
+            x=rx*math.sin(theta)
+            zz=cz-rz*math.cos(theta)-.008
+            curve=(-.018*math.cos(theta*2)) if ri==0 else .007*math.sin(j*.8+ri)
+            v.append([x,yy+curve,zz])
+    for ri in range(len(rings)-1):
+        for j in range(sides-1):
+            a=ri*sides+j;b=a+1;c=(ri+1)*sides+j+1;d=c-1
+            faces.extend([(a,b,c),(a,c,d)])
+    beard=trimesh.Trimesh(vertices=np.asarray(v),faces=np.asarray(faces),process=False)
+    piece('fitted-beard','hair',beard,'head')
+    for sign in [-1,1]:
+        piece('moustache-'+str(sign),'hair',
+              segment((sign*.016,-.123,-.301),(sign*.137,-.135,-.284),
+                      .017,.011,10),'head')
 piece('hair-cap','hair',ellipsoid((0,.39,.018),(.309,.147,.292),3),'head')
 # Tapered, flowing locks instead of a uniform ring of spherical clumps.
 style=VARIANT['hairStyle']
