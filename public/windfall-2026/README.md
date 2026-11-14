@@ -14,7 +14,7 @@ python3 -m http.server 3001
 
 Open `http://127.0.0.1:3001/`. WASD / arrow keys move, Shift runs, dragging orbits the camera, and scrolling zooms. Touchscreens have a joystick and Run. The procedural scene can work directly from `index.html`, but the new self-hosted GLB art models require HTTP(S) because browsers restrict local-file fetches.
 
-This preview has **no hosted server processing**, runtime asset CDN, user account, subscription, or paid graphics provider. The six self-hosted GLB models remain original Windfall assets. Three separate **CC0 scanned ground and bark textures** are now used for additional local surface detail; they were sourced from Poly Haven and their authors, original URLs, and SHA hashes are preserved in `materials/SOURCES.json`. No network calls to Poly Haven are made while playing.
+This preview has **no hosted server processing**, runtime asset CDN, user account, subscription, or paid graphics provider. The ten self-hosted GLB asset families remain original Windfall creations, including five fictional adventurers. Three separate **CC0 scanned ground and bark textures** are now used for additional local surface detail; they were sourced from Poly Haven and their authors, original URLs, and SHA hashes are preserved in `materials/SOURCES.json`. No network calls to Poly Haven are made while playing.
 
 ## Graphics work staged so far
 
@@ -23,8 +23,16 @@ This preview has **no hosted server processing**, runtime asset CDN, user accoun
 - A **stabilized higher-resolution near-field shadow cascade** for the player's surroundings, retaining a broader island-wide shadow map
 - Animated hero casts a dynamic silhouette shadow; low-cost fallback for software WebGL
 - **New WebGL2 glTF/GLB asset pipeline** supporting embedded PBR color, normal, and metallic/roughness textures, alpha-masked leaves, shared model instances, sunlight shadows, and model collision boundaries
-- Six original authored GLB asset families: standing stone, broadleaf tree, mountain conifer, textured articulated wayfarer, timber cottage and harbor workshop. Five cottages, two workshops, and sixteen authored conifers enrich the prototype while remaining fully original and self-hosted. Each family has reproducible local generation scripts; the authored character remains an unskinned, mid-poly proof of concept.
-- GitHub Actions verifies all six authored GLB model families, their provenance, missing-character fallback, character movement, WebGL2 and JavaScript errors. A separate full-detail SwiftShader test also confirmed all three local CC0 textures loaded with no reported GL errors. This is **not** a real GPU FPS or cinematic art acceptance.
+- Ten original authored GLB asset families: five individual fantasy adventurers (one playable wayfarer and four animated village companions), standing stone, broadleaf tree, mountain conifer, timber cottage and harbor workshop. The cast has independently authored size, clothing palettes, hair silhouettes and facial elements from a reproducible generator. The companions have idle head, arms and cape motion. Five cottages, two workshops and sixteen authored conifers remain in the world. These are **original fictional characters**, not digital portraits or claimed likenesses of actual people, and still **not** skin-weighted or high-resolution hero sculpts.
+- GitHub Actions verifies all ten authored GLB model families, their provenance, the missing-player fallback, movement, four companion statuses, WebGL2 and JavaScript errors. A full-detail SwiftShader pass separately checks that ten models and all three local CC0 textures are loaded with no WebGL errors. Model construction is exercised by the isolated five-variant authoring job. This is **not** a real GPU FPS or cinematic art acceptance.
+
+## Five-character original fantasy ensemble (staged)
+
+The playable wayfarer now has a continuous fitted head-and-jaw shell, thinner eye contours, separate fingers and swept hair-lock geometry. Four further GLBs introduce different body scale, head-to-body ratio, beard choices, textured clothing and hairstyle profiles. They stand at intentionally separate village locations and use the runtime's original named-pivot idle animation rather than being immobile statues.
+
+Run `WINDFALL_CHARACTER=windfall-companion-b python tools/build_wayfarer.py` to regenerate one model; run all five `WINDFALL_CHARACTER` values in the dedicated [character asset GitHub workflow](../../.github/workflows/windfall-character-assets.yml) to rebuild the cast. All assets are generated with NumPy, Pillow and trimesh; runtime uses WebGL2 without a subscription.
+
+**Limits:** no artist-approved human likenesses, skin-weighted skeletal animation, face capture, motion capture, proper cloth simulation, subsurface skin scattering or high-resolution scanned character textures. These are currently hand-generated fantasy companions, not realistic replicas of the user's family.
 
 ## Rebuilt village and local photographic materials
 
