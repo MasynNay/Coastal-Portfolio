@@ -19,6 +19,17 @@ for(const a of manifest.assets){
  for(const inst of a.instances){assert.ok(inst.position.length===3&&inst.position.every(Number.isFinite));}
  console.log(`${a.id}: ${bytes.length} bytes, ${(json.meshes||[]).length} GLB meshes, ${a.instances.length} placed instances`);
 }
+const tree=manifest.assets.find(a=>a.id==='windfall-broadleaf-tree');
+assert.ok(tree&&tree.thirdPartyComponents?.length===1,'Scanned broadleaf bark attribution missing');
+const barkSource=tree.thirdPartyComponents[0];
+assert.equal(barkSource.license,'CC0-1.0');
+assert.equal(barkSource.creator,'Rob Tuytel');
+assert.equal(barkSource.source,'https://polyhaven.com/a/bark_brown_02');
+for(const id of ['windfall-hazel-shrub','windfall-fern-understory','windfall-wildflower-patch']){
+  const asset=manifest.assets.find(a=>a.id===id);
+  assert.ok(asset&&asset.instances.length>=12,'Missing original undergrowth asset '+id);
+  assert.equal(asset.license,'OWNED-ORIGINAL');
+}
 // Surface scans are CC0, self-hosted, dimension-checked and SHA-verified.
 // A missing or changed tile must not be silently accepted as an approved asset.
 const crypto=require('node:crypto');
