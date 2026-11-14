@@ -16,6 +16,16 @@ assert.match(characterAuthoring,/CHARACTER=os\.environ\.get/);
 assert.match(characterAuthoring,/piece\('fitted-beard','hair',beard,'head'\)/);
 assert.ok(characterAuthoring.includes('faces.extend([(a,c,b),(a,d,c)])'),
   'Character facial-hair sculpt must use outward-facing front normals');
+for(const label of ["label=='skin'","label=='hair'","label=='leather'","label=='iris'","label=='brass'"]){
+ assert.ok(characterAuthoring.includes(label),'Missing authored material response '+label);
+}
+assert.match(characterAuthoring,/normal\/=np\.linalg\.norm\(normal/);
+assert.match(characterAuthoring,/rough_map/);
+const botanicalSource=fs.readFileSync(path.join(root,'tools','build_understory.py'),'utf8');
+for(const plant of ['hazel','fern','wildflower']){
+ assert.ok(botanicalSource.includes('def '+plant+'():'),'Missing original understory mesh source: '+plant);
+}
+
 
 new Function(main);
 new Function(models);
