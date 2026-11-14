@@ -204,8 +204,8 @@
    if(uAlphaMasked>.5&&base.a<uAlphaCutoff)discard;
    vec3 n=normalize(vNormal),v=normalize(uEye-vPosition),l=normalize(uSun);
    if(uHasNormal>.5){vec3 mapped=texture(uNormal,vUV).xyz*2.-1.;n=normalize(mat3(normalize(vTangent),normalize(vBitangent),n)*mapped);}
-   float metal=uMetalRough.x,rough=uMetalRough.y;
-   if(uHasORM>.5){vec4 orm=texture(uORM,vUV);rough*=orm.g;metal*=orm.b;}
+   float metal=uMetalRough.x,rough=uMetalRough.y,ambientOcclusion=1.;
+   if(uHasORM>.5){vec4 orm=texture(uORM,vUV);rough*=orm.g;metal*=orm.b;ambientOcclusion=mix(1.,orm.r,.78);}
    rough=clamp(rough,.075,1.);metal=clamp(metal,0.,1.);
    vec3 h=normalize(l+v),F0=mix(vec3(.04),base.rgb,metal);
    float nl=max(dot(n,l),0.),nv=max(dot(n,v),.001),nh=max(dot(n,h),.001),vh=max(dot(v,h),0.);
@@ -224,8 +224,11 @@
     cloudSun-=smoothstep(.14,.53,a*.51+b*.34+c*.15)*.32;
    }
    vec3 direct=(kd*base.rgb/3.14159+spec)*vec3(1.,.80,.60)*nl*shadow(n)*cloudSun*2.5;
-   vec3 hemisphere=base.rgb*mix(vec3(.20,.24,.27),vec3(.48,.55,.58),clamp(n.y*.5+.5,0.,1.))*(1.-metal)*.60;
-   vec3 color=direct+hemisphere+uEmission*(uHasEmissive>.5?texture(uEmissive,vUV).rgb:vec3(1.));
+   vec3 hemisphere=base.rgb*mix(vec3(.20,.24,.27),vec3(.48,.55,.58),clamp(n.y*.5+.5,0.,1.))*(1.-metal)*.60*ambientOcclusion;
+   // Thin alpha-masked foliage receives a small, warm backlit transmission term.
+   float leafBacklight=max(dot(-n,l),0.)*uAlphaMasked*.31;
+   vec3 leafTransmission=base.rgb*vec3(.46,.66,.29)*leafBacklight*shadow(n)*cloudSun;
+   vec3 color=direct+hemisphere+leafTransmission+uEmission*(uHasEmissive>.5?texture(uEmissive,vUV).rgb:vec3(1.));
    float dist=length(uEye-vPosition);
    float heightFog=exp(-max(vPosition.y,0.)*.052);
    float fog=1.-exp(-pow(dist*.0086,1.52)*(.68+.40*heightFog));
