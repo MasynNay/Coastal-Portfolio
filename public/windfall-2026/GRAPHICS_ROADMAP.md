@@ -1,3 +1,15 @@
+## November 14 — five-character original cast and articulated village inhabitants
+
+**Status: original model source, exported GLBs and live browser integration staged on preview branch; not approved for release.**
+
+- Extended the existing original textured wayfarer generator into five reproducible mesh variants: `windfall-wayfarer`, `windfall-companion-a`, `-b`, `-c` and `-d`. A dedicated GitHub Actions job regenerates all five in Python (NumPy/Pillow/trimesh), checks glTF node pivots, distinct height order, triangle counts and binary budgets, and commits GLBs only to the isolated unreleased branch. The latest regeneration completed successfully.
+- Introduced varied height, shoulder width, head proportions, cloth color, skin/hair values, beard choices and short/long/braided/tousled hair. The hair now uses fitted tapered lock lofts rather than a ring of spheres.
+- Upgraded the facial silhouette with a single continuous cheek/brow/jaw mesh, refined upper eyelids, less intrusive facial forms, and separate finger/thumb meshes on both hands. All five variants share reusable pivot hierarchy, but are distinct generated geometry, **not real-world likenesses**.
+- Placed four original companions around the market, fountain and village routes. They have their own static collision boundaries, continuously updated conservative frustum bounds, animated idle arms, head turns, breathing and cape reactions, and participate in near/far sunlight shadows.
+- Expanded graphics QA from six to ten model families, including loading and fallback checks for all five character variants. On the preceding character checkpoint the Chromium SwiftShader software and full shader/material jobs both passed with ten GLBs loaded and no reported JS or WebGL errors. A second mesh pass has since been built; its revised close-view snapshot and final verification remain necessary before accepting this checkpoint.
+- Increased rendered model count substantially; **real hardware FPS, memory and mobile thermal budgets are not yet measured.** Prioritize LOD/mesh batching and true per-character artistry rather than interpreting passing SwiftShader checks as performance approval.
+- **Next heavy art work:** unique artist-sculpted heads/faces and wardrobe per character with actual reference approval, skinning/IK, gait transition blending, higher-fidelity tree canopy and shrub models, true photographed rock/earth displacement, global illumination and environment reflection. Do not publish or merge the prototype.
+
 ## November 14 — photographed local surface scans and full-detail browser QA
 
 - Integrated three **verified CC0 scanned material sources**, all by Rob Tuytel at Poly Haven: Forest Ground 01, Cobblestone Floor 04 and Bark Brown 02. Generated 384×384 RGBA color + subdued displacement tiles using verified MD5 downloads, with exact SHA256 of resulting files and source URLs recorded in `materials/SOURCES.json`. The files are self-hosted; the browser never calls Poly Haven.
