@@ -1,3 +1,10 @@
+## November 14 — drifting world-space cloud shadows (unreleased)
+
+- Added animated, world-space cloud occlusion to the high-quality terrain/prop sunlight shader: three broad low-frequency layers produce soft moving patches without screen-space sliding.
+- Coupled diffuse and specular direct sunlight so cloud shade dims both consistently; indirect sky fill remains present beneath passing clouds.
+- The software WebGL quality path skips the cloud calculations. This is a shader-level visual step, **not** volumetric clouds, a physically based sky, cinematic-quality lighting, or evidence of real-GPU performance.
+- **Verification pending:** shader compilation and visual inspection on a real GPU, close-up character art, cloud consistency with authored GLB materials, and long-session performance. **Do not publish or merge.**
+
 ## November 14 — authored forest density and visible-only model rendering
 
 - Kept the original, self-hosted PBR cottage and harbor workshop models, with per-family fallback geometry and rotated building collision volumes.
