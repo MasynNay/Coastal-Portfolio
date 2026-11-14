@@ -1,3 +1,10 @@
+## November 14 — verified photogrammetric mossy rocks, staged
+
+- Imported a physically measured, photogrammetric six-stone set `rock_moss_set_01` by Kless Gyzen (Poly Haven, **CC0-1.0**), converted offline from source glTF and four dependencies into a **2.25 MB, approximately 63K-triangle self-contained GLB**. Verified source MD5 hashes and final SHA256 are saved at `models/windfall-cc0-mossy-rock-set.SOURCES.json`.
+- The independent source-model import and geometry budget check passed. Added three discrete instances to woodland and village-edge routes at terrain height; the render and shadow pipelines share the same authored PBR material and self-contained local model.
+- Extended asset integrity and browser tests from thirteen to fourteen model families, checking the imported rock-set author/license, original source URLs, hashes, and actual WebGL model-loading status. Full browser QA and screenshot review still required for this latest milestone.
+- This is **genuine CC0 captured natural detail** rather than invented procedural triangles, but it is a localized improvement. The majority of the world (including the lead character) is still visibly stylized. Do not publish, merge, or claim a 2026 remake-quality release.
+
 ## November 14 — architecture sculpting, material response and alpine geology (unreleased)
 
 - **Fixed a real detailed-rendering crash:** both far and near shadow functions previously accessed a `const eye` defined only inside the animation frame. Chromium SwiftShader's full-quality view timed out before its ready marker. Both routines now receive the current camera explicitly, and source regressions cover calls and signatures; final in-browser validation is still required.
