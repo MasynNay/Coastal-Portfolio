@@ -1,3 +1,15 @@
+## November 14 — coastal understory and scanned-bark forest checkpoint
+
+**Development branch only. Keep the public site and release gate unchanged.**
+
+- Created reproducible, original `tools/build_understory.py` with three **real textured GLB mesh families**: hazel shrubs (3,600 triangles each), arching fern clusters (1,368 triangles each), and wildflower patches (616 triangles each). All original textures are embedded, with PBR normal/roughness and alpha silhouettes; no downloaded vegetation models or runtime external services.
+- A new automated asset-authoring workflow generated and validated all three GLBs with NumPy/Pillow/trimesh, then committed them to the isolated graphics branch. Its mesh-count, bounding, triangle, attribution and binary-size checks passed.
+- Grounded and varied 40 new instances in the existing island, with 12 hazel, 14 fern and 14 wildflower clusters; the shrubs have small grounded collision proxies while soft foliage remains walk-through. Color and sunlight shadow passes consume the same new GLBs.
+- Changed the original WebGL2 color and depth vertex shaders to bend alpha-masked plants **relative to each mesh's actual height**. Motion scales down on small plants and is preserved in depth shadows; additional regression contracts verify height-aware wind and all three model families.
+- Made `tools/build_tree_asset.py` reproducible outside the old developer machine and upgraded the original broadleaf's bark PBR color/normal relief using the **locally stored and verified CC0 Bark Brown 02 photograph by Rob Tuytel (Poly Haven)**. The independent GitHub Actions build of that GLB passed and commits only to the preview branch. Mixed-component attribution is recorded in `asset-manifest.json`.
+- The initial thirteen-model Chromium software-mode scene QA passed, including fallback player, movement and WebGL checks. Re-run the full-detail browser test against the final broadleaf scan and inspect both the wide and close-up screenshots. **Do not claim real GPU performance, painterly botanical polish or remake fidelity** from those automated tests.
+- **Future asset priorities:** detailed canopy silhouette and leaf texture variants, mesh LOD and batching, physics-driven ground cover, photographic rock displacement, accurate tree roots, high-end houses, truly modeled human facial/skin material and skeletal animation. The screen remains visibly stylized and below 2026 cinematic-art expectations.
+
 ## November 14 — five-character original cast and articulated village inhabitants
 
 **Status: original model source, exported GLBs and live browser integration staged on preview branch; not approved for release.**
