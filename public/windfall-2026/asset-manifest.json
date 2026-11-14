@@ -40,9 +40,9 @@
         },
         {
           "position": [
-            -28.0,
+            -28,
             -0.5,
-            -19.0
+            -19
           ],
           "scale": 1.5,
           "rotationY": -0.7,
@@ -52,7 +52,7 @@
           "position": [
             28.7,
             -0.5,
-            -28.0
+            -28
           ],
           "scale": 1.9,
           "rotationY": 0.1,
@@ -60,7 +60,7 @@
         },
         {
           "position": [
-            18.0,
+            18,
             -0.5,
             8.8
           ],
@@ -154,12 +154,12 @@
     {
       "id": "windfall-timber-cottage",
       "src": "models/windfall-timber-cottage.glb",
-      "creator": "Windfall \u2014 original procedural architecture and custom PBR textures",
+      "creator": "Windfall — original procedural architecture and custom PBR textures",
       "license": "OWNED-ORIGINAL",
       "provenance": "tools/build_architecture.py; all geometry and PBR maps created locally, no borrowed mesh or image",
       "collisionBox": [
         3.1,
-        3.0
+        3
       ],
       "instances": [
         {
@@ -217,7 +217,7 @@
     {
       "id": "windfall-harbor-workshop",
       "src": "models/windfall-harbor-workshop.glb",
-      "creator": "Windfall \u2014 original procedural architecture and custom PBR textures",
+      "creator": "Windfall — original procedural architecture and custom PBR textures",
       "license": "OWNED-ORIGINAL",
       "provenance": "tools/build_architecture.py; all geometry and PBR maps created locally, no borrowed mesh or image",
       "collisionBox": [
@@ -267,6 +267,90 @@
       ]
     },
     {
+      "id": "windfall-companion-a",
+      "src": "models/windfall-companion-a.glb",
+      "role": "companion",
+      "creator": "Windfall — original procedural five-character fantasy ensemble",
+      "license": "OWNED-ORIGINAL",
+      "provenance": "tools/build_wayfarer.py with WINDFALL_CHARACTER variant; original sculpted parts and authored PBR materials; no photos or third-party character meshes; fictional design, not a real person's likeness",
+      "collisionRadius": 0.33,
+      "instances": [
+        {
+          "position": [
+            -9.5,
+            0.06,
+            -1.8
+          ],
+          "rotationY": 0.58,
+          "scale": 1,
+          "grounded": true
+        }
+      ]
+    },
+    {
+      "id": "windfall-companion-b",
+      "src": "models/windfall-companion-b.glb",
+      "role": "companion",
+      "creator": "Windfall — original procedural five-character fantasy ensemble",
+      "license": "OWNED-ORIGINAL",
+      "provenance": "tools/build_wayfarer.py with WINDFALL_CHARACTER variant; original sculpted parts and authored PBR materials; no photos or third-party character meshes; fictional design, not a real person's likeness",
+      "collisionRadius": 0.33,
+      "instances": [
+        {
+          "position": [
+            -3.7,
+            0.06,
+            -7.3
+          ],
+          "rotationY": -1.08,
+          "scale": 1,
+          "grounded": true
+        }
+      ]
+    },
+    {
+      "id": "windfall-companion-c",
+      "src": "models/windfall-companion-c.glb",
+      "role": "companion",
+      "creator": "Windfall — original procedural five-character fantasy ensemble",
+      "license": "OWNED-ORIGINAL",
+      "provenance": "tools/build_wayfarer.py with WINDFALL_CHARACTER variant; original sculpted parts and authored PBR materials; no photos or third-party character meshes; fictional design, not a real person's likeness",
+      "collisionRadius": 0.33,
+      "instances": [
+        {
+          "position": [
+            4.7,
+            0.06,
+            -6.4
+          ],
+          "rotationY": 0.66,
+          "scale": 1,
+          "grounded": true
+        }
+      ]
+    },
+    {
+      "id": "windfall-companion-d",
+      "src": "models/windfall-companion-d.glb",
+      "role": "companion",
+      "creator": "Windfall — original procedural five-character fantasy ensemble",
+      "license": "OWNED-ORIGINAL",
+      "provenance": "tools/build_wayfarer.py with WINDFALL_CHARACTER variant; original sculpted parts and authored PBR materials; no photos or third-party character meshes; fictional design, not a real person's likeness",
+      "collisionRadius": 0.33,
+      "instances": [
+        {
+          "position": [
+            7.9,
+            0.06,
+            4.1
+          ],
+          "rotationY": -1.31,
+          "scale": 1,
+          "grounded": true
+        }
+      ]
+    },
+    {
       "id": "windfall-mountain-conifer",
       "src": "models/windfall-mountain-conifer.glb",
       "creator": "Windfall original procedural forest art",
@@ -281,7 +365,7 @@
             -44
           ],
           "scale": 1.12,
-          "rotationY": 0.0,
+          "rotationY": 0,
           "grounded": true
         },
         {
