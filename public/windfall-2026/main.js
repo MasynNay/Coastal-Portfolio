@@ -539,7 +539,11 @@ function shader(type,src){let s=gl.createShader(type);gl.shaderSource(s,src);gl.
 function program(v,f){let p=gl.createProgram();gl.attachShader(p,shader(gl.VERTEX_SHADER,v));gl.attachShader(p,shader(gl.FRAGMENT_SHADER,f));gl.linkProgram(p);if(!gl.getProgramParameter(p,gl.LINK_STATUS))throw Error(gl.getProgramInfoLog(p));return p}
 function geometryBuffer(geometry){let vao=gl.createVertexArray(),buffer=gl.createBuffer();gl.bindVertexArray(vao);gl.bindBuffer(gl.ARRAY_BUFFER,buffer);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array(geometry.a),gl.STATIC_DRAW);for(let i=0;i<4;i++){gl.enableVertexAttribArray(i);gl.vertexAttribPointer(i,i===0||i===1||i===2?3:1,gl.FLOAT,false,40,[0,12,24,36][i])}gl.bindVertexArray(null);return {vao,buffer,count:geometry.count}}
 let mainProgram,shadowProgram,skyProgram,waterProgram,staticGeo,dynamicGeo,waterGeo,fullscreen,depthTex,depthFbo,lightVP,nearDepthTex,nearDepthFbo,nearLightVP,nearShadowSize,materialAtlas,coastHeightmap;
+let authoredAssets=null;
 try{
+ // A separate glTF/GLB PBR path supports actually authored assets with normal and ORM maps.
+ // Any import failure leaves the existing exploratory world playable.
+ if(window.WindfallAssetPipeline){try{authoredAssets=window.WindfallAssetPipeline.create(gl);}catch(e){console.warn('Optional PBR model system unavailable',e);}}
  mainProgram=program(VS,FS);materialAtlas=makeMaterialAtlas(gl);coastHeightmap=createCoastHeightmap(gl);shadowProgram=program(SHADOW_VS,SHADOW_FS);skyProgram=program(SKY_VS,SKY_FS);waterProgram=program(WATER_VS,WATER_FS);
  staticGeo=geometryBuffer(world);world.a=null;
  const water=new Geometry();water.quad([-155,.035,-155],[155,.035,-155],[155,.035,155],[-155,.035,155],colors.water,8);waterGeo=geometryBuffer(water);
@@ -665,6 +669,9 @@ function characterShadow(){
 }
 // One persistent VAO for character, replacing only its small dynamic data each frame.
 dynamicGeo=geometryBuffer(character(0));gl.bindBuffer(gl.ARRAY_BUFFER,dynamicGeo.buffer);let dynamicByteCapacity=Math.ceil(dynamicGeo.count*40*1.6);gl.bufferData(gl.ARRAY_BUFFER,dynamicByteCapacity,gl.DYNAMIC_DRAW);
+if(authoredAssets)authoredAssets.loadManifest('asset-manifest.json',terrain).then(status=>{
+ document.documentElement.dataset.windfallAssets=String(status.filter(s=>s.loaded).length);
+}).catch(err=>console.warn('Authored asset manifest unavailable; using procedural scene:',String(err)));
 const shadowDecalGeo=geometryBuffer(characterShadow());let shadowByteCapacity=Math.ceil(shadowDecalGeo.count*40*1.4);
 gl.bindBuffer(gl.ARRAY_BUFFER,shadowDecalGeo.buffer);gl.bufferData(gl.ARRAY_BUFFER,shadowByteCapacity,gl.DYNAMIC_DRAW);
 let last=0,elapsed=0,frames=0,phase=0,lastNearRender=-100;
@@ -685,6 +692,7 @@ function renderNearSunShadow(x,z,y,heroCount,now){
  gl.bindVertexArray(staticGeo.vao);gl.drawArrays(gl.TRIANGLES,0,staticGeo.count);
  // Unlike the previous fixed-circle shadow, the complete animated silhouette casts light.
  gl.bindVertexArray(dynamicGeo.vao);gl.drawArrays(gl.TRIANGLES,0,heroCount);
+ if(authoredAssets)authoredAssets.drawShadow(nearLightVP);
  gl.bindFramebuffer(gl.FRAMEBUFFER,null);
 }
 // Movement uses elapsed real time; clamping to 45 ms made controls nearly freeze on low FPS.
@@ -698,7 +706,7 @@ function frame(now){let dt=last?Math.max(0,Math.min(.75,(now-last)/1000)):0;last
  for(let step=0;step<steps;step++){
   const nextX=clamp(player.x+wx*stride,-85,85),nextZ=clamp(player.z+wz*stride,-86,68);
   const onPier=nextX>8.5&&nextX<14.5&&nextZ>=12.7&&nextZ<32.3;
-  if(terrain(nextX,nextZ)<.18&&!onPier)break;
+  if((terrain(nextX,nextZ)<.18&&!onPier)||(authoredAssets&&authoredAssets.collides(nextX,nextZ)))break;
   player.x=nextX;player.z=nextZ;
  }
  let target=Math.atan2(-wx,-wz),diff=Math.atan2(Math.sin(target-player.heading),Math.cos(target-player.heading));player.heading+=diff*Math.min(1,dt*12);
@@ -723,6 +731,14 @@ function frame(now){let dt=last?Math.max(0,Math.min(.75,(now-last)/1000)):0;last
  if(!softwareRenderer)gl.uniformMatrix4fv(mainU.nearLvp,false,new Float32Array(nearLightVP));gl.uniform3fv(mainU.eye,eye);gl.uniform3fv(mainU.sun,sun);gl.uniform3fv(mainU.fog,fog);gl.uniform1f(mainU.time,elapsed);gl.uniform1f(mainU.enabled,softwareRenderer?0:1);gl.uniform1f(mainU.lowQuality,softwareRenderer?1:0);gl.activeTexture(gl.TEXTURE0);gl.bindTexture(gl.TEXTURE_2D,depthTex);gl.uniform1i(mainU.shadow,0);gl.activeTexture(gl.TEXTURE1);gl.bindTexture(gl.TEXTURE_2D,materialAtlas);gl.uniform1i(mainU.materials,1);gl.uniform1f(mainU.shadowSize,softwareRenderer?512:window.matchMedia('(pointer:coarse)').matches?1024:2048);
  if(!softwareRenderer){gl.activeTexture(gl.TEXTURE3);gl.bindTexture(gl.TEXTURE_2D,nearDepthTex);gl.uniform1i(mainU.nearShadow,3);gl.uniform1f(mainU.nearShadowSize,nearShadowSize);}
  gl.bindVertexArray(staticGeo.vao);gl.drawArrays(gl.TRIANGLES,0,staticGeo.count);
+ if(authoredAssets){
+  authoredAssets.draw({vp,eye,sun,fog,farVP:lightVP,nearVP:nearLightVP,farMap:depthTex,nearMap:nearDepthTex});
+  // Third-party material draw paths must never leak shader or texture bindings
+  // into the procedural hero, decals, or water passes.
+  gl.useProgram(mainProgram);
+  gl.activeTexture(gl.TEXTURE0);gl.bindTexture(gl.TEXTURE_2D,depthTex);
+  gl.activeTexture(gl.TEXTURE1);gl.bindTexture(gl.TEXTURE_2D,materialAtlas);
+ }
  // A soft, fading, ground-following contact shadow anchors the moving feet.
  gl.enable(gl.BLEND);gl.blendFunc(gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);gl.depthMask(false);
  const sd=new Float32Array(characterShadow().a);gl.bindBuffer(gl.ARRAY_BUFFER,shadowDecalGeo.buffer);

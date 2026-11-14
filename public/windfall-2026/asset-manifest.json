@@ -1,0 +1,155 @@
+{
+  "version": 1,
+  "assets": [
+    {
+      "id": "weathered-standing-stone",
+      "src": "models/weathered-standing-stone.glb",
+      "creator": "Windfall project - original procedural sculpt and PBR texture authoring",
+      "license": "OWNED-ORIGINAL",
+      "provenance": "Generated locally with Python, NumPy, PIL, and trimesh; no third-party mesh or bitmap source",
+      "instances": [
+        {
+          "position": [
+            -7.5,
+            -0.6,
+            11.5
+          ],
+          "scale": 1.05,
+          "rotationY": 0.5,
+          "grounded": true
+        },
+        {
+          "position": [
+            7.3,
+            -0.6,
+            10.4
+          ],
+          "scale": 1.45,
+          "rotationY": -0.9,
+          "grounded": true
+        },
+        {
+          "position": [
+            -25.2,
+            -0.6,
+            6.2
+          ],
+          "scale": 1.9,
+          "rotationY": 0.8,
+          "grounded": true
+        },
+        {
+          "position": [
+            -28.0,
+            -0.5,
+            -19.0
+          ],
+          "scale": 1.5,
+          "rotationY": -0.7,
+          "grounded": true
+        },
+        {
+          "position": [
+            28.7,
+            -0.5,
+            -28.0
+          ],
+          "scale": 1.9,
+          "rotationY": 0.1,
+          "grounded": true
+        },
+        {
+          "position": [
+            18.0,
+            -0.5,
+            8.8
+          ],
+          "scale": 1.3,
+          "rotationY": 1.1,
+          "grounded": true
+        }
+      ],
+      "collisionRadius": 0.72
+    },
+    {
+      "id": "windfall-broadleaf-tree",
+      "src": "models/windfall-broadleaf-tree.glb",
+      "creator": "Windfall project - original procedural branch sculpture and hand-authored leaf textures",
+      "license": "OWNED-ORIGINAL",
+      "provenance": "Generated locally from original Python tree mesh and PBR bark/leaf images; no borrowed models or textures",
+      "instances": [
+        {
+          "position": [
+            -12,
+            -0.1,
+            12
+          ],
+          "scale": 0.82,
+          "rotationY": 0.32,
+          "grounded": true
+        },
+        {
+          "position": [
+            19,
+            -0.1,
+            14
+          ],
+          "scale": 1.04,
+          "rotationY": 1.4,
+          "grounded": true
+        },
+        {
+          "position": [
+            -18,
+            -0.1,
+            -21
+          ],
+          "scale": 1.28,
+          "rotationY": -0.9,
+          "grounded": true
+        },
+        {
+          "position": [
+            24,
+            -0.1,
+            -19
+          ],
+          "scale": 1.16,
+          "rotationY": 0.86,
+          "grounded": true
+        },
+        {
+          "position": [
+            -32,
+            -0.1,
+            9
+          ],
+          "scale": 1.35,
+          "rotationY": 0.15,
+          "grounded": true
+        },
+        {
+          "position": [
+            37,
+            -0.1,
+            -10
+          ],
+          "scale": 1.21,
+          "rotationY": -0.68,
+          "grounded": true
+        },
+        {
+          "position": [
+            9,
+            -0.1,
+            -32
+          ],
+          "scale": 1.34,
+          "rotationY": 1.8,
+          "grounded": true
+        }
+      ],
+      "collisionRadius": 0.27
+    }
+  ]
+}
