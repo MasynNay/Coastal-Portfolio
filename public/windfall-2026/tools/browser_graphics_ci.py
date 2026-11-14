@@ -22,6 +22,8 @@ EXPECTED = {
     "windfall-wayfarer", "windfall-mountain-conifer",
     "windfall-companion-a", "windfall-companion-b",
     "windfall-companion-c", "windfall-companion-d",
+    "windfall-hazel-shrub", "windfall-fern-understory",
+    "windfall-wildflower-patch",
 }
 
 
@@ -79,6 +81,8 @@ async def run_case(browser, base, fallback):
         companions=[item for item in initial["assets"] if item.get("role")=="companion"]
         assert len(companions)==4 and all(x["loaded"] for x in companions), companions
         assert diagnostics["modelDraws"]["colorSubmitted"] > 0, diagnostics
+        for botanical in ("windfall-hazel-shrub","windfall-fern-understory","windfall-wildflower-patch"):
+            assert loaded[botanical]["loaded"], botanical
         assert diagnostics["modelDraws"]["colorCulled"] >= 0, diagnostics
         prefix = "fallback" if fallback else "authored"
         await page.screenshot(path=str(ARTIFACTS / f"{prefix}-start.png"))
