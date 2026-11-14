@@ -23,6 +23,14 @@
 - **Browser checks:** in Chromium's SwiftShader/WebGL2 renderer, all eight GLSL shaders compiled successfully; the village initialized without JavaScript or shader errors; desktop travel reached the harbor; the mobile-quality layout initialized with joystick and run controls visible. No real-GPU FPS claim is made.
 - **Release gate remains CLOSED.** Although the surfacing and gameplay pipeline has improved, the houses, hero, foliage, cliffs and architectural meshes still use original procedural primitives. Cinematic graphics require original sculpted/retopologized/rigged hero and family models, authored high-detail environment meshes, genuinely sourced PBR base-color/normal/ORM maps, lighting upgrades and GPU performance measurements. No third-party production models have been imported during this pass.
 
+## Current checkpoint — authored models and local high-resolution shadows
+
+- Added a stabilized near-field sunlight shadow map around the player, combined with the existing island-wide map. The walking character now casts an actual moving mesh shadow in the close cascade. Hardware-quality startup compiled and initialized in software-WebGL simulation, but GPU-specific frame rates are unmeasured.
+- Added a self-hosted glTF 2.0 binary model renderer with support for embedded base-color, tangent-space normal, and metallic-roughness texture maps, alpha-cutout foliage, node hierarchies, model instancing, ground-height placement and model collision proxies.
+- Added two fully original 3D **pipeline test assets**: a 5,120-triangle weathered standing stone and a detailed branched broadleaf tree with independent bark and leaf materials. All generated geometry and maps have reproducible Python source scripts; no third-party game assets were incorporated.
+- Verified both model families load in WebGL2 without JavaScript errors, plus a depth-only shadow framebuffer and PBR model-draw smoke test. The manifest enforces explicit licensing/provenance and local model paths.
+- **Do not release.** These remain authored procedural prototypes, not high-fidelity scans or AAA character and environment art. The release blockers are especially the rigged family, buildings, forest canopy/rocks at hero distance, lighting/indirect illumination, camera navigation and real-GPU performance. See `ASSET_PIPELINE.md` for format and rights details.
+
 ## November 2026 procedural foundation hardening
 
 - Changed repetitive paving-strip mesh into discrete offset stone courses with gaps.
