@@ -58,6 +58,11 @@ assert.match(models,/render\.lowQuality/);
 assert.match(colorWind,/world\.xz\+=vec2\(\.16,\.085\)/);
 assert.match(shadowWind,/world\.xz\+=vec2\(\.16,\.085\)/);
 assert.match(main,/drawShadow\(nearLightVP,true,elapsed,eye\)/);
+assert.match(main,/function rebuildFarSunShadow\(eye\)/);
+assert.match(main,/rebuildFarSunShadow\(eye\);farShadowDirty=false/);
+assert.match(main,/function renderNearSunShadow\(x,z,y,heroCount,now,eye\)/);
+assert.match(main,/renderNearSunShadow\(x,z,y,hero\?hero\.count:0,now\*\.001,eye\)/);
+
 assert.match(main,/drawShadow\(lightVP,false,elapsed,eye\)/);
 const cameraFunction=main.match(/function cameraSafeEye\(target,desired\)\{[\s\S]*?\n\}/);
 assert.ok(cameraFunction,'Camera obstacle function missing');
