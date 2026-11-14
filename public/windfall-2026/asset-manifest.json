@@ -519,6 +519,434 @@
           "grounded": true
         }
       ]
+    },
+    {
+      "id": "windfall-hazel-shrub",
+      "src": "models/windfall-hazel-shrub.glb",
+      "creator": "Windfall project — original authored coastal botanical sculpture and hand-generated PBR foliage",
+      "license": "OWNED-ORIGINAL",
+      "provenance": "Reproducible tools/build_understory.py; locally generated geometry, botanical silhouettes, alpha-masked leaf textures and PBR maps; no borrowed meshes, photos or external runtime assets",
+      "collisionRadius": 0.38,
+      "instances": [
+        {
+          "position": [
+            -9,
+            0.02,
+            9
+          ],
+          "scale": 0.82,
+          "rotationY": 0,
+          "grounded": true
+        },
+        {
+          "position": [
+            10,
+            0.02,
+            7
+          ],
+          "scale": 0.74,
+          "rotationY": 2.39996,
+          "grounded": true
+        },
+        {
+          "position": [
+            -18,
+            0.02,
+            8
+          ],
+          "scale": 1.06,
+          "rotationY": 4.79993,
+          "grounded": true
+        },
+        {
+          "position": [
+            22,
+            0.02,
+            12
+          ],
+          "scale": 0.9,
+          "rotationY": 0.9167,
+          "grounded": true
+        },
+        {
+          "position": [
+            -24,
+            0.02,
+            -8
+          ],
+          "scale": 1.04,
+          "rotationY": 3.31667,
+          "grounded": true
+        },
+        {
+          "position": [
+            27,
+            0.02,
+            -13
+          ],
+          "scale": 0.94,
+          "rotationY": 5.71663,
+          "grounded": true
+        },
+        {
+          "position": [
+            -35,
+            0.02,
+            -22
+          ],
+          "scale": 1.12,
+          "rotationY": 1.83341,
+          "grounded": true
+        },
+        {
+          "position": [
+            16,
+            0.02,
+            -30
+          ],
+          "scale": 1.12,
+          "rotationY": 4.23337,
+          "grounded": true
+        },
+        {
+          "position": [
+            -26,
+            0.02,
+            -33
+          ],
+          "scale": 1.08,
+          "rotationY": 0.35015,
+          "grounded": true
+        },
+        {
+          "position": [
+            30,
+            0.02,
+            -29
+          ],
+          "scale": 1.08,
+          "rotationY": 2.75011,
+          "grounded": true
+        },
+        {
+          "position": [
+            -39,
+            0.02,
+            5
+          ],
+          "scale": 1.05,
+          "rotationY": 5.15008,
+          "grounded": true
+        },
+        {
+          "position": [
+            40,
+            0.02,
+            -18
+          ],
+          "scale": 1.1,
+          "rotationY": 1.26685,
+          "grounded": true
+        }
+      ]
+    },
+    {
+      "id": "windfall-fern-understory",
+      "src": "models/windfall-fern-understory.glb",
+      "creator": "Windfall project — original authored coastal botanical sculpture and hand-generated PBR foliage",
+      "license": "OWNED-ORIGINAL",
+      "provenance": "Reproducible tools/build_understory.py; locally generated geometry, botanical silhouettes, alpha-masked leaf textures and PBR maps; no borrowed meshes, photos or external runtime assets",
+      "instances": [
+        {
+          "position": [
+            -16,
+            0.02,
+            -12
+          ],
+          "scale": 0.95,
+          "rotationY": 0,
+          "grounded": true
+        },
+        {
+          "position": [
+            13,
+            0.02,
+            -17
+          ],
+          "scale": 0.82,
+          "rotationY": 2.39996,
+          "grounded": true
+        },
+        {
+          "position": [
+            -25,
+            0.02,
+            -24
+          ],
+          "scale": 0.94,
+          "rotationY": 4.79993,
+          "grounded": true
+        },
+        {
+          "position": [
+            -29,
+            0.02,
+            -33
+          ],
+          "scale": 1.05,
+          "rotationY": 0.9167,
+          "grounded": true
+        },
+        {
+          "position": [
+            -38,
+            0.02,
+            -33
+          ],
+          "scale": 1.02,
+          "rotationY": 3.31667,
+          "grounded": true
+        },
+        {
+          "position": [
+            -50,
+            0.02,
+            -29
+          ],
+          "scale": 1.12,
+          "rotationY": 5.71663,
+          "grounded": true
+        },
+        {
+          "position": [
+            33,
+            0.02,
+            -23
+          ],
+          "scale": 0.98,
+          "rotationY": 1.83341,
+          "grounded": true
+        },
+        {
+          "position": [
+            44,
+            0.02,
+            -30
+          ],
+          "scale": 1.12,
+          "rotationY": 4.23337,
+          "grounded": true
+        },
+        {
+          "position": [
+            53,
+            0.02,
+            -23
+          ],
+          "scale": 1.11,
+          "rotationY": 0.35015,
+          "grounded": true
+        },
+        {
+          "position": [
+            -12,
+            0.02,
+            -30
+          ],
+          "scale": 0.94,
+          "rotationY": 2.75011,
+          "grounded": true
+        },
+        {
+          "position": [
+            18,
+            0.02,
+            -38
+          ],
+          "scale": 1.05,
+          "rotationY": 5.15008,
+          "grounded": true
+        },
+        {
+          "position": [
+            -45,
+            0.02,
+            -15
+          ],
+          "scale": 1.18,
+          "rotationY": 1.26685,
+          "grounded": true
+        },
+        {
+          "position": [
+            27,
+            0.02,
+            -4
+          ],
+          "scale": 0.93,
+          "rotationY": 3.66682,
+          "grounded": true
+        },
+        {
+          "position": [
+            -31,
+            0.02,
+            6
+          ],
+          "scale": 1.02,
+          "rotationY": 6.06678,
+          "grounded": true
+        }
+      ]
+    },
+    {
+      "id": "windfall-wildflower-patch",
+      "src": "models/windfall-wildflower-patch.glb",
+      "creator": "Windfall project — original authored coastal botanical sculpture and hand-generated PBR foliage",
+      "license": "OWNED-ORIGINAL",
+      "provenance": "Reproducible tools/build_understory.py; locally generated geometry, botanical silhouettes, alpha-masked leaf textures and PBR maps; no borrowed meshes, photos or external runtime assets",
+      "instances": [
+        {
+          "position": [
+            4,
+            0.02,
+            9
+          ],
+          "scale": 0.92,
+          "rotationY": 0,
+          "grounded": true
+        },
+        {
+          "position": [
+            -4,
+            0.02,
+            11
+          ],
+          "scale": 0.86,
+          "rotationY": 2.39996,
+          "grounded": true
+        },
+        {
+          "position": [
+            -9,
+            0.02,
+            4
+          ],
+          "scale": 0.92,
+          "rotationY": 4.79993,
+          "grounded": true
+        },
+        {
+          "position": [
+            9,
+            0.02,
+            4
+          ],
+          "scale": 0.84,
+          "rotationY": 0.9167,
+          "grounded": true
+        },
+        {
+          "position": [
+            -7,
+            0.02,
+            -4
+          ],
+          "scale": 0.92,
+          "rotationY": 3.31667,
+          "grounded": true
+        },
+        {
+          "position": [
+            7,
+            0.02,
+            -7
+          ],
+          "scale": 0.96,
+          "rotationY": 5.71663,
+          "grounded": true
+        },
+        {
+          "position": [
+            14,
+            0.02,
+            14
+          ],
+          "scale": 0.86,
+          "rotationY": 1.83341,
+          "grounded": true
+        },
+        {
+          "position": [
+            -14,
+            0.02,
+            17
+          ],
+          "scale": 1.02,
+          "rotationY": 4.23337,
+          "grounded": true
+        },
+        {
+          "position": [
+            0,
+            0.02,
+            -13
+          ],
+          "scale": 0.94,
+          "rotationY": 0.35015,
+          "grounded": true
+        },
+        {
+          "position": [
+            19,
+            0.02,
+            -6
+          ],
+          "scale": 0.94,
+          "rotationY": 2.75011,
+          "grounded": true
+        },
+        {
+          "position": [
+            -20,
+            0.02,
+            2
+          ],
+          "scale": 1.02,
+          "rotationY": 5.15008,
+          "grounded": true
+        },
+        {
+          "position": [
+            6,
+            0.02,
+            -25
+          ],
+          "scale": 1.05,
+          "rotationY": 1.26685,
+          "grounded": true
+        },
+        {
+          "position": [
+            24,
+            0.02,
+            -24
+          ],
+          "scale": 0.94,
+          "rotationY": 3.66682,
+          "grounded": true
+        },
+        {
+          "position": [
+            1,
+            0.02,
+            20
+          ],
+          "scale": 1.13,
+          "rotationY": 6.06678,
+          "grounded": true
+        }
+      ]
     }
   ]
 }
