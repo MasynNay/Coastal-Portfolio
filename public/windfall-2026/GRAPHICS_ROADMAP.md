@@ -25,3 +25,11 @@
 ## Asset research
 
 Potential license-compatible sources, subject to each asset's provenance and export validation: Poly Haven's CC0 scanned models/PBR materials (https://polyhaven.com/), Quaternius CC0 fantasy environments (https://quaternius.com/). Preserve license attribution/provenance in the repository even when optional under CC0. Avoid hotlinking external model CDN assets for production.
+
+## Material/shader pipeline checkpoint
+
+- Created an 8-material, self-contained deterministic texture atlas used by the WebGL2 shader (grass, stone, wood, foliage, plaster, roof, metal, sand).
+- Added adaptive shadow map resolution (desktop/touch) and SwiftShader/software fallback to keep non-GPU browser rendering functional. Hardware WebGL2 retains the higher-detail material shader and PCF shadowing.
+- Verified material shader compilation and startup for village and harbor in headed Chromium; mobile emulation exposed visible joystick and run controls and no JS/WebGL console errors.
+- Known blocker: the renderer still uses procedurally constructed materials and character geometry. It **does not** meet the cinematic/remake fidelity gate. Replace these with genuinely authored PBR glTF models and source-license documentation; do not quietly swap in unlicensed or brand-owned meshes.
+- Performance note: browser tests used SwiftShader software rendering. Real hardware FPS, animation smoothness, input latency and long-session stability need separate verification before any release.
