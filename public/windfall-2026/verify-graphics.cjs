@@ -57,5 +57,30 @@ for(const a of manifest.assets){
  assert.ok(['OWNED-ORIGINAL','CC0-1.0','CC-BY-4.0'].includes(a.license));
  assert.ok(a.provenance&&a.creator&&a.instances.length>0);
 }
-console.log('Windfall graphics contracts: JS syntax, 12 GLSL source checks, weather, foliage wind, shadow times, camera sweeps, six asset families PASS.');
+// Exercise the exact production culling helpers, rather than reimplementing
+// camera math in tests. This catches column-major row/plane regressions.
+const vm=require('node:vm');
+const sandbox={window:{}};
+vm.runInNewContext(models,sandbox,{timeout:3000});
+const {frustumPlanes,transformSphere,sphereVisible}=sandbox.window.WindfallAssetPipeline.culling;
+const I=[1,0,0,0, 0,1,0,0, 0,0,1,0, 0,0,0,1];
+const planes=frustumPlanes(I);
+assert.equal(planes.length,6);
+assert.ok(sphereVisible({center:[0,0,0],radius:.25},planes));
+assert.ok(sphereVisible({center:[.95,0,0],radius:.1},planes),'Visible edge sphere was discarded');
+assert.ok(!sphereVisible({center:[2.5,0,0],radius:.1},planes),'Offscreen sphere was not culled');
+assert.ok(!sphereVisible({center:[0,0,-3],radius:.1},planes),'Behind near plane not culled');
+const shifted=I.slice();shifted[12]=-3;
+assert.ok(sphereVisible({center:[3,0,0],radius:.1},frustumPlanes(shifted)),'Translated world visibility');
+assert.ok(!sphereVisible({center:[0,0,0],radius:.1},frustumPlanes(shifted)),'Translated camera side culling');
+const nonuniform=[2,0,0,0, 0,3,0,0, 0,0,4,0, 7,0,-5,1];
+const bounds=transformSphere({center:[.5,1,0],radius:2},nonuniform,.5);
+assert.equal(bounds.center[0],8);
+assert.equal(bounds.center[1],3);
+assert.equal(bounds.center[2],-5);
+assert.equal(bounds.radius,8.5);
+assert.match(models,/getDrawStats:/);
+assert.match(main,/windfallDrawStats/);
+assert.match(main,/authoredAssets\.beginFrame\(\)/);
+console.log('Windfall graphics contracts: JS syntax, 12 GLSL sources, weather, foliage, camera, culling, six model families PASS.');
 console.log('Still required: headed WebGL2 shader compilation, screenshot review, and physical GPU profiling.');
