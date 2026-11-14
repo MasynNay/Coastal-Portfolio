@@ -211,7 +211,7 @@ if VARIANT['beard']:
     for ri in range(len(rings)-1):
         for j in range(sides-1):
             a=ri*sides+j;b=a+1;c=(ri+1)*sides+j+1;d=c-1
-            faces.extend([(a,b,c),(a,c,d)])
+            faces.extend([(a,c,b),(a,d,c)])  # outward-facing frontal beard normals
     beard=trimesh.Trimesh(vertices=np.asarray(v),faces=np.asarray(faces),process=False)
     piece('fitted-beard','hair',beard,'head')
     for sign in [-1,1]:
