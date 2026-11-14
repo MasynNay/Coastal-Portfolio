@@ -85,6 +85,18 @@ for(let j=0;j<NZ-1;j++)for(let i=0;i<NX-1;i++){
 function stonesAlong(ax,az,bx,bz,count,width=3){
  const dx=bx-ax,dz=bz-az,dist=Math.hypot(dx,dz),ux=dx/dist,uz=dz/dist,sideX=-uz,sideZ=ux;
  const steps=Math.max(8,Math.round(count*1.35)),stride=dist/steps;
+ // Earth path beneath the stone joints: dark, gently broken borders and
+ // correct terrain-relative height, not a road made of floating squares.
+ for(let n=0;n<steps;n++){
+  const a=n/steps,b=(n+1)/steps;
+  const mx=mix(ax,bx,a),mz=mix(az,bz,a),nx=mix(ax,bx,b),nz=mix(az,bz,b);
+  const edgeA=width*(.51+.035*Math.sin(n*.87+ax*.10)),edgeB=width*(.51+.035*Math.sin((n+1)*.87+ax*.10));
+  const ground=(xx,zz)=>[xx,terrain(xx,zz)+.015,zz];
+  const leftA=ground(mx-sideX*edgeA,mz-sideZ*edgeA),rightA=ground(mx+sideX*edgeA,mz+sideZ*edgeA);
+  const rightB=ground(nx+sideX*edgeB,nz+sideZ*edgeB),leftB=ground(nx-sideX*edgeB,nz-sideZ*edgeB);
+  const color=tint([.26,.235,.178],.84+.12*Math.sin(n*.59+ax*.2));
+  world.quad(leftA,rightA,rightB,leftB,color,7);
+ }
  for(let n=0;n<steps;n++){
   let t=(n+.5)/steps,cx=mix(ax,bx,t),cz=mix(az,bz,t);
   for(let row=-2;row<=2;row++){
@@ -92,7 +104,7 @@ function stonesAlong(ax,az,bx,bz,count,width=3){
    const irregularX=jitter(stride*.17),irregularZ=jitter(width*.065);
    const offset=(row+(n%2?.22:-.20))*(width/5.3);
    const lx=cx+sideX*offset+ux*irregularX,lz=cz+sideZ*offset+uz*irregularX+irregularZ;
-   const half=stride*(.40+rand()*.13),side=(width/5.4)*(.38+rand()*.13);
+   const half=stride*(.47+rand()*.12),side=(width/5.4)*(.46+rand()*.15);
    const corner=[[-1,-.55],[-.83,.68],[-.26,1.02],[.55,.93],[1,.43],[.88,-.64],[.15,-1.02],[-.62,-.92]];
    const rim=corner.map(([a,b])=>{
     let forward=half*(a+jitter(.18)),across=side*(b+jitter(.17));
@@ -101,18 +113,17 @@ function stonesAlong(ax,az,bx,bz,count,width=3){
    });
    const color=tint([.31,.32,.29],.74+rand()*.43);
    const center=[lx,terrain(lx,lz)+.060+rand()*.013,lz];
-   if(softwareRenderer){
-    // Four wedges retain nonrectangular silhouettes without dense sidewalls.
-    for(let k=0;k<8;k+=2)world.tri(center,rim[k],rim[(k+2)%8],color,1);
-   }else{
-    for(let k=0;k<rim.length;k++){
-     let j=(k+1)%rim.length;
-     world.tri(center,rim[k],rim[j],color,1);
+   for(let k=0;k<rim.length;k++){
+    const j=(k+1)%rim.length;
+    world.tri(center,rim[k],rim[j],color,1);
+    if(!softwareRenderer){
      // Shallow stone thickness provides a grounded, weathered edge.
      const a=[rim[k][0],rim[k][1]-.026,rim[k][2]];
      const b=[rim[j][0],rim[j][1]-.026,rim[j][2]];
      world.quad(rim[j],rim[k],a,b,tint(color,.77),1);
     }
+   }
+   if(!softwareRenderer){
     if(rand()<.13)world.beam([lx-half*.20,center[1]+.006,lz-side*.18],
       [lx+half*.26,center[1]+.006,lz+side*.21],.006,tint(colors.rock,.60),1,3);
    }
@@ -339,7 +350,7 @@ function portico(){
 portico();
 // Fountain built from stacked carved stone and water bowls.
 function fountain(x,z){let y=terrain(x,z)+.05;world.cylinder(x,y,z,3.3,3.3,.58,colors.paleStone,1,19);world.cylinder(x,y+.55,z,2.9,2.8,.14,colors.rock,1,19);
- world.cylinder(x,y+.62,z,2.5,2.5,.24,colors.water,8,19);world.cylinder(x,y+.74,z,.67,.56,2.1,colors.paleStone,1,13);world.cylinder(x,y+2.63,z,1.65,1.35,.33,colors.stone,1,17);
+ world.cylinder(x,y+.62,z,2.5,2.5,.18,tint(colors.water,.65),9,19);world.cylinder(x,y+.74,z,.67,.56,2.1,colors.paleStone,1,13);world.cylinder(x,y+2.63,z,1.65,1.35,.33,colors.stone,1,17);
  world.cylinder(x,y+2.94,z,.25,.14,1.5,colors.paleStone,1,10);world.ellipsoid(x,y+4.53,z,.21,.38,.21,colors.gold,8,6,10);
  for(let i=0;i<8;i++){let a=i*Math.PI/4,x1=x+Math.cos(a)*1.15,z1=z+Math.sin(a)*1.15;world.beam([x1,y+2.87,z1],[x1+Math.cos(a)*.65,y+1.7,z1+Math.sin(a)*.65],.034,colors.glass,8,5)}
 }
