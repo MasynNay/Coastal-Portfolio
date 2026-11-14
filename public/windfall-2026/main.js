@@ -8,7 +8,10 @@ const gl=canvas.getContext('webgl2',{antialias:true,alpha:false,powerPreference:
 if(!gl){error('WebGL 2 is unavailable. Enable hardware acceleration or try a recent Firefox/Chrome browser.');return;}
 const rendererExtension=gl.getExtension('WEBGL_debug_renderer_info');
 const rendererName=rendererExtension?gl.getParameter(rendererExtension.UNMASKED_RENDERER_WEBGL):gl.getParameter(gl.RENDERER);
-const softwareRenderer=/swiftshader|llvmpipe|software rasterizer/i.test(rendererName||'');
+// The explicit low-quality switch is used by browser QA and slower devices.
+// It never changes the production/default quality choice on normal URLs.
+const softwareRenderer=new URLSearchParams(location.search).get('quality')==='software'||
+  /swiftshader|llvmpipe|software rasterizer/i.test(rendererName||'');
 const clamp=(a,b,c)=>Math.max(b,Math.min(c,a)), mix=(a,b,t)=>a+(b-a)*t;
 const smooth=(a,b,x)=>{let t=clamp((x-a)/(b-a),0,1);return t*t*(3-2*t)};
 const v3=(x,y,z)=>[x,y,z], sub=(a,b)=>[a[0]-b[0],a[1]-b[1],a[2]-b[2]], cross=(a,b)=>[a[1]*b[2]-a[2]*b[1],a[2]*b[0]-a[0]*b[2],a[0]*b[1]-a[1]*b[0]], norm=(a)=>{let s=Math.hypot(...a)||1;return a.map(x=>x/s)};
@@ -658,6 +661,17 @@ const sun=norm([-0.55,.70,.46]),fog=[.63,.70,.73];
 const player={x:0,z:7,y:0,heading:0.16,phase:0,motion:0,turn:0};
 let cameraYaw=0.16,cameraPitch=.27,cameraDist=10.9,drag=null,aimX=0,aimY=0,runTouch=false;
 let cameraEye=null,cameraLook=null;
+window.WindfallDiagnostics=Object.freeze({
+ snapshot:()=>({
+  player:[player.x,player.z],
+  heading:player.heading,
+  frames,
+  renderer:String(rendererName),
+  softwareRenderer,
+  assets:authoredAssets?.getStatus()||[],
+  modelDraws:authoredAssets?.getDrawStats()||null
+ })
+});
 // Sample the full look-to-eye segment so a cliff or building never hides the player.
 function cameraSafeEye(target,desired){
  const vx=desired[0]-target[0],vy=desired[1]-target[1],vz=desired[2]-target[2];
