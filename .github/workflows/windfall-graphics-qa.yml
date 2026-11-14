@@ -5,9 +5,19 @@ on:
     branches:
       - feature/windfall-2026-graphics-preview
     paths:
-      - "public/windfall-2026/**"
+      - "public/windfall-2026/*.js"
+      - "public/windfall-2026/*.cjs"
+      - "public/windfall-2026/*.html"
+      - "public/windfall-2026/*.json"
+      - "public/windfall-2026/models/**"
+      - "public/windfall-2026/materials/**"
+      - "public/windfall-2026/tools/browser_*.py"
       - ".github/workflows/windfall-graphics-qa.yml"
   workflow_dispatch:
+
+concurrency:
+  group: windfall-graphics-${{ github.ref }}
+  cancel-in-progress: true
 
 permissions:
   contents: read
