@@ -53,6 +53,32 @@ assert.match(landscape,/cloudSun/);
 assert.match(authored,/cloudSun/);
 assert.match(authored,/ambientOcclusion/);
 assert.match(authored,/leafTransmission/);
+assert.match(authored,/environmentSpecular/);
+assert.match(authored,/skinScattering/);
+assert.match(authored,/hairSheen/);
+assert.match(authored,/uSurfaceClass/);
+assert.match(authored,/leafTransmission=base.rgb\*vec3\(\.53,\.51,\.43\)/);
+assert.ok(models.includes("surfaceClass:/\\bskin\\b/i.test"),'GLB skin material classification missing');
+const architect=fs.readFileSync(path.join(root,'tools','build_architecture.py'),'utf8');
+assert.ok(architect.includes('def tri(self,a,b,c,mat='),'Nondegenerate triangular gable API missing');
+assert.ok(architect.includes("g.tri([x0,wall,z1]"),'Front roof gable is degenerate');
+assert.ok(architect.includes('u0=(a[0]*.373'),'Varied world-position material UV missing');
+assert.ok(architect.includes('Weatherworn stone quoins'),'Staggered architectural stonework missing');
+const terrainBlock=main.match(/function terrain\(x,z\)\{[\s\S]*?\n\}/);
+assert.ok(terrainBlock,'World terrain function missing');
+const tSmooth=(a,b,x)=>{
+ const t=Math.max(0,Math.min(1,(x-a)/(b-a)));
+ return t*t*(3-2*t);
+};
+const ground=new Function('smooth',terrainBlock[0]+';return terrain;')(tSmooth);
+for(const [x,z,height] of [[0,7,2.773],[-11,-12,2.330],[13,15,-1.221],[-21,-9,2.457],[0,-25,4.498]]){
+ assert.ok(Math.abs(ground(x,z)-height)<.009,'Protected village or coast terrain shifted');
+}
+for(let x=-80;x<=80;x+=16)for(let z=-90;z<=55;z+=17){
+ assert.ok(Number.isFinite(ground(x,z)),'Non-finite terrain coordinate');
+}
+assert.ok(ground(-46,-58)>29.0 && ground(29,-59)>30.5,'Northern mountain sculpt vanished');
+
 assert.match(main,/render\.lowQuality|lowQuality:softwareRenderer/);
 assert.match(models,/render\.lowQuality/);
 assert.match(colorWind,/world\.xz\+=vec2\(\.16,\.085\)/);
