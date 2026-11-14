@@ -34,6 +34,14 @@ The WebGL2 vertex and shadow programs now normalize wind bending by **each mesh'
 
 These improvements add botanical variety but do not constitute realistic high-density forestry, scanned vegetation cards, wind simulation, skinning, or an AAA art-quality acceptance.
 
+## Sculpted buildings and mountain geology (staged)
+
+The original timber cottage and harbor workshop model builder now emits correct triangular gables, staggered foundation masonry, less repetitive roof/wall UV sampling, roof verge boards, cap flashing, window drip ledges, weathered plaster and sparse ivy. `python tools/build_architecture.py` rebuilds both locally; the [unreleased architecture workflow](../../.github/workflows/windfall-architecture-detail.yml) validates triangle and texture budgets and commits the two original GLBs only on the isolated branch.
+
+The terrain height function adds erosion-cut spurs and drainage to the northern mountains, with clustered talus and restrained alpine frost. Harbor and village terrain samples are regression-tested so the playable routes do not shift unexpectedly.
+
+The glTF material shader now uses a lightweight analytical sky-ground reflection approximation and differentiated skin, hair and glass responses. It is still **not** a true ray-traced global illumination, subsurface-scattering skin or realistic scanned-face material system; the five fictional character models need a substantial artist-led quality jump.
+
 ## Five-character original fantasy ensemble (staged)
 
 The playable wayfarer now has a continuous fitted head-and-jaw shell, thinner eye contours, separate fingers and swept hair-lock geometry. The five generated meshes have also been rebuilt with **material-specific original PBR textures**: finer skin pores and pigmentation, woven fabric normal detail, long hair strands, leathery creases, subtle iris fibers and brushed metallic relief. These are procedural authoring maps, not scanned or captured human skin. Four further GLBs introduce different body scale, head-to-body ratio, beard choices, textured clothing and hairstyle profiles. They stand at intentionally separate village locations and use the runtime's original named-pivot idle animation rather than being immobile statues.
