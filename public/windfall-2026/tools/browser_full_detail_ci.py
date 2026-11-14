@@ -77,6 +77,19 @@ async def main():
                 assert set(state["scans"].split(",")) == EXPECTED_SCANS, state
                 assert state["draws"] and state["draws"]["colorSubmitted"] > 0, state
                 await page.screenshot(path=str(ARTIFACTS/"authored-full-detail.png"))
+                # Uncluttered art-review frame: hide the preview HUD and reframe
+                # at desktop aspect ratio. Game UI remains unchanged in source.
+                await page.set_viewport_size({"width": 850, "height": 500})
+                await page.add_style_tag(content="""
+                  .top,.bottom,.center,.vignette,#mobileControls,#runTouch{
+                    display:none !important
+                  }
+                """)
+                await page.wait_for_timeout(1250)
+                assert await page.evaluate(
+                    "()=>document.getElementById('scene').getContext('webgl2').getError()"
+                ) == 0
+                await page.screenshot(path=str(ARTIFACTS/"authored-full-detail-world.png"))
                 (ARTIFACTS/"full-detail-results.json").write_text(
                     json.dumps({
                         "disclaimer":"Full shader feature path on SwiftShader, NOT a physical GPU or AAA visual approval",
