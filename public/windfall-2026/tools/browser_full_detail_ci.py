@@ -73,7 +73,7 @@ async def main():
                 assert not state["softwarePath"], state
                 assert state["glError"] == 0, state
                 assert not state["error"] and not errors, (state,errors)
-                assert len(state["models"]) == 13 and all(x["loaded"] for x in state["models"]), state
+                assert len(state["models"]) == 14 and all(x["loaded"] for x in state["models"]), state
                 assert set(state["scans"].split(",")) == EXPECTED_SCANS, state
                 assert state["draws"] and state["draws"]["colorSubmitted"] > 0, state
                 assert sum(x.get("role")=="companion" for x in state["models"])==4, state
