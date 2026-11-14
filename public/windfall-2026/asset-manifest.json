@@ -959,6 +959,46 @@
         }
       ],
       "detailDistance": 34
+    },
+    {
+      "id": "windfall-cc0-mossy-rock-set",
+      "src": "models/windfall-cc0-mossy-rock-set.glb",
+      "creator": "Kless Gyzen — Poly Haven photogrammetry",
+      "license": "CC0-1.0",
+      "provenance": "Poly Haven original CC0 mossy rock set rock_moss_set_01. Model author Kless Gyzen. Verified original glTF/texture MD5 hashes, locally converted/packed via tools/import_cc0_rocks.py; full file URLs and SHA256 checks stored in models/windfall-cc0-mossy-rock-set.SOURCES.json. Not original Windfall mesh. Runtime is self-hosted.",
+      "collisionRadius": 1.9,
+      "instances": [
+        {
+          "position": [
+            -22,
+            -0.06,
+            8
+          ],
+          "scale": 0.78,
+          "rotationY": 0.72,
+          "grounded": true
+        },
+        {
+          "position": [
+            26,
+            -0.07,
+            -18
+          ],
+          "scale": 1.07,
+          "rotationY": -1.18,
+          "grounded": true
+        },
+        {
+          "position": [
+            -42,
+            -0.08,
+            -37
+          ],
+          "scale": 1.18,
+          "rotationY": 1.44,
+          "grounded": true
+        }
+      ]
     }
   ]
 }
