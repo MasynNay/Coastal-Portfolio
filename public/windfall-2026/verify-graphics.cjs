@@ -57,8 +57,8 @@ assert.match(main,/render\.lowQuality|lowQuality:softwareRenderer/);
 assert.match(models,/render\.lowQuality/);
 assert.match(colorWind,/world\.xz\+=vec2\(\.16,\.085\)/);
 assert.match(shadowWind,/world\.xz\+=vec2\(\.16,\.085\)/);
-assert.match(main,/drawShadow\(nearLightVP,true,elapsed\)/);
-assert.match(main,/drawShadow\(lightVP,false,elapsed\)/);
+assert.match(main,/drawShadow\(nearLightVP,true,elapsed,eye\)/);
+assert.match(main,/drawShadow\(lightVP,false,elapsed,eye\)/);
 const cameraFunction=main.match(/function cameraSafeEye\(target,desired\)\{[\s\S]*?\n\}/);
 assert.ok(cameraFunction,'Camera obstacle function missing');
 const camera=(terrain,assets)=>new Function('walkingHeight','authoredAssets',cameraFunction[0]+';return cameraSafeEye;')(terrain,assets);
@@ -76,6 +76,18 @@ for(const item of companions){
  assert.ok(item.collisionRadius>0,'Companion needs physical collision proxy');
 }
 assert.equal(manifest.assets.filter(item=>item.role==='player').length,1,'One playable wayfarer');
+const distances={'windfall-hazel-shrub':49,'windfall-fern-understory':37,'windfall-wildflower-patch':34};
+for(const [id,value] of Object.entries(distances)){
+ assert.equal(manifest.assets.find(a=>a.id===id).detailDistance,value,'Unexpected foliage distance LOD');
+}
+const rangeFn=models.match(/function inDetailRange\(mesh,eye\)\{[\s\S]*?\n    \}/);
+assert.ok(rangeFn,'Missing mesh-radius-aware distance visibility helper');
+const inDetailRange=new Function(rangeFn[0]+';return inDetailRange;')();
+assert.ok(inDetailRange({bounds:{center:[0,0,0],radius:.2},detailDistance:30},[30.1,0,0]));
+assert.ok(!inDetailRange({bounds:{center:[0,0,0],radius:.2},detailDistance:30},[30.3,0,0]));
+assert.ok(inDetailRange({bounds:{center:[0,0,0],radius:1},detailDistance:Infinity},[500,0,0]));
+assert.match(models,/inDetailRange\(m,render\.eye\)/);
+
 const undergrowth=['windfall-hazel-shrub','windfall-fern-understory','windfall-wildflower-patch'];
 const number=undergrowth.reduce((n,id)=>n+manifest.assets.find(a=>a.id===id).instances.length,0);
 assert.equal(number,40,'Expected forty authored forest-floor botanical placements');
