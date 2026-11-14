@@ -42,3 +42,25 @@ jobs:
           path: public/windfall-2026/qa-artifacts/
           if-no-files-found: ignore
           retention-days: 7
+  detailed-shaders:
+    name: Full-detail shaders and scanned materials (SwiftShader)
+    needs: graphics
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install Chromium QA
+        run: python -m pip install --disable-pip-version-check playwright
+      - name: Verify full-detail renderer and embedded CC0 tile loading
+        run: python public/windfall-2026/tools/browser_full_detail_ci.py
+      - name: Preserve full-detail screenshot and diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: windfall-full-detail-qa
+          path: public/windfall-2026/qa-artifacts/
+          if-no-files-found: ignore
+          retention-days: 7
