@@ -1,0 +1,87 @@
+{
+  "purpose": "Original Windfall fantasy world CC0 scanned surface layer",
+  "runtime_network_requests": false,
+  "resolution": 384,
+  "license": "CC0-1.0",
+  "credits": "Powered by Poly Haven (asset import tool only)",
+  "assets": [
+    {
+      "id": "forrest_ground_01",
+      "name": "Forest Ground 01",
+      "purpose": "grass surface",
+      "local_file": "forest-floor-rgba.png",
+      "license": "CC0-1.0",
+      "author": [
+        "Rob Tuytel"
+      ],
+      "source": "https://polyhaven.com/a/forrest_ground_01",
+      "api": "https://api.polyhaven.com/files/forrest_ground_01",
+      "diffuse": {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/forrest_ground_01/forrest_ground_01_diff_1k.jpg",
+        "source_md5": "236e7d928f5e357a194fd92de189cbe4",
+        "source_sha256": "3dd6875cb3908e022a3c45ebbffa5e84c670ff2691fbbb6dc9ea4bff88523800",
+        "bytes": 833711
+      },
+      "height": {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/forrest_ground_01/forrest_ground_01_disp_1k.jpg",
+        "source_md5": "2ef1913c910da346874776055ae6cc83",
+        "source_sha256": "a1ce10a2426d20d7fec2e48efa255638055922c809ff3ea03067257c0a594953",
+        "bytes": 321227
+      },
+      "generated_sha256": "8222173fdf8a5869c9c58c2d26a8ddb3474deceaf9a1155a222e656777db339c",
+      "note": "Single color + derived height-alpha tile; not full normal/roughness/IBL PBR"
+    },
+    {
+      "id": "cobblestone_floor_04",
+      "name": "Cobblestone Floor 04",
+      "purpose": "village masonry",
+      "local_file": "cobblestone-rgba.png",
+      "license": "CC0-1.0",
+      "author": [
+        "Rob Tuytel"
+      ],
+      "source": "https://polyhaven.com/a/cobblestone_floor_04",
+      "api": "https://api.polyhaven.com/files/cobblestone_floor_04",
+      "diffuse": {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/cobblestone_floor_04/cobblestone_floor_04_diff_1k.jpg",
+        "source_md5": "b57737026948ed8b4fce9b0cb3c91e81",
+        "source_sha256": "b0662eaec38a2056ef00abc66d1a0e8da421d704ed3ff8f9e268ad4c7b2aa58c",
+        "bytes": 575440
+      },
+      "height": {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/cobblestone_floor_04/cobblestone_floor_04_disp_1k.jpg",
+        "source_md5": "36268e26165683ffa7ce0ce2c5b5c037",
+        "source_sha256": "b38d7b3935d284f038a60cf274012fc0968f1c19fec26445ce727441c37edc78",
+        "bytes": 179624
+      },
+      "generated_sha256": "586b5e7492ed43c55baf3f77c065e4382d262a42caa04a62e8b4f16b8c80995c",
+      "note": "Single color + derived height-alpha tile; not full normal/roughness/IBL PBR"
+    },
+    {
+      "id": "bark_brown_02",
+      "name": "Bark Brown 02",
+      "purpose": "weathered timber",
+      "local_file": "tree-bark-rgba.png",
+      "license": "CC0-1.0",
+      "author": [
+        "Rob Tuytel"
+      ],
+      "source": "https://polyhaven.com/a/bark_brown_02",
+      "api": "https://api.polyhaven.com/files/bark_brown_02",
+      "diffuse": {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/bark_brown_02/bark_brown_02_diff_1k.jpg",
+        "source_md5": "6669cca520594bdca19f94084984ab72",
+        "source_sha256": "920fa0bed0c9d78c1d530e99795113afd532d7db746de440f4a85d7c83ed0f1a",
+        "bytes": 659592
+      },
+      "height": {
+        "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/bark_brown_02/bark_brown_02_disp_1k.jpg",
+        "source_md5": "88dbb65ff3ade168ab5bea53b035cf82",
+        "source_sha256": "03a771fd43038257bffc2ebdd12e5599ebba8a30ffae2ed4774c05e4bbab4e45",
+        "bytes": 176442
+      },
+      "generated_sha256": "a5ff8f010704ab166ec97de740cacbcb448793a8b93a4fac168e1eb9aef085db",
+      "note": "Single color + derived height-alpha tile; not full normal/roughness/IBL PBR"
+    }
+  ]
+}
