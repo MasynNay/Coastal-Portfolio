@@ -171,14 +171,23 @@ piece('cape-hem','linen',strip([(-.59,-.94,.42),(-.4,-.98,.45),(0,-1.01,.46),(.4
 anchor('neck','body',(0,.94,0))
 piece('neck-skin','skin',segment((0,-.05,0),(0,.22,0),.15,.145,16),'neck')
 anchor('head','neck',(0,.36,-.04))
-piece('head-sculpt','skin',ellipsoid((0,.11,-.02),(.300,.396,.288),3),'head')
-piece('jawline','skin',ellipsoid((0,-.125,-.087),(.224,.185,.235),2),'head')
+# A continuous head surface, fitted by brow, cheekbone, jaw and chin rings.
+# This avoids two intersecting egg shapes and their artificial seam.
+piece('head-sculpt','skin',loft([
+    (-.31,.06,.07,0,-.115),(-.28,.135,.150,0,-.103),
+    (-.235,.185,.194,0,-.085),(-.155,.221,.220,0,-.062),
+    (-.065,.264,.263,0,-.039),(.045,.291,.287,0,-.016),
+    (.15,.301,.284,0,-.015),(.26,.296,.268,0,0),
+    (.365,.274,.246,0,.014),(.448,.217,.196,0,.032),
+    (.512,.07,.087,0,.034)
+],36),'head')
 piece('nose-bridge','skin',ellipsoid((0,.07,-.325),(.066,.153,.081),2),'head')
-piece('nose-tip','skin',ellipsoid((0,-.007,-.375),(.089,.064,.075),2),'head')
-piece('chin','skin',ellipsoid((0,-.215,-.21),(.16,.083,.114),2),'head')
+piece('nose-tip','skin',ellipsoid((0,-.009,-.371),(.081,.048,.063),3),'head')
+piece('chin','skin',ellipsoid((0,-.228,-.192),(.132,.063,.083),2),'head')
 for sign in [-1,1]:
     piece('ear-'+str(sign),'skin',ellipsoid((sign*.30,.09,-.016),(.073,.119,.079),2),'head')
-    piece('cheek-'+str(sign),'skin',ellipsoid((sign*.21,-.064,-.184),(.102,.108,.11),2),'head')
+    # Subtle cheek volume stays inside the continuous face silhouette.
+    piece('cheek-'+str(sign),'skin',ellipsoid((sign*.187,-.081,-.188),(.077,.081,.075),2),'head')
     piece('eye-white-'+str(sign),'linen',ellipsoid((sign*.124,.125,-.281),(.057,.028,.020),3),'head')
     piece('iris-'+str(sign),'iris',ellipsoid((sign*.124,.124,-.305),(.020,.022,.011),3),'head')
     piece('pupil-'+str(sign),'dark',ellipsoid((sign*.124,.126,-.316),(.010,.014,.005),2),'head')
@@ -229,7 +238,19 @@ for side,label in [(-1,'L'),(1,'R')]:
     anchor('forearm-'+label,'arm-'+label,(side*.085,-.52,0))
     piece('wrist-sleeve-'+label,'coat',loft([(-.45,.124,.14,0,0),(-.25,.145,.15,0,0),(-.04,.148,.15,0,0)],18),'forearm-'+label)
     piece('cuff-'+label,'leather',loft([(-.47,.145,.152,0,0),(-.41,.14,.15,0,0)],18),'forearm-'+label)
-    piece('hand-'+label,'skin',ellipsoid((0,-.56,-.006),(.115,.155,.095),2),'forearm-'+label)
+    piece('hand-'+label,'skin',ellipsoid((0,-.555,-.006),(.109,.123,.091),2),'forearm-'+label)
+    # Four tapered finger shapes and a thumb follow the existing wrist pivot.
+    for digit in range(4):
+        bx=(digit-1.5)*.047
+        ending=(digit-1.5)*.052
+        length=.098 if digit in (0,3) else .127
+        piece(f'finger-{label}-{digit}','skin',
+              segment((bx,-.640,-.027),(ending,-.640-length,-.040),.025,.014,10),
+              'forearm-'+label)
+    thumb_sign=1 if label=='R' else -1
+    piece('thumb-'+label,'skin',
+          segment((thumb_sign*.089,-.575,-.026),(thumb_sign*.142,-.674,-.083),
+                  .033,.018,10),'forearm-'+label)
     anchor('leg-'+label,'rig-root',(side*.22,1.13,.03))
     piece('thigh-'+label,'pants',loft([(-.51,.18,.183,0,0),(-.32,.196,.197,0,0),(-.04,.22,.207,0,0)],20),'leg-'+label)
     anchor('shin-'+label,'leg-'+label,(0,-.52,0))
