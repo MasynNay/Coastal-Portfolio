@@ -1,0 +1,58 @@
+name: Rebuild Windfall scanned-bark broadleaf (unreleased)
+
+on:
+  push:
+    branches:
+      - feature/windfall-2026-graphics-preview
+    paths:
+      - "public/windfall-2026/tools/build_tree_asset.py"
+      - ".github/workflows/windfall-broadleaf-assets.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  broadleaf:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install original mesh and CC0 scan authoring dependencies
+        run: python -m pip install --disable-pip-version-check numpy Pillow trimesh
+      - name: Rebuild original branch geometry with locally verified CC0 bark
+        working-directory: public/windfall-2026
+        run: python tools/build_tree_asset.py
+      - name: Validate original GLB and reviewed scan provenance
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          import trimesh
+          root=Path("public/windfall-2026")
+          source=json.loads((root/"materials/SOURCES.json").read_text())
+          bark=next(a for a in source["assets"] if a["local_file"]=="tree-bark-rgba.png")
+          assert bark["license"]=="CC0-1.0"
+          assert "Rob Tuytel" in bark["author"]
+          model=root/"models/windfall-broadleaf-tree.glb"
+          scene=trimesh.load(model,force="scene")
+          assert len(scene.geometry)==2
+          faces=sum(len(g.faces) for g in scene.geometry.values())
+          assert faces>2000 and model.stat().st_size<5*1024*1024
+          assert model.read_bytes()[:4]==b"glTF"
+          print("Broadleaf:",faces,"triangles, bytes",model.stat().st_size)
+          PY
+      - name: Stage rebuilt model in isolated graphics branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add public/windfall-2026/models/windfall-broadleaf-tree.glb
+          if git diff --cached --quiet; then
+            echo "Broadleaf model is current."
+          else
+            git commit -m "Stage rebuilt original broadleaf with attributed CC0 scanned bark"
+            git push origin "HEAD:${GITHUB_REF_NAME}"
+          fi
