@@ -362,11 +362,61 @@ function workshop(){let x=13,z=-7,y=terrain(x,z);world.box(x,y+.2,z+3.0,4.0,.28,
  for(let j=0;j<6;j++)world.box(x-3.2+j*.56,y,z+4.8,.38,.43,.38,tint(colors.wood,.77+rand()*.2),2);
 }
 workshop();
-// Market stalls: roofs with contrasting handwoven colors and suspending pennants.
-function market(x,z,col){let y=terrain(x,z)+.08;for(let s of [-1,1])for(let d of [-1,1])world.beam([x+s*2,y,z+d*1.45],[x+s*2,y+2.65,z+d*1.45],.13,colors.wood);
- world.quad([x-2.24,y+2.85,z-1.75],[x+2.24,y+2.85,z-1.75],[x+2.24,y+2.45,z+1.75],[x-2.24,y+2.45,z+1.75],col,5);
- for(let i=0;i<5;i++){let xx=x-1.85+i*.9;world.beam([xx,y+2.83,z-1.68],[xx,y+2.46,z+1.68],.035,colors.linen)}
- world.box(x,y+.65,z,3.6,.23,1.4,colors.wood,2);for(let j=0;j<9;j++){let xx=x-1.45+(j%5)*.72,zz=z+(j>4?.30:-.30);world.ellipsoid(xx,y+.99,zz,.22,.25,.23,j%3===0?colors.gold: j%2?colors.leaf:colors.redLeaf,3,4,6)}
+// Original market carpentry: layered canvas, beams, woven baskets,
+// pottery and crates. The goods are small props, not glowing spheres.
+function market(x,z,cloth){
+ const y=terrain(x,z)+.08,wood=tint(colors.wood,.72),dark=tint(colors.timber,.86);
+ const sep=1.44,span=2.1;
+ for(const a of [-1,1])for(const b of [-1,1]){
+  const xx=x+a*span,zz=z+b*sep;
+  world.beam([xx,y,zz],[xx,y+2.75,zz],.13,wood,2,8);
+  world.box(xx,y+.025,zz,.30,.17,.34,tint(colors.rock,.77),1);
+ }
+ for(const b of [-1,1])world.beam([x-span,y+2.57,z+b*sep],[x+span,y+2.57,z+b*sep],.095,dark,2,7);
+ // Cloth roof rises toward the central ridge; colored canvas panels alternate
+ // with calmer, weathered shades and visible stitched seams.
+ const ridge=y+3.15,low=y+2.53;
+ for(let n=0;n<8;n++){
+  const xa=x-span-.15+n*(span*2+.3)/8,xb=x-span-.15+(n+1)*(span*2+.3)/8;
+  const wave=.08*Math.sin(n*1.8+z*.30);
+  const color=tint(cloth,(n%2?.80:.93)+.04*Math.sin(n*1.5));
+  world.quad([xa,low+wave,z+sep+.19],[xb,low+wave,z+sep+.19],
+    [xb,ridge,z],[xa,ridge,z],color,5);
+  world.quad([xb,low+wave,z-sep-.19],[xa,low+wave,z-sep-.19],
+    [xa,ridge,z],[xb,ridge,z],tint(color,.84),5);
+ }
+ world.beam([x-span-.18,ridge,z],[x+span+.18,ridge,z],.084,dark,2,8);
+ for(const b of [-1,1])for(let k=0;k<4;k++){
+  let xx=x-span+.4+k*1.1;
+  world.beam([xx,low,z+b*(sep+.20)],[xx,low-.17,z+b*(sep+.22)],.013,colors.linen,2,5);
+ }
+ // A deep wooden stall counter with separate boards and upright end braces.
+ for(let k=0;k<5;k++){
+  const zz=z-.63+k*.32;
+  world.box(x,y+1.15,zz,3.68,.10,.29,tint(colors.wood,.76+.05*(k%3)),2);
+ }
+ for(const a of [-1,1]){
+  world.beam([x+a*1.56,y+.2,z-.45],[x+a*1.56,y+1.25,z-.45],.09,wood,2,6);
+  world.beam([x+a*1.56,y+.2,z+.55],[x+a*1.56,y+1.25,z+.55],.09,wood,2,6);
+ }
+ // Rounded low baskets have rough wicker bands and varied, subdued produce.
+ for(let k=0;k<4;k++){
+  const xx=x-1.25+k*.78,zz=z+.20+(k%2)*.22;
+  world.cylinder(xx,y+1.23,zz,.29,.34,.24,tint(colors.wood,.73),2,10);
+  for(let t=0;t<3;t++)world.cylinder(xx,y+1.28+t*.065,zz,.336,.332,.018,tint(colors.linen,.50+.035*t),2,12);
+  for(let p=0;p<5;p++){
+   const theta=p*Math.PI*2/5;
+   world.ellipsoid(xx+Math.cos(theta)*.18,y+1.50+(p%3)*.045,
+      zz+Math.sin(theta)*.18,.13,.13,.11,
+      tint(p%3===0?colors.redLeaf:p%2?colors.lightLeaf:colors.gold,.72+.04*k),3,5,7);
+  }
+ }
+ // Tucked crates at the rear prevent an empty "table and canopy" silhouette.
+ for(const a of [-1,1]){
+  const xx=x+a*1.60,zz=z-.93;
+  world.box(xx,y+.06,zz,.66,.60,.64,tint(colors.wood,.67),2);
+  for(const h of [.18,.44])world.beam([xx-.33,y+h,zz+.34],[xx+.33,y+h,zz+.34],.033,tint(colors.timber,.84),2,6);
+ }
 }
 market(-12,5,colors.redLeaf);market(-3,-12,colors.deepRoof);
 function fences(ax,az,bx,bz,posts=10){let dx=(bx-ax)/posts,dz=(bz-az)/posts;for(let i=0;i<=posts;i++){let x=ax+i*dx,z=az+i*dz,y=terrain(x,z);world.beam([x,y,z],[x,y+1.3,z],.105,colors.wood)}for(let i=0;i<posts;i++)for(let high of [.55,1.10]){let x=ax+i*dx,z=az+i*dz,nx=x+dx,nz=z+dz;world.beam([x,terrain(x,z)+high,z],[nx,terrain(nx,nz)+high,nz],.055,colors.wood)}}
