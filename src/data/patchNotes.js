@@ -5,6 +5,7 @@ const patchNotes = [
     version: "1.1.7",
     date: "November 19, 2026",
     previousCommit: "3494a49",
+    comparisonRef: "d5544129f7b698dbf2bef30cdda3cce043bf8ba4",
     changes: [
       "Added Bloom to the Mac dock, with a rotating ASCII flower bouquet dedicated to Mi Shell.",
       "The bouquet includes a personal message from Masyn, floating hearts, a ribbon, daisies, and tulips.",
