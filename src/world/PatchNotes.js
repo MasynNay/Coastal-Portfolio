@@ -16,7 +16,7 @@ export default function PatchNotes() {
             ))}
           </ul>
           <a
-            href={`${links.repository}/compare/${patch.previousCommit}...v${patch.version}`}
+            href={`${links.repository}/compare/${patch.previousCommit}...${patch.comparisonRef ?? `v${patch.version}`}`}
             target="_blank"
             rel="noreferrer"
           >

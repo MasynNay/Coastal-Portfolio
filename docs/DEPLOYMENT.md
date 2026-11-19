@@ -45,7 +45,7 @@ No EmailJS account, SMTP password or private API key is required. The form keeps
 
 ## In-game patch notes
 
-Windfall's mailbox reads `src/data/patchNotes.js`. Add only completed changes relative to the recorded production commit, and publish the matching version tag so its comparison link points to the actual patch.
+Windfall's mailbox reads `src/data/patchNotes.js`. Add only completed changes relative to the recorded production commit. Its comparison link uses `comparisonRef` when an immutable release commit is recorded, or the matching version tag otherwise. Keep these references pinned to the actual patch.
 
 ## GBA cartridge assets
 

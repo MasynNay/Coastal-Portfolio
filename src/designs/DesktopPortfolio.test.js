@@ -7,6 +7,9 @@ jest.mock("../pages/ResumePage", () => () => null);
 jest.mock("../components/Projects", () => ({ Projects: () => null }));
 jest.mock("../components/Contact", () => ({ Contact: () => null }));
 jest.mock("../typing/TypingTest", () => () => null);
+jest.mock("../bloom/Bloom", () => ({ active }) => (
+  <div data-bloom-active={String(active)}>ASCII bouquet</div>
+));
 let host, root;
 beforeEach(() => {
   global.IS_REACT_ACT_ENVIRONMENT = true;
@@ -86,6 +89,28 @@ function pointer(node, type, x, y, extra = {}) {
   act(() => node.dispatchEvent(event));
   return event;
 }
+
+test("Bloom opens from the dock and suspends while minimized or another app is in front", () => {
+  const dock = host.querySelector('[aria-label="Open Bloom"]');
+  act(() => dock.click());
+  const bloom = host.querySelector('[role="dialog"][aria-label="Bloom"]');
+  expect(bloom.textContent).toContain("ASCII bouquet");
+  expect(bloom.querySelector('[data-bloom-active="true"]')).not.toBeNull();
+  act(() => host.querySelector('[aria-label="Open Skills"]').click());
+  expect(bloom.querySelector('[data-bloom-active="false"]')).not.toBeNull();
+  act(() => dock.click());
+  expect(
+    host.querySelectorAll('[role="dialog"][aria-label="Bloom"]'),
+  ).toHaveLength(1);
+  act(() => bloom.querySelector('[aria-label="Minimize Bloom"]').click());
+  expect(bloom.hidden).toBe(true);
+  expect(bloom.querySelector('[data-bloom-active="false"]')).not.toBeNull();
+  act(() => dock.click());
+  expect(bloom.hidden).toBe(false);
+  act(() => bloom.querySelector('[aria-label="Close Bloom"]').click());
+  expect(host.querySelector('[role="dialog"][aria-label="Bloom"]')).toBeNull();
+  expect(document.activeElement).toBe(dock);
+});
 
 test("a finger drags from the actual mobile position, ignores other fingers, and stops on release", () => {
   const { dialog, titlebar, point } = mobileWindow();

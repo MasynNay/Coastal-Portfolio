@@ -2,6 +2,17 @@
 // the preceding production commit, rather than fictional in-game release notes.
 const patchNotes = [
   {
+    version: "1.1.7",
+    date: "November 19, 2026",
+    previousCommit: "3494a49",
+    changes: [
+      "Added Bloom to the Mac dock, with a rotating ASCII flower bouquet dedicated to Mi Shell.",
+      "The bouquet includes a personal message from Masyn, floating hearts, a ribbon, daisies, and tulips.",
+      "Pause Rotation and Bloom Again work with mouse, keyboard, and touch. The bouquet fits its window as it is resized.",
+      "Bloom pauses while minimized, behind another app, or in a hidden browser tab, and respects reduced-motion preferences.",
+    ],
+  },
+  {
     version: "1.1.6",
     date: "November 10, 2026",
     previousCommit: "307a90d",

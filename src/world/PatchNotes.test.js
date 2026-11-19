@@ -18,7 +18,7 @@ test("Windfall opens actual patch notes while the one original Rickroll stays at
     expect(host.textContent).toContain(`Island update · ${latest.version}`);
     expect(host.querySelectorAll("li").length).toBeGreaterThan(3);
     expect(host.querySelector("a").href).toContain(
-      `compare/${latest.previousCommit}...v${latest.version}`,
+      `compare/${latest.previousCommit}...${latest.comparisonRef ?? `v${latest.version}`}`,
     );
     expect(host.querySelector('a[href*="youtube"]')).toBeNull();
     expect(

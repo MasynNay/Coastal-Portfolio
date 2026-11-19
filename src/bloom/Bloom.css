@@ -1,0 +1,150 @@
+/* This app fills the shared draggable Mac window. The canvas takes the space
+   left between the terminal command and controls, keeping phones scroll-free. */
+.bloom-app {
+  height: 100%;
+  min-height: 330px;
+  display: flex;
+  flex-direction: column;
+  background: #202630;
+  color: #e1eee8;
+  font-family: "Courier New", monospace;
+}
+
+.bloom-command {
+  flex: 0 0 auto;
+  margin: 0;
+  padding: 12px 22px 6px;
+  font-size: 12px;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+.bloom-command > span:first-child {
+  color: #9de5bf;
+}
+
+.bloom-path {
+  color: #a4a9b7;
+}
+
+.bloom-stage {
+  position: relative;
+  flex: 1;
+  min-height: 160px;
+  overflow: hidden;
+}
+
+.bloom-stage canvas {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.bloom-stage > p {
+  position: relative;
+  padding: 20px;
+}
+
+.bloom-footer {
+  flex: 0 0 auto;
+  padding: 4px 20px 10px;
+  text-align: center;
+}
+
+.bloom-message {
+  margin: 0 0 6px;
+  color: #f5b1d4;
+  font-size: 17px;
+  letter-spacing: 0.08em;
+}
+
+.bloom-message span {
+  color: #f77fae;
+}
+
+.bloom-dedication {
+  max-width: 340px;
+  margin: 0 auto 12px;
+  color: #ced7db;
+  font-family: inherit;
+  font-size: 11px;
+  line-height: 1.6;
+}
+
+.bloom-dedication > span {
+  display: block;
+  color: #efb5d0;
+}
+
+.bloom-actions {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.bloom-actions button {
+  width: 160px;
+  min-height: 44px;
+  padding: 8px 10px;
+  border: 1px solid #52635b;
+  border-radius: 8px;
+  background: #15201d;
+  color: #dbece2;
+  font: inherit;
+  font-size: 12px;
+}
+
+.bloom-actions button:hover {
+  border-color: #a5d6b7;
+  background: #20322b;
+}
+
+.bloom-actions button:focus-visible,
+.bloom-footer a:focus-visible {
+  outline: 2px solid #a5d6b7;
+  outline-offset: 4px;
+}
+
+.bloom-actions button:disabled {
+  opacity: 0.5;
+}
+
+.bloom-footer > a {
+  display: inline-block;
+  margin-top: 6px;
+  color: #9eaaa5;
+  font-size: 10px;
+}
+
+/* This color is used by Bloom's icon in the Mac dock. */
+.desktop-app-icon.icon-bloom {
+  background: linear-gradient(145deg, #9e416b, #402b4d);
+  color: #ffdcdf;
+}
+
+/* A portrait window suits the original terminal composition. The green window
+   control still expands it, and the shared mobile rules keep it on screen. */
+@media (min-width: 1025px) and (pointer: fine) {
+  .desktop-window.window-bloom {
+    width: min(500px, calc(100% - 24px));
+    height: min(720px, calc(100% - 110px));
+  }
+}
+
+@media (max-width: 400px) {
+  .bloom-command {
+    padding: 12px 14px 8px;
+    font-size: 10px;
+  }
+
+  .bloom-footer {
+    padding: 4px 12px 12px;
+  }
+
+  .bloom-actions button {
+    width: 140px;
+    font-size: 11px;
+  }
+}
