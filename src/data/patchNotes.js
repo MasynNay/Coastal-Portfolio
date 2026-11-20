@@ -5,6 +5,7 @@ const patchNotes = [
     version: "1.1.9",
     date: "November 19, 2026",
     previousCommit: "2d7150b",
+    comparisonRef: "921d299fb0ed23af387f7370970cb2c1629502fa",
     changes: [
       "Bloom now has twelve bouquets, adding peonies, orchids, hydrangeas, poppies, bluebells, and dahlias.",
       "The new arrangements include ruffled petals, clustered blossoms, bell-shaped blooms, and their own paper and ribbon colors.",
