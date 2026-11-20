@@ -248,10 +248,11 @@ export default function WebsiteServices() {
                   Utah website design that feels like <em>your</em> business.
                 </h1>
                 <p>
-                  Custom, mobile-friendly websites for small businesses in
-                  Weber County, Davis County, Utah County, and across Utah.
-                  You share what you need. I handle the design, code, domain setup, and launch.
-                  Remote projects elsewhere in the United States are welcome, too.
+                  Custom, mobile-friendly websites for small businesses in Weber
+                  County, Davis County, Utah County, and across Utah. You share
+                  what you need. I handle the design, code, domain setup, and
+                  launch. Remote projects elsewhere in the United States are
+                  welcome, too.
                 </p>
                 <div className="service-actions">
                   <a className="service-primary" href="#request">
@@ -419,7 +420,6 @@ export default function WebsiteServices() {
           </div>
         </section>
 
-
         <section className="service-section service-areas" id="service-areas">
           <div className="container">
             <div className="service-heading">
@@ -435,24 +435,38 @@ export default function WebsiteServices() {
             <div className="service-area-grid">
               <article>
                 <h3>Weber County</h3>
-                <p>Websites for businesses around Ogden, Roy, Hooper, and surrounding Weber County communities. Clear services, fast mobile layouts, and simple ways for customers to reach you.</p>
+                <p>
+                  Websites for businesses around Ogden, Roy, Hooper, and
+                  surrounding Weber County communities. Clear services, fast
+                  mobile layouts, and simple ways for customers to reach you.
+                </p>
               </article>
               <article>
                 <h3>Davis County</h3>
-                <p>Website design for Layton, Syracuse, Clearfield, Farmington, Bountiful, and nearby Davis County businesses. A useful online presence without a complicated maintenance workflow.</p>
+                <p>
+                  Website design for Layton, Syracuse, Clearfield, Farmington,
+                  Bountiful, and nearby Davis County businesses. A useful online
+                  presence without a complicated maintenance workflow.
+                </p>
               </article>
               <article>
                 <h3>Utah County</h3>
-                <p>Websites for Provo, Orem, Lehi, American Fork, and Utah County businesses. Present your services and portfolio, collect inquiries, and make your business easier to understand.</p>
+                <p>
+                  Websites for Provo, Orem, Lehi, American Fork, and Utah County
+                  businesses. Present your services and portfolio, collect
+                  inquiries, and make your business easier to understand.
+                </p>
               </article>
             </div>
             <p className="service-area-note">
-              Also serving Salt Lake County, the rest of Utah, and remote clients
-              throughout the United States. Projects are managed online and by email.
-              No local office visits are implied or required.
+              Also serving Salt Lake County, the rest of Utah, and remote
+              clients throughout the United States. Projects are managed online
+              and by email. No local office visits are implied or required.
             </p>
             <div className="service-area-actions">
-              <a href="/utah-web-design/">Read my Utah website design guide ↗</a>
+              <a href="/utah-web-design/">
+                Read my Utah website design guide ↗
+              </a>
               <a href="#request">Request a free written quote ↗</a>
             </div>
           </div>
