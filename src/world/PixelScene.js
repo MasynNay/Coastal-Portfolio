@@ -73,6 +73,7 @@ export function createCanvasScene(host, invalidate = () => {}) {
   let saluting = null;
   let width = 1,
     height = 1,
+    pixelRatio = 1,
     unit = 24,
     zoom = 0.68,
     townZoom = 0.68,
@@ -335,10 +336,10 @@ export function createCanvasScene(host, invalidate = () => {}) {
             }
           : sheet;
     ctx.save();
-    ctx.imageSmoothingEnabled = !!sheet.smooth || !sheet.pixelArt;
+    ctx.imageSmoothingEnabled = !sheet.pixelArt;
     ctx.imageSmoothingQuality = "high";
-    // Smoothly sampled art can move at subpixel positions. Ground props and
-    // hard pixel edges still use their existing pixel grid.
+    // Keep animation origins smooth in CSS space. The shared sprite renderer
+    // aligns pixel art to the physical-pixel grid of the high-density canvas.
     const precise = !!motion || (!!sheet.smooth && (human || sheet.native));
     drawSprite(
       ctx,
@@ -353,6 +354,7 @@ export function createCanvasScene(host, invalidate = () => {}) {
       moving,
       time,
       motion,
+      pixelRatio,
     );
     ctx.restore();
   }
@@ -1247,6 +1249,8 @@ export function createCanvasScene(host, invalidate = () => {}) {
                 2,
                 false,
                 0,
+                undefined,
+                pixelRatio,
               );
               ctx.restore();
             }
@@ -1262,6 +1266,8 @@ export function createCanvasScene(host, invalidate = () => {}) {
             2,
             true,
             elapsed,
+            undefined,
+            pixelRatio,
           );
           ctx.restore();
         }
@@ -1373,8 +1379,22 @@ export function createCanvasScene(host, invalidate = () => {}) {
     resize() {
       width = host.clientWidth || window.innerWidth;
       height = host.clientHeight || window.innerHeight;
-      canvas.width = width;
-      canvas.height = height;
+      // CSS dimensions still drive camera/input math. Only the backing bitmap
+      // grows for Retina screens; cap it at 2x / eight megapixels so phone GPU
+      // memory stays bounded. A 1x canvas looked soft on high-density displays.
+      const requestedRatio = Math.max(1, window.devicePixelRatio || 1);
+      pixelRatio = Math.max(
+        1,
+        Math.min(
+          requestedRatio,
+          2,
+          Math.sqrt((8 * 1024 * 1024) / (width * height)),
+        ),
+      );
+      canvas.width = Math.round(width * pixelRatio);
+      canvas.height = Math.round(height * pixelRatio);
+      ctx.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
+      canvas.dataset.pixelRatio = pixelRatio.toFixed(2);
     },
     loadRoom: async (id) => {
       await art.load("interior-" + id);

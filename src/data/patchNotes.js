@@ -2,6 +2,17 @@
 // the preceding production commit, rather than fictional in-game release notes.
 const patchNotes = [
   {
+    version: "1.3.2",
+    date: "November 20, 2026",
+    previousCommit: "0909bfa",
+    changes: [
+      "Made the game canvas Retina-aware, with a 2x resolution and eight-megapixel limit to improve clarity while bounding GPU memory.",
+      "Stopped smoothing pixel-art characters, animals, and props, and aligned their drawing edges to physical pixels at fractional zoom levels.",
+      "Used the same crisp sampling for character sprites in flight and minigames, and removed the extra smoothed layer from pixel-art menu and inventory previews.",
+      "Kept existing artwork, animation frames, character proportions, movement, and touch hit coordinates unchanged.",
+    ],
+  },
+  {
     version: "1.3.1",
     date: "November 20, 2026",
     previousCommit: "7eebe0a",

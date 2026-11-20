@@ -161,6 +161,7 @@ export function drawSprite(
   moving,
   time,
   motion,
+  pixelRatio = 1,
 ) {
   const width = Math.round(
     (height * (sheet.cw || sheet.width)) / (sheet.ch || sheet.height),
@@ -171,7 +172,16 @@ export function drawSprite(
     sheet.footY;
   const baseline = originY ? originY / sheet.ch : 1;
   ctx.save();
-  ctx.translate(x, y);
+  // Pixel-art atlases must never blend neighboring texels, even when an old
+  // manifest also carries a smooth flag. This policy is shared by the world,
+  // riding/flying poses and minigame characters. Illustrated art keeps its
+  // existing filtering; fades and rotations retain their normal opacity.
+  const crisp = !!sheet.pixelArt;
+  if (crisp) ctx.imageSmoothingEnabled = false;
+  const snap = crisp
+    ? (value) => Math.round(value * pixelRatio) / pixelRatio
+    : (value) => value;
+  ctx.translate(snap(x), snap(y));
   if (motion?.rotate) ctx.rotate(motion.rotate);
   if (motion?.scaleX || motion?.scaleY)
     ctx.scale(motion.scaleX ?? 1, motion.scaleY ?? 1);
@@ -187,13 +197,14 @@ export function drawSprite(
         frame.row * sheet.ch,
         right - left,
         sheet.ch,
-        (-(anchor - left) * width) / sheet.cw,
-        -height * baseline,
-        ((right - left) * width) / sheet.cw,
-        height,
+        snap((-(anchor - left) * width) / sheet.cw),
+        snap(-height * baseline),
+        snap(((right - left) * width) / sheet.cw),
+        snap(height),
       ]
-    : [-width / 2, -height, width, height];
-  // Downscaling a thin, opaque outline with smoothing introduces translucent
+    : [snap(-width / 2), snap(-height), snap(width), snap(height)];
+  // For illustrated, non-pixel art, downscaling a thin opaque outline with
+  // smoothing introduces translucent
   // edge pixels. A crisp pass of this SAME frame supplies solid coverage,
   // then the normal smooth pass preserves facial/cloth detail. No extra image
   // is allocated or cached. Explicit effect fades keep their original opacity.

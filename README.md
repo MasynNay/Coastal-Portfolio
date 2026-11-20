@@ -38,7 +38,7 @@ SO THAT the experience feels personal and gives me something to discover.
 | One presentation | Website, Mac Mode and Game Mode sharing the same professional content |
 | Static navigation | A coastal town with rooms, characters, pets, collectibles and activities |
 
-Mac Mode includes independent app windows, a live wallpaper, a photo slideshow, games and a TypeNinja typing test. Game Mode uses Canvas 2D, with family characters, costumes, duck flights, axolotl surfing, fishing, bikes, boats, wakeboarding, a skateboard and beach activities, including a directional animated dragon kite and seven-second sandcastle construction.
+Mac Mode includes independent app windows, a live wallpaper, a photo slideshow, games and a TypeNinja typing test. Game Mode uses Canvas 2D, with family characters, costumes, duck flights, axolotl surfing, fishing, bikes, boats, wakeboarding, a skateboard and beach activities, including a directional animated dragon kite and seven-second sandcastle construction. The game canvas follows display density up to 2x, bounded to eight megapixels. Pixel-art sprites and UI previews use crisp sampling; the camera and touch input continue to use CSS coordinates.
 
 ASCII is a terminal-style Mac dock app with a choice of animated bouquets and living aquariums. Eighteen bouquets are dedicated to my wife, Mi Shell, with distinct flower shapes, wrapping, and ribbons. Swipe, use the arrow buttons, or press the arrow keys to explore them. Pause and replay controls remain available.
 

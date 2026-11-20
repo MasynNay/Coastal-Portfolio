@@ -303,3 +303,26 @@ test("activated glass floats and shells render as their actual artwork, while in
   expect(drawn()).toContain("shell-1");
   expect(drawn()).toContain("castle-stage-7");
 });
+
+test("Retina backing resolution stays sharp without changing world hit coordinates", () => {
+  const descriptor = Object.getOwnPropertyDescriptor(
+    window,
+    "devicePixelRatio",
+  );
+  const before = scene.hit(123, 234);
+  try {
+    Object.defineProperty(window, "devicePixelRatio", {
+      value: 3,
+      configurable: true,
+    });
+    scene.resize();
+    expect(scene.canvas.width).toBe(window.innerWidth * 2);
+    expect(scene.canvas.height).toBe(window.innerHeight * 2);
+    expect(scene.canvas.dataset.pixelRatio).toBe("2.00");
+    expect(scene.hit(123, 234)).toEqual(before);
+    const ctx = HTMLCanvasElement.prototype.getContext.mock.results[0].value;
+    expect(ctx.setTransform).toHaveBeenLastCalledWith(2, 0, 0, 2, 0, 0);
+  } finally {
+    Object.defineProperty(window, "devicePixelRatio", descriptor);
+  }
+});

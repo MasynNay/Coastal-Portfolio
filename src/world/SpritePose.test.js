@@ -2,12 +2,21 @@ import { act } from "react";
 import { createRoot } from "react-dom/client";
 import SpritePose from "./SpritePose";
 
-test("the adventurer preview shares a frame and position between solid and smooth layers", () => {
+test("family and costume previews use one crisp frame in every direction", () => {
   global.IS_REACT_ACT_ENVIRONMENT = true;
   const host = document.createElement("div"),
     root = createRoot(host);
   try {
-    for (const asset of ["link", "link-run", "ability-ocarina"])
+    for (const asset of [
+      "masyn",
+      "mi-shell",
+      "ezra",
+      "fallyn",
+      "fitzgerald",
+      "link",
+      "link-run",
+      "ability-ocarina",
+    ])
       for (let direction = 0; direction < 8; direction++) {
         act(() =>
           root.render(
@@ -21,16 +30,10 @@ test("the adventurer preview shares a frame and position between solid and smoot
         );
         const preview = host.querySelector('[role="img"]');
         expect(preview.getAttribute("aria-label")).toBe("Hyrulian Adventurer");
-        const [base, detail] = preview.children;
-        expect(preview.children).toHaveLength(2);
-        expect(base.style.imageRendering).toBe("pixelated");
-        expect(detail.style.imageRendering).toBe("auto");
-        for (const property of [
-          "backgroundImage",
-          "backgroundPosition",
-          "backgroundSize",
-        ])
-          expect(base.style[property]).toBe(detail.style[property]);
+        expect(preview.children).toHaveLength(0);
+        expect(preview.style.imageRendering).toBe("pixelated");
+        expect(preview.style.backgroundImage).toContain("url(");
+        expect(preview.style.backgroundSize).not.toBe("");
       }
   } finally {
     act(() => root.unmount());

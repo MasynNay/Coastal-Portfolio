@@ -42,8 +42,10 @@ export default function SpritePose({
     backgroundSize: `${sheet.cw * (sheet.columns || 4) * scale}px ${sheet.ch * (sheet.rows || 8) * scale}px`,
     backgroundPosition: `${-column * sheet.cw * scale + align + ((previewWidth - sheet.cw) * scale) / 2}px ${-pose.row * sheet.ch * scale}px`,
   };
-  // Match drawSprite's solid base plus smooth detail in character pickers and
-  // the sprite workshop, using the same frame/position for both layers.
+  // Pixel-art previews use the same crisp policy as the walking renderer.
+  // Only illustrated, non-pixel art needs the legacy edge-coverage layers.
+  const layered = sheet.opaqueBody && !sheet.pixelArt;
+  const rendering = sheet.pixelArt || !sheet.smooth ? "pixelated" : "auto";
   const layer = { ...background, position: "absolute", inset: 0 };
   return (
     <span
@@ -54,12 +56,12 @@ export default function SpritePose({
         display: "inline-block",
         width: previewWidth * scale,
         height: sheet.ch * scale,
-        ...(sheet.opaqueBody ? { position: "relative" } : background),
-        imageRendering: sheet.smooth ? "auto" : "pixelated",
+        ...(layered ? { position: "relative" } : background),
+        imageRendering: rendering,
         transform: pose.flip ? "scaleX(-1)" : undefined,
       }}
     >
-      {sheet.opaqueBody && (
+      {layered && (
         <>
           <span
             aria-hidden="true"
@@ -69,7 +71,7 @@ export default function SpritePose({
             aria-hidden="true"
             style={{
               ...layer,
-              imageRendering: sheet.smooth ? "auto" : "pixelated",
+              imageRendering: rendering,
             }}
           />
         </>

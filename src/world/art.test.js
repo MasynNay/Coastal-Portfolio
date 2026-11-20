@@ -4,7 +4,7 @@ import sheets from "./SpriteSheets.json";
 import { spriteFrame } from "./animation";
 import fs from "fs";
 import path from "path";
-test("adventurer edges stay opaque while both render passes use the exact same pose", () => {
+test("pixel-art adventurer edges use one crisp pass in every direction", () => {
   for (const id of ["link", "link-run", "link-surf", "ability-ocarina"]) {
     for (let direction = 0; direction < 8; direction++) {
       const calls = [],
@@ -12,8 +12,12 @@ test("adventurer edges stay opaque while both render passes use the exact same p
       const ctx = {
         globalAlpha: 1,
         imageSmoothingEnabled: true,
-        save() {},
-        restore() {},
+        save() {
+          this.savedSmoothing = this.imageSmoothingEnabled;
+        },
+        restore() {
+          this.imageSmoothingEnabled = this.savedSmoothing;
+        },
         translate() {},
         scale() {},
         drawImage(...args) {
@@ -25,9 +29,8 @@ test("adventurer edges stay opaque while both render passes use the exact same p
         },
       };
       drawSprite(ctx, image, sheets[id], 100, 120, 64, direction, true, 350);
-      expect(calls.map((c) => c.smoothing)).toEqual([false, true]);
-      expect(calls[0].args).toEqual(calls[1].args);
-      expect(calls.map((c) => c.alpha)).toEqual([1, 1]);
+      expect(calls.map((c) => c.smoothing)).toEqual([false]);
+      expect(calls.map((c) => c.alpha)).toEqual([1]);
       expect(ctx.imageSmoothingEnabled).toBe(true);
     }
   }
@@ -183,4 +186,73 @@ test("decoded artwork is bounded by memory use and recently drawn costumes stay 
   } finally {
     global.Image = Original;
   }
+});
+
+test.each([1, 1.25, 2])(
+  "pixel sprites align destination edges at %sx without changing atlas crops",
+  (ratio) => {
+    const draw = jest.fn(),
+      translate = jest.fn();
+    const ctx = {
+      globalAlpha: 1,
+      imageSmoothingEnabled: true,
+      save() {},
+      restore() {},
+      translate,
+      scale() {},
+      drawImage: draw,
+    };
+    const sheet = sheets.masyn;
+    drawSprite(
+      ctx,
+      {},
+      sheet,
+      100.13,
+      120.37,
+      63.41,
+      2,
+      true,
+      350,
+      undefined,
+      ratio,
+    );
+    const args = draw.mock.calls[0];
+    for (const value of [...translate.mock.calls[0], ...args.slice(-4)])
+      expect(value * ratio).toBeCloseTo(Math.round(value * ratio), 8);
+    const frame = spriteFrame(sheet, 2, true, 350);
+    expect(args.slice(1, 5)).toEqual([
+      frame.column * sheet.cw,
+      frame.row * sheet.ch,
+      sheet.cw,
+      sheet.ch,
+    ]);
+    expect(ctx.imageSmoothingEnabled).toBe(false);
+  },
+);
+
+test("illustrated opaque bodies retain their existing edge coverage", () => {
+  const calls = [];
+  const ctx = {
+    globalAlpha: 1,
+    imageSmoothingEnabled: true,
+    save() {},
+    restore() {},
+    translate() {},
+    scale() {},
+    drawImage() {
+      calls.push(this.imageSmoothingEnabled);
+    },
+  };
+  drawSprite(
+    ctx,
+    {},
+    { ...sheets.link, pixelArt: false },
+    0,
+    0,
+    64,
+    0,
+    false,
+    0,
+  );
+  expect(calls).toEqual([false, true]);
 });
