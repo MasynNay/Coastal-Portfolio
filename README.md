@@ -42,6 +42,8 @@ Mac Mode includes independent app windows, a live wallpaper, a photo slideshow, 
 
 Bloom is a Mac dock app dedicated to my wife, Mi Shell. Its rotating bouquet is drawn with colored text, with pause and replay controls for keyboard and touch users. The browser adaptation credits [Alish Sharma’s ASCII Flower Bouquet](https://github.com/alishsharma17/Ascii-Flower-Bouquet-) and includes its [MIT license](public/licenses/AsciiBouquet.txt).
 
+Swipe through six arrangements in Bloom, including roses, tulips, sunflowers, lavender, lilies, and the original mixed garden bouquet. Each has its own flower shapes, wrapping, and ribbon. Arrow buttons and keyboard arrow keys also change bouquets.
+
 The island has 500 bugs across five equally likely groups, 250 aquatic species with freshwater and saltwater habitats, and 50 seashell varieties. Duplicate catches increase quantities. A shared field guide records discoveries, even after a creature is released. Collections and scores stay on the visitor's device.
 
 Small games around town include the Avatar-inspired Element Runner with four elemental power-ups, Orc Hunt with archery and animated targets, Poké Ball Match with swipe swaps and special combo balls, Wind Waker-inspired Windfall 2048, Wizard Memory and Axolotl Drift. The glass-float hunt hides 20 colored floats in new locations around the town and its beaches whenever a fresh search begins.

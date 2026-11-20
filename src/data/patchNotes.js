@@ -2,6 +2,17 @@
 // the preceding production commit, rather than fictional in-game release notes.
 const patchNotes = [
   {
+    version: "1.1.8",
+    date: "November 19, 2026",
+    previousCommit: "7e4e365",
+    changes: [
+      "Bloom now offers six bouquets for Mi Shell: Garden Bouquet, Rose Romance, Spring Tulips, Sunflower Sunshine, Lavender Letters, and Moonlight Lilies.",
+      "Each arrangement has its own flower shapes, colors, paper wrapping, and ribbon.",
+      "Swipe across the flowers to change bouquets, or use the arrow buttons and keyboard arrow keys. The gallery loops from the last bouquet back to the first.",
+      "Mi Shell’s dedication stays with every bouquet, and Pause Rotation and Bloom Again work with the selected style.",
+    ],
+  },
+  {
     version: "1.1.7",
     date: "November 19, 2026",
     previousCommit: "3494a49",

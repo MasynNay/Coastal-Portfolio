@@ -1,5 +1,5 @@
-/* This app fills the shared draggable Mac window. The canvas takes the space
-   left between the terminal command and controls, keeping phones scroll-free. */
+/* The canvas fills the space between the bouquet selector and dedication.
+   Short windows scroll vertically so the flowers and controls stay reachable. */
 .bloom-app {
   height: 100%;
   min-height: 330px;
@@ -27,11 +27,58 @@
   color: #a4a9b7;
 }
 
+.bloom-picker {
+  flex: 0 0 auto;
+  display: grid;
+  grid-template-columns: 44px minmax(0, 1fr) 44px;
+  align-items: center;
+  gap: 8px;
+  padding: 0 18px 4px;
+}
+
+.bloom-picker p {
+  margin: 0;
+  text-align: center;
+  line-height: 1.5;
+}
+
+.bloom-picker strong,
+.bloom-picker p > span {
+  display: block;
+}
+
+.bloom-picker strong {
+  color: #f6c8dc;
+  font-size: 12px;
+}
+
+.bloom-picker p > span {
+  color: #b6c2ca;
+  font-size: 9px;
+}
+
+.bloom-picker button {
+  width: 44px;
+  height: 44px;
+  border: 1px solid #758194;
+  border-radius: 50%;
+  background: #2b3443;
+  color: #f6dce7;
+  font: inherit;
+  font-size: 28px;
+  line-height: 1;
+}
+
+.bloom-picker button:hover {
+  background: #394457;
+}
+
 .bloom-stage {
   position: relative;
   flex: 1;
   min-height: 160px;
   overflow: hidden;
+  touch-action: pan-y pinch-zoom;
 }
 
 .bloom-stage canvas {
@@ -102,6 +149,8 @@
 }
 
 .bloom-actions button:focus-visible,
+.bloom-picker button:focus-visible,
+.bloom-stage canvas:focus-visible,
 .bloom-footer a:focus-visible {
   outline: 2px solid #a5d6b7;
   outline-offset: 4px;

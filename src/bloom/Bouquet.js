@@ -25,6 +25,124 @@ const HEARTS = [161, 197, 204, 205, 211, 218];
 const SHADE = ".:-=+*%@";
 const PETAL_SHADE = "+*#%";
 
+// Each arrangement changes the flower silhouettes, spacing, wrapping, and
+// colors. The original mixed bouquet remains the first style in the gallery.
+export const bouquetStyles = [
+  {
+    id: "garden",
+    name: "Garden Bouquet",
+    description: "Mixed daisies and tulips in cream paper with a pink ribbon.",
+    count: 10,
+    seed: 21,
+    paper: PAPER,
+    ribbon: RIBBON,
+  },
+  {
+    id: "roses",
+    name: "Rose Romance",
+    description:
+      "Red and blush roses with curled, layered petals, rose paper, and a burgundy ribbon.",
+    count: 9,
+    seed: 32,
+    paper: [95, 138, 181, 217, 224, 230],
+    ribbon: [52, 88, 125, 161, 197, 204],
+    flowers: [
+      {
+        kind: "rose",
+        palette: [52, 88, 124, 160, 196, 203, 210],
+        radius: 0.16,
+      },
+      {
+        kind: "rose",
+        palette: [125, 162, 168, 205, 211, 218, 225],
+        radius: 0.145,
+      },
+    ],
+  },
+  {
+    id: "tulips",
+    name: "Spring Tulips",
+    description:
+      "A tall gathering of pink, coral, and yellow cup-shaped tulips in mint paper.",
+    count: 12,
+    seed: 43,
+    paper: [66, 102, 108, 151, 194, 231],
+    ribbon: [54, 91, 134, 177, 183, 225],
+    flowers: [
+      { kind: "tulip", palette: PINK, radius: 0.14 },
+      { kind: "tulip", palette: [130, 166, 202, 208, 209, 216], radius: 0.14 },
+      { kind: "tulip", palette: YELLOW, radius: 0.14 },
+    ],
+  },
+  {
+    id: "sunflowers",
+    name: "Sunflower Sunshine",
+    description:
+      "Large golden sunflowers with dark seed centers, kraft paper, and a green ribbon.",
+    count: 7,
+    seed: 54,
+    paper: [94, 137, 180, 223, 229, 230],
+    ribbon: [22, 28, 64, 100, 142, 185],
+    flowers: [
+      {
+        kind: "sunflower",
+        palette: YELLOW,
+        center: DARK,
+        petals: 18,
+        radius: 0.19,
+      },
+    ],
+  },
+  {
+    id: "lavender",
+    name: "Lavender Letters",
+    description:
+      "Slender purple lavender sprigs with tiny clustered blossoms, lilac paper, and a cream ribbon.",
+    count: 16,
+    seed: 65,
+    paper: [60, 97, 103, 146, 189, 231],
+    ribbon: [137, 180, 223, 230, 231],
+    flowers: [
+      {
+        kind: "lavender",
+        palette: [54, 91, 97, 134, 140, 177, 183],
+        radius: 0.08,
+      },
+      {
+        kind: "lavender",
+        palette: [61, 98, 135, 141, 177, 183, 225],
+        radius: 0.075,
+      },
+    ],
+  },
+  {
+    id: "lilies",
+    name: "Moonlight Lilies",
+    description:
+      "White and blush lilies with six pointed petals, blue paper, and a silver ribbon.",
+    count: 8,
+    seed: 76,
+    paper: [24, 60, 67, 110, 153, 195],
+    ribbon: [102, 145, 188, 252, 255, 231],
+    flowers: [
+      {
+        kind: "lily",
+        palette: [145, 188, 224, 230, 255, 231],
+        center: GOLD,
+        petals: 6,
+        radius: 0.19,
+      },
+      {
+        kind: "lily",
+        palette: [138, 181, 217, 224, 225, 231],
+        center: GOLD,
+        petals: 6,
+        radius: 0.18,
+      },
+    ],
+  },
+];
+
 function normalize([x, y, z]) {
   const length = Math.hypot(x, y, z) || 1;
   return [x / length, y / length, z / length];
@@ -51,8 +169,8 @@ function randomSource(seed = 21) {
   };
 }
 
-export function createBouquet() {
-  const random = randomSource();
+export function createBouquet(style = bouquetStyles[0]) {
+  const random = randomSource(style.seed);
   const range = (low, high) => low + random() * (high - low);
   const points = [];
   const flowers = [];
@@ -65,8 +183,9 @@ export function createBouquet() {
   let discIndex = 0;
 
   // A spiral dome gives the flower heads depth as the bouquet rotates.
-  for (let index = 0; index < 10; index += 1) {
-    const elevation = ((88 - 60 * Math.sqrt(index / 9)) * Math.PI) / 180;
+  for (let index = 0; index < style.count; index += 1) {
+    const elevation =
+      ((88 - 60 * Math.sqrt(index / (style.count - 1))) * Math.PI) / 180;
     const angle = index * goldenAngle;
     const axis = [
       Math.cos(elevation) * Math.cos(angle),
@@ -91,14 +210,18 @@ export function createBouquet() {
     }
     const tulip = index === 3 || index === 8;
     const [palette, center, petals] = FLOWERS[discIndex % FLOWERS.length];
-    flowers.push({
+    const originalFlower = {
       position,
-      tulip,
+      kind: tulip ? "tulip" : "disc",
       palette: tulip ? (index === 3 ? RED : PINK) : palette,
       center,
       petals,
       radius: tulip ? 0.11 : range(0.12, 0.14),
       phase: random() * TAU,
+    };
+    flowers.push({
+      ...originalFlower,
+      ...style.flowers?.[index % style.flowers.length],
     });
     if (!tulip) discIndex += 1;
   }
@@ -146,7 +269,7 @@ export function createBouquet() {
           radius * sine,
         ],
         normalize([cosine, -slope, sine]),
-        PAPER,
+        style.paper,
         0.3 * (Math.abs(Math.sin(5 * angle)) - 0.6),
         false,
       );
@@ -183,7 +306,7 @@ export function createBouquet() {
           ribbonRadius * Math.sin(angle),
         ],
         [Math.cos(angle), 0, Math.sin(angle)],
-        RIBBON,
+        style.ribbon,
         0,
         false,
       );
@@ -200,7 +323,7 @@ export function createBouquet() {
         point(
           [loopX * fill, ribbonY + loopY * fill, knotZ + 0.01],
           [side * 0.3, 0.2, 0.93],
-          RIBBON,
+          style.ribbon,
           0.1,
         );
       }
@@ -210,13 +333,13 @@ export function createBouquet() {
       point(
         [side * 0.06 * t, ribbonY - 0.15 * t, knotZ + 0.015],
         [side * 0.2, 0, 0.98],
-        RIBBON,
+        style.ribbon,
         -0.05 + 0.05 * Math.sin(t * 9),
       );
     }
   }
   for (const x of [-0.01, 0, 0.01]) {
-    point([x, ribbonY, knotZ + 0.02], [0, 0, 1], RIBBON, 0.2, true, "@");
+    point([x, ribbonY, knotZ + 0.02], [0, 0, 1], style.ribbon, 0.2, true, "@");
   }
 
   for (let index = 0; index < 90; index += 1) {
@@ -356,8 +479,12 @@ export function renderBouquet(
   // angle. Their centers still move through real perspective and occlusion.
   for (const flower of scene.flowers) {
     const [x, y, z, perspective] = project(flower.position);
-    const radiusY = flower.radius * perspective * scale;
-    const radiusX = radiusY * 2;
+    const radiusX = flower.radius * perspective * scale * 2;
+    const radiusY =
+      flower.radius *
+      perspective *
+      scale *
+      (flower.kind === "lavender" ? 2.2 : 1);
     const dim = -0.4 * (1 - Math.min(1, Math.max(0, (z + 0.6) / 1.2)));
     const rotation = flower.phase + angle * 0.7;
     for (
@@ -372,7 +499,7 @@ export function renderBouquet(
         column += 1
       ) {
         const dx = (column + 0.5 - x) / radiusX;
-        if (flower.tulip) {
+        if (flower.kind === "tulip") {
           const v = (1 - dy) / 2;
           if (v < 0 || v > 1) continue;
           const halfWidth =
@@ -392,9 +519,54 @@ export function renderBouquet(
           );
           continue;
         }
+        if (flower.kind === "lavender") {
+          // Alternating clusters taper toward the tip of each upright sprig.
+          const level = Math.round((dy + 0.85) / 0.3);
+          const centerY = -0.85 + level * 0.3;
+          const width = 0.22 + 0.22 * (centerY + 1);
+          const clusterX = level % 2 ? width * 0.4 : -width * 0.4;
+          if (
+            level < 0 ||
+            level > 6 ||
+            Math.hypot((dx - clusterX) / width, (dy - centerY) / 0.2) > 1
+          )
+            continue;
+          const brightness = clamp(0.68 - 0.2 * dx - 0.12 * dy + dim);
+          plot(
+            column,
+            row,
+            z + 0.03,
+            PETAL_SHADE[Math.floor(brightness * 4)],
+            flower.palette[Math.floor(brightness * flower.palette.length)],
+          );
+          continue;
+        }
         const distance = Math.hypot(dx, dy);
         if (distance > 1) continue;
-        if (distance < 0.3) {
+        if (flower.kind === "rose") {
+          // Curved bands model the overlapping petals around a rose's center.
+          const petalAngle = Math.atan2(dy, dx) + rotation;
+          if (distance > 0.9 + 0.1 * Math.cos(6 * petalAngle)) continue;
+          const fold = Math.sin(5 * petalAngle + distance * 17);
+          const brightness = clamp(
+            0.62 - 0.16 * dx - 0.2 * dy + fold * 0.2 + dim,
+          );
+          plot(
+            column,
+            row,
+            z + 0.06 * (1 - distance),
+            distance < 0.13 ? "@" : PETAL_SHADE[Math.floor(brightness * 4)],
+            flower.palette[Math.floor(brightness * flower.palette.length)],
+          );
+          continue;
+        }
+        const centerRadius =
+          flower.kind === "sunflower"
+            ? 0.45
+            : flower.kind === "lily"
+              ? 0.16
+              : 0.3;
+        if (distance < centerRadius) {
           const brightness = clamp(0.55 - 0.35 * dx - 0.35 * dy + dim);
           plot(
             column,
@@ -405,13 +577,15 @@ export function renderBouquet(
           );
           continue;
         }
+        const petalBase = flower.kind === "lily" ? 0.12 : 0.32;
+        const petalPower = flower.kind === "lily" ? 2.2 : 0.7;
         const reach =
-          0.32 +
-          0.68 *
+          petalBase +
+          (1 - petalBase) *
             Math.abs(
               Math.cos((flower.petals * (Math.atan2(dy, dx) + rotation)) / 2),
             ) **
-              0.7;
+              petalPower;
         if (distance > reach) continue;
         const edge = distance > reach - 0.14 ? -0.22 : 0;
         const brightness = clamp(

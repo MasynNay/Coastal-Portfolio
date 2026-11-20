@@ -1,13 +1,21 @@
 import { useEffect, useRef, useState } from "react";
-import { createBouquet, createFrame, renderBouquet } from "./Bouquet";
+import {
+  bouquetStyles,
+  createBouquet,
+  createFrame,
+  renderBouquet,
+} from "./Bouquet";
 import "./Bloom.css";
 
 export default function Bloom({ active }) {
   const canvasRef = useRef(null);
   const elapsed = useRef(0);
+  const swipe = useRef(null);
+  const [bouquetIndex, setBouquetIndex] = useState(0);
   const [paused, setPaused] = useState(false);
   const [restart, setRestart] = useState(0);
   const [available, setAvailable] = useState(true);
+  const style = bouquetStyles[bouquetIndex];
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -16,7 +24,7 @@ export default function Bloom({ active }) {
       setAvailable(false);
       return;
     }
-    const scene = createBouquet();
+    const scene = createBouquet(style);
     const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
     let frame;
     let cellWidth;
@@ -90,7 +98,37 @@ export default function Bloom({ active }) {
       document.removeEventListener("visibilitychange", syncPlayback);
       motion.removeEventListener("change", syncPlayback);
     };
-  }, [active, paused, restart]);
+  }, [active, paused, restart, style]);
+
+  function changeBouquet(direction) {
+    elapsed.current = 0;
+    setBouquetIndex(
+      (index) =>
+        (index + direction + bouquetStyles.length) % bouquetStyles.length,
+    );
+  }
+
+  function startSwipe(event) {
+    if (!event.isPrimary || event.button !== 0) return;
+    swipe.current = { id: event.pointerId, x: event.clientX, y: event.clientY };
+    event.currentTarget.setPointerCapture(event.pointerId);
+  }
+
+  function finishSwipe(event) {
+    const start = swipe.current;
+    if (!start || start.id !== event.pointerId) return;
+    swipe.current = null;
+    const horizontal = event.clientX - start.x;
+    const vertical = event.clientY - start.y;
+    // Only deliberate horizontal swipes change flowers. Vertical scrolling
+    // and pinching remain available inside small, touch-sized Mac windows.
+    if (
+      Math.abs(horizontal) >= 48 &&
+      Math.abs(horizontal) > Math.abs(vertical) * 1.25
+    ) {
+      changeBouquet(horizontal < 0 ? 1 : -1);
+    }
+  }
 
   function replay() {
     elapsed.current = 0;
@@ -104,14 +142,45 @@ export default function Bloom({ active }) {
         <span>masyn@mac</span> <span className="bloom-path">~ %</span> python3
         bouquet.py
       </p>
-      <div className="bloom-stage">
+      <div className="bloom-picker" aria-label="Choose a bouquet">
+        <button aria-label="Previous Bouquet" onClick={() => changeBouquet(-1)}>
+          <span aria-hidden="true">‹</span>
+        </button>
+        <p aria-live="polite" aria-atomic="true">
+          <strong>{style.name}</strong>
+          <span>
+            {bouquetIndex + 1} of {bouquetStyles.length} · Swipe to explore
+          </span>
+        </p>
+        <button aria-label="Next Bouquet" onClick={() => changeBouquet(1)}>
+          <span aria-hidden="true">›</span>
+        </button>
+      </div>
+      <div
+        className="bloom-stage"
+        onPointerDown={startSwipe}
+        onPointerUp={finishSwipe}
+        onPointerCancel={() => {
+          swipe.current = null;
+        }}
+        onLostPointerCapture={() => {
+          swipe.current = null;
+        }}
+      >
         <canvas
           ref={canvasRef}
           role="img"
-          aria-label="A rotating 3D bouquet drawn entirely with colored text characters. Daisies and tulips sit in a paper wrap with a pink ribbon, surrounded by floating hearts."
+          tabIndex={0}
+          aria-label={`${style.name}. ${style.description} A rotating 3D bouquet drawn with colored text, surrounded by floating hearts. Swipe or use the left and right arrow keys to change bouquets.`}
+          onKeyDown={(event) => {
+            if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
+              event.preventDefault();
+              event.stopPropagation();
+              changeBouquet(event.key === "ArrowRight" ? 1 : -1);
+            }
+          }}
         >
-          A colorful ASCII bouquet of daisies and tulips, wrapped in paper and
-          tied with a pink ribbon.
+          {style.description}
         </canvas>
         {!available && (
           <p>
