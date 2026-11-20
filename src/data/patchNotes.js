@@ -5,6 +5,7 @@ const patchNotes = [
     version: "1.2.1",
     date: "November 20, 2026",
     previousCommit: "3bb3cdd",
+    comparisonRef: "fd64ee166a895714692a361fc68fef4524f60d8d",
     changes: [
       "Expanded ASCII’s living-world collection from six to eighteen scenes, matching the eighteen bouquets.",
       "Added koi, axolotls, seahorses, octopuses, Arctic swimmers, rays, a mangrove nursery, and a second Pokémon habitat.",
