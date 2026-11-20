@@ -1,0 +1,143 @@
+/* The Coding section has one compact entry into ASCII. The studio opens above
+   the page, with focus and Escape handled by the shared dialog hook. */
+.ascii-feature {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 24px;
+  padding: 28px;
+  margin: 28px 0 12px;
+  border: 1px solid #78969e66;
+  border-radius: 24px;
+  background: linear-gradient(120deg, #152c32, #17202d);
+  color: #dfebe6;
+}
+.ascii-feature pre {
+  color: #ace5d2;
+  font: 12px/1.7 monospace;
+  margin: 0;
+}
+.ascii-feature > div {
+  flex: 1 1 260px;
+}
+.ascii-feature-kicker {
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  color: #aed7ce;
+}
+.ascii-feature h3 {
+  font-size: 24px;
+  margin: 8px 0;
+}
+.ascii-feature p {
+  text-align: left;
+  width: auto;
+  margin: 0 0 12px;
+  font-size: 15px;
+  line-height: 1.6;
+  color: #c4d5d6;
+}
+.ascii-feature small {
+  color: #9ebfc3;
+  font-size: 11px;
+}
+.ascii-feature > button {
+  min-height: 48px;
+  padding: 12px 20px;
+  border-radius: 10px;
+  border: 1px solid #93b8b9;
+  background: #c0dbd1;
+  color: #11282b;
+  font-weight: 700;
+}
+.ascii-feature > button:focus-visible,
+.ascii-modal button:focus-visible {
+  outline: 2px solid #d7f5dc;
+  outline-offset: 4px;
+}
+.ascii-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 11000;
+  display: grid;
+  place-items: center;
+  padding: 12px;
+  background: #071017c9;
+  backdrop-filter: blur(12px);
+}
+.ascii-modal {
+  width: min(860px, 100%);
+  height: min(860px, calc(100dvh - 24px));
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  outline: none;
+  border-radius: 18px;
+  border: 1px solid #829da075;
+  overflow: hidden;
+  background: #111b25;
+}
+.ascii-modal-title {
+  min-height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 14px 8px 20px;
+  color: #dce9e8;
+  font: 14px monospace;
+  background: #1c2731;
+}
+.ascii-modal-title button {
+  width: 38px;
+  height: 38px;
+  border: 1px solid #77999b88;
+  border-radius: 8px;
+  background: #284047;
+  color: #eef5ec;
+  font-size: 24px;
+}
+.ascii-modal-body {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+}
+.ascii-modal-body > p {
+  padding: 24px;
+  color: #cfdfdc;
+}
+/* The room's existing modal owns its backdrop, close control and focus trap. */
+.world-dialog.room-ascii-dialog {
+  width: min(900px, 100%);
+}
+.room-ascii-dialog .world-dialog-body {
+  padding: 0;
+}
+.room-ascii-dialog .ascii-app {
+  height: min(70dvh, 760px);
+}
+@media (max-width: 600px) {
+  .ascii-feature {
+    padding: 22px;
+  }
+  .ascii-feature > pre {
+    display: none;
+  }
+  .ascii-feature > button {
+    width: 100%;
+  }
+}
+
+.glass-site .project .ascii-feature p {
+  max-width: none;
+  margin: 0 0 12px;
+  color: #c4d5d6;
+  line-height: 1.6;
+  text-align: left;
+}
+.room-ascii-dialog .aquarium-picker button {
+  border-radius: 50%;
+  padding: 0;
+}
+.room-ascii-dialog .ascii-app button {
+  font-family: inherit;
+}

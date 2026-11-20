@@ -204,3 +204,21 @@ test("the offering announces the saved discovery, and the letter opens only on i
   act(() => panel.querySelector('[aria-label="Close panel"]').click());
   expect(game.freeze).toHaveBeenLastCalledWith(false);
 });
+
+test("the room computer opens the shared ASCII app and Escape returns to exploring", () => {
+  act(() => callbacks.onEvent({ type: "room-ascii", id: "portfolio-ascii" }));
+  const dialog = host.querySelector(
+    '[role="dialog"][aria-label="ASCII Studio"]',
+  );
+  expect(dialog).not.toBeNull();
+  expect(dialog.textContent).toContain("Galaxies");
+  expect(dialog.textContent).toContain("Game Worlds");
+  act(() =>
+    document.dispatchEvent(
+      new KeyboardEvent("keydown", { key: "Escape", bubbles: true }),
+    ),
+  );
+  expect(
+    host.querySelector('[role="dialog"][aria-label="ASCII Studio"]'),
+  ).toBeNull();
+});

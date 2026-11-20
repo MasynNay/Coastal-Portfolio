@@ -42,9 +42,11 @@ Mac Mode includes independent app windows, a live wallpaper, a photo slideshow, 
 
 ASCII is a terminal-style Mac dock app with a choice of animated bouquets and living aquariums. Eighteen bouquets are dedicated to my wife, Mi Shell, with distinct flower shapes, wrapping, and ribbons. Swipe, use the arrow buttons, or press the arrow keys to explore them. Pause and replay controls remain available.
 
-Eighteen living text-art scenes match the eighteen bouquets. Aquariums range from planted freshwater gardens and coral reefs to koi ponds, axolotl hideaways, octopus grottoes, Arctic waters, rays, and mangroves. The Pokémon scenes have individual models for Magikarp, Horsea, Lapras, Squirtle, Poliwag, and Psyduck. Firefly Meadow, Rainforest Terrarium, Little Solar System, and Lantern Festival add gardens and night skies to the collection.
+ASCII has four primary collections: **18 bouquets, 18 aquariums, 18 game worlds, and 18 galaxy studies**. Aquariums contain aquatic habitats and animals. Game Worlds has six Pokémon, six Kingdom Hearts, and six Zelda scenes, grouped by series. Galaxies use spiral, barred, ring, elliptical, edge-on, irregular, and interacting star distributions rather than solar-system scenes. The three garden and lantern favorites stay in Nature & Nights.
 
-Tap to feed fish, scatter nectar, send a meteor shower, or release lanterns, depending on the scene. Swipe, use the arrow buttons, or choose a scene directly from the selector. Hidden or minimized scenes suspend their animation loops, and reduced-motion preferences are respected.
+Every collection supports touch, keyboard navigation, direct scene selection, pause controls, reduced motion, and suspended playback when hidden. Scene-specific interactions include feeding, magic, hearts, fairies, wind, starlight pulses, nectar, and lantern releases.
+
+The same studio opens from the Mac dock, the **ASCII Studio feature in Portfolio → Coding**, or the **back-left computer inside the Pokémon/Portfolio house** in Game Mode. Walk close to that computer and use the interaction button or E. The main portfolio dialog supports Escape and restores focus to its launch button.
 
 The bouquet renderer adapts [Alish Sharma’s ASCII Flower Bouquet](https://github.com/alishsharma17/Ascii-Flower-Bouquet-) and retains its [MIT license](public/licenses/AsciiBouquet.txt). Aquarium models and rendering live in `src/ascii/`; the existing bouquet math remains in `src/bloom/`.
 

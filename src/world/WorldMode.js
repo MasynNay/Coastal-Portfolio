@@ -1,4 +1,6 @@
 import RoomArcade from "./RoomArcade";
+import AsciiApp from "../ascii/AsciiApp";
+import "../ascii/AsciiLauncher.css";
 import LoveLetter from "./LoveLetter";
 import RomDownload from "../components/RomDownload";
 import { playWindSong } from "./WindStatue";
@@ -196,6 +198,7 @@ function panelTitle(dialog) {
     encounter: "A familiar encounter",
     trivia: "The one with the trivia",
     "room-arcade": "Windfall Arcade",
+    "room-ascii": "ASCII Studio",
     "love-letter": "A Message For My Love",
   };
   if (dialog.type === "island-game") return gameTitles[dialog.id];
@@ -1043,20 +1046,26 @@ export default function WorldMode() {
       )}
       {dialog && (
         <Dialog
-          wide={dialog.type === "axolotl-game" || dialog.type === "room-arcade"}
+          wide={["axolotl-game", "room-arcade", "room-ascii"].includes(
+            dialog.type,
+          )}
           className={
-            dialog.type === "room-arcade"
-              ? "room-arcade-dialog"
-              : dialog.type === "axolotl-game"
-                ? "world-arcade-dialog"
-                : dialog.type === "island-game" && dialog.id === "chimes"
-                  ? "world-runner-dialog"
-                  : ""
+            dialog.type === "room-ascii"
+              ? "room-ascii-dialog"
+              : dialog.type === "room-arcade"
+                ? "room-arcade-dialog"
+                : dialog.type === "axolotl-game"
+                  ? "world-arcade-dialog"
+                  : dialog.type === "island-game" && dialog.id === "chimes"
+                    ? "world-runner-dialog"
+                    : ""
           }
           title={panelTitle(dialog)}
           onClose={() => setDialog(null)}
         >
-          {dialog.type === "room-arcade" ? (
+          {dialog.type === "room-ascii" ? (
+            <AsciiApp active />
+          ) : dialog.type === "room-arcade" ? (
             <RoomArcade />
           ) : dialog.type === "love-letter" ? (
             <LoveLetter />

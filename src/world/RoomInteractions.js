@@ -17,6 +17,14 @@ export const lodgeChests = {
   type: "room-arcade",
   label: "Open game cartridges",
 };
+// The back-left workstation in the Pokémon house, just in front of its
+// painted stool. Its floor position is reachable without walking into a wall.
+export const asciiComputer = {
+  ...artPoint("portfolio", 360, 220),
+  id: "portfolio-ascii",
+  type: "room-ascii",
+  label: "Open ASCII Studio",
+};
 export const loveLight = {
   ...artPoint("home", 1094, 228),
   id: "love-letter",
@@ -44,6 +52,7 @@ export function createRoomInteractions(savedSecrets = []) {
   return {
     points(room) {
       if (room === "lodge") return [lodgeChests];
+      if (room === "portfolio") return [asciiComputer];
       if (room === "home" && unlocked) return [loveLight];
       return [];
     },

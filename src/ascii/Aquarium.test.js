@@ -1,6 +1,7 @@
 import { act } from "react";
 import { createRoot } from "react-dom/client";
 import Aquarium from "./Aquarium";
+import { galaxyStyles, natureStyles } from "./Worlds";
 
 test("aquarium pause, app visibility, reduced motion, feeding, and touch gestures cooperate", () => {
   global.IS_REACT_ACT_ENVIRONMENT = true;
@@ -91,20 +92,22 @@ test("aquarium pause, app visibility, reduced motion, feeding, and touch gesture
       ),
     );
     expect(canvas.getAttribute("aria-label")).toContain("River Garden");
-    const chooser = host.querySelector('select[aria-label="Choose Scene"]');
-    function choose(id) {
-      act(() => {
-        chooser.value = id;
-        chooser.dispatchEvent(new Event("change", { bubbles: true }));
-      });
-    }
-    choose("orbit");
-    expect(canvas.getAttribute("aria-label")).toContain("Meteor Shower");
-    act(() => button("Meteor Shower").click());
-    expect(host.querySelector('[role="status"]').textContent).toContain(
-      "meteor shower",
+    act(() =>
+      root.render(<Aquarium active scenes={galaxyStyles} title="Galaxies" />),
     );
-    choose("lanterns");
+    expect(canvas.getAttribute("aria-label")).toContain("Starlight Pulse");
+    act(() => button("Starlight Pulse").click());
+    expect(host.querySelector('[role="status"]').textContent).toContain(
+      "starlight",
+    );
+    act(() =>
+      root.render(<Aquarium active scenes={natureStyles} title="Nature" />),
+    );
+    const chooser = host.querySelector('select[aria-label="Choose Scene"]');
+    act(() => {
+      chooser.value = "lanterns";
+      chooser.dispatchEvent(new Event("change", { bubbles: true }));
+    });
     expect(button("Release Lanterns")).toBeDefined();
     expect(host.querySelector('[role="status"]').textContent).toContain(
       "Tap the sky",

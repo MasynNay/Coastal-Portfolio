@@ -4,8 +4,14 @@ import AsciiApp from "./AsciiApp";
 jest.mock("../bloom/Bloom", () => ({ active }) => (
   <div data-bouquet={String(active)}>Mi Shell’s bouquets</div>
 ));
-jest.mock("./Aquarium", () => ({ active }) => (
-  <div data-aquarium={String(active)}>Aquariums</div>
+jest.mock("./Aquarium", () => ({ active, scenes, title }) => (
+  <div
+    data-aquarium={String(active)}
+    data-category={title}
+    data-count={scenes.length}
+  >
+    {title}
+  </div>
 ));
 
 test("the terminal chooser preserves modes and only animates the foreground scene", () => {
@@ -28,6 +34,22 @@ test("the terminal chooser preserves modes and only animates the foreground scen
     act(() => button("Aquariums").click());
     expect(host.querySelector("[data-aquarium]").dataset.aquarium).toBe("true");
     expect(bouquet.dataset.bouquet).toBe("false");
+    act(() => button("Modes").click());
+    act(() => button("Game Worlds").click());
+    expect(
+      host.querySelector('[data-category="Game Worlds"]').dataset.aquarium,
+    ).toBe("true");
+    expect(
+      host.querySelector('[data-category="Aquariums"]').dataset.aquarium,
+    ).toBe("false");
+    act(() => button("Modes").click());
+    act(() => button("Galaxies").click());
+    expect(host.querySelector('[data-category="Galaxies"]').dataset.count).toBe(
+      "18",
+    );
+    expect(
+      host.querySelector('[data-category="Game Worlds"]').dataset.aquarium,
+    ).toBe("false");
     act(() => root.render(<AsciiApp active={false} />));
     expect(host.querySelector("[data-aquarium]").dataset.aquarium).toBe(
       "false",

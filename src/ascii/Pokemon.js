@@ -13,6 +13,196 @@ export function drawPokemon(art, kind) {
     body(x, y, size, size * 1.2, white);
     body(x + 0.3, y, size * 0.4, size * 0.7, ink);
   };
+  if (kind === "pikachu") {
+    const yellow = [248, 219, 105];
+    polygon(
+      [
+        [-3, -4],
+        [-5, -10],
+        [-3, -11],
+        [-1, -4],
+      ],
+      yellow,
+    );
+    polygon(
+      [
+        [1, -4],
+        [3, -11],
+        [5, -10],
+        [3, -4],
+      ],
+      yellow,
+    );
+    polygon(
+      [
+        [-5, -10],
+        [-3, -11],
+        [-2.6, -8],
+      ],
+      ink,
+    );
+    polygon(
+      [
+        [3, -11],
+        [5, -10],
+        [4, -8],
+      ],
+      ink,
+    );
+    polygon(
+      [
+        [-3, 2],
+        [-8, 1],
+        [-6, -2],
+        [-11, -3],
+        [-9, -5],
+        [-4, -3],
+        [-6, 0],
+        [-2, 0],
+      ],
+      yellow,
+    );
+    body(0, 2, 3.8, 4.3, yellow);
+    body(0, -3, 4.2, 3.3, yellow);
+    eye(-1.5, -3.5, 0.65);
+    eye(1.5, -3.5, 0.65);
+    body(-3, -2, 0.9, 0.8, orange);
+    body(3, -2, 0.9, 0.8, orange);
+    at(0, -2, "v", ink);
+    stroke(-2, 6, -3, 7, yellow, "#");
+    stroke(2, 6, 3, 7, yellow, "#");
+    stroke(-3, 1, -4, 3 + beat * 0.4, yellow, "#");
+    stroke(3, 1, 4, 3 - beat * 0.4, yellow, "#");
+    return true;
+  }
+  if (kind === "eevee") {
+    const brown = [187, 137, 92];
+    polygon(
+      [
+        [-3, -3],
+        [-5, -10],
+        [-2, -9],
+        [0, -3],
+      ],
+      brown,
+    );
+    polygon(
+      [
+        [1, -3],
+        [3, -10],
+        [5, -9],
+        [3, -2],
+      ],
+      brown,
+    );
+    body(-1, 2, 4.8, 3.5, brown);
+    body(-6, 0, 4, 2.7, brown);
+    body(-8, -1, 1.8, 2, cream);
+    body(2, -3, 3.8, 3.2, brown);
+    eye(3, -3.5, 0.9);
+    at(5, -2, "o", ink);
+    polygon(
+      [
+        [-2, -1],
+        [-3, 2],
+        [-1, 1],
+        [0, 4],
+        [1, 2],
+        [3, 3],
+        [4, 0],
+        [2, -1],
+      ],
+      cream,
+    );
+    stroke(-3, 4, -4, 7, brown, "#");
+    stroke(2, 4, 3, 7, brown, "#");
+    return true;
+  }
+  if (kind === "gengar") {
+    const purple = [174, 132, 218];
+    polygon(
+      [
+        [-5, -3],
+        [-5, -7],
+        [-2, -6],
+        [0, -9],
+        [2, -6],
+        [5, -7],
+        [5, -2],
+      ],
+      purple,
+    );
+    body(0, 1, 5.8, 5, purple);
+    polygon(
+      [
+        [-6, 0],
+        [-9, 3],
+        [-5, 3],
+      ],
+      purple,
+    );
+    polygon(
+      [
+        [6, 0],
+        [9, 3],
+        [5, 3],
+      ],
+      purple,
+    );
+    stroke(-3, 5, -4, 7, purple, "#");
+    stroke(3, 5, 4, 7, purple, "#");
+    body(-2.2, -1.5, 1.3, 0.8, [248, 142, 156]);
+    body(2.2, -1.5, 1.3, 0.8, [248, 142, 156]);
+    body(0, 2, 3.8, 1.4, white);
+    for (let x = -2; x <= 2; x++) stroke(x, 1, x, 3, purple, "|");
+    return true;
+  }
+  if (kind === "dragonite") {
+    polygon(
+      [
+        [-3, -1],
+        [-9, -7 - beat],
+        [-8, 1],
+        [-3, 2],
+      ],
+      orange,
+    );
+    polygon(
+      [
+        [3, -1],
+        [9, -7 + beat],
+        [8, 1],
+        [3, 2],
+      ],
+      orange,
+    );
+    polygon(
+      [
+        [-4, -1],
+        [-8, -5 - beat],
+        [-7, 0],
+      ],
+      [118, 185, 151],
+    );
+    polygon(
+      [
+        [4, -1],
+        [8, -5 + beat],
+        [7, 0],
+      ],
+      [118, 185, 151],
+    );
+    body(0, 2, 4.8, 5, orange);
+    body(0, 3, 3.2, 3.8, cream);
+    body(0, -4, 3.5, 3, orange);
+    stroke(-1, -6, -3, -9, cream, "~");
+    stroke(1, -6, 3, -9, cream, "~");
+    eye(-1.3, -4.4, 0.7);
+    eye(1.3, -4.4, 0.7);
+    stroke(-3, 6, -5, 7, orange, "#");
+    stroke(3, 6, 5, 7, orange, "#");
+    return true;
+  }
   if (kind === "magikarp") {
     // Cream forked tail, golden crown, round eyes, open pink lips and long
     // barbels are the distinguishing features, not the orange body alone.

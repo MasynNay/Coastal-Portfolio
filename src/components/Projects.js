@@ -7,6 +7,7 @@ import "animate.css";
 import TrackVisibility from "react-on-screen";
 import { Link, useLocation } from "react-router-dom";
 import gameIcon from "../assets/images/game-icon.svg";
+import AsciiLauncher from "../ascii/AsciiLauncher";
 import { achievements } from "../data/resume";
 
 export const Projects = ({ glass = false }) => {
@@ -95,6 +96,7 @@ export const Projects = ({ glass = false }) => {
                             />
                           ))}
                         </Row>
+                        <AsciiLauncher />
                       </Tab.Pane>
                       <Tab.Pane eventKey="second">
                         <Row>

@@ -3,6 +3,12 @@
 // simulation time separate from wall time prevents jumps after minimizing.
 import { aquariumStyles } from "./Worlds";
 import { drawPokemon } from "./Pokemon";
+import { drawGalaxy } from "./GalaxyArt";
+import {
+  drawGameCharacter,
+  drawGameLandscape,
+  drawGameEffects,
+} from "./GameArt";
 import {
   drawWorldCreature,
   drawWorldLandscape,
@@ -22,6 +28,11 @@ const SILVER = [167, 217, 214];
 // home height. The same origin is used after feeding and on first render.
 function homeHeight(style, kind, index) {
   if (style.positions?.[index]) return style.positions[index][1];
+  if (
+    style.category === "games" &&
+    !["cove", "springs"].includes(style.setting)
+  )
+    return style.setting === "clouds" || kind === "fairy" ? 0.44 : 0.64;
   if (kind === "lapras") return 0.52;
   if (["crab", "frog"].includes(kind)) return 0.7;
   if (
@@ -86,7 +97,10 @@ export function feedAquarium(scene, x = 0.5) {
       y:
         scene.style.action === "lanterns"
           ? 0.83 + (i % 2) * 0.03
-          : scene.style.action === "nectar"
+          : scene.style.action === "nectar" ||
+              (scene.style.category === "games" &&
+                scene.style.action !== "feed") ||
+              scene.style.category === "galaxy"
             ? 0.35 + (i % 2) * 0.03
             : 0.06 + (i % 2) * 0.02,
       age: 0,
@@ -112,7 +126,15 @@ export function updateAquarium(scene, seconds) {
     food.age += dt;
   }
   scene.food = scene.food.filter(
-    (food) => food.age < 14 && food.y < 0.9 && food.y > 0.05 && food.x < 1,
+    (food) =>
+      food.age <
+        (scene.style.category === "galaxy" ||
+        (scene.style.category === "games" && scene.style.action !== "feed")
+          ? 6
+          : 14) &&
+      food.y < 0.9 &&
+      food.y > 0.05 &&
+      food.x < 1,
   );
   for (const creature of scene.creatures) {
     // The long-necked cove visitor eats with its head, leaving its body below
@@ -132,16 +154,18 @@ export function updateAquarium(scene, seconds) {
         penguin: 0.08,
         seal: 0.1,
       }[creature.kind] ?? 0;
-    const edible = ![
-      "jelly",
-      "seahorse",
-      "horsea",
-      "rocket",
-      "ufo",
-      "satellite",
-      "sky-lantern",
-      "frog",
-    ].includes(creature.kind);
+    const edible =
+      !(scene.style.category === "games" && scene.style.action !== "feed") &&
+      ![
+        "jelly",
+        "seahorse",
+        "horsea",
+        "rocket",
+        "ufo",
+        "satellite",
+        "sky-lantern",
+        "frog",
+      ].includes(creature.kind);
     const target =
       edible &&
       scene.food.reduce((best, food) => {
@@ -164,7 +188,18 @@ export function updateAquarium(scene, seconds) {
         scene.fed++;
       }
     } else {
-      creature.x += dt * creature.speed * creature.direction;
+      if (
+        scene.style.category === "games" &&
+        !["cove", "springs"].includes(scene.style.setting)
+      ) {
+        const anchor =
+          scene.style.positions?.[creature.seed - 1]?.[0] ??
+          (scene.style.animals.length <= 2
+            ? 0.34 + (creature.seed - 1) * 0.32
+            : 0.22 + (creature.seed - 1) * 0.28);
+        creature.x =
+          anchor + Math.sin(scene.time * 0.5 + creature.seed) * 0.025;
+      } else creature.x += dt * creature.speed * creature.direction;
       const homeY = homeHeight(scene.style, creature.kind, creature.seed - 1);
       creature.y += (homeY - creature.y) * dt * 0.5;
       if (creature.x > 0.86) {
@@ -247,6 +282,8 @@ function textGrid(columns, rows) {
 }
 
 function landscape(grid, scene) {
+  if (scene.style.category === "games" && drawGameLandscape(grid, scene))
+    return;
   if (drawWorldLandscape(grid, scene)) return;
   const { columns: w, rows: h, put, line, oval } = grid;
   const { style, time } = scene;
@@ -335,7 +372,7 @@ function landscape(grid, scene) {
   }
 }
 
-function drawCreature(grid, c, time, index) {
+function drawCreature(grid, c, time, index, sceneForArt = { food: [] }) {
   const scale = Math.min(grid.columns / 115, grid.rows / 55) * c.size * 1.6;
   const x = c.x * grid.columns;
   const y =
@@ -377,7 +414,12 @@ function drawCreature(grid, c, time, index) {
       color,
     );
   const art = { at, body, stroke, polygon, beat, time };
-  if (drawPokemon(art, c.kind) || drawWorldCreature(art, c.kind, index)) return;
+  if (
+    drawGameCharacter(art, c.kind, sceneForArt) ||
+    drawPokemon(art, c.kind) ||
+    drawWorldCreature(art, c.kind, index)
+  )
+    return;
   if (c.kind === "jelly") {
     const pink = index % 2 ? [207, 155, 242] : [124, 221, 227];
     for (let i = -3; i <= 3; i++) {
@@ -476,35 +518,46 @@ export function renderAquarium(context, scene, width, height) {
   const rows = 52;
   const columns = clamp(Math.round((width / height) * rows * 1.55), 82, 180);
   const grid = textGrid(columns, rows);
-  landscape(grid, scene);
-  scene.creatures.forEach((c, i) => drawCreature(grid, c, scene.time, i));
-  scene.food.forEach((food, i) => {
-    if (scene.style.action === "lanterns")
-      drawCreature(
-        grid,
-        {
-          kind: "sky-lantern",
-          x: food.x,
-          y: food.y,
-          direction: 1,
-          size: 0.38,
-          particle: true,
-        },
-        0,
-        i,
-      );
-    else if (scene.style.action === "meteors") {
-      grid.line(
-        food.x * columns - 7,
-        food.y * rows - 3,
-        food.x * columns,
-        food.y * rows,
-        [184, 194, 231],
-        ":",
-      );
-      grid.put(food.x * columns, food.y * rows, "*", [255, 230, 167]);
-    } else grid.put(food.x * columns, food.y * rows, "*", [252, 214, 137]);
-  });
+  if (scene.style.category === "galaxy") drawGalaxy(grid, scene);
+  else {
+    landscape(grid, scene);
+    scene.creatures.forEach((c, i) =>
+      drawCreature(grid, c, scene.time, i, scene),
+    );
+  }
+  if (scene.style.category === "games" && scene.style.action !== "feed")
+    drawGameEffects(grid, scene);
+  if (
+    scene.style.category !== "galaxy" &&
+    !(scene.style.category === "games" && scene.style.action !== "feed")
+  )
+    scene.food.forEach((food, i) => {
+      if (scene.style.action === "lanterns")
+        drawCreature(
+          grid,
+          {
+            kind: "sky-lantern",
+            x: food.x,
+            y: food.y,
+            direction: 1,
+            size: 0.38,
+            particle: true,
+          },
+          0,
+          i,
+        );
+      else if (scene.style.action === "meteors") {
+        grid.line(
+          food.x * columns - 7,
+          food.y * rows - 3,
+          food.x * columns,
+          food.y * rows,
+          [184, 194, 231],
+          ":",
+        );
+        grid.put(food.x * columns, food.y * rows, "*", [255, 230, 167]);
+      } else grid.put(food.x * columns, food.y * rows, "*", [252, 214, 137]);
+    });
   context.fillStyle = rgb(scene.style.water);
   context.fillRect(0, 0, width, height);
   const cell = Math.min(width / columns, height / (rows * 1.55));

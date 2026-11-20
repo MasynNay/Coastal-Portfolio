@@ -13,6 +13,104 @@ export function drawWorldCreature(art, kind, index) {
     at(x, y, "O", white);
     at(x + 0.5, y, ".", dark);
   };
+  if (["discus", "cichlid", "betta", "lionfish"].includes(kind)) {
+    const color =
+      kind === "betta"
+        ? index % 2
+          ? pink
+          : blue
+        : kind === "cichlid"
+          ? index % 2
+            ? gold
+            : blue
+          : [235, 166, 136];
+    if (kind === "betta") {
+      for (let i = -5; i <= 5; i++)
+        stroke(-3, 0, -11 + Math.sin(time * 2 + i) * 0.5, i, color, "~");
+      polygon(
+        [
+          [-3, -1],
+          [-1, -6],
+          [3, -3],
+        ],
+        color,
+      );
+      polygon(
+        [
+          [-3, 1],
+          [-1, 6],
+          [3, 3],
+        ],
+        color,
+      );
+    } else if (kind === "lionfish") {
+      for (let i = -5; i <= 5; i++) {
+        stroke(i, -1, i * 1.4, -6 + Math.abs(i) * 0.4, white, "|");
+        stroke(i, 1, i * 1.4, 5 - Math.abs(i) * 0.3, pink, "|");
+      }
+    } else
+      polygon(
+        [
+          [-4, 0],
+          [-9, -3],
+          [-8, 3],
+        ],
+        color,
+      );
+    body(0, 0, 5.5, kind === "discus" ? 4.5 : 2.8, color, (u) =>
+      Math.sin(u * (kind === "discus" ? 19 : 11)) > 0.5 ? white : color,
+    );
+    eyes(3.5, -1);
+    at(5.5, 0, ">", white);
+    return true;
+  }
+  if (kind === "starfish") {
+    const points = [];
+    for (let i = 0; i < 10; i++) {
+      const a = (i / 10) * Math.PI * 2 - Math.PI / 2,
+        r = i % 2 ? 2 : 6;
+      points.push([Math.cos(a) * r, Math.sin(a) * r * 0.7]);
+    }
+    polygon(points, pink);
+    body(0, 0, 1.5, 1, gold);
+    return true;
+  }
+  if (kind === "shrimp") {
+    body(0, 0, 4, 1.5, pink);
+    body(3, -1, 2, 1.7, white);
+    for (let i = -3; i < 3; i++)
+      stroke(i, 0, i - 1, 3 + beat * 0.2, white, "/");
+    stroke(4, -1, 9, -4, pink, "~");
+    stroke(4, -1, 10, -2, pink, "~");
+    polygon(
+      [
+        [-3, 0],
+        [-7, -2],
+        [-7, 2],
+      ],
+      pink,
+    );
+    eyes(4, -1.5);
+    return true;
+  }
+  if (kind === "hermit") {
+    body(-1, -1, 4.5, 3.5, gold);
+    for (let i = 0; i < 30; i++) {
+      const a = (i / 30) * Math.PI * 5,
+        r = (i / 30) * 3;
+      at(
+        -1 + Math.cos(a) * r,
+        -1 + Math.sin(a) * r * 0.7,
+        "@",
+        [151, 119, 107],
+      );
+    }
+    body(3, 2, 2.5, 1.3, pink);
+    eyes(4, 1);
+    for (let i = 0; i < 3; i++) stroke(i, 2, i - 2, 5, pink, "/");
+    at(6, 2, "V", pink);
+    return true;
+  }
   if (kind === "axolotl") {
     const color = [pink, white, gold][index % 3];
     polygon(
@@ -334,6 +432,20 @@ export function drawWorldLandscape(grid, scene) {
 export function drawHabitatDetails(grid, scene) {
   const { columns: w, rows: h, oval, line, put } = grid;
   const { landscape, accent, plant } = scene.style;
+  if (landscape === "anemones") {
+    for (let i = 0; i < 4; i++)
+      for (let arm = -5; arm <= 5; arm++) {
+        const x = w * (0.13 + i * 0.24) + arm;
+        line(
+          x,
+          h - 4,
+          x + Math.sin(scene.time * 1.5 + arm) * 2,
+          h - 12 - Math.abs(arm) * 0.5,
+          [227, 159, 193],
+          "~",
+        );
+      }
+  }
   if (landscape === "pond") {
     for (const x of [0.14, 0.56, 0.86]) {
       oval(w * x, h * 0.1, 8, 1.6, plant);

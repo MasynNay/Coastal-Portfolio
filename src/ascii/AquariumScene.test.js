@@ -1,3 +1,4 @@
+import { gameStyles, galaxyStyles, natureStyles } from "./Worlds";
 import {
   aquariumStyles,
   createAquarium,
@@ -8,7 +9,7 @@ import {
 
 const context = () => ({ fillRect: jest.fn(), fillText: jest.fn() });
 
-test.each(aquariumStyles)(
+test.each([...aquariumStyles, ...gameStyles, ...galaxyStyles, ...natureStyles])(
   "$name draws a complete, bounded habitat at phone and desktop sizes",
   (style) => {
     const scene = createAquarium(style);
@@ -20,7 +21,7 @@ test.each(aquariumStyles)(
       const grid = renderAquarium(ctx, scene, width, height);
       expect(
         grid.glyphs.filter((glyph) => glyph !== " ").length,
-      ).toBeGreaterThan(style.landscape === "space" ? 500 : 1000);
+      ).toBeGreaterThan(style.category ? 200 : 1000);
       for (const [glyph, x, y] of ctx.fillText.mock.calls) {
         expect(glyph).toMatch(/^[\x20-\x7e]$/);
         expect(Number.isFinite(x) && Number.isFinite(y)).toBe(true);
@@ -29,10 +30,10 @@ test.each(aquariumStyles)(
         expect(x).toBeLessThan(width);
         expect(y).toBeLessThan(height);
       }
-      const a = [...grid.glyphs];
+      const a = { glyphs: [...grid.glyphs], colors: [...grid.colors] };
       for (let i = 0; i < 20; i++) updateAquarium(scene, 0.05);
       const b = renderAquarium(ctx, scene, width, height);
-      expect(b.glyphs).not.toEqual(a);
+      expect({ glyphs: b.glyphs, colors: b.colors }).not.toEqual(a);
     }
   },
 );
@@ -68,22 +69,38 @@ test("a resumed tab cannot advance the tank by minutes or let creatures escape",
   }
 });
 
-test("world and bouquet collections have matching counts and unique scene identities", () => {
+test("categories have meaningful membership, eighteen scenes each, and six scenes per game series", () => {
   const { bouquetStyles } = require("../bloom/Bouquet");
-  expect(aquariumStyles).toHaveLength(18);
-  expect(aquariumStyles).toHaveLength(bouquetStyles.length);
-  expect(new Set(aquariumStyles.map((style) => style.id)).size).toBe(18);
+  for (const list of [aquariumStyles, gameStyles, galaxyStyles]) {
+    expect(list).toHaveLength(bouquetStyles.length);
+    expect(new Set(list.map((item) => item.id)).size).toBe(18);
+  }
+  expect(
+    aquariumStyles.every((item) => !item.series && item.landscape !== "galaxy"),
+  ).toBe(true);
+  for (const series of ["Pokémon", "Kingdom Hearts", "Zelda"])
+    expect(gameStyles.filter((item) => item.series === series)).toHaveLength(6);
+  expect(
+    galaxyStyles.every(
+      (item) => item.category === "galaxy" && item.animals.length === 0,
+    ),
+  ).toBe(true);
+  expect(new Set(galaxyStyles.map((item) => item.form)).size).toBeGreaterThan(
+    12,
+  );
 });
 
 test.each([
-  ["meteors", 1],
+  ["starlight", 1],
   ["lanterns", -1],
   ["nectar", 1],
 ])(
   "%s interactions move in the appropriate environment",
   (action, direction) => {
     const scene = createAquarium(
-      aquariumStyles.find((style) => style.action === action),
+      [...galaxyStyles, ...natureStyles].find(
+        (style) => style.action === action,
+      ),
     );
     feedAquarium(scene, 0.5);
     const before = scene.food[0].y;

@@ -3,6 +3,7 @@ import {
   isLoveOffering,
   loveLight,
   lodgeChests,
+  asciiComputer,
 } from "./RoomInteractions";
 
 test("room secrets follow their artwork and restored discoveries persist", () => {
@@ -39,4 +40,12 @@ test("only Mi Shell's nearby money offering toward the blue light unlocks the le
   ).toBe(false);
   expect(isLoveOffering("home", actor, { kind: "wand" })).toBe(false);
   expect(isLoveOffering("home", actor, null)).toBe(false);
+});
+
+test("the Pokémon house PC opens ASCII from a reachable floor position", () => {
+  const rooms = createRoomInteractions();
+  expect(rooms.points("portfolio")).toEqual([asciiComputer]);
+  expect(asciiComputer.type).toBe("room-ascii");
+  expect(asciiComputer.x).toBeCloseTo(-5);
+  expect(asciiComputer.z).toBeGreaterThan(-5.55);
 });

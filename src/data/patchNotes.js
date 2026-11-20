@@ -2,6 +2,19 @@
 // the preceding production commit, rather than fictional in-game release notes.
 const patchNotes = [
   {
+    version: "1.3.0",
+    date: "November 20, 2026",
+    previousCommit: "bb60ee5",
+    changes: [
+      "Separated ASCII into Bouquets, Aquariums, Game Worlds, and Galaxies, with eighteen scenes in each primary category.",
+      "Aquariums now contain aquatic habitats only, including six new discus, betta, tide-pool, anemone, cichlid, and lionfish settings.",
+      "Game Worlds has six Pokémon, six Kingdom Hearts, and six Zelda scenes, grouped by series, with their own characters, settings, and effects.",
+      "Added eighteen galaxy studies with distinct spiral arms, bars, rings, ellipses, dust lanes, and interacting companions. The former solar-system scene is no longer presented as a galaxy.",
+      "Preserved the three garden and lantern favorites in Nature & Nights.",
+      "Added ASCII Studio to the Coding section and an Open ASCII Studio interaction at the back-left computer inside the Pokémon house. Both use the same app as the Mac dock.",
+    ],
+  },
+  {
     version: "1.2.1",
     date: "November 20, 2026",
     previousCommit: "3bb3cdd",

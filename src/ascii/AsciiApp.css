@@ -1,5 +1,5 @@
-/* The ASCII window shares the desktop's drag, resize, focus and minimize
-   behavior. Only its contents and initial size differ from other dock apps. */
+/* ASCII shares the desktop's window controls. The terminal menu and gallery
+   fill its content area; short windows scroll vertically, never sideways. */
 .ascii-app {
   height: 100%;
   min-height: 480px;
@@ -49,13 +49,16 @@
   background: #2b4856;
 }
 .ascii-app button:focus-visible,
-.ascii-app canvas:focus-visible {
+.ascii-app canvas:focus-visible,
+.aquarium-picker select:focus-visible {
   outline: 2px solid #aff3d6;
   outline-offset: 3px;
 }
+/* Four primary categories fit together. The preserved nature scenes follow
+   them, and each gallery retains its selection when returning to this menu. */
 .ascii-menu {
-  padding: clamp(22px, 5%, 40px);
-  margin: auto 0;
+  padding: 22px;
+  margin: 0;
 }
 .ascii-eyebrow {
   color: #a6cdc5;
@@ -64,28 +67,32 @@
 }
 .ascii-menu h2 {
   font:
-    500 clamp(28px, 6vw, 40px) / 1.1 "Courier New",
+    500 28px/1.05 "Courier New",
     monospace;
   letter-spacing: -0.045em;
-  margin: 16px 0;
+  margin: 10px 0;
   color: #f1eee6;
 }
 .ascii-menu > p {
   color: #abc0cd;
   font-size: 14px;
+  text-align: left;
+  margin-bottom: 0;
 }
 .ascii-mode-list {
   display: grid;
-  gap: 14px;
-  margin-top: 28px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 18px;
 }
 .ascii-mode-list button {
   display: grid;
-  grid-template-columns: 110px minmax(0, 1fr);
-  gap: 16px;
+  grid-template-columns: 54px minmax(0, 1fr);
+  gap: 12px;
   align-items: center;
+  align-content: start;
   width: 100%;
-  padding: 20px;
+  padding: 14px;
   border: 1px solid #526776;
   border-radius: 12px;
   color: #f2c5d9;
@@ -93,9 +100,25 @@
   text-align: left;
   font: inherit;
 }
-.ascii-mode-list button:last-child {
+.ascii-mode-list .ascii-choice-bouquet {
+  color: #f2c5d9;
+  background: #212738;
+}
+.ascii-mode-list .ascii-choice-aquarium {
   color: #8ee1ec;
   background: #102c37;
+}
+.ascii-mode-list .ascii-choice-games {
+  color: #f2d7a1;
+  background: #2a2937;
+}
+.ascii-mode-list .ascii-choice-galaxies {
+  color: #c5b8fa;
+  background: #24273d;
+}
+.ascii-mode-list .ascii-choice-nature {
+  color: #bce1b2;
+  background: #1c302e;
 }
 .ascii-mode-list button:hover {
   border-color: #a5d6c5;
@@ -103,14 +126,15 @@
 }
 .ascii-mode-list pre {
   margin: 0;
+  overflow: hidden;
   color: inherit;
   font:
-    13px/1.3 "Courier New",
+    10px/1.2 "Courier New",
     monospace;
 }
 .ascii-mode-list strong {
   display: block;
-  font-size: 20px;
+  font-size: 17px;
   margin-bottom: 8px;
 }
 .ascii-mode-list span > span {
@@ -126,7 +150,7 @@
   color: inherit;
 }
 .ascii-menu .ascii-menu-note {
-  margin-top: 26px;
+  margin-top: 20px;
   font-size: 11px;
 }
 .ascii-mode-panel {
@@ -145,8 +169,8 @@
   background: linear-gradient(145deg, #204850, #13222d);
   color: #b0f3d1;
 }
-/* Aquariums use a stable text grid; the decorative frame never intercepts
-   taps. Habitat controls wrap rather than forcing a phone to scroll sideways. */
+/* The shared scene player handles aquariums, games, galaxies and nature. The
+   canvas owns drawing; these controls never force the tank outside its frame. */
 .aquarium-app {
   flex: 1;
   min-height: 410px;
@@ -176,8 +200,30 @@
 }
 .aquarium-picker select {
   display: block;
-  font-size: 15px;
+  width: 100%;
+  max-width: 320px;
+  min-height: 38px;
+  margin: auto;
+  padding: 6px 26px 6px 4px;
+  border: 0;
+  border-radius: 6px;
+  background-color: #0a202e;
+  background-image:
+    linear-gradient(45deg, transparent 50%, #b6dadb 50%),
+    linear-gradient(135deg, #b6dadb 50%, transparent 50%);
+  background-position:
+    calc(100% - 13px) 16px,
+    calc(100% - 8px) 16px;
+  background-size: 5px 5px;
+  background-repeat: no-repeat;
   color: #c5eee9;
+  font:
+    bold 14px "Courier New",
+    monospace;
+  text-align: center;
+  appearance: none;
+  color-scheme: dark;
+  cursor: pointer;
 }
 .aquarium-picker span {
   display: block;
@@ -239,6 +285,11 @@
     height: min(760px, calc(100% - 110px));
   }
 }
+@media (max-width: 600px) {
+  .ascii-mode-list {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
 @media (max-width: 440px) {
   .ascii-toolbar {
     padding: 8px 14px;
@@ -247,62 +298,15 @@
     font-size: 11px;
   }
   .ascii-menu {
-    padding: 24px 18px;
-  }
-  .ascii-mode-list button {
-    padding: 16px 12px;
-    grid-template-columns: 82px minmax(0, 1fr);
-    gap: 12px;
-  }
-  .ascii-mode-list pre {
-    font-size: 10px;
-  }
-  .ascii-mode-list strong {
-    font-size: 18px;
+    padding: 20px 16px;
   }
   .aquarium-stage {
     margin: 0 10px;
   }
-  .aquarium-controls button {
-    min-width: 120px;
-  }
-}
-
-/* One native selector makes eighteen scenes easy to reach without repeatedly
-   swiping; the existing buttons and arrow-key navigation remain available. */
-.aquarium-picker select {
-  width: 100%;
-  max-width: 320px;
-  min-height: 38px;
-  margin: auto;
-  padding: 6px 26px 6px 4px;
-  border: 0;
-  border-radius: 6px;
-  background-color: #0a202e;
-  background-image:
-    linear-gradient(45deg, transparent 50%, #b6dadb 50%),
-    linear-gradient(135deg, #b6dadb 50%, transparent 50%);
-  background-position:
-    calc(100% - 13px) 16px,
-    calc(100% - 8px) 16px;
-  background-size: 5px 5px;
-  background-repeat: no-repeat;
-  color: #c5eee9;
-  font:
-    bold 14px "Courier New",
-    monospace;
-  text-align: center;
-  appearance: none;
-  color-scheme: dark;
-  cursor: pointer;
-}
-.aquarium-picker select:focus-visible {
-  outline: 2px solid #aff3d6;
-  outline-offset: 2px;
-}
-
-@media (max-width: 440px) {
   .aquarium-picker select {
     font-size: 13px;
+  }
+  .aquarium-controls button {
+    min-width: 120px;
   }
 }

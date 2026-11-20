@@ -8,7 +8,11 @@ import {
 } from "./AquariumScene";
 import { getSceneAction } from "./Worlds";
 
-export default function Aquarium({ active = true }) {
+export default function Aquarium({
+  active = true,
+  scenes = aquariumStyles,
+  title = "Aquariums",
+}) {
   const canvasRef = useRef(null);
   const sceneRef = useRef(null);
   const swipe = useRef(null);
@@ -16,7 +20,7 @@ export default function Aquarium({ active = true }) {
   const [paused, setPaused] = useState(false);
   const [status, setStatus] = useState("");
   const [available, setAvailable] = useState(true);
-  const style = aquariumStyles[index];
+  const style = scenes[index];
   const action = getSceneAction(style);
   const paint = useRef(() => {});
 
@@ -81,9 +85,7 @@ export default function Aquarium({ active = true }) {
   }, [active, paused, style]);
 
   function change(direction) {
-    selectScene(
-      (index + direction + aquariumStyles.length) % aquariumStyles.length,
-    );
+    selectScene((index + direction + scenes.length) % scenes.length);
   }
   function selectScene(next) {
     setIndex(next);
@@ -101,7 +103,7 @@ export default function Aquarium({ active = true }) {
     );
   }
   return (
-    <section className="aquarium-app" aria-label="ASCII aquariums and worlds">
+    <section className="aquarium-app" aria-label={`ASCII ${title}`}>
       <div className="aquarium-picker" aria-label="Browse scenes">
         <button aria-label="Previous Scene" onClick={() => change(-1)}>
           ‹
@@ -112,20 +114,32 @@ export default function Aquarium({ active = true }) {
             value={style.id}
             onChange={(event) =>
               selectScene(
-                aquariumStyles.findIndex(
-                  (item) => item.id === event.target.value,
-                ),
+                scenes.findIndex((item) => item.id === event.target.value),
               )
             }
           >
-            {aquariumStyles.map((item) => (
-              <option key={item.id} value={item.id}>
-                {item.name}
-              </option>
-            ))}
+            {scenes.some((item) => item.series)
+              ? [...new Set(scenes.map((item) => item.series))].map(
+                  (series) => (
+                    <optgroup key={series} label={series}>
+                      {scenes
+                        .filter((item) => item.series === series)
+                        .map((item) => (
+                          <option key={item.id} value={item.id}>
+                            {item.name}
+                          </option>
+                        ))}
+                    </optgroup>
+                  ),
+                )
+              : scenes.map((item) => (
+                  <option key={item.id} value={item.id}>
+                    {item.name}
+                  </option>
+                ))}
           </select>
           <span aria-live="polite">
-            {index + 1} of {aquariumStyles.length} · Swipe to explore
+            {index + 1} of {scenes.length} · Swipe to explore
           </span>
         </div>
         <button aria-label="Next Scene" onClick={() => change(1)}>
