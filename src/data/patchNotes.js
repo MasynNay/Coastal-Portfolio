@@ -5,6 +5,7 @@ const patchNotes = [
     version: "1.3.1",
     date: "November 20, 2026",
     previousCommit: "7eebe0a",
+    comparisonRef: "cd2d807fa9efb6840dee61e4ff4ff148904e7dae",
     changes: [
       "Redrew Gengar with pointed ears, red eyes, a broad toothy grin, and a rounded spiky silhouette.",
       "Rebuilt Link, Toon Link, the Zelda companions, and the Kingdom Hearts cast as individual colored ASCII drawings with clearer faces, outfits, shoes, and signature props.",
