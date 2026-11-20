@@ -2,6 +2,18 @@
 // the preceding production commit, rather than fictional in-game release notes.
 const patchNotes = [
   {
+    version: "1.2.0",
+    date: "November 19, 2026",
+    previousCommit: "8510a06",
+    changes: [
+      "Replaced the Bloom dock shortcut with ASCII, a terminal-style app with a mode chooser for bouquets and aquariums.",
+      "Added six animated ASCII aquariums: River Garden, Coral Cathedral, Moonlit Lagoon, Amber Kelp Forest, Midnight Glow, and Pokémon Cove.",
+      "Feed swimming fish by tapping the water or using Feed Fish. Turtles paddle, jellyfish pulse, plants sway, and bubbles rise in habitat-specific scenes.",
+      "Added six more bouquets: Cosmic Love, Golden Chrysanthemums, Velvet Irises, Apricot Freesias, Forget-Me-Not, and Stargazer Promise. All eighteen retain Mi Shell’s dedication.",
+      "Both modes support touch and keyboard navigation, pause controls, reduced motion, and suspended animation while hidden or minimized.",
+    ],
+  },
+  {
     version: "1.1.9",
     date: "November 19, 2026",
     previousCommit: "2d7150b",

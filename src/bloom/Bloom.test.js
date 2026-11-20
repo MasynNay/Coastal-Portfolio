@@ -140,7 +140,7 @@ test("the dock app pauses its frame loop when minimized or inactive and honors r
       act(() => stage.dispatchEvent(event));
     }
     act(() => host.querySelector('[aria-label="Previous Bouquet"]').click());
-    expect(canvas.getAttribute("aria-label")).toContain("Dahlia Dreams");
+    expect(canvas.getAttribute("aria-label")).toContain("Stargazer Promise");
     act(() => host.querySelector('[aria-label="Next Bouquet"]').click());
     expect(canvas.getAttribute("aria-label")).toContain("Garden Bouquet");
     act(() =>
@@ -163,7 +163,7 @@ test("the dock app pauses its frame loop when minimized or inactive and honors r
     pointer("pointerup", 240, 125);
     expect(canvas.getAttribute("aria-label")).toContain("Rose Romance");
     expect(host.querySelector('[aria-live="polite"]').textContent).toContain(
-      "2 of 12",
+      "2 of 18",
     );
     expect(host.textContent).toContain("For Mi Shell");
   } finally {

@@ -283,6 +283,152 @@ export const bouquetStyles = [
       },
     ],
   },
+  {
+    id: "cosmos",
+    name: "Cosmic Love",
+    seed: 153,
+    count: 12,
+    description:
+      "Airy pink and white cosmos with eight fine petals, cloud-blue wrapping, and a lilac ribbon.",
+    paper: [60, 67, 110, 153, 195, 231],
+    ribbon: [97, 134, 177, 183, 225],
+    flowers: [
+      {
+        kind: "disc",
+        petals: 8,
+        radius: 0.17,
+        palette: [125, 162, 168, 205, 211, 225],
+        center: GOLD,
+      },
+      {
+        kind: "disc",
+        petals: 8,
+        radius: 0.15,
+        palette: [145, 188, 230, 255, 231],
+        center: GOLD,
+      },
+    ],
+  },
+  {
+    id: "chrysanthemums",
+    name: "Golden Chrysanthemums",
+    seed: 164,
+    count: 7,
+    description:
+      "Golden pompom chrysanthemums with tightly curled layers, moss-green wrapping, and a copper ribbon.",
+    paper: [58, 65, 108, 151, 194, 230],
+    ribbon: [94, 130, 166, 172, 215, 223],
+    flowers: [
+      {
+        kind: "rose",
+        folds: 24,
+        layers: 32,
+        edgePetals: 24,
+        radius: 0.21,
+        palette: [94, 136, 178, 214, 220, 229],
+      },
+      {
+        kind: "rose",
+        folds: 24,
+        layers: 32,
+        edgePetals: 24,
+        radius: 0.18,
+        palette: [130, 166, 208, 214, 223, 230],
+      },
+    ],
+  },
+  {
+    id: "irises",
+    name: "Velvet Irises",
+    seed: 175,
+    count: 9,
+    description:
+      "Deep violet three-petaled irises with golden centers, midnight wrapping, and a silver ribbon.",
+    paper: [17, 24, 60, 97, 140, 183],
+    ribbon: [102, 145, 188, 252, 255, 231],
+    flowers: [
+      {
+        kind: "lily",
+        petals: 3,
+        radius: 0.23,
+        palette: [17, 54, 91, 98, 135, 183],
+        center: GOLD,
+      },
+      {
+        kind: "lily",
+        petals: 3,
+        radius: 0.2,
+        palette: [54, 91, 97, 134, 177, 225],
+        center: GOLD,
+      },
+    ],
+  },
+  {
+    id: "freesias",
+    name: "Apricot Freesias",
+    seed: 186,
+    count: 16,
+    description:
+      "A light spray of apricot and butter-yellow freesia bells, peach paper, and a sage ribbon.",
+    paper: [137, 180, 216, 223, 230, 231],
+    ribbon: [65, 108, 151, 157, 194],
+    flowers: [
+      { kind: "bell", radius: 0.12, palette: [130, 172, 209, 216, 223, 230] },
+      { kind: "bell", radius: 0.11, palette: [136, 178, 220, 229, 230, 231] },
+    ],
+  },
+  {
+    id: "forget-me-nots",
+    name: "Forget-Me-Not",
+    seed: 197,
+    count: 19,
+    description:
+      "Tiny sky-blue five-petaled blossoms with golden hearts, cream wrapping, and a deep-blue ribbon.",
+    paper: PAPER,
+    ribbon: [18, 25, 32, 68, 75, 111],
+    flowers: [
+      {
+        kind: "disc",
+        petals: 5,
+        radius: 0.105,
+        palette: [25, 32, 69, 75, 111, 153, 195],
+        center: GOLD,
+      },
+      {
+        kind: "disc",
+        petals: 5,
+        radius: 0.095,
+        palette: [61, 98, 104, 141, 147, 189],
+        center: GOLD,
+      },
+    ],
+  },
+  {
+    id: "stargazers",
+    name: "Stargazer Promise",
+    seed: 208,
+    count: 6,
+    description:
+      "Wide rose-pink stargazer lilies with six sweeping petals, blush paper, and a burgundy ribbon.",
+    paper: [95, 138, 181, 217, 224, 231],
+    ribbon: [52, 88, 125, 161, 204, 211],
+    flowers: [
+      {
+        kind: "lily",
+        petals: 6,
+        radius: 0.25,
+        palette: [125, 162, 168, 205, 211, 218, 225],
+        center: GOLD,
+      },
+      {
+        kind: "lily",
+        petals: 6,
+        radius: 0.22,
+        palette: [131, 168, 175, 211, 217, 224, 231],
+        center: GOLD,
+      },
+    ],
+  },
 ];
 
 function normalize([x, y, z]) {

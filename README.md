@@ -40,9 +40,11 @@ SO THAT the experience feels personal and gives me something to discover.
 
 Mac Mode includes independent app windows, a live wallpaper, a photo slideshow, games and a TypeNinja typing test. Game Mode uses Canvas 2D, with family characters, costumes, duck flights, axolotl surfing, fishing, bikes, boats, wakeboarding, a skateboard and beach activities, including a directional animated dragon kite and seven-second sandcastle construction.
 
-Bloom is a Mac dock app dedicated to my wife, Mi Shell. Its rotating bouquet is drawn with colored text, with pause and replay controls for keyboard and touch users. The browser adaptation credits [Alish Sharma’s ASCII Flower Bouquet](https://github.com/alishsharma17/Ascii-Flower-Bouquet-) and includes its [MIT license](public/licenses/AsciiBouquet.txt).
+ASCII is a terminal-style Mac dock app with a choice of animated bouquets and living aquariums. Eighteen bouquets are dedicated to my wife, Mi Shell, with distinct flower shapes, wrapping, and ribbons. Swipe, use the arrow buttons, or press the arrow keys to explore them. Pause and replay controls remain available.
 
-Swipe through twelve arrangements in Bloom, including roses, tulips, sunflowers, lavender, lilies, peonies, orchids, hydrangeas, poppies, bluebells, dahlias, and the mixed garden bouquet. Each has its own flower shapes, wrapping, and ribbon. Arrow buttons and keyboard arrow keys also change bouquets.
+Six text-art aquariums include River Garden, Coral Cathedral, Moonlit Lagoon, Amber Kelp Forest, Midnight Glow, and Pokémon Cove. Fish swim and gather for food; turtles paddle, jellyfish pulse, bubbles rise, and rooted plants sway. Tap the water or choose Feed Fish, swipe between habitats, and pause the tank to look closely. Hidden or minimized scenes suspend their animation loops, and reduced-motion preferences are respected.
+
+The bouquet renderer adapts [Alish Sharma’s ASCII Flower Bouquet](https://github.com/alishsharma17/Ascii-Flower-Bouquet-) and retains its [MIT license](public/licenses/AsciiBouquet.txt). Aquarium models and rendering live in `src/ascii/`; the existing bouquet math remains in `src/bloom/`.
 
 The island has 500 bugs across five equally likely groups, 250 aquatic species with freshwater and saltwater habitats, and 50 seashell varieties. Duplicate catches increase quantities. A shared field guide records discoveries, even after a creature is released. Collections and scores stay on the visitor's device.
 

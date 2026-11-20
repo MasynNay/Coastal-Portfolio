@@ -159,21 +159,6 @@
   opacity: 0.5;
 }
 
-/* This color is used by Bloom's icon in the Mac dock. */
-.desktop-app-icon.icon-bloom {
-  background: linear-gradient(145deg, #9e416b, #402b4d);
-  color: #ffdcdf;
-}
-
-/* A portrait window suits the original terminal composition. The green window
-   control still expands it, and the shared mobile rules keep it on screen. */
-@media (min-width: 1025px) and (pointer: fine) {
-  .desktop-window.window-bloom {
-    width: min(500px, calc(100% - 24px));
-    height: min(720px, calc(100% - 110px));
-  }
-}
-
 @media (max-width: 400px) {
   .bloom-command {
     padding: 12px 14px 8px;

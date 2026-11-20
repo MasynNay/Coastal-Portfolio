@@ -7,8 +7,8 @@ jest.mock("../pages/ResumePage", () => () => null);
 jest.mock("../components/Projects", () => ({ Projects: () => null }));
 jest.mock("../components/Contact", () => ({ Contact: () => null }));
 jest.mock("../typing/TypingTest", () => () => null);
-jest.mock("../bloom/Bloom", () => ({ active }) => (
-  <div data-bloom-active={String(active)}>ASCII bouquet</div>
+jest.mock("../ascii/AsciiApp", () => ({ active }) => (
+  <div data-ascii-active={String(active)}>ASCII terminal</div>
 ));
 let host, root;
 beforeEach(() => {
@@ -90,25 +90,25 @@ function pointer(node, type, x, y, extra = {}) {
   return event;
 }
 
-test("Bloom opens from the dock and suspends while minimized or another app is in front", () => {
-  const dock = host.querySelector('[aria-label="Open Bloom"]');
+test("ASCII opens from the dock and suspends while minimized or another app is in front", () => {
+  const dock = host.querySelector('[aria-label="Open ASCII"]');
   act(() => dock.click());
-  const bloom = host.querySelector('[role="dialog"][aria-label="Bloom"]');
-  expect(bloom.textContent).toContain("ASCII bouquet");
-  expect(bloom.querySelector('[data-bloom-active="true"]')).not.toBeNull();
+  const bloom = host.querySelector('[role="dialog"][aria-label="ASCII"]');
+  expect(bloom.textContent).toContain("ASCII terminal");
+  expect(bloom.querySelector('[data-ascii-active="true"]')).not.toBeNull();
   act(() => host.querySelector('[aria-label="Open Skills"]').click());
-  expect(bloom.querySelector('[data-bloom-active="false"]')).not.toBeNull();
+  expect(bloom.querySelector('[data-ascii-active="false"]')).not.toBeNull();
   act(() => dock.click());
   expect(
-    host.querySelectorAll('[role="dialog"][aria-label="Bloom"]'),
+    host.querySelectorAll('[role="dialog"][aria-label="ASCII"]'),
   ).toHaveLength(1);
-  act(() => bloom.querySelector('[aria-label="Minimize Bloom"]').click());
+  act(() => bloom.querySelector('[aria-label="Minimize ASCII"]').click());
   expect(bloom.hidden).toBe(true);
-  expect(bloom.querySelector('[data-bloom-active="false"]')).not.toBeNull();
+  expect(bloom.querySelector('[data-ascii-active="false"]')).not.toBeNull();
   act(() => dock.click());
   expect(bloom.hidden).toBe(false);
-  act(() => bloom.querySelector('[aria-label="Close Bloom"]').click());
-  expect(host.querySelector('[role="dialog"][aria-label="Bloom"]')).toBeNull();
+  act(() => bloom.querySelector('[aria-label="Close ASCII"]').click());
+  expect(host.querySelector('[role="dialog"][aria-label="ASCII"]')).toBeNull();
   expect(document.activeElement).toBe(dock);
 });
 

@@ -7,7 +7,7 @@ import {
 } from "./Bouquet";
 import "./Bloom.css";
 
-export default function Bloom({ active }) {
+export default function Bloom({ active, embedded = false }) {
   const canvasRef = useRef(null);
   const elapsed = useRef(0);
   const swipe = useRef(null);
@@ -138,10 +138,12 @@ export default function Bloom({ active }) {
 
   return (
     <div className="bloom-app">
-      <p className="bloom-command">
-        <span>masyn@mac</span> <span className="bloom-path">~ %</span> python3
-        bouquet.py
-      </p>
+      {!embedded && (
+        <p className="bloom-command">
+          <span>masyn@mac</span> <span className="bloom-path">~ %</span> python3
+          bouquet.py
+        </p>
+      )}
       <div className="bloom-picker" aria-label="Choose a bouquet">
         <button aria-label="Previous Bouquet" onClick={() => changeBouquet(-1)}>
           <span aria-hidden="true">‹</span>

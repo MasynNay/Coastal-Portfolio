@@ -16,7 +16,6 @@ import {
   Controller,
   Images,
   Keyboard,
-  Flower1,
 } from "react-bootstrap-icons";
 import { Projects } from "../components/Projects";
 import { Contact } from "../components/Contact";
@@ -31,7 +30,7 @@ import MacAppearance, {
 import { MacMenu, AboutMac } from "./MacMenu";
 import { GamesApp, GamePlayer, PhotosApp } from "./MacApps";
 import TypingTest from "../typing/TypingTest";
-import Bloom from "../bloom/Bloom";
+import AsciiApp from "../ascii/AsciiApp";
 import useWindowDrag from "../hooks/useWindowDrag";
 import "./glass.css";
 import "./desktop.css";
@@ -43,7 +42,7 @@ const apps = [
   { id: "resume", title: "Resume", Icon: FileEarmarkText, color: "paper" },
   { id: "contact", title: "Contact", Icon: Envelope, color: "mail" },
   { id: "typing", title: "Typing Test", Icon: Keyboard, color: "teal" },
-  { id: "bloom", title: "Bloom", Icon: Flower1, color: "bloom" },
+  { id: "ascii", title: "ASCII", Icon: Terminal, color: "ascii" },
   { id: "games", title: "Games", Icon: Controller, color: "blue" },
   { id: "photos", title: "Photos", Icon: Images, color: "folder" },
 ];
@@ -210,8 +209,10 @@ export function DesktopPortfolio() {
                       active={active === "typing" && !window.minimized}
                     />
                   )}
-                  {window.id === "bloom" && (
-                    <Bloom active={active === "bloom" && !window.minimized} />
+                  {window.id === "ascii" && (
+                    <AsciiApp
+                      active={active === "ascii" && !window.minimized}
+                    />
                   )}
                   {window.id === "about" && (
                     <div className="desktop-about">
@@ -361,11 +362,11 @@ function DesktopWindow({
 }) {
   const initialPosition = {
     x:
-      app.id === "typing" || app.id === "bloom"
+      app.id === "typing" || app.id === "ascii"
         ? 40
         : 90 + apps.findIndex((item) => item.id === app.id) * 25,
     y:
-      app.id === "typing" || app.id === "bloom"
+      app.id === "typing" || app.id === "ascii"
         ? 24
         : 42 + apps.findIndex((item) => item.id === app.id) * 22,
   };
@@ -394,7 +395,7 @@ function DesktopWindow({
       aria-label={app.title}
       tabIndex={-1}
       hidden={minimized}
-      className={`desktop-window ${app.id === "bloom" ? "window-bloom" : ""} ${app.largePlayer ? "window-large-game" : ""} ${active ? "window-active" : ""} ${maximized ? "window-maximized" : ""} ${dragging ? "window-dragging" : ""}`}
+      className={`desktop-window ${app.id === "ascii" ? "window-ascii" : ""} ${app.largePlayer ? "window-large-game" : ""} ${active ? "window-active" : ""} ${maximized ? "window-maximized" : ""} ${dragging ? "window-dragging" : ""}`}
       style={{
         "--window-start-x": `${initialPosition.x}px`,
         "--window-start-y": `${initialPosition.y}px`,
