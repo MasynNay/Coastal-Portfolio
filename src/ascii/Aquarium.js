@@ -6,6 +6,7 @@ import {
   renderAquarium,
   updateAquarium,
 } from "./AquariumScene";
+import { getSceneAction } from "./Worlds";
 
 export default function Aquarium({ active = true }) {
   const canvasRef = useRef(null);
@@ -13,11 +14,10 @@ export default function Aquarium({ active = true }) {
   const swipe = useRef(null);
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
-  const [status, setStatus] = useState(
-    "Tap the water to feed, or use Feed Fish.",
-  );
+  const [status, setStatus] = useState("");
   const [available, setAvailable] = useState(true);
   const style = aquariumStyles[index];
+  const action = getSceneAction(style);
   const paint = useRef(() => {});
 
   // The scene survives pause and app focus changes. Only a habitat change
@@ -81,10 +81,13 @@ export default function Aquarium({ active = true }) {
   }, [active, paused, style]);
 
   function change(direction) {
-    setIndex(
-      (i) => (i + direction + aquariumStyles.length) % aquariumStyles.length,
+    selectScene(
+      (index + direction + aquariumStyles.length) % aquariumStyles.length,
     );
-    setStatus("Tap the water to feed, or use Feed Fish.");
+  }
+  function selectScene(next) {
+    setIndex(next);
+    setStatus("");
   }
   function feed(x = 0.5) {
     const added = feedAquarium(sceneRef.current, x);
@@ -92,24 +95,40 @@ export default function Aquarium({ active = true }) {
     setStatus(
       added
         ? paused
-          ? "Food added. Resume the tank to watch them gather."
-          : "Dinner is served. Watch the swimmers gather!"
-        : "They have plenty to nibble on. Give them a moment.",
+          ? "Ready when you are. Resume the scene to watch it unfold."
+          : action.success
+        : "Give the scene a moment before adding more.",
     );
   }
   return (
-    <section className="aquarium-app" aria-label="ASCII aquariums">
-      <div className="aquarium-picker" aria-label="Choose an aquarium">
-        <button aria-label="Previous Aquarium" onClick={() => change(-1)}>
+    <section className="aquarium-app" aria-label="ASCII aquariums and worlds">
+      <div className="aquarium-picker" aria-label="Browse scenes">
+        <button aria-label="Previous Scene" onClick={() => change(-1)}>
           ‹
         </button>
-        <p aria-live="polite">
-          <strong>{style.name}</strong>
-          <span>
+        <div className="aquarium-caption">
+          <select
+            aria-label="Choose Scene"
+            value={style.id}
+            onChange={(event) =>
+              selectScene(
+                aquariumStyles.findIndex(
+                  (item) => item.id === event.target.value,
+                ),
+              )
+            }
+          >
+            {aquariumStyles.map((item) => (
+              <option key={item.id} value={item.id}>
+                {item.name}
+              </option>
+            ))}
+          </select>
+          <span aria-live="polite">
             {index + 1} of {aquariumStyles.length} · Swipe to explore
           </span>
-        </p>
-        <button aria-label="Next Aquarium" onClick={() => change(1)}>
+        </div>
+        <button aria-label="Next Scene" onClick={() => change(1)}>
           ›
         </button>
       </div>
@@ -118,7 +137,7 @@ export default function Aquarium({ active = true }) {
           ref={canvasRef}
           role="img"
           tabIndex={0}
-          aria-label={`${style.name}. ${style.description} Tap to feed. Left and right arrows change aquariums. Enter feeds the fish.`}
+          aria-label={`${style.name}. ${style.description} ${action.instruction} Left and right arrows change scenes. Enter activates ${action.label}.`}
           onKeyDown={(event) => {
             if (["ArrowLeft", "ArrowRight", "Enter", " "].includes(event.key)) {
               event.preventDefault();
@@ -163,26 +182,26 @@ export default function Aquarium({ active = true }) {
       <p className="aquarium-description">{style.description}</p>
       <div className="aquarium-controls">
         <button onClick={() => feed()} disabled={!available}>
-          Feed Fish
+          {action.label}
         </button>
         <button
           onClick={() => {
             if (paused)
               setStatus(
                 sceneRef.current.food.length
-                  ? "Dinner is served. Watch the swimmers gather!"
-                  : "Tap the water to feed, or use Feed Fish.",
+                  ? action.success
+                  : action.instruction,
               );
             setPaused((value) => !value);
           }}
           disabled={!available}
         >
-          {paused ? "Resume Tank" : "Pause Tank"}
+          {paused ? "Resume Scene" : "Pause Scene"}
         </button>
       </div>
       <p className="aquarium-status" role="status">
         {available
-          ? status
+          ? status || action.instruction
           : "This browser couldn’t draw the aquarium. Please try another browser."}
       </p>
     </section>

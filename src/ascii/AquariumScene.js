@@ -1,6 +1,15 @@
-// Aquariums are drawn entirely with monospace characters, not sprite images.
+// Living worlds are drawn entirely with monospace characters, not sprite images.
 // The model owns movement and feeding; the renderer only reads it. Keeping
 // simulation time separate from wall time prevents jumps after minimizing.
+import { aquariumStyles } from "./Worlds";
+import { drawPokemon } from "./Pokemon";
+import {
+  drawWorldCreature,
+  drawWorldLandscape,
+  drawHabitatDetails,
+} from "./WorldArt";
+export { aquariumStyles } from "./Worlds";
+
 const clamp = (n, low, high) => Math.max(low, Math.min(high, n));
 const mix = (a, b, t) => a.map((v, i) => Math.round(v + (b[i] - v) * t));
 const rgb = (color) => `rgb(${color.join(",")})`;
@@ -9,120 +18,25 @@ const CORAL = [246, 128, 154];
 const BLUE = [94, 192, 235];
 const SILVER = [167, 217, 214];
 
-export const aquariumStyles = [
-  {
-    id: "river",
-    name: "River Garden",
-    description:
-      "A sunlit freshwater garden. Tetras school through ribbon plants and a little turtle takes the scenic route.",
-    water: [9, 29, 38],
-    plant: [83, 161, 120],
-    accent: [150, 211, 167],
-    bed: [101, 130, 109],
-    animals: [
-      "tetra",
-      "tetra",
-      "tetra",
-      "tetra",
-      "goldfish",
-      "goldfish",
-      "turtle",
-    ],
-    landscape: "plants",
-  },
-  {
-    id: "reef",
-    name: "Coral Cathedral",
-    description:
-      "Clownfish, striped reef fish, and a sea turtle weave through a garden of branching coral.",
-    water: [8, 28, 52],
-    plant: [219, 113, 160],
-    accent: [128, 220, 216],
-    bed: [159, 151, 132],
-    animals: [
-      "clownfish",
-      "clownfish",
-      "angelfish",
-      "angelfish",
-      "tang",
-      "turtle",
-      "tetra",
-    ],
-    landscape: "coral",
-  },
-  {
-    id: "moon",
-    name: "Moonlit Lagoon",
-    description:
-      "Lavender jellyfish pulse under moonlight. Silver fish drift past soft, swaying seagrass.",
-    water: [12, 17, 42],
-    plant: [104, 120, 176],
-    accent: [191, 176, 238],
-    bed: [92, 104, 139],
-    animals: [
-      "jelly",
-      "jelly",
-      "jelly",
-      "silver",
-      "silver",
-      "silver",
-      "turtle",
-    ],
-    landscape: "plants",
-  },
-  {
-    id: "kelp",
-    name: "Amber Kelp Forest",
-    description:
-      "Golden ribbons of kelp, curious seahorses, and warm shoals in the late afternoon light.",
-    water: [10, 31, 35],
-    plant: [148, 161, 83],
-    accent: [230, 190, 112],
-    bed: [112, 128, 100],
-    animals: [
-      "seahorse",
-      "seahorse",
-      "goldfish",
-      "silver",
-      "silver",
-      "turtle",
-      "goldfish",
-    ],
-    landscape: "kelp",
-  },
-  {
-    id: "deep",
-    name: "Midnight Glow",
-    description:
-      "A deep-sea dream: luminous jellyfish, tiny lantern fish, and bioluminescent coral.",
-    water: [5, 12, 29],
-    plant: [76, 124, 170],
-    accent: [124, 230, 230],
-    bed: [66, 80, 115],
-    animals: [
-      "jelly",
-      "jelly",
-      "jelly",
-      "lantern",
-      "lantern",
-      "lantern",
-      "lantern",
-    ],
-    landscape: "coral",
-  },
-  {
-    id: "pokemon",
-    name: "Pokémon Cove",
-    description:
-      "Magikarp splash, Horsea bob, and a familiar blue sea traveler glides through a playful pocket-sized reef.",
-    water: [9, 26, 49],
-    plant: [93, 158, 164],
-    accent: [153, 213, 246],
-    bed: [132, 151, 157],
-    animals: ["magikarp", "magikarp", "horsea", "horsea", "lapras", "magikarp"],
-    landscape: "coral",
-  },
-];
+// Residents with tall silhouettes or bottom-dwelling habits need their own
+// home height. The same origin is used after feeding and on first render.
+function homeHeight(style, kind, index) {
+  if (style.positions?.[index]) return style.positions[index][1];
+  if (kind === "lapras") return 0.52;
+  if (["crab", "frog"].includes(kind)) return 0.7;
+  if (
+    [
+      "sky-lantern",
+      "squirtle",
+      "psyduck",
+      "magikarp",
+      "horsea",
+      "poliwag",
+    ].includes(kind)
+  )
+    return 0.3 + (index % 3) * 0.16;
+  return 0.19 + ((index * 0.137) % 0.46);
+}
 
 export function createAquarium(style = aquariumStyles[0]) {
   return {
@@ -132,8 +46,12 @@ export function createAquarium(style = aquariumStyles[0]) {
     fed: 0,
     creatures: style.animals.map((kind, i) => ({
       kind,
-      x: 0.16 + ((i * 0.169) % 0.68),
-      y: 0.19 + ((i * 0.137) % 0.46),
+      x:
+        style.positions?.[i]?.[0] ??
+        (style.animals.length <= 3
+          ? 0.22 + i * 0.28
+          : 0.16 + ((i * 0.169) % 0.68)),
+      y: homeHeight(style, kind, i),
       direction: i % 2 ? -1 : 1,
       seed: i + 1,
       speed:
@@ -141,13 +59,19 @@ export function createAquarium(style = aquariumStyles[0]) {
           ? 0.019
           : 0.025 + (i % 3) * 0.007,
       size:
-        kind === "lapras"
-          ? 1.3
-          : kind === "turtle"
-            ? 1.05
-            : kind === "tetra" || kind === "lantern"
-              ? 0.64
-              : 0.85,
+        {
+          lapras: 1,
+          magikarp: 1.1,
+          horsea: 1.05,
+          squirtle: 1.1,
+          poliwag: 1.05,
+          psyduck: 1.05,
+        }[kind] ??
+        (kind === "turtle"
+          ? 1.05
+          : kind === "tetra" || kind === "lantern"
+            ? 0.64
+            : 0.85),
     })),
   };
 }
@@ -159,7 +83,12 @@ export function feedAquarium(scene, x = 0.5) {
   for (let i = 0; i < 6; i++) {
     scene.food.push({
       x: clamp(x + (i - 2.5) * 0.018, 0.16, 0.84),
-      y: 0.06 + (i % 2) * 0.02,
+      y:
+        scene.style.action === "lanterns"
+          ? 0.83 + (i % 2) * 0.03
+          : scene.style.action === "nectar"
+            ? 0.35 + (i % 2) * 0.03
+            : 0.06 + (i % 2) * 0.02,
       age: 0,
     });
   }
@@ -170,15 +99,49 @@ export function updateAquarium(scene, seconds) {
   const dt = clamp(seconds, 0, 0.08);
   scene.time += dt;
   for (const food of scene.food) {
-    food.y += dt * 0.025;
+    food.y +=
+      dt *
+      (scene.style.action === "lanterns"
+        ? -0.045
+        : scene.style.action === "meteors"
+          ? 0.12
+          : scene.style.action === "nectar"
+            ? 0.008
+            : 0.025);
+    if (scene.style.action === "meteors") food.x += dt * 0.045;
     food.age += dt;
   }
-  scene.food = scene.food.filter((food) => food.age < 14 && food.y < 0.86);
+  scene.food = scene.food.filter(
+    (food) => food.age < 14 && food.y < 0.9 && food.y > 0.05 && food.x < 1,
+  );
   for (const creature of scene.creatures) {
     // The long-necked cove visitor eats with its head, leaving its body below
     // the surface instead of clipping the neck out of the top of the canvas.
-    const mouthOffset = creature.kind === "lapras" ? 0.23 : 0;
-    const edible = !["jelly", "seahorse", "horsea"].includes(creature.kind);
+    const mouthOffset =
+      {
+        lapras: 0.32,
+        magikarp: 0.23,
+        squirtle: 0.18,
+        poliwag: 0.14,
+        psyduck: 0.25,
+        ray: 0.13,
+        turtle: 0.1,
+        octopus: 0.1,
+        axolotl: 0.1,
+        shark: 0.11,
+        penguin: 0.08,
+        seal: 0.1,
+      }[creature.kind] ?? 0;
+    const edible = ![
+      "jelly",
+      "seahorse",
+      "horsea",
+      "rocket",
+      "ufo",
+      "satellite",
+      "sky-lantern",
+      "frog",
+    ].includes(creature.kind);
     const target =
       edible &&
       scene.food.reduce((best, food) => {
@@ -202,7 +165,7 @@ export function updateAquarium(scene, seconds) {
       }
     } else {
       creature.x += dt * creature.speed * creature.direction;
-      const homeY = 0.19 + (((creature.seed - 1) * 0.137) % 0.46);
+      const homeY = homeHeight(scene.style, creature.kind, creature.seed - 1);
       creature.y += (homeY - creature.y) * dt * 0.5;
       if (creature.x > 0.86) {
         creature.x = 0.86;
@@ -258,10 +221,33 @@ function textGrid(columns, rows) {
       }
     }
   }
-  return { columns, rows, glyphs, colors, put, line, oval };
+  // Scan-line fill lets fins, crowns, tails and spacecraft have deliberate
+  // outlines. Both mirrored orientations use the same vertex list.
+  function polygon(vertices, color) {
+    const low = Math.max(0, Math.floor(Math.min(...vertices.map((p) => p[1]))));
+    const high = Math.min(
+      rows - 1,
+      Math.ceil(Math.max(...vertices.map((p) => p[1]))),
+    );
+    for (let y = low; y <= high; y++) {
+      const hits = [];
+      for (let i = 0; i < vertices.length; i++) {
+        const a = vertices[i],
+          b = vertices[(i + 1) % vertices.length];
+        if ((a[1] <= y && b[1] > y) || (b[1] <= y && a[1] > y))
+          hits.push(a[0] + ((y - a[1]) / (b[1] - a[1])) * (b[0] - a[0]));
+      }
+      hits.sort((a, b) => a - b);
+      for (let i = 0; i < hits.length - 1; i += 2)
+        for (let x = Math.ceil(hits[i]); x <= hits[i + 1]; x++)
+          put(x, y, (x + y) % 3 ? "#" : "+", color);
+    }
+  }
+  return { columns, rows, glyphs, colors, put, line, oval, polygon };
 }
 
 function landscape(grid, scene) {
+  if (drawWorldLandscape(grid, scene)) return;
   const { columns: w, rows: h, put, line, oval } = grid;
   const { style, time } = scene;
   // Slow, low-contrast rays and suspended specks stay behind the silhouettes.
@@ -292,7 +278,11 @@ function landscape(grid, scene) {
   [0.06, 0.19, 0.77, 0.91].forEach((p, i) => {
     oval(w * p, h - 5, 8 + (i % 3), 2.5, mix(style.bed, style.water, 0.35));
   });
-  for (let plant = 0; plant < 15; plant++) {
+  for (
+    let plant = 0;
+    plant < (style.landscape === "sand" || style.landscape === "ice" ? 4 : 15);
+    plant++
+  ) {
     const base = ((plant * 0.173 + 0.035) % 1) * w;
     const height =
       h *
@@ -331,6 +321,7 @@ function landscape(grid, scene) {
       }
     }
   }
+  drawHabitatDetails(grid, scene);
   // Bubbles follow separate columns with staggered phases and sizes.
   for (let i = 0; i < 14; i++) {
     const phase = (time * 0.045 + i * 0.173) % 1;
@@ -347,7 +338,12 @@ function landscape(grid, scene) {
 function drawCreature(grid, c, time, index) {
   const scale = Math.min(grid.columns / 115, grid.rows / 55) * c.size * 1.6;
   const x = c.x * grid.columns;
-  const y = c.y * grid.rows + Math.sin(time * 1.4 + index) * 0.6;
+  const y =
+    (c.kind === "sky-lantern" && !c.particle
+      ? 0.18 + ((((c.y - time * 0.012) % 0.6) + 0.6) % 0.6)
+      : c.y) *
+      grid.rows +
+    Math.sin(time * 1.4 + index) * 0.6;
   const d = c.direction;
   const { put, oval, line } = grid;
   const at = (u, v, glyph, color) =>
@@ -375,6 +371,13 @@ function drawCreature(grid, c, time, index) {
     at(u + 0.6, v, ".", [10, 21, 32]);
   };
   const beat = Math.sin(time * 4 + index);
+  const polygon = (vertices, color) =>
+    grid.polygon(
+      vertices.map(([u, v]) => [x + u * scale * d, y + v * scale]),
+      color,
+    );
+  const art = { at, body, stroke, polygon, beat, time };
+  if (drawPokemon(art, c.kind) || drawWorldCreature(art, c.kind, index)) return;
   if (c.kind === "jelly") {
     const pink = index % 2 ? [207, 155, 242] : [124, 221, 227];
     for (let i = -3; i <= 3; i++) {
@@ -406,8 +409,8 @@ function drawCreature(grid, c, time, index) {
     at(-7, 0, "<", green);
     return;
   }
-  if (c.kind === "seahorse" || c.kind === "horsea") {
-    const color = c.kind === "horsea" ? BLUE : GOLD;
+  if (c.kind === "seahorse") {
+    const color = index % 2 ? CORAL : GOLD;
     stroke(-3, 0, -5, 2 + beat, color, ":");
     body(-1, 1, 3, 4, color);
     body(0, -4, 3, 2.5, color);
@@ -421,21 +424,7 @@ function drawCreature(grid, c, time, index) {
       at(-3, -3 + j * 2, "<", mix(color, [241, 224, 167], 0.35));
     return;
   }
-  if (c.kind === "lapras") {
-    body(-1, 2, 7, 3.5, BLUE);
-    body(-2, 0, 5.5, 2.7, [154, 174, 198], (u, v) =>
-      Math.sin(u * 14) > 0.5 && v < 0 ? [224, 227, 229] : [131, 158, 184],
-    );
-    body(4, -1, 2, 5, BLUE);
-    body(5, -5, 3, 2, BLUE);
-    body(-4, 5, 4, 1.2 + beat * 0.3, BLUE);
-    body(3, 5, 3, 1.2 - beat * 0.3, BLUE);
-    at(3, -7, "^", BLUE);
-    at(6, -7, "^", BLUE);
-    eye(6, -5);
-    return;
-  }
-  const color = ["clownfish", "magikarp", "goldfish"].includes(c.kind)
+  const color = ["clownfish", "goldfish", "koi"].includes(c.kind)
     ? GOLD
     : c.kind === "angelfish"
       ? [218, 211, 165]
@@ -455,12 +444,16 @@ function drawCreature(grid, c, time, index) {
       mix(color, CORAL, 0.2),
       ":",
     );
-  if (["angelfish", "magikarp"].includes(c.kind)) {
+  if (c.kind === "angelfish") {
     for (let j = -3; j < 3; j++)
       stroke(j, -2, j - 1, -5 + Math.abs(j), color, "^");
     stroke(0, 2, -2, 5, color, "v");
   }
   body(0, 0, 6, c.kind === "angelfish" ? 4 : 2.6, color, (u, v) => {
+    if (c.kind === "koi")
+      return Math.sin(u * 5 + index) * Math.cos(v * 6) > 0.25
+        ? [246, 128, 72]
+        : [237, 243, 231];
     if (c.kind === "clownfish" && Math.cos((u + 0.1) * 9) > 0.55)
       return [238, 238, 221];
     if (c.kind === "angelfish" && Math.sin(u * 11) > 0.55)
@@ -471,10 +464,6 @@ function drawCreature(grid, c, time, index) {
   stroke(-1, 0.5, -2, 2.8 + beat * 0.3, mix(color, [255, 230, 178], 0.5), "/");
   eye(3.5, -0.8);
   at(6, 0.5, ">", color);
-  if (c.kind === "magikarp") {
-    stroke(5, 1, 8, 3, GOLD, "~");
-    stroke(4, -1, 7, -3, GOLD, "~");
-  }
   if (c.kind === "lantern") {
     stroke(3, -2, 4, -4, BLUE, ":");
     at(5, -4, "*", [218, 255, 184]);
@@ -489,9 +478,33 @@ export function renderAquarium(context, scene, width, height) {
   const grid = textGrid(columns, rows);
   landscape(grid, scene);
   scene.creatures.forEach((c, i) => drawCreature(grid, c, scene.time, i));
-  scene.food.forEach((food) =>
-    grid.put(food.x * columns, food.y * rows, "*", [252, 214, 137]),
-  );
+  scene.food.forEach((food, i) => {
+    if (scene.style.action === "lanterns")
+      drawCreature(
+        grid,
+        {
+          kind: "sky-lantern",
+          x: food.x,
+          y: food.y,
+          direction: 1,
+          size: 0.38,
+          particle: true,
+        },
+        0,
+        i,
+      );
+    else if (scene.style.action === "meteors") {
+      grid.line(
+        food.x * columns - 7,
+        food.y * rows - 3,
+        food.x * columns,
+        food.y * rows,
+        [184, 194, 231],
+        ":",
+      );
+      grid.put(food.x * columns, food.y * rows, "*", [255, 230, 167]);
+    } else grid.put(food.x * columns, food.y * rows, "*", [252, 214, 137]);
+  });
   context.fillStyle = rgb(scene.style.water);
   context.fillRect(0, 0, width, height);
   const cell = Math.min(width / columns, height / (rows * 1.55));

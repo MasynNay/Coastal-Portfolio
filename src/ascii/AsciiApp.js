@@ -2,6 +2,8 @@ import { useRef, useState } from "react";
 import Bloom from "../bloom/Bloom";
 import Aquarium from "./Aquarium";
 import "./AsciiApp.css";
+import { aquariumStyles } from "./Worlds";
+import { bouquetStyles } from "../bloom/Bouquet";
 
 // One dock window owns the terminal menu. Keep opened modes mounted so a trip
 // back to the menu preserves the selected bouquet, habitat, and pause setting.
@@ -19,7 +21,9 @@ export default function AsciiApp({ active = true }) {
       <header className="ascii-toolbar">
         <p ref={heading} tabIndex={-1}>
           <span>masyn@mac</span> <span className="ascii-muted">~ %</span>{" "}
-          {mode ? `ascii --${mode}` : "ascii --explore"}
+          {mode
+            ? `ascii --${mode === "aquarium" ? "worlds" : mode}`
+            : "ascii --explore"}
           <span className="ascii-cursor" aria-hidden="true">
             _
           </span>
@@ -46,7 +50,9 @@ export default function AsciiApp({ active = true }) {
               </pre>
               <span>
                 <strong>Bouquets</strong>
-                <span>Eighteen arrangements. One very special person.</span>
+                <span>
+                  {bouquetStyles.length} arrangements. One very special person.
+                </span>
                 <small>For Mi Shell ♥</small>
               </span>
             </button>
@@ -57,12 +63,12 @@ export default function AsciiApp({ active = true }) {
                 }
               </pre>
               <span>
-                <strong>Aquariums</strong>
+                <strong>Aquariums & Worlds</strong>
                 <span>
-                  Six living waterscapes. Feed the fish and watch the world
-                  drift by.
+                  {aquariumStyles.length} animated scenes. Feed the fish,
+                  explore a garden, or drift into space.
                 </span>
-                <small>Reefs, rivers & a Pokémon cove</small>
+                <small>Reefs, Pokémon, fireflies & more</small>
               </span>
             </button>
           </div>

@@ -45,11 +45,11 @@ test("aquarium pause, app visibility, reduced motion, feeding, and touch gesture
     expect(host.querySelector('[role="status"]').textContent).toContain(
       "Dinner is served",
     );
-    act(() => button("Pause Tank").click());
+    act(() => button("Pause Scene").click());
     expect(cancel).toHaveBeenCalledWith(45);
     act(() => button("Feed Fish").click());
-    expect(host.textContent).toContain("Resume the tank");
-    act(() => button("Resume Tank").click());
+    expect(host.textContent).toContain("Resume the scene");
+    act(() => button("Resume Scene").click());
     expect(request).toHaveBeenCalledTimes(2);
     act(() => root.render(<Aquarium active={false} />));
     expect(request).toHaveBeenCalledTimes(2);
@@ -91,6 +91,24 @@ test("aquarium pause, app visibility, reduced motion, feeding, and touch gesture
       ),
     );
     expect(canvas.getAttribute("aria-label")).toContain("River Garden");
+    const chooser = host.querySelector('select[aria-label="Choose Scene"]');
+    function choose(id) {
+      act(() => {
+        chooser.value = id;
+        chooser.dispatchEvent(new Event("change", { bubbles: true }));
+      });
+    }
+    choose("orbit");
+    expect(canvas.getAttribute("aria-label")).toContain("Meteor Shower");
+    act(() => button("Meteor Shower").click());
+    expect(host.querySelector('[role="status"]').textContent).toContain(
+      "meteor shower",
+    );
+    choose("lanterns");
+    expect(button("Release Lanterns")).toBeDefined();
+    expect(host.querySelector('[role="status"]').textContent).toContain(
+      "Tap the sky",
+    );
   } finally {
     act(() => root.unmount());
     host.remove();

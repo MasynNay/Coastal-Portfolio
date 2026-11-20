@@ -2,6 +2,18 @@
 // the preceding production commit, rather than fictional in-game release notes.
 const patchNotes = [
   {
+    version: "1.2.1",
+    date: "November 20, 2026",
+    previousCommit: "3bb3cdd",
+    changes: [
+      "Expanded ASCII’s living-world collection from six to eighteen scenes, matching the eighteen bouquets.",
+      "Added koi, axolotls, seahorses, octopuses, Arctic swimmers, rays, a mangrove nursery, and a second Pokémon habitat.",
+      "Redrew Magikarp, Horsea, and Lapras with their own recognizable shapes and details, and added Squirtle, Poliwag, and Psyduck.",
+      "Added Firefly Meadow, Rainforest Terrarium, Little Solar System, and Lantern Festival, with nectar, meteor-shower, and lantern-release interactions.",
+      "Added a direct scene selector alongside swipe and arrow navigation. Instructions and action labels now match each setting.",
+    ],
+  },
+  {
     version: "1.2.0",
     date: "November 19, 2026",
     previousCommit: "8510a06",

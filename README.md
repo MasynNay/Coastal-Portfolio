@@ -42,7 +42,9 @@ Mac Mode includes independent app windows, a live wallpaper, a photo slideshow, 
 
 ASCII is a terminal-style Mac dock app with a choice of animated bouquets and living aquariums. Eighteen bouquets are dedicated to my wife, Mi Shell, with distinct flower shapes, wrapping, and ribbons. Swipe, use the arrow buttons, or press the arrow keys to explore them. Pause and replay controls remain available.
 
-Six text-art aquariums include River Garden, Coral Cathedral, Moonlit Lagoon, Amber Kelp Forest, Midnight Glow, and Pokémon Cove. Fish swim and gather for food; turtles paddle, jellyfish pulse, bubbles rise, and rooted plants sway. Tap the water or choose Feed Fish, swipe between habitats, and pause the tank to look closely. Hidden or minimized scenes suspend their animation loops, and reduced-motion preferences are respected.
+Eighteen living text-art scenes match the eighteen bouquets. Aquariums range from planted freshwater gardens and coral reefs to koi ponds, axolotl hideaways, octopus grottoes, Arctic waters, rays, and mangroves. The Pokémon scenes have individual models for Magikarp, Horsea, Lapras, Squirtle, Poliwag, and Psyduck. Firefly Meadow, Rainforest Terrarium, Little Solar System, and Lantern Festival add gardens and night skies to the collection.
+
+Tap to feed fish, scatter nectar, send a meteor shower, or release lanterns, depending on the scene. Swipe, use the arrow buttons, or choose a scene directly from the selector. Hidden or minimized scenes suspend their animation loops, and reduced-motion preferences are respected.
 
 The bouquet renderer adapts [Alish Sharma’s ASCII Flower Bouquet](https://github.com/alishsharma17/Ascii-Flower-Bouquet-) and retains its [MIT license](public/licenses/AsciiBouquet.txt). Aquarium models and rendering live in `src/ascii/`; the existing bouquet math remains in `src/bloom/`.
 

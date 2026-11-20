@@ -20,7 +20,7 @@ test.each(aquariumStyles)(
       const grid = renderAquarium(ctx, scene, width, height);
       expect(
         grid.glyphs.filter((glyph) => glyph !== " ").length,
-      ).toBeGreaterThan(1000);
+      ).toBeGreaterThan(style.landscape === "space" ? 500 : 1000);
       for (const [glyph, x, y] of ctx.fillText.mock.calls) {
         expect(glyph).toMatch(/^[\x20-\x7e]$/);
         expect(Number.isFinite(x) && Number.isFinite(y)).toBe(true);
@@ -67,3 +67,27 @@ test("a resumed tab cannot advance the tank by minutes or let creatures escape",
     expect([-1, 1]).toContain(c.direction);
   }
 });
+
+test("world and bouquet collections have matching counts and unique scene identities", () => {
+  const { bouquetStyles } = require("../bloom/Bouquet");
+  expect(aquariumStyles).toHaveLength(18);
+  expect(aquariumStyles).toHaveLength(bouquetStyles.length);
+  expect(new Set(aquariumStyles.map((style) => style.id)).size).toBe(18);
+});
+
+test.each([
+  ["meteors", 1],
+  ["lanterns", -1],
+  ["nectar", 1],
+])(
+  "%s interactions move in the appropriate environment",
+  (action, direction) => {
+    const scene = createAquarium(
+      aquariumStyles.find((style) => style.action === action),
+    );
+    feedAquarium(scene, 0.5);
+    const before = scene.food[0].y;
+    updateAquarium(scene, 0.05);
+    expect((scene.food[0].y - before) * direction).toBeGreaterThan(0);
+  },
+);
