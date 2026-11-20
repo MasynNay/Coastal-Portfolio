@@ -5,6 +5,7 @@ const patchNotes = [
     version: "1.2.0",
     date: "November 19, 2026",
     previousCommit: "8510a06",
+    comparisonRef: "f00cbf5a96731ddeba371e2a1dcc0fb271893819",
     changes: [
       "Replaced the Bloom dock shortcut with ASCII, a terminal-style app with a mode chooser for bouquets and aquariums.",
       "Added six animated ASCII aquariums: River Garden, Coral Cathedral, Moonlit Lagoon, Amber Kelp Forest, Midnight Glow, and Pokémon Cove.",
