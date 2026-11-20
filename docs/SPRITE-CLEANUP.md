@@ -4,11 +4,11 @@
 
 ## Movement and activities
 
-All fourteen appearances have separate sixteen-pose walking and running cycles in eight directions, plus a reserved idle frame. `BuildPeople.py` publishes a 128 × 144 canvas, 96-pixel body scale and a common origin. Five actual source views provide south, southwest, west, northwest and north; opposite views are reflected from the same poses. Incomplete twelve-pose walks have separate complete sixteen-pose sources. The importer rejects missing cells.
+All fifteen published appearances have separate 32-frame walking and running cycles in eight directions, plus a reserved idle frame. `BuildPeople.py` publishes a 128 × 144 canvas, 96-pixel body scale and a common origin. Five actual source views provide south, southwest, west, northwest and north; opposite views are reflected from the same poses. Incomplete twelve-pose walks have separate complete sixteen-pose sources. The importer rejects missing cells.
 
 `BuildActivities.py` publishes complete-body skating, tricks, wakeboarding, seated vehicle driving, cycling, surfing and fishing. Each available source has eight poses per direction. Bicycles and the family's axolotls are separate props beneath the person. Fishing bodies contain no rod: the canvas draws one pole, line and bobber. Uniform row scaling preserves anatomy and fits every pose inside its canvas; a seated figure is not stretched to standing height.
 
-All fourteen appearances now have complete drawings for all nine activity variants. No component-animation sources or outputs remain. `DirectionRows.json` preserves the visually checked Minish mounted-fishing rear-view correction. `ActivityPrompts.json` records the selected generation/edit inputs, including the completed missing north-facing fishing poses.
+All fifteen appearances now have complete drawings for all nine activity variants. No component-animation sources or outputs remain. `DirectionRows.json` preserves the visually checked Minish mounted-fishing rear-view correction. `ActivityPrompts.json` records the selected generation/edit inputs, including the completed missing north-facing fishing poses.
 
 `Gait.json` owns nominal cycle timing: 1040 ms walking, 880 ms running. `Gait.js` accumulates phase from actual travel at the selected movement speed; Shift no longer accelerates an already separate run cycle again. Switching speed or loading the matching walking fallback preserves the same leading foot. Zero-time input redraws retain the moving stride. Animal, ability, fishing and vehicle clocks are separate.
 
@@ -30,7 +30,7 @@ python3 scripts/PreviewPeople.py
 
 For bike fitting alone, use `BuildActivities.py --all --actions=bike`. `PoseGuide.py` and `ActivityGuide.py` draw anatomical reference diagrams for new artwork; those diagrams are not runtime sprites. Prompts record use of the built-in image tool. No image API key or production dependency is needed.
 
-`CleanSprites.py` removes only detached 1–3-pixel islands. Fixed-origin drawings keep their authored raised feet and body motion; cleanup does not realign airborne poses. After changing creatures as well, run the cleanup without `--people`. `SpriteAudit.json` records the work. Content hashes refresh changed images in both the game and CSS previews.
+`CleanSprites.py` removes detached 1–3-pixel islands more than two pixels away from the body, preserving nearby antenna and whisker tips. Coastal sprites retain their authored origins. Run `python3 scripts/RepairAnimalSprites.py --fragments` for the visually reviewed neighboring-frame scraps in aquatic and dragonfly artwork. Fixed-origin drawings keep their authored raised feet and body motion; cleanup does not realign airborne poses. After changing creatures as well, run the cleanup without `--people`. `SpriteAudit.json` records the work. Content hashes refresh changed images in both the game and CSS previews.
 
 `VerifySprites.py` checks actual PNG dimensions, usable frames, alpha, palettes, margins, origins and distinct movement poses. `VerifyDirections.py` checks every canonical left/right reflection, including activities. These checks cannot judge anatomy or artistic quality; inspect the published sheets and workshop too. `PreviewPeople.py` produces the review sheets and animated family preview in `docs/`.
 

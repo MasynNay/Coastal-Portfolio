@@ -208,13 +208,6 @@ export default function Bloom({ active }) {
             Bloom Again
           </button>
         </div>
-        <a
-          href="https://github.com/alishsharma17/Ascii-Flower-Bouquet-"
-          target="_blank"
-          rel="noreferrer"
-        >
-          Original bouquet by Alish Sharma ↗
-        </a>
       </div>
     </div>
   );

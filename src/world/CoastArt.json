@@ -21,7 +21,7 @@
   },
   "swallow-flight": {
     "src": "/world/coast/swallow-flight.png",
-    "revision": "486514897a32",
+    "revision": "19f182f0e642",
     "detailVersion": 1,
     "detailScale": 1,
     "native": true,
@@ -243,7 +243,7 @@
   },
   "mallard-flight": {
     "src": "/world/coast/mallard-flight.png",
-    "revision": "8b4e372ef688",
+    "revision": "c68ba935a0e9",
     "detailVersion": 1,
     "detailScale": 1,
     "native": true,
@@ -263,7 +263,7 @@
   },
   "surf-wake": {
     "src": "/world/coast/surf-wake.png",
-    "revision": "06bc093e6cfa",
+    "revision": "8661dd9afb67",
     "detailVersion": 1,
     "detailScale": 1,
     "native": true,

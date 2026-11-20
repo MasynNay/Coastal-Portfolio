@@ -6,6 +6,7 @@ FineSprites.json lists map sprites whose thin features need extra resolution.
 
 import hashlib
 import json
+import sys
 from PIL import Image
 import ImportSprites as sprites
 from ImportCollectibles import FINE_SPRITES, pack
@@ -60,6 +61,122 @@ def repair_frames(sheet, edits, baseline=None):
         )
         image.save(path, **options)
     sheet["revision"] = hashlib.sha256(path.read_bytes()).hexdigest()[:12]
+
+
+def clean_detached_fragments():
+    """Remove visually reviewed neighboring-frame scraps in map and tank art.
+
+    Each rule describes where an unwanted fragment sits relative to the intact
+    creature. This keeps real antennae, separated legs, and Ponyo's bubbles.
+    No body pixels, frame dimensions, or animation origins are changed.
+    """
+    from CleanSprites import islands
+
+    subjects = {
+        "fish-aurora",
+        "fish-pipefish",
+        "fish-spiny-lobster",
+        "dragonfly-emerald",
+        "dragonfly-sunset",
+        "dragonfly-velvetwing",
+        "fish-harlequin-shrimp",
+        "fish-squat-lobster",
+        "fish-red-reef-prawn",
+    }
+    repairs = []
+    for book_name in ["SpriteSheets", "CollectionArt"]:
+        book = read_manifest(book_name)
+        book_changed = False
+        for name in sorted(subjects):
+            sheet = book[name]
+            path = ROOT / ("public" + sheet["src"])
+            image = Image.open(path).convert("RGBA")
+            width = sheet.get("cw", sheet.get("width"))
+            height = sheet.get("ch", sheet.get("height"))
+            removed = 0
+            for row in range(image.height // height):
+                for column in range(sheet.get("columns", 4)):
+                    bounds = (
+                        column * width,
+                        row * height,
+                        (column + 1) * width,
+                        (row + 1) * height,
+                    )
+                    cell = image.crop(bounds)
+                    parts = islands(cell)
+                    body = set(parts[0])
+                    left = min(x for x, y in body)
+                    right = max(x for x, y in body) + 1
+                    top = min(y for x, y in body)
+                    bottom = max(y for x, y in body) + 1
+                    center_x = (left + right) / 2
+                    center_y = (top + bottom) / 2
+                    cell_changed = False
+                    for part in parts[1:]:
+                        if len(part) > 300:
+                            continue
+                        part_left = min(x for x, y in part)
+                        part_top = min(y for x, y in part)
+                        part_bottom = max(y for x, y in part) + 1
+                        if name in {
+                            "fish-aurora", "fish-pipefish", "dragonfly-emerald"
+                        }:
+                            unwanted = (
+                                part_left > center_x + (right - left) * 0.25
+                                and part_bottom < bottom - (bottom - top) * 0.25
+                            )
+                        elif name == "fish-spiny-lobster":
+                            unwanted = part_left > center_x + (right - left) * 0.25
+                        elif name in {"dragonfly-sunset", "fish-harlequin-shrimp"}:
+                            unwanted = part_top > bottom + 2
+                        elif name == "dragonfly-velvetwing":
+                            unwanted = part_bottom < top - 2
+                        elif name == "fish-squat-lobster":
+                            unwanted = part_left > right + 2
+                        else:
+                            unwanted = (
+                                part_left > center_x + (right - left) * 0.3
+                                and part_bottom < center_y
+                            )
+                        if not unwanted:
+                            continue
+                        nearby = any(
+                            (x + dx, y + dy) in body
+                            for x, y in part
+                            for dx in range(-2, 3)
+                            for dy in range(-2, 3)
+                        )
+                        if nearby:
+                            continue
+                        for point in part:
+                            cell.putpixel(point, (0, 0, 0, 0))
+                        removed += len(part)
+                        cell_changed = True
+                    if cell_changed:
+                        image.paste(cell, bounds)
+            if removed:
+                options = (
+                    {"lossless": True, "method": 6}
+                    if path.suffix == ".webp"
+                    else {"optimize": True}
+                )
+                image.save(path, **options)
+                sheet["revision"] = hashlib.sha256(path.read_bytes()).hexdigest()[:12]
+                repairs.append({"asset": name, "src": sheet["src"], "pixels": removed})
+                book_changed = True
+        if book_changed:
+            save_manifest(book_name, book)
+    report_path = ROOT / "docs/SpriteAudit.json"
+    report = json.loads(report_path.read_text())
+    report.setdefault("fragmentRepairs", []).extend(repairs)
+    report_path.write_text(json.dumps(report, indent=2) + "\n")
+    print(
+        "Removed",
+        sum(item["pixels"] for item in repairs),
+        "reviewed fragment pixels from",
+        len(repairs),
+        "map/inspection atlases.",
+    )
 
 
 def main():
@@ -119,4 +236,6 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    if "--fragments" not in sys.argv:
+        main()
+    clean_detached_fragments()

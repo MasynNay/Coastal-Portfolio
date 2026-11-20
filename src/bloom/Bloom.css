@@ -150,21 +150,13 @@
 
 .bloom-actions button:focus-visible,
 .bloom-picker button:focus-visible,
-.bloom-stage canvas:focus-visible,
-.bloom-footer a:focus-visible {
+.bloom-stage canvas:focus-visible {
   outline: 2px solid #a5d6b7;
   outline-offset: 4px;
 }
 
 .bloom-actions button:disabled {
   opacity: 0.5;
-}
-
-.bloom-footer > a {
-  display: inline-block;
-  margin-top: 6px;
-  color: #9eaaa5;
-  font-size: 10px;
 }
 
 /* This color is used by Bloom's icon in the Mac dock. */

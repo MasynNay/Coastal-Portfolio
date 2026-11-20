@@ -10314,7 +10314,7 @@
     "layout": "eight",
     "action": "walk",
     "frameMs": 110.0,
-    "revision": "9c0447b06622",
+    "revision": "0940697526fd",
     "native": true,
     "smooth": true,
     "colors": 64,
@@ -10503,7 +10503,7 @@
     "detailVersion": 2,
     "detailScale": 2.6666666666666665,
     "canonicalSides": true,
-    "revision": "2895eca1a80c",
+    "revision": "a728435e7ec4",
     "inbetweenVersion": 1
   },
   "ability-spell": {
@@ -11285,7 +11285,7 @@
     "detailScale": 2.6666666666666665,
     "mirrorWest": false,
     "canonicalSides": true,
-    "revision": "7f98b87b4d1b",
+    "revision": "09f8f27413cb",
     "identityVersion": 1,
     "inbetweenVersion": 1
   },
@@ -12811,7 +12811,7 @@
     "layout": "eight",
     "action": "walk",
     "frameMs": 110.0,
-    "revision": "16041d26bfee",
+    "revision": "de36f8ce51ec",
     "native": true,
     "smooth": true,
     "colors": 64,
@@ -12916,7 +12916,7 @@
     "layout": "eight",
     "action": "walk",
     "frameMs": 110.0,
-    "revision": "6e18c48b12db",
+    "revision": "8c3dd7f261f2",
     "native": true,
     "smooth": true,
     "colors": 64,
@@ -13194,7 +13194,7 @@
     "layout": "eight",
     "action": "walk",
     "frameMs": 110.0,
-    "revision": "d3dc956b08a2",
+    "revision": "7469e8778e1d",
     "inbetweenVersion": 1
   },
   "fish-dartfish": {
@@ -16794,7 +16794,7 @@
     "layout": "eight",
     "action": "walk",
     "frameMs": 85.0,
-    "revision": "1d2888ed6827",
+    "revision": "e237d45a72dc",
     "native": true,
     "smooth": true,
     "colors": 64,
@@ -16992,7 +16992,7 @@
     "layout": "eight",
     "action": "walk",
     "frameMs": 85.0,
-    "revision": "cacbed3662e9",
+    "revision": "a34e824dbb00",
     "inbetweenVersion": 1
   },
   "dragonfly-scarlet": {
@@ -17008,7 +17008,7 @@
     "layout": "eight",
     "action": "walk",
     "frameMs": 85.0,
-    "revision": "dd924cf965aa",
+    "revision": "2b7420800cc0",
     "native": true,
     "smooth": true,
     "colors": 64,
@@ -17046,7 +17046,7 @@
     "layout": "eight",
     "action": "walk",
     "frameMs": 85.0,
-    "revision": "fb33f50481d7",
+    "revision": "c606edbddcfa",
     "inbetweenVersion": 1
   },
   "dragonfly-violet": {
@@ -17062,7 +17062,7 @@
     "layout": "eight",
     "action": "walk",
     "frameMs": 85.0,
-    "revision": "13fdf64bf834",
+    "revision": "827ee4b5f4c2",
     "inbetweenVersion": 1
   },
   "ability-money": {
@@ -20823,7 +20823,7 @@
     "layout": "eight",
     "action": "walk",
     "frameMs": 85.0,
-    "revision": "31ee023fd388",
+    "revision": "8df806f6e9c4",
     "inbetweenVersion": 1
   },
   "ladybug-cherry": {
@@ -20935,7 +20935,7 @@
     "layout": "eight",
     "action": "walk",
     "frameMs": 85.0,
-    "revision": "f395ede14f8f",
+    "revision": "35f0b4ff8b85",
     "inbetweenVersion": 1
   },
   "ladybug-teal": {
@@ -20951,7 +20951,7 @@
     "layout": "eight",
     "action": "walk",
     "frameMs": 85.0,
-    "revision": "0af9fd9cda89",
+    "revision": "ac504ed17339",
     "inbetweenVersion": 1
   },
   "ladybug-rubystripe": {
@@ -21063,7 +21063,7 @@
     "layout": "eight",
     "action": "walk",
     "frameMs": 85.0,
-    "revision": "879b660b9ea6",
+    "revision": "d9cf8f54f4a9",
     "inbetweenVersion": 1
   },
   "dragonfly-hawker": {
@@ -21159,7 +21159,7 @@
     "layout": "eight",
     "action": "walk",
     "frameMs": 85.0,
-    "revision": "dc81f2c1ba44",
+    "revision": "efed40a491c1",
     "inbetweenVersion": 1
   },
   "dragonfly-chaser": {
@@ -21274,7 +21274,7 @@
     "layout": "eight",
     "action": "walk",
     "frameMs": 85.0,
-    "revision": "657d82e21469",
+    "revision": "9ab02c63e26c",
     "native": true,
     "smooth": true,
     "colors": 64,
@@ -21328,7 +21328,7 @@
     "layout": "eight",
     "action": "walk",
     "frameMs": 85.0,
-    "revision": "e7bbef4ad521",
+    "revision": "1856c543ea24",
     "inbetweenVersion": 1
   },
   "dragonfly-tiger": {
@@ -23689,7 +23689,7 @@
       64.75,
       64.0
     ],
-    "revision": "8a18ea5dbce4",
+    "revision": "15b73ffa5372",
     "baselines": [
       117,
       117.5,
@@ -26620,7 +26620,7 @@
       63.0,
       63.0
     ],
-    "revision": "2c28cf8a8d41",
+    "revision": "7c7805b4c6db",
     "headTops": [
       32,
       32.0,
@@ -28295,7 +28295,7 @@
     "layout": "eight",
     "action": "walk",
     "frameMs": 85.0,
-    "revision": "15951cafb859",
+    "revision": "7aa52cda33ed",
     "inbetweenVersion": 1
   },
   "mantis-marigold": {
@@ -28448,7 +28448,7 @@
     "layout": "eight",
     "action": "walk",
     "frameMs": 85.0,
-    "revision": "483ec752934c",
+    "revision": "579dfe18eeb0",
     "native": true,
     "smooth": true,
     "colors": 64,
@@ -28572,7 +28572,7 @@
     "layout": "eight",
     "action": "walk",
     "frameMs": 85.0,
-    "revision": "50affdf1ca22",
+    "revision": "82e5a71fa5da",
     "native": true,
     "smooth": true,
     "colors": 64,
@@ -28610,7 +28610,7 @@
     "layout": "eight",
     "action": "walk",
     "frameMs": 85.0,
-    "revision": "7c6e0c1cb591",
+    "revision": "f4649824542f",
     "native": true,
     "smooth": true,
     "colors": 64,
@@ -28664,7 +28664,7 @@
     "layout": "eight",
     "action": "walk",
     "frameMs": 85.0,
-    "revision": "1faff8dd4e7b",
+    "revision": "243a27e3d941",
     "native": true,
     "smooth": true,
     "colors": 64,
@@ -28740,7 +28740,7 @@
     "layout": "eight",
     "action": "walk",
     "frameMs": 85.0,
-    "revision": "26671b751c5e",
+    "revision": "e90c942b8f26",
     "native": true,
     "smooth": true,
     "colors": 64,
@@ -29042,7 +29042,7 @@
     "layout": "eight",
     "action": "walk",
     "frameMs": 85.0,
-    "revision": "588bab56bd56",
+    "revision": "df66897c5551",
     "native": true,
     "smooth": true,
     "colors": 64,
@@ -29318,7 +29318,7 @@
     "layout": "eight",
     "action": "walk",
     "frameMs": 85.0,
-    "revision": "7d13cebd0225",
+    "revision": "ab312bab55e2",
     "native": true,
     "smooth": true,
     "colors": 64,
@@ -29420,7 +29420,7 @@
     "layout": "eight",
     "action": "walk",
     "frameMs": 85.0,
-    "revision": "bbe7f379130f",
+    "revision": "413206de3335",
     "native": true,
     "smooth": true,
     "colors": 64,
@@ -29439,7 +29439,7 @@
     "layout": "eight",
     "action": "walk",
     "frameMs": 85.0,
-    "revision": "b9eba151a155",
+    "revision": "822264201007",
     "inbetweenVersion": 1
   },
   "mantis-celestial": {
@@ -29602,7 +29602,7 @@
     "layout": "eight",
     "action": "walk",
     "frameMs": 85.0,
-    "revision": "97b2043357d0",
+    "revision": "82232f79de95",
     "inbetweenVersion": 1
   },
   "butterfly-dandelion": {
@@ -30850,7 +30850,7 @@
     "layout": "eight",
     "action": "walk",
     "frameMs": 85.0,
-    "revision": "b3e64e2c7088",
+    "revision": "f75f5d8c0253",
     "inbetweenVersion": 1
   },
   "ladybug-sage": {
@@ -30930,7 +30930,7 @@
     "layout": "eight",
     "action": "walk",
     "frameMs": 85.0,
-    "revision": "e1c94f5df551",
+    "revision": "1eaa0200bcd8",
     "inbetweenVersion": 1
   },
   "ladybug-sunleaf": {
@@ -31474,7 +31474,7 @@
     "layout": "eight",
     "action": "walk",
     "frameMs": 85.0,
-    "revision": "3cf670a4b356",
+    "revision": "34c3e363b9ba",
     "inbetweenVersion": 1
   },
   "ladybug-twilight": {
@@ -31698,7 +31698,7 @@
     "layout": "eight",
     "action": "walk",
     "frameMs": 85.0,
-    "revision": "d36aa2122e10",
+    "revision": "817569574e30",
     "inbetweenVersion": 1
   },
   "ladybug-rainbow": {
@@ -31730,7 +31730,7 @@
     "layout": "eight",
     "action": "walk",
     "frameMs": 85.0,
-    "revision": "c479df2f9b78",
+    "revision": "84dd0ed33cfe",
     "inbetweenVersion": 1
   },
   "dragonfly-willow": {
@@ -32139,7 +32139,7 @@
     "layout": "eight",
     "action": "walk",
     "frameMs": 85.0,
-    "revision": "579c41c4f5ff",
+    "revision": "4aa354fd2e56",
     "native": true,
     "smooth": true,
     "colors": 64,
@@ -32867,7 +32867,7 @@
     "layout": "eight",
     "action": "walk",
     "frameMs": 85.0,
-    "revision": "2d47c2c8f06f",
+    "revision": "9ba3ce5cbaaa",
     "native": true,
     "smooth": true,
     "colors": 64,
@@ -48205,7 +48205,7 @@
       63.0,
       63.0
     ],
-    "revision": "8be95c87208c",
+    "revision": "ea30b525bf17",
     "illustratedRod": false,
     "holdFrame": 14,
     "mounted": false,
@@ -50956,7 +50956,7 @@
       95.0,
       95.0
     ],
-    "revision": "46b62a0a237e",
+    "revision": "0a747eea884c",
     "illustratedRod": false,
     "holdFrame": 14,
     "mounted": true,
@@ -57147,7 +57147,7 @@
     "layout": "eight",
     "action": "walk",
     "frameMs": 110.0,
-    "revision": "b0141d06a9d6",
+    "revision": "13b88e828245",
     "native": true,
     "smooth": true,
     "colors": 64,
@@ -57722,7 +57722,7 @@
     "layout": "eight",
     "action": "walk",
     "frameMs": 110.0,
-    "revision": "a38c793cb116",
+    "revision": "cad282b2d5b0",
     "native": true,
     "smooth": true,
     "colors": 64,
@@ -57965,7 +57965,7 @@
     "layout": "eight",
     "action": "walk",
     "frameMs": 110.0,
-    "revision": "c63350f925e4",
+    "revision": "ca6a0072a90d",
     "inbetweenVersion": 1
   },
   "fish-striped-pyjama-squid": {
@@ -58682,7 +58682,7 @@
     "detailScale": 2.6666666666666665,
     "frameMs": 175.0,
     "opaqueBody": true,
-    "revision": "3a534ce4b8cf",
+    "revision": "73ab0f061600",
     "identityVersion": 1,
     "inbetweenVersion": 1
   },
@@ -58753,7 +58753,7 @@
     "detailScale": 2.6666666666666665,
     "frameMs": 175.0,
     "opaqueBody": true,
-    "revision": "85c41dd75e6f",
+    "revision": "700d99747a5b",
     "inbetweenVersion": 1
   },
   "costume-contact-conduct": {
@@ -58799,7 +58799,7 @@
     "detailScale": 2.6666666666666665,
     "frameMs": 175.0,
     "opaqueBody": true,
-    "revision": "4fce0e51c7d6",
+    "revision": "519a32c2603a",
     "identityVersion": 1,
     "inbetweenVersion": 1
   },

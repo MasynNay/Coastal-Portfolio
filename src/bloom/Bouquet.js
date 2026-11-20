@@ -141,6 +141,148 @@ export const bouquetStyles = [
       },
     ],
   },
+  {
+    id: "peonies",
+    name: "Blush Peonies",
+    description:
+      "Full pink and cream peonies with ruffled petals, pale green paper, and a rose ribbon.",
+    count: 9,
+    seed: 87,
+    paper: [65, 108, 151, 194, 230, 231],
+    ribbon: [95, 132, 168, 175, 211, 218],
+    flowers: [
+      {
+        kind: "rose",
+        palette: [131, 168, 175, 211, 217, 224, 225],
+        radius: 0.19,
+        folds: 9,
+        layers: 24,
+        edgePetals: 12,
+      },
+      {
+        kind: "rose",
+        palette: [138, 181, 188, 224, 230, 231],
+        radius: 0.17,
+        folds: 9,
+        layers: 24,
+        edgePetals: 12,
+      },
+    ],
+  },
+  {
+    id: "orchids",
+    name: "Orchid Elegance",
+    description:
+      "White and lilac orchids with broad side petals and magenta lips, violet paper, and a gold ribbon.",
+    count: 7,
+    seed: 98,
+    paper: [60, 97, 140, 183, 189, 231],
+    ribbon: [94, 136, 178, 220, 229],
+    flowers: [
+      {
+        kind: "orchid",
+        palette: [145, 188, 224, 230, 255, 231],
+        center: [90, 127, 164, 170, 207, 213],
+        radius: 0.19,
+      },
+      {
+        kind: "orchid",
+        palette: [97, 134, 140, 177, 183, 225],
+        center: [125, 162, 198, 205, 218],
+        radius: 0.18,
+      },
+    ],
+  },
+  {
+    id: "hydrangeas",
+    name: "Blue Hydrangeas",
+    description:
+      "Round clusters of tiny blue and periwinkle hydrangea blossoms, sky-blue paper, and a white ribbon.",
+    count: 8,
+    seed: 109,
+    paper: [31, 67, 110, 153, 195, 231],
+    ribbon: [102, 145, 188, 252, 255, 231],
+    flowers: [
+      {
+        kind: "hydrangea",
+        palette: [25, 32, 69, 75, 111, 153, 195],
+        radius: 0.19,
+      },
+      {
+        kind: "hydrangea",
+        palette: [61, 98, 104, 141, 147, 183, 189],
+        radius: 0.18,
+      },
+    ],
+  },
+  {
+    id: "poppies",
+    name: "Wild Poppies",
+    description:
+      "Scarlet and coral poppies with four broad petals and dark centers, warm kraft paper, and a charcoal ribbon.",
+    count: 10,
+    seed: 120,
+    paper: [94, 137, 180, 223, 229, 230],
+    ribbon: [236, 239, 242, 245, 248],
+    flowers: [
+      {
+        kind: "disc",
+        palette: [88, 124, 160, 196, 203, 210],
+        center: [16, 52, 53, 95],
+        petals: 4,
+        radius: 0.17,
+      },
+      {
+        kind: "disc",
+        palette: [130, 166, 202, 209, 216, 223],
+        center: [16, 52, 94, 95],
+        petals: 4,
+        radius: 0.16,
+      },
+    ],
+  },
+  {
+    id: "bluebells",
+    name: "Bluebell Wishes",
+    description:
+      "Delicate blue and violet bells with flared scalloped mouths, cream paper, and a blue ribbon.",
+    count: 13,
+    seed: 131,
+    paper: [101, 144, 187, 223, 230, 231],
+    ribbon: [24, 31, 68, 75, 111, 153],
+    flowers: [
+      { kind: "bell", palette: [25, 26, 62, 69, 105, 147, 189], radius: 0.14 },
+      { kind: "bell", palette: [54, 91, 98, 135, 141, 183, 225], radius: 0.13 },
+    ],
+  },
+  {
+    id: "dahlias",
+    name: "Dahlia Dreams",
+    description:
+      "Copper and burgundy dahlias with many tightly layered pointed petals, peach paper, and a plum ribbon.",
+    count: 8,
+    seed: 142,
+    paper: [137, 174, 180, 216, 223, 230],
+    ribbon: [53, 90, 127, 133, 170, 176],
+    flowers: [
+      {
+        kind: "rose",
+        palette: [94, 130, 166, 172, 208, 214, 223],
+        radius: 0.19,
+        folds: 16,
+        layers: 28,
+        edgePetals: 16,
+      },
+      {
+        kind: "rose",
+        palette: [52, 88, 125, 131, 168, 175, 218],
+        radius: 0.18,
+        folds: 16,
+        layers: 28,
+        edgePetals: 16,
+      },
+    ],
+  },
 ];
 
 function normalize([x, y, z]) {
@@ -499,6 +641,70 @@ export function renderBouquet(
         column += 1
       ) {
         const dx = (column + 0.5 - x) / radiusX;
+        if (flower.kind === "orchid") {
+          // Five broad petals surround a contrasting lower lip.
+          const petal = Math.min(
+            Math.hypot(dx / 0.24, (dy + 0.65) / 0.34),
+            Math.hypot((Math.abs(dx) - 0.38) / 0.35, (dy + 0.35) / 0.49),
+            Math.hypot((Math.abs(dx) - 0.56) / 0.43, (dy - 0.02) / 0.3),
+          );
+          const lip = Math.hypot(dx / 0.39, (dy - 0.47) / 0.43) < 1;
+          if (petal > 1 && !lip) continue;
+          const brightness = clamp(0.77 - 0.18 * dx - 0.15 * dy + dim);
+          const palette = lip ? flower.center : flower.palette;
+          plot(
+            column,
+            row,
+            z + (lip ? 0.06 : 0.03),
+            PETAL_SHADE[Math.floor(brightness * 4)],
+            palette[Math.floor(brightness * palette.length)],
+          );
+          continue;
+        }
+        if (flower.kind === "hydrangea") {
+          // Pack small four-petal blossoms into a rounded hydrangea head.
+          if (Math.hypot(dx, dy) > 0.96) continue;
+          const localX = (dx - Math.round(dx / 0.42) * 0.42) / 0.25;
+          const localY = (dy - Math.round(dy / 0.38) * 0.38) / 0.23;
+          const localRadius = Math.hypot(localX, localY);
+          if (
+            localRadius >
+            0.4 + 0.6 * Math.abs(Math.cos(2 * Math.atan2(localY, localX)))
+          )
+            continue;
+          const brightness = clamp(0.72 - 0.2 * dx - 0.2 * dy + dim);
+          plot(
+            column,
+            row,
+            z + 0.05 * (1 - Math.hypot(dx, dy)),
+            localRadius < 0.18 ? "o" : PETAL_SHADE[Math.floor(brightness * 4)],
+            flower.palette[Math.floor(brightness * flower.palette.length)],
+          );
+          continue;
+        }
+        if (flower.kind === "bell") {
+          const height = (dy + 1) / 2;
+          if (height < 0 || height > 1) continue;
+          const width = 0.2 + 0.48 * height + 0.1 * Math.sin(Math.PI * height);
+          const across = dx / width;
+          if (
+            Math.abs(across) > 1 ||
+            height > 0.88 + 0.1 * Math.cos(across * Math.PI * 3)
+          )
+            continue;
+          const fold = Math.cos(across * Math.PI * 3) * 0.09;
+          const brightness = clamp(
+            0.68 - 0.22 * across - 0.12 * height + fold + dim,
+          );
+          plot(
+            column,
+            row,
+            z + 0.03,
+            PETAL_SHADE[Math.floor(brightness * 4)],
+            flower.palette[Math.floor(brightness * flower.palette.length)],
+          );
+          continue;
+        }
         if (flower.kind === "tulip") {
           const v = (1 - dy) / 2;
           if (v < 0 || v > 1) continue;
@@ -546,8 +752,14 @@ export function renderBouquet(
         if (flower.kind === "rose") {
           // Curved bands model the overlapping petals around a rose's center.
           const petalAngle = Math.atan2(dy, dx) + rotation;
-          if (distance > 0.9 + 0.1 * Math.cos(6 * petalAngle)) continue;
-          const fold = Math.sin(5 * petalAngle + distance * 17);
+          if (
+            distance >
+            0.9 + 0.1 * Math.cos((flower.edgePetals ?? 6) * petalAngle)
+          )
+            continue;
+          const fold = Math.sin(
+            (flower.folds ?? 5) * petalAngle + distance * (flower.layers ?? 17),
+          );
           const brightness = clamp(
             0.62 - 0.16 * dx - 0.2 * dy + fold * 0.2 + dim,
           );

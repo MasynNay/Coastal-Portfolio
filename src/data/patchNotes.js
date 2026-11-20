@@ -2,6 +2,19 @@
 // the preceding production commit, rather than fictional in-game release notes.
 const patchNotes = [
   {
+    version: "1.1.9",
+    date: "November 19, 2026",
+    previousCommit: "2d7150b",
+    changes: [
+      "Bloom now has twelve bouquets, adding peonies, orchids, hydrangeas, poppies, bluebells, and dahlias.",
+      "The new arrangements include ruffled petals, clustered blossoms, bell-shaped blooms, and their own paper and ribbon colors.",
+      "Removed the source-credit link from the bouquet window. The project retains the original MIT license and source attribution.",
+      "All twelve arrangements keep Mi Shell’s dedication and support swiping, arrow buttons, keyboard navigation, and pause and replay controls.",
+      "Audited 40,687 sprite frames, removed 610 distant specks, and repaired 1,720 pixels of stray artwork in fish and insect frames while preserving fine antenna and whisker details.",
+      "Rechecked all fifteen character appearances, matching directional poses, and complete map and habitat artwork for all 500 bugs and 251 aquatic species.",
+    ],
+  },
+  {
     version: "1.1.8",
     date: "November 19, 2026",
     previousCommit: "7e4e365",

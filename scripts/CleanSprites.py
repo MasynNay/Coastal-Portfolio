@@ -4,8 +4,9 @@ python3 scripts/CleanSprites.py --write   # after an art import
 python3 scripts/CleanSprites.py          # read-only audit of every shipped frame
 python3 scripts/CleanSprites.py --write --people  # after only human art changes
 
-Only isolated alpha islands of 1-3 pixels are discarded. Connected hair, fur,
-whiskers, outlines and antialiasing remain intact. Original sources are retained.
+Only isolated alpha islands of 1-3 pixels separated from the body by more than
+two pixels are discarded. Nearby antenna/whisker tips remain intact. Original
+sources are retained. Coastal birds and geese are audited without shifting poses.
 """
 
 from pathlib import Path
@@ -16,12 +17,18 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 def islands(cell):
-    pixels = cell.load()
+    alpha = cell.getchannel("A")
+    bounds = alpha.getbbox()
+    if not bounds:
+        return []
+    left, top, right, bottom = bounds
+    width = right - left
+    # Read only the occupied rectangle, using byte alpha values rather than
+    # allocating an RGBA tuple for every transparent pixel in the canvas.
     remaining = {
-        (x, y)
-        for y in range(cell.height)
-        for x in range(cell.width)
-        if pixels[x, y][3] >= 16
+        (index % width + left, index // width + top)
+        for index, value in enumerate(alpha.crop(bounds).getdata())
+        if value >= 16
     }
     parts = []
     while remaining:
@@ -37,6 +44,26 @@ def islands(cell):
                         part.append((xx, yy))
         parts.append(part)
     return sorted(parts, key=len, reverse=True)
+
+
+def noise_pixels(cell):
+    """Keep fine detached tips close to the body while removing distant specks."""
+    parts = islands(cell)
+    small_parts = [part for part in parts[1:] if len(part) <= 3]
+    if not small_parts:
+        return []
+    body = set(parts[0])
+    noise = []
+    for part in small_parts:
+        nearby = any(
+            (x + dx, y + dy) in body
+            for x, y in part
+            for dx in range(-2, 3)
+            for dy in range(-2, 3)
+        )
+        if not nearby:
+            noise.extend(part)
+    return noise
 
 
 def head_center(cell, scale=1):
@@ -76,6 +103,7 @@ def main(write=False, people_only=False):
         sheets,
         json.loads((ROOT / "src/world/spriteManifest.json").read_text()),
         json.loads((ROOT / "src/world/CollectionArt.json").read_text()),
+        json.loads((ROOT / "src/world/CoastArt.json").read_text()),
     ]
     report = dict(
         filesScanned=0,
@@ -104,12 +132,7 @@ def main(write=False, people_only=False):
                     box = (col * cw, row * ch, (col + 1) * cw, (row + 1) * ch)
                     cell = im.crop(box)
                     assert cell.getbbox(), (name, row, col, "empty frame")
-                    noise = [
-                        point
-                        for part in islands(cell)[1:]
-                        if len(part) <= 3
-                        for point in part
-                    ]
+                    noise = noise_pixels(cell)
                     changes += len(noise)
                     if write and noise:
                         for x, y in noise:
@@ -119,7 +142,7 @@ def main(write=False, people_only=False):
                     foot = s.get("footY")
                     shift = (
                         foot - cell.getbbox()[3]
-                        if foot and not s.get("rootAligned")
+                        if foot and not s.get("rootAligned") and group is not groups[3]
                         else 0
                     )
                     if shift:
@@ -162,7 +185,13 @@ def main(write=False, people_only=False):
         # update must never keep displaying an older bitmap from browser cache.
         revisions = {}
         for group, filename in zip(
-            groups, ["SpriteSheets.json", "spriteManifest.json", "CollectionArt.json"]
+            groups,
+            [
+                "SpriteSheets.json",
+                "spriteManifest.json",
+                "CollectionArt.json",
+                "CoastArt.json",
+            ],
         ):
             for item in group.values():
                 path = ROOT / ("public" + item["src"])
