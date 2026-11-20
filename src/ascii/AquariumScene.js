@@ -32,7 +32,7 @@ function homeHeight(style, kind, index) {
     style.category === "games" &&
     !["cove", "springs"].includes(style.setting)
   )
-    return style.setting === "clouds" || kind === "fairy" ? 0.44 : 0.64;
+    return style.setting === "clouds" || kind === "fairy" ? 0.38 : 0.56;
   if (kind === "lapras") return 0.52;
   if (["crab", "frog"].includes(kind)) return 0.7;
   if (
@@ -49,6 +49,21 @@ function homeHeight(style, kind, index) {
   return 0.19 + ((index * 0.137) % 0.46);
 }
 
+// Start and idle use the same anchor, avoiding a sideways jump on frame one.
+function homeX(style, index) {
+  if (style.positions?.[index]) return style.positions[index][0];
+  if (
+    style.category === "games" &&
+    !["cove", "springs"].includes(style.setting)
+  )
+    return style.animals.length <= 2
+      ? 0.34 + index * 0.32
+      : 0.22 + index * 0.28;
+  return style.animals.length <= 3
+    ? 0.22 + index * 0.28
+    : 0.16 + ((index * 0.169) % 0.68);
+}
+
 export function createAquarium(style = aquariumStyles[0]) {
   return {
     style,
@@ -57,11 +72,7 @@ export function createAquarium(style = aquariumStyles[0]) {
     fed: 0,
     creatures: style.animals.map((kind, i) => ({
       kind,
-      x:
-        style.positions?.[i]?.[0] ??
-        (style.animals.length <= 3
-          ? 0.22 + i * 0.28
-          : 0.16 + ((i * 0.169) % 0.68)),
+      x: homeX(style, i),
       y: homeHeight(style, kind, i),
       direction: i % 2 ? -1 : 1,
       seed: i + 1,
@@ -192,11 +203,7 @@ export function updateAquarium(scene, seconds) {
         scene.style.category === "games" &&
         !["cove", "springs"].includes(scene.style.setting)
       ) {
-        const anchor =
-          scene.style.positions?.[creature.seed - 1]?.[0] ??
-          (scene.style.animals.length <= 2
-            ? 0.34 + (creature.seed - 1) * 0.32
-            : 0.22 + (creature.seed - 1) * 0.28);
+        const anchor = homeX(scene.style, creature.seed - 1);
         creature.x =
           anchor + Math.sin(scene.time * 0.5 + creature.seed) * 0.025;
       } else creature.x += dt * creature.speed * creature.direction;
@@ -373,7 +380,16 @@ function landscape(grid, scene) {
 }
 
 function drawCreature(grid, c, time, index, sceneForArt = { food: [] }) {
-  const scale = Math.min(grid.columns / 115, grid.rows / 55) * c.size * 1.6;
+  // Portraits share a readable cell size instead of shrinking their faces to
+  // fish-sized blobs. Three companions still fit side by side on a phone.
+  const portrait =
+    sceneForArt.style?.category === "games" &&
+    !["cove", "springs", "grove", "glade", "clouds"].includes(
+      sceneForArt.style.setting,
+    );
+  const scale = portrait
+    ? Math.min((grid.rows / 52) * 1.2, grid.columns / 95)
+    : Math.min(grid.columns / 115, grid.rows / 55) * c.size * 1.6;
   const x = c.x * grid.columns;
   const y =
     (c.kind === "sky-lantern" && !c.particle
@@ -413,7 +429,23 @@ function drawCreature(grid, c, time, index, sceneForArt = { food: [] }) {
       vertices.map(([u, v]) => [x + u * scale * d, y + v * scale]),
       color,
     );
-  const art = { at, body, stroke, polygon, beat, time };
+  // Inverse mapping fills each destination cell once. Forward stamping would
+  // leave gaps at larger scales, particularly across a face or pointed cap.
+  const stamp = (rows, palette, { baseline = 13 } = {}) => {
+    const width = Math.max(...rows.map((row) => row.length));
+    const left = -width / 2,
+      top = baseline - rows.length;
+    for (let v = Math.floor(top * scale); v < baseline * scale; v++) {
+      const row = rows[Math.floor(v / scale - top)];
+      if (!row) continue;
+      for (let u = Math.floor(left * scale); u < (left + width) * scale; u++) {
+        const token = row[Math.floor(u / scale - left)];
+        const material = palette[token];
+        if (material) put(x + u * d, y + v, material[1], material[0]);
+      }
+    }
+  };
+  const art = { at, body, stroke, polygon, stamp, beat, time };
   if (
     drawGameCharacter(art, c.kind, sceneForArt) ||
     drawPokemon(art, c.kind) ||

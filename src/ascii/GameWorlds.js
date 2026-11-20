@@ -148,7 +148,7 @@ const scenes = [
     "zelda",
     "field",
     ["link", "fairy"],
-    "A green-capped adventurer and a glowing fairy cross the field near the castle.",
+    "Link wears his long green cap and carries the Hylian shield and a silver sword, with Navi nearby.",
     "fairies",
   ],
   [
@@ -168,7 +168,7 @@ const scenes = [
     "zelda",
     "harbor",
     ["toon-link"],
-    "A little green cap, a red lion boat, windmills, and bright harbor water.",
+    "Wide-eyed Toon Link waits by the King of Red Lions, with his green cap, blond fringe, and small shield.",
     "wind",
   ],
   [
@@ -211,7 +211,7 @@ export const gameStyles = scenes.map(
     animals,
     description,
     action,
-    positions: setting === "harbor" ? [[0.69, 0.52]] : undefined,
+    positions: setting === "harbor" ? [[0.29, 0.56]] : undefined,
     category: "games",
     landscape:
       setting === "cove" ? "coral" : setting === "springs" ? "pond" : "game",

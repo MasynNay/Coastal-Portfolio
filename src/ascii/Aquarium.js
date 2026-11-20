@@ -216,7 +216,7 @@ export default function Aquarium({
       <p className="aquarium-status" role="status">
         {available
           ? status || action.instruction
-          : "This browser couldn’t draw the aquarium. Please try another browser."}
+          : "This browser couldn’t draw this scene. Please try another browser."}
       </p>
     </section>
   );

@@ -1,4 +1,4 @@
-import { gameStyles, galaxyStyles, natureStyles } from "./Worlds";
+import { gameStyles, galaxyStyles, natureStyles, storyStyles } from "./Worlds";
 import {
   aquariumStyles,
   createAquarium,
@@ -9,7 +9,13 @@ import {
 
 const context = () => ({ fillRect: jest.fn(), fillText: jest.fn() });
 
-test.each([...aquariumStyles, ...gameStyles, ...galaxyStyles, ...natureStyles])(
+test.each([
+  ...aquariumStyles,
+  ...gameStyles,
+  ...galaxyStyles,
+  ...natureStyles,
+  ...storyStyles,
+])(
   "$name draws a complete, bounded habitat at phone and desktop sizes",
   (style) => {
     const scene = createAquarium(style);
@@ -108,3 +114,56 @@ test.each([
     expect((scene.food[0].y - before) * direction).toBeGreaterThan(0);
   },
 );
+
+test.each([
+  [
+    "hyrule-field",
+    [
+      [255, 216, 96],
+      [68, 162, 100],
+      [93, 203, 255],
+    ],
+  ],
+  [
+    "gengar-tower",
+    [
+      [250, 89, 109],
+      [250, 245, 223],
+      [196, 157, 239],
+    ],
+  ],
+  [
+    "traverse-town",
+    [
+      [255, 216, 96],
+      [221, 74, 82],
+      [79, 133, 219],
+    ],
+  ],
+])("%s keeps signature character features visible on a phone", (id, colors) => {
+  const scene = createAquarium(gameStyles.find((s) => s.id === id));
+  const grid = renderAquarium(context(), scene, 300, 280);
+  for (const color of colors)
+    expect(
+      grid.colors.filter((c) => c && c.join() === color.join()).length,
+    ).toBeGreaterThan(1);
+  const before = scene.creatures.map((c) => c.x);
+  updateAquarium(scene, 1 / 30);
+  scene.creatures.forEach((c, i) =>
+    expect(Math.abs(c.x - before[i])).toBeLessThan(0.03),
+  );
+});
+
+test("storybook interactions stay bounded and clear after playback", () => {
+  expect(storyStyles).toHaveLength(4);
+  for (const style of storyStyles) {
+    const scene = createAquarium(style);
+    for (let i = 0; i < 8; i++) feedAquarium(scene);
+    expect(scene.food.length).toBeLessThanOrEqual(24);
+    for (let i = 0; i < 240; i++) updateAquarium(scene, 0.05);
+    expect(scene.food).toHaveLength(0);
+    expect(
+      renderAquarium(context(), scene, 300, 280).glyphs.some((g) => g !== " "),
+    ).toBe(true);
+  }
+});

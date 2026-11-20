@@ -2,7 +2,8 @@ import { aquariumStyles } from "./Aquariums";
 import { gameStyles } from "./GameWorlds";
 import { galaxyStyles } from "./Galaxies";
 import { natureStyles } from "./Nature";
-export { aquariumStyles, gameStyles, galaxyStyles, natureStyles };
+import { storyStyles } from "./StoryWorlds";
+export { aquariumStyles, gameStyles, galaxyStyles, natureStyles, storyStyles };
 
 // Every launch point uses this catalog. Categories own their scene arrays so a
 // Pokémon scene cannot accidentally reappear in the aquarium selector.
@@ -34,6 +35,14 @@ export const sceneCategories = [
     icon: " .  . *\n  ~(@)~\n * .  .",
   },
   {
+    id: "stories",
+    title: "Storybook Worlds",
+    scenes: storyStyles,
+    description: "Four quiet tributes to beloved imaginary places.",
+    detail: "Forest spirits, lanterns, air temples & the Shire",
+    icon: "  .--.\n /    \\\n | [] |",
+  },
+  {
     id: "nature",
     title: "Nature & Nights",
     scenes: natureStyles,
@@ -43,6 +52,16 @@ export const sceneCategories = [
   },
 ];
 const actions = {
+  rain: [
+    "Call the Rain",
+    "Tap the forest or choose Call the Rain.",
+    "A gentle shower for the forest spirits.",
+  ],
+  butterflies: [
+    "Invite Butterflies",
+    "Tap the garden or choose Invite Butterflies.",
+    "A few butterflies visit the garden.",
+  ],
   meteors: [
     "Meteor Shower",
     "Tap the stars or choose Meteor Shower.",

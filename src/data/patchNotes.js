@@ -2,6 +2,17 @@
 // the preceding production commit, rather than fictional in-game release notes.
 const patchNotes = [
   {
+    version: "1.3.1",
+    date: "November 20, 2026",
+    previousCommit: "7eebe0a",
+    changes: [
+      "Redrew Gengar with pointed ears, red eyes, a broad toothy grin, and a rounded spiky silhouette.",
+      "Rebuilt Link, Toon Link, the Zelda companions, and the Kingdom Hearts cast as individual colored ASCII drawings with clearer faces, outfits, shoes, and signature props.",
+      "Recomposed the castle, town, temple, and haunted-tower scenery so buildings no longer obscure character faces. Improved phone scaling and removed the first-frame sideways jump.",
+      "Added Storybook Worlds: Forest Spirits, The Lantern Bridge, Above the Air Temple, and A Hill in the Shire, with rain, lantern, wind, and butterfly interactions.",
+    ],
+  },
+  {
     version: "1.3.0",
     date: "November 20, 2026",
     previousCommit: "bb60ee5",

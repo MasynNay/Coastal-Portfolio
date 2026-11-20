@@ -1,0 +1,61 @@
+// A small, separate collection of animated storybook tributes. These are text
+// illustrations, not games or aquarium residents; each has its own scenery.
+const worlds = [
+  [
+    "forest-spirits",
+    "Forest Spirits",
+    "totoro-garden",
+    ["totoro"],
+    "A friendly forest spirit waits under an umbrella of leaves. Call a little rain and watch the fireflies glow.",
+    "rain",
+    [12, 30, 29],
+    [118, 185, 131],
+  ],
+  [
+    "lantern-bridge",
+    "The Lantern Bridge",
+    "bathhouse",
+    ["no-face"],
+    "No-Face drifts beside a lantern-lit bathhouse. Send warm lanterns up through the evening mist.",
+    "lanterns",
+    [24, 20, 39],
+    [239, 166, 119],
+  ],
+  [
+    "air-temple",
+    "Above the Air Temple",
+    "air-temple",
+    ["airbender"],
+    "An arrow-marked airbender rests beside his staff above the clouds. Call the wind to trace a little air spiral.",
+    "wind",
+    [16, 32, 46],
+    [174, 220, 229],
+  ],
+  [
+    "shire-hill",
+    "A Hill in the Shire",
+    "shire",
+    ["hobbit"],
+    "A round green door, a garden path, and an unhurried hobbit. Let a few butterflies visit the garden.",
+    "butterflies",
+    [17, 34, 27],
+    [237, 209, 134],
+  ],
+];
+export const storyStyles = worlds.map(
+  ([id, name, setting, animals, description, action, water, accent]) => ({
+    id,
+    name,
+    setting,
+    animals,
+    description,
+    action,
+    water,
+    accent,
+    category: "games",
+    landscape: "game",
+    plant: [110, 178, 128],
+    bed: [99, 130, 113],
+    positions: [[0.5, 0.56]],
+  }),
+);

@@ -54,8 +54,8 @@
   outline: 2px solid #aff3d6;
   outline-offset: 3px;
 }
-/* Four primary categories fit together. The preserved nature scenes follow
-   them, and each gallery retains its selection when returning to this menu. */
+/* Categories share one responsive chooser; each gallery retains its selection
+   when returning to this menu. Additional collections wrap naturally. */
 .ascii-menu {
   padding: 22px;
   margin: 0;
@@ -115,6 +115,10 @@
 .ascii-mode-list .ascii-choice-galaxies {
   color: #c5b8fa;
   background: #24273d;
+}
+.ascii-mode-list .ascii-choice-stories {
+  color: #f3c49d;
+  background: #302b32;
 }
 .ascii-mode-list .ascii-choice-nature {
   color: #bce1b2;

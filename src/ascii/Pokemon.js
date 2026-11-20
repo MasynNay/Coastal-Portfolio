@@ -118,45 +118,6 @@ export function drawPokemon(art, kind) {
     stroke(2, 4, 3, 7, brown, "#");
     return true;
   }
-  if (kind === "gengar") {
-    const purple = [174, 132, 218];
-    polygon(
-      [
-        [-5, -3],
-        [-5, -7],
-        [-2, -6],
-        [0, -9],
-        [2, -6],
-        [5, -7],
-        [5, -2],
-      ],
-      purple,
-    );
-    body(0, 1, 5.8, 5, purple);
-    polygon(
-      [
-        [-6, 0],
-        [-9, 3],
-        [-5, 3],
-      ],
-      purple,
-    );
-    polygon(
-      [
-        [6, 0],
-        [9, 3],
-        [5, 3],
-      ],
-      purple,
-    );
-    stroke(-3, 5, -4, 7, purple, "#");
-    stroke(3, 5, 4, 7, purple, "#");
-    body(-2.2, -1.5, 1.3, 0.8, [248, 142, 156]);
-    body(2.2, -1.5, 1.3, 0.8, [248, 142, 156]);
-    body(0, 2, 3.8, 1.4, white);
-    for (let x = -2; x <= 2; x++) stroke(x, 1, x, 3, purple, "|");
-    return true;
-  }
   if (kind === "dragonite") {
     polygon(
       [
