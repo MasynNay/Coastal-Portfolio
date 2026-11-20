@@ -5,6 +5,7 @@ const patchNotes = [
     version: "1.1.8",
     date: "November 19, 2026",
     previousCommit: "7e4e365",
+    comparisonRef: "9a6cb25f1c2200628c902861f02bfc17ccb72cf6",
     changes: [
       "Bloom now offers six bouquets for Mi Shell: Garden Bouquet, Rose Romance, Spring Tulips, Sunflower Sunshine, Lavender Letters, and Moonlight Lilies.",
       "Each arrangement has its own flower shapes, colors, paper wrapping, and ribbon.",
