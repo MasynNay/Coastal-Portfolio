@@ -5,6 +5,7 @@ const patchNotes = [
     version: "1.3.0",
     date: "November 20, 2026",
     previousCommit: "bb60ee5",
+    comparisonRef: "0c2c2f2ddc5a12213bfcdcf2f76b102ae165089f",
     changes: [
       "Separated ASCII into Bouquets, Aquariums, Game Worlds, and Galaxies, with eighteen scenes in each primary category.",
       "Aquariums now contain aquatic habitats only, including six new discus, betta, tide-pool, anemone, cichlid, and lionfish settings.",
