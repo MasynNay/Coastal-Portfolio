@@ -205,8 +205,10 @@ test("the offering announces the saved discovery, and the letter opens only on i
   expect(game.freeze).toHaveBeenLastCalledWith(false);
 });
 
-test("the room computer opens the shared ASCII app and Escape returns to exploring", () => {
-  act(() => callbacks.onEvent({ type: "room-ascii", id: "portfolio-ascii" }));
+test("the room computer opens the shared ASCII app and Escape returns to exploring", async () => {
+  await act(async () =>
+    callbacks.onEvent({ type: "room-ascii", id: "portfolio-ascii" }),
+  );
   const dialog = host.querySelector(
     '[role="dialog"][aria-label="ASCII Studio"]',
   );

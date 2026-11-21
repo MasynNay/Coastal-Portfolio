@@ -7,7 +7,7 @@ jest.mock("../pages/ResumePage", () => () => null);
 jest.mock("../components/Projects", () => ({ Projects: () => null }));
 jest.mock("../components/Contact", () => ({ Contact: () => null }));
 jest.mock("../typing/TypingTest", () => () => null);
-jest.mock("../ascii/AsciiApp", () => ({ active }) => (
+jest.mock("../ascii/AsciiStudio", () => ({ active }) => (
   <div data-ascii-active={String(active)}>ASCII terminal</div>
 ));
 let host, root;

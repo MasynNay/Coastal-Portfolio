@@ -1,0 +1,149 @@
+[
+  {
+    "id": "pikachu",
+    "file": "pikachu.gif",
+    "url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/25.gif",
+    "credit": "Pok\u00e9mon sprites: Nintendo / Creatures / GAME FREAK; reference archive: Pok\u00e9API.",
+    "sha256": "0ddc94c6f8cd432e3fd8972b4eca2a7b72fbfaf130c1970726089feb6fdbacc0"
+  },
+  {
+    "id": "eevee",
+    "file": "eevee.gif",
+    "url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/133.gif",
+    "credit": "Pok\u00e9mon sprites: Nintendo / Creatures / GAME FREAK; reference archive: Pok\u00e9API.",
+    "sha256": "cc9ebb27b89737099672aaf47fc47167c26725db720def18d26aa66190caf17b"
+  },
+  {
+    "id": "gengar",
+    "file": "gengar.gif",
+    "url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/94.gif",
+    "credit": "Pok\u00e9mon sprites: Nintendo / Creatures / GAME FREAK; reference archive: Pok\u00e9API.",
+    "sha256": "a6abb74d994fbc18581c519bfe047743c9523c3a30898c48d3536c3f3f0683ad"
+  },
+  {
+    "id": "dragonite",
+    "file": "dragonite.gif",
+    "url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/149.gif",
+    "credit": "Pok\u00e9mon sprites: Nintendo / Creatures / GAME FREAK; reference archive: Pok\u00e9API.",
+    "sha256": "ea83358260bf2f2081c30b15c11f94cb7debd3f01cd724a9066d3bab5c8043e3"
+  },
+  {
+    "id": "magikarp",
+    "file": "magikarp.gif",
+    "url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/129.gif",
+    "credit": "Pok\u00e9mon sprites: Nintendo / Creatures / GAME FREAK; reference archive: Pok\u00e9API.",
+    "sha256": "5f6e78759fc026bdc081aec637909c0a5e78981c251529ad2997dcdfd8ca80c8"
+  },
+  {
+    "id": "horsea",
+    "file": "horsea.gif",
+    "url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/116.gif",
+    "credit": "Pok\u00e9mon sprites: Nintendo / Creatures / GAME FREAK; reference archive: Pok\u00e9API.",
+    "sha256": "7169d3923e84bfe7196598b42d65019eee67ff55c8e03d7959f5b1e14bcb878e"
+  },
+  {
+    "id": "lapras",
+    "file": "lapras.gif",
+    "url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/131.gif",
+    "credit": "Pok\u00e9mon sprites: Nintendo / Creatures / GAME FREAK; reference archive: Pok\u00e9API.",
+    "sha256": "7afeddf87a578e26555a57743fdc95fec0e70cae15cae46a5c75ef7d9ef8bede"
+  },
+  {
+    "id": "squirtle",
+    "file": "squirtle.gif",
+    "url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/7.gif",
+    "credit": "Pok\u00e9mon sprites: Nintendo / Creatures / GAME FREAK; reference archive: Pok\u00e9API.",
+    "sha256": "cfb2c0799c062c09baf49ca8cd946c4a53bb42147ed6cc811b8879281c79aa30"
+  },
+  {
+    "id": "poliwag",
+    "file": "poliwag.gif",
+    "url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/60.gif",
+    "credit": "Pok\u00e9mon sprites: Nintendo / Creatures / GAME FREAK; reference archive: Pok\u00e9API.",
+    "sha256": "2dd2e9ebb411e2e645598d747918933efa2c244e1fe6e0c9b8df85de03aa481e"
+  },
+  {
+    "id": "psyduck",
+    "file": "psyduck.gif",
+    "url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/54.gif",
+    "credit": "Pok\u00e9mon sprites: Nintendo / Creatures / GAME FREAK; reference archive: Pok\u00e9API.",
+    "sha256": "236d243cd1bbc26d11705f1ef410dea61da56241dcb15733bafc16825427835a"
+  },
+  {
+    "id": "donald",
+    "file": "donald.png",
+    "url": "https://kh.wiki.gallery/images/2/2c/Donald_%28Sprite%29_KHCOM.png",
+    "credit": "Kingdom Hearts: Disney / Square Enix; reference archive: Kingdom Hearts Wiki.",
+    "sha256": "659deef99efd74426be0e3d4ce99c4b76c2697587f3c32f785ca811c43ef9dc5"
+  },
+  {
+    "id": "goofy",
+    "file": "goofy.png",
+    "url": "https://kh.wiki.gallery/images/1/12/Goofy_%28Sprite%29_KHCOM.png",
+    "credit": "Kingdom Hearts: Disney / Square Enix; reference archive: Kingdom Hearts Wiki.",
+    "sha256": "f51906f7c68db9c8b6ef4b5f0e8c0bc764552b4f48810ffa545f75e95ac9cb36"
+  },
+  {
+    "id": "kairi",
+    "file": "kairi.png",
+    "url": "https://kh.wiki.gallery/images/2/25/Kairi_%28Sprite%29_KHCOM.png",
+    "credit": "Kingdom Hearts: Disney / Square Enix; reference archive: Kingdom Hearts Wiki.",
+    "sha256": "d67c2c1e60b62e39affc367e64def6ea911a950f29d723310b0988b126524f27"
+  },
+  {
+    "id": "roxas",
+    "file": "roxas.png",
+    "url": "https://kh.wiki.gallery/images/5/53/Roxas_KHII.png",
+    "credit": "Kingdom Hearts: Disney / Square Enix; reference archive: Kingdom Hearts Wiki.",
+    "sha256": "d4035b507fa788e51a03ba0f2e48abf7b92790252997d939883ecc69891a665c"
+  },
+  {
+    "id": "jack",
+    "file": "jack.png",
+    "url": "https://kh.wiki.gallery/images/1/16/Jack_Skellington_%28Sprite%29_KHCOM.png",
+    "credit": "Kingdom Hearts: Disney / Square Enix; reference archive: Kingdom Hearts Wiki.",
+    "sha256": "75b73897f8b05598a56b378fab08030d008cd4ba978eb0e0ebf58f94d13dca0e"
+  },
+  {
+    "id": "shadow",
+    "file": "shadow.png",
+    "url": "https://kh.wiki.gallery/images/8/8d/Shadow_KHCOM.png",
+    "credit": "Kingdom Hearts: Disney / Square Enix; reference archive: Kingdom Hearts Wiki.",
+    "sha256": "d94ec6189ef6ffd096331a2a91edb9b92b4adf2c171a62863268c0708c9e12b4"
+  },
+  {
+    "id": "sora",
+    "file": "sora.gif",
+    "url": "https://kh.wiki.gallery/images/c/cb/Sora_%28Battle%29_KHCOM.gif",
+    "credit": "Kingdom Hearts: Disney / Square Enix; reference archive: Kingdom Hearts Wiki.",
+    "sha256": "823f7cb3deb5a259c537dabaef58e89cd8bc111d97491a59b6ad86b21b5b54f8"
+  },
+  {
+    "id": "link",
+    "file": "link-art.png",
+    "url": "https://www.zeldadungeon.net/wiki/Special:FilePath/LinkOcarinaofTime.png",
+    "credit": "The Legend of Zelda: Nintendo; reference archive: Zelda Dungeon.",
+    "sha256": "e40210b221ea1e2104b54a1f82905d3bd15aec2adf5d3787706fb6c3cc28957f"
+  },
+  {
+    "id": "toon-link",
+    "file": "toon-link-art.png",
+    "url": "https://www.zeldadungeon.net/wiki/Special:FilePath/WindWakerLinkHD.png",
+    "credit": "The Legend of Zelda: Nintendo; reference archive: Zelda Dungeon.",
+    "sha256": "facf35db45fb17617ac1c23e0ee98b55316e91cd0b9c734a8161d400e5fb53b2"
+  },
+  {
+    "id": "skull-kid",
+    "file": "skull-kid-art.png",
+    "url": "https://www.zeldadungeon.net/wiki/Special:FilePath/Skull%20Kid%20Artwork%20%28Majora%27s%20Mask%29.png",
+    "credit": "The Legend of Zelda: Nintendo; reference archive: Zelda Dungeon.",
+    "sha256": "bfda25e41cf24b3f5c52d947bce912023bdc47e62eee643151db66bd97da214f"
+  },
+  {
+    "id": "zora",
+    "file": "zora.png",
+    "url": "https://www.zeldadungeon.net/wiki/Special:FilePath/Ruto-young.png",
+    "credit": "The Legend of Zelda: Nintendo; reference archive: Zelda Dungeon.",
+    "sha256": "d93b4a8246278bc73327248e60eecb4a192a47d1bd21ce1fd7a56723002253c6"
+  }
+]

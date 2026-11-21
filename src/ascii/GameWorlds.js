@@ -68,7 +68,7 @@ const scenes = [
     "pokemon",
     "haunted",
     ["gengar", "gengar"],
-    "Two grinning Gengar watch the moon from a crooked old tower.",
+    "Gengar’s red eyes and broad grin catch the moonlight beside a crooked tower.",
     "magic",
   ],
   [
@@ -78,7 +78,7 @@ const scenes = [
     "pokemon",
     "clouds",
     ["dragonite", "dragonite"],
-    "Orange Dragonite flap their green wings over a soft sea of clouds.",
+    "Dragonite flaps its small green wings over a soft sea of clouds.",
     "wind",
   ],
   [
@@ -168,7 +168,7 @@ const scenes = [
     "zelda",
     "harbor",
     ["toon-link"],
-    "Wide-eyed Toon Link waits by the King of Red Lions, with his green cap, blond fringe, and small shield.",
+    "Toon Link conducts the harbor breeze with the Wind Waker, beside the King of Red Lions.",
     "wind",
   ],
   [
@@ -203,18 +203,47 @@ const scenes = [
   ],
 ];
 export const gameStyles = scenes.map(
-  ([id, name, series, palette, setting, animals, description, action]) => ({
-    id,
-    name,
-    series,
-    setting,
-    animals,
-    description,
-    action,
-    positions: setting === "harbor" ? [[0.29, 0.56]] : undefined,
-    category: "games",
-    landscape:
-      setting === "cove" ? "coral" : setting === "springs" ? "pond" : "game",
-    ...palettes[palette],
-  }),
+  ([id, name, series, palette, setting, originalCast, description, action]) => {
+    // A single large Pokémon portrait reads clearly; companions have deliberate
+    // secondary positions instead of two identical, cramped figure copies.
+    const animals =
+      series === "Pokémon" && !["cove", "springs"].includes(setting)
+        ? [originalCast[0]]
+        : originalCast;
+    const positions = ["cove", "springs"].includes(setting)
+      ? undefined
+      : setting === "harbor"
+        ? [[0.3, 0.56]]
+        : animals[1] === "fairy"
+          ? [
+              [0.4, 0.56],
+              [0.81, 0.3],
+            ]
+          : animals.length === 3
+            ? [
+                [0.5, 0.56],
+                [0.16, 0.69],
+                [0.84, 0.66],
+              ]
+            : animals.length === 2
+              ? [
+                  [0.32, 0.56],
+                  [0.78, 0.62],
+                ]
+              : [[0.5, 0.56]];
+    return {
+      id,
+      name,
+      series,
+      setting,
+      animals,
+      description,
+      action,
+      positions,
+      category: "games",
+      landscape:
+        setting === "cove" ? "coral" : setting === "springs" ? "pond" : "game",
+      ...palettes[palette],
+    };
+  },
 );

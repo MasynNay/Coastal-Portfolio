@@ -128,7 +128,7 @@ function atKey(grid, x, y, color) {
   grid.put(x + 2, y + 1, "+", color);
 }
 
-export function drawGameEffects(grid, scene) {
+export function drawSceneEffects(grid, scene) {
   const action = scene.style.action,
     time = scene.time;
   scene.food.forEach((p, i) => {

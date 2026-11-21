@@ -38,7 +38,7 @@ export const sceneCategories = [
     id: "stories",
     title: "Storybook Worlds",
     scenes: storyStyles,
-    description: "Four quiet tributes to beloved imaginary places.",
+    description: "18 quiet tributes to beloved imaginary places.",
     detail: "Forest spirits, lanterns, air temples & the Shire",
     icon: "  .--.\n /    \\\n | [] |",
   },
@@ -46,16 +46,16 @@ export const sceneCategories = [
     id: "nature",
     title: "Nature & Nights",
     scenes: natureStyles,
-    description: "Quiet gardens and a lantern-lit sky.",
-    detail: "Fireflies, a terrarium & lanterns",
+    description: "18 gardens, landscapes, skies, and quiet nights.",
+    detail: "Forests, weather, mountains & night skies",
     icon: "  * . *\n  /|\\\n _/ | \\_",
   },
 ];
 const actions = {
   rain: [
     "Call the Rain",
-    "Tap the forest or choose Call the Rain.",
-    "A gentle shower for the forest spirits.",
+    "Tap the scene or choose Call the Rain.",
+    "A gentle shower drifts through the scene.",
   ],
   butterflies: [
     "Invite Butterflies",
@@ -114,6 +114,13 @@ const actions = {
   ],
 };
 export function getSceneAction(style) {
+  if (style.action === "starlight" && style.category !== "galaxy")
+    return {
+      label: "Light the Sky",
+      instruction: "Tap the scene or choose Light the Sky.",
+      success: "A little starlight brightens the scene.",
+    };
+
   const [label, instruction, success] = actions[style.action] || [
     "Feed Fish",
     "Tap the water to feed, or use Feed Fish.",

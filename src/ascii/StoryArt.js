@@ -1,6 +1,8 @@
+import { drawStoryScenery } from "./StoryScenery";
 // Simple, deliberate silhouettes leave a clear foreground for the main figure.
 // Rain, drifting lanterns, cloud ribbons and butterflies provide gentle motion.
 export function drawStoryLandscape(grid, scene) {
+  if (drawStoryScenery(grid, scene)) return true;
   const { setting, water, plant, accent } = scene.style;
   if (!["totoro-garden", "bathhouse", "air-temple", "shire"].includes(setting))
     return false;

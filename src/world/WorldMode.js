@@ -1,5 +1,5 @@
 import RoomArcade from "./RoomArcade";
-import AsciiApp from "../ascii/AsciiApp";
+import AsciiApp from "../ascii/AsciiStudio";
 import "../ascii/AsciiLauncher.css";
 import LoveLetter from "./LoveLetter";
 import RomDownload from "../components/RomDownload";

@@ -54,7 +54,7 @@ test("the terminal chooser preserves modes and only animates the foreground scen
     act(() => button("Storybook Worlds").click());
     expect(
       host.querySelector('[data-category="Storybook Worlds"]').dataset.count,
-    ).toBe("4");
+    ).toBe("18");
     act(() => root.render(<AsciiApp active={false} />));
     expect(host.querySelector("[data-aquarium]").dataset.aquarium).toBe(
       "false",

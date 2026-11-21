@@ -314,3 +314,10 @@
     min-width: 120px;
   }
 }
+
+/* Shared lazy-loading state inside Mac windows, room dialogs and portfolio. */
+.ascii-loading {
+  padding: 24px;
+  color: #c4d8d7;
+  font: 14px monospace;
+}

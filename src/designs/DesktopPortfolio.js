@@ -30,7 +30,7 @@ import MacAppearance, {
 import { MacMenu, AboutMac } from "./MacMenu";
 import { GamesApp, GamePlayer, PhotosApp } from "./MacApps";
 import TypingTest from "../typing/TypingTest";
-import AsciiApp from "../ascii/AsciiApp";
+import AsciiApp from "../ascii/AsciiStudio";
 import useWindowDrag from "../hooks/useWindowDrag";
 import "./glass.css";
 import "./desktop.css";

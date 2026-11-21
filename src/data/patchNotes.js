@@ -2,6 +2,18 @@
 // the preceding production commit, rather than fictional in-game release notes.
 const patchNotes = [
   {
+    version: "1.4.0",
+    date: "November 21, 2026",
+    previousCommit: "e235399",
+    changes: [
+      "Balanced all six ASCII collections at eighteen entries each, for 108 total selections.",
+      "Added fourteen Storybook Worlds and fifteen Nature & Nights scenes with distinct landmarks, creatures, terrain, weather, and interactions.",
+      "Replaced the earlier simplified Pokémon, Kingdom Hearts, and Zelda figures with colored-text conversions of recognizable reference artwork; documented the sources and reproducible conversion tool.",
+      "Preserved ninety-four sampled character poses with consistent crops and palettes, improved dark-text contrast, and composed casts around a readable central character.",
+      "Kept the same ASCII Studio app available in Mac Mode, the Coding portfolio section, and the computer in the Pokémon house.",
+    ],
+  },
+  {
     version: "1.3.2",
     date: "November 20, 2026",
     previousCommit: "0909bfa",

@@ -1,10 +1,9 @@
-import { lazy, Suspense, useRef, useState } from "react";
+import { useRef, useState } from "react";
+import AsciiApp from "./AsciiStudio";
 import { createPortal } from "react-dom";
 import useDialogFocus from "../hooks/useDialogFocus";
 import { sceneCategories } from "./Worlds";
 import "./AsciiLauncher.css";
-
-const AsciiApp = lazy(() => import("./AsciiApp"));
 
 // The normal portfolio launches the same app as the Mac dock and room PC.
 // Load the renderer only after opening, so the main page stays lightweight.
@@ -25,13 +24,8 @@ export default function AsciiLauncher() {
           exploring.
         </p>
         <small>
-          {sceneCategories
-            .slice(0, 3)
-            .map(
-              (category) =>
-                `${category.scenes.length} ${category.title.toLowerCase()}`,
-            )
-            .join(" · ")}
+          {sceneCategories.length + 1} collections ·{" "}
+          {sceneCategories[0].scenes.length} scenes each
         </small>
       </div>
       <button ref={trigger} onClick={() => setOpen(true)}>
@@ -66,9 +60,7 @@ function AsciiModal({ onClose, trigger }) {
           </button>
         </header>
         <div className="ascii-modal-body">
-          <Suspense fallback={<p>Opening ASCII Studio…</p>}>
-            <AsciiApp active />
-          </Suspense>
+          <AsciiApp active />
         </div>
       </section>
     </div>

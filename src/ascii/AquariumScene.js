@@ -2,12 +2,13 @@
 // The model owns movement and feeding; the renderer only reads it. Keeping
 // simulation time separate from wall time prevents jumps after minimizing.
 import { aquariumStyles } from "./Worlds";
-import { drawPokemon } from "./Pokemon";
+import { drawCharacterFigure } from "./CharacterFigures";
+import { drawNatureLandscape } from "./NatureArt";
 import { drawGalaxy } from "./GalaxyArt";
 import {
   drawGameCharacter,
   drawGameLandscape,
-  drawGameEffects,
+  drawSceneEffects,
 } from "./GameArt";
 import {
   drawWorldCreature,
@@ -111,7 +112,8 @@ export function feedAquarium(scene, x = 0.5) {
           : scene.style.action === "nectar" ||
               (scene.style.category === "games" &&
                 scene.style.action !== "feed") ||
-              scene.style.category === "galaxy"
+              scene.style.category === "galaxy" ||
+              scene.style.category === "nature"
             ? 0.35 + (i % 2) * 0.03
             : 0.06 + (i % 2) * 0.02,
       age: 0,
@@ -140,6 +142,7 @@ export function updateAquarium(scene, seconds) {
     (food) =>
       food.age <
         (scene.style.category === "galaxy" ||
+        scene.style.category === "nature" ||
         (scene.style.category === "games" && scene.style.action !== "feed")
           ? 6
           : 14) &&
@@ -152,11 +155,11 @@ export function updateAquarium(scene, seconds) {
     // the surface instead of clipping the neck out of the top of the canvas.
     const mouthOffset =
       {
-        lapras: 0.32,
-        magikarp: 0.23,
-        squirtle: 0.18,
-        poliwag: 0.14,
-        psyduck: 0.25,
+        lapras: 0.17,
+        magikarp: 0.04,
+        squirtle: 0.12,
+        poliwag: 0.04,
+        psyduck: 0.1,
         ray: 0.13,
         turtle: 0.1,
         octopus: 0.1,
@@ -289,6 +292,7 @@ function textGrid(columns, rows) {
 }
 
 function landscape(grid, scene) {
+  if (drawNatureLandscape(grid, scene)) return;
   if (scene.style.category === "games" && drawGameLandscape(grid, scene))
     return;
   if (drawWorldLandscape(grid, scene)) return;
@@ -380,6 +384,7 @@ function landscape(grid, scene) {
 }
 
 function drawCreature(grid, c, time, index, sceneForArt = { food: [] }) {
+  if (drawCharacterFigure(grid, c, sceneForArt)) return;
   // Portraits share a readable cell size instead of shrinking their faces to
   // fish-sized blobs. Three companions still fit side by side on a phone.
   const portrait =
@@ -448,7 +453,6 @@ function drawCreature(grid, c, time, index, sceneForArt = { food: [] }) {
   const art = { at, body, stroke, polygon, stamp, beat, time };
   if (
     drawGameCharacter(art, c.kind, sceneForArt) ||
-    drawPokemon(art, c.kind) ||
     drawWorldCreature(art, c.kind, index)
   )
     return;
@@ -547,8 +551,14 @@ function drawCreature(grid, c, time, index, sceneForArt = { food: [] }) {
 export function renderAquarium(context, scene, width, height) {
   // A fixed logical composition makes the full habitat fit at every size.
   // It is redrawn at up to 30 fps without any per-frame React state updates.
-  const rows = 52;
-  const columns = clamp(Math.round((width / height) * rows * 1.55), 82, 180);
+  // Game references get enough text cells to preserve eyes and costume detail.
+  // Other collections retain their established density and composition.
+  const rows = scene.style.series ? 76 : 52;
+  const columns = clamp(
+    Math.round((width / height) * rows * 1.55),
+    82,
+    scene.style.series ? 280 : 180,
+  );
   const grid = textGrid(columns, rows);
   if (scene.style.category === "galaxy") drawGalaxy(grid, scene);
   else {
@@ -557,11 +567,15 @@ export function renderAquarium(context, scene, width, height) {
       drawCreature(grid, c, scene.time, i, scene),
     );
   }
-  if (scene.style.category === "games" && scene.style.action !== "feed")
-    drawGameEffects(grid, scene);
+  if (
+    (scene.style.category === "games" && scene.style.action !== "feed") ||
+    scene.style.category === "nature"
+  )
+    drawSceneEffects(grid, scene);
   if (
     scene.style.category !== "galaxy" &&
-    !(scene.style.category === "games" && scene.style.action !== "feed")
+    !(scene.style.category === "games" && scene.style.action !== "feed") &&
+    scene.style.category !== "nature"
   )
     scene.food.forEach((food, i) => {
       if (scene.style.action === "lanterns")
