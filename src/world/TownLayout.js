@@ -212,8 +212,10 @@ export const townProps = [
   },
   {
     id: "shell-fountain",
-    x: -25.5,
-    z: 15.3,
+    // The open east lawn gives the arcade a clear approach from the side street,
+    // above the seahorse and clear of the mailbox and front-door path.
+    x: -11.8,
+    z: 12.4,
     h: 2.5,
   },
   {
