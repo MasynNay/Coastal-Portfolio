@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { packs, cardArt } from "./CardCatalog";
+import { packs, cardArt, cardsById, isChase } from "./CardCatalog";
 import {
   collectPack,
   useCardCollection,
@@ -7,13 +7,59 @@ import {
   revealCard,
   nextCard,
   finishPack,
-  cardKey,
 } from "./CardCollection";
 import TearPack, { PackArtwork } from "./TearPack";
+import CardAlbum from "./CardAlbum";
 import "./CardPacks.css";
 export { packs, openPack } from "./CardCatalog";
 
 export function PokemonCard({ card, quantity, large = false }) {
+  const [failed, setFailed] = useState(false);
+  useEffect(() => setFailed(false), [card.id]);
+  if (cardsById[card.id])
+    return (
+      <figure
+        className={`tcg-card ${large ? "is-large" : ""} ${card.holo || card.variant !== "Regular" ? "is-foil" : ""} ${isChase(card) ? "is-chase" : ""} tier-${card.tier.toLowerCase().replaceAll(" ", "-")}`}
+      >
+        <div className="tcg-card-face">
+          {failed ? (
+            <div className="card-art-unavailable">
+              <strong>{card.name}</strong>
+              <span>
+                {card.tier} · #{card.number}
+              </span>
+              <small>Artwork is temporarily unavailable</small>
+            </div>
+          ) : (
+            <img
+              src={cardArt(card, large)}
+              alt={`${card.name}, ${card.rarity}, ${card.pack} #${card.number}`}
+              loading={large ? "eager" : "lazy"}
+              onError={(e) => {
+                if (e.currentTarget.src !== cardArt(card))
+                  e.currentTarget.src = cardArt(card);
+                else setFailed(true);
+              }}
+            />
+          )}
+          <span className="card-foil" aria-hidden="true" />
+          {isChase(card) && (
+            <span className="chase-glimmer" aria-hidden="true" />
+          )}
+        </div>
+        <figcaption>
+          <strong>{card.name}</strong>
+          <span className="printing-tier">
+            {card.tier}
+            {card.variant === "Reverse Holo" ? " · Reverse Holo" : ""}
+          </span>
+          <small>
+            #{card.number} · {card.pack}
+            {quantity ? ` · ×${quantity}` : ""}
+          </small>
+        </figcaption>
+      </figure>
+    );
   return (
     <div
       className={`island-card ${large ? "is-large" : ""} ${card.variant === "Shiny" ? "is-shiny" : ""} rarity-${card.rarity.replaceAll(" ", "-").toLowerCase()}`}
@@ -66,7 +112,8 @@ export default function CardPacks({ onInventory }) {
               <PackArtwork pack={pack} />
             </div>
             <h3>{pack.name}</h3>
-            <p>{pack.type}</p>
+            <p className="pack-highlights">{pack.type}</p>
+            <p>{pack.cards.length} card printings to collect</p>
             <small>{state.packs[pack.id] || 0} unopened in your bag</small>
             <button
               disabled={(state.packs[pack.id] || 0) >= 99}
@@ -84,7 +131,7 @@ export default function CardPacks({ onInventory }) {
       </div>
       <p role="status" className="card-notice">
         {notice ||
-          "Every pack is free. Five different Pokémon, with a chance of a shiny."}
+          "Five different Pokémon. EX, VMAX, illustration rares, secret rares, and shiny printings are waiting."}
       </p>
       {onInventory && (
         <button className="world-primary" onClick={onInventory}>
@@ -97,26 +144,15 @@ export default function CardPacks({ onInventory }) {
 export function CardCollection({ onBack }) {
   const state = useCardCollection(),
     [tab, setTab] = useState("packs"),
-    [opening, setOpening] = useState(null),
-    [filter, setFilter] = useState("All"),
-    [selected, setSelected] = useState(null);
-  const album = Object.values(state.cards),
-    pending = state.pending;
+    [opening, setOpening] = useState(null);
+  const pending = state.pending;
   const pack = packs.find((p) => p.id === (pending?.setId || opening));
-  const visible = album.filter(
-    (c) =>
-      filter === "All" ||
-      (filter === "Shiny" && c.variant === "Shiny") ||
-      c.setId === filter,
-  );
   const revealFrame = useRef(null);
   const revealIndex = pending?.index,
     revealFace = pending?.flipped;
   useEffect(() => {
     revealFrame.current?.scrollIntoView?.({ block: "center" });
   }, [revealIndex, revealFace]);
-  const selectedCard =
-    visible.find((c) => cardKey(c) === selected) || visible[0];
   return (
     <section className="card-collection">
       <div className="collection-toolbar">
@@ -161,7 +197,7 @@ export function CardCollection({ onBack }) {
           </button>
           <p role="status">
             {pending.flipped
-              ? `${pending.cards[pending.index].variant === "Shiny" ? "A shiny! " : ""}${pending.cards[pending.index].name} · ${pending.cards[pending.index].rarity}`
+              ? `${pending.cards[pending.index].variant === "Shiny" ? "A shiny! " : ""}${pending.cards[pending.index].name} · ${pending.cards[pending.index].tier || pending.cards[pending.index].rarity}`
               : "Your next discovery is waiting."}
           </p>
           <div className="card-reveal-actions">
@@ -227,63 +263,18 @@ export function CardCollection({ onBack }) {
         </>
       ) : (
         <>
-          <div className="card-album-heading">
-            <p>
-              {album.length} different cards ·{" "}
-              {album.filter((c) => c.variant === "Shiny").length} shiny
-              discoveries · {album.reduce((n, c) => n + c.quantity, 0)} cards
-              collected
-            </p>
-            <label>
-              Show{" "}
-              <select
-                value={filter}
-                onChange={(e) => {
-                  setFilter(e.target.value);
-                  setSelected(null);
-                }}
-              >
-                <option>All</option>
-                <option>Shiny</option>
-                {packs.map((p) => (
-                  <option value={p.id} key={p.id}>
-                    {p.name}
-                  </option>
-                ))}
-              </select>
-            </label>
-          </div>
-          {selectedCard && (
-            <div className="selected-album-card">
-              <PokemonCard
-                card={selectedCard}
-                quantity={selectedCard.quantity}
-                large
-              />
-            </div>
-          )}
-          <div className="card-album-grid">
-            {visible.map((c) => (
-              <button
-                key={cardKey(c)}
-                aria-pressed={selectedCard === c}
-                onClick={() => setSelected(cardKey(c))}
-              >
-                <PokemonCard card={c} quantity={c.quantity} />
-              </button>
-            ))}
-          </div>
-          {!visible.length && (
-            <p className="card-empty">
-              No cards in this part of your album yet. Every opened pack adds
-              five discoveries here.
-            </p>
-          )}
+          <CardAlbum
+            cards={state.cards}
+            renderCard={(card, large) => (
+              <PokemonCard card={card} quantity={card.quantity} large={large} />
+            )}
+          />
         </>
       )}
       <p className="card-credit">
-        Fan-made island cards. Character sprites: PokeAPI / Nintendo, Creatures
-        and GAME FREAK. Saved on this device.
+        Card artwork and catalog: TCGdex / The Pokémon Company. Free island
+        packs use custom odds and curated checklists, not full retail sets.
+        Saved on this device.
       </p>
     </section>
   );

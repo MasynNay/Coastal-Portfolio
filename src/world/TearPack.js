@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { cardArt } from "./CardCatalog";
+
 // A partial drag only opens a partial seam. No tap-to-rip shortcut bypasses it.
 // The same progress has keyboard control so a mouse/touch gesture is optional.
 export function tearDistance(start, x, width, previous = 0) {
@@ -15,25 +15,23 @@ export function PackArtwork({ pack }) {
       style={{ "--pack-color": pack.color }}
       aria-hidden="true"
     >
-      <span className="booster-label">ISLAND COLLECTION</span>
+      <span className="booster-crimp top" />
       <div className="booster-burst" />
       <img
-        className="pack-companion first"
-        src={cardArt({ id: pack.ids[0] }, true)}
+        className="booster-set-logo"
+        src={pack.logo}
         alt=""
-      />
-      <img
-        className="pack-companion second"
-        src={cardArt({ id: pack.ids[6] }, true)}
-        alt=""
+        onError={(e) => {
+          e.currentTarget.hidden = true;
+        }}
       />
       <img
         className="pack-mascot"
-        src={cardArt({ id: pack.mascot }, true)}
+        src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pack.mascot}.png`}
         alt=""
       />
-      <strong>{pack.name}</strong>
-      <small>5 CARDS · ONE RARE OR BETTER</small>
+      <strong className="booster-set-name">Trading Card Game</strong>
+      <small>5 POKÉMON CARDS</small>
       <span className="booster-crimp bottom" />
     </div>
   );

@@ -661,12 +661,17 @@ export default function WorldMode() {
           <button
             className="world-interact"
             disabled={
-              !status.prompt ||
-              !!status.fishingPhase ||
-              status.interactionBusy ||
-              status.surfingBoard
+              !status.playground &&
+              (!status.prompt ||
+                !!status.fishingPhase ||
+                status.interactionBusy ||
+                status.surfingBoard)
             }
-            onClick={() => engine.current?.interact()}
+            onClick={() =>
+              status.playground
+                ? engine.current?.leavePlayground()
+                : engine.current?.interact()
+            }
           >
             <kbd>
               {["building", "exit"].includes(status.promptType) ? "Walk" : "E"}
@@ -1055,9 +1060,12 @@ export default function WorldMode() {
       )}
       {dialog && (
         <Dialog
-          wide={["axolotl-game", "room-arcade", "room-ascii"].includes(
-            dialog.type,
-          )}
+          wide={[
+            "axolotl-game",
+            "room-arcade",
+            "room-ascii",
+            "card-packs",
+          ].includes(dialog.type)}
           className={
             dialog.type === "room-ascii"
               ? "room-ascii-dialog"

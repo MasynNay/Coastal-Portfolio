@@ -1,4 +1,10 @@
-import { packs, openPack, cardArt } from "./CardCatalog";
+import {
+  packs,
+  openPack,
+  cardArt,
+  cardCatalog,
+  checklistProgress,
+} from "./CardCatalog";
 import {
   collectPack,
   readCardCollection,
@@ -21,10 +27,11 @@ test("every pack gives five distinct Pokémon across thousands of rolls, includi
   const found = new Set();
   for (const pack of packs) {
     expect(pack.ids.length).toBeGreaterThan(20);
-    for (let i = 0; i < 200; i++) {
+    for (let i = 0; i < 1000; i++) {
       const cards = openPack(pack, random);
       expect(new Set(cards.map((c) => c.id)).size).toBe(5);
-      expect(["Rare", "Holo Rare", "Legendary"]).toContain(cards[4].rarity);
+      expect(new Set(cards.map((c) => c.dexId)).size).toBe(5);
+      expect(["Common", "Uncommon"]).not.toContain(cards[4].tier);
       for (const c of cards) {
         expect(pack.ids).toContain(c.id);
         expect(c.name).toBeTruthy();
@@ -38,8 +45,26 @@ test("every pack gives five distinct Pokémon across thousands of rolls, includi
   expect(cardArt({ id: 25, variant: "Shiny" }, true)).toContain(
     "official-artwork/shiny/",
   );
-  expect(shiny).toBeGreaterThan(100);
-  expect(found.size).toBe(144);
+  expect(shiny).toBeGreaterThan(20);
+  expect(found.size).toBe(cardCatalog.length);
+});
+test("checklist counts distinct printings, preserves chase labels and uses complete card scans", () => {
+  const sir = cardCatalog.find((c) => c.tier === "SIR"),
+    vmax = cardCatalog.find((c) => c.tier === "VMAX");
+  expect(cardArt(sir, true)).toContain("/high.webp");
+  expect(vmax.name).toContain("VMAX");
+  expect(cardCatalog.some((c) => c.tier === "EX")).toBe(true);
+  const album = {
+    a: { ...sir, quantity: 8 },
+    b: { ...sir, variant: "Reverse Holo", quantity: 2 },
+    c: { ...vmax, quantity: 1 },
+  };
+  expect(checklistProgress(album)).toEqual({
+    found: 2,
+    total: 200,
+    missing: 198,
+  });
+  expect(checklistProgress(album, sir.setId).found).toBe(1);
 });
 test("dispensed packs persist unopened; one tear consumes one pack and awards exactly five cards", () => {
   expect(ripOwnedPack("kanto")).toBeNull();
@@ -150,4 +175,26 @@ test("the requested garden placements stay distinct and the unused western bench
   const home = buildings.find((b) => b.id === "skills"),
     box = mailboxes.find((b) => b.home === "skills");
   expect(box.z - home.z).toBeLessThan(4);
+});
+
+test("the net has distinct grip/pull and summit celebration phases; the tunnel crosses the actual mouths", () => {
+  const dome = townProps.find((p) => p.id === "climbing-dome"),
+    tunnel = townProps.find((p) => p.id === "tunnel"),
+    play = createPlayground();
+  play.start(dome, { x: dome.x, z: dome.z + 1 }, null, 0);
+  const climbing = play.snapshot(2400),
+    top = play.snapshot(6000);
+  expect(climbing.player.climbing).toBe(true);
+  expect(climbing.player.moving).toBe(false);
+  expect(top.player.celebrating).toBe(true);
+  expect(top.player.moving).toBe(false);
+  expect(top.player.z).toBeLessThan(climbing.player.z);
+  play.stop();
+  play.start(tunnel, { x: tunnel.x - 2, z: tunnel.z + 1 }, null, 0);
+  expect(play.snapshot(1800).player.stage).toBe("entering-tunnel");
+  expect(play.snapshot(3000).player.stage).toBe("inside-tunnel");
+  expect(play.snapshot(4500).player.stage).toBe("exiting-tunnel");
+  expect(play.snapshot(4500).player.x).toBeGreaterThan(
+    play.snapshot(1800).player.x,
+  );
 });

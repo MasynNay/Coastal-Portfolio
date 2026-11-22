@@ -7,7 +7,7 @@ import { artwork } from "./art";
 import { personHeight } from "./Movement";
 import { activityAsset } from "./Wardrobe";
 import appearances from "./Appearances.json";
-import { buildings, obstacles } from "./config";
+import { buildings } from "./config";
 import { canStand } from "./navigation";
 import { townProps } from "./TownLayout";
 
@@ -61,12 +61,12 @@ test("each of six packs has five cards, a guaranteed rare slot, and real names",
   for (const pack of packs) {
     const cards = openPack(pack, () => 0.5);
     expect(cards).toHaveLength(5);
-    expect(cards[4].rarity).toBe("Rare");
+    expect(["Common", "Uncommon"]).not.toContain(cards[4].tier);
     cards.forEach((c) => {
       expect(pack.ids).toContain(c.id);
       expect(c.name).toBeTruthy();
     });
-    expect(openPack(pack, () => 0)[4].rarity).toBe("Legendary");
+    expect(["Common", "Uncommon"]).not.toContain(openPack(pack, () => 0)[4].tier);
   }
 });
 test("hand sockets scale with each actor and rotate with wakeboard tricks", () => {
@@ -98,10 +98,12 @@ test("hand sockets scale with each actor and rotate with wakeboard tricks", () =
     }
   }
 });
-test("the back and side roofs of every house block walking", () => {
+test("house facades block walking while the rear roof overhang leaves room to pass", () => {
   for (const b of buildings) {
-    expect(canStand(b.x, b.z - 3.5, obstacles)).toBe(false);
-    expect(canStand(b.x + 2, b.z - 1.5, obstacles)).toBe(false);
+    const { buildingObstacle } = require("./WorldLayout"),
+      wall = buildingObstacle(b);
+    expect(canStand(b.x, wall.z - wall.d / 2 - 0.6, [wall])).toBe(true);
+    expect(canStand(b.x + 2, wall.z, [wall])).toBe(false);
   }
 });
 test("habitat care uses appropriate food for all five bug groups", () => {

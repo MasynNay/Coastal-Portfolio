@@ -654,6 +654,7 @@ export function createWorld(host, callbacks) {
                                       ? `Surf on your ${axolotlColors[character]} axolotl`
                                       : nearby()?.label || null,
       fishingPhase,
+      playground: playground.active(),
       interactionBusy: beachActivities.busy() || !!groveSession,
       surfingBoard: surfRide.active(),
       surfTransitioning: surfRide.active() && !surfRide.manual(),
@@ -766,18 +767,22 @@ export function createWorld(host, callbacks) {
   function isBeachInteraction(p) {
     return !room && p?.distance < 1.65 && closeInteractionTypes.has(p.type);
   }
+  function leavePlayground() {
+    if (!playground.active()) return false;
+    position = playground.stop();
+    guestPause.release(worldTime);
+    stop();
+    publish();
+    requestDraw();
+    return true;
+  }
   function interact() {
+    // Leaving is always available, including during a pause or an incidental
+    // salute. The button and keyboard both cancel the same animation session.
+    if (leavePlayground()) return;
     if (skySalute.active()) return;
     if (!frozen && noFace.active()) {
       position = noFace.stop();
-      stop();
-      publish();
-      requestDraw();
-      return;
-    }
-    if (!frozen && playground.active()) {
-      position = playground.stop();
-      guestPause.release(worldTime);
       stop();
       publish();
       requestDraw();
@@ -1736,6 +1741,7 @@ export function createWorld(host, callbacks) {
       return true;
     },
     ability: useAbility,
+    leavePlayground,
     endRide() {
       if (skateRide.active()) {
         skateRide.return();

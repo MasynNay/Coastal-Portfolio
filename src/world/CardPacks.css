@@ -11,55 +11,70 @@
 }
 .pack-machine-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 16px;
   margin: 24px 0;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 28px 24px;
 }
 .pack-machine-grid article {
   min-width: 0;
-  padding: 15px;
-  background: #b8dbcf0a;
   border: 1px solid #a1c1b532;
   border-radius: 16px;
+  padding: 24px 20px;
+  background: linear-gradient(150deg, #294b4a, #172d35);
+  border-color: #95bcb653;
 }
 .pack-machine-grid h3 {
-  font-size: 16px;
-  margin: 14px 0 4px;
+  font-size: 21px;
+  line-height: 1.3;
+  margin: 22px 0 10px;
 }
 .pack-machine-grid article p {
-  font-size: 13px;
-  margin: 4px 0;
   color: #b0c6c4;
+  font-size: 14px;
+  line-height: 1.6;
+  margin: 8px auto;
+  max-width: 28ch;
 }
-.pack-machine-grid article small {
+.pack-machine-grid article > small {
   display: block;
-  font-size: 12px;
-  margin: 10px 0;
+  font-size: 14px;
+  margin: 14px 0;
 }
 .pack-machine-grid article button {
   width: 100%;
   min-height: 44px;
 }
 .pack-machine-art {
-  width: 100%;
-  max-width: 180px;
   margin: auto;
+  width: min(100%, 220px);
+  max-width: none;
+  transform: rotate(-2deg);
+  transition: transform 0.2s;
 }
 .booster-art {
   position: relative;
   width: 100%;
-  aspect-ratio: 0.7;
   isolation: isolate;
   overflow: hidden;
-  border: 1px solid #d5ce9a;
-  border-radius: 4px;
   color: #fff9dd;
+  aspect-ratio: 0.66;
+  border-radius: 3px 3px 6px 6px;
+  border: 1px solid #d9d8b4;
   background:
-    linear-gradient(110deg, #fff8, transparent 20% 75%, #fff4),
-    linear-gradient(145deg, #152d4e, var(--pack-color), #102a32);
+    linear-gradient(
+      105deg,
+      #131e2d,
+      transparent 9%,
+      #ffffff40 11%,
+      transparent 14% 85%,
+      #ffffff55 89%,
+      #102b35 96%
+    ),
+    radial-gradient(ellipse at 50% 55%, #ffffff48, transparent 60%),
+    linear-gradient(155deg, #102744, var(--pack-color), #112638);
   box-shadow:
-    2px 8px 17px #0005,
-    inset 0 0 0 5px #fff2;
+    5px 10px 16px #0007,
+    inset 0 0 0 6px #ffffff0f;
 }
 .booster-art::before {
   content: "";
@@ -67,60 +82,35 @@
   inset: 0;
   z-index: 3;
   pointer-events: none;
-  background: repeating-linear-gradient(
-    115deg,
-    transparent 0 25px,
-    #fff1 26px 27px,
-    transparent 28px 50px
+  background: linear-gradient(
+    112deg,
+    transparent 0 20%,
+    #ffffff25 26%,
+    transparent 30% 70%,
+    #ffffff30 74%,
+    transparent 79%
   );
-}
-.booster-label {
-  position: absolute;
-  top: 9%;
-  left: 5%;
-  width: 90%;
-  font-size: clamp(8px, 1.3vw, 12px);
-  font-weight: 800;
-  letter-spacing: 0.1em;
-  text-shadow: 0 2px 3px #000;
-  z-index: 4;
 }
 .booster-burst {
   position: absolute;
-  inset: 18% -30% 20%;
   background: repeating-conic-gradient(
     from 20deg,
     #fff2 0 8deg,
     transparent 8deg 20deg
   );
   border-radius: 50%;
+  inset: 25% -20% 17%;
+  opacity: 0.45;
 }
 .pack-mascot {
   position: absolute;
   z-index: 2;
-  width: 82%;
-  height: 62%;
   object-fit: contain;
-  left: 9%;
-  top: 16%;
-  filter: drop-shadow(0 7px 2px #0007);
-}
-.pack-companion {
-  position: absolute;
-  width: 44%;
-  height: 38%;
-  object-fit: contain;
-  top: 40%;
-  opacity: 0.9;
-  filter: drop-shadow(0 3px 1px #0008);
-}
-.pack-companion.first {
-  left: -5%;
-  transform: rotate(-12deg);
-}
-.pack-companion.second {
-  right: -5%;
-  transform: rotate(12deg);
+  top: 29%;
+  height: 50%;
+  width: 96%;
+  left: 2%;
+  filter: drop-shadow(0 8px 3px #0009);
 }
 .booster-art > strong {
   position: absolute;
@@ -138,20 +128,32 @@
 }
 .booster-art > small {
   position: absolute;
-  bottom: 7%;
   left: 0;
   width: 100%;
   font-size: 7px;
-  letter-spacing: 0.05em;
   z-index: 4;
   color: #fff8d9;
+  font:
+    700 10px/1.4 system-ui,
+    sans-serif;
+  bottom: 7%;
+  letter-spacing: 0.1em;
 }
 .booster-crimp {
   position: absolute;
-  height: 5%;
   width: 100%;
   left: 0;
-  background: repeating-linear-gradient(90deg, #9d9b78 0 2px, #dfdcb1 2px 4px);
+  height: 5.5%;
+  z-index: 5;
+  background: repeating-linear-gradient(
+    90deg,
+    #737875 0 1px,
+    #d3d5bf 1px 3px,
+    #9da59c 3px 4px
+  );
+  box-shadow:
+    inset 0 2px 2px #fff6,
+    inset 0 -2px 2px #142d3866;
 }
 .booster-crimp.bottom {
   bottom: 0;
@@ -267,7 +269,7 @@
   margin: 20px auto;
 }
 .pack-reveal-stage {
-  padding: 18px 0;
+  padding: 8px 0;
 }
 .reveal-card-button {
   padding: 0 !important;
@@ -275,9 +277,9 @@
   border-radius: 18px !important;
   background: none !important;
   display: block;
-  width: min(300px, 90%);
-  margin: 22px auto;
   perspective: 800px;
+  width: min(250px, 88%);
+  margin: 14px auto;
 }
 .island-card {
   position: relative;
@@ -495,28 +497,10 @@
 .card-reveal-actions button {
   min-width: 130px;
 }
-.card-album-heading {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  margin: 20px 0;
-}
-.card-album-heading p {
-  font-size: 13px;
-}
-.card-album-heading select {
-  max-width: 180px;
-}
-.selected-album-card {
-  width: min(290px, 85%);
-  margin: 24px auto;
-}
 .card-album-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-  gap: 14px;
+  grid-template-columns: repeat(auto-fill, minmax(145px, 1fr));
+  gap: 18px 14px;
 }
 .card-album-grid > button {
   border: 2px solid transparent;
@@ -524,6 +508,7 @@
   border-radius: 16px;
   padding: 3px !important;
   min-width: 0;
+  align-self: start;
 }
 .card-album-grid > button[aria-pressed="true"] {
   border-color: #d4dcab;
@@ -565,9 +550,6 @@
   .card-topline strong {
     font-size: 17px;
   }
-  .booster-label {
-    font-size: 9px;
-  }
 }
 @media (prefers-reduced-motion: reduce) {
   .is-shiny .card-illustration::before,
@@ -578,14 +560,333 @@
 }
 
 /* Keep a whole revealed card in view below the sticky dialog header. */
-.reveal-card-button {
-  width: min(250px, 88%);
-  margin: 14px auto;
-}
-.pack-reveal-stage {
-  padding: 8px 0;
-}
 .pack-reveal-stage > p {
   font-size: 14px;
   margin: 10px 0;
+}
+
+/* Shop packs have their own generous shelf dimensions. The bag/tear views
+   keep the same wrapper; viewport-sized font rules never squeeze shelf text. */
+.pack-machine-grid article:hover .pack-machine-art {
+  transform: rotate(0) translateY(-4px);
+}
+.pack-machine-grid article .pack-highlights {
+  color: #dce8a9;
+  min-height: 3.2em;
+}
+.booster-set-logo {
+  position: absolute;
+  left: 10%;
+  top: 10%;
+  width: 80%;
+  height: 21%;
+  object-fit: contain;
+  z-index: 4;
+  filter: drop-shadow(0 2px 2px #000a);
+}
+.booster-art > .booster-set-name {
+  font:
+    900 17px/1.15 system-ui,
+    sans-serif;
+  letter-spacing: -0.025em;
+  left: 5%;
+  width: 90%;
+  bottom: 14%;
+  text-wrap: balance;
+}
+.booster-crimp.top {
+  top: 0;
+}
+
+/* Complete card scans retain their own frames, text, full art and collector
+   numbers. Effects sit above the scan at low opacity, never obscure the face. */
+.tcg-card {
+  margin: 0;
+  width: 100%;
+  min-width: 0;
+  text-align: center;
+}
+.tcg-card-face {
+  position: relative;
+  aspect-ratio: 63/88;
+  border-radius: 4%/3%;
+  overflow: hidden;
+  background: #172a42;
+  box-shadow: 0 6px 18px #0008;
+  isolation: isolate;
+}
+.tcg-card-face > img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.tcg-card figcaption {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 12px 2px;
+  color: #e2ebe7;
+}
+.tcg-card figcaption strong {
+  font-size: 15px;
+  line-height: 1.3;
+}
+.tcg-card figcaption small {
+  font-size: 12px;
+  line-height: 1.4;
+  color: #b2c9c3;
+}
+.printing-tier {
+  font-size: 12px;
+  font-weight: 750;
+  color: #e9db9f;
+}
+.card-foil,
+.chase-glimmer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.is-foil .card-foil {
+  background: linear-gradient(
+    120deg,
+    transparent 25%,
+    #afefff3b 40%,
+    #fff7c92b 48%,
+    transparent 65%
+  );
+  mix-blend-mode: screen;
+  background-size: 250% 100%;
+  animation: foil-pass 6s ease-in-out infinite;
+}
+.is-chase .tcg-card-face {
+  box-shadow:
+    0 0 0 2px #d6c784,
+    0 0 28px #98c0df45,
+    0 8px 24px #0008;
+}
+.is-chase .chase-glimmer {
+  background:
+    radial-gradient(circle at 9% 8%, #fffbc370, transparent 12%),
+    radial-gradient(circle at 88% 90%, #caf9ff60, transparent 14%);
+  animation: chase-glimmer 2s ease-in-out infinite alternate;
+}
+.tier-sir .printing-tier,
+.tier-secret-rare .printing-tier {
+  color: #f7c8fa;
+}
+.is-flipped .tcg-card {
+  animation: card-flip 0.55s ease-out;
+}
+.is-flipped .tcg-card.is-chase {
+  animation: chase-reveal 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+@keyframes foil-pass {
+  0%,
+  100% {
+    background-position: 100% 0;
+  }
+  50% {
+    background-position: 0% 0;
+  }
+}
+@keyframes chase-glimmer {
+  to {
+    opacity: 0.3;
+  }
+}
+@keyframes chase-reveal {
+  from {
+    transform: rotateY(-65deg) scale(0.8);
+    filter: brightness(1.8);
+  }
+  to {
+    transform: rotateY(0) scale(1);
+    filter: brightness(1);
+  }
+}
+.card-art-unavailable {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 20px;
+  color: #e3dfbc;
+}
+.album-progress {
+  padding: 22px;
+  border: 1px solid #a5c7ac44;
+  border-radius: 16px;
+  background: linear-gradient(130deg, #234443, #192f39);
+  margin: 22px 0;
+  text-align: left;
+}
+.album-progress small {
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  color: #c8d4ab;
+}
+.album-progress h3 {
+  font-size: 24px;
+  margin: 8px 0;
+}
+.album-progress p {
+  font-size: 14px;
+  color: #bcd2ca;
+  margin: 6px 0 14px;
+}
+.album-progress progress {
+  width: 100%;
+  height: 12px;
+  accent-color: #9ed6b7;
+}
+.album-filters {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 14px;
+  text-align: left;
+}
+.album-filters label {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  font-size: 14px;
+}
+.album-filters select {
+  width: 100%;
+  min-width: 0;
+  min-height: 44px;
+}
+.album-view-controls {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin: 20px 0;
+}
+.album-view-controls button {
+  flex: 1;
+  min-height: 44px;
+  font-size: 14px;
+}
+.album-view-controls button[aria-pressed="true"] {
+  background: #a9cdb9;
+  color: #173637;
+}
+.album-inspection {
+  width: min(255px, 100%);
+  scroll-margin-top: 125px;
+  margin: 24px auto;
+}
+.album-inspection > button {
+  margin-top: 14px;
+}
+.checklist-label {
+  font-size: 14px;
+  color: #acc6c0;
+}
+.locked-card {
+  aspect-ratio: 63/88;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+  padding: 14px 10px;
+  border: 2px dashed #99bbb44d;
+  border-radius: 10px;
+  background: repeating-linear-gradient(
+    135deg,
+    #213837,
+    #213837 10px,
+    #253c3c 10px,
+    #253c3c 20px
+  );
+  color: #a9c4bf;
+}
+.locked-card strong {
+  font-size: 14px;
+  line-height: 1.35;
+}
+.locked-card > span:not(.locked-symbol) {
+  font-size: 12px;
+}
+.locked-card small {
+  font-size: 9px;
+  letter-spacing: 0.09em;
+}
+.locked-symbol {
+  font-size: 42px;
+  color: #76958d;
+  line-height: 1;
+}
+.locked-number {
+  align-self: start;
+}
+.missing-card-detail {
+  padding: 24px;
+  border: 1px dashed #799e8f;
+  border-radius: 14px;
+}
+.missing-card-detail > span {
+  font-size: 64px;
+}
+@media (max-width: 600px) {
+  .pack-machine-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 24px;
+  }
+  .pack-machine-grid article {
+    padding: 24px 18px;
+  }
+  .pack-machine-art {
+    width: min(100%, 230px);
+  }
+  .pack-machine-grid h3 {
+    font-size: 22px;
+  }
+  .pack-machine-grid article .pack-highlights {
+    min-height: 0;
+  }
+  .album-filters {
+    grid-template-columns: 1fr;
+  }
+  .card-album-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px 12px;
+  }
+  .album-progress {
+    padding: 16px;
+  }
+  .album-progress h3 {
+    font-size: 22px;
+  }
+  .album-view-controls button {
+    min-width: 85px;
+    padding: 10px 8px;
+    font-size: 13px;
+  }
+  .tcg-card figcaption strong {
+    font-size: 13px;
+  }
+  .reveal-card-button {
+    width: min(265px, 90%);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .is-foil .card-foil,
+  .is-chase .chase-glimmer,
+  .is-flipped .tcg-card,
+  .is-flipped .tcg-card.is-chase {
+    animation: none;
+  }
+}
+.album-filters select {
+  background: #233b3e;
+  color: #e2ece7;
+  border: 1px solid #91b4a966;
+  border-radius: 10px;
+  padding: 10px 12px;
+  font: inherit;
 }

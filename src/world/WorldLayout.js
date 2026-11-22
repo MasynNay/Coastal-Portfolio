@@ -72,15 +72,13 @@ export function leavingRoom(position, previous) {
   );
 }
 
-// The renderer anchors every house at z + 3.1. Use that same bottom edge and
-// the full image width: shrinking either leaves walkable strips inside the
-// front corners. Rounded clearance gives the player's feet room without the
-// square invisible corners that made walking around a facade feel sticky.
-// Only the narrow, front-facing doorway cuts through this solid boundary.
+// The lower facade is solid; the tall roof is drawn above it and is not an
+// enormous invisible wall. Feet may pass behind a roof, where depth sorting
+// hides the person naturally. Keep the complete front width/corners protected.
 export function buildingObstacle(building) {
   const art = places["building-" + building.id];
   const height = buildingHeight(building);
-  const back = building.z + 3.1 - height;
+  const back = building.z + 3.1 - height * 0.55;
   const front = building.z + 3.1;
   const center = (back + front) / 2;
   return {

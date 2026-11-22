@@ -1,25 +1,31 @@
 import { useEffect, useState } from "react";
-import { packs, pokemonNames, openPack } from "./CardCatalog";
+import { packs, pokemonNames, openPack, cardsById } from "./CardCatalog";
 const key = "island-card-collection-v2",
   event = "island-cards-changed";
-export const cardKey = (c) => `${c.id}-${c.rarity}-${c.variant || "Regular"}`;
+export const cardKey = (c) =>
+  cardsById[c.id]
+    ? `${c.id}-${c.variant || "Regular"}`
+    : `${c.id}-${c.rarity}-${c.variant || "Regular"}`;
 function cleanCards(data) {
   const result = {};
   for (const c of Object.values(data || {})) {
     if (
       !c ||
-      !pokemonNames[c.id] ||
+      (!pokemonNames[c.id] && !cardsById[c.id]) ||
       !Number.isFinite(c.quantity) ||
       c.quantity < 1
     )
       continue;
     const card = {
       ...c,
-      name: pokemonNames[c.id],
-      variant: c.variant === "Shiny" ? "Shiny" : "Regular",
+      ...(cardsById[c.id] || { name: pokemonNames[c.id] }),
+      variant: ["Shiny", "Reverse Holo"].includes(c.variant)
+        ? c.variant
+        : "Regular",
       quantity: Math.min(9999, Math.floor(c.quantity)),
     };
     if (
+      !cardsById[c.id] &&
       !["Common", "Uncommon", "Rare", "Holo Rare", "Legendary"].includes(
         card.rarity,
       )
@@ -55,7 +61,9 @@ export function readCardCollection() {
           Number.isInteger(saved.pending.index) &&
           saved.pending.index >= 0 &&
           saved.pending.index < 5 &&
-          saved.pending.cards.every((c) => c && pokemonNames[c.id])
+          saved.pending.cards.every(
+            (c) => c && (pokemonNames[c.id] || cardsById[c.id]),
+          )
             ? saved.pending
             : null,
       };

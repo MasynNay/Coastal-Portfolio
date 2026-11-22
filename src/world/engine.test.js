@@ -1134,3 +1134,36 @@ test("Q performs and lands everyday Fallyn's pass while Ladybug keeps her yo-yo"
     game.dispose();
   }
 });
+
+test("leaving a playground activity stops it immediately and restores its origin, even while paused", async () => {
+  const statuses = [],
+    game = createWorld(document.createElement("div"), {
+      onStatus: (s) => statuses.push(s),
+    });
+  try {
+    await Promise.resolve();
+    frame(16);
+    mockScene.hit = () => ({ x: 23.1, z: 3.1 });
+    mockScene.canvas.dispatchEvent(
+      new MouseEvent("pointerdown", { button: 0 }),
+    );
+    for (let i = 0; i < 150; i++) frame(50);
+    const before = draws.at(-1).position;
+    game.interact();
+    frame(16);
+    expect(draws.at(-1).playground.id).toBe("roundabout");
+    expect(statuses.at(-1).playground).toBe(true);
+    for (let i = 0; i < 30; i++) frame(50);
+    game.freeze(true);
+    expect(game.leavePlayground()).toBe(true);
+    expect(statuses.at(-1).playground).toBe(false);
+    game.freeze(false);
+    frame(16);
+    expect(draws.at(-1).playground).toBeNull();
+    expect(draws.at(-1).position).toEqual(before);
+    for (let i = 0; i < 60; i++) frame(50);
+    expect(draws.at(-1).position).toEqual(before);
+  } finally {
+    game.dispose();
+  }
+});

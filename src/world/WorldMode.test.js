@@ -224,3 +224,19 @@ test("the room computer opens the shared ASCII app and Escape returns to explori
     host.querySelector('[role="dialog"][aria-label="ASCII Studio"]'),
   ).toBeNull();
 });
+
+test("Leave the Playground Ride remains enabled and calls the explicit cancellation even while interactions are busy", () => {
+  game.leavePlayground = jest.fn();
+  act(() =>
+    callbacks.onStatus({
+      ...status,
+      playground: true,
+      prompt: "Leave the Playground Ride",
+      interactionBusy: true,
+    }),
+  );
+  const leave = host.querySelector(".world-interact");
+  expect(leave.disabled).toBe(false);
+  act(() => leave.click());
+  expect(game.leavePlayground).toHaveBeenCalledTimes(1);
+});

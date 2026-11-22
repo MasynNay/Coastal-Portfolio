@@ -1,5 +1,6 @@
 import { drawNoFace } from "./NoFace";
 import { drawRoundabout } from "./Playground";
+import { drawClimber } from "./PlaygroundPoses";
 import { ropeGrip } from "./RopeAnchors";
 import {
   drawGroveLights,
@@ -1023,6 +1024,7 @@ export function createCanvasScene(host, invalidate = () => {}) {
         sprites.push({ ...box, sortZ: Math.max(box.z, home.z + 3.2) });
       }
     }
+    const personUnit = unit;
     for (const a of sprites.sort((a, b) => {
       const depth = (p) => {
         if (p.sortZ !== undefined) return p.sortZ;
@@ -1064,6 +1066,20 @@ export function createCanvasScene(host, invalidate = () => {}) {
               const outfit = player
                 ? state.outfit
                 : state.playground.partner.outfit;
+              if (pose.climbing || pose.celebrating) {
+                const base = characterAsset(id, outfit);
+                if (
+                  drawClimber(
+                    ctx,
+                    image(base),
+                    artwork[base],
+                    at(pose.x, pose.z),
+                    personHeight(id) * personUnit,
+                    pose,
+                  )
+                )
+                  return;
+              }
               const asset = activityAsset(
                 id,
                 outfit,
@@ -1083,7 +1099,7 @@ export function createCanvasScene(host, invalidate = () => {}) {
                 asset,
                 pose.x,
                 pose.z + (pose.anchor === "hips" ? personHeight(id) * 0.29 : 0),
-                personHeight(id),
+                personHeight(id) * (pose.crouch ? 0.65 : 1),
                 pose.direction,
                 pose.crouch || !!pose.moving,
                 pose.crouch
