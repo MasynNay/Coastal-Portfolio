@@ -2,6 +2,24 @@
 // the preceding production commit, rather than fictional in-game release notes.
 const patchNotes = [
   {
+    version: "1.5.0",
+    date: "November 22, 2026",
+    previousCommit: "ddd6171",
+    comparisonRef: "8e10c01c33e6817cd9c4252e2e10bcd3fcf2a64a",
+    changes: [
+      "Standardized bug and fish collection cards with equal-size artwork wells and readable labels.",
+      "Added Feed All and habitat watering controls, with flies, nectar, aphids, fish food, and water effects appropriate to the selected residents.",
+      "Attached dog leashes and wakeboarding ropes to animation-frame hand sockets that follow each character's size, costume, lift, and trick rotation.",
+      "Made the playground interactive: swing, climb and slide, ride the seesaw with another resident, sit at the table, crawl through the tunnel, and use the dome, spring rider, and balance trail.",
+      "Replaced the redundant playground sandbox with a timber balance trail.",
+      "Moved the arcade shell fountain to the seahorse's former right-hand position and moved the rocking seahorse to the left lawn.",
+      "Hidden Totoro and friends inside their tree until three distinct shakes; completing their dance sends them back until the next three shakes.",
+      "Replaced the trainer's stool with a Pokémon card-pack dispenser offering six fan-made sets, animated pack opening, rarity rolls, and a device-saved card album.",
+      "Expanded each home's collision boundary to its visible roof and facade while keeping the front doorway accessible; matched the turf cottage's colors more closely to the town.",
+      "Reviewed prop footprint widths and kept the new controls usable with touch and keyboard input.",
+    ],
+  },
+  {
     version: "1.4.1",
     date: "November 22, 2026",
     previousCommit: "9710e10",
