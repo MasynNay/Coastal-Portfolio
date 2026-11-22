@@ -56,7 +56,7 @@ export function createPlayground() {
       } else if (prop.id === "seesaw") {
         tilt = Math.sin(phase * 2) * 0.2 * ease(age / 700);
         x -= 1.05;
-        lift = 0.65 - Math.sin(tilt) * 1.05;
+        lift = -0.25 - Math.sin(tilt) * 1.05;
       } else if (prop.id === "playhouse") {
         // Walk up the actual left ladder, cross the platform, then slide down
         // the right-hand chute. Return on foot, never teleport between stages.
@@ -129,7 +129,7 @@ export function createPlayground() {
             ? {
                 x: prop.x + 1.05,
                 z: prop.z - 0.25,
-                lift: 0.65 + Math.sin(tilt) * 1.05,
+                lift: 0.6 + Math.sin(tilt) * 1.05,
                 direction: 6,
               }
             : null,
@@ -174,31 +174,44 @@ export function drawPlayground(ctx, at, unit, activity, drawProp, drawPerson) {
       unit * 0.12,
     );
   } else if (p.id === "seesaw") {
-    const pivot = at(p.x, p.z - 0.65);
-    ctx.fillStyle = "#97632f";
+    // Keep the original illustrated wood, teal seats, gold handles and grain.
+    // Separate its fixed fulcrum from the rocking beam with source-space clips,
+    // rather than replacing the detailed equipment with a plain drawn plank.
+    const h = p.h * unit,
+      w = (h * 303) / 166;
+    const left = foot.x - w / 2,
+      top = foot.y - h;
+    const support = [
+      [104, 146],
+      [145, 76],
+      [190, 62],
+      [233, 147],
+      [194, 166],
+      [135, 158],
+    ];
+    const supportPath = () => {
+      support.forEach(([x, y], i) =>
+        i
+          ? ctx.lineTo(left + (x / 303) * w, top + (y / 166) * h)
+          : ctx.moveTo(left + (x / 303) * w, top + (y / 166) * h),
+      );
+      ctx.closePath();
+    };
+    ctx.save();
     ctx.beginPath();
-    ctx.moveTo(pivot.x, pivot.y - unit * 0.15);
-    ctx.lineTo(pivot.x - unit * 0.35, foot.y);
-    ctx.lineTo(pivot.x + unit * 0.35, foot.y);
-    ctx.closePath();
-    ctx.fill();
+    supportPath();
+    ctx.clip();
+    drawProp();
+    ctx.restore();
+    const pivot = at(p.x, p.z - 0.65);
     ctx.translate(pivot.x, pivot.y);
     ctx.rotate(-activity.tilt);
-    const wood = ctx.createLinearGradient(0, -unit * 0.13, 0, unit * 0.1);
-    wood.addColorStop(0, "#e5ac58");
-    wood.addColorStop(1, "#8a5027");
-    ctx.fillStyle = wood;
-    ctx.fillRect(-unit * 1.5, -unit * 0.08, unit * 3, unit * 0.16);
-    ctx.fillStyle = "#309b94";
-    for (const side of [-1, 1]) {
-      ctx.fillRect(
-        side * unit * 1.1 - unit * 0.22,
-        -unit * 0.16,
-        unit * 0.44,
-        unit * 0.13,
-      );
-      ctx.fillRect(side * unit * 0.8, -unit * 0.5, unit * 0.07, unit * 0.4);
-    }
+    ctx.translate(-pivot.x, -pivot.y);
+    ctx.beginPath();
+    ctx.rect(left - 2, top - 2, w + 4, h + 4);
+    supportPath();
+    ctx.clip("evenodd");
+    drawProp();
   } else if (p.id === "spring-rider") {
     ctx.translate(foot.x, foot.y);
     ctx.rotate(activity.tilt);
