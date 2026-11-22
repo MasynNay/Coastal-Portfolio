@@ -5,7 +5,7 @@ const patchNotes = [
     version: "1.5.0",
     date: "November 22, 2026",
     previousCommit: "ddd6171",
-    comparisonRef: "8e10c01c33e6817cd9c4252e2e10bcd3fcf2a64a",
+    comparisonRef: "805a7a2755c570f8c8d0ba80425eec22c6d4fbde",
     changes: [
       "Standardized bug and fish collection cards with equal-size artwork wells and readable labels.",
       "Added Feed All and habitat watering controls, with flies, nectar, aphids, fish food, and water effects appropriate to the selected residents.",
