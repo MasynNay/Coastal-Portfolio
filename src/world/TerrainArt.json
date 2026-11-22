@@ -212,15 +212,15 @@
       "height": 256,
       "revision": "0bfcb3de14c9"
     },
-    "town-balance-trail": {
-      "src": "/world/town-art/balance-trail.svg",
-      "width": 320,
-      "height": 170
-    },
     "town-card-dispenser": {
       "src": "/world/town-art/card-dispenser.svg",
       "width": 240,
       "height": 320
+    },
+    "town-roundabout": {
+      "src": "/world/town-art/roundabout.svg",
+      "width": 320,
+      "height": 200
     }
   },
   "ground": {

@@ -1,3 +1,5 @@
+import { drawNoFace } from "./NoFace";
+import { drawRoundabout } from "./Playground";
 import { ropeGrip } from "./RopeAnchors";
 import {
   drawGroveLights,
@@ -718,9 +720,13 @@ export function createCanvasScene(host, invalidate = () => {}) {
       const peek = (1 - Math.cos(state.worldTime / 1250)) / 2;
       sprites.push({
         art: "no-face",
-        x: windfallTree.x + 0.84 + peek * 0.9,
-        z: windfallTree.z + 0.14,
-        sortZ: windfallTree.z - 0.01,
+        x: state.noFace?.x ?? windfallTree.x + 0.84 + peek * 0.9,
+        z: state.noFace?.z ?? windfallTree.z + 0.14,
+        sortZ:
+          state.noFace && !state.noFace.returning
+            ? state.noFace.z
+            : windfallTree.z - 0.01,
+        noFace: true,
         h: 1.85,
       });
       for (const spirit of state.groveVisible ? groveSpirits(state.grove) : [])
@@ -1031,6 +1037,21 @@ export function createCanvasScene(host, invalidate = () => {}) {
       if (!a.hidden && (!a.player || flight <= time))
         if (a.groveSpirit)
           drawGroveSpirit(ctx, at, unit, image("totoro-grove"), a);
+        else if (a.noFace && state.noFace)
+          drawNoFace(
+            ctx,
+            at,
+            unit,
+            state.noFace,
+            state,
+            () => sprite(a.art, a.x, a.z, a.h),
+            personHeight(state.character),
+          );
+        else if (
+          a.art === "town-roundabout" &&
+          state.playground?.id !== "roundabout"
+        )
+          drawRoundabout(ctx, at, unit, a, 0);
         else if (state.playground && a.art === "town-" + state.playground.id)
           drawPlayground(
             ctx,
@@ -1061,7 +1082,7 @@ export function createCanvasScene(host, invalidate = () => {}) {
               sprite(
                 asset,
                 pose.x,
-                pose.z,
+                pose.z + (pose.anchor === "hips" ? personHeight(id) * 0.29 : 0),
                 personHeight(id),
                 pose.direction,
                 pose.crouch || !!pose.moving,
@@ -1072,6 +1093,7 @@ export function createCanvasScene(host, invalidate = () => {}) {
               );
               ctx.restore();
             },
+            image,
           );
         else if (a.restSpot) drawRestSpot(a, state);
         else if (a.watercraft) drawWatercraft(a, state);
@@ -1385,6 +1407,16 @@ export function createCanvasScene(host, invalidate = () => {}) {
           inWater: a.inWater,
         })),
     );
+    canvas.dataset.playgroundStage = state.playground?.player.stage || "idle";
+    canvas.dataset.noFacePhase = state.noFace
+      ? state.noFace.returning
+        ? "returning"
+        : state.noFace.age < 900
+          ? "emerging"
+          : state.noFace.age < 3200
+            ? "offering"
+            : "bowing"
+      : "peeking";
     canvas.dataset.dogActivity =
       state.dogPlay && !state.dogPlay.done ? state.dogPlay.kind : "idle";
     canvas.dataset.bikeRide = state.bikeRide?.phase || "idle";

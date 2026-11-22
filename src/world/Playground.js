@@ -8,16 +8,53 @@ export const playgroundActivities = {
   tunnel: "Crawl Through the Tunnel",
   "climbing-dome": "Climb the Dome",
   "spring-rider": "Ride the Spring Rider",
-  "balance-trail": "Walk the Balance Trail",
+  roundabout: "Ride the Merry-Go-Round",
+};
+const ratios = {
+  playhouse: 298 / 272,
+  swings: 294 / 258,
+  seesaw: 303 / 166,
+  "picnic-table": 256 / 237,
 };
 const clamp = (t) => Math.max(0, Math.min(1, t));
 const ease = (t) => {
   t = clamp(t);
   return t * t * (3 - 2 * t);
 };
-
-// One cancellable scene-clock activity owns both riders. Every pose is relative
-// to the placed equipment, so moving a prop also moves its ride and hit target.
+const mix = (a, b, t) => ({
+  x: a.x + (b.x - a.x) * t,
+  z: a.z + (b.z - a.z) * t,
+});
+// Coordinates are attachment points in the actual equipment illustration.
+// A seated pose puts its hips here; a walking pose puts its feet here. There
+// is no second, guessed elevation to accidentally lift a climber onto a roof.
+export function equipmentPoint(prop, u, v) {
+  return {
+    x: prop.x + (u - 0.5) * prop.h * (ratios[prop.id] || 1),
+    z: prop.z + (v - 1) * prop.h,
+  };
+}
+export function seesawSeat(prop, side, tilt) {
+  const base = equipmentPoint(
+    prop,
+    side < 0 ? 0.13 : 0.9,
+    side < 0 ? 0.75 : 0.22,
+  );
+  const pivot = equipmentPoint(prop, 0.55, 0.62),
+    dx = base.x - pivot.x,
+    dz = base.z - pivot.z;
+  return {
+    x: pivot.x + dx * Math.cos(tilt) + dz * Math.sin(tilt),
+    z: pivot.z - dx * Math.sin(tilt) + dz * Math.cos(tilt),
+  };
+}
+export function swingSeat(prop, tilt) {
+  const seat = equipmentPoint(prop, 0.365, 0.775);
+  return {
+    x: seat.x + Math.sin(tilt) * 0.08,
+    z: seat.z + Math.sin(tilt) * 0.6 - (1 - Math.cos(tilt)) * prop.h * 0.62,
+  };
+}
 export function createPlayground() {
   let current = null;
   return {
@@ -34,87 +71,133 @@ export function createPlayground() {
     },
     snapshot(time) {
       if (!current) return null;
-      const { prop, origin, partner, started } = current;
-      const age = time - started;
-      const phase = age / 1000;
-      let x = prop.x,
-        z = prop.z - 0.25,
-        lift = 0.4,
+      const { prop, origin, partner, started } = current,
+        age = Math.max(0, time - started),
+        phase = age / 1000;
+      let point = { x: prop.x, z: prop.z - 0.2 },
         direction = 0,
-        tilt = 0;
-      const seated = [
-        "swings",
-        "seesaw",
-        "picnic-table",
-        "spring-rider",
-      ].includes(prop.id);
+        seated = false,
+        crouch = false,
+        rotation = 0,
+        tilt = 0,
+        guest = null,
+        exitAt = 8800,
+        stage = "playing";
       if (prop.id === "swings") {
-        tilt = Math.sin(phase * 2.25) * 0.55 * ease(age / 900);
-        x -= 0.45;
-        z += Math.sin(tilt) * 0.85;
-        lift = 0.55 + (1 - Math.cos(tilt)) * 1.5;
+        tilt =
+          Math.sin(phase * 2.1) *
+          0.42 *
+          ease(age / 1100) *
+          ease((8800 - age) / 1000);
+        point = swingSeat(prop, tilt);
+        seated = true;
+        direction = 0;
+        rotation = -Math.sin(tilt) * 0.1;
       } else if (prop.id === "seesaw") {
-        tilt = Math.sin(phase * 2) * 0.2 * ease(age / 700);
-        x -= 1.05;
-        lift = -0.25 - Math.sin(tilt) * 1.05;
+        tilt =
+          Math.sin(phase * 1.8) *
+          0.16 *
+          ease(age / 900) *
+          ease((8800 - age) / 900);
+        point = seesawSeat(prop, -1, tilt);
+        seated = true;
+        direction = 2;
+        if (partner)
+          guest = {
+            ...seesawSeat(prop, 1, tilt),
+            direction: 6,
+            seated: true,
+            lift: 0,
+            anchor: "hips",
+          };
       } else if (prop.id === "playhouse") {
-        // Walk up the actual left ladder, cross the platform, then slide down
-        // the right-hand chute. Return on foot, never teleport between stages.
-        const t = Math.max(0, age - 300);
-        if (t < 2500) {
-          const q = ease(t / 2500);
-          x -= 1.55 - q * 0.45;
-          z -= q * 0.9;
-          lift = q * 2.4;
+        const bottom = equipmentPoint(prop, 0.11, 0.94),
+          top = equipmentPoint(prop, 0.34, 0.55),
+          mouth = equipmentPoint(prop, 0.55, 0.53);
+        exitAt = 5900;
+        if (age < 800) {
+          point = mix(origin, bottom, ease(age / 800));
+          direction = movementDirection(
+            bottom.x - origin.x,
+            bottom.z - origin.z,
+          );
+          stage = "approaching";
+        } else if (age < 3100) {
+          point = mix(bottom, top, (age - 800) / 2300);
           direction = 4;
-        } else if (t < 3300) {
-          const q = ease((t - 2500) / 800);
-          x += -0.1 + q * 0.55;
-          z -= 0.9;
-          lift = 2.4;
+          stage = "climbing";
+        } else if (age < 3650) {
+          point = mix(top, mouth, ease((age - 3100) / 550));
           direction = 2;
-        } else {
-          const q = ease((t - 3300) / 1700);
-          x += 0.45 + q * 1.6;
-          z += -0.9 + q * 1.4;
-          lift = 2.4 * (1 - q);
+          stage = "platform";
+        } else if (age < 4900) {
+          const t = ease((age - 3650) / 1250),
+            a = equipmentPoint(prop, 0.55, 0.53),
+            b = equipmentPoint(prop, 0.64, 0.8),
+            c = equipmentPoint(prop, 0.88, 0.94);
+          point = {
+            x: (1 - t) ** 2 * a.x + 2 * (1 - t) * t * b.x + t * t * c.x,
+            z: (1 - t) ** 2 * a.z + 2 * (1 - t) * t * b.z + t * t * c.z,
+          };
+          seated = true;
           direction = 1;
+          stage = "sliding";
+        } else {
+          point = equipmentPoint(prop, 0.92, 1.03);
+          direction = 1;
+          stage = "landing";
         }
       } else if (prop.id === "picnic-table") {
-        x -= 0.5;
-        z += 0.1;
-        lift = 0.6;
+        point = equipmentPoint(prop, 0.26, 0.82);
+        seated = true;
         direction = 2;
       } else if (prop.id === "spring-rider") {
-        tilt = Math.sin(phase * 3.1) * 0.12;
-        lift = 0.55;
+        point = { x: prop.x, z: prop.z - 0.72 };
+        seated = true;
+        rotation = Math.sin(phase * 2.7) * 0.08;
+        tilt = rotation;
+        direction = 2;
       } else if (prop.id === "tunnel") {
-        x += -1 + ease(age / 3500) * 2;
+        point = { x: prop.x - 1 + ease(age / 3500) * 2, z: prop.z - 0.12 };
         direction = 2;
-        lift = -0.1;
+        crouch = true;
+        exitAt = 4200;
       } else if (prop.id === "climbing-dome") {
-        lift = Math.sin(Math.PI * clamp(age / 5000)) * 1.6;
-        direction = age < 2500 ? 4 : 0;
-      } else {
-        x += -1.4 + ease(age / 5000) * 2.8;
-        direction = 2;
-        lift = 0.2;
+        point = {
+          x: prop.x,
+          z: prop.z - Math.sin(Math.PI * clamp(age / 5200)) * 1.6,
+        };
+        direction = age < 2600 ? 4 : 0;
+        exitAt = 5600;
+      } else if (prop.id === "roundabout") {
+        const angle = -Math.PI / 2 + phase * 1.25 * ease(age / 1600);
+        point = {
+          x: prop.x + Math.cos(angle) * 1.05,
+          z: prop.z - 0.3 + Math.sin(angle) * 0.42,
+        };
+        direction = movementDirection(prop.x - point.x, prop.z - 0.3 - point.z);
+        seated = true;
+        tilt = angle;
       }
-      const exitAt = prop.id === "playhouse" ? 5600 : seated ? 9000 : 5600;
-      const returning = age > exitAt;
-      const q = ease((age - exitAt) / 1100);
+      const returning = age > exitAt,
+        q = ease((age - exitAt) / 1000);
+      if (returning) {
+        direction = movementDirection(origin.x - point.x, origin.z - point.z);
+        point = mix(point, origin, q);
+        stage = "returning";
+      }
+      // Boarding eases onto a seat; the slide already has its own approach path.
+      if (seated && age < 650) point = mix(origin, point, ease(age / 650));
       const player = {
-        x: x + (origin.x - x) * q,
-        z: z + (origin.z - z) * q,
-        lift: lift * (1 - q),
-        direction: returning
-          ? movementDirection(origin.x - x, origin.z - z)
-          : direction,
-        seated:
-          (seated || (prop.id === "playhouse" && age >= 3600)) && !returning,
-        moving: returning || !seated,
-        crouch: prop.id === "tunnel" && !returning,
-        rotation: prop.id === "spring-rider" ? tilt : 0,
+        ...point,
+        lift: 0,
+        direction,
+        seated: seated && !returning,
+        crouch: crouch && !returning,
+        rotation,
+        anchor: seated && !returning ? "hips" : "feet",
+        moving: !seated || returning,
+        stage,
       };
       return {
         id: prop.id,
@@ -124,62 +207,92 @@ export function createPlayground() {
         tilt,
         player,
         partner,
-        guest:
-          partner && prop.id === "seesaw"
-            ? {
-                x: prop.x + 1.05,
-                z: prop.z - 0.25,
-                lift: 0.6 + Math.sin(tilt) * 1.05,
-                direction: 6,
-              }
-            : null,
-        done: age >= exitAt + 1100,
+        guest,
+        done: age >= exitAt + 1000,
       };
     },
   };
 }
 
-// Animated equipment uses the existing wood/teal illustration palette. The
-// static ropes/seat are clipped out while swinging, then replaced at their real
-// moving positions. Rider feet and seat share the same transform.
-export function drawPlayground(ctx, at, unit, activity, drawProp, drawPerson) {
+// Draw only the original left swing's seat/ropes dynamically. The right swing,
+// A-frame, feet and crossbar remain intact. The moving seat retains its drawn
+// wood grain rather than being replaced with a rectangular placeholder.
+export function drawPlayground(
+  ctx,
+  at,
+  unit,
+  activity,
+  drawProp,
+  drawPerson,
+  image,
+) {
   const p = activity.prop,
     foot = at(p.x, p.z);
-  ctx.save();
   if (p.id === "swings") {
     const h = p.h * unit,
-      w = (h * 294) / 258;
+      w = (h * 294) / 258,
+      left = foot.x - w / 2,
+      top = foot.y - h;
+    ctx.save();
     ctx.beginPath();
-    ctx.rect(foot.x - w / 2, foot.y - h, w, h);
-    ctx.rect(foot.x - w * 0.29, foot.y - h * 0.79, w * 0.58, h * 0.66);
+    ctx.rect(left, top, w, h);
+    ctx.rect(left + w * 0.235, top + h * 0.17, w * 0.29, h * 0.675);
     ctx.clip("evenodd");
     drawProp();
     ctx.restore();
+    const seat = at(...[activity.player.x, activity.player.z]);
+    const a = equipmentPoint(p, 0.29, 0.145),
+      b = equipmentPoint(p, 0.475, 0.145);
+    const half = w * 0.105;
     ctx.save();
-    const pivot = at(p.x - 0.45, p.z - 2.55),
-      seat = at(activity.player.x, activity.player.z - activity.player.lift);
-    ctx.strokeStyle = "#cba46b";
-    ctx.lineWidth = unit * 0.055;
-    for (const side of [-1, 1]) {
+    for (const [anchor, side] of [
+      [a, -1],
+      [b, 1],
+    ]) {
+      const start = at(anchor.x, anchor.z),
+        end = { x: seat.x + side * half, y: seat.y };
+      ctx.strokeStyle = "#5a3f2b";
+      ctx.lineWidth = Math.max(2, unit * 0.058);
       ctx.beginPath();
-      ctx.moveTo(pivot.x + side * unit * 0.27, pivot.y);
-      ctx.lineTo(seat.x + side * unit * 0.27, seat.y);
+      ctx.moveTo(start.x, start.y);
+      ctx.lineTo(end.x, end.y);
       ctx.stroke();
+      ctx.strokeStyle = "#d9b97c";
+      ctx.lineWidth = Math.max(1, unit * 0.031);
+      ctx.stroke();
+      for (let t = 0.1; t < 1; t += 0.13) {
+        const x = start.x + (end.x - start.x) * t,
+          y = start.y + (end.y - start.y) * t;
+        ctx.fillStyle = "#f1cf89";
+        ctx.fillRect(
+          x - unit * 0.028,
+          y - unit * 0.018,
+          unit * 0.055,
+          unit * 0.035,
+        );
+      }
     }
-    ctx.fillStyle = "#b87937";
-    ctx.fillRect(
-      seat.x - unit * 0.39,
-      seat.y - unit * 0.04,
-      unit * 0.78,
-      unit * 0.12,
-    );
-  } else if (p.id === "seesaw") {
-    // Keep the original illustrated wood, teal seats, gold handles and grain.
-    // Separate its fixed fulcrum from the rocking beam with source-space clips,
-    // rather than replacing the detailed equipment with a plain drawn plank.
+    const img = image?.("town-swings");
+    if (img)
+      ctx.drawImage(
+        img,
+        img.width * 0.235,
+        img.height * 0.72,
+        img.width * 0.29,
+        img.height * 0.125,
+        seat.x - w * 0.145,
+        seat.y - h * 0.03,
+        w * 0.29,
+        h * 0.125,
+      );
+    drawPerson(activity.player, true);
+    ctx.restore();
+    return;
+  }
+  if (p.id === "seesaw") {
     const h = p.h * unit,
-      w = (h * 303) / 166;
-    const left = foot.x - w / 2,
+      w = (h * 303) / 166,
+      left = foot.x - w / 2,
       top = foot.y - h;
     const support = [
       [104, 146],
@@ -189,7 +302,7 @@ export function drawPlayground(ctx, at, unit, activity, drawProp, drawPerson) {
       [194, 166],
       [135, 158],
     ];
-    const supportPath = () => {
+    const shape = () => {
       support.forEach(([x, y], i) =>
         i
           ? ctx.lineTo(left + (x / 303) * w, top + (y / 166) * h)
@@ -199,26 +312,144 @@ export function drawPlayground(ctx, at, unit, activity, drawProp, drawPerson) {
     };
     ctx.save();
     ctx.beginPath();
-    supportPath();
+    shape();
     ctx.clip();
     drawProp();
     ctx.restore();
-    const pivot = at(p.x, p.z - 0.65);
-    ctx.translate(pivot.x, pivot.y);
+    const pivot = equipmentPoint(p, 0.55, 0.62),
+      atPivot = at(pivot.x, pivot.z);
+    ctx.save();
+    ctx.translate(atPivot.x, atPivot.y);
     ctx.rotate(-activity.tilt);
-    ctx.translate(-pivot.x, -pivot.y);
+    ctx.translate(-atPivot.x, -atPivot.y);
     ctx.beginPath();
     ctx.rect(left - 2, top - 2, w + 4, h + 4);
-    supportPath();
+    shape();
     ctx.clip("evenodd");
     drawProp();
-  } else if (p.id === "spring-rider") {
+    ctx.restore();
+    drawPerson(activity.player, true);
+    if (activity.guest) drawPerson(activity.guest, false);
+    return;
+  }
+  if (p.id === "roundabout") {
+    drawRoundabout(ctx, at, unit, p, activity.tilt, () =>
+      drawPerson(activity.player, true),
+    );
+    return;
+  }
+  ctx.save();
+  if (p.id === "spring-rider") {
     ctx.translate(foot.x, foot.y);
     ctx.rotate(activity.tilt);
     ctx.translate(-foot.x, -foot.y);
-    drawProp();
-  } else drawProp();
+  }
+  drawProp();
   ctx.restore();
   drawPerson(activity.player, true);
-  if (activity.guest) drawPerson({ ...activity.guest, seated: true }, false);
+  if (
+    p.id === "playhouse" &&
+    activity.elapsed > 2100 &&
+    activity.elapsed < 4100
+  ) {
+    const img = image?.("town-playhouse");
+    if (img) {
+      const h = p.h * unit,
+        w = (h * 298) / 272;
+      ctx.drawImage(
+        img,
+        0,
+        0,
+        img.width,
+        img.height * 0.36,
+        foot.x - w / 2,
+        foot.y - h,
+        w,
+        h * 0.36,
+      );
+    }
+  }
+}
+
+// The carousel is built in the same wood, brass and teal palette. Projected
+// seat sockets and rail depth share one angle, keeping the rider on the deck.
+export function drawRoundabout(
+  ctx,
+  at,
+  unit,
+  prop,
+  angle,
+  drawRider = () => {},
+) {
+  const p = at(prop.x, prop.z - 0.2),
+    rx = unit * 1.45,
+    ry = unit * 0.55;
+  ctx.save();
+  ctx.fillStyle = "#153c373f";
+  ctx.beginPath();
+  ctx.ellipse(p.x, p.y + unit * 0.18, rx * 1.05, ry, 0, 0, Math.PI * 2);
+  ctx.fill();
+  const wood = ctx.createLinearGradient(p.x, p.y - ry, p.x, p.y + ry);
+  wood.addColorStop(0, "#e3b26a");
+  wood.addColorStop(1, "#85512e");
+  ctx.fillStyle = wood;
+  ctx.strokeStyle = "#66462e";
+  ctx.lineWidth = unit * 0.06;
+  ctx.beginPath();
+  ctx.ellipse(p.x, p.y, rx, ry, 0, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.stroke();
+  for (let i = 0; i < 12; i++) {
+    const a = angle + (i * Math.PI) / 6;
+    ctx.strokeStyle = i % 2 ? "#956536" : "#f1cc88";
+    ctx.lineWidth = unit * 0.022;
+    ctx.beginPath();
+    ctx.moveTo(p.x, p.y);
+    ctx.lineTo(p.x + Math.cos(a) * rx, p.y + Math.sin(a) * ry);
+    ctx.stroke();
+  }
+  const seats = Array.from({ length: 4 }, (_, i) => {
+    const a = angle + (i * Math.PI) / 2;
+    return {
+      x: p.x + Math.cos(a) * unit * 1.05,
+      y: p.y + Math.sin(a) * unit * 0.42,
+    };
+  }).sort((a, b) => a.y - b.y);
+  const rail = (s) => {
+    ctx.strokeStyle = "#785730";
+    ctx.lineWidth = unit * 0.095;
+    ctx.beginPath();
+    ctx.moveTo(s.x, s.y);
+    ctx.lineTo(s.x, s.y - unit * 0.68);
+    ctx.lineTo(p.x, p.y - unit * 0.88);
+    ctx.stroke();
+    ctx.strokeStyle = "#e8bc63";
+    ctx.lineWidth = unit * 0.045;
+    ctx.stroke();
+    ctx.fillStyle = "#279589";
+    ctx.beginPath();
+    ctx.ellipse(
+      s.x,
+      s.y - unit * 0.1,
+      unit * 0.26,
+      unit * 0.1,
+      0,
+      0,
+      Math.PI * 2,
+    );
+    ctx.fill();
+    ctx.strokeStyle = "#175b59";
+    ctx.lineWidth = unit * 0.03;
+    ctx.stroke();
+  };
+  seats.filter((s) => s.y < p.y).forEach(rail);
+  drawRider();
+  seats.filter((s) => s.y >= p.y).forEach(rail);
+  ctx.fillStyle = "#d2a45b";
+  ctx.fillRect(p.x - unit * 0.07, p.y - unit * 0.95, unit * 0.14, unit * 0.9);
+  ctx.fillStyle = "#3caaa1";
+  ctx.beginPath();
+  ctx.arc(p.x, p.y - unit * 0.96, unit * 0.13, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.restore();
 }

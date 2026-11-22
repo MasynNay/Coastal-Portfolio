@@ -75,7 +75,10 @@ test("themed mailboxes stand clear of the facade with a reachable reading point"
     expect(box.x - door.x).toBeGreaterThanOrEqual(2.5);
     expect(box.x - door.x).toBeLessThanOrEqual(4);
     expect(box.z - door.z).toBeGreaterThan(1);
-    expect(canStand(box.x, box.z + 0.8, obstacles)).toBe(true);
+    expect({
+      home: box.home,
+      reachable: canStand(box.x, box.z + 0.8, obstacles),
+    }).toEqual({ home: box.home, reachable: true });
     expect(box.art).toBe("mailbox-" + b.id);
   }
 });

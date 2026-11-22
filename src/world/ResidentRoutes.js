@@ -161,7 +161,8 @@ export function createResidentRoute(id, variant, seed) {
     for (let lap = 0; lap < 3; lap++) {
       for (const p of playground) {
         if (walk({ x: p[0], z: p[1] }))
-          rest(9 + random() * 3, { activity: "playground" });
+          // Leave time to play even when a longer safe path goes around a home.
+          rest(12 + random() * 3, { activity: "playground" });
       }
       if (lap === 0) visitOuting();
     }

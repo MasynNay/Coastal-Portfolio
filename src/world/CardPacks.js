@@ -1,293 +1,290 @@
 import { useEffect, useRef, useState } from "react";
+import { packs, cardArt } from "./CardCatalog";
+import {
+  collectPack,
+  useCardCollection,
+  ripOwnedPack,
+  revealCard,
+  nextCard,
+  finishPack,
+  cardKey,
+} from "./CardCollection";
+import TearPack, { PackArtwork } from "./TearPack";
 import "./CardPacks.css";
+export { packs, openPack } from "./CardCatalog";
 
-// Six free, fan-made virtual packs. The collection lives on this device, not a
-// paid service. Pack odds and artwork never imply official TCG card ownership.
-export const packs = [
-  {
-    name: "Kanto Origins",
-    color: "#cb663d",
-    ids: [1, 4, 7, 25, 39, 52, 54, 94, 131, 149],
-    type: "Original partners",
-  },
-  {
-    name: "Johto Trails",
-    color: "#b38e36",
-    ids: [152, 155, 158, 161, 163, 179, 183, 196, 197, 249],
-    type: "Forest & moonlight",
-  },
-  {
-    name: "Hoenn Tides",
-    color: "#398f9f",
-    ids: [252, 255, 258, 270, 280, 302, 333, 350, 359, 384],
-    type: "Sea & sky",
-  },
-  {
-    name: "Sinnoh Summit",
-    color: "#697eb6",
-    ids: [387, 390, 393, 396, 403, 417, 425, 443, 448, 483],
-    type: "Mountain explorers",
-  },
-  {
-    name: "Unova City",
-    color: "#8e639b",
-    ids: [495, 498, 501, 506, 519, 570, 572, 607, 610, 643],
-    type: "City adventures",
-  },
-  {
-    name: "Kalos Glow",
-    color: "#538e6c",
-    ids: [650, 653, 656, 659, 661, 674, 677, 700, 704, 716],
-    type: "A little fairy magic",
-  },
-];
-const names = [
-  "Bulbasaur",
-  "Charmander",
-  "Squirtle",
-  "Pikachu",
-  "Jigglypuff",
-  "Meowth",
-  "Psyduck",
-  "Gengar",
-  "Lapras",
-  "Dragonite",
-  "Chikorita",
-  "Cyndaquil",
-  "Totodile",
-  "Sentret",
-  "Hoothoot",
-  "Mareep",
-  "Marill",
-  "Espeon",
-  "Umbreon",
-  "Lugia",
-  "Treecko",
-  "Torchic",
-  "Mudkip",
-  "Lotad",
-  "Ralts",
-  "Sableye",
-  "Swablu",
-  "Milotic",
-  "Absol",
-  "Rayquaza",
-  "Turtwig",
-  "Chimchar",
-  "Piplup",
-  "Starly",
-  "Shinx",
-  "Pachirisu",
-  "Drifloon",
-  "Gible",
-  "Lucario",
-  "Dialga",
-  "Snivy",
-  "Tepig",
-  "Oshawott",
-  "Lillipup",
-  "Pidove",
-  "Zorua",
-  "Minccino",
-  "Litwick",
-  "Axew",
-  "Reshiram",
-  "Chespin",
-  "Fennekin",
-  "Froakie",
-  "Bunnelby",
-  "Fletchling",
-  "Pancham",
-  "Espurr",
-  "Sylveon",
-  "Goomy",
-  "Xerneas",
-];
-const pokemonNames = Object.fromEntries(
-  packs.flatMap((p) => p.ids).map((id, i) => [id, names[i]]),
-);
-const art = (id) =>
-  `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`;
-export function openPack(pack, random = Math.random) {
-  return Array.from({ length: 5 }, (_, index) => {
-    const roll = random();
-    const rarity =
-      index === 4
-        ? roll < 0.06
-          ? "Legendary"
-          : roll < 0.3
-            ? "Holo Rare"
-            : "Rare"
-        : roll < 0.12
-          ? "Uncommon"
-          : "Common";
-    const pool =
-      rarity === "Legendary"
-        ? pack.ids.slice(-1)
-        : rarity === "Holo Rare"
-          ? pack.ids.slice(-3)
-          : pack.ids.slice(0, 9);
-    const id =
-      pool[Math.min(pool.length - 1, Math.floor(random() * pool.length))];
-    return { id, name: pokemonNames[id], rarity, pack: pack.name };
-  });
-}
-function readCards() {
-  try {
-    const data = JSON.parse(localStorage.getItem("island-card-packs-v1"));
-    return data && typeof data === "object" && !Array.isArray(data) ? data : {};
-  } catch {
-    return {};
-  }
-}
-export default function CardPacks() {
-  const [selected, setSelected] = useState(packs[0]),
-    [cards, setCards] = useState([]),
-    [index, setIndex] = useState(0),
-    [stage, setStage] = useState("choose"),
-    [collection, setCollection] = useState(readCards);
-  const pointer = useRef(null),
-    timer = useRef(null);
-  useEffect(() => () => clearTimeout(timer.current), []);
-  function rip() {
-    if (stage !== "sealed") return;
-    const next = openPack(selected);
-    setCards(next);
-    setIndex(0);
-    setStage("ripping");
-    const saved = { ...collection };
-    next.forEach((card) => {
-      const key = `${card.id}-${card.rarity}`;
-      saved[key] = { ...card, quantity: (saved[key]?.quantity || 0) + 1 };
-    });
-    setCollection(saved);
-    try {
-      localStorage.setItem("island-card-packs-v1", JSON.stringify(saved));
-    } catch {
-      /* A private/full browser still lets the visitor open packs. */
-    }
-    timer.current = setTimeout(() => setStage("reveal"), 850);
-  }
-  const card = cards[index];
+export function PokemonCard({ card, quantity, large = false }) {
   return (
-    <section className="card-packs" style={{ "--pack-color": selected.color }}>
+    <div
+      className={`island-card ${large ? "is-large" : ""} ${card.variant === "Shiny" ? "is-shiny" : ""} rarity-${card.rarity.replaceAll(" ", "-").toLowerCase()}`}
+    >
+      <div className="card-topline">
+        <strong>{card.name}</strong>
+        <span>{card.variant === "Shiny" ? "✦ SHINY" : "POKÉMON"}</span>
+      </div>
+      <div className="card-illustration">
+        <div className="card-halo" />
+        <img
+          src={cardArt(card, true)}
+          onError={(e) => {
+            if (e.currentTarget.src.includes("official-artwork"))
+              e.currentTarget.src = cardArt(card);
+          }}
+          alt={`${card.variant === "Shiny" ? "Shiny " : ""}${card.name}`}
+          loading="lazy"
+        />
+        {card.variant === "Shiny" && (
+          <span className="card-sparkles" aria-hidden="true">
+            ✦ ⋆ ✧
+          </span>
+        )}
+      </div>
+      <span className="card-rarity">{card.rarity}</span>
+      <p>{card.pack}</p>
+      <footer>
+        <span>ISLAND KEEPSAKE</span>
+        {quantity && <strong>×{quantity}</strong>}
+      </footer>
+    </div>
+  );
+}
+// The machine only dispenses sealed packs. The visitor owns when and where to
+// open them; opening and the card album both live in Inventory → Card Collection.
+export default function CardPacks({ onInventory }) {
+  const state = useCardCollection(),
+    [notice, setNotice] = useState("");
+  return (
+    <section className="card-machine">
       <p>
-        Pick a pack, tear the seal, and reveal five cards. Free island
-        keepsakes, saved on this device.
+        Choose a set. Your sealed pack goes into your inventory, ready to open
+        whenever you like.
       </p>
-      <div className="card-pack-tabs" aria-label="Choose a pack">
-        {packs.map((p) => (
-          <button
-            key={p.name}
-            aria-pressed={selected.name === p.name}
-            onClick={() => {
-              clearTimeout(timer.current);
-              setSelected(p);
-              setStage("sealed");
-            }}
-            style={{ "--pack-color": p.color }}
-          >
-            <span className="mini-pack">◉</span>
-            {p.name}
-            <small>{p.type}</small>
-          </button>
+      <div className="pack-machine-grid">
+        {packs.map((pack) => (
+          <article key={pack.id}>
+            <div className="pack-machine-art">
+              <PackArtwork pack={pack} />
+            </div>
+            <h3>{pack.name}</h3>
+            <p>{pack.type}</p>
+            <small>{state.packs[pack.id] || 0} unopened in your bag</small>
+            <button
+              disabled={(state.packs[pack.id] || 0) >= 99}
+              onClick={() => {
+                if (collectPack(pack.id))
+                  setNotice(
+                    `${pack.name} dispensed! Find it in Inventory → Card Collection.`,
+                  );
+              }}
+            >
+              Collect Pack
+            </button>
+          </article>
         ))}
       </div>
-      {stage === "choose" && (
-        <button className="world-primary" onClick={() => setStage("sealed")}>
-          Choose {selected.name}
+      <p role="status" className="card-notice">
+        {notice ||
+          "Every pack is free. Five different Pokémon, with a chance of a shiny."}
+      </p>
+      {onInventory && (
+        <button className="world-primary" onClick={onInventory}>
+          Open Card Collection
         </button>
       )}
-      {["sealed", "ripping"].includes(stage) && (
-        <div
-          className={`sealed-pack ${stage === "ripping" ? "is-ripping" : ""}`}
-          onPointerDown={(e) => {
-            if (e.target.closest("button")) return;
-            pointer.current = e.clientX;
-            e.currentTarget.setPointerCapture(e.pointerId);
-          }}
-          onPointerCancel={() => {
-            pointer.current = null;
-          }}
-          onPointerUp={(e) => {
-            if (
-              pointer.current != null &&
-              Math.abs(e.clientX - pointer.current) > 35
-            )
-              rip();
-            pointer.current = null;
+    </section>
+  );
+}
+export function CardCollection({ onBack }) {
+  const state = useCardCollection(),
+    [tab, setTab] = useState("packs"),
+    [opening, setOpening] = useState(null),
+    [filter, setFilter] = useState("All"),
+    [selected, setSelected] = useState(null);
+  const album = Object.values(state.cards),
+    pending = state.pending;
+  const pack = packs.find((p) => p.id === (pending?.setId || opening));
+  const visible = album.filter(
+    (c) =>
+      filter === "All" ||
+      (filter === "Shiny" && c.variant === "Shiny") ||
+      c.setId === filter,
+  );
+  const revealFrame = useRef(null);
+  const revealIndex = pending?.index,
+    revealFace = pending?.flipped;
+  useEffect(() => {
+    revealFrame.current?.scrollIntoView?.({ block: "center" });
+  }, [revealIndex, revealFace]);
+  const selectedCard =
+    visible.find((c) => cardKey(c) === selected) || visible[0];
+  return (
+    <section className="card-collection">
+      <div className="collection-toolbar">
+        <button onClick={onBack}>← Inventory</button>
+        <button
+          onClick={() => {
+            setOpening(null);
+            setTab(tab === "packs" ? "album" : "packs");
           }}
         >
-          <span className="pack-seal">TEAR HERE</span>
-          <span className="pack-orbit">◉</span>
-          <strong>{selected.name}</strong>
-          <small>5 island cards</small>
-          <button disabled={stage === "ripping"} onClick={rip}>
-            Rip Open
-          </button>
-        </div>
-      )}
-      {stage === "reveal" && card && (
-        <div className="card-reveal">
+          {tab === "packs" ? "View Card Album" : "View Unopened Packs"}
+        </button>
+      </div>
+      {pending ? (
+        <div className="pack-reveal-stage">
+          <p>
+            {pack?.name} · Card {pending.index + 1} of 5
+          </p>
           <button
-            className={`pokemon-island-card rarity-${card.rarity.replaceAll(" ", "-").toLowerCase()}`}
-            onClick={() =>
-              index < 4 ? setIndex(index + 1) : setStage("summary")
+            ref={revealFrame}
+            className={`reveal-card-button ${pending.flipped ? "is-flipped" : ""}`}
+            onClick={() => (pending.flipped ? nextCard() : revealCard())}
+            aria-label={
+              pending.flipped
+                ? `Next card after ${pending.cards[pending.index].name}`
+                : "Turn over this card"
             }
-            aria-label={`Reveal next card after ${card.name}`}
-            key={index}
           >
-            <small>{card.rarity}</small>
-            <strong>{card.name}</strong>
-            <img
-              src={art(card.id)}
-              alt={card.name}
-              onError={(e) => {
-                e.currentTarget.style.visibility = "hidden";
-              }}
-            />
-            <span>{selected.name}</span>
-            <small>
-              {index + 1} / 5 · Tap to reveal{" "}
-              {index === 4 ? "your pack" : "the next card"}
-            </small>
+            {pending.flipped ? (
+              <PokemonCard
+                key={pending.index}
+                card={pending.cards[pending.index]}
+                large
+              />
+            ) : (
+              <span className="island-card-back">
+                <span>ISLAND COLLECTION</span>
+                <i>◉</i>
+                <strong>Tap to reveal</strong>
+              </span>
+            )}
           </button>
+          <p role="status">
+            {pending.flipped
+              ? `${pending.cards[pending.index].variant === "Shiny" ? "A shiny! " : ""}${pending.cards[pending.index].name} · ${pending.cards[pending.index].rarity}`
+              : "Your next discovery is waiting."}
+          </p>
+          <div className="card-reveal-actions">
+            <button
+              onClick={() => (pending.flipped ? nextCard() : revealCard())}
+            >
+              {pending.flipped
+                ? pending.index === 4
+                  ? "Finish Pack"
+                  : "Next Card"
+                : "Reveal Card"}
+            </button>
+            <button
+              onClick={() => {
+                finishPack();
+                setOpening(null);
+                setTab("album");
+              }}
+            >
+              Save All to Album
+            </button>
+          </div>
         </div>
-      )}
-      {stage === "summary" && (
+      ) : opening && pack ? (
         <>
-          <div className="opened-pack">
-            {cards.map((c, i) => (
-              <div key={i}>
-                <img src={art(c.id)} alt={c.name} />
-                <strong>{c.name}</strong>
-                <small>{c.rarity}</small>
-              </div>
+          <button onClick={() => setOpening(null)}>
+            Back to Unopened Packs
+          </button>
+          <TearPack
+            key={opening}
+            pack={pack}
+            onRip={() => {
+              ripOwnedPack(opening);
+              setOpening(null);
+            }}
+          />
+        </>
+      ) : tab === "packs" ? (
+        <>
+          <p>
+            Sealed packs stay in your bag until you tear them open. Your cards
+            are saved even if you close during a reveal.
+          </p>
+          <div className="pack-bag-grid">
+            {packs
+              .filter((p) => state.packs[p.id] > 0)
+              .map((p) => (
+                <button key={p.id} onClick={() => setOpening(p.id)}>
+                  <PackArtwork pack={p} />
+                  <strong>
+                    {p.name} ×{state.packs[p.id]}
+                  </strong>
+                  <span>Open Pack</span>
+                </button>
+              ))}
+          </div>
+          {!Object.values(state.packs).some((n) => n > 0) && (
+            <p className="card-empty">
+              Your pack bag is empty. Visit the dispenser beside the Pokémon
+              house to collect a pack.
+            </p>
+          )}
+        </>
+      ) : (
+        <>
+          <div className="card-album-heading">
+            <p>
+              {album.length} different cards ·{" "}
+              {album.filter((c) => c.variant === "Shiny").length} shiny
+              discoveries · {album.reduce((n, c) => n + c.quantity, 0)} cards
+              collected
+            </p>
+            <label>
+              Show{" "}
+              <select
+                value={filter}
+                onChange={(e) => {
+                  setFilter(e.target.value);
+                  setSelected(null);
+                }}
+              >
+                <option>All</option>
+                <option>Shiny</option>
+                {packs.map((p) => (
+                  <option value={p.id} key={p.id}>
+                    {p.name}
+                  </option>
+                ))}
+              </select>
+            </label>
+          </div>
+          {selectedCard && (
+            <div className="selected-album-card">
+              <PokemonCard
+                card={selectedCard}
+                quantity={selectedCard.quantity}
+                large
+              />
+            </div>
+          )}
+          <div className="card-album-grid">
+            {visible.map((c) => (
+              <button
+                key={cardKey(c)}
+                aria-pressed={selectedCard === c}
+                onClick={() => setSelected(cardKey(c))}
+              >
+                <PokemonCard card={c} quantity={c.quantity} />
+              </button>
             ))}
           </div>
-          <button onClick={() => setStage("sealed")}>Open Another Pack</button>
+          {!visible.length && (
+            <p className="card-empty">
+              No cards in this part of your album yet. Every opened pack adds
+              five discoveries here.
+            </p>
+          )}
         </>
       )}
-      <details>
-        <summary>
-          Your Card Album · {Object.keys(collection).length} discoveries
-        </summary>
-        <div className="card-album">
-          {Object.values(collection).map((c) => (
-            <div key={`${c.id}-${c.rarity}`}>
-              <img src={art(c.id)} alt="" loading="lazy" />
-              <strong>
-                {c.name} ×{c.quantity}
-              </strong>
-              <small>{c.rarity}</small>
-            </div>
-          ))}
-        </div>
-      </details>
-      <small className="activity-note">
-        Fan-made mini game · Pokémon character sprites: PokeAPI / Nintendo,
-        Creatures, GAME FREAK. No purchases or official cards.
-      </small>
+      <p className="card-credit">
+        Fan-made island cards. Character sprites: PokeAPI / Nintendo, Creatures
+        and GAME FREAK. Saved on this device.
+      </p>
     </section>
   );
 }

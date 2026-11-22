@@ -1,3 +1,5 @@
+import { useCardCollection } from "./CardCollection";
+import { readGold } from "./NoFace";
 import { Book } from "react-bootstrap-icons";
 import { useState } from "react";
 import CollectionIcon from "./CollectionIcon";
@@ -239,7 +241,9 @@ export function Inventory({
   fish = {},
   onAquariums,
   onFieldGuide,
+  onCards,
 }) {
+  const cards = useCardCollection();
   const ids = Object.keys(caught);
   const rare = ids.filter((id) =>
     ["Rare", "Very rare", "Super rare"].includes(
@@ -267,6 +271,51 @@ export function Inventory({
         </span>
         <span aria-hidden="true">→</span>
       </button>
+      <button className="inventory-folder" onClick={onCards}>
+        <span className="inventory-folder-icon" aria-hidden="true">
+          <svg viewBox="0 0 64 64" width="54" height="54">
+            <rect
+              x="9"
+              y="9"
+              width="34"
+              height="46"
+              rx="4"
+              fill="#567996"
+              stroke="#d6c175"
+              transform="rotate(-12 26 32)"
+            />
+            <rect
+              x="23"
+              y="9"
+              width="34"
+              height="46"
+              rx="4"
+              fill="#254d62"
+              stroke="#dfc56c"
+            />
+            <circle cx="40" cy="31" r="11" fill="#dbb961" />
+            <circle cx="40" cy="31" r="5" fill="#214352" />
+          </svg>
+        </span>
+        <span>
+          <strong>Card Collection</strong>
+          <small>
+            {Object.values(cards.packs).reduce((n, c) => n + c, 0)} unopened
+            packs · {Object.keys(cards.cards).length} different cards
+          </small>
+          <small>
+            {cards.pending
+              ? "Resume your pack reveal."
+              : "Rip packs, discover shiny Pokémon, and browse your album."}
+          </small>
+        </span>
+        <span aria-hidden="true">→</span>
+      </button>
+      {readGold() > 0 && (
+        <p className="inventory-gold">
+          ✦ {readGold()} gold keepsakes from No-Face
+        </p>
+      )}
       <button className="inventory-folder" onClick={onAquariums}>
         <span className="inventory-folder-icon">
           <CollectionSprite asset="fish-harbor" label="Fish collection" />

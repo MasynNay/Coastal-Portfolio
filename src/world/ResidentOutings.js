@@ -31,7 +31,8 @@ export function startResidentOuting(id, actor, time, driver) {
       createSkateRide(),
       actor,
       time,
-      { x: 17.5, z: 7 },
+      // Keep the turnaround on the street, above Windfall's full rear boundary.
+      { x: 17.5, z: 6 },
       4600,
       2100,
       (tour) => tour.return(),

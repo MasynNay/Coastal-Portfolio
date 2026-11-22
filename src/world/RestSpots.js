@@ -1,13 +1,13 @@
 import { buildings } from "./TownLayout";
 const ocean = buildings.find((b) => b.id === "contact");
-// Positions drive art, collision and the same E/touch interaction. The chair
-// remains outside the path; the seahorse occupies the ocean home's side lawn.
+// The rocker shares its position across artwork, collision and E/touch input.
+// Its west-lawn placement leaves the front path and mailbox clear.
 export const restSpots = [
   {
     id: "seahorse-rocker",
     art: "seahorse-rocker",
     label: "Ride the seahorse",
-    x: ocean.x - 6.5,
+    x: ocean.x - 6.95,
     z: ocean.z + 3.3,
     h: 1.9,
     direction: 2,

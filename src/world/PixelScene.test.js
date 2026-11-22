@@ -43,7 +43,10 @@ beforeEach(() => {
   mockMissing = new Set();
   mockLoads.mockClear();
   const ctx = new Proxy(
-    { measureText: () => ({ width: 30 }) },
+    {
+      measureText: () => ({ width: 30 }),
+      createLinearGradient: () => ({ addColorStop: jest.fn() }),
+    },
     { get: (o, k) => (k in o ? o[k] : (o[k] = jest.fn())) },
   );
   jest.spyOn(HTMLCanvasElement.prototype, "getContext").mockReturnValue(ctx);

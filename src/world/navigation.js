@@ -20,14 +20,21 @@ export function canStand(x, z, obstacles, inside = false, surfing = false) {
       ? false
       : o.door && Math.abs(x - o.x) < o.door.width / 2 && z > o.z + o.door.back
         ? false
-        : o.rx
-          ? ((x - o.x) / (o.rx + (o.water ? 0 : 0.45))) ** 2 +
-              ((z - o.z) / (o.rz + (o.water ? 0 : 0.45))) ** 2 <
-            1
-          : o.radius
-            ? Math.hypot(x - o.x, z - o.z) < o.radius + 0.45
-            : Math.abs(x - o.x) < o.w / 2 + (o.clearance ?? 0.4) &&
-              Math.abs(z - o.z) < o.d / 2 + (o.clearance ?? 0.4),
+        : o.rounded
+          ? // Distance from the actual rectangle, expanded by a circular foot
+            // radius. Keyboard, tap-to-walk and resident paths share this test.
+            Math.hypot(
+              Math.max(0, Math.abs(x - o.x) - o.w / 2),
+              Math.max(0, Math.abs(z - o.z) - o.d / 2),
+            ) < (o.clearance ?? 0.4)
+          : o.rx
+            ? ((x - o.x) / (o.rx + (o.water ? 0 : 0.45))) ** 2 +
+                ((z - o.z) / (o.rz + (o.water ? 0 : 0.45))) ** 2 <
+              1
+            : o.radius
+              ? Math.hypot(x - o.x, z - o.z) < o.radius + 0.45
+              : Math.abs(x - o.x) < o.w / 2 + (o.clearance ?? 0.4) &&
+                Math.abs(z - o.z) < o.d / 2 + (o.clearance ?? 0.4),
   );
 }
 export function move(position, dx, dz, obstacles, inside, surfing = false) {
@@ -57,10 +64,46 @@ export function findPath(
     x: Math.round(p.x),
     z: Math.round(p.z),
   });
-  const a = snap(start),
-    b = snap(target),
-    key = (p) => `${p.x},${p.z}`;
-  if (!canStand(b.x, b.z, obstacles, inside, surfing)) return [];
+  const key = (p) => `${p.x},${p.z}`;
+  if (!canStand(target.x, target.z, obstacles, inside, surfing)) return [];
+  // A valid tap beside a wall may round onto a blocked grid square. Connect
+  // each real endpoint to the nearest clear grid node instead of dropping the
+  // tap or trying to cross the corner. The short connecting legs are checked
+  // with the same fine spacing as movement, so they cannot tunnel through art.
+  const clearConnection = (from, to) => {
+    const steps = Math.max(
+      1,
+      Math.ceil(Math.hypot(to.x - from.x, to.z - from.z) / 0.1),
+    );
+    for (let i = 0; i <= steps; i++)
+      if (
+        !canStand(
+          from.x + ((to.x - from.x) * i) / steps,
+          from.z + ((to.z - from.z) * i) / steps,
+          obstacles,
+          inside,
+          surfing,
+        )
+      )
+        return false;
+    return true;
+  };
+  const anchor = (point) => {
+    const rounded = snap(point),
+      candidates = [];
+    for (let dx = -1; dx <= 1; dx++)
+      for (let dz = -1; dz <= 1; dz++)
+        candidates.push({ x: rounded.x + dx, z: rounded.z + dz });
+    candidates.sort(
+      (p, q) =>
+        Math.hypot(p.x - point.x, p.z - point.z) -
+        Math.hypot(q.x - point.x, q.z - point.z),
+    );
+    return candidates.find((p) => clearConnection(point, p));
+  };
+  const a = anchor(start),
+    b = anchor(target);
+  if (!a || !b) return [];
   const open = [
       {
         ...a,
@@ -94,6 +137,9 @@ export function findPath(
         p = parents.get(key(p));
         if (!p) return [];
       }
+      if (Math.hypot(start.x - a.x, start.z - a.z) > 0.001) path.unshift(a);
+      if (Math.hypot(target.x - b.x, target.z - b.z) > 0.001)
+        path.push({ x: target.x, z: target.z });
       return path;
     }
     for (const [dx, dz] of dirs) {

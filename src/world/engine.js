@@ -8,6 +8,7 @@ import {
 } from "./ForestGrove";
 import { createRoomInteractions, isLoveOffering } from "./RoomInteractions";
 import { startWindSong } from "./WindStatue";
+import { createNoFace, noFaceInteraction } from "./NoFace";
 import { createPlayground, playgroundActivities } from "./Playground";
 import { restSpots, createRestSpots } from "./RestSpots";
 import { gameTitles } from "./games/GameLocations";
@@ -187,6 +188,7 @@ export function createWorld(host, callbacks) {
     shellSpawns = createShellSpawns(),
     beachActivities = createBeachActivities();
   const playground = createPlayground();
+  const noFace = createNoFace();
   const dogPlay = createDogPlay(),
     duckPlay = createDuckPlay(),
     webs = createWebs(),
@@ -224,6 +226,7 @@ export function createWorld(host, callbacks) {
     abilityEffect = null;
   }
   const activityBusy = () =>
+    noFace.active() ||
     playground.active() ||
     !!groveSession ||
     dogPlay.active() ||
@@ -240,6 +243,8 @@ export function createWorld(host, callbacks) {
     manualWatercraft() || skateRide.manual() || surfRide.manual();
   function cancelActivities() {
     finishGrove();
+    const goldOrigin = noFace.stop();
+    if (goldOrigin) position = { ...goldOrigin };
     const playgroundOrigin = playground.stop();
     if (playgroundOrigin) position = { ...playgroundOrigin };
     skySalute.cancel();
@@ -361,6 +366,7 @@ export function createWorld(host, callbacks) {
       night: room ? 0 : tricks.night(worldTime),
       animals: worldAnimals(),
       playground: playground.snapshot(worldTime),
+      noFace: noFace.snapshot(worldTime),
       dogPlay: dogPlay.snapshot(),
       duckPlay: duckPlay.snapshot(),
       bikeRide: bikeRide.snapshot(),
@@ -461,6 +467,7 @@ export function createWorld(host, callbacks) {
     const nearbyAnimals = worldAnimals();
     return [
       ...(!surfing && groveReveal.visible() ? [groveInteraction] : []),
+      ...(!surfing ? [noFaceInteraction] : []),
       ...restSpots.map((p) => ({ ...p, type: "rest" })),
       axolotlRaceMarker,
       {
@@ -612,38 +619,40 @@ export function createWorld(host, callbacks) {
       loading,
       prompt: loading
         ? null
-        : playground.active()
-          ? "Leave the Playground Ride"
-          : groveSession
-            ? "Dancing with Totoro…"
-            : rest.active()
-              ? "Stand up"
-              : axolotlRace.active()
-                ? "Leave the race"
-                : skateRide.active()
-                  ? "Return the skateboard"
-                  : waterRide.active()
-                    ? "Return to pier"
-                    : bikeRide.active()
-                      ? "A little ride around the pond…"
-                      : beachActivities.busy()
-                        ? "Building a sandcastle…"
-                        : surfRide.active()
-                          ? "Steer onto a beach to step ashore"
-                          : isBeachInteraction(selected)
-                            ? selected.label
-                            : selected?.type === "duck" &&
-                                selected.distance < 1.8
+        : noFace.active()
+          ? "Thank No-Face"
+          : playground.active()
+            ? "Leave the Playground Ride"
+            : groveSession
+              ? "Dancing with Totoro…"
+              : rest.active()
+                ? "Stand up"
+                : axolotlRace.active()
+                  ? "Leave the race"
+                  : skateRide.active()
+                    ? "Return the skateboard"
+                    : waterRide.active()
+                      ? "Return to pier"
+                      : bikeRide.active()
+                        ? "A little ride around the pond…"
+                        : beachActivities.busy()
+                          ? "Building a sandcastle…"
+                          : surfRide.active()
+                            ? "Steer onto a beach to step ashore"
+                            : isBeachInteraction(selected)
                               ? selected.label
-                              : ["watercraft", "race", "surfboard"].includes(
-                                    selected?.type,
-                                  )
+                              : selected?.type === "duck" &&
+                                  selected.distance < 1.8
                                 ? selected.label
-                                : surfing
-                                  ? "Surfing · return to shore to walk"
-                                  : shore()
-                                    ? `Surf on your ${axolotlColors[character]} axolotl`
-                                    : nearby()?.label || null,
+                                : ["watercraft", "race", "surfboard"].includes(
+                                      selected?.type,
+                                    )
+                                  ? selected.label
+                                  : surfing
+                                    ? "Surfing · return to shore to walk"
+                                    : shore()
+                                      ? `Surf on your ${axolotlColors[character]} axolotl`
+                                      : nearby()?.label || null,
       fishingPhase,
       interactionBusy: beachActivities.busy() || !!groveSession,
       surfingBoard: surfRide.active(),
@@ -759,6 +768,13 @@ export function createWorld(host, callbacks) {
   }
   function interact() {
     if (skySalute.active()) return;
+    if (!frozen && noFace.active()) {
+      position = noFace.stop();
+      stop();
+      publish();
+      requestDraw();
+      return;
+    }
     if (!frozen && playground.active()) {
       position = playground.stop();
       guestPause.release(worldTime);
@@ -830,6 +846,18 @@ export function createWorld(host, callbacks) {
         worldTime,
       );
       callbacks.onEvent?.({ type: "wind-song" });
+      publish();
+      requestDraw();
+      return;
+    }
+    if (duckTarget?.type === "no-face") {
+      stop();
+      cancelAbility();
+      noFace.start(position, worldTime);
+      direction = movementDirection(
+        duckTarget.x - position.x,
+        duckTarget.z - position.z,
+      );
       publish();
       requestDraw();
       return;
@@ -1175,7 +1203,9 @@ export function createWorld(host, callbacks) {
         !loading &&
         !travelInProgress &&
         !axolotlRace.active() &&
-        !groveSession,
+        !groveSession &&
+        !playground.active() &&
+        !noFace.active(),
       worldTime,
     );
     const saluting = !!salutePose;
@@ -1221,6 +1251,20 @@ export function createWorld(host, callbacks) {
     const wasMoving = moving;
     moving = false;
     let remaining = dt;
+    if (noFace.active() && !frozen && !loading) {
+      const gift = noFace.update(worldTime);
+      if (gift.reward)
+        callbacks.onEvent?.({
+          type: "notice",
+          message:
+            "No-Face offers five little gold keepsakes. A quiet bow, and a thank-you.",
+        });
+      if (gift.done) {
+        position = noFace.stop();
+        stop();
+      }
+      dirty = true;
+    }
     if (playground.active() && !frozen && !loading) {
       const play = playground.snapshot(worldTime);
       position = { x: play.player.x, z: play.player.z };

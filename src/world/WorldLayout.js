@@ -72,20 +72,24 @@ export function leavingRoom(position, previous) {
   );
 }
 
-// Bounds follow each illustration's full roof/facade extent. The inset front
-// door remains an explicit approach corridor; the roof has no rear entrance.
+// The renderer anchors every house at z + 3.1. Use that same bottom edge and
+// the full image width: shrinking either leaves walkable strips inside the
+// front corners. Rounded clearance gives the player's feet room without the
+// square invisible corners that made walking around a facade feel sticky.
+// Only the narrow, front-facing doorway cuts through this solid boundary.
 export function buildingObstacle(building) {
   const art = places["building-" + building.id];
   const height = buildingHeight(building);
-  const back = building.z + 3.1 - height + 0.35;
-  const front = building.z + 3.1 - 0.3;
+  const back = building.z + 3.1 - height;
+  const front = building.z + 3.1;
   const center = (back + front) / 2;
   return {
     x: building.x,
     z: center,
-    w: ((height * art.width) / art.height) * 0.9,
+    w: (height * art.width) / art.height,
     d: front - back,
-    clearance: 0.18,
+    clearance: 0.42,
+    rounded: true,
     door: { back: building.z + doorOffset(building) - 1 - center, width: 1.7 },
   };
 }

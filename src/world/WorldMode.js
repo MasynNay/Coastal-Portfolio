@@ -1,4 +1,4 @@
-import CardPacks from "./CardPacks";
+import CardPacks, { CardCollection } from "./CardPacks";
 import RoomArcade from "./RoomArcade";
 import AsciiApp from "../ascii/AsciiStudio";
 import "../ascii/AsciiLauncher.css";
@@ -733,7 +733,9 @@ export default function WorldMode() {
       )}
       {menu && (
         <Dialog
-          wide={["aquariums", "terrariums", "field-guide"].includes(menu)}
+          wide={["aquariums", "terrariums", "field-guide", "cards"].includes(
+            menu,
+          )}
           className={
             menu === "travel"
               ? "world-map-panel"
@@ -754,9 +756,11 @@ export default function WorldMode() {
                       ? "Aquariums"
                       : menu === "inventory"
                         ? "Inventory"
-                        : menu === "terrariums"
-                          ? "Terrariums"
-                          : "Make yourself at home"
+                        : menu === "cards"
+                          ? "Card Collection"
+                          : menu === "terrariums"
+                            ? "Terrariums"
+                            : "Make yourself at home"
           }
           onClose={() => setMenu(null)}
         >
@@ -820,12 +824,15 @@ export default function WorldMode() {
                 onRelease={(id) => engine.current?.releaseFish(id)}
               />
             </>
+          ) : menu === "cards" ? (
+            <CardCollection onBack={() => setMenu("inventory")} />
           ) : menu === "inventory" ? (
             <Inventory
               caught={caught}
               fish={aquariums}
               onFieldGuide={() => openGuide()}
               onAquariums={() => setMenu("aquariums")}
+              onCards={() => setMenu("cards")}
               onTerrariums={() => setMenu("terrariums")}
             />
           ) : menu === "terrariums" ? (
@@ -1070,7 +1077,12 @@ export default function WorldMode() {
           ) : dialog.type === "room-arcade" ? (
             <RoomArcade />
           ) : dialog.type === "card-packs" ? (
-            <CardPacks />
+            <CardPacks
+              onInventory={() => {
+                setDialog(null);
+                setMenu("cards");
+              }}
+            />
           ) : dialog.type === "love-letter" ? (
             <LoveLetter />
           ) : dialog.type === "island-game" ? (

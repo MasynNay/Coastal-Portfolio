@@ -160,7 +160,7 @@ test("the outdoor shell fountain opens Axolotl Drift directly without a wish men
     // Approach from the promenade instead of walking through a house doorway.
     for (const target of [
       { x: 0, z: 20 },
-      { x: -11.6, z: 16.1 },
+      { x: -12.05, z: 16.1 },
     ]) {
       mockScene.hit = () => target;
       mockScene.canvas.dispatchEvent(

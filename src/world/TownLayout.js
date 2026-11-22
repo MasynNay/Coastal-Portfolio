@@ -124,7 +124,6 @@ export const streets = [
 // decorations in water; the central streets and every front door remain clear.
 export const windfallTree = { x: 24, z: 10.5 };
 export const townDecor = [
-  ["harbor-bench", -12, 18.1, 1.05],
   ["harbor-bench", 12, 18.1, 1.05],
   ["harbor-umbrella", -24, 16.5, 2.2],
   ["harbor-umbrella", 24, 16.5, 2.2],
@@ -216,7 +215,7 @@ export const townProps = [
     id: "shell-fountain",
     // The open east lawn gives the arcade a clear approach from the side street,
     // clear of the mailbox and front-door path. The rocker sits on the west lawn.
-    x: -11.6,
+    x: -12.05,
     z: 15.2,
     h: 2.5,
   },
@@ -251,12 +250,12 @@ export const townProps = [
     h: 1.6,
   },
   {
-    id: "balance-trail",
+    id: "roundabout",
     x: 23.1,
     z: 1.7,
     h: 2,
-    w: 0.35,
-    d: 0.25,
+    w: 2.8,
+    d: 0.9,
   },
   { id: "tunnel", x: 13.8, z: -4.7, h: 1.7, w: 2.2, d: 0.8 },
   { id: "climbing-dome", x: 22.7, z: -4.8, h: 2.4, w: 2.6, d: 0.85 },
@@ -270,9 +269,9 @@ export const privateStreet = (b) =>
 // star model and rocker rather than repeating one collision-prone offset.
 const mailboxOffsets = {
   home: { x: 3.1, z: 4.3 },
-  skills: { x: 3.5, z: 7.4 },
+  skills: { x: 3, z: 3.8 },
   portfolio: { x: 3.3, z: 4.3 },
-  resume: { x: 2.8, z: 4.9 },
+  resume: { x: 2.8, z: 4.4 },
   contact: { x: 3.3, z: 4.1 },
   lodge: { x: 2.6, z: 4.1 },
 };

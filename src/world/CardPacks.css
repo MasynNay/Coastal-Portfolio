@@ -1,162 +1,591 @@
-/* The packet and card share the selected set color. Only the seal tears away;
-   card reveals use a short turn rather than a distracting continuous spin. */
-.card-packs {
-  text-align: center;
+/* Shared physical pack/card surfaces for the machine, bag and album. The seal
+   follows pointer progress; the card reveal is a deliberate separate gesture. */
+.card-machine,
+.card-collection {
   min-width: 0;
+  text-align: center;
 }
-.card-pack-tabs {
+.card-machine p,
+.card-collection p {
+  line-height: 1.55;
+}
+.pack-machine-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 10px;
+  gap: 16px;
+  margin: 24px 0;
 }
-.card-pack-tabs button {
+.pack-machine-grid article {
   min-width: 0;
-  padding: 12px 8px;
+  padding: 15px;
+  background: #b8dbcf0a;
+  border: 1px solid #a1c1b532;
+  border-radius: 16px;
+}
+.pack-machine-grid h3 {
+  font-size: 16px;
+  margin: 14px 0 4px;
+}
+.pack-machine-grid article p {
   font-size: 13px;
+  margin: 4px 0;
+  color: #b0c6c4;
 }
-.card-pack-tabs button[aria-pressed="true"] {
-  outline: 2px solid #d8d49a;
-  outline-offset: -2px;
-}
-.card-pack-tabs small,
-.opened-pack small,
-.card-album small {
+.pack-machine-grid article small {
   display: block;
-  opacity: 0.7;
+  font-size: 12px;
+  margin: 10px 0;
 }
-.mini-pack {
-  display: block;
-  width: 34px;
-  padding: 10px 0;
-  background: var(--pack-color);
-  margin: 0 auto 8px;
-  color: #fff4b3;
-  border: 1px solid #e8d9a7;
-  border-radius: 3px;
+.pack-machine-grid article button {
+  width: 100%;
+  min-height: 44px;
 }
-.sealed-pack {
+.pack-machine-art {
+  width: 100%;
+  max-width: 180px;
+  margin: auto;
+}
+.booster-art {
   position: relative;
+  width: 100%;
+  aspect-ratio: 0.7;
+  isolation: isolate;
   overflow: hidden;
-  width: min(240px, 85%);
-  min-height: 280px;
-  margin: 24px auto;
-  padding: 45px 15px 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 14px;
-  background:
-    linear-gradient(120deg, #fff3, transparent 35%, #0005), var(--pack-color);
-  border: 2px solid #c7bd86;
-  box-shadow: 0 15px 35px #0005;
+  border: 1px solid #d5ce9a;
   border-radius: 4px;
-  touch-action: pan-y;
+  color: #fff9dd;
+  background:
+    linear-gradient(110deg, #fff8, transparent 20% 75%, #fff4),
+    linear-gradient(145deg, #152d4e, var(--pack-color), #102a32);
+  box-shadow:
+    2px 8px 17px #0005,
+    inset 0 0 0 5px #fff2;
 }
-.pack-seal {
+.booster-art::before {
+  content: "";
   position: absolute;
-  inset: 0 0 auto;
-  padding: 7px;
-  background: repeating-linear-gradient(90deg, #ded8b0 0 2px, #b6b08d 2px 4px);
-  color: #35434a;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    115deg,
+    transparent 0 25px,
+    #fff1 26px 27px,
+    transparent 28px 50px
+  );
+}
+.booster-label {
+  position: absolute;
+  top: 9%;
+  left: 5%;
+  width: 90%;
+  font-size: clamp(8px, 1.3vw, 12px);
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-shadow: 0 2px 3px #000;
+  z-index: 4;
+}
+.booster-burst {
+  position: absolute;
+  inset: 18% -30% 20%;
+  background: repeating-conic-gradient(
+    from 20deg,
+    #fff2 0 8deg,
+    transparent 8deg 20deg
+  );
+  border-radius: 50%;
+}
+.pack-mascot {
+  position: absolute;
+  z-index: 2;
+  width: 82%;
+  height: 62%;
+  object-fit: contain;
+  left: 9%;
+  top: 16%;
+  filter: drop-shadow(0 7px 2px #0007);
+}
+.pack-companion {
+  position: absolute;
+  width: 44%;
+  height: 38%;
+  object-fit: contain;
+  top: 40%;
+  opacity: 0.9;
+  filter: drop-shadow(0 3px 1px #0008);
+}
+.pack-companion.first {
+  left: -5%;
+  transform: rotate(-12deg);
+}
+.pack-companion.second {
+  right: -5%;
+  transform: rotate(12deg);
+}
+.booster-art > strong {
+  position: absolute;
+  left: 4%;
+  width: 92%;
+  bottom: 14%;
+  font-size: clamp(13px, 2.5vw, 23px);
+  line-height: 1.05;
+  z-index: 4;
+  color: #ffec9b;
+  text-shadow:
+    0 2px 0 #233d51,
+    1px 0 0 #233d51;
+  font-weight: 900;
+}
+.booster-art > small {
+  position: absolute;
+  bottom: 7%;
+  left: 0;
+  width: 100%;
+  font-size: 7px;
+  letter-spacing: 0.05em;
+  z-index: 4;
+  color: #fff8d9;
+}
+.booster-crimp {
+  position: absolute;
+  height: 5%;
+  width: 100%;
+  left: 0;
+  background: repeating-linear-gradient(90deg, #9d9b78 0 2px, #dfdcb1 2px 4px);
+}
+.booster-crimp.bottom {
+  bottom: 0;
+}
+.card-notice {
+  min-height: 3em;
+  font-size: 14px;
+  color: #d0ded4;
+}
+.card-credit {
   font-size: 11px;
-  letter-spacing: 3px;
+  color: #9ab3b0;
+  margin: 24px 0 0;
 }
-.pack-orbit {
-  font-size: 55px;
-  color: #faf2cd;
+.pack-bag-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(145px, 1fr));
+  gap: 18px;
+  margin: 22px 0;
 }
-.is-ripping .pack-seal {
-  animation: pack-rip 0.8s ease-out both;
-}
-@keyframes pack-rip {
-  to {
-    transform: translateX(110%) rotate(12deg);
-    opacity: 0;
-  }
-}
-.pokemon-island-card {
-  width: min(260px, 88%);
-  min-height: 340px;
-  margin: 22px auto;
-  border: 9px solid #d8bd65 !important;
-  border-radius: 14px;
+.pack-bag-grid > button {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 12px;
-  background: linear-gradient(145deg, #e9eee0, #8eb5aa) !important;
-  color: #142d36 !important;
-  animation: card-turn 0.4s ease-out;
+  gap: 10px;
+  padding: 14px;
+  min-width: 0;
 }
-.pokemon-island-card strong {
-  font-size: 24px;
+.pack-bag-grid .booster-art {
+  width: 100%;
+  max-width: 175px;
 }
-.pokemon-island-card img {
-  width: 170px;
-  height: 170px;
-  object-fit: contain;
-  image-rendering: pixelated;
-  background: radial-gradient(#efffd5, #598e9b);
-  border-radius: 8px;
+.pack-bag-grid > button > strong {
+  font-size: 14px;
 }
-.rarity-holo-rare,
-.rarity-legendary {
+.pack-bag-grid > button > span {
+  font-size: 12px;
+  color: #cdddb5;
+}
+.tear-stage {
+  padding: 18px 0;
+}
+.tear-instruction {
+  font-size: 16px;
+  color: #e6e6ce;
+}
+.sealed-booster {
+  position: relative;
+  width: min(275px, 90%);
+  margin: 28px auto;
+  perspective: 600px;
+}
+.sealed-booster .booster-art {
+  padding-top: 18px;
+}
+.pack-tear-seam {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 48px;
+  z-index: 7;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 12px;
+  cursor: ew-resize;
+  touch-action: none;
+  user-select: none;
+  color: #2e4243;
+  border-top: 1px solid #fff4c7;
+  border-bottom: 1px dashed #8b7952;
+  background: repeating-linear-gradient(90deg, #bdbb89 0 2px, #e5dfad 2px 4px);
+}
+.pack-tear-seam:focus-visible {
+  outline: 3px solid #a5dcd4;
+  outline-offset: 5px;
+}
+.pack-tear-seam span {
+  font-size: 11px;
+  letter-spacing: 2px;
+  font-weight: 800;
+  z-index: 2;
+}
+.pack-tear-seam i {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  height: 5px;
+  width: var(--tear);
+  background: #193336;
+  box-shadow: 0 2px 1px #fff8c7;
+  transform: rotate(-1deg);
+  pointer-events: none;
+}
+.tear-flap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: var(--tear);
+  height: 35px;
+  background: linear-gradient(#fff8d9, #aca981);
+  border-bottom: 1px solid #f7e1a4;
+  z-index: 8;
+  pointer-events: none;
+  transform-origin: right center;
+  box-shadow: 0 4px 5px #0003;
+}
+.tear-keyboard-help {
+  font-size: 12px;
+  color: #a8c0bb;
+  max-width: 400px;
+  margin: 20px auto;
+}
+.pack-reveal-stage {
+  padding: 18px 0;
+}
+.reveal-card-button {
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 18px !important;
+  background: none !important;
+  display: block;
+  width: min(300px, 90%);
+  margin: 22px auto;
+  perspective: 800px;
+}
+.island-card {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 0.715;
+  display: flex;
+  flex-direction: column;
+  border: 7px solid #c3a658;
+  padding: 10px;
+  border-radius: 14px;
+  color: #1a3441;
+  background: linear-gradient(135deg, #e5f2de, #8eae9f);
   box-shadow:
-    0 0 24px #aadff88a,
-    inset 0 0 28px #fff9;
+    inset 0 0 0 1px #f5edbc,
+    0 5px 15px #0005;
+  overflow: hidden;
+  text-align: left;
 }
-@keyframes card-turn {
+.card-topline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px;
+  min-height: 24px;
+}
+.card-topline strong {
+  font-size: clamp(11px, 1.5vw, 18px);
+}
+.card-topline > span {
+  font-size: 7px;
+  letter-spacing: 0.05em;
+  font-weight: 800;
+  white-space: nowrap;
+}
+.card-illustration {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  margin: 6px 0;
+  display: grid;
+  place-items: center;
+  border: 2px solid #7b9694;
+  border-radius: 7px;
+  background: radial-gradient(
+    ellipse at 50% 90%,
+    #dae8b5,
+    #77a6a8 65%,
+    #456b85
+  );
+}
+.card-illustration::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(35deg, #274b4750, transparent 45%),
+    repeating-radial-gradient(
+      ellipse at 20% 90%,
+      transparent 0 17px,
+      #e9f2db18 18px 20px,
+      transparent 21px 40px
+    );
+  pointer-events: none;
+}
+.card-illustration img {
+  width: 94%;
+  height: 100%;
+  min-height: 0;
+  object-fit: contain;
+  z-index: 1;
+  filter: drop-shadow(0 7px 3px #193c4450);
+}
+.card-halo {
+  position: absolute;
+  width: 80%;
+  aspect-ratio: 1;
+  border: 1px solid #ecf5c54d;
+  border-radius: 50%;
+}
+.card-rarity {
+  font-weight: 800;
+  font-size: 11px;
+  color: #314345;
+  letter-spacing: 0.06em;
+}
+.island-card p {
+  font-size: 11px !important;
+  color: #304c53 !important;
+  margin: 7px 0 !important;
+  text-align: left !important;
+  line-height: 1.3 !important;
+}
+.island-card footer {
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid #324f5340;
+  padding-top: 6px;
+  font-size: 7px;
+  letter-spacing: 0.1em;
+}
+.island-card footer strong {
+  font-size: 12px;
+}
+.island-card.rarity-legendary {
+  border-color: #d9bd61;
+  background: linear-gradient(135deg, #f0e7b6, #c0c4b5, #d7b67c);
+}
+.island-card.rarity-holo-rare .card-illustration {
+  background: conic-gradient(
+    from 30deg,
+    #83c0cb,
+    #d2bcba,
+    #85c7ac,
+    #b2a1cd,
+    #83c0cb
+  );
+}
+.island-card.is-shiny {
+  border-color: #d5c8e6;
+  box-shadow:
+    0 0 22px #b8dbea55,
+    inset 0 0 0 1px #fff9;
+}
+.is-shiny .card-illustration::before {
+  content: "";
+  position: absolute;
+  inset: -30%;
+  background: linear-gradient(
+    120deg,
+    transparent 30%,
+    #fff7 43%,
+    #b2e9f03a 50%,
+    transparent 65%
+  );
+  animation: shiny-sheen 4s ease-in-out infinite;
+  z-index: 3;
+  pointer-events: none;
+}
+.card-sparkles {
+  position: absolute;
+  inset: 10% 7% auto;
+  z-index: 4;
+  color: #fff9cd;
+  font-size: 25px;
+  word-spacing: 20px;
+  text-shadow: 0 0 9px #b9f7ff;
+  animation: shiny-stars 2s ease-in-out infinite alternate;
+}
+@keyframes shiny-sheen {
   from {
-    transform: perspective(600px) rotateY(-40deg);
-    opacity: 0.1;
+    transform: translateX(-60%);
   }
   to {
-    transform: perspective(600px) rotateY(0);
+    transform: translateX(60%);
+  }
+}
+@keyframes shiny-stars {
+  to {
+    opacity: 0.35;
+    transform: translateY(-5px);
+  }
+}
+.island-card-back {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+  width: 100%;
+  aspect-ratio: 0.715;
+  border: 9px solid #b8c3cd;
+  border-radius: 14px;
+  color: #f8e8ae;
+  background: repeating-radial-gradient(
+    circle at center,
+    #132e55 0 15px,
+    #294c76 16px 20px,
+    #132e55 22px 35px
+  );
+  box-shadow:
+    0 12px 30px #0007,
+    inset 0 0 0 4px #9cbaae;
+}
+.island-card-back > span {
+  font-size: 12px;
+  letter-spacing: 0.1em;
+}
+.island-card-back > i {
+  font-size: 90px;
+  font-style: normal;
+}
+.island-card-back > strong {
+  font-size: 16px;
+}
+.is-flipped .island-card {
+  animation: card-flip 0.42s ease-out;
+}
+@keyframes card-flip {
+  from {
+    transform: rotateY(-65deg);
+    opacity: 0.25;
+  }
+  to {
+    transform: rotateY(0);
     opacity: 1;
   }
 }
-.opened-pack,
-.card-album {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(105px, 1fr));
-  gap: 10px;
-  margin: 18px 0;
+.card-reveal-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
 }
-.opened-pack > div,
-.card-album > div {
-  padding: 8px;
-  border: 1px solid #bfcda340;
-  border-radius: 8px;
-  background: #b0cda714;
+.card-reveal-actions button {
+  min-width: 130px;
+}
+.card-album-heading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 20px 0;
+}
+.card-album-heading p {
+  font-size: 13px;
+}
+.card-album-heading select {
+  max-width: 180px;
+}
+.selected-album-card {
+  width: min(290px, 85%);
+  margin: 24px auto;
+}
+.card-album-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  gap: 14px;
+}
+.card-album-grid > button {
+  border: 2px solid transparent;
+  background: transparent !important;
+  border-radius: 16px;
+  padding: 3px !important;
+  min-width: 0;
+}
+.card-album-grid > button[aria-pressed="true"] {
+  border-color: #d4dcab;
+}
+.card-album-grid .island-card {
+  border-width: 5px;
+  padding: 6px;
+}
+.card-album-grid .card-topline {
+  flex-wrap: wrap;
+}
+.card-album-grid .card-topline strong {
   font-size: 12px;
 }
-.opened-pack img,
-.card-album img {
-  display: block;
-  width: 80px;
-  height: 80px;
-  object-fit: contain;
-  margin: auto;
-  image-rendering: pixelated;
+.card-empty {
+  padding: 35px 16px;
+  border: 1px dashed #b0c5b64d;
+  border-radius: 15px;
+  color: #b9cfca;
 }
-.card-packs details {
-  margin: 22px 0;
-  text-align: left;
-}
-@media (max-width: 500px) {
-  .card-pack-tabs {
+@media (max-width: 600px) {
+  .pack-machine-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+  .pack-machine-grid article {
+    padding: 10px;
+  }
+  .pack-machine-grid h3 {
+    font-size: 14px;
+  }
+  .pack-machine-grid article p {
+    font-size: 12px;
+  }
+  .card-album-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 9px;
+  }
+  .card-topline strong {
+    font-size: 17px;
+  }
+  .booster-label {
+    font-size: 9px;
   }
 }
 @media (prefers-reduced-motion: reduce) {
-  .pokemon-island-card,
-  .is-ripping .pack-seal {
+  .is-shiny .card-illustration::before,
+  .card-sparkles,
+  .is-flipped .island-card {
     animation: none;
   }
 }
-.pokemon-island-card small {
-  color: #36515a !important;
-  opacity: 1;
-  letter-spacing: 0.02em;
-  font-size: 12px;
+
+/* Keep a whole revealed card in view below the sticky dialog header. */
+.reveal-card-button {
+  width: min(250px, 88%);
+  margin: 14px auto;
+}
+.pack-reveal-stage {
+  padding: 8px 0;
+}
+.pack-reveal-stage > p {
+  font-size: 14px;
+  margin: 10px 0;
 }
