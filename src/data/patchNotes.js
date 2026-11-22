@@ -2,6 +2,15 @@
 // the preceding production commit, rather than fictional in-game release notes.
 const patchNotes = [
   {
+    version: "1.4.1",
+    date: "November 22, 2026",
+    previousCommit: "9710e10",
+    comparisonRef: "8b5362a988e979edf7a1efc3249a816e6d50af6d",
+    changes: [
+      "Moved the shell fountain and Axolotl Drift interaction to the right of the water house, with an open approach clear of the mailbox, seahorse, and doorway.",
+    ],
+  },
+  {
     version: "1.4.0",
     date: "November 21, 2026",
     previousCommit: "e235399",
