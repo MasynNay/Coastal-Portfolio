@@ -2,6 +2,25 @@
 // the preceding production commit, rather than fictional in-game release notes.
 const patchNotes = [
   {
+    version: "1.6.0",
+    date: "November 22, 2026",
+    previousCommit: "64fcc53",
+    comparisonRef: "0817f4cae2f532bc93d73e4b831aa75e3b003ef4",
+    changes: [
+      "Closed the walk-through strips along all six houses' front corners and sides, with rounded player clearance for smoother movement and clear front-door approaches.",
+      "Fixed tap-to-walk dropping valid destinations beside walls when rounding the destination onto a blocked pathfinding square.",
+      "Kept NPC skateboard turns on the open street and allowed longer playground visits so safe detours around homes do not crowd out the children's playtime.",
+      "Repositioned playground riders using attachment points measured from the equipment artwork: facing seesaw partners, a textured swinging seat, and a ladder/platform/chute slide route without double elevation.",
+      "Replaced the balance beam with a rideable wood-and-teal merry-go-round with rotating seats and depth-sorted handrails.",
+      "Added an animated No-Face greeting beside Windfall's tree: he steps out, offers a handful of gold, bows, and returns. Souvenir gold appears in inventory.",
+      "Moved the Hobbit home's mailbox closer to its entrance, shifted both water-house attractions slightly left, and removed the unused bench below the water house.",
+      "Changed the card dispenser to give unopened packs that are saved in Inventory → Card Collection, alongside a separate card album.",
+      "Expanded the six pack pools to 144 Pokémon and guaranteed five distinct species in every pack, including a rare-or-better final card and possible shiny variants.",
+      "Added pointer-controlled tearing, individual card-back reveals, illustrated card faces, shiny foil effects, set/shiny album filters, and duplicate quantity counts.",
+      "Preserved earlier card collections and saved unfinished reveals so closing a panel or reloading cannot consume a pack twice or lose awarded cards.",
+    ],
+  },
+  {
     version: "1.5.0",
     date: "November 22, 2026",
     previousCommit: "ddd6171",
