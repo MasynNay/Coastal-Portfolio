@@ -1,4 +1,6 @@
 import {
+  createGroveReveal,
+  groveTree,
   groveDance,
   groveInteraction,
   grovePlayer,
@@ -6,6 +8,7 @@ import {
 } from "./ForestGrove";
 import { createRoomInteractions, isLoveOffering } from "./RoomInteractions";
 import { startWindSong } from "./WindStatue";
+import { createPlayground, playgroundActivities } from "./Playground";
 import { restSpots, createRestSpots } from "./RestSpots";
 import { gameTitles } from "./games/GameLocations";
 import { createSurfRide, surfboard } from "./SurfRide";
@@ -183,6 +186,7 @@ export function createWorld(host, callbacks) {
   const floatHunt = createFloatHunt(),
     shellSpawns = createShellSpawns(),
     beachActivities = createBeachActivities();
+  const playground = createPlayground();
   const dogPlay = createDogPlay(),
     duckPlay = createDuckPlay(),
     webs = createWebs(),
@@ -200,11 +204,15 @@ export function createWorld(host, callbacks) {
   let webEffects = [];
   let abilityEffect = null;
   let groveSession = null;
+  const groveReveal = createGroveReveal();
+  let npcWasDancing = false;
+  let groveTreeShake = null;
   function finishGrove() {
     if (!groveSession) return;
     position = groveSession.origin;
     direction = groveSession.direction;
     groveSession = null;
+    groveReveal.hide();
     moving = false;
     gaitTime = 0;
   }
@@ -216,6 +224,7 @@ export function createWorld(host, callbacks) {
     abilityEffect = null;
   }
   const activityBusy = () =>
+    playground.active() ||
     !!groveSession ||
     dogPlay.active() ||
     duckPlay.active() ||
@@ -231,6 +240,8 @@ export function createWorld(host, callbacks) {
     manualWatercraft() || skateRide.manual() || surfRide.manual();
   function cancelActivities() {
     finishGrove();
+    const playgroundOrigin = playground.stop();
+    if (playgroundOrigin) position = { ...playgroundOrigin };
     skySalute.cancel();
     salutePose = null;
     const restingOrigin = rest.stop();
@@ -349,6 +360,7 @@ export function createWorld(host, callbacks) {
       npcTricks: tricks.snapshot(worldTime),
       night: room ? 0 : tricks.night(worldTime),
       animals: worldAnimals(),
+      playground: playground.snapshot(worldTime),
       dogPlay: dogPlay.snapshot(),
       duckPlay: duckPlay.snapshot(),
       bikeRide: bikeRide.snapshot(),
@@ -357,13 +369,17 @@ export function createWorld(host, callbacks) {
       bikeParking: bikeRide.parking(),
       webEffects,
       abilityEffect,
+      groveVisible: groveReveal.visible(),
       grove: groveSession
         ? {
             ...groveDance(groveSession.started, worldTime),
             playerAngle: groveSession.angle,
           }
         : npcRides.pose("grove"),
-      treeShake: bugSpawns.treeShake(worldTime),
+      treeShake:
+        groveTreeShake && worldTime - groveTreeShake.started < 700
+          ? groveTreeShake
+          : bugSpawns.treeShake(worldTime),
       worldTime,
       skyTime,
       rideTime,
@@ -444,7 +460,7 @@ export function createWorld(host, callbacks) {
       ];
     const nearbyAnimals = worldAnimals();
     return [
-      ...(!surfing ? [groveInteraction] : []),
+      ...(!surfing && groveReveal.visible() ? [groveInteraction] : []),
       ...restSpots.map((p) => ({ ...p, type: "rest" })),
       axolotlRaceMarker,
       {
@@ -472,7 +488,10 @@ export function createWorld(host, callbacks) {
       ...bugTrees.map((t) => ({
         ...t,
         type: "tree",
-        label: "Shake tree · find bugs",
+        label:
+          t.x === groveTree.x && t.z === groveTree.z
+            ? `Shake the Spirit Tree · ${groveReveal.count()} / 3`
+            : "Shake tree · find bugs",
       })),
       ...bikes.map((b) => ({
         ...b,
@@ -496,19 +515,27 @@ export function createWorld(host, callbacks) {
       ...townProps.map((p) => ({
         ...p,
         label:
-          p.id === "wind-statue"
-            ? "Conduct the sea breeze"
-            : p.id === "shell-fountain"
-              ? axolotlArcade.label
-              : gameTitles[p.id]
-                ? "Play " + gameTitles[p.id]
-                : "Explore " + p.id.replaceAll("-", " "),
+          p.id === "card-dispenser"
+            ? "Open Pokémon Card Packs"
+            : playgroundActivities[p.id]
+              ? playgroundActivities[p.id]
+              : p.id === "wind-statue"
+                ? "Conduct the sea breeze"
+                : p.id === "shell-fountain"
+                  ? axolotlArcade.label
+                  : gameTitles[p.id]
+                    ? "Play " + gameTitles[p.id]
+                    : "Explore " + p.id.replaceAll("-", " "),
         type:
-          p.id === "shell-fountain"
-            ? "axolotl-game"
-            : gameTitles[p.id]
-              ? "island-game"
-              : "town-prop",
+          p.id === "card-dispenser"
+            ? "card-packs"
+            : playgroundActivities[p.id]
+              ? "playground"
+              : p.id === "shell-fountain"
+                ? "axolotl-game"
+                : gameTitles[p.id]
+                  ? "island-game"
+                  : "town-prop",
       })),
       ...buildings.map((b) => ({
         id: b.id,
@@ -585,35 +612,38 @@ export function createWorld(host, callbacks) {
       loading,
       prompt: loading
         ? null
-        : groveSession
-          ? "Dancing with Totoro…"
-          : rest.active()
-            ? "Stand up"
-            : axolotlRace.active()
-              ? "Leave the race"
-              : skateRide.active()
-                ? "Return the skateboard"
-                : waterRide.active()
-                  ? "Return to pier"
-                  : bikeRide.active()
-                    ? "A little ride around the pond…"
-                    : beachActivities.busy()
-                      ? "Building a sandcastle…"
-                      : surfRide.active()
-                        ? "Steer onto a beach to step ashore"
-                        : isBeachInteraction(selected)
-                          ? selected.label
-                          : selected?.type === "duck" && selected.distance < 1.8
+        : playground.active()
+          ? "Leave the Playground Ride"
+          : groveSession
+            ? "Dancing with Totoro…"
+            : rest.active()
+              ? "Stand up"
+              : axolotlRace.active()
+                ? "Leave the race"
+                : skateRide.active()
+                  ? "Return the skateboard"
+                  : waterRide.active()
+                    ? "Return to pier"
+                    : bikeRide.active()
+                      ? "A little ride around the pond…"
+                      : beachActivities.busy()
+                        ? "Building a sandcastle…"
+                        : surfRide.active()
+                          ? "Steer onto a beach to step ashore"
+                          : isBeachInteraction(selected)
                             ? selected.label
-                            : ["watercraft", "race", "surfboard"].includes(
-                                  selected?.type,
-                                )
+                            : selected?.type === "duck" &&
+                                selected.distance < 1.8
                               ? selected.label
-                              : surfing
-                                ? "Surfing · return to shore to walk"
-                                : shore()
-                                  ? `Surf on your ${axolotlColors[character]} axolotl`
-                                  : nearby()?.label || null,
+                              : ["watercraft", "race", "surfboard"].includes(
+                                    selected?.type,
+                                  )
+                                ? selected.label
+                                : surfing
+                                  ? "Surfing · return to shore to walk"
+                                  : shore()
+                                    ? `Surf on your ${axolotlColors[character]} axolotl`
+                                    : nearby()?.label || null,
       fishingPhase,
       interactionBusy: beachActivities.busy() || !!groveSession,
       surfingBoard: surfRide.active(),
@@ -729,6 +759,14 @@ export function createWorld(host, callbacks) {
   }
   function interact() {
     if (skySalute.active()) return;
+    if (!frozen && playground.active()) {
+      position = playground.stop();
+      guestPause.release(worldTime);
+      stop();
+      publish();
+      requestDraw();
+      return;
+    }
     if (!frozen && rest.active()) {
       position = rest.stop();
       stop();
@@ -794,6 +832,28 @@ export function createWorld(host, callbacks) {
       callbacks.onEvent?.({ type: "wind-song" });
       publish();
       requestDraw();
+      return;
+    }
+    if (duckTarget?.type === "playground") {
+      stop();
+      cancelAbility();
+      const partner =
+        duckTarget.id === "seesaw"
+          ? worldResidents().find(
+              (r) =>
+                r.id !== character &&
+                !r.hidden &&
+                !r.room &&
+                !r.outing &&
+                !r.surfing &&
+                !r.bike,
+            )
+          : null;
+      if (playground.start(duckTarget, position, partner, worldTime)) {
+        if (partner) guestPause.hold(partner.id, worldTime);
+        publish();
+        requestDraw();
+      }
       return;
     }
     if (duckTarget?.type === "rest") {
@@ -951,6 +1011,19 @@ export function createWorld(host, callbacks) {
     if (!p) return;
     if (p.type === "tree") {
       stop();
+      const reveal = groveReveal.shake(p, performance.now());
+      if (reveal) {
+        groveTreeShake = { ...p, started: worldTime };
+        callbacks.onEvent?.({
+          type: "notice",
+          message: reveal.visible
+            ? "Totoro and friends peek out! Come dance around the tree."
+            : `A rustle in the leaves… ${reveal.count} / 3 shakes.`,
+        });
+        publish();
+        requestDraw();
+        return;
+      }
       const result = bugSpawns.shake(p, worldTime, (q) =>
         canStand(q.x, q.z, obstacles),
       );
@@ -1136,15 +1209,28 @@ export function createWorld(host, callbacks) {
         character,
         bikeRide.active() ? bikeRide.snapshot() : null,
         [
-          groveSession && "grove",
+          (!groveReveal.visible() || groveSession) && "grove",
           skateRide.active() && "skateboard",
           surfRide.active() && "surfboard",
           waterRide.id(),
         ],
       );
+    const npcDancing = !!npcRides.pose("grove");
+    if (npcWasDancing && !npcDancing) groveReveal.hide();
+    npcWasDancing = npcDancing;
     const wasMoving = moving;
     moving = false;
     let remaining = dt;
+    if (playground.active() && !frozen && !loading) {
+      const play = playground.snapshot(worldTime);
+      position = { x: play.player.x, z: play.player.z };
+      direction = play.player.direction;
+      if (play.done) {
+        position = playground.stop();
+        guestPause.release(worldTime);
+      }
+      dirty = true;
+    }
     if (groveSession && !frozen && !loading) {
       const dance = groveDance(groveSession.started, worldTime);
       if (!dance) finishGrove();

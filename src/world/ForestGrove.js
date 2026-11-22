@@ -139,9 +139,10 @@ export function groveSpirits(dance) {
     // During a reach, turn toward the trunk. While circling, follow the tangent.
     const back = dance.walking ? Math.cos(angle) < 0 : ringZ > groveTree.z;
     return {
-      x,
-      z,
-      h: spirit.h,
+      x: dance.returning ? x + (groveTree.x - x) * dance.progress : x,
+      z: dance.returning ? z + (groveTree.z - z) * dance.progress : z,
+      h: spirit.h * (dance.returning ? 1 - dance.progress * 0.45 : 1),
+      opacity: dance.returning ? 1 - dance.progress : 1,
       row: index * 2 + Number(back && approach > 0.7),
       pose: stepping ? 3 : dance.pose,
       flip: stepping && footfall < 0,
@@ -157,6 +158,7 @@ export function drawGroveSpirit(ctx, at, unit, image, spirit) {
   const size = spirit.h * unit;
   const lift = (spirit.lift || 0) * unit;
   ctx.save();
+  ctx.globalAlpha = spirit.opacity ?? 1;
   ctx.fillStyle = "#183d363c";
   ctx.beginPath();
   ctx.ellipse(foot.x, foot.y + 1, size * 0.28, size * 0.075, 0, 0, Math.PI * 2);
@@ -200,4 +202,30 @@ export function drawGroveLights(ctx, at, unit, dance) {
     ctx.fill();
   }
   ctx.restore();
+}
+
+// This visit-local reveal belongs to the tree, not the character. Repeated input
+// in one keypress cannot count as three shakes. Completing a dance resets it.
+export function createGroveReveal() {
+  let shakes = 0,
+    visible = false,
+    last = -Infinity;
+  return {
+    visible: () => visible,
+    count: () => shakes,
+    shake(tree, time) {
+      if (tree.x !== groveTree.x || tree.z !== groveTree.z) return null;
+      if (visible) return { count: 3, visible: true };
+      if (time - last < 650) return { count: shakes, visible: false };
+      last = time;
+      shakes += 1;
+      visible = shakes === 3;
+      return { count: shakes, visible };
+    },
+    hide() {
+      shakes = 0;
+      visible = false;
+      last = -Infinity;
+    },
+  };
 }

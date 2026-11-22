@@ -2,7 +2,7 @@ import { restObstacles } from "./RestSpots";
 import { bugSpecies } from "./Bugs";
 import { fenceObstacles } from "./Fence";
 import { pond, townObstacles, buildings } from "./TownLayout";
-import { doorOffset } from "./WorldLayout";
+import { buildingObstacle } from "./WorldLayout";
 import appearances from "./Appearances.json";
 // World coordinates are independent of screen size. Each building maps to shared site content.
 export { buildings } from "./TownLayout";
@@ -168,16 +168,7 @@ export const obstacles = [
   ...restObstacles,
   ...fenceObstacles,
   ...townObstacles,
-  ...buildings.map((b) => ({
-    x: b.x,
-    z: b.z,
-    w: 8,
-    d: 6.2,
-    door: {
-      back: doorOffset(b) - 1,
-      width: 1.7,
-    },
-  })),
+  ...buildings.map(buildingObstacle),
   {
     x: pond.x,
     z: pond.z,

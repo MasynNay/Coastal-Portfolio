@@ -21,3 +21,7 @@ These files support the site; they are not browser code. JavaScript build helper
 | Rebuild the archived original site | `ArchivePortfolio.py`, using a separate original repository checkout |
 
 Importers intentionally write artwork/manifests; validators are read-only. Keep editable sources in `docs/source-assets/` and published exports in `public/world/`. The archived original portfolio and vendored emulator retain their own filenames, formatting and licenses. They are not copies to merge into the current site's styles.
+
+`BuildHandAnchors.py` reads the current family/costume pose sheets and writes
+`src/world/HandAnchors.json` for dog leashes and wakeboard tow handles. It requires
+Pillow, changes no image files, and should be rerun after replacing those atlases.

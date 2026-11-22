@@ -1,9 +1,11 @@
+import { ropeGrip } from "./RopeAnchors";
 import {
   drawGroveLights,
   drawGroveSpirit,
   groveSpirits,
   groveTree,
 } from "./ForestGrove";
+import { drawPlayground } from "./Playground";
 import { drawWindSong } from "./WindStatue";
 import { surfboard, drawSurfWave } from "./SurfRide";
 import { skyBirds } from "./Sky";
@@ -721,11 +723,16 @@ export function createCanvasScene(host, invalidate = () => {}) {
         sortZ: windfallTree.z - 0.01,
         h: 1.85,
       });
-      for (const spirit of groveSpirits(state.grove))
+      for (const spirit of state.groveVisible ? groveSpirits(state.grove) : [])
         sprites.push({ ...spirit, groveSpirit: true });
 
       for (const r of state.residents || residents)
-        if (r.id !== state.character && !r.room && !r.hidden)
+        if (
+          r.id !== state.character &&
+          r.id !== state.playground?.partner?.id &&
+          !r.room &&
+          !r.hidden
+        )
           sprites.push({
             ...r,
             art: r.frog
@@ -864,14 +871,38 @@ export function createCanvasScene(host, invalidate = () => {}) {
       const tow = waterRide?.wakeboarder ? waterRide : state.residentBoat;
       const guest = tow?.wakeboarder;
       if (guest) {
-        const a = at(tow.x, tow.z),
-          b = at(guest.x, guest.z);
+        const a = at(tow.x, tow.z);
+        const outfit =
+          guest.id === state.character
+            ? state.outfit
+            : state.residents?.find((r) => r.id === guest.id)?.outfit;
+        const pose = boardPose(
+          guest.id,
+          guest,
+          true,
+          state.rideTime ?? state.worldTime,
+          artwork,
+          outfit,
+        );
+        const b = ropeGrip(
+          at,
+          unit,
+          {
+            ...guest,
+            asset: pose.asset,
+            height: personHeight(guest.id),
+            moving: pose.moving,
+            time: pose.time,
+            bodyLift: 0.16,
+          },
+          artwork,
+        );
         ctx.save();
         ctx.strokeStyle = "#e8e5b9";
         ctx.lineWidth = Math.max(1, unit * 0.03);
         ctx.beginPath();
         ctx.moveTo(a.x, a.y - unit * 0.3);
-        ctx.lineTo(b.x, b.y - unit * (1 + guest.lift));
+        ctx.lineTo(b.x, b.y);
         ctx.stroke();
         ctx.restore();
         sprites.push({
@@ -892,7 +923,7 @@ export function createCanvasScene(host, invalidate = () => {}) {
           restSpot: true,
           player: state.rest?.id === spot.id,
         });
-    if (!waterRide && !skateRide && !surfer && !state.rest)
+    if (!waterRide && !skateRide && !surfer && !state.rest && !state.playground)
       sprites.push({
         id: state.character,
         ...state.position,
@@ -1000,6 +1031,48 @@ export function createCanvasScene(host, invalidate = () => {}) {
       if (!a.hidden && (!a.player || flight <= time))
         if (a.groveSpirit)
           drawGroveSpirit(ctx, at, unit, image("totoro-grove"), a);
+        else if (state.playground && a.art === "town-" + state.playground.id)
+          drawPlayground(
+            ctx,
+            at,
+            unit,
+            state.playground,
+            () => sprite(a.art, a.x, a.z, a.h, 0, false, state.worldTime),
+            (pose, player) => {
+              const id = player ? state.character : state.playground.partner.id;
+              const outfit = player
+                ? state.outfit
+                : state.playground.partner.outfit;
+              const asset = activityAsset(
+                id,
+                outfit,
+                pose.crouch
+                  ? "board-trick"
+                  : pose.seated
+                    ? "water-ride"
+                    : "walk",
+                artwork,
+              );
+              const ground = at(pose.x, pose.z);
+              ctx.save();
+              ctx.translate(ground.x, ground.y);
+              ctx.rotate(pose.rotation || 0);
+              ctx.translate(-ground.x, -ground.y);
+              sprite(
+                asset,
+                pose.x,
+                pose.z,
+                personHeight(id),
+                pose.direction,
+                pose.crouch || !!pose.moving,
+                pose.crouch
+                  ? authoredFrameTime(artwork[asset], 1)
+                  : state.worldTime,
+                pose.lift,
+              );
+              ctx.restore();
+            },
+          );
         else if (a.restSpot) drawRestSpot(a, state);
         else if (a.watercraft) drawWatercraft(a, state);
         else if (a.board) drawBoard(a, state);
@@ -1036,6 +1109,11 @@ export function createCanvasScene(host, invalidate = () => {}) {
             );
             ctx.fill();
           }
+          ctx.save();
+          // Match the turf-roof cottage's saturated source colors to the town's
+          // softer grass and stone, without replacing its recognizable drawing.
+          if (a.art === "building-skills")
+            ctx.filter = "saturate(.82) brightness(.96)";
           sprite(
             pose.art,
             a.x,
@@ -1050,6 +1128,7 @@ export function createCanvasScene(host, invalidate = () => {}) {
             human,
             motion,
           );
+          ctx.restore();
         }
     if (!room) {
       for (const bird of skyBirds(

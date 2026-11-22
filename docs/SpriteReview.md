@@ -33,3 +33,19 @@ The adventurer PNGs have binary alpha, but smoothing their thin contours at game
 The latest Hyrulian style pass preserves the approved south/front drawings and repaints southwest, west, northwest and north in the same outlined, cel-shaded cartoon treatment. Each replacement source was checked for all 36 complete idle/walk/run poses before publishing; right-facing directions are still exact mirrors. The existing activity/ocarina sources were reviewed and retained. `HyrulianViews.png` compares idle, walking and running across all eight directions. `source-assets/people/StylePrompts.json` records the built-in imagegen prompts and saved source paths.
 
 Mailbox artwork was intact; an inset doorway could sort its mailbox behind the building. The renderer now retains each real mailbox position while painting it in front of its own home. Per-image revisions refresh older browser caches. Two independent bike reservations and separated pond lanes allow both rentals to run at once; the extra End ride button was removed.
+
+### November 22: interaction alignment
+
+Dog-walk and wakeboard rope grips use `HandAnchors.json`. Rebuild that data with
+`python3 scripts/BuildHandAnchors.py` after editing a person’s walking,
+wake-riding, or board-trick atlas. The extractor reads exposed hand pixels in
+each shipped frame and leaves the image untouched. `RopeAnchors.js` uses the
+renderer’s frame/root mapping and applies the same body scale, lift, and rider
+rotation to the grip. A smaller resident therefore carries the leash lower;
+a wakeboard flip rotates the grip with the hand rather than leaving it behind.
+
+`Playground.js` owns the short, cancellable equipment sessions. The engine
+reserves a seesaw partner and restores their normal routine afterward. Drawing
+uses the selected costume’s seated or walking pose at its normal body height.
+Collision remains in the engine; animated equipment does not change a home’s
+entry or a visitor’s saved collection.

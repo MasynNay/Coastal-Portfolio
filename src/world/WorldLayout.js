@@ -71,3 +71,21 @@ export function leavingRoom(position, previous) {
     position.z > previous.z && Math.abs(position.x) < 1.15 && position.z >= 9.5
   );
 }
+
+// Bounds follow each illustration's full roof/facade extent. The inset front
+// door remains an explicit approach corridor; the roof has no rear entrance.
+export function buildingObstacle(building) {
+  const art = places["building-" + building.id];
+  const height = buildingHeight(building);
+  const back = building.z + 3.1 - height + 0.35;
+  const front = building.z + 3.1 - 0.3;
+  const center = (back + front) / 2;
+  return {
+    x: building.x,
+    z: center,
+    w: ((height * art.width) / art.height) * 0.9,
+    d: front - back,
+    clearance: 0.18,
+    door: { back: building.z + doorOffset(building) - 1 - center, width: 1.7 },
+  };
+}

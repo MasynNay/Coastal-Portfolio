@@ -1,0 +1,162 @@
+/* The packet and card share the selected set color. Only the seal tears away;
+   card reveals use a short turn rather than a distracting continuous spin. */
+.card-packs {
+  text-align: center;
+  min-width: 0;
+}
+.card-pack-tabs {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+.card-pack-tabs button {
+  min-width: 0;
+  padding: 12px 8px;
+  font-size: 13px;
+}
+.card-pack-tabs button[aria-pressed="true"] {
+  outline: 2px solid #d8d49a;
+  outline-offset: -2px;
+}
+.card-pack-tabs small,
+.opened-pack small,
+.card-album small {
+  display: block;
+  opacity: 0.7;
+}
+.mini-pack {
+  display: block;
+  width: 34px;
+  padding: 10px 0;
+  background: var(--pack-color);
+  margin: 0 auto 8px;
+  color: #fff4b3;
+  border: 1px solid #e8d9a7;
+  border-radius: 3px;
+}
+.sealed-pack {
+  position: relative;
+  overflow: hidden;
+  width: min(240px, 85%);
+  min-height: 280px;
+  margin: 24px auto;
+  padding: 45px 15px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  background:
+    linear-gradient(120deg, #fff3, transparent 35%, #0005), var(--pack-color);
+  border: 2px solid #c7bd86;
+  box-shadow: 0 15px 35px #0005;
+  border-radius: 4px;
+  touch-action: pan-y;
+}
+.pack-seal {
+  position: absolute;
+  inset: 0 0 auto;
+  padding: 7px;
+  background: repeating-linear-gradient(90deg, #ded8b0 0 2px, #b6b08d 2px 4px);
+  color: #35434a;
+  font-size: 11px;
+  letter-spacing: 3px;
+}
+.pack-orbit {
+  font-size: 55px;
+  color: #faf2cd;
+}
+.is-ripping .pack-seal {
+  animation: pack-rip 0.8s ease-out both;
+}
+@keyframes pack-rip {
+  to {
+    transform: translateX(110%) rotate(12deg);
+    opacity: 0;
+  }
+}
+.pokemon-island-card {
+  width: min(260px, 88%);
+  min-height: 340px;
+  margin: 22px auto;
+  border: 9px solid #d8bd65 !important;
+  border-radius: 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  background: linear-gradient(145deg, #e9eee0, #8eb5aa) !important;
+  color: #142d36 !important;
+  animation: card-turn 0.4s ease-out;
+}
+.pokemon-island-card strong {
+  font-size: 24px;
+}
+.pokemon-island-card img {
+  width: 170px;
+  height: 170px;
+  object-fit: contain;
+  image-rendering: pixelated;
+  background: radial-gradient(#efffd5, #598e9b);
+  border-radius: 8px;
+}
+.rarity-holo-rare,
+.rarity-legendary {
+  box-shadow:
+    0 0 24px #aadff88a,
+    inset 0 0 28px #fff9;
+}
+@keyframes card-turn {
+  from {
+    transform: perspective(600px) rotateY(-40deg);
+    opacity: 0.1;
+  }
+  to {
+    transform: perspective(600px) rotateY(0);
+    opacity: 1;
+  }
+}
+.opened-pack,
+.card-album {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(105px, 1fr));
+  gap: 10px;
+  margin: 18px 0;
+}
+.opened-pack > div,
+.card-album > div {
+  padding: 8px;
+  border: 1px solid #bfcda340;
+  border-radius: 8px;
+  background: #b0cda714;
+  font-size: 12px;
+}
+.opened-pack img,
+.card-album img {
+  display: block;
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  margin: auto;
+  image-rendering: pixelated;
+}
+.card-packs details {
+  margin: 22px 0;
+  text-align: left;
+}
+@media (max-width: 500px) {
+  .card-pack-tabs {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pokemon-island-card,
+  .is-ripping .pack-seal {
+    animation: none;
+  }
+}
+.pokemon-island-card small {
+  color: #36515a !important;
+  opacity: 1;
+  letter-spacing: 0.02em;
+  font-size: 12px;
+}

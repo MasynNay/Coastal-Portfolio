@@ -1,5 +1,7 @@
 import { Book } from "react-bootstrap-icons";
 import { useState } from "react";
+import CollectionIcon from "./CollectionIcon";
+import HabitatCare from "./HabitatCare";
 import HabitatResidents from "./HabitatResidents";
 import { bugHomes, bugHomeFor, readBugHomes, saveBugHomes } from "./BugHomes";
 import HabitatView from "./HabitatView";
@@ -98,12 +100,7 @@ export function Terrariums({ caught, onRelease }) {
                 setInspecting(null);
               }}
             >
-              <SpritePose
-                asset={s.art}
-                scale={1}
-                playing={false}
-                label={s.name}
-              />
+              <CollectionIcon asset={s.art} label={s.name} />
               <span>
                 {s.name} ×{caught[s.id]}
               </span>
@@ -133,6 +130,7 @@ export function Terrariums({ caught, onRelease }) {
             </label>
             <HabitatView
               name={s.name}
+              care={<HabitatCare species={s} quantity={caught[s.id]} />}
               inspecting={inspecting === s.id}
               paused={paused}
               onInspect={() => setInspecting(inspecting === s.id ? null : s.id)}
@@ -149,6 +147,7 @@ export function Terrariums({ caught, onRelease }) {
                 quantity={caught[s.id]}
                 paused={paused}
               />
+
               <span className="habitat-reflection" />
             </HabitatView>
             <h3>{s.name}</h3>

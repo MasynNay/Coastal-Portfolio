@@ -1047,3 +1047,132 @@
   background: #1e3838;
   color: #e2ede3;
 }
+
+/* Equal-size collection cards isolate the artwork from source-atlas dimensions.
+   Only this strip scrolls sideways; the habitat and labels fit the phone. */
+.collection-picker button {
+  flex: 0 0 112px;
+  min-width: 112px;
+  height: 156px;
+  justify-content: flex-start;
+  gap: 10px;
+  padding: 12px 8px !important;
+  font-size: 13px;
+  line-height: 1.4;
+}
+.collection-icon {
+  width: 72px;
+  height: 72px;
+  flex: 0 0 72px;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+.collection-icon .collection-sprite {
+  width: 64px;
+  max-height: 64px;
+  display: block;
+  flex: none;
+}
+.collection-picker button > span:last-child {
+  text-align: center;
+}
+.habitat-care {
+  position: relative;
+  margin: 18px 0 6px;
+}
+.habitat-care-buttons {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+.habitat-care-buttons button {
+  min-width: 0;
+  padding: 10px 12px;
+  font-size: 14px;
+}
+.habitat-care-buttons small {
+  display: block;
+  margin-top: 3px;
+  font-size: 12px;
+  opacity: 0.7;
+}
+.habitat-care-status {
+  font-size: 13px;
+  text-align: center;
+  min-height: 2.8em;
+}
+/* Particles cover the tank only. Care buttons remain independent of inspection. */
+.habitat-care-particles {
+  position: absolute;
+  bottom: calc(100% + 14px);
+  left: 0;
+  width: 100%;
+  height: clamp(130px, 28vw, 320px);
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 3;
+}
+.habitat-care-particles i {
+  position: absolute;
+  left: var(--drop-x);
+  top: -12px;
+  width: 7px;
+  height: 5px;
+  border-radius: 40%;
+  background: #d5ae63;
+  box-shadow: 0 0 2px #fff5;
+  animation: habitat-feed 2.3s var(--drop-delay) ease-in both;
+}
+.habitat-care-particles.is-flies i {
+  background: #303740;
+  width: 5px;
+  height: 6px;
+  box-shadow:
+    -3px -2px 0 #d5e6edb0,
+    3px -2px 0 #d5e6edb0;
+  animation-timing-function: ease-in-out;
+}
+.habitat-care-particles.is-aphids i,
+.habitat-care-particles.is-leaf i {
+  background: #91bb54;
+  border-radius: 70% 15%;
+}
+.habitat-care-particles.is-nectar i {
+  background: #f4c15e;
+  border-radius: 60% 60% 55% 15%;
+}
+.habitat-care-particles.is-water i {
+  background: #9bdcf4aa;
+  border: 1px solid #ecfbffa0;
+  width: 4px;
+  height: 7px;
+  border-radius: 60%;
+}
+@keyframes habitat-feed {
+  0% {
+    transform: translate(0, 0);
+    opacity: 0;
+  }
+  12% {
+    opacity: 1;
+  }
+  85% {
+    opacity: 0.9;
+  }
+  100% {
+    transform: translate(var(--drift), 250px);
+    opacity: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .habitat-care-particles i {
+    animation: none;
+    top: 55%;
+    opacity: 0.75;
+  }
+}
+.habitat-surface {
+  position: relative;
+  width: 100%;
+}

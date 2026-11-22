@@ -12,6 +12,7 @@ export default function HabitatView({
   onInspect,
   onRelease,
   children,
+  care,
 }) {
   const [confirming, setConfirming] = useState(false);
   const releaseButton = useRef(null);
@@ -19,36 +20,39 @@ export default function HabitatView({
     <div
       className={`habitat-view ${aquatic ? "aquatic-view" : ""} ${inspecting ? "is-close" : ""}`}
     >
-      <button
-        className={`${aquatic ? "aquarium-tank" : "spider-habitat"} ${inspecting ? "is-close" : ""} ${paused ? "is-paused" : ""}`}
-        aria-label={`Inspect ${name}`}
-        aria-pressed={inspecting}
-        onClick={onInspect}
-      >
-        {children}
-      </button>
-      <button
-        className="habitat-zoom"
-        aria-label={
-          inspecting ? `Back to ${name}'s habitat` : `Look closer at ${name}`
-        }
-        aria-pressed={inspecting}
-        onClick={onInspect}
-      >
-        {inspecting
-          ? `− Back to ${aquatic ? "aquarium" : "habitat"}`
-          : "+ Look closer"}
-      </button>
-      {onRelease && (
+      <div className="habitat-surface">
         <button
-          className="habitat-release"
-          ref={releaseButton}
-          aria-label={`Release one ${name}`}
-          onClick={() => setConfirming(true)}
+          className={`${aquatic ? "aquarium-tank" : "spider-habitat"} ${inspecting ? "is-close" : ""} ${paused ? "is-paused" : ""}`}
+          aria-label={`Inspect ${name}`}
+          aria-pressed={inspecting}
+          onClick={onInspect}
         >
-          Release One
+          {children}
         </button>
-      )}
+        <button
+          className="habitat-zoom"
+          aria-label={
+            inspecting ? `Back to ${name}'s habitat` : `Look closer at ${name}`
+          }
+          aria-pressed={inspecting}
+          onClick={onInspect}
+        >
+          {inspecting
+            ? `− Back to ${aquatic ? "aquarium" : "habitat"}`
+            : "+ Look closer"}
+        </button>
+        {onRelease && (
+          <button
+            className="habitat-release"
+            ref={releaseButton}
+            aria-label={`Release one ${name}`}
+            onClick={() => setConfirming(true)}
+          >
+            Release One
+          </button>
+        )}
+      </div>
+      {care}
       {confirming &&
         createPortal(
           <Dialog

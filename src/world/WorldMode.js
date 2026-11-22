@@ -1,3 +1,4 @@
+import CardPacks from "./CardPacks";
 import RoomArcade from "./RoomArcade";
 import AsciiApp from "../ascii/AsciiStudio";
 import "../ascii/AsciiLauncher.css";
@@ -201,6 +202,7 @@ function panelTitle(dialog) {
     "room-ascii": "ASCII Studio",
     "love-letter": "A Message For My Love",
   };
+  if (dialog.type === "card-packs") return "Pokémon Card Packs";
   if (dialog.type === "island-game") return gameTitles[dialog.id];
   if (dialog.type === "dog" || dialog.type === "duck")
     return `Play with ${dialog.name}`;
@@ -1067,6 +1069,8 @@ export default function WorldMode() {
             <AsciiApp active />
           ) : dialog.type === "room-arcade" ? (
             <RoomArcade />
+          ) : dialog.type === "card-packs" ? (
+            <CardPacks />
           ) : dialog.type === "love-letter" ? (
             <LoveLetter />
           ) : dialog.type === "island-game" ? (

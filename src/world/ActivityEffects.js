@@ -1,3 +1,8 @@
+import { gaitTimeForSheet } from "./Gait";
+import { ropeGrip } from "./RopeAnchors";
+import { personHeight } from "./Movement";
+import { characterAsset } from "./Wardrobe";
+import { artwork } from "./art";
 import { drawAbility } from "./AbilityEffects";
 // Small effects share the scene projection and simulation clock. They pause with
 // dialogs and never need independent animation loops or background timers.
@@ -40,7 +45,22 @@ export function drawActivities(ctx, at, unit, state) {
   ctx.globalAlpha = 1;
   const play = state.dogPlay;
   if (play && !play.done) {
-    const p = at(play.player.x, play.player.z - 0.85),
+    const p = ropeGrip(
+        at,
+        unit,
+        {
+          ...play.player,
+          asset: characterAsset(state.character, state.outfit),
+          height: personHeight(state.character),
+          direction: state.direction,
+          moving: state.moving,
+          time: gaitTimeForSheet(
+            artwork[characterAsset(state.character, state.outfit)],
+            state.gaitTime,
+          ),
+        },
+        artwork,
+      ),
       d = at(play.dog.x, play.dog.z - 0.35);
     if (play.leash) {
       ctx.strokeStyle = "#d5b181";

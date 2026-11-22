@@ -1,3 +1,4 @@
+import terrainArt from "./TerrainArt.json";
 import { isBeachLand } from "./Coast";
 // Original coastal town plan inspired by a compact harbor city. Rendering and water
 // collision share this geometry; no painted shoreline can silently disagree with movement.
@@ -168,6 +169,7 @@ export const townDecor = [
 // Themed objects sit beside each home. These coordinates also provide E prompts
 // and small collision footprints, so the artwork cannot drift away from its use.
 export const townProps = [
+  { id: "card-dispenser", x: 10.9, z: -14.7, h: 2.3 },
   {
     id: "bonsai",
     x: -23,
@@ -213,9 +215,9 @@ export const townProps = [
   {
     id: "shell-fountain",
     // The open east lawn gives the arcade a clear approach from the side street,
-    // above the seahorse and clear of the mailbox and front-door path.
-    x: -11.8,
-    z: 12.4,
+    // clear of the mailbox and front-door path. The rocker sits on the west lawn.
+    x: -11.6,
+    z: 15.2,
     h: 2.5,
   },
   {
@@ -249,10 +251,12 @@ export const townProps = [
     h: 1.6,
   },
   {
-    id: "sandbox",
+    id: "balance-trail",
     x: 23.1,
     z: 1.7,
-    h: 1.4,
+    h: 2,
+    w: 0.35,
+    d: 0.25,
   },
   { id: "tunnel", x: 13.8, z: -4.7, h: 1.7, w: 2.2, d: 0.8 },
   { id: "climbing-dome", x: 22.7, z: -4.8, h: 2.4, w: 2.6, d: 0.85 },
@@ -299,7 +303,11 @@ export const townObstacles = [
   ...townProps.map((p) => ({
     x: p.x,
     z: p.z - 0.2,
-    w: p.w ?? (p.id === "playhouse" ? 2.5 : p.id === "swings" ? 2.2 : 1.1),
+    w:
+      p.w ??
+      ((p.h * (terrainArt.props["town-" + p.id]?.width || 200)) /
+        (terrainArt.props["town-" + p.id]?.height || 250)) *
+        0.72,
     d: p.d ?? 0.65,
   })),
   ...townDecor

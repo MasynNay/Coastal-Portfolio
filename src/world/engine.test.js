@@ -5,7 +5,7 @@ import { createWorld } from "./engine";
 import { gaitTimeForSheet } from "./Gait";
 import sheets from "./SpriteSheets.json";
 import { runSpeed } from "./Movement";
-import { groveInteraction, groveTree } from "./ForestGrove";
+import { groveTree } from "./ForestGrove";
 // The 2D game uses screen-aligned movement; no retired 3D projection is needed.
 const screenToWorld = (x, z) => ({
     x,
@@ -118,11 +118,17 @@ test("the player joins every beat of the grove dance and returns to their starti
   try {
     await Promise.resolve();
     frame(16);
-    mockScene.hit = () => groveInteraction;
+    mockScene.hit = () => ({ x: -25.3, z: -22 });
     mockScene.canvas.dispatchEvent(
       new MouseEvent("pointerdown", { button: 0 }),
     );
     for (let i = 0; i < 180; i++) frame(50);
+    expect(draws.at(-1).groveVisible).toBe(false);
+    for (let shake = 0; shake < 3; shake++) {
+      game.interact();
+      for (let i = 0; i < 16; i++) frame(50);
+    }
+    expect(draws.at(-1).groveVisible).toBe(true);
     const before = draws.at(-1);
     game.interact();
     const from = draws.length;
@@ -140,15 +146,7 @@ test("the player joins every beat of the grove dance and returns to their starti
       direction: before.direction,
       moving: false,
     });
-    game.interact();
-    for (let i = 0; i < 30; i++) frame(50);
-    expect(draws.at(-1).position).not.toEqual(before.position);
-    game.stop();
-    frame(16);
-    expect(draws.at(-1)).toMatchObject({
-      grove: null,
-      position: before.position,
-    });
+    expect(draws.at(-1).groveVisible).toBe(false);
   } finally {
     game.dispose();
   }
@@ -162,7 +160,7 @@ test("the outdoor shell fountain opens Axolotl Drift directly without a wish men
     // Approach from the promenade instead of walking through a house doorway.
     for (const target of [
       { x: 0, z: 20 },
-      { x: -11.8, z: 13.3 },
+      { x: -11.6, z: 16.1 },
     ]) {
       mockScene.hit = () => target;
       mockScene.canvas.dispatchEvent(

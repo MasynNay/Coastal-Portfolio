@@ -2,7 +2,8 @@ import { rarities } from "./Rarity";
 import { useState } from "react";
 import HabitatResidents from "./HabitatResidents";
 import HabitatView from "./HabitatView";
-import SpritePose from "./SpritePose";
+import CollectionIcon from "./CollectionIcon";
+import HabitatCare from "./HabitatCare";
 import CollectingHelp from "./CollectingHelp";
 import { fishSpecies, fishHabitats } from "./Fish";
 // Aquarium cards render the same animated atlas awarded by fishing. Counts are
@@ -53,12 +54,7 @@ export default function Aquariums({ caught, onRelease }) {
                   setInspect(null);
                 }}
               >
-                <SpritePose
-                  asset={f.art}
-                  scale={1.2}
-                  playing={false}
-                  label={f.name}
-                />
+                <CollectionIcon asset={f.art} label={f.name} />
                 <span>
                   {f.name} ×{caught[f.id]}
                 </span>
@@ -71,6 +67,9 @@ export default function Aquariums({ caught, onRelease }) {
               <article key={f.id} data-rarity={f.rarity}>
                 <HabitatView
                   name={f.name}
+                  care={
+                    <HabitatCare species={f} quantity={caught[f.id]} aquatic />
+                  }
                   aquatic
                   inspecting={inspect === f.id}
                   paused={paused}
@@ -89,6 +88,7 @@ export default function Aquariums({ caught, onRelease }) {
                     paused={paused}
                     aquatic
                   />
+
                   <i className="tank-bubble" />
                   <i className="tank-bubble second" />
                 </HabitatView>

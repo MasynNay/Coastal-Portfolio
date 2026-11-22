@@ -16,7 +16,7 @@ test("every perimeter rail stops walking and mounted movement, including long di
   const approaches = [
     [{ x: 26, z: 0 }, 4, 0],
     [{ x: -26, z: 5 }, -4, 0],
-    [{ x: 0, z: -27 }, 0, -4],
+    [{ x: 0, z: -28 }, 0, -4],
     [{ x: -18, z: 17.5 }, 0, 5],
     [{ x: 18, z: 17.5 }, 0, 5],
   ];
