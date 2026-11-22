@@ -2,6 +2,22 @@
 // the preceding production commit, rather than fictional in-game release notes.
 const patchNotes = [
   {
+    version: "1.7.0",
+    date: "November 22, 2026",
+    previousCommit: "76762d1",
+    comparisonRef: "81e861c04d0828ca97c0da010c49c3662b0e0054",
+    changes: [
+      "Rebuilt the vending-machine shelves with larger foil-style booster wrappers, set logos, readable pack descriptions, and a single-column phone layout.",
+      "Replaced new character-label cards with 200 complete Pokémon TCG card printings across six curated sets, including EX, VMAX, VSTAR, special illustration rares, secret rares, and shiny cards. Added foil and chase-card reveal effects.",
+      "Added a full card checklist with owned/missing filters, rarity filters, collection totals, and individual card details. Earlier keepsakes, sealed packs, quantities, and unfinished reveals are preserved.",
+      "Fixed the playground exit button with a dedicated cancellation that immediately restores the visitor's starting position and releases any borrowed NPC.",
+      "Depth-sorted the carousel's center post and rail supports against the rider's actual seat, keeping the post behind a front-facing rider.",
+      "Moved the tunnel route through its illustrated openings, with the wooden shell hiding the crawler while inside.",
+      "Added alternate hand reaches, bent-knee pulls, a pause between net rungs, and a raised-arm summit celebration using each character's own costume artwork.",
+      "Reduced house collision to the lower facade footprint, reopening the space behind roof overhangs while retaining solid front corners and clear doorway access.",
+    ],
+  },
+  {
     version: "1.6.0",
     date: "November 22, 2026",
     previousCommit: "64fcc53",
