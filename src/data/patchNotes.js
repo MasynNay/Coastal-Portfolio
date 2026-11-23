@@ -2,6 +2,19 @@
 // the preceding production commit, rather than fictional in-game release notes.
 const patchNotes = [
   {
+    version: "1.7.1",
+    date: "November 22, 2026",
+    previousCommit: "26ec3ab",
+    comparisonRef: "9bdb4003f245edcdb1c74a06aa1f4af1b490030a",
+    changes: [
+      "Rebuilt the card collection as a phone-friendly app with a full-screen layout on phones and tablets, safe-area spacing, and a persistent Shop / Packs / Binder navigation bar.",
+      "Changed the dispenser to show one large pack at a time with swipe browsing, collection arrows, and a single clear Collect Pack button.",
+      "Added a searchable binder with compact completion progress, collapsible collection and rarity filters, owned/missing views, and 24-card batches instead of rendering the entire checklist at once.",
+      "Moved card inspection to its own screen with full artwork, swipe and arrow browsing, a Back to Binder button, and keyboard support.",
+      "Kept reveal controls visible on small screens, added swipe-to-continue, and allowed unfinished packs to be resumed after visiting another tab without losing or duplicating cards.",
+    ],
+  },
+  {
     version: "1.7.0",
     date: "November 22, 2026",
     previousCommit: "76762d1",
