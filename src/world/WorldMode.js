@@ -46,6 +46,7 @@ import FRIENDS_TRIVIA from "../data/friendsTrivia.json";
 import RoomContent from "./RoomContent";
 import Dialog from "./WorldDialog";
 import "./world.css";
+import "./CardApp.css";
 
 // Only recognized IDs survive a storage/version mismatch; corrupt saved data cannot break the UI.
 function readProgress() {
@@ -253,6 +254,7 @@ export default function WorldMode() {
   const [aquariums, setAquariums] = useState(readAquariums);
   const [shells, setShells] = useState(readShells);
   const [guideSection, setGuideSection] = useState("bugs");
+  const [cardTab, setCardTab] = useState("packs");
   function openGuide(section = "bugs") {
     setGuideSection(section);
     setMenu("field-guide");
@@ -746,7 +748,9 @@ export default function WorldMode() {
               ? "world-map-panel"
               : ["aquariums", "terrariums"].includes(menu)
                 ? "world-collection-dialog"
-                : ""
+                : menu === "cards"
+                  ? "world-cards-dialog"
+                  : ""
           }
           title={
             menu === "journal"
@@ -830,7 +834,17 @@ export default function WorldMode() {
               />
             </>
           ) : menu === "cards" ? (
-            <CardCollection onBack={() => setMenu("inventory")} />
+            <CardCollection
+              initialTab={cardTab}
+              onBack={() => {
+                setCardTab("packs");
+                setMenu("inventory");
+              }}
+              onShop={() => {
+                setMenu(null);
+                setDialog({ type: "card-packs" });
+              }}
+            />
           ) : menu === "inventory" ? (
             <Inventory
               caught={caught}
@@ -1067,15 +1081,17 @@ export default function WorldMode() {
             "card-packs",
           ].includes(dialog.type)}
           className={
-            dialog.type === "room-ascii"
-              ? "room-ascii-dialog"
-              : dialog.type === "room-arcade"
-                ? "room-arcade-dialog"
-                : dialog.type === "axolotl-game"
-                  ? "world-arcade-dialog"
-                  : dialog.type === "island-game" && dialog.id === "chimes"
-                    ? "world-runner-dialog"
-                    : ""
+            dialog.type === "card-packs"
+              ? "world-cards-dialog"
+              : dialog.type === "room-ascii"
+                ? "room-ascii-dialog"
+                : dialog.type === "room-arcade"
+                  ? "room-arcade-dialog"
+                  : dialog.type === "axolotl-game"
+                    ? "world-arcade-dialog"
+                    : dialog.type === "island-game" && dialog.id === "chimes"
+                      ? "world-runner-dialog"
+                      : ""
           }
           title={panelTitle(dialog)}
           onClose={() => setDialog(null)}
@@ -1086,7 +1102,12 @@ export default function WorldMode() {
             <RoomArcade />
           ) : dialog.type === "card-packs" ? (
             <CardPacks
-              onInventory={() => {
+              onBack={() => {
+                setDialog(null);
+                setMenu("inventory");
+              }}
+              onInventory={(tab) => {
+                setCardTab(tab);
                 setDialog(null);
                 setMenu("cards");
               }}

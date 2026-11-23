@@ -14,37 +14,68 @@ afterEach(() => {
   host.remove();
   delete global.IS_REACT_ACT_ENVIRONMENT;
 });
-test("the missing checklist excludes owned prints and filters by set and chase type", () => {
-  const card = cardCatalog.find((c) => c.tier === "SIR");
+const button = (label) =>
+  [...host.querySelectorAll("button")].find((b) => b.textContent === label);
+function render(cards = {}) {
   act(() =>
     root.render(
       <CardAlbum
-        cards={{ owned: { ...card, quantity: 4 } }}
+        cards={cards}
         renderCard={(c) => <span>{c.name} owned</span>}
       />,
     ),
   );
+}
+function change(node, value) {
+  act(() => {
+    node.value = value;
+    node.dispatchEvent(new Event("change", { bubbles: true }));
+  });
+}
+test("binder paginates the complete checklist and combines ownership, set and rarity filters", () => {
+  const card = cardCatalog.find((c) => c.tier === "SIR");
+  render({ owned: { ...card, quantity: 4 } });
   expect(host.textContent).toContain("1 / 200 Collected");
-  expect(host.querySelectorAll(".missing-card-slot")).toHaveLength(199);
-  const missing = [...host.querySelectorAll("button")].find(
-    (b) => b.textContent === "Missing Cards",
-  );
-  act(() => missing.click());
+  expect(host.querySelectorAll(".card-album-grid > button")).toHaveLength(24);
+  act(() => button("Show More Cards · 24 / 200").click());
+  expect(host.querySelectorAll(".card-album-grid > button")).toHaveLength(48);
+  act(() => button("Missing Cards").click());
   expect(host.querySelectorAll(".owned-card-slot")).toHaveLength(0);
-  expect(host.querySelectorAll(".missing-card-slot")).toHaveLength(199);
+  expect(host.textContent).toContain("199 missing cards");
   const filters = host.querySelectorAll("select");
-  act(() => {
-    filters[0].value = card.setId;
-    filters[0].dispatchEvent(new Event("change", { bubbles: true }));
-  });
-  const size = cardCatalog.filter((c) => c.setId === card.setId).length;
-  expect(host.textContent).toContain(`1 / ${size} Collected`);
-  act(() => {
-    filters[1].value = "SIR";
-    filters[1].dispatchEvent(new Event("change", { bubbles: true }));
-  });
+  change(filters[0], card.setId);
+  change(filters[1], "SIR");
+  const matches = cardCatalog.filter(
+    (c) => c.setId === card.setId && c.tier === "SIR" && c.id !== card.id,
+  ).length;
   expect(host.querySelectorAll(".card-album-grid > button")).toHaveLength(
-    cardCatalog.filter((c) => c.setId === card.setId && c.tier === "SIR")
-      .length,
+    matches,
   );
+  act(() => button("My Cards").click());
+  expect(host.querySelectorAll(".owned-card-slot")).toHaveLength(1);
+});
+test("card inspection replaces the grid, supports keyboard browsing and Escape returns to the binder", () => {
+  render();
+  act(() => host.querySelector(".missing-card-slot").click());
+  expect(host.querySelector(".card-album-grid")).toBeNull();
+  expect(host.querySelector(".card-inspection-screen")).toBe(
+    document.activeElement,
+  );
+  const first = host.querySelector(".missing-card-detail h3").textContent;
+  act(() =>
+    document.activeElement.dispatchEvent(
+      new KeyboardEvent("keydown", { key: "ArrowRight", bubbles: true }),
+    ),
+  );
+  expect(host.querySelector(".missing-card-detail h3").textContent).not.toBe(
+    first,
+  );
+  const escape = new KeyboardEvent("keydown", {
+    key: "Escape",
+    bubbles: true,
+    cancelable: true,
+  });
+  act(() => document.activeElement.dispatchEvent(escape));
+  expect(escape.defaultPrevented).toBe(true);
+  expect(host.querySelector(".card-album-grid")).not.toBeNull();
 });

@@ -1,0 +1,482 @@
+/* Card app layout: one scrolling content area and a persistent, separate dock.
+   Scoped to card panels so the field guide and room dialogs keep their layout. */
+.world-dialog.world-cards-dialog {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  height: min(850px, 90dvh);
+  max-height: 90dvh;
+  width: min(860px, 100%);
+}
+.world-dialog.world-cards-dialog > header {
+  flex: none;
+  padding: 12px 22px;
+}
+.world-dialog.world-cards-dialog > header small {
+  display: none;
+}
+.world-dialog.world-cards-dialog > header h2 {
+  font-size: 22px;
+  margin: 0;
+}
+.world-cards-dialog > .world-dialog-body {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+  padding: 0;
+  overflow: hidden;
+}
+.world-cards-dialog .card-app {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 0;
+  text-align: center;
+}
+.world-cards-dialog .card-app-main {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 18px 24px;
+  scrollbar-gutter: stable;
+}
+.world-cards-dialog .card-app button {
+  min-height: 44px;
+}
+.world-cards-dialog .card-app .card-inventory-link {
+  display: block;
+  font-size: 13px;
+  padding: 8px 12px;
+  margin: 0 0 12px;
+  background: transparent;
+  border-color: #adcac236;
+}
+.world-cards-dialog .card-app-nav {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  flex: none;
+  gap: 6px;
+  padding: 8px 16px max(8px, env(safe-area-inset-bottom));
+  border-top: 1px solid #9dc3b52e;
+  background: #14292e;
+}
+.world-cards-dialog .card-app-nav button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  border: 0;
+  background: transparent;
+  color: #b3cbc8;
+  font-size: 12px;
+  line-height: 1.3;
+}
+.world-cards-dialog .card-app-nav button[aria-current] {
+  background: #365853;
+  color: #efffe7;
+}
+.world-cards-dialog .card-app-nav svg {
+  width: 23px;
+  height: 23px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linejoin: round;
+}
+.world-cards-dialog .card-app-nav b {
+  display: inline-block;
+  margin-left: 6px;
+  background: #b6d4af;
+  color: #162f2b;
+  border-radius: 12px;
+  padding: 1px 6px;
+  font-size: 10px;
+}
+.world-cards-dialog .card-shop-heading h3 {
+  margin: 0 !important;
+}
+.world-cards-dialog .card-shop-heading p {
+  margin: 5px 0 16px;
+  color: #b5cdc5;
+}
+.world-cards-dialog .card-shop-feature {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: center;
+  gap: 24px;
+  border: 1px solid #a7c3b533;
+  border-radius: 20px;
+  padding: 26px;
+  background: radial-gradient(ellipse at 30% 30%, #3c6659, #172d35 78%);
+  touch-action: pan-y;
+}
+.world-cards-dialog .card-shop-art {
+  width: min(100%, 230px);
+  margin: auto;
+}
+.world-cards-dialog .card-shop-details {
+  text-align: left;
+}
+.world-cards-dialog .card-shop-details h3 {
+  font-size: 24px;
+  line-height: 1.2;
+}
+.world-cards-dialog .card-shop-details small {
+  color: #d8d8a9;
+}
+.world-cards-dialog .card-shop-details p {
+  color: #bdcec9;
+  line-height: 1.5;
+}
+.world-cards-dialog .card-shop-details > span {
+  display: block;
+  font-size: 12px;
+  color: #bbd0c7;
+}
+.world-cards-dialog .card-shop-details > button {
+  width: 100%;
+  margin-top: 18px;
+}
+.world-cards-dialog .card-page-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  max-width: 400px;
+  margin: 14px auto 0;
+}
+.world-cards-dialog .card-page-controls > button {
+  width: 46px;
+  flex: none;
+}
+.world-cards-dialog .card-page-dots {
+  display: flex;
+  justify-content: center;
+  min-width: 0;
+}
+.world-cards-dialog .card-page-dots button {
+  border: 0;
+  background: none;
+  padding: 0;
+  width: 32px;
+  min-width: 0;
+}
+.world-cards-dialog .card-page-dots span {
+  display: block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #658780;
+  margin: auto;
+}
+.world-cards-dialog .card-page-dots [aria-pressed="true"] span {
+  width: 18px;
+  border-radius: 5px;
+  background: #d1e3af;
+}
+.world-cards-dialog .card-shop-notice {
+  min-height: 2.8em;
+  color: #d5e4c5;
+  font-size: 13px;
+  margin: 10px 0 0;
+  line-height: 1.4;
+}
+.world-cards-dialog .card-app .pack-bag-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+.world-cards-dialog .card-app .pack-bag-grid .booster-art {
+  max-width: 140px;
+}
+.world-cards-dialog .card-app .pack-bag-grid > button {
+  padding: 12px;
+}
+.world-cards-dialog .card-app .pack-bag-grid > button > strong {
+  line-height: 1.3;
+}
+.world-cards-dialog .card-app .pack-bag-grid > button:disabled {
+  opacity: 0.5;
+}
+.world-cards-dialog .card-resume {
+  width: 100%;
+}
+.world-cards-dialog .card-save-info,
+.world-cards-dialog .card-binder-filters {
+  border: 1px solid #a8c1b633;
+  border-radius: 12px;
+  padding: 12px;
+  text-align: left;
+  font-size: 13px;
+  margin: 14px 0;
+}
+.world-cards-dialog .card-save-info summary,
+.world-cards-dialog .card-binder-filters summary {
+  cursor: pointer;
+  min-height: 22px;
+}
+.world-cards-dialog .card-binder-filters .album-filters {
+  margin-top: 12px;
+}
+.world-cards-dialog .card-app .album-progress {
+  padding: 12px 16px;
+  margin: 0 0 14px;
+}
+.world-cards-dialog .card-app .album-progress h3 {
+  font-size: 20px;
+  margin: 0 0 8px;
+}
+.world-cards-dialog .card-app .album-progress progress {
+  display: block;
+  height: 8px;
+}
+.world-cards-dialog .card-search {
+  display: block;
+  text-align: left;
+  font-size: 12px;
+  color: #bfd4c9;
+}
+.world-cards-dialog .card-search input {
+  display: block;
+  width: 100%;
+  min-height: 44px;
+  margin: 4px 0 0;
+  border: 1px solid #94b8ad66;
+  border-radius: 12px;
+  background: #1c3338;
+  color: #f0f5ee;
+  padding: 10px 12px;
+  font-size: 16px;
+}
+.world-cards-dialog .card-search input::placeholder {
+  color: #b4c9c4;
+}
+.world-cards-dialog .card-app .album-view-controls {
+  margin: 12px 0;
+  gap: 6px;
+  flex-wrap: nowrap;
+}
+.world-cards-dialog .card-app .album-view-controls button {
+  min-width: 0;
+  font-size: 12px;
+  padding: 8px 4px;
+}
+.world-cards-dialog .card-app .card-album-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+.world-cards-dialog .card-app .card-album-grid > button {
+  padding: 6px;
+  min-width: 0;
+}
+.world-cards-dialog .card-app .tcg-card figcaption {
+  gap: 3px;
+  padding: 8px 2px;
+}
+.world-cards-dialog .card-app .tcg-card figcaption small {
+  font-size: 11px;
+}
+.world-cards-dialog .card-app .locked-card {
+  min-height: 0;
+}
+.world-cards-dialog .card-load-more {
+  width: 100%;
+  margin-top: 18px;
+}
+.world-cards-dialog .card-inspection-screen {
+  outline: none;
+}
+.world-cards-dialog .card-app .album-inspection {
+  width: min(300px, 76vw, calc((100dvh - 350px) * 63 / 88));
+  margin: 0 auto;
+  touch-action: pan-y;
+}
+.world-cards-dialog .card-app .album-inspection .tcg-card-face {
+  max-height: calc(100dvh - 330px);
+}
+.world-cards-dialog .card-app .album-inspection .tcg-card-face > img {
+  object-fit: contain;
+}
+.world-cards-dialog .card-app .album-inspection .missing-card-detail {
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.world-cards-dialog .card-gesture-hint {
+  font-size: 12px;
+  color: #b5cdc4;
+  margin: 10px 0;
+}
+.world-cards-dialog .card-app .pack-reveal-stage {
+  padding: 0;
+}
+.world-cards-dialog .card-app .pack-reveal-stage > p {
+  margin: 6px 0;
+  font-size: 13px;
+}
+.world-cards-dialog .card-app .pack-reveal-stage .reveal-card-button {
+  width: min(260px, 62vw, calc((100dvh - 300px) * 63 / 88));
+  margin: 10px auto;
+  touch-action: pan-y;
+}
+.world-cards-dialog .card-app .pack-reveal-stage .tcg-card-face,
+.world-cards-dialog .card-app .island-card-back {
+  max-height: calc(100dvh - 360px);
+  min-height: 0;
+}
+.world-cards-dialog .card-app .island-card-back {
+  aspect-ratio: 63/88;
+  height: auto;
+}
+.world-cards-dialog .card-app .reveal-card-button figcaption {
+  display: none;
+}
+.world-cards-dialog .card-app .card-reveal-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  max-width: 450px;
+  margin: 14px auto;
+}
+.world-cards-dialog .card-app .sealed-booster {
+  width: min(245px, 48vw);
+}
+.world-cards-dialog .card-app .tear-stage {
+  padding: 0;
+}
+/* Phone and tablet app shell respects browser bars and notches. Horizontal
+   scrolling belongs only to deliberate gestures, never the entire modal. */
+@media (max-width: 900px) {
+  .world-scrim:has(.world-cards-dialog) {
+    padding: 0;
+  }
+  .world-dialog.world-cards-dialog {
+    height: 100dvh;
+    max-height: 100dvh;
+    width: 100%;
+    max-width: none;
+    border-radius: 0;
+    border: 0;
+  }
+  .world-dialog.world-cards-dialog > header {
+    padding: max(10px, env(safe-area-inset-top)) 16px 10px;
+  }
+  .world-dialog.world-cards-dialog > header h2 {
+    font-size: 20px;
+  }
+  .world-cards-dialog .card-app-main {
+    padding: 14px 16px;
+    scrollbar-gutter: auto;
+  }
+}
+@media (max-width: 600px) {
+  .world-cards-dialog .card-shop-heading h3 {
+    font-size: 18px;
+  }
+  .world-cards-dialog .card-shop-heading p {
+    font-size: 13px;
+    margin-bottom: 12px;
+  }
+  .world-cards-dialog .card-shop-feature {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding: 18px 16px;
+  }
+  .world-cards-dialog .card-shop-art {
+    width: clamp(130px, calc((100dvh - 490px) * 0.65), 210px);
+  }
+  .world-cards-dialog .card-shop-details {
+    text-align: center;
+    width: 100%;
+  }
+  .world-cards-dialog .card-shop-details h3 {
+    font-size: 21px;
+    margin: 4px 0 6px;
+  }
+  .world-cards-dialog .card-shop-details > small,
+  .world-cards-dialog .card-shop-details p {
+    display: none;
+  }
+  .world-cards-dialog .card-shop-details > button {
+    margin-top: 12px;
+  }
+  .world-cards-dialog .card-page-controls {
+    margin-top: 6px;
+  }
+  .world-cards-dialog .card-app .pack-bag-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+  .world-cards-dialog .card-app .card-album-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+  .world-cards-dialog .card-app .album-inspection {
+    width: min(300px, 76vw, calc((100dvh - 350px) * 63 / 88));
+  }
+  .world-cards-dialog .card-app .album-inspection .tcg-card-face {
+    max-height: calc(100dvh - 350px);
+  }
+  .world-cards-dialog .card-app .album-inspection .tcg-card {
+    width: fit-content;
+    max-width: 100%;
+    margin: auto;
+  }
+  .world-cards-dialog .card-app .album-inspection .tcg-card-face {
+    width: auto;
+  }
+  .world-cards-dialog .card-app .card-reveal-actions {
+    font-size: 12px;
+  }
+}
+@media (max-height: 500px) and (orientation: landscape) {
+  .world-cards-dialog .card-shop-feature {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  .world-cards-dialog .card-shop-art {
+    width: 120px;
+  }
+}
+
+/* Detail and reveal screens have their own back button, keeping a single clear
+   route back rather than stacking two navigation rows above the artwork. */
+.world-cards-dialog
+  .card-app-main:has(.card-inspection-screen, .pack-reveal-stage, .tear-stage)
+  > .card-inventory-return {
+  display: none;
+}
+.world-cards-dialog .album-inspection .tcg-card figcaption {
+  gap: 1px;
+  padding: 7px 0;
+}
+@media (max-width: 600px) {
+  .world-cards-dialog .card-inspection-screen > .card-gesture-hint {
+    display: none;
+  }
+}
+
+.world-cards-dialog .card-shop-feature,
+.world-cards-dialog .album-inspection,
+.world-cards-dialog .reveal-card-button {
+  user-select: none;
+}
+.world-cards-dialog .card-app img {
+  -webkit-user-drag: none;
+}
+/* Tablets have room to read the scan at a larger size without enlarging the
+   controls or forcing the same phone-sized card into an otherwise empty view. */
+@media (min-width: 601px) {
+  .world-cards-dialog .pack-reveal-stage .reveal-card-button {
+    width: min(360px, calc((100dvh - 330px) * 63 / 88));
+  }
+  .world-cards-dialog .pack-reveal-stage .tcg-card-face {
+    max-height: none;
+  }
+  .world-cards-dialog .album-inspection {
+    width: min(360px, calc((100dvh - 350px) * 63 / 88));
+  }
+}

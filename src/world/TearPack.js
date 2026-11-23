@@ -18,6 +18,7 @@ export function PackArtwork({ pack }) {
       <span className="booster-crimp top" />
       <div className="booster-burst" />
       <img
+        draggable={false}
         className="booster-set-logo"
         src={pack.logo}
         alt=""
@@ -26,6 +27,7 @@ export function PackArtwork({ pack }) {
         }}
       />
       <img
+        draggable={false}
         className="pack-mascot"
         src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pack.mascot}.png`}
         alt=""

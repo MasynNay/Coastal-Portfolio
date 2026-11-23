@@ -18,3 +18,14 @@ The binder counts distinct printing IDs toward completion. Duplicate quantities 
 - `LegacyCards.js` keeps earlier saves readable without mixing those old prints into the new checklist.
 
 New artwork is requested only when a card is visible or inspected. Images that fail to load show a readable name and printing description; the saved card is retained.
+
+## Phone and tablet layout
+
+The collection opens as a full-screen card app below 900px, with separate Shop, Packs, and Binder tabs. Desktop uses the same navigation inside the world window. Only the content scrolls; the navigation stays visible and respects device safe areas.
+
+The shop presents one pack at a time. Swipe horizontally, use the arrows, or select a collection dot. The binder loads 24 checklist entries at a time, supports name search and combined ownership/set/rarity filters, and opens individual cards in a separate inspection screen. Swipe or use the previous/next buttons to browse; Escape returns to the binder before closing the panel. Returning restores the selected slot and scroll position.
+
+Pack opening still uses the original atomic save transaction. Leaving a reveal returns to a resumable pack; browsing the binder or shop cannot consume it twice. A horizontal swipe turns/replaces a revealed card, while vertical gestures remain scrolling and taps remain taps.
+
+- `CardApp.js` shares the persistent navigation and horizontal gesture handling.
+- `CardApp.css` scopes the app layout to card dialogs, without changing other room panels.
