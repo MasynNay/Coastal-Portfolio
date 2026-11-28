@@ -5,6 +5,7 @@ const patchNotes = [
     version: "1.8.4",
     date: "November 28, 2026",
     previousCommit: "24d530964740decbd678c87d4a78b860ff43a211",
+    comparisonRef: "e0e96fdc7998eb738d8046aa915c75cc6bc70f51",
     changes: [
       "Expanded the Pokémon card machine and binder to 202 English physical TCG collections and 21,432 cataloged printings. Search by expansion, collect ten packs, and reveal fifty cards together without losing or duplicating rewards if you close the app.",
       "The trampoline now stays active until you leave. Approach the mat from outside, hop on, then press Q or tap Trick for a backflip, frontflip, or full twist.",
