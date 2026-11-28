@@ -58,7 +58,10 @@ export function GlassPortfolio({ resume = false }) {
                     ALWAYS LEARNING. ALWAYS BUILDING.
                   </span>
                   <h2>Skills</h2>
-                  <p>A technical foundation. A creative perspective.</p>
+                  <p>
+                    A practical look at the tools and skills I bring to
+                    technology, development, and creative work.
+                  </p>
                 </div>
                 <div className="glass-skills-panel">
                   {skills.map((skill, i) => {
@@ -108,9 +111,6 @@ export function GlassPortfolio({ resume = false }) {
           <a href={links.github}>GitHub ↗</a>
           <a href={links.linkedin}>LinkedIn ↗</a>
           <a href={links.instagram}>Instagram ↗</a>
-          <a href="/React-Portfolio/" target="_blank" rel="noreferrer">
-            Before this redesign ↗
-          </a>
         </div>
         <div
           className="glass-portfolio-archive"

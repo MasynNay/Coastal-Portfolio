@@ -7,6 +7,7 @@ export default function SpritePose({
   asset = "masyn",
   direction = 0,
   playing = true,
+  playbackRate = 1,
   scale = 3,
   frame = null,
   label = "Character sprite",
@@ -22,9 +23,12 @@ export default function SpritePose({
   useEffect(() => {
     if (!playing) return;
     const step = Math.min(50, sheet.frameMs || 50);
-    const timer = setInterval(() => setTime((t) => t + step), step);
+    const timer = setInterval(
+      () => setTime((t) => t + step * playbackRate),
+      step,
+    );
     return () => clearInterval(timer);
-  }, [playing, sheet.frameMs]);
+  }, [playing, sheet.frameMs, playbackRate]);
   const pose = spriteFrame(sheet, direction, playing || frame !== null, time),
     column = frame ?? pose.column;
   const previewWidth = sheet.previewWidth || sheet.cw;

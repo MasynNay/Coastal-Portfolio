@@ -17,7 +17,12 @@ export default function useWindowDrag(windowRef, disabled = false) {
     const scaleX = workspace.width / (area.offsetWidth || workspace.width);
     const scaleY = workspace.height / (area.offsetHeight || workspace.height);
     const dock = node.closest(".desktop-site")?.querySelector(".desktop-dock");
-    const dockTop = dock?.getBoundingClientRect().top;
+    const dockBounds = dock?.getBoundingClientRect();
+    // A side launcher does not consume the bottom of the workspace.
+    const dockTop =
+      dockBounds && !(dockBounds.width < dockBounds.height)
+        ? dockBounds.top
+        : null;
     const bottom =
       dockTop > workspace.top && dockTop < workspace.bottom
         ? (dockTop - workspace.top) / scaleY - 8

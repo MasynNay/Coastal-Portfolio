@@ -1,13 +1,13 @@
+import { SystemIcon, workspaceSystems } from "./WorkspaceSystem";
 import BrandMark from "../components/BrandMark";
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { Apple } from "react-bootstrap-icons";
 import useDialogFocus from "../hooks/useDialogFocus";
 import "./MacMenu.css";
 
 // The Apple control is a real menu, independent of dock apps and their windows.
 // Dismissal and keyboard focus follow the same rules as a small system menu.
-export function MacMenu({ onAbout, onAppearance, buttonRef }) {
+export function MacMenu({ onAbout, onAppearance, buttonRef, system = "mac" }) {
   const [open, setOpen] = useState(false);
   const root = useRef(null),
     menu = useRef(null);
@@ -64,7 +64,7 @@ export function MacMenu({ onAbout, onAppearance, buttonRef }) {
           }
         }}
       >
-        <Apple size={18} aria-hidden="true" />
+        <SystemIcon system={system} />
       </button>
       {open && (
         <div
@@ -82,7 +82,7 @@ export function MacMenu({ onAbout, onAppearance, buttonRef }) {
               onAbout();
             }}
           >
-            About this Mac
+            {workspaceSystems[system].about}
           </button>
           {onAppearance && (
             <button
@@ -92,7 +92,7 @@ export function MacMenu({ onAbout, onAppearance, buttonRef }) {
                 onAppearance();
               }}
             >
-              Change Wallpaper &amp; Bezel…
+              Customize Workspace…
             </button>
           )}
           <div className="mac-system-separator" role="separator" />
@@ -114,7 +114,7 @@ export function MacMenu({ onAbout, onAppearance, buttonRef }) {
 
 // This lighthearted spec panel belongs to Masyn's Mac, not the portfolio's
 // existing About app. It doesn't create a second dock icon or change app state.
-export function AboutMac({ onClose, returnFocusRef }) {
+export function AboutMac({ onClose, returnFocusRef, system = "mac" }) {
   const panel = useRef(null);
   useDialogFocus(panel, onClose, returnFocusRef);
   const specs = [
@@ -143,12 +143,12 @@ export function AboutMac({ onClose, returnFocusRef }) {
         <header>
           <button
             className="mac-about-close"
-            aria-label="Close About this Mac"
+            aria-label={`Close ${workspaceSystems[system].about}`}
             onClick={() => onClose()}
           >
             ×
           </button>
-          <span>About this Mac</span>
+          <span>{workspaceSystems[system].about}</span>
         </header>
         <div className="mac-about-content">
           <div className="mac-about-machine" aria-hidden="true">
@@ -156,7 +156,7 @@ export function AboutMac({ onClose, returnFocusRef }) {
               <BrandMark size="screen" decorative />
             </div>
             <div className="mac-about-chin">
-              <Apple size={9} />
+              <SystemIcon system={system} size={9} />
             </div>
             <div className="mac-about-stand" />
           </div>

@@ -1,3 +1,4 @@
+import { useFavorites } from "./CollectionPreferences";
 import { useState, useRef, useEffect } from "react";
 import {
   packs,
@@ -16,7 +17,10 @@ export default function CardAlbum({ cards, renderCard }) {
     [rarity, setRarity] = useState("All"),
     [search, setSearch] = useState(""),
     [selected, setSelected] = useState(null),
-    [limit, setLimit] = useState(24);
+    [limit, setLimit] = useState(24),
+    [favoritesOnly, setFavoritesOnly] = useState(false),
+    [sort, setSort] = useState("Checklist");
+  const { favorites, toggle } = useFavorites("cards");
   const detail = useRef(null),
     returnTo = useRef(null),
     binder = useRef(null),
@@ -35,13 +39,47 @@ export default function CardAlbum({ cards, renderCard }) {
     set === "Archive"
       ? album.filter((c) => !cardsById[c.id])
       : cardCatalog.filter((c) => set === "All" || c.setId === set);
-  const visible = catalog.filter(
-    (c) =>
-      (show === "All" ||
-        (show === "Missing" ? !owned.has(c.id) : owned.has(c.id))) &&
-      (rarity === "All" || (c.tier || c.rarity) === rarity) &&
-      c.name.toLowerCase().includes(search.trim().toLowerCase()),
-  );
+  const visible = catalog
+    .filter(
+      (c) =>
+        (show === "All" ||
+          (show === "Missing" ? !owned.has(c.id) : owned.has(c.id))) &&
+        (rarity === "All" || (c.tier || c.rarity) === rarity) &&
+        c.name.toLowerCase().includes(search.trim().toLowerCase()) &&
+        (!favoritesOnly || favorites.includes(c.id)),
+    )
+    .sort((a, b) =>
+      sort === "Name"
+        ? a.name.localeCompare(b.name)
+        : sort === "Rarity"
+          ? [
+              "Common",
+              "Uncommon",
+              "Rare",
+              "EX",
+              "V",
+              "VSTAR",
+              "VMAX",
+              "Illustration Rare",
+              "Shiny",
+              "Secret Rare",
+              "SIR",
+            ].indexOf(b.tier) -
+            [
+              "Common",
+              "Uncommon",
+              "Rare",
+              "EX",
+              "V",
+              "VSTAR",
+              "VMAX",
+              "Illustration Rare",
+              "Shiny",
+              "Secret Rare",
+              "SIR",
+            ].indexOf(a.tier)
+          : 0,
+    );
   const index = visible.findIndex((c) => c.id === selected),
     inspected = visible[index];
   function turn(step) {
@@ -87,6 +125,15 @@ export default function CardAlbum({ cards, renderCard }) {
         >
           ← Back to Binder
         </button>
+        {owned.has(inspected.id) && (
+          <button
+            className="card-favorite"
+            aria-pressed={favorites.includes(inspected.id)}
+            onClick={() => toggle(inspected.id)}
+          >
+            {favorites.includes(inspected.id) ? "★ Favorite" : "☆ Add Favorite"}
+          </button>
+        )}
         <div className="album-inspection" {...swipe}>
           {owned.has(inspected.id) ? (
             renderCard(owned.get(inspected.id), true)
@@ -162,6 +209,31 @@ export default function CardAlbum({ cards, renderCard }) {
             {label}
           </button>
         ))}
+      </div>
+      <div className="card-binder-tools">
+        <button
+          aria-pressed={favoritesOnly}
+          onClick={() => {
+            setFavoritesOnly(!favoritesOnly);
+            setLimit(24);
+          }}
+        >
+          Favorites Only
+        </button>
+        <label>
+          Sort By
+          <select
+            value={sort}
+            onChange={(e) => {
+              setSort(e.target.value);
+              setLimit(24);
+            }}
+          >
+            <option>Checklist</option>
+            <option>Name</option>
+            <option>Rarity</option>
+          </select>
+        </label>
       </div>
       <details className="card-binder-filters">
         <summary>

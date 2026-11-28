@@ -1,9 +1,9 @@
+import { SystemIcon, workspaceSystems } from "./WorkspaceSystem";
 import { links } from "../data/links";
 import BrandMark from "../components/BrandMark";
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import {
-  Apple,
   Person,
   Folder2Open,
   Terminal,
@@ -16,6 +16,7 @@ import {
   Controller,
   Images,
   Keyboard,
+  Flower1,
 } from "react-bootstrap-icons";
 import { Projects } from "../components/Projects";
 import { Contact } from "../components/Contact";
@@ -34,15 +35,16 @@ import AsciiApp from "../ascii/AsciiStudio";
 import useWindowDrag from "../hooks/useWindowDrag";
 import "./glass.css";
 import "./desktop.css";
+import "./Workspace.css";
 
 const apps = [
-  { id: "about", title: "About Masyn", Icon: Person, color: "blue" },
+  { id: "about", title: "Profile", Icon: Person, color: "blue" },
   { id: "projects", title: "Portfolio", Icon: Folder2Open, color: "folder" },
   { id: "skills", title: "Skills", Icon: Terminal, color: "black" },
   { id: "resume", title: "Resume", Icon: FileEarmarkText, color: "paper" },
   { id: "contact", title: "Contact", Icon: Envelope, color: "mail" },
   { id: "typing", title: "Typing Test", Icon: Keyboard, color: "teal" },
-  { id: "ascii", title: "ASCII", Icon: Terminal, color: "ascii" },
+  { id: "ascii", title: "ASCII", Icon: Flower1, color: "ascii" },
   { id: "games", title: "Games", Icon: Controller, color: "blue" },
   { id: "photos", title: "Photos", Icon: Images, color: "folder" },
 ];
@@ -114,6 +116,7 @@ export function DesktopPortfolio() {
   return (
     <div
       className="desktop-studio"
+      data-system={appearance.system || "mac"}
       data-wallpaper={appearance.wallpaper}
       data-bezel={appearance.bezel}
       style={appearanceStyle(appearance)}
@@ -124,12 +127,17 @@ export function DesktopPortfolio() {
           <span className="imac-camera" aria-hidden="true" />
           <div className="desktop-site">
             <header className="desktop-menubar">
-              <MacMenu
-                buttonRef={systemButton}
-                onAbout={() => setAboutMac(true)}
-                onAppearance={() => setAppearanceOpen(true)}
-              />
-              <strong>Masyn’s Mac</strong>
+              {(appearance.system || "mac") === "mac" && (
+                <MacMenu
+                  system="mac"
+                  buttonRef={systemButton}
+                  onAbout={() => setAboutMac(true)}
+                  onAppearance={() => setAppearanceOpen(true)}
+                />
+              )}
+              <strong>
+                {workspaceSystems[appearance.system || "mac"].computer}
+              </strong>
               <span className="desktop-menu-caption">
                 Explore. Open. Discover.
               </span>
@@ -222,7 +230,7 @@ export function DesktopPortfolio() {
                       <span className="desktop-kicker">
                         A HUMAN BEHIND THE SCREEN
                       </span>
-                      <h1>Hey, I’m Masyn.</h1>
+                      <h1>Masyn Nay</h1>
                       <p className="desktop-about-role">{profile.headline}</p>
                       <p>{profile.introduction}</p>
                       <p>{profile.interestsIntroduction}</p>
@@ -289,6 +297,16 @@ export function DesktopPortfolio() {
                 </div>
               )}
             </main>
+            {appearance.system && appearance.system !== "mac" && (
+              <div className="workspace-system-launcher">
+                <MacMenu
+                  system={appearance.system}
+                  buttonRef={systemButton}
+                  onAbout={() => setAboutMac(true)}
+                  onAppearance={() => setAppearanceOpen(true)}
+                />
+              </div>
+            )}
             <nav className="desktop-dock" aria-label="Portfolio apps">
               {apps.map((app) => (
                 <button
@@ -333,6 +351,7 @@ export function DesktopPortfolio() {
             )}
             {aboutMac && (
               <AboutMac
+                system={appearance.system || "mac"}
                 returnFocusRef={systemButton}
                 onClose={() => setAboutMac(false)}
               />
@@ -340,7 +359,7 @@ export function DesktopPortfolio() {
           </div>
         </div>
         <div className="imac-chin" aria-hidden="true">
-          <Apple />
+          <SystemIcon system={appearance.system || "mac"} />
         </div>
         <div className="imac-stand" aria-hidden="true">
           <span />
@@ -453,7 +472,7 @@ function DesktopWindow({
         <span>
           <app.Icon size={14} /> {app.title}
         </span>
-        <span className="desktop-window-mode">DARK MODE</span>
+        <span className="desktop-window-mode">WORKSPACE</span>
       </div>
       <div className="desktop-window-body">{children}</div>
     </section>

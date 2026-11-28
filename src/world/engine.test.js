@@ -1167,3 +1167,35 @@ test("leaving a playground activity stops it immediately and restores its origin
     game.dispose();
   }
 });
+
+test("stopping and restarting keeps the planted leg phase while footsteps follow actual land movement", async () => {
+  const footstep = jest.fn(),
+    game = createWorld(document.createElement("div"), { onFootstep: footstep });
+  try {
+    await Promise.resolve();
+    frame(16);
+    window.dispatchEvent(
+      new KeyboardEvent("keydown", { key: "d", code: "KeyD" }),
+    );
+    frame(160);
+    const stride = draws.at(-1).gaitTime;
+    expect(stride).toBeGreaterThan(0);
+    expect(footstep).toHaveBeenCalled();
+    window.dispatchEvent(
+      new KeyboardEvent("keyup", { key: "d", code: "KeyD" }),
+    );
+    frame(180);
+    expect(draws.at(-1).moving).toBe(false);
+    expect(draws.at(-1).gaitTime).toBe(stride);
+    const calls = footstep.mock.calls.length;
+    frame(160);
+    expect(footstep).toHaveBeenCalledTimes(calls);
+    window.dispatchEvent(
+      new KeyboardEvent("keydown", { key: "d", code: "KeyD" }),
+    );
+    frame(80);
+    expect(draws.at(-1).gaitTime).toBeGreaterThan(stride);
+  } finally {
+    game.dispose();
+  }
+});

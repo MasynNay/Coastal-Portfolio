@@ -117,3 +117,21 @@ The earlier portfolio keeps its original branding and project screenshots, so it
 Created by [Masyn Nay](https://github.com/MasynNay). The project demos retain the context and credits of the original boot camp group projects. Source artwork and attribution records are kept under [docs/source-assets](docs/source-assets) and [docs/licenses](docs/licenses).
 
 This is a personal portfolio with fan-inspired costumes and activities. It is not affiliated with the franchises referenced in those designs.
+
+## Island passport and collection room
+
+Inventory now includes an **Island Passport**, **My Display Room**, and **Save Backup**. The passport builds on the existing visit/secret journal, adding collection milestones and unlockable room themes. The six display shelves reference items the visitor actually owns; rearranging a shelf never creates another catch or card.
+
+Favorites and name/rarity sorting are available in the card binder and creature collections. Save Backup exports an island-only JSON file, previews imported progress, and asks the visitor to restore explicitly. It supports manual transfer between devices, including an unfinished card reveal. It is not cloud synchronization and does not include emulator save files.
+
+The Help panel includes opt-in sound/volume controls and a Character Motion Studio. Ocean ambience and short original synthesized effects use a single audio context and suspend when the tab is hidden. The studio compares the existing walk/run artwork in eight directions, using Everyday Masyn as a consistent reference.
+
+See [Island Life](docs/IslandLife.md) for the storage boundaries, progress rules, and verification notes.
+
+## Workspace computer styles
+
+The experience previously called Mac Mode is now **Workspace**. Open its system menu and choose **Customize Workspace** to select Mac, Windows, or Ubuntu styling alongside the existing wallpapers and bezel colors. Switching styles keeps app windows, game sessions, and content in place; the choice is saved on this device. These are interface styles for the same browser portfolio, not actual operating systems.
+
+Mac retains its floating dock and left-side window controls. Windows uses a bottom taskbar and right-side window controls; Ubuntu uses a side launcher on wider screens and a touch-friendly bottom launcher on phones. Window dragging continues to use the same bounded pointer/keyboard implementation. The existing `/design/desktop` address remains available for bookmarks.
+
+The Profile app introduces Masyn without the earlier casual greeting, ASCII uses its own flower icon, and Games puts Island Arcade before the Game Boy Advance library.

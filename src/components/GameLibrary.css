@@ -3,3 +3,9 @@
   padding: 24px;
   color: #e6f0eb;
 }
+
+.game-library-category > h3 {
+  font-size: 1.15rem;
+  margin: 24px 0 16px;
+  color: #d4e8dc;
+}

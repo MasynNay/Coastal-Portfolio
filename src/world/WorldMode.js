@@ -1,10 +1,18 @@
+import Passport from "./Passport";
+import DisplayRoom from "./DisplayRoom";
+import SaveBackup from "./SaveBackup";
+import AnimationReview from "./AnimationReview";
+import IslandAudioControls from "./IslandAudioControls";
+import { createIslandAudio } from "./IslandAudio";
+import { discoveredFish } from "./Fish";
+import { discoveredBugs } from "./Bugs";
+import "./IslandLife.css";
 import CardPacks, { CardCollection } from "./CardPacks";
 import RoomArcade from "./RoomArcade";
 import AsciiApp from "../ascii/AsciiStudio";
 import "../ascii/AsciiLauncher.css";
 import LoveLetter from "./LoveLetter";
 import RomDownload from "../components/RomDownload";
-import { playWindSong } from "./WindStatue";
 import IslandGames from "./games/IslandGames";
 import { gameTitles } from "./games/GameLocations";
 import IslandJournal, { islandSecrets } from "./IslandJournal";
@@ -136,6 +144,14 @@ function FishingResult({ result, onClose, onAgain, onAquariums }) {
       >
         {result.caught ? <SpritePose asset="fish" scale={0.5} /> : "〰"}
       </span>
+      {result.firstDiscovery && (
+        <span
+          className="discovery-badge"
+          data-rare={species?.rarity === "Super rare"}
+        >
+          First Discovery!
+        </span>
+      )}
       <h3>{result.caught ? "You caught a fish!" : "It got away!"}</h3>
       <p>
         {result.caught
@@ -243,6 +259,9 @@ export default function WorldMode() {
     },
     [syncMapPlayer],
   );
+  const knownFish = useRef(discoveredFish(readAquariums()));
+  const knownBugs = useRef(discoveredBugs(readTerrariums()));
+  const audio = useRef(null);
   const host = useRef(null),
     engine = useRef(null),
     labelRefs = useRef({}),
@@ -260,6 +279,7 @@ export default function WorldMode() {
     setMenu("field-guide");
   }
   const closeIntro = useCallback(() => {
+    audio.current?.unlock();
     setIntro(false);
   }, []);
   const [status, setStatus] = useState({
@@ -340,10 +360,13 @@ export default function WorldMode() {
   useEffect(() => {
     const title = document.title;
     document.title = "Game Mode · Masyn Nay";
+    audio.current = createIslandAudio();
     try {
       engine.current = createWorld(host.current, {
         secrets: initialSecrets.current,
         onStatus: setStatus,
+        onFootstep: (distance, surface, running) =>
+          audio.current?.step(distance, surface, running),
         onCollection: setCaught,
         onAquariums: setAquariums,
         onShells: setShells,
@@ -372,6 +395,14 @@ export default function WorldMode() {
             }));
         },
         onEvent: (event) => {
+          if (event.type === "fishing-result" && event.caught) {
+            event.firstDiscovery = !knownFish.current[event.fishId];
+            knownFish.current[event.fishId] = 1;
+            const species = fishSpecies.find((f) => f.id === event.fishId);
+            audio.current?.sound(
+              species?.rarity === "Super rare" ? "rare" : "discovery",
+            );
+          }
           if (
             ["room-unlocked", "room-arcade", "love-letter"].includes(event.type)
           ) {
@@ -387,7 +418,7 @@ export default function WorldMode() {
             }
           }
           if (event.type === "wind-song") {
-            playWindSong();
+            audio.current?.sound("wind-song");
             announce("A little melody carries across the sea. ♫");
             return;
           }
@@ -464,6 +495,7 @@ export default function WorldMode() {
     }
     return () => {
       engine.current?.dispose();
+      audio.current?.dispose();
       clearTimeout(toastTimer.current);
       document.title = title;
     };
@@ -471,6 +503,7 @@ export default function WorldMode() {
   useEffect(() => {
     const paused = !!dialog || !!menu || intro;
     engine.current?.freeze(paused);
+    audio.current?.scene({ paused, room: status.room });
     // Closing a panel unfreezes and clears movement first. Queue rental walks
     // after that step so the new route isn't immediately canceled by unfreezing.
     if (!paused && pendingRide.current) {
@@ -484,7 +517,7 @@ export default function WorldMode() {
         );
       else announce("Step onto land outside to walk to your ride.");
     }
-  }, [dialog, menu, intro, announce]);
+  }, [dialog, menu, intro, announce, status.room]);
   useEffect(() => {
     try {
       localStorage.setItem("masyn-world-v1", JSON.stringify(progress));
@@ -553,7 +586,7 @@ export default function WorldMode() {
           </Link>
           <nav aria-label="Portfolio modes">
             <Link to="/design/glass">Website</Link>
-            <Link to="/design/desktop">Mac Mode</Link>
+            <Link to="/design/desktop">Workspace</Link>
             <span aria-current="page">Game mode</span>
           </nav>
         </header>
@@ -569,8 +602,8 @@ export default function WorldMode() {
             className="world-progress"
             aria-label="Open island journal"
             aria-haspopup="dialog"
-            aria-expanded={menu === "journal"}
-            onClick={() => setMenu("journal")}
+            aria-expanded={menu === "passport" || menu === "journal"}
+            onClick={() => setMenu("passport")}
           >
             {progress.visited.length} / 6 places visited <span>•</span>{" "}
             {progress.secrets.length} secrets found
@@ -740,9 +773,14 @@ export default function WorldMode() {
       )}
       {menu && (
         <Dialog
-          wide={["aquariums", "terrariums", "field-guide", "cards"].includes(
-            menu,
-          )}
+          wide={[
+            "aquariums",
+            "terrariums",
+            "field-guide",
+            "cards",
+            "passport",
+            "display-room",
+          ].includes(menu)}
           className={
             menu === "travel"
               ? "world-map-panel"
@@ -753,27 +791,57 @@ export default function WorldMode() {
                   : ""
           }
           title={
-            menu === "journal"
-              ? "Island journal"
-              : menu === "field-guide"
-                ? "Island Field Guide"
-                : menu === "travel"
-                  ? "Island map"
-                  : menu === "characters"
-                    ? "Who’s exploring today?"
-                    : menu === "aquariums"
-                      ? "Aquariums"
-                      : menu === "inventory"
-                        ? "Inventory"
-                        : menu === "cards"
-                          ? "Card Collection"
-                          : menu === "terrariums"
-                            ? "Terrariums"
-                            : "Make yourself at home"
+            menu === "passport"
+              ? "Island Passport"
+              : menu === "display-room"
+                ? "My Display Room"
+                : menu === "save-backup"
+                  ? "Save Backup"
+                  : menu === "motion"
+                    ? "Character Motion Studio"
+                    : menu === "journal"
+                      ? "Island journal"
+                      : menu === "field-guide"
+                        ? "Island Field Guide"
+                        : menu === "travel"
+                          ? "Island map"
+                          : menu === "characters"
+                            ? "Who’s exploring today?"
+                            : menu === "aquariums"
+                              ? "Aquariums"
+                              : menu === "inventory"
+                                ? "Inventory"
+                                : menu === "cards"
+                                  ? "Card Collection"
+                                  : menu === "terrariums"
+                                    ? "Terrariums"
+                                    : "Make yourself at home"
           }
           onClose={() => setMenu(null)}
         >
-          {menu === "journal" ? (
+          {menu === "passport" ? (
+            <Passport
+              progress={progress}
+              bugs={caught}
+              fish={aquariums}
+              shells={shells}
+              onJournal={() => setMenu("journal")}
+              onRoom={() => setMenu("display-room")}
+              onBackup={() => setMenu("save-backup")}
+            />
+          ) : menu === "display-room" ? (
+            <DisplayRoom
+              progress={progress}
+              bugs={caught}
+              fish={aquariums}
+              shells={shells}
+              onBack={() => setMenu("inventory")}
+            />
+          ) : menu === "save-backup" ? (
+            <SaveBackup onBack={() => setMenu("inventory")} />
+          ) : menu === "motion" ? (
+            <AnimationReview />
+          ) : menu === "journal" ? (
             <IslandJournal
               progress={progress}
               hunt={status.hunt}
@@ -852,6 +920,9 @@ export default function WorldMode() {
               onFieldGuide={() => openGuide()}
               onAquariums={() => setMenu("aquariums")}
               onCards={() => setMenu("cards")}
+              onPassport={() => setMenu("passport")}
+              onDisplay={() => setMenu("display-room")}
+              onBackup={() => setMenu("save-backup")}
               onTerrariums={() => setMenu("terrariums")}
             />
           ) : menu === "terrariums" ? (
@@ -936,6 +1007,25 @@ export default function WorldMode() {
             </div>
           ) : (
             <>
+              <div className="island-life-actions">
+                <button onClick={() => setMenu("passport")}>
+                  Island Passport
+                </button>
+                <button onClick={() => setMenu("save-backup")}>
+                  Save Backup
+                </button>
+                <button onClick={() => setMenu("motion")}>
+                  Character Motion Studio
+                </button>
+              </div>
+              <IslandAudioControls
+                onChange={(next) => audio.current?.configure(next)}
+              />
+              <p>
+                Open Inventory for your Island Passport, favorites, display
+                room, and save backups. Backups move your progress between
+                devices manually.
+              </p>
               <h3>The beach & island journal</h3>
               <p>
                 Tap or click the places / secrets counter to review discoveries
@@ -1208,7 +1298,15 @@ export default function WorldMode() {
               id={dialog.id}
               onClose={() => setDialog(null)}
               onCatch={() => {
+                const first = !knownBugs.current[dialog.id];
                 engine.current?.catchBug(dialog.id);
+                knownBugs.current[dialog.id] = 1;
+                if (first) {
+                  audio.current?.sound("discovery");
+                  announce(
+                    "First discovery! A new species is in your field guide.",
+                  );
+                }
                 setDialog(null);
                 setMenu("terrariums");
               }}

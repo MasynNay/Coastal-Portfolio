@@ -7,7 +7,7 @@ import BrandMark from "./BrandMark";
 import linkedinIcon from "../assets/images/linkedin.svg";
 import githubIcon from "../assets/images/github.svg";
 import instagramIcon from "../assets/images/instagram.svg";
-import { Apple, Controller, List, X } from "react-bootstrap-icons";
+import { Display, Controller, List, X } from "react-bootstrap-icons";
 
 export const NavBar = ({ glass = false }) => {
   const [activeLink, setActiveLink] = useState("home");
@@ -126,12 +126,12 @@ export const NavBar = ({ glass = false }) => {
             <Link
               to="/design/desktop"
               className="glass-mac-button glass-mode-button"
-              aria-label="Open Mac Mode"
-              data-tooltip="Explore Mac Mode"
+              aria-label="Open Workspace"
+              data-tooltip="Explore Workspace"
               onClick={() => setExpanded(false)}
             >
-              <Apple size={20} aria-hidden="true" />
-              <span>Mac Mode</span>
+              <Display size={20} aria-hidden="true" />
+              <span>Workspace</span>
             </Link>
           )}
           {glass && (

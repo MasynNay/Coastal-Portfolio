@@ -6,7 +6,7 @@ export const cardKey = (c) =>
   cardsById[c.id]
     ? `${c.id}-${c.variant || "Regular"}`
     : `${c.id}-${c.rarity}-${c.variant || "Regular"}`;
-function cleanCards(data) {
+export function cleanCards(data) {
   const result = {};
   for (const c of Object.values(data || {})) {
     if (
@@ -38,36 +38,58 @@ function cleanCards(data) {
   }
   return result;
 }
+// Shared by normal loading and backup validation; incoming metadata is replaced
+// with the shipped catalog, while quantities and an unfinished reveal survive.
+export function normalizeCardCollection(saved) {
+  if (!saved || saved.version !== 2) return null;
+  const p = saved.pending;
+  const pending =
+    Array.isArray(p?.cards) &&
+    p.cards.length === 5 &&
+    packs.some((pack) => pack.id === p.setId) &&
+    Number.isInteger(p.index) &&
+    p.index >= 0 &&
+    p.index < 5 &&
+    p.cards.every(
+      (c) =>
+        c &&
+        (cardsById[c.id] ||
+          (pokemonNames[c.id] &&
+            ["Common", "Uncommon", "Rare", "Holo Rare", "Legendary"].includes(
+              c.rarity,
+            ))),
+    )
+      ? {
+          setId: p.setId,
+          index: p.index,
+          flipped: !!p.flipped,
+          cards: p.cards.map((c) => ({
+            ...Object.values(cleanCards({ card: { ...c, quantity: 1 } }))[0],
+            quantity: 1,
+          })),
+        }
+      : null;
+  return {
+    version: 2,
+    packs: Object.fromEntries(
+      packs.map((pack) => [
+        pack.id,
+        Math.min(
+          99,
+          Math.max(0, Math.floor(Number(saved.packs?.[pack.id]) || 0)),
+        ),
+      ]),
+    ),
+    cards: cleanCards(saved.cards),
+    pending,
+  };
+}
 export function readCardCollection() {
   try {
-    const saved = JSON.parse(localStorage.getItem(key));
-    if (saved && saved.version === 2)
-      return {
-        version: 2,
-        packs: Object.fromEntries(
-          packs.map((p) => [
-            p.id,
-            Math.min(
-              99,
-              Math.max(0, Math.floor(Number(saved.packs?.[p.id]) || 0)),
-            ),
-          ]),
-        ),
-        cards: cleanCards(saved.cards),
-        pending:
-          Array.isArray(saved.pending?.cards) &&
-          saved.pending.cards.length === 5 &&
-          packs.some((p) => p.id === saved.pending.setId) &&
-          Number.isInteger(saved.pending.index) &&
-          saved.pending.index >= 0 &&
-          saved.pending.index < 5 &&
-          saved.pending.cards.every(
-            (c) => c && (pokemonNames[c.id] || cardsById[c.id]),
-          )
-            ? saved.pending
-            : null,
-      };
-    // Earlier cards are retained; no old album is erased on this upgrade.
+    const current = normalizeCardCollection(
+      JSON.parse(localStorage.getItem(key)),
+    );
+    if (current) return current;
     return {
       version: 2,
       packs: {},
@@ -109,7 +131,11 @@ export function ripOwnedPack(id, random = Math.random) {
   const state = read(),
     pack = packs.find((p) => p.id === id);
   if (!pack || state.pending || !state.packs[id]) return null;
-  const cards = openPack(pack, random),
+  const known = new Set(Object.values(state.cards).map((c) => c.id));
+  const cards = openPack(pack, random).map((c) => ({
+      ...c,
+      firstDiscovery: !known.has(c.id),
+    })),
     album = { ...state.cards };
   cards.forEach((c) => {
     const id = cardKey(c);

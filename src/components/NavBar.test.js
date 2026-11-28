@@ -63,13 +63,13 @@ test("the resume page announces its active page and keeps working navigation to 
   expect(links[1].getAttribute("aria-current")).toBe("page");
 });
 
-test("Game Mode has a visible mobile-menu label after Mac Mode and closes navigation on selection", () => {
+test("Game Mode has a visible mobile-menu label after Workspace and closes navigation on selection", () => {
   show("/design/glass");
   const toggle = host.querySelector(".navbar-toggler");
   act(() => toggle.click());
   const modes = host.querySelectorAll(".glass-mac-button");
   expect([...modes].map((link) => link.textContent.trim())).toEqual([
-    "Mac Mode",
+    "Workspace",
     "Game Mode",
   ]);
   expect(modes[1].getAttribute("href")).toBe("/world");

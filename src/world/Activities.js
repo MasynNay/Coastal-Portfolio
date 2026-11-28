@@ -1,3 +1,5 @@
+import { useFavorites, sortCreatures } from "./CollectionPreferences";
+import CollectionTools from "./CollectionTools";
 import { useCardCollection } from "./CardCollection";
 import { readGold } from "./NoFace";
 import { Book } from "react-bootstrap-icons";
@@ -65,7 +67,15 @@ export function Terrariums({ caught, onRelease }) {
     [paused, setPaused] = useState(false),
     [selected, setSelected] = useState(null);
   const [homes, setHomes] = useState(readBugHomes);
-  const spiders = terrariumSpecies.filter((s) => !!caught[s.id]);
+  const { favorites, toggle } = useFavorites("bugs");
+  const [onlyFavorites, setOnlyFavorites] = useState(false),
+    [sort, setSort] = useState("Name");
+  const spiders = sortCreatures(
+    terrariumSpecies.filter(
+      (s) => !!caught[s.id] && (!onlyFavorites || favorites.includes(s.id)),
+    ),
+    sort,
+  );
   const resident = spiders.find((s) => s.id === selected) || spiders[0];
   return (
     <div className="spider-home">
@@ -73,7 +83,15 @@ export function Terrariums({ caught, onRelease }) {
         Each species has a home of its own. Swipe or scroll the creature strip
         to choose one, then tap or click its habitat to look closer.
       </p>
-      <CollectingHelp kind="bugs" expanded={!spiders.length} />
+      <CollectionTools
+        favorite={favorites.includes(resident?.id)}
+        onFavorite={resident ? () => toggle(resident.id) : undefined}
+        onlyFavorites={onlyFavorites}
+        onOnlyFavorites={setOnlyFavorites}
+        sort={sort}
+        onSort={setSort}
+      />
+      <CollectingHelp kind="bugs" expanded={!Object.keys(caught).length} />
       {spiders.some((s) => s.legacy) && (
         <p className="activity-note">
           Your earlier island discoveries are still here. The current field
@@ -82,8 +100,9 @@ export function Terrariums({ caught, onRelease }) {
       )}
       {!spiders.length && (
         <div className="spider-empty">
-          No residents yet. Your catches will appear here with their own
-          habitats.
+          {onlyFavorites
+            ? "No favorite residents in this collection yet."
+            : "No residents yet. Your catches will appear here with their own habitats."}
         </div>
       )}
       {!!spiders.length && (
@@ -242,6 +261,9 @@ export function Inventory({
   onAquariums,
   onFieldGuide,
   onCards,
+  onPassport,
+  onDisplay,
+  onBackup,
 }) {
   const cards = useCardCollection();
   const ids = Object.keys(caught);
@@ -253,6 +275,11 @@ export function Inventory({
   return (
     <div className="world-inventory">
       <p>A home for the little things you find along the way.</p>
+      <div className="island-life-actions">
+        <button onClick={onPassport}>Island Passport</button>
+        <button onClick={onDisplay}>My Display Room</button>
+        <button onClick={onBackup}>Save Backup</button>
+      </div>
       <button className="inventory-folder" onClick={onFieldGuide}>
         <span className="inventory-folder-icon">
           <Book size={40} aria-hidden="true" />

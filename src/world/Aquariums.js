@@ -1,3 +1,5 @@
+import { useFavorites, sortCreatures } from "./CollectionPreferences";
+import CollectionTools from "./CollectionTools";
 import { rarities } from "./Rarity";
 import { useState } from "react";
 import HabitatResidents from "./HabitatResidents";
@@ -13,9 +15,17 @@ export default function Aquariums({ caught, onRelease }) {
     [filter, setFilter] = useState("All"),
     [paused, setPaused] = useState(false),
     [selected, setSelected] = useState(null);
+  const { favorites, toggle } = useFavorites("fish");
+  const [onlyFavorites, setOnlyFavorites] = useState(false),
+    [sort, setSort] = useState("Name");
   const collected = fishSpecies.filter((f) => caught[f.id]);
-  const visible = collected.filter(
-    (f) => filter === "All" || filter === f.rarity,
+  const visible = sortCreatures(
+    collected.filter(
+      (f) =>
+        (filter === "All" || filter === f.rarity) &&
+        (!onlyFavorites || favorites.includes(f.id)),
+    ),
+    sort,
   );
   const resident = visible.find((f) => f.id === selected) || visible[0];
   return (
@@ -24,6 +34,14 @@ export default function Aquariums({ caught, onRelease }) {
         Your aquatic finds, with a little room to explore. {collected.length} /{" "}
         {fishSpecies.length} types discovered.
       </p>
+      <CollectionTools
+        favorite={favorites.includes(resident?.id)}
+        onFavorite={resident ? () => toggle(resident.id) : undefined}
+        onlyFavorites={onlyFavorites}
+        onOnlyFavorites={setOnlyFavorites}
+        sort={sort}
+        onSort={setSort}
+      />
       <CollectingHelp kind="fish" expanded={!collected.length} />
       {!collected.length ? (
         <div className="spider-empty">

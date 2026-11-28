@@ -1,3 +1,4 @@
+import { SystemIcon, workspaceSystems } from "./WorkspaceSystem";
 import { useRef } from "react";
 import useDialogFocus from "../hooks/useDialogFocus";
 import "./MacAppearance.css";
@@ -83,7 +84,11 @@ const bezels = {
   spruce: metal("Spruce", "#adcab7", "#4f7864", "#385b4b"),
   slateBlue: metal("Storm blue", "#a6b4cd", "#596a89", "#455371"),
 };
-export const defaultAppearance = { wallpaper: "ocean", bezel: "silver" };
+export const defaultAppearance = {
+  system: "mac",
+  wallpaper: "ocean",
+  bezel: "silver",
+};
 
 export function appearanceStyle({ wallpaper, bezel }) {
   return {
@@ -97,6 +102,9 @@ export function readAppearance() {
   try {
     const saved = JSON.parse(localStorage.getItem(preferenceKey));
     return {
+      system: Object.hasOwn(workspaceSystems, saved?.system)
+        ? saved.system
+        : "mac",
       wallpaper: Object.hasOwn(wallpapers, saved?.wallpaper)
         ? saved.wallpaper
         : defaultAppearance.wallpaper,
@@ -151,7 +159,25 @@ export default function MacAppearance({
           <span id="mac-appearance-title">Appearance</span>
         </header>
         <div className="mac-appearance-content">
-          <p>Make this Mac yours. Your choices are saved on this device.</p>
+          <p>
+            Make this workspace yours. Switch computer styles without closing
+            your apps. Your choices are saved on this device.
+          </p>
+          <fieldset>
+            <legend>Computer Style</legend>
+            <div className="workspace-os-picker">
+              {Object.entries(workspaceSystems).map(([id, item]) => (
+                <button
+                  key={id}
+                  aria-pressed={(value.system || "mac") === id}
+                  onClick={() => onChange({ ...value, system: id })}
+                >
+                  <SystemIcon system={id} size={26} />
+                  {item.name}
+                </button>
+              ))}
+            </div>
+          </fieldset>
           {[
             ["wallpaper", "Wallpaper", wallpapers],
             ["bezel", "Bezel color", bezels],

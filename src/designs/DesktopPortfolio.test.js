@@ -36,7 +36,7 @@ afterEach(() => {
 // jsdom does not lay out CSS or implement pointer capture. Supply measured
 // phone-sized bounds, then exercise the real title-bar event handlers.
 function mobileWindow() {
-  act(() => host.querySelector('[aria-label="Open About Masyn"]').click());
+  act(() => host.querySelector('[aria-label="Open Profile"]').click());
   const dialog = host.querySelector('[role="dialog"]');
   const titlebar = dialog.querySelector('[role="toolbar"]');
   const area = dialog.parentElement;
@@ -148,13 +148,11 @@ test("rotation recontains the window above the dock; app scrolling, controls and
   layout.windowWidth = 270;
   act(() => window.dispatchEvent(new Event("resize")));
   expect(point()).toEqual({ x: 42, y: 28 });
-  act(() =>
-    dialog.querySelector('[aria-label="Maximize About Masyn"]').click(),
-  );
+  act(() => dialog.querySelector('[aria-label="Maximize Profile"]').click());
   titlebar.setPointerCapture.mockClear();
   pointer(titlebar, "pointerdown", 130, 90);
   expect(titlebar.setPointerCapture).not.toHaveBeenCalled();
-  act(() => dialog.querySelector('[aria-label="Restore About Masyn"]').click());
+  act(() => dialog.querySelector('[aria-label="Restore Profile"]').click());
   expect(point()).toEqual({ x: 42, y: 28 });
   act(() =>
     titlebar.dispatchEvent(
@@ -182,7 +180,9 @@ test("cartridges open separate game windows; reopening restores one window and c
   act(() => dock.click());
   const library = host.querySelector('[role="dialog"][aria-label="Games"]');
   expect(library.querySelector("iframe")).toBeNull();
-  const cartridges = library.querySelectorAll(".game-cartridge");
+  const cartridges = library.querySelectorAll(
+    ".game-library-category:last-child .game-cartridge",
+  );
   act(() => cartridges[0].click());
   const player = host.querySelector(
     `[role="dialog"][aria-label="${games[0].name}"]`,
@@ -220,3 +220,33 @@ test.each(["Element Runner", "Axolotl Drift"])(
     expect(player.classList.contains("window-maximized")).toBe(false);
   },
 );
+
+test("workspace switches Mac, Windows and Ubuntu without closing apps and keeps its choice", () => {
+  act(() => host.querySelector('[aria-label="Open Profile"]').click());
+  expect(host.textContent).toContain("Masyn Nay");
+  expect(host.textContent).not.toContain("Hey, I’m Masyn");
+  act(() => host.querySelector('[aria-label="Open system menu"]').click());
+  act(() =>
+    [...host.querySelectorAll('[role="menuitem"]')]
+      .find((b) => b.textContent === "Customize Workspace…")
+      .click(),
+  );
+  const chooseSystem = (system) =>
+    act(() =>
+      [...host.querySelectorAll(".workspace-os-picker button")]
+        .find((b) => b.textContent === system)
+        .click(),
+    );
+  for (const system of ["Windows", "Ubuntu", "Mac"]) {
+    chooseSystem(system);
+    expect(host.querySelector(".desktop-studio").dataset.system).toBe(
+      system.toLowerCase(),
+    );
+    expect(
+      host.querySelector('[role="dialog"][aria-label="Profile"]'),
+    ).not.toBeNull();
+    expect(
+      JSON.parse(localStorage.getItem("masyn-mac-appearance")).system,
+    ).toBe(system.toLowerCase());
+  }
+});

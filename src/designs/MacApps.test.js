@@ -1,7 +1,7 @@
 import { act } from "react";
 import { createRoot } from "react-dom/client";
 import { GamesApp, GamePlayer, PhotosApp } from "./MacApps";
-import { games, islandGames } from "../data/games";
+import { games, islandGames, gameShelf } from "../data/games";
 
 let host, root, originalFetch;
 beforeEach(() => {
@@ -26,7 +26,7 @@ test("the cartridge shelf opens a game window without embedding a player in the 
   act(() => root.render(<GamesApp onOpen={open} />));
   const picks = host.querySelectorAll(".mac-game-picker .game-cartridge");
   expect(picks).toHaveLength(games.length);
-  for (const [index, game] of games.entries()) {
+  for (const [index, game] of gameShelf.entries()) {
     act(() => picks[index].click());
     expect(open).toHaveBeenLastCalledWith(game);
     expect(picks[index].getAttribute("aria-pressed")).toBe("true");

@@ -42,7 +42,7 @@ test("binder paginates the complete checklist and combines ownership, set and ra
   act(() => button("Missing Cards").click());
   expect(host.querySelectorAll(".owned-card-slot")).toHaveLength(0);
   expect(host.textContent).toContain("199 missing cards");
-  const filters = host.querySelectorAll("select");
+  const filters = host.querySelectorAll(".album-filters select");
   change(filters[0], card.setId);
   change(filters[1], "SIR");
   const matches = cardCatalog.filter(
@@ -78,4 +78,15 @@ test("card inspection replaces the grid, supports keyboard browsing and Escape r
   act(() => document.activeElement.dispatchEvent(escape));
   expect(escape.defaultPrevented).toBe(true);
   expect(host.querySelector(".card-album-grid")).not.toBeNull();
+});
+
+test("favorites are limited to owned prints and remain selectable from the binder", () => {
+  const card = cardCatalog[0];
+  render({ owned: { ...card, quantity: 1 } });
+  act(() => host.querySelector(".owned-card-slot").click());
+  act(() => button("☆ Add Favorite").click());
+  expect(button("★ Favorite").getAttribute("aria-pressed")).toBe("true");
+  act(() => button("← Back to Binder").click());
+  act(() => button("Favorites Only").click());
+  expect(host.querySelectorAll(".card-album-grid>button")).toHaveLength(1);
 });

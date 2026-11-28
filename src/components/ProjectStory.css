@@ -1,0 +1,39 @@
+/* Project evidence is a readable disclosure inside the existing card body. */
+.glass-project-body .project-story {
+  border-top: 1px solid #adceca33;
+  padding-top: 16px;
+  margin-top: 20px;
+  line-height: 1.7;
+  color: #c3d2d3;
+}
+.project-story summary {
+  cursor: pointer;
+  min-height: 44px;
+  display: list-item;
+  color: #d4e9d9;
+  font-weight: 600;
+  padding: 8px 0;
+}
+.project-story small {
+  font-size: 0.85rem;
+  display: block;
+  margin: 10px 0;
+  color: #b1c8bc;
+}
+.project-story dl {
+  margin: 15px 0;
+}
+.project-story dt {
+  font-size: 0.9rem;
+  color: #e1e7d6;
+  margin-top: 16px;
+}
+.project-story dd {
+  font-size: 1rem;
+  margin: 5px 0 0;
+}
+.project-story a {
+  display: inline-block;
+  min-height: 44px;
+  padding: 8px 0;
+}

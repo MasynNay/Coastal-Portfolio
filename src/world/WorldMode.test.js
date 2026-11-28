@@ -133,6 +133,12 @@ test("the progress badge opens a named journal with visited homes, discovered se
   expect(badge.textContent).toContain("1 / 6 places visited");
   expect(badge.textContent).toContain("1 secrets found");
   act(() => badge.click());
+  expect(host.querySelector('[aria-label="Island Passport"]')).not.toBeNull();
+  act(() =>
+    [...host.querySelectorAll("button")]
+      .find((b) => b.textContent === "Discoveries & Secrets")
+      .click(),
+  );
   const panel = host.querySelector('[aria-label="Island journal"]');
   expect(panel).not.toBeNull();
   expect(panel.textContent).toContain(GAME_PORTALS["game-home"].title);
@@ -178,7 +184,11 @@ test("the Lodge library opens all cartridges and unloads a player when returning
   const panel = host.querySelector('[aria-label="Windfall Arcade"]');
   expect(panel.querySelectorAll(".game-cartridge")).toHaveLength(18);
   expect(game.freeze).toHaveBeenLastCalledWith(true);
-  act(() => panel.querySelector(".game-cartridge").click());
+  act(() =>
+    panel
+      .querySelector(".game-library-category:last-child .game-cartridge")
+      .click(),
+  );
   expect(panel.querySelector("iframe").getAttribute("src")).toContain(
     "/emulator/player.html?game=",
   );

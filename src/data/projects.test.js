@@ -13,10 +13,10 @@ test("Anything Plays is a truthful, fully linked desktop project", () => {
   expect(entry.imgUrl).toBe("/images/projects/anything-plays-ocarina.webp");
   expect(entry.previewKind).toBe("interface");
   expect(entry.release).toBe(
-    "https://github.com/MasynNay/anything-plays/releases/tag/v3.0.0",
+    "https://github.com/MasynNay/anything-plays/releases/tag/v3.3.0",
   );
   expect(entry.demo).toBeUndefined();
-  expect(entry.description).toMatch(/3\.0 release.*18 console profiles/i);
+  expect(entry.description).toMatch(/3\.3 release.*18 console profiles/i);
   expect(webProjects.filter((project) => project.id === entry.id)).toHaveLength(
     1,
   );

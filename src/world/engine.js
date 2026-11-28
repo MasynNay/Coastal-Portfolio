@@ -43,7 +43,7 @@ import { bikes, createBikeRide } from "./Bikes";
 import { planGlide, glideVisual } from "./Glide";
 import { planTumbling, tumblingPose } from "./Tumbling";
 import { createWebs } from "./Heroes";
-import { townProps, pond, mailboxes, isOcean } from "./TownLayout";
+import { townProps, pond, mailboxes, isOcean, streets } from "./TownLayout";
 import { walkSpeed, runSpeed } from "./Movement";
 import { advanceGait } from "./Gait";
 import { familyGreeting } from "./Interactions";
@@ -1484,10 +1484,25 @@ export function createWorld(host, callbacks) {
               next.x - previous.x,
               next.z - previous.z,
             );
-            gaitTime += advanceGait(
-              Math.hypot(projected.x, projected.z),
-              running,
-            );
+            const distanceMoved = Math.hypot(projected.x, projected.z);
+            gaitTime += advanceGait(distanceMoved, running);
+            if (!surfing)
+              callbacks.onFootstep?.(
+                distanceMoved,
+                isSand(next.x, next.z)
+                  ? "sand"
+                  : room ||
+                      streets.some(
+                        (s) =>
+                          next.x >= s.x &&
+                          next.x <= s.x + s.w &&
+                          next.z >= s.z &&
+                          next.z <= s.z + s.d,
+                      )
+                    ? "stone"
+                    : "grass",
+                running,
+              );
           }
           position = next;
           if (surfing && !isWater(position.x, position.z)) surfing = false;
@@ -1538,7 +1553,8 @@ export function createWorld(host, callbacks) {
       );
       if (message) callbacks.onEvent?.({ type: "notice", message });
     }
-    if (!moving) gaitTime = 0;
+    // Keep the planted stride phase while idle; restarting no longer rewinds
+    // to the first leg pose on every short tap. Room resets still clear it.
     if (
       dirty ||
       moving ||

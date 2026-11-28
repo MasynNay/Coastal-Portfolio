@@ -11,11 +11,11 @@ export const webProjects = [
     category: "Software",
     label: "05 / INDEPENDENT DESKTOP SOFTWARE",
     description:
-      "Turn a webcam into a controller for classic games. Track a color on a hand, toy, or fish and map movement to game inputs, or play with a keyboard. The free 3.0 release bundles 11 emulator cores for 18 console profiles, including Nintendo 64 and GameCube. The desktop app runs offline on Windows, macOS, and Linux.",
+      "Turn a webcam into a controller for classic games. Track a color on a hand, toy, or fish and map movement to game inputs, or play with a keyboard. The free 3.3 release bundles 11 emulator cores for 18 console profiles, including Nintendo 64 and GameCube. The desktop app runs offline on Windows, macOS, and Linux.",
     tools:
       "Python · OpenCV · Tkinter · Libretro · PyInstaller · GitHub Actions",
     github: "https://github.com/MasynNay/anything-plays",
-    release: "https://github.com/MasynNay/anything-plays/releases/tag/v3.0.0",
+    release: "https://github.com/MasynNay/anything-plays/releases/tag/v3.3.0",
   },
   {
     id: "aftertone",

@@ -1,0 +1,533 @@
+/* Shared island collection additions: scoped layouts fit the room dialog and
+   collapse to a single reading column on phones without sideways page scroll. */
+.world-dialog .island-life-actions,
+.world-dialog .collection-tools {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  margin: 18px 0;
+}
+.world-dialog .island-life-actions button,
+.world-dialog .collection-tools button {
+  min-height: 44px;
+  flex: 1 1 140px;
+}
+.world-dialog .collection-tools label,
+.world-dialog .display-theme,
+.world-dialog .animation-review-controls label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+  min-width: 140px;
+}
+.world-dialog .collection-tools select,
+.world-dialog .display-theme select,
+.world-dialog .animation-review select {
+  min-height: 44px;
+  width: 100%;
+  background: #203b3f;
+  color: #eef6e9;
+  border: 1px solid #b0cebe66;
+  border-radius: 10px;
+  padding: 9px 12px;
+  font: inherit;
+}
+.world-dialog .collection-tools button[aria-pressed="true"] {
+  background: #b2d4b8;
+  color: #142e31;
+}
+.world-dialog .passport-cover {
+  border: 1px solid #b9d8b66b;
+  border-radius: 18px;
+  padding: 30px;
+  background: radial-gradient(ellipse at top, #335950, #152e32);
+  text-align: center;
+}
+.world-dialog .passport-cover h3 {
+  font:
+    2rem Georgia,
+    serif;
+  line-height: 1.2;
+  margin: 14px 0;
+}
+.world-dialog .passport-cover > span {
+  display: inline-block;
+  border: 1px solid #adcaa76b;
+  border-radius: 20px;
+  padding: 6px 16px;
+  color: #e4e5b6;
+}
+.world-dialog .passport-stamps {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+.world-dialog .passport-stamps > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 2px dashed #899d9644;
+  border-radius: 50%;
+  aspect-ratio: 1;
+  padding: 8px;
+  text-align: center;
+  color: #a6bab4;
+}
+.world-dialog .passport-stamps > div[data-earned="true"] {
+  border: 2px solid #b9d499;
+  background: #48706544;
+  color: #e4eed8;
+  transform: rotate(-3deg);
+}
+.world-dialog .passport-stamps span {
+  font-size: 1.6rem;
+}
+.world-dialog .passport-stamps small {
+  letter-spacing: normal;
+  font-size: 0.875rem;
+}
+.world-dialog .passport-milestones {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+.world-dialog .passport-milestones article {
+  border: 1px solid #a6c3b444;
+  border-radius: 14px;
+  padding: 18px;
+  background: #1b3439;
+}
+.world-dialog .passport-milestones article[data-earned="true"] {
+  border-color: #b6d295;
+}
+.world-dialog .passport-milestones article p {
+  margin: 4px 0 10px;
+}
+.world-dialog .passport-milestones progress {
+  width: 100%;
+  accent-color: #b5d6aa;
+  height: 8px;
+  display: block;
+}
+.world-dialog .passport-milestones article > span,
+.world-dialog .passport-milestones article > small {
+  display: block;
+  letter-spacing: normal;
+  font-size: 0.875rem;
+  margin-top: 6px;
+}
+.world-dialog .passport-favorites {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+}
+.world-dialog .passport-favorites > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  min-width: 0;
+}
+.world-dialog .passport-favorites .collection-icon {
+  width: 76px;
+  height: 76px;
+}
+.world-dialog .display-theme {
+  margin: 15px 0;
+}
+.world-dialog .display-room {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid #b0c9b956;
+  background: repeating-linear-gradient(
+    90deg,
+    #345759 0,
+    #345759 62px,
+    #2d4d50 64px
+  );
+  padding: 24px 18px;
+  isolation: isolate;
+}
+.world-dialog .display-room[data-theme="moon"] {
+  background: repeating-linear-gradient(
+    90deg,
+    #28374e 0,
+    #28374e 62px,
+    #202d44 64px
+  );
+}
+.world-dialog .display-room[data-theme="fern"] {
+  background: repeating-linear-gradient(
+    90deg,
+    #2c523c 0,
+    #2c523c 62px,
+    #244832 64px
+  );
+}
+.world-dialog .display-window {
+  position: absolute;
+  right: 20px;
+  top: 15px;
+  width: 100px;
+  height: 130px;
+  border-radius: 50px 50px 0 0;
+  border: 8px solid #bbad89;
+  background: linear-gradient(#7ba9b1, #b9d7bc);
+  opacity: 0.22;
+  z-index: -1;
+}
+.world-dialog .display-room[data-theme="moon"] .display-window {
+  background:
+    radial-gradient(circle at 65% 25%, #ffffda 0 12%, transparent 13%),
+    linear-gradient(#1c294a, #768aa0);
+  opacity: 0.5;
+}
+.world-dialog .display-shelves {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px 14px;
+}
+.world-dialog .display-shelf {
+  min-width: 0;
+  padding: 8px 6px 14px;
+  border-bottom: 12px solid #9e7957;
+  box-shadow: 0 8px 5px -5px #071c25;
+  text-align: center;
+  background: linear-gradient(transparent, #1a2b3288);
+}
+.world-dialog .display-object {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 190px;
+  width: 100%;
+  padding: 6px;
+  border: 1px dashed #c6d6c130;
+  background: transparent;
+  overflow: hidden;
+}
+.world-dialog .display-object .tcg-card {
+  width: 115px;
+}
+.world-dialog .display-object .tcg-card figcaption {
+  display: none;
+}
+.world-dialog .display-object .collection-icon {
+  width: 105px;
+  height: 105px;
+}
+.world-dialog .display-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 0.875rem;
+  color: #c6d6ce;
+}
+.world-dialog .display-empty b {
+  font-size: 2rem;
+  font-weight: 400;
+}
+.world-dialog .display-habitat {
+  position: relative;
+  width: 100%;
+  height: 140px;
+  border: 3px solid #d0e3dd88;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: inset 0 0 15px #ccfff322;
+}
+.world-dialog .display-habitat > span:first-child {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+}
+.world-dialog .display-habitat .habitat-resident {
+  --resident-scale: 0.62 !important;
+}
+.world-dialog .display-shelf > strong {
+  display: block;
+  min-height: 2.8em;
+  font-size: 0.875rem;
+  line-height: 1.4;
+  margin: 8px 0;
+  overflow-wrap: anywhere;
+}
+.world-dialog .display-reorder {
+  display: flex;
+  gap: 5px;
+}
+.world-dialog .display-reorder button {
+  padding: 6px;
+  min-width: 0;
+  min-height: 44px;
+  font-size: 0.875rem;
+  flex: 1;
+}
+.world-dialog .display-picker {
+  border: 1px solid #adcaba55;
+  border-radius: 14px;
+  padding: 16px;
+  margin-top: 20px;
+  background: #1a3437;
+}
+.world-dialog .display-options {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+  gap: 10px;
+  max-height: 340px;
+  overflow-y: auto;
+}
+.world-dialog .display-options button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+  min-width: 0;
+  gap: 8px;
+  font-size: 0.875rem;
+}
+.world-dialog .display-options img {
+  width: 70px;
+  aspect-ratio: 63/88;
+  object-fit: contain;
+}
+.world-dialog .display-options .collection-icon {
+  width: 70px;
+  height: 70px;
+}
+.world-dialog .backup-file {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+  min-width: 220px;
+}
+.world-dialog .backup-file input {
+  max-width: 100%;
+  font-size: 1rem;
+  min-height: 44px;
+}
+.world-dialog .backup-preview {
+  border: 1px solid #c4c88988;
+  border-radius: 14px;
+  padding: 20px;
+  margin-top: 20px;
+  background: #243f40;
+}
+.world-dialog .backup-preview dl {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+.world-dialog .backup-preview dl > div {
+  padding: 12px;
+  border-radius: 10px;
+  background: #122a30;
+}
+.world-dialog .backup-preview dt {
+  font-weight: 400;
+  color: #c1d1c5;
+}
+.world-dialog .backup-preview dd {
+  font-size: 1.6rem;
+  margin: 0;
+}
+.world-dialog .island-audio-controls {
+  border-top: 1px solid #aac7b544;
+  margin-top: 20px;
+  padding-top: 12px;
+}
+.world-dialog .island-audio-controls label {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 16px 0;
+}
+.world-dialog .island-audio-controls input {
+  min-width: 0;
+  flex: 1;
+  accent-color: #b9dbb1;
+}
+.world-dialog .island-audio-controls output {
+  min-width: 45px;
+}
+.world-dialog .animation-review-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 20px 0;
+}
+.world-dialog .animation-review-stage {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 15px;
+  background: radial-gradient(#48685c, #1b343a);
+  padding: 20px 8px;
+  border-radius: 16px;
+}
+.world-dialog .animation-review-stage > div {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-direction: column;
+  min-width: 0;
+  gap: 15px;
+  overflow: hidden;
+}
+.world-dialog .animation-review > button {
+  margin-top: 16px;
+}
+.world-dialog .discovery-badge {
+  display: inline-block;
+  border: 1px solid #c5d99b;
+  border-radius: 20px;
+  padding: 6px 16px;
+  color: #ecf2b6;
+  background: #42634f;
+  animation: discovery-arrive 0.45s ease-out;
+}
+.world-dialog .discovery-badge[data-rare="true"] {
+  background: linear-gradient(120deg, #3e4967, #735b83, #355d59);
+  border-color: #d6c3f4;
+}
+@keyframes discovery-arrive {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.94);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@media (max-width: 600px) {
+  .world-dialog .passport-cover {
+    padding: 22px 16px;
+  }
+  .world-dialog .passport-cover h3 {
+    font-size: 1.7rem;
+  }
+  .world-dialog .passport-stamps {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .world-dialog .passport-milestones {
+    grid-template-columns: 1fr;
+  }
+  .world-dialog .passport-favorites {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .world-dialog .display-shelves {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px 10px;
+  }
+  .world-dialog .display-room {
+    padding: 16px 10px;
+  }
+  .world-dialog .display-object {
+    height: 165px;
+  }
+  .world-dialog .display-habitat {
+    height: 125px;
+  }
+  .world-dialog .display-object .tcg-card {
+    width: 100px;
+  }
+  .world-dialog .display-reorder {
+    flex-direction: column;
+  }
+  .world-dialog .display-options {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .world-dialog .backup-preview {
+    padding: 14px;
+  }
+  .world-dialog .island-life-actions > button {
+    width: 100%;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .world-dialog .discovery-badge {
+    animation: none;
+  }
+}
+/* Extra collection actions share one compact row on phone card screens. */
+.world-cards-dialog .card-binder-tools {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.world-cards-dialog .card-binder-tools > button {
+  flex: 1;
+}
+.world-cards-dialog .card-binder-tools label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.875rem;
+}
+.world-cards-dialog .card-binder-tools select {
+  min-height: 44px;
+  max-width: 130px;
+  background: #203b3f;
+  color: #e9f1e8;
+  border: 1px solid #8fb1a7;
+  border-radius: 10px;
+  padding: 6px;
+}
+.world-cards-dialog .card-favorite {
+  display: block;
+  margin: 0 auto 10px;
+}
+.world-cards-dialog .card-favorite[aria-pressed="true"] {
+  color: #f5dfa1;
+}
+.world-cards-dialog
+  .world-dialog
+  .pack-reveal-stage:has(.discovery-badge)
+  .world-dialog
+  .reveal-card-button {
+  width: min(250px, 58vw, calc((100dvh - 345px) * 63 / 88));
+}
+.world-cards-dialog
+  .world-dialog
+  .card-inspection-screen:has(.card-favorite)
+  .world-dialog
+  .album-inspection {
+  width: min(300px, 76vw, calc((100dvh - 405px) * 63 / 88));
+}
+.world-dialog .display-search {
+  display: block;
+  margin: 12px 0;
+  font-size: 0.9rem;
+}
+.world-dialog .display-search input {
+  display: block;
+  width: 100%;
+  min-height: 44px;
+  background: #152e32;
+  border: 1px solid #8dad9f;
+  color: #e7f1e3;
+  padding: 10px 12px;
+  border-radius: 10px;
+  font-size: 1rem;
+}
+
+.world-dialog .island-passport,
+.world-dialog .display-room-app,
+.world-dialog .island-backup,
+.world-dialog .island-audio-controls,
+.world-dialog .animation-review {
+  font-size: 1rem;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+.world-dialog .display-picker:focus {
+  outline: 2px solid #bdd6ad;
+  outline-offset: 4px;
+}

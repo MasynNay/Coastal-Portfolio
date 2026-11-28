@@ -1,3 +1,4 @@
+import ProjectStory from "./ProjectStory";
 // Project cards share destinations and preview artwork across portfolio layouts.
 // The glass flag changes presentation, never the project data or navigation.
 import { Link } from "react-router-dom";
@@ -50,6 +51,7 @@ export const ProjectCard = ({
           <div className="glass-project-body">
             <h3>{title}</h3>
             <p>{description}</p>
+            <ProjectStory title={title} />
             <div>
               {demoLink && <Link to={demoLink}>Try the demo ↗</Link>}
               {webLink && (

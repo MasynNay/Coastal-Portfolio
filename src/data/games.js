@@ -92,3 +92,6 @@ export const islandGames = [
 }));
 
 export const games = [...retroGames, ...islandGames];
+
+// Presentation order is separate from route defaults and emulator save IDs.
+export const gameShelf = [...islandGames, ...retroGames];

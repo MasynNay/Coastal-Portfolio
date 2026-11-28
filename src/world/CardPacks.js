@@ -1,3 +1,4 @@
+import { islandSound } from "./IslandAudio";
 import { useEffect, useState } from "react";
 import { packs, cardArt, cardsById, isChase } from "./CardCatalog";
 import {
@@ -187,7 +188,14 @@ export function CardCollection({ onBack, onShop, initialTab = "packs" }) {
     );
   const pending = state.pending;
   const pack = packs.find((p) => p.id === (pending?.setId || opening));
-  const advance = () => (pending?.flipped ? nextCard() : revealCard());
+  const advance = () => {
+    if (!pending) return;
+    if (pending.flipped) nextCard();
+    else {
+      revealCard();
+      islandSound(isChase(pending.cards[pending.index]) ? "rare" : "reveal");
+    }
+  };
   const swipe = useCardSwipe((direction) => {
     if (direction === 1 && pending) advance();
   });
@@ -241,6 +249,14 @@ export function CardCollection({ onBack, onShop, initialTab = "packs" }) {
               </span>
             )}
           </button>
+          {pending.flipped && pending.cards[pending.index].firstDiscovery && (
+            <span
+              className="discovery-badge"
+              data-rare={isChase(pending.cards[pending.index])}
+            >
+              New to Your Binder!
+            </span>
+          )}
           <div className="card-reveal-actions">
             <button className="world-primary" onClick={advance}>
               {pending.flipped
@@ -277,6 +293,7 @@ export function CardCollection({ onBack, onShop, initialTab = "packs" }) {
             pack={pack}
             onRip={() => {
               ripOwnedPack(opening);
+              islandSound("tear");
               setOpening(null);
               setRevealing(true);
             }}
