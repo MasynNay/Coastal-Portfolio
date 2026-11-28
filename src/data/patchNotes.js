@@ -2,6 +2,19 @@
 // the preceding production commit, rather than fictional in-game release notes.
 const patchNotes = [
   {
+    version: "1.8.3",
+    date: "November 27, 2026",
+    previousCommit: "9b6578a",
+    comparisonRef: "af2ecad0fc6019a820bf40710a28c02303fd4524",
+    changes: [
+      "Replaced the wizard house's back-right bookcase with an interactive wardrobe. Added 18 theme presets, character-specific hair styling, hats, accessories, top and lower-garment finishes, and a live animation preview. Mix the pieces for hundreds of combinations; saved looks stay with their own family member and are included in island backups.",
+      "Added 90 dedicated full-body rope-climbing and summit celebration drawings across all 15 existing character looks. The ladder and net movement now pause and pull at discrete rungs, with the new art also available in the Sprite Workshop.",
+      "Restored eight distinct illustrated sandcastle construction stages, with grounded transitions and sand particles following the builder's actual hand instead of floating independently.",
+      "Kept playground rider nameplates attached to their actual seats and climbing positions. Synchronized the habitat wing and hop cycles with resting periods instead of perpetual floating or flapping.",
+      "Added distinct text-free Mac, Windows and Ubuntu wallpapers with independently saved wallpaper choices. Removed the idle-desktop instruction text; optional widgets are off by default and can be enabled in Quick Settings.",
+    ],
+  },
+  {
     version: "1.8.2",
     date: "November 27, 2026",
     previousCommit: "a58eb71",
