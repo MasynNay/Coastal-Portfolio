@@ -52,7 +52,7 @@ export function seesawSeat(prop, side, tilt) {
   };
 }
 export function swingSeat(prop, tilt, slot = 0) {
-  const seat = equipmentPoint(prop, 0.365 + slot * 0.335, 0.775);
+  const seat = equipmentPoint(prop, 0.365 + slot * 0.28, 0.775);
   return {
     x: seat.x + Math.sin(tilt) * 0.08,
     z: seat.z + Math.sin(tilt) * 0.6 - (1 - Math.cos(tilt)) * prop.h * 0.62,
@@ -480,16 +480,16 @@ export function drawPlayground(
     ctx.rect(left, top, w, h);
     for (const ride of riders)
       ctx.rect(
-        left + w * (0.235 + (ride.slot || 0) * 0.335),
+        left + w * (0.23 + (ride.slot || 0) * 0.28),
         top + h * 0.17,
-        w * 0.29,
+        w * 0.275,
         h * 0.675,
       );
     ctx.clip("evenodd");
     drawProp();
     ctx.restore();
     for (const ride of riders) {
-      const offset = (ride.slot || 0) * 0.335;
+      const offset = (ride.slot || 0) * 0.28;
       const socket = swingSeat(p, ride.tilt, ride.slot);
       const seat = at(socket.x, socket.z);
       const a = equipmentPoint(p, 0.29 + offset, 0.145),
