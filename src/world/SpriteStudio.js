@@ -2,7 +2,7 @@ import { outfits } from "./Wardrobe";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { characters } from "./config";
-import sheets from "./SpriteSheets.json";
+import { artwork as sheets } from "./art";
 import SpritePose from "./SpritePose";
 import { characterAbility } from "./Abilities";
 import "./sprites.css";
@@ -21,6 +21,7 @@ const actions = [
   ["water-ride", "Boat / jet ski"],
   ["board-ride", "Skateboard"],
   ["board-trick", "Board trick"],
+  ["climb", "Climb / summit"],
   ["wake-ride", "Wakeboard"],
   ["bike-acro", "Acro bike"],
   ["bike-mach", "Mach bike"],

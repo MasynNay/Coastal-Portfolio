@@ -1,6 +1,11 @@
 import { shoreRuns, shoreReach } from "./Shore";
 import { beachStations } from "./BeachActivities";
 import { oceanBounds, pierDeck } from "./Coast";
+import { artwork } from "./art";
+import { authoredFrameTime } from "./animation";
+import { ropeGrip } from "./RopeAnchors";
+import { personHeight } from "./Movement";
+import { playerPose } from "./PlayerPose";
 
 // Reuse tide samples rather than allocating coast geometry each animation frame.
 const shoreReaches = shoreRuns.map((coast) => new Float32Array(coast.length));
@@ -84,6 +89,63 @@ export function drawFootprints(ctx, at, unit, state) {
   }
   ctx.restore();
 }
+// Eight illustrated construction steps: foundation, mould, three towers,
+// carved walls, doorway and flags. Each mould is revealed from the base
+// upward, without stretching or fading two different castle silhouettes.
+export function castleConstruction(progress) {
+  const steps = Math.max(0, Math.min(8, progress * 8));
+  if (steps === 8)
+    return { art: "castle-stage-7", previous: null, reveal: 1, stage: 7 };
+  const stage = Math.floor(steps);
+  const fraction = Math.min(1, Math.max(0, (steps - stage - 0.16) / 0.64));
+  return {
+    art: `castle-stage-${stage}`,
+    previous: stage ? `castle-stage-${stage - 1}` : null,
+    reveal: fraction * fraction * (3 - 2 * fraction),
+    stage,
+  };
+}
+
+export function castleWorkTime(sheet, building) {
+  const sequence = [0, 1, 2, 3, 4, 5, 4, 3, 2, 1];
+  const fraction = (building.progress * 8) % 1;
+  return authoredFrameTime(
+    sheet,
+    sequence[Math.floor(fraction * sequence.length)],
+  );
+}
+
+export function drawCastleConstruction(ctx, at, unit, castle, sprite) {
+  const { art, previous, reveal } = castle;
+  const paint = (id) => sprite(id, castle.x, castle.z, castle.h);
+  if (reveal >= 1 || (!previous && reveal === 0)) {
+    if (reveal >= 1) paint(art);
+    return;
+  }
+  if (reveal === 0) {
+    paint(previous);
+    return;
+  }
+  const p = at(castle.x, castle.z),
+    extent = castle.h * unit * 1.15;
+  const split = p.y - extent * reveal;
+  const left = p.x - extent,
+    width = extent * 2;
+  const clipped = (id, y, height) => {
+    if (!id) return;
+    ctx.save();
+    ctx.beginPath();
+    ctx.rect(left, y, width, height);
+    ctx.clip();
+    paint(id);
+    ctx.restore();
+  };
+  // Keep only the old part above the construction edge; draw the new part
+  // beneath it. Each pixel belongs to exactly one fully opaque stage.
+  clipped(previous, p.y - extent - 1, split - (p.y - extent - 1));
+  clipped(art, split, p.y + 2 - split);
+}
+
 export function beachSprites(state) {
   const progress = state.beach?.castle || 0;
   const building = state.beach?.building;
@@ -92,8 +154,8 @@ export function beachSprites(state) {
       ? [
           {
             ...beachStations[0],
-            art: "castle-stage-7",
-            castleProgress: progress,
+            ...castleConstruction(progress),
+            castle: true,
             h: 3.15,
           },
         ]
@@ -125,7 +187,28 @@ export function drawBeachActivities(ctx, at, unit, state, sprite) {
   if (activity.building) {
     const site = beachStations[0],
       t = (state.worldTime - activity.building.started) / 1000;
-    sprite("beach-bucket", site.x + 1.2, site.z + 0.5, 0.9, 0, false, 0);
+    sprite("beach-bucket", site.x + 2.4, site.z + 0.5, 0.9, 0, false, 0);
+    const asset = playerPose(state),
+      sheet = artwork[asset];
+    if (!sheet) return;
+    const hand = ropeGrip(
+      at,
+      unit,
+      {
+        asset,
+        direction: state.direction,
+        moving: true,
+        time: castleWorkTime(sheet, activity.building),
+        height: personHeight(state.character),
+        ...state.position,
+      },
+      artwork,
+    );
+    const construction = castleConstruction(activity.building.progress);
+    const target = at(
+      site.x + 0.45,
+      site.z - [0.5, 0.65, 1.5, 1.5, 1.9, 2, 2.65, 2.9][construction.stage],
+    );
     ctx.save();
     // Each short shower travels from the builder toward the current top of
     // the structure. No unrelated particles orbit the completed castle.
@@ -133,13 +216,13 @@ export function drawBeachActivities(ctx, at, unit, state, sprite) {
     for (let i = 0; i < 5; i++) {
       const flight = (t * 2.4 + i * 0.09) % 1;
       ctx.globalAlpha = Math.sin(Math.PI * flight) * 0.85;
-      const p = at(
-        site.x + 0.8 - flight * 0.64 + i * 0.03,
-        site.z -
-          0.15 -
-          activity.building.progress * 2.65 * flight -
-          Math.sin(Math.PI * flight) * 0.35,
-      );
+      const p = {
+        x: hand.x + (target.x - hand.x) * flight + i * unit * 0.025,
+        y:
+          hand.y +
+          (target.y - hand.y) * flight -
+          Math.sin(Math.PI * flight) * unit * 0.22,
+      };
       ctx.beginPath();
       ctx.ellipse(
         p.x,

@@ -1,31 +1,36 @@
-import { spriteFrame } from "./animation";
+import { styledSpriteFrame } from "./WardrobePainter";
 
-// Use complete illustrated cells for climbing instead of rotating overlapping
-// rectangles of the standing sprite. Bent knees and extended arms keep the
-// selected costume's hands, hair and boots intact while traversing the net.
+// Dedicated complete-body climbing drawings: four alternating grips and two
+// front-facing summit cheers. The movement clock is tied to the actual rungs.
 export function climbingFrame(pose) {
   if (pose.celebrating) {
-    const t = Math.max(0, Math.min(1, (pose.poseTime - 5050) / 350));
-    return { direction: 0, column: Math.round(3 + t * 3) };
+    return { direction: 0, column: (pose.celebrateTime ?? 0) < 280 ? 4 : 5 };
   }
-  const step = (pose.poseTime / 700) % 1;
-  const sequence = [4, 5, 6, 7, 8, 9, 8, 5];
-  return {
-    direction: pose.stage === "climbing" ? 3 : 4,
-    column: sequence[Math.floor(step * sequence.length)],
-  };
+  const cycle = pose.climbCycle ?? (pose.poseTime / 1400) % 1;
+  return { direction: 4, column: Math.min(3, Math.floor(cycle * 4)) };
 }
 
-export function drawClimber(ctx, img, sheet, point, height, pose) {
-  if (!img || !sheet || sheet.action !== "board-trick") return false;
-  const { direction, column } = climbingFrame(pose);
-  const frame = spriteFrame(
-    sheet,
-    direction,
-    true,
-    column * sheet.frameMs + 0.1,
-  );
-  const index = frame.row * sheet.columns + frame.column;
+export function drawClimber(
+  ctx,
+  img,
+  sheet,
+  point,
+  height,
+  pose,
+  customLook = null,
+) {
+  if (!img || !sheet || sheet.action !== "climb") return false;
+  const { column } = climbingFrame(pose);
+  const index = column;
+  const styled =
+    customLook &&
+    styledSpriteFrame(
+      img,
+      sheet,
+      { row: 0, column, flip: false },
+      customLook,
+      pose.celebrating ? 0 : 4,
+    );
   const body = sheet.bodyHeight || 96;
   const foot = sheet.baselines?.[index] ?? sheet.footY;
   const center = sheet.anchors?.[index] ?? sheet.cw / 2;
@@ -33,11 +38,11 @@ export function drawClimber(ctx, img, sheet, point, height, pose) {
   ctx.save();
   ctx.imageSmoothingEnabled = false;
   ctx.translate(point.x, point.y);
-  ctx.scale(frame.flip ? -scale : scale, scale);
+  ctx.scale(scale, scale);
   ctx.drawImage(
-    img,
-    frame.column * sheet.cw,
-    frame.row * sheet.ch,
+    styled?.image || img,
+    (styled ? 0 : column) * sheet.cw,
+    0,
     sheet.cw,
     sheet.ch,
     -center,

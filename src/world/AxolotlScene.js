@@ -5,7 +5,10 @@ import { drawEelGate } from "./EelGate";
 
 // Canvas artwork is separate from the React dialog, input handlers and physics.
 // The renderer reads the same immutable round snapshot on every device.
-export function createAxolotlScene(ctx, { images, getRider, sheet, ratio }) {
+export function createAxolotlScene(
+  ctx,
+  { images, getRider, sheet, ratio, customLook = null },
+) {
   const { width: w, height: h, floor } = flightSize;
   function paint(state, time) {
     ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
@@ -53,6 +56,9 @@ export function createAxolotlScene(ctx, { images, getRider, sheet, ratio }) {
         upperTip,
         true,
         time,
+        undefined,
+        ratio,
+        customLook,
       );
       drawEelGate(
         ctx,

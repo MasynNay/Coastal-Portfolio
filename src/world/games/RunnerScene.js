@@ -20,7 +20,7 @@ const powerKinds = new Set(["air", "water", "fire", "earth"]);
 
 // The temple is a distant landmark. The bridge, props and coins all advance
 // along the same world-space track beneath it.
-export function drawRunner(ctx, cache, state, asset) {
+export function drawRunner(ctx, cache, state, asset, customLook = null) {
   const time = state.elapsed * 1000,
     bottom = runnerCamera.feet;
   const backdrop = cache.get("runner-temple");
@@ -55,6 +55,9 @@ export function drawRunner(ctx, cache, state, asset) {
         direction,
         moving,
         clock,
+        undefined,
+        1,
+        id === asset ? customLook : null,
       );
   }
 

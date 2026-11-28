@@ -231,7 +231,6 @@ export function DesktopPortfolio() {
                 {appearance.wallpaper === "ocean" && (
                   <SystemWallpaper system={system} />
                 )}
-                <div className="desktop-wallpaper-loop" />
                 <div className="workspace-wallpaper-dim" />
               </div>
               <div className="desktop-shortcuts">
@@ -250,7 +249,7 @@ export function DesktopPortfolio() {
                   <span>GitHub ↗</span>
                 </a>
               </div>
-              {appearance.widgets !== false && (
+              {appearance.widgets === true && (
                 <WorkspaceWidgets
                   system={system}
                   now={now}
@@ -365,17 +364,6 @@ export function DesktopPortfolio() {
                   )}
                 </DesktopWindow>
               ))}
-              {windows.every((window) => window.minimized) && (
-                <div className="desktop-empty">
-                  <p>
-                    {system === "windows"
-                      ? "Open Start to explore the portfolio."
-                      : system === "ubuntu"
-                        ? "Open Applications to explore the portfolio."
-                        : "Click an icon on the dock to try it out!"}
-                  </p>
-                </div>
-              )}
             </main>
             <nav className="desktop-dock" aria-label="Portfolio apps">
               {system !== "mac" && (

@@ -4,6 +4,21 @@ import useDialogFocus from "../hooks/useDialogFocus";
 import "./MacAppearance.css";
 
 const preferenceKey = "masyn-mac-appearance";
+const systemWallpapers = { mac: "ocean", windows: "ocean", ubuntu: "ocean" };
+const systemWallpaperStyles = {
+  mac: {
+    name: "Mac · Pacific Ridges",
+    paint: "linear-gradient(160deg, #7fc8d3, #346e8d 52%, #192d50)",
+  },
+  windows: {
+    name: "Windows · Blue Bloom",
+    paint: "linear-gradient(135deg, #081c48, #327bec 58%, #b7e2ff)",
+  },
+  ubuntu: {
+    name: "Ubuntu · Aubergine Dawn",
+    paint: "linear-gradient(145deg, #311335, #702256 55%, #ec7940)",
+  },
+};
 // The same palette paints the swatch and the desktop, so each new option
 // only needs one entry. Keep the IDs stable for saved preferences.
 const wallpapers = {
@@ -87,15 +102,19 @@ const bezels = {
 export const defaultAppearance = {
   system: "mac",
   wallpaper: "ocean",
+  wallpaperBySystem: systemWallpapers,
   bezel: "silver",
   motion: true,
   brightness: 1,
-  widgets: true,
+  widgets: false,
 };
 
-export function appearanceStyle({ wallpaper, bezel }) {
+export function appearanceStyle({ wallpaper, bezel, system }) {
   return {
-    "--wallpaper-choice": wallpapers[wallpaper].paint,
+    "--wallpaper-choice":
+      wallpaper === "ocean"
+        ? systemWallpaperStyles[system || "mac"].paint
+        : wallpapers[wallpaper].paint,
     "--bezel-choice": bezels[bezel].paint,
     "--bezel-edge": bezels[bezel].edge,
   };
@@ -104,18 +123,31 @@ export function appearanceStyle({ wallpaper, bezel }) {
 export function readAppearance() {
   try {
     const saved = JSON.parse(localStorage.getItem(preferenceKey));
+    const system = Object.hasOwn(workspaceSystems, saved?.system)
+      ? saved.system
+      : "mac";
+    const validWallpaper = (id) => Object.hasOwn(wallpapers, id);
+    // Preserve the old single wallpaper for the previously active OS, and
+    // initialize the other systems to their own defaults.
+    const wallpaperBySystem = Object.fromEntries(
+      Object.keys(workspaceSystems).map((id) => [
+        id,
+        validWallpaper(saved?.wallpaperBySystem?.[id])
+          ? saved.wallpaperBySystem[id]
+          : id === system && validWallpaper(saved?.wallpaper)
+            ? saved.wallpaper
+            : "ocean",
+      ]),
+    );
     return {
-      system: Object.hasOwn(workspaceSystems, saved?.system)
-        ? saved.system
-        : "mac",
+      system,
       motion: saved?.motion !== false,
-      widgets: saved?.widgets !== false,
+      widgets: !!saved?.wallpaperBySystem && saved.widgets === true,
       brightness: Number.isFinite(saved?.brightness)
         ? Math.max(0.35, Math.min(1, saved.brightness))
         : 1,
-      wallpaper: Object.hasOwn(wallpapers, saved?.wallpaper)
-        ? saved.wallpaper
-        : defaultAppearance.wallpaper,
+      wallpaper: wallpaperBySystem[system],
+      wallpaperBySystem,
       bezel: Object.hasOwn(bezels, saved?.bezel)
         ? saved.bezel
         : defaultAppearance.bezel,
@@ -123,6 +155,25 @@ export function readAppearance() {
   } catch {
     return defaultAppearance;
   }
+}
+
+export function chooseSystem(value, system) {
+  return {
+    ...value,
+    system,
+    wallpaper: value.wallpaperBySystem?.[system] || "ocean",
+  };
+}
+export function chooseWallpaper(value, wallpaper) {
+  return {
+    ...value,
+    wallpaper,
+    wallpaperBySystem: {
+      ...systemWallpapers,
+      ...value.wallpaperBySystem,
+      [value.system || "mac"]: wallpaper,
+    },
+  };
 }
 
 export function saveAppearance(appearance) {
@@ -169,7 +220,7 @@ export default function MacAppearance({
         <div className="mac-appearance-content">
           <p>
             Make this workspace yours. Switch computer styles without closing
-            your apps. Your choices are saved on this device.
+            your apps. Each computer remembers its own wallpaper on this device.
           </p>
           <fieldset>
             <legend>Computer Style</legend>
@@ -178,7 +229,7 @@ export default function MacAppearance({
                 <button
                   key={id}
                   aria-pressed={(value.system || "mac") === id}
-                  onClick={() => onChange({ ...value, system: id })}
+                  onClick={() => onChange(chooseSystem(value, id))}
                 >
                   <SystemIcon system={id} size={26} />
                   {item.name}
@@ -187,7 +238,14 @@ export default function MacAppearance({
             </div>
           </fieldset>
           {[
-            ["wallpaper", "Wallpaper", wallpapers],
+            [
+              "wallpaper",
+              `${workspaceSystems[value.system || "mac"].name} Wallpaper`,
+              {
+                ...wallpapers,
+                ocean: systemWallpaperStyles[value.system || "mac"],
+              },
+            ],
             ["bezel", "Bezel color", bezels],
           ].map(([key, title, options]) => (
             <fieldset key={key}>
@@ -200,7 +258,13 @@ export default function MacAppearance({
                       name={key}
                       value={id}
                       checked={value[key] === id}
-                      onChange={() => onChange({ ...value, [key]: id })}
+                      onChange={() =>
+                        onChange(
+                          key === "wallpaper"
+                            ? chooseWallpaper(value, id)
+                            : { ...value, [key]: id },
+                        )
+                      }
                     />
                     <span
                       className="mac-appearance-swatch"

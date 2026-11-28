@@ -250,3 +250,46 @@ test("Leave the Playground Ride remains enabled and calls the explicit cancellat
   act(() => leave.click());
   expect(game.leavePlayground).toHaveBeenCalledTimes(1);
 });
+
+test("wizard wardrobe equips a theme on the selected character through the dialog", () => {
+  game.setCustomLook = jest.fn();
+  const context = jest
+    .spyOn(HTMLCanvasElement.prototype, "getContext")
+    .mockReturnValue(null);
+  try {
+    act(() =>
+      callbacks.onStatus({
+        ...status,
+        character: "ezra",
+        room: "resume",
+        outfit: null,
+      }),
+    );
+    act(() =>
+      callbacks.onEvent({
+        type: "room-wardrobe",
+        id: "wizard-wardrobe",
+        room: "resume",
+      }),
+    );
+    const dialog = host.querySelector(
+      '[role="dialog"][aria-label="The Wardrobe"]',
+    );
+    expect(dialog.textContent).toContain("Ezra's dressing room");
+    act(() =>
+      [...dialog.querySelectorAll("button")]
+        .find((b) => b.textContent.includes("Green Hunter"))
+        .click(),
+    );
+    act(() =>
+      [...dialog.querySelectorAll("button")]
+        .find((b) => b.textContent === "Wear This Look")
+        .click(),
+    );
+    expect(game.setCustomLook).toHaveBeenCalledWith(
+      expect.objectContaining({ top: "hunter", bottom: "sand", enabled: true }),
+    );
+  } finally {
+    context.mockRestore();
+  }
+});

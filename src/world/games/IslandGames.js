@@ -12,7 +12,9 @@ const components = {
   orrery: MemoryGame,
   chimes: RunnerGame,
 };
-export default function IslandGames({ id, character, outfit }) {
+export default function IslandGames({ id, character, outfit, customLook }) {
   const Game = components[id];
-  return Game ? <Game character={character} outfit={outfit} /> : null;
+  return Game ? (
+    <Game character={character} outfit={outfit} customLook={customLook} />
+  ) : null;
 }

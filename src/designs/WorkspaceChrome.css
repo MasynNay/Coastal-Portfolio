@@ -47,6 +47,13 @@
   .desktop-workspace {
   background: linear-gradient(145deg, #27132c, #632046 60%, #be482a);
 }
+.desktop-studio[data-wallpaper="ocean"][data-system="mac"] .desktop-workspace {
+  background: var(--wallpaper-choice);
+}
+.desktop-studio[data-wallpaper="ocean"] .desktop-wallpaper::before,
+.desktop-studio[data-wallpaper="ocean"] .desktop-wallpaper::after {
+  display: none;
+}
 .desktop-studio:not([data-system="mac"]) .desktop-wallpaper::before,
 .desktop-studio:not([data-system="mac"]) .desktop-wallpaper::after,
 .desktop-studio:not([data-system="mac"]) .desktop-wallpaper-loop {
@@ -781,21 +788,6 @@
     .workspace-windows-tray
     .workspace-chrome-button {
     padding: 4px 6px;
-  }
-}
-@media (min-width: 821px) {
-  .desktop-studio[data-system="windows"] .desktop-empty {
-    left: 50%;
-    transform: translateX(-50%);
-    text-align: center;
-  }
-  .desktop-studio[data-system="mac"] .desktop-empty {
-    left: 50%;
-    transform: translateX(-50%);
-  }
-  .desktop-studio[data-system="ubuntu"] .desktop-empty {
-    left: 50%;
-    transform: translateX(-50%);
   }
 }
 @media (max-width: 420px) {

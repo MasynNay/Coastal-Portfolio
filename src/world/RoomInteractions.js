@@ -31,6 +31,20 @@ export const loveLight = {
   type: "love-letter",
   label: "A Message For My Love",
 };
+// The cabinet occupies the former far-right bookcase. The interaction is
+// placed on the clear floor in front of the cabinet's threshold.
+export const wizardWardrobe = {
+  ...artPoint("resume", places["interior-resume"].width * 0.867, 277),
+  id: "wizard-wardrobe",
+  type: "room-wardrobe",
+  label: "Open Wardrobe",
+};
+export const wardrobeFootprint = {
+  x: wizardWardrobe.x,
+  z: wizardWardrobe.z - 0.93,
+  w: 1.62,
+  d: 0.68,
+};
 
 export function isLoveOffering(room, actor, effect) {
   if (room !== "home" || actor.id !== "mi-shell" || effect?.kind !== "money")
@@ -53,6 +67,7 @@ export function createRoomInteractions(savedSecrets = []) {
     points(room) {
       if (room === "lodge") return [lodgeChests];
       if (room === "portfolio") return [asciiComputer];
+      if (room === "resume") return [wizardWardrobe];
       if (room === "home" && unlocked) return [loveLight];
       return [];
     },

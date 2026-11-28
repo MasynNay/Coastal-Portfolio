@@ -13,7 +13,11 @@ function readBest() {
     return 0;
   }
 }
-export default function RunnerGame({ character = "masyn", outfit }) {
+export default function RunnerGame({
+  character = "masyn",
+  outfit,
+  customLook = null,
+}) {
   const canvas = useRef(null),
     game = useRef(newRunner()),
     art = useRef(null),
@@ -59,7 +63,7 @@ export default function RunnerGame({ character = "masyn", outfit }) {
     const ctx = canvas.current.getContext("2d");
     const loop = createFrameLoop((now, dt) => {
       if (mode === "playing") stepRunner(game.current, dt);
-      drawRunner(ctx, art.current, game.current, asset);
+      drawRunner(ctx, art.current, game.current, asset, customLook);
       if (now - published > 100 || game.current.over) {
         setHud({
           distance: Math.floor(game.current.distance),
@@ -89,7 +93,7 @@ export default function RunnerGame({ character = "masyn", outfit }) {
     });
     loop.wake();
     return () => loop.dispose();
-  }, [asset, mode, loaded]);
+  }, [asset, mode, loaded, customLook]);
   useEffect(() => {
     function key(e) {
       const name = runnerActions[e.key] || runnerActions[e.key.toLowerCase()];

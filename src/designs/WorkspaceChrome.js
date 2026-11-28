@@ -509,10 +509,9 @@ export default function WorkspacePanel({
   );
 }
 
-// Original vector wallpapers: curved blue glass for Windows and a geometric
-// orange/plum Ubuntu landscape. Custom color choices still override these.
+// Original, text-free vector wallpapers are rendered at the screen's aspect
+// ratio. Neither app names nor promotional copy are baked into the artwork.
 export function SystemWallpaper({ system }) {
-  if (system === "mac") return null;
   return (
     <svg
       className="workspace-system-wallpaper"
@@ -520,7 +519,67 @@ export function SystemWallpaper({ system }) {
       preserveAspectRatio="xMidYMid slice"
       aria-hidden="true"
     >
-      {system === "windows" ? (
+      {system === "mac" ? (
+        <>
+          <defs>
+            <linearGradient id="mac-sky" x2=".2" y2="1">
+              <stop stopColor="#b6e1d9" />
+              <stop offset=".5" stopColor="#72b9cc" />
+              <stop offset="1" stopColor="#5489ad" />
+            </linearGradient>
+            <linearGradient id="mac-ridge" x1="0" y1="0" x2="1" y2=".8">
+              <stop stopColor="#c2dad0" />
+              <stop offset=".48" stopColor="#6296a2" />
+              <stop offset="1" stopColor="#304f79" />
+            </linearGradient>
+            <linearGradient id="mac-valley" x1="0" y1="0" x2=".9" y2="1">
+              <stop stopColor="#4f9e9d" />
+              <stop offset=".5" stopColor="#295a79" />
+              <stop offset="1" stopColor="#152644" />
+            </linearGradient>
+            <linearGradient id="mac-water" x2=".75" y2="1">
+              <stop stopColor="#86cccb" />
+              <stop offset=".52" stopColor="#337b9a" />
+              <stop offset="1" stopColor="#242b5e" />
+            </linearGradient>
+            <radialGradient id="mac-light">
+              <stop stopColor="#fff5dd" stopOpacity=".65" />
+              <stop offset="1" stopColor="#fff5dd" stopOpacity="0" />
+            </radialGradient>
+          </defs>
+          <path d="M0 0H1200V720H0Z" fill="url(#mac-sky)" />
+          <ellipse cx="950" cy="110" rx="620" ry="320" fill="url(#mac-light)" />
+          <path
+            d="M0 435C156 381 215 238 381 228C527 219 599 331 713 281C881 209 930 91 1200 115V720H0Z"
+            fill="url(#mac-ridge)"
+          />
+          <path
+            d="M0 458C184 407 303 478 443 383C610 270 692 250 812 338C971 454 1062 291 1200 273V720H0Z"
+            fill="#376987"
+            opacity=".72"
+          />
+          <path
+            d="M0 420C183 372 244 299 348 307C508 320 563 470 699 452C856 432 997 350 1200 392V720H0Z"
+            fill="url(#mac-valley)"
+          />
+          <path
+            d="M0 597C237 437 327 493 496 540C675 591 724 511 883 477C1025 446 1134 510 1200 473V720H0Z"
+            fill="url(#mac-water)"
+          />
+          <path
+            d="M0 662C273 569 359 658 593 612C830 565 1027 535 1200 604V720H0Z"
+            fill="#162d55"
+            opacity=".45"
+          />
+          <path
+            d="M0 595C236 456 339 512 500 553C674 601 744 514 884 480C1023 454 1138 510 1200 475"
+            stroke="#c8eee1"
+            opacity=".34"
+            fill="none"
+            strokeWidth="2"
+          />
+        </>
+      ) : system === "windows" ? (
         <>
           <defs>
             <linearGradient id="win-fold" x1="0" y1="0" x2="1" y2="1">
@@ -534,7 +593,13 @@ export function SystemWallpaper({ system }) {
               <stop offset=".55" stopColor="#205ec2" />
               <stop offset="1" stopColor="#081539" />
             </linearGradient>
+            <radialGradient id="win-halo" cx=".66" cy=".45" r=".7">
+              <stop stopColor="#347dcc" />
+              <stop offset=".8" stopColor="#0a2458" />
+              <stop offset="1" stopColor="#071632" />
+            </radialGradient>
           </defs>
+          <path d="M0 0H1200V720H0Z" fill="url(#win-halo)" />
           <g className="workspace-bloom" transform="translate(80 -10)">
             <path
               d="M260 720C312 532 153 440 367 329C541 240 635 170 585 24C802 94 839 225 726 333C564 490 878 578 766 720Z"
@@ -543,6 +608,13 @@ export function SystemWallpaper({ system }) {
             <path
               d="M500 760C297 646 317 517 474 427C682 309 820 260 740 33C996 183 936 363 722 469C569 544 624 658 890 741Z"
               fill="url(#win-fold)"
+            />
+            <path
+              d="M500 760C297 646 317 517 474 427C682 309 820 260 740 33"
+              stroke="#d4efff"
+              strokeWidth="3"
+              opacity=".42"
+              fill="none"
             />
             <path
               d="M637 720C493 613 527 543 695 476C895 395 1027 203 941 86C1172 193 1081 445 855 537C747 581 750 651 1025 720Z"
@@ -561,7 +633,12 @@ export function SystemWallpaper({ system }) {
               <stop stopColor="#ee793e" />
               <stop offset="1" stopColor="#672245" />
             </linearGradient>
+            <radialGradient id="ubuntu-sky" cx=".7" cy=".3" r=".85">
+              <stop stopColor="#9c3460" />
+              <stop offset="1" stopColor="#29162f" />
+            </radialGradient>
           </defs>
+          <path d="M0 0H1200V720H0Z" fill="url(#ubuntu-sky)" />
           <path d="M0 450 340 110 680 390 1200 20V720H0Z" fill="#62204f" />
           <path
             d="M0 560 400 235 780 490 1200 125V720H0Z"
@@ -573,6 +650,10 @@ export function SystemWallpaper({ system }) {
           <g fill="none" stroke="#ffb486" opacity=".36">
             <circle cx="875" cy="230" r="138" />
             <circle cx="875" cy="230" r="155" />
+          </g>
+          <g fill="none" stroke="#ffb486" strokeWidth="1.5" opacity=".18">
+            <path d="M0 320 330 0M0 400 416 0M1200 480 890 720M1200 560 1040 720" />
+            <path d="M0 688 310 410 490 583 780 325 1200 68" />
           </g>
         </>
       )}

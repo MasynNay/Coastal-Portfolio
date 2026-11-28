@@ -334,10 +334,58 @@ test("Ubuntu Activities leads to the application grid and settings persist witho
       .find((b) => b.textContent.includes("Desktop Widgets"))
       .click(),
   );
+  expect(host.querySelector(".workspace-widgets")).not.toBeNull();
+  act(() =>
+    [...settings.querySelectorAll("button")]
+      .find((b) => b.textContent.includes("Desktop Widgets"))
+      .click(),
+  );
   expect(host.querySelector(".workspace-widgets")).toBeNull();
   expect(JSON.parse(localStorage.getItem("masyn-mac-appearance")).widgets).toBe(
     false,
   );
+});
+
+test("each workspace has its own text-free default wallpaper and remembers a custom choice", () => {
+  const studio = () => host.querySelector(".desktop-studio");
+  expect(host.querySelector(".desktop-wallpaper").textContent).toBe("");
+  expect(host.querySelector(".desktop-empty")).toBeNull();
+  expect(host.querySelector(".workspace-widgets")).toBeNull();
+  expect(host.querySelector("#mac-sky")).not.toBeNull();
+  act(() => host.querySelector('[aria-label="Open system menu"]').click());
+  act(() =>
+    [...host.querySelectorAll('[role="menuitem"]')]
+      .find((b) => b.textContent === "Customize Workspace…")
+      .click(),
+  );
+  const system = (name) =>
+    act(() =>
+      [...host.querySelectorAll(".workspace-os-picker button")]
+        .find((b) => b.textContent === name)
+        .click(),
+    );
+  const wallpaper = (name) =>
+    act(() =>
+      host.querySelector(`input[name="wallpaper"][value="${name}"]`).click(),
+    );
+  wallpaper("forest");
+  system("Windows");
+  expect(studio().dataset.wallpaper).toBe("ocean");
+  expect(host.querySelector("#win-fold")).not.toBeNull();
+  wallpaper("midnight");
+  system("Ubuntu");
+  expect(studio().dataset.wallpaper).toBe("ocean");
+  expect(host.querySelector("#ubuntu-sky")).not.toBeNull();
+  wallpaper("ember");
+  system("Mac");
+  expect(studio().dataset.wallpaper).toBe("forest");
+  system("Windows");
+  expect(studio().dataset.wallpaper).toBe("midnight");
+  system("Ubuntu");
+  expect(studio().dataset.wallpaper).toBe("ember");
+  expect(
+    JSON.parse(localStorage.getItem("masyn-mac-appearance")).wallpaperBySystem,
+  ).toEqual({ mac: "forest", windows: "midnight", ubuntu: "ember" });
 });
 
 test("Mac Spotlight and calendar have independent working controls", () => {

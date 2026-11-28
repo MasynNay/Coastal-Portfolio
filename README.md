@@ -142,4 +142,25 @@ Each Workspace now has its own functional shell. Windows offers Start, search, p
 
 The playground includes a trampoline and musical drums alongside the slide, seesaw, swings, climbing dome, picnic table and carousel. Equipment movement uses separate approach, ride and exit poses. Family residents have individual itineraries and reserve available equipment; player interactions take priority. Terrariums now support search and bug-group filtering. Household habitats share placement coordinates with the display room, with creature motion grounded on the surfaces of the actual enclosure artwork.
 
+The slide ladder and climbing dome use 90 dedicated climbing and summit poses
+across all fifteen looks. Source sheets and reproducible packing instructions
+are in [Playground climbing artwork](docs/source-assets/people/climbing/README.md).
+The sandcastle progresses through eight drawn stages over seven seconds.
+
+## Wizard wardrobe
+
+Visit the wizard house (Resume) and approach the wardrobe in the back-right
+corner. The dressing room offers eighteen themed starting looks, existing
+illustrated costumes, garment finishes, hats, accessories, and character-specific
+hair styling. A preview uses the same frame renderer as the island. Wear a look
+to save it for the selected family member; other family members retain their
+own choices. Restore Original Outfits returns to the normal room/costume behavior.
+The customizable details are composited onto existing full-body poses, not separate
+hand-drawn atlases for every possible combination. Wardrobe preferences travel
+with island save backups and do not alter collection history.
+
+Each Workspace remembers its own wallpaper. The Mac coastal ridges, Windows
+blue bloom, and Ubuntu aubergine dawn defaults contain no text; desktop widgets
+are optional from Quick Settings.
+
 Release checks: `npm run format:check`, `npm run lint`, `npm run check:project`, `CI=true npm test -- --watchAll=false --runInBand`, and `npm run build`.

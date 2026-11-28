@@ -103,6 +103,21 @@ const pathLength = (points) =>
       (sum, p, i) => sum + Math.hypot(p.x - points[i].x, p.z - points[i].z),
       0,
     );
+// Rungs have physical contact points rather than equal distance along an
+// imaginary line. Each alternating reach pauses on a rung, then pulls up.
+export function climbRungs(points, progress, descending = false) {
+  const last = points.length - 1;
+  const step = clamp(progress) * last;
+  const index = Math.min(last - 1, Math.floor(step));
+  const fraction = step - index;
+  const position = mix(
+    points[index],
+    points[index + 1],
+    ease((fraction - 0.22) / 0.78),
+  );
+  const cycle = (((step / 2) % 1) + 1) % 1;
+  return { position, cycle: descending ? (1 - cycle) % 1 : cycle };
+}
 export function createPlayground() {
   let current = null;
   return {
@@ -139,6 +154,8 @@ export function createPlayground() {
         stage = "playing",
         climbing = false,
         celebrating = false,
+        climbCycle = 0,
+        celebrateTime = 0,
         lift = 0,
         seatWeight = null,
         returnPath = null,
@@ -194,8 +211,13 @@ export function createPlayground() {
           direction = point.direction;
           stage = "approaching";
         } else if (age < climbEnd) {
-          point = mix(bottom, top, (age - approachTime) / 2300);
-          direction = 3;
+          const ladder = Array.from({ length: 5 }, (_, i) =>
+            mix(bottom, top, i / 4),
+          );
+          const climb = climbRungs(ladder, (age - approachTime) / 2300);
+          point = climb.position;
+          climbCycle = climb.cycle;
+          direction = 4;
           climbing = true;
           stage = "climbing";
         } else if (age < platformEnd) {
@@ -268,12 +290,9 @@ export function createPlayground() {
           stage = "approaching";
         } else if (age < 5050) {
           // Reach, grip, then pull up one rung; never a walking cycle on ropes.
-          const step = Math.min(5.999, (age - 850) / 700),
-            progress =
-              (Math.floor(step) +
-                ease(Math.max(0, ((step % 1) - 0.28) / 0.72))) /
-              6;
-          point = followPath(rungs, progress);
+          const climb = climbRungs(rungs, (age - 850) / 4200);
+          point = climb.position;
+          climbCycle = climb.cycle;
           direction = 4;
           climbing = true;
           stage = "climbing-net";
@@ -281,9 +300,16 @@ export function createPlayground() {
           point = summit;
           direction = 0;
           celebrating = true;
+          celebrateTime = age - 5050;
           stage = "summit";
         } else {
-          point = followPath([...rungs].reverse(), ease((age - 7550) / 2450));
+          const climb = climbRungs(
+            [...rungs].reverse(),
+            (age - 7550) / 2450,
+            true,
+          );
+          point = climb.position;
+          climbCycle = climb.cycle;
           direction = 4;
           climbing = true;
           stage = "descending-net";
@@ -337,6 +363,8 @@ export function createPlayground() {
         ),
         climbing: climbing && !returning,
         celebrating: celebrating && !returning,
+        climbCycle,
+        celebrateTime,
         poseTime: age,
         stage,
       };

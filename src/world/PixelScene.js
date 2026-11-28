@@ -1,6 +1,7 @@
 import { drawNoFace } from "./NoFace";
 import { drawRoundabout } from "./Playground";
 import { drawClimber } from "./PlaygroundPoses";
+import { customLookForAsset } from "./CustomWardrobe";
 import { ropeGrip } from "./RopeAnchors";
 import {
   drawGroveLights,
@@ -14,6 +15,8 @@ import { surfboard, drawSurfWave } from "./SurfRide";
 import { skyBirds } from "./Sky";
 import {
   beachSprites,
+  castleWorkTime,
+  drawCastleConstruction,
   drawFootprints,
   drawBeachActivities,
 } from "./BeachScene";
@@ -76,6 +79,7 @@ export function createCanvasScene(host, invalidate = () => {}) {
   const settleFootfall = createFootfalls();
   const reduceMotion = window.matchMedia?.("(prefers-reduced-motion: reduce)");
   let saluting = null;
+  let renderedLooks = {};
   let width = 1,
     height = 1,
     pixelRatio = 1,
@@ -360,6 +364,7 @@ export function createCanvasScene(host, invalidate = () => {}) {
       time,
       motion,
       pixelRatio,
+      customLookForAsset(id, renderedLooks),
     );
     ctx.restore();
   }
@@ -562,6 +567,7 @@ export function createCanvasScene(host, invalidate = () => {}) {
   }
   function draw(state, time) {
     art.beginFrame();
+    renderedLooks = state.customLooks || {};
     const saluteBase = characterAsset(state.character, state.outfit);
     saluting = state.salute
       ? {
@@ -963,10 +969,7 @@ export function createCanvasScene(host, invalidate = () => {}) {
                   ? 0
                   : state.salute.elapsed
               : state.beach?.building
-                ? authoredFrameTime(
-                    artwork[costume],
-                    [2, 3, 4, 5, 4, 3][Math.floor(state.worldTime / 155) % 6],
-                  )
+                ? castleWorkTime(artwork[costume], state.beach.building)
                 : cycling
                   ? state.bikeRide.time
                   : glide
@@ -1072,16 +1075,18 @@ export function createCanvasScene(host, invalidate = () => {}) {
                 : play.partner;
               if (!actor) return;
               const { id, outfit } = actor;
+              const climbingAsset = activityAsset(id, outfit, "climb", artwork);
+              const climbingImage = image(climbingAsset);
               if (pose.climbing || pose.celebrating) {
-                const base = activityAsset(id, outfit, "board-trick", artwork);
                 if (
                   drawClimber(
                     ctx,
-                    image(base),
-                    artwork[base],
+                    climbingImage,
+                    artwork[climbingAsset],
                     at(pose.x, pose.z),
                     personHeight(id) * personUnit,
                     pose,
+                    customLookForAsset(climbingAsset, state.customLooks),
                   )
                 )
                   return;
@@ -1139,23 +1144,8 @@ export function createCanvasScene(host, invalidate = () => {}) {
         else if (a.watercraft) drawWatercraft(a, state);
         else if (a.board) drawBoard(a, state);
         else if (a.surfboard) drawSurfer(a, state);
-        else if (a.castleProgress != null) {
-          // Reveal a single anchored castle drawing from the foundation up.
-          // Each frame retains its exact silhouette and ground contact.
-          const base = at(a.x, a.z);
-          const revealHeight = a.h * unit * 1.1 * a.castleProgress;
-          ctx.save();
-          ctx.beginPath();
-          ctx.rect(
-            base.x - a.h * unit,
-            base.y - revealHeight,
-            a.h * unit * 2,
-            revealHeight + unit * 0.12,
-          );
-          ctx.clip();
-          sprite(a.art, a.x, a.z, a.h);
-          ctx.restore();
-        } else {
+        else if (a.castle) drawCastleConstruction(ctx, at, unit, a, sprite);
+        else {
           const human = humanIds.has(a.id);
           const pose = human
             ? settleFootfall(a, artwork[a.art], state.worldTime)
@@ -1233,6 +1223,15 @@ export function createCanvasScene(host, invalidate = () => {}) {
     ctx.save();
     ctx.font = "500 11px system-ui";
     ctx.textAlign = "center";
+    const paintName = (name, p, y) => {
+      const w = ctx.measureText(name).width + 14;
+      ctx.fillStyle = "#122b30cc";
+      ctx.beginPath();
+      ctx.roundRect(p.x - w / 2, y - 12, w, 19, 6);
+      ctx.fill();
+      ctx.fillStyle = "#edf3e6";
+      ctx.fillText(name, p.x, y + 1);
+    };
     for (const a of sprites) {
       const person = characters.find(
         (c) => c.id === (a.restSpot && a.player ? state.character : a.id),
@@ -1249,13 +1248,25 @@ export function createCanvasScene(host, invalidate = () => {}) {
             ? (a.h * (sheet.footY - sheet.labelTop)) / sheet.bodyHeight
             : a.h,
         y = p.y - unit * (labelHeight + (a.lift || 0)) - 8;
-      const w = ctx.measureText(name).width + 14;
-      ctx.fillStyle = "#122b30cc";
-      ctx.beginPath();
-      ctx.roundRect(p.x - w / 2, y - 12, w, 19, 6);
-      ctx.fill();
-      ctx.fillStyle = "#edf3e6";
-      ctx.fillText(name, p.x, y + 1);
+      paintName(name, p, y);
+    }
+    // Equipment riders are rendered with their toys, not in the normal
+    // resident list. Their nameplates still follow the actual seat or rung.
+    for (const play of playgroundByArt.values()) {
+      for (const [actor, pose] of [
+        [play.resident?.id || state.character, play.player],
+        [play.partner?.id, play.guest],
+      ]) {
+        const person = characters.find((c) => c.id === actor);
+        if (!person || !pose) continue;
+        const point = at(pose.x, pose.z);
+        const height = personHeight(actor) * (pose.seated ? 0.75 : 1.05);
+        paintName(
+          person.name,
+          point,
+          point.y - unit * (height + (pose.lift || 0)) - 8,
+        );
+      }
     }
     ctx.restore();
     drawActivities(ctx, at, unit, state);
@@ -1408,6 +1419,7 @@ export function createCanvasScene(host, invalidate = () => {}) {
                 0,
                 undefined,
                 pixelRatio,
+                customLookForAsset(appearance.body, renderedLooks),
               );
               ctx.restore();
             }
@@ -1425,6 +1437,7 @@ export function createCanvasScene(host, invalidate = () => {}) {
             elapsed,
             undefined,
             pixelRatio,
+            customLookForAsset(id, renderedLooks),
           );
           ctx.restore();
         }

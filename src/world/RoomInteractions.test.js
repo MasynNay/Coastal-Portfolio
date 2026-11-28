@@ -4,7 +4,11 @@ import {
   loveLight,
   lodgeChests,
   asciiComputer,
+  wizardWardrobe,
+  wardrobeFootprint,
 } from "./RoomInteractions";
+import { canStand } from "./navigation";
+import { roomObstacles } from "./config";
 
 test("room secrets follow their artwork and restored discoveries persist", () => {
   const rooms = createRoomInteractions();
@@ -48,4 +52,18 @@ test("the Pokémon house PC opens ASCII from a reachable floor position", () => 
   expect(asciiComputer.type).toBe("room-ascii");
   expect(asciiComputer.x).toBeCloseTo(-5);
   expect(asciiComputer.z).toBeGreaterThan(-5.55);
+});
+test("the wizard wardrobe replaces the right-hand bookcase and has a reachable threshold", () => {
+  const rooms = createRoomInteractions();
+  expect(rooms.points("resume")).toEqual([wizardWardrobe]);
+  expect(wizardWardrobe.type).toBe("room-wardrobe");
+  expect(wizardWardrobe.x).toBeGreaterThan(8);
+  expect(
+    canStand(
+      wizardWardrobe.x,
+      wizardWardrobe.z,
+      [...roomObstacles, wardrobeFootprint],
+      "resume",
+    ),
+  ).toBe(true);
 });

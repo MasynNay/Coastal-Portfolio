@@ -9,6 +9,7 @@ import { discoveredBugs } from "./Bugs";
 import "./IslandLife.css";
 import CardPacks, { CardCollection } from "./CardPacks";
 import RoomArcade from "./RoomArcade";
+import WardrobeStudio from "./WardrobeStudio";
 import AsciiApp from "../ascii/AsciiStudio";
 import "../ascii/AsciiLauncher.css";
 import LoveLetter from "./LoveLetter";
@@ -217,6 +218,7 @@ function panelTitle(dialog) {
     trivia: "The one with the trivia",
     "room-arcade": "Windfall Arcade",
     "room-ascii": "ASCII Studio",
+    "room-wardrobe": "The Wardrobe",
     "love-letter": "A Message For My Love",
   };
   if (dialog.type === "card-packs") return "Pokémon Card Packs";
@@ -1174,6 +1176,7 @@ export default function WorldMode() {
             "axolotl-game",
             "room-arcade",
             "room-ascii",
+            "room-wardrobe",
             "card-packs",
           ].includes(dialog.type)}
           className={
@@ -1194,6 +1197,19 @@ export default function WorldMode() {
         >
           {dialog.type === "room-ascii" ? (
             <AsciiApp active />
+          ) : dialog.type === "room-wardrobe" ? (
+            <WardrobeStudio
+              character={status.character}
+              outfit={status.outfit}
+              saved={status.customLook}
+              onWear={(look) => engine.current?.setCustomLook(look)}
+              onRestore={() =>
+                engine.current?.setCustomLook({
+                  ...status.customLook,
+                  enabled: false,
+                })
+              }
+            />
           ) : dialog.type === "room-arcade" ? (
             <RoomArcade />
           ) : dialog.type === "card-packs" ? (
@@ -1215,9 +1231,14 @@ export default function WorldMode() {
               id={dialog.id}
               character={status.character}
               outfit={status.outfit}
+              customLook={status.customLook}
             />
           ) : dialog.type === "axolotl-game" ? (
-            <AxolotlGame character={status.character} outfit={status.outfit} />
+            <AxolotlGame
+              character={status.character}
+              outfit={status.outfit}
+              customLook={status.customLook}
+            />
           ) : dialog.type === "race-result" ? (
             <div className="world-race-result">
               <span className="world-race-winner">

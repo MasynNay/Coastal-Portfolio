@@ -41,6 +41,16 @@ const TRAINER = [
   [1, 0],
 ];
 export function spriteFrame(sheet, direction, moving, time) {
+  if (sheet.fixedFrame) return sheet.fixedFrame;
+  if (sheet.action === "climb" && sheet.celebrationFrames) {
+    const rear = [3, 4, 5].includes(direction);
+    const tick = moving ? Math.floor(time / sheet.frameMs) : 0;
+    return {
+      row: 0,
+      column: rear ? tick % 4 : sheet.celebrationFrames[tick % 2],
+      flip: false,
+    };
+  }
   const columns = sheet.columns || 4;
   const cycle = sheet.cycleFrames || columns;
   const column = moving

@@ -57,9 +57,9 @@
     "height": 960
   },
   "interior-resume": {
-    "src": "/world/places/interior-resume.png",
-    "width": 1200,
-    "height": 960
+    "src": "/world/places/interior-resume-wardrobe.webp",
+    "width": 1402,
+    "height": 1122
   },
   "interior-contact": {
     "src": "/world/places/interior-contact.png",

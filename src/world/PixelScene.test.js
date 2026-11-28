@@ -16,6 +16,7 @@ jest.mock("./art", () => {
   const artwork = Object.fromEntries(
     Object.entries({
       ...sheets,
+      ...require("./ClimbArt.json"),
       ...places,
       ...terrain.props,
       ...require("./BeachArt.json"),

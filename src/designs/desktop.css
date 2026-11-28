@@ -80,21 +80,6 @@
   pointer-events: none;
   overflow: hidden;
 }
-.desktop-wallpaper > span {
-  position: absolute;
-  top: 18%;
-  left: 7%;
-  font-size: clamp(50px, 7vw, 110px);
-  font-weight: 750;
-  line-height: 1.05;
-  letter-spacing: -0.07em;
-  color: #9da9af1c;
-}
-.desktop-wallpaper > span em {
-  color: #bfc7cb20;
-  font-family: Georgia, serif;
-  font-weight: 400;
-}
 .desktop-wallpaper-loop {
   position: absolute;
   width: 85vw;
@@ -314,8 +299,7 @@
   margin: 25px 0;
   flex-wrap: wrap;
 }
-.desktop-about-actions button,
-.desktop-empty button {
+.desktop-about-actions button {
   border: 1px solid #cdd3d644;
   background: #c1c9cd22;
   color: #e7eaeb;
@@ -434,22 +418,6 @@
   align-self: stretch;
   background: #ffffff25;
   margin: 3px 3px 10px;
-}
-.desktop-empty {
-  position: absolute;
-  top: 28%;
-  left: 20%;
-  right: 20%;
-  text-align: center;
-}
-.desktop-empty h1 {
-  font-size: 36px;
-  letter-spacing: -0.04em;
-}
-.desktop-empty p {
-  margin: 20px 0;
-  font-size: 14px;
-  color: #b6bfc4;
 }
 .desktop-projects.glass-site,
 .desktop-contact.glass-site {
@@ -679,13 +647,6 @@
   .desktop-skills {
     padding: 25px 20px;
   }
-  .desktop-empty {
-    left: 10%;
-    right: 10%;
-  }
-  .desktop-empty h1 {
-    font-size: 28px;
-  }
 }
 @media (max-width: 360px) {
   .desktop-app-icon {
@@ -855,20 +816,6 @@
   transform: rotate(-30deg);
   background: linear-gradient(155deg, #87bbb7, #20576f 40%, #122f4b);
 }
-.desktop-wallpaper > span {
-  z-index: 1;
-  top: 17%;
-  left: 8%;
-  font-size: clamp(44px, 6.2vw, 96px);
-  color: #f0f4e8;
-  font-weight: 650;
-  text-shadow: 0 3px 30px #12364440;
-  letter-spacing: -0.065em;
-}
-.desktop-wallpaper > span em {
-  color: #def3e8;
-  font-weight: 400;
-}
 .desktop-wallpaper-loop {
   display: none;
 }
@@ -881,32 +828,6 @@
 }
 .desktop-shortcuts svg {
   color: #f1f4eb;
-}
-.desktop-empty {
-  top: auto;
-  left: 8%;
-  right: auto;
-  bottom: 120px;
-  text-align: left;
-  max-width: 450px;
-}
-.desktop-empty .desktop-welcome-label {
-  margin: 0 0 6px;
-  color: #f3f5ec;
-  font-size: 16px;
-  font-weight: 600;
-}
-.desktop-empty p {
-  margin: 0 0 14px;
-  color: #dfede9;
-  font-size: 13px;
-  line-height: 1.5;
-}
-.desktop-empty button {
-  background: #eff3e6;
-  color: #183b46;
-  border-color: #ffffffe0;
-  padding: 10px 17px;
 }
 .desktop-dock {
   background: #e4eeeb35;
@@ -954,16 +875,6 @@
   .imac-stand::before {
     height: 59px;
   }
-  .desktop-wallpaper > span {
-    top: 19%;
-    left: 7%;
-    font-size: clamp(38px, 8vw, 55px);
-  }
-  .desktop-empty {
-    left: 7%;
-    right: 10%;
-    bottom: 105px;
-  }
 }
 /* Distinct app colors make the dock readable against the brighter wallpaper. */
 .desktop-app-icon.icon-blue {
@@ -984,9 +895,6 @@
 }
 .desktop-app-icon.icon-paper svg {
   color: #42677c;
-}
-.desktop-empty p {
-  text-align: left;
 }
 
 /* Close seated viewpoint: the computer nearly fills the browser, while its bezel stays visible. */
@@ -1113,20 +1021,6 @@
   display: inline-block;
   color: #b5e3d2;
   margin-left: 15px;
-}
-
-/* Reserve the shortcut column when the iMac is shown on a phone. */
-@media (max-width: 600px) {
-  .desktop-wallpaper > span {
-    width: calc(100% - 122px);
-    max-width: 245px;
-    font-size: clamp(25px, 7vw, 34px);
-    line-height: 1.12;
-    left: 22px;
-  }
-  .desktop-wallpaper > span em {
-    font-size: inherit;
-  }
 }
 
 /* Touch windows leave room to drag their title bars. Contents scroll normally;
@@ -1299,9 +1193,6 @@
   .desktop-app-icon {
     width: 38px;
     height: 38px;
-  }
-  .desktop-empty {
-    bottom: 76px;
   }
 }
 @media (any-pointer: coarse), (max-width: 700px) {

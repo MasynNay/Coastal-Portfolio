@@ -6,7 +6,11 @@ import {
   grovePlayer,
   groveStart,
 } from "./ForestGrove";
-import { createRoomInteractions, isLoveOffering } from "./RoomInteractions";
+import {
+  createRoomInteractions,
+  isLoveOffering,
+  wardrobeFootprint,
+} from "./RoomInteractions";
 import { startWindSong } from "./WindStatue";
 import { createNoFace, noFaceInteraction } from "./NoFace";
 import { createPlayground, playgroundActivities } from "./Playground";
@@ -49,6 +53,7 @@ import { walkSpeed, runSpeed } from "./Movement";
 import { advanceGait } from "./Gait";
 import { familyGreeting } from "./Interactions";
 import { characterSelection } from "./Wardrobe";
+import { cleanLook, readWardrobes, saveWardrobes } from "./CustomWardrobe";
 import { createFishingSequence } from "./Fishing";
 import { surfEntry, isWater, isWaterSurface, axolotlColors } from "./Surf";
 import {
@@ -88,9 +93,13 @@ export function createWorld(host, callbacks) {
     if (!disposed) requestDraw();
   });
   const roomInteractions = createRoomInteractions(callbacks.secrets);
+  const wizardRoomObstacles = [...roomObstacles, wardrobeFootprint];
+  const blockers = () =>
+    room === "resume" ? wizardRoomObstacles : room ? roomObstacles : obstacles;
+  let customLooks = readWardrobes();
   let room = null,
     character = "masyn",
-    outfit = null,
+    outfit = customLooks.masyn?.enabled ? customLooks.masyn.base : null,
     position = {
       x: 0,
       z: 9,
@@ -349,6 +358,8 @@ export function createWorld(host, callbacks) {
         );
         // Borrowed residents cannot be assigned a bicycle or another interaction
         // while they are wakeboarding behind the player's boat.
+        if (customLooks[resident.id]?.enabled)
+          resident.outfit = customLooks[resident.id].base;
         return resident.id === guestPause.id()
           ? { ...resident, hidden: true }
           : resident;
@@ -403,6 +414,7 @@ export function createWorld(host, callbacks) {
       salute: salutePose,
       character,
       outfit,
+      customLooks: axolotlRace.active() ? {} : customLooks,
       position,
       direction,
       moving,
@@ -636,6 +648,7 @@ export function createWorld(host, callbacks) {
       room,
       character,
       outfit,
+      customLook: customLooks[character] || null,
       loading,
       prompt: loading
         ? null
@@ -749,7 +762,8 @@ export function createWorld(host, callbacks) {
     loading = !!id;
     if (id) {
       lastRoom = id;
-      if (character === "masyn") outfit = id;
+      if (character === "masyn" && !customLooks[character]?.enabled)
+        outfit = id;
       position = {
         ...roomEntrance,
       };
@@ -955,7 +969,7 @@ export function createWorld(host, callbacks) {
       } else if (isSand(position.x, position.z)) {
         if (p.type === "sandcastle") {
           cancelAbility();
-          position = { x: p.x + 1, z: p.z + 0.65 };
+          position = { x: p.x + 1.85, z: p.z + 0.65 };
           direction = 6;
           beachActivities.build(worldTime);
         } else beachActivities.fly(worldTime, direction);
@@ -1180,7 +1194,7 @@ export function createWorld(host, callbacks) {
       if (abilityEffect?.target) direction = abilityEffect.direction;
       if (abilityEffect?.kind === "glide") {
         abilityEffect = planGlide(abilityEffect, (p) =>
-          canStand(p.x, p.z, room ? roomObstacles : obstacles, room),
+          canStand(p.x, p.z, blockers(), room),
         );
         if (!abilityEffect)
           callbacks.onEvent?.({
@@ -1190,7 +1204,7 @@ export function createWorld(host, callbacks) {
       }
       if (abilityEffect?.kind === "tumbling") {
         abilityEffect = planTumbling(abilityEffect, (p) =>
-          canStand(p.x, p.z, room ? roomObstacles : obstacles, room),
+          canStand(p.x, p.z, blockers(), room),
         );
         if (!abilityEffect)
           callbacks.onEvent?.({
@@ -1492,7 +1506,7 @@ export function createWorld(host, callbacks) {
             position,
             (dx / length) * step,
             (dz / length) * step,
-            room ? roomObstacles : obstacles,
+            blockers(),
             room,
             surfing,
           );
@@ -1670,24 +1684,10 @@ export function createWorld(host, callbacks) {
       );
       if (door) target = doorApproach(door);
     }
-    if (
-      canStand(
-        target.x,
-        target.z,
-        room ? roomObstacles : obstacles,
-        room,
-        surfing,
-      )
-    ) {
+    if (canStand(target.x, target.z, blockers(), room, surfing)) {
       pathRunning = running || e.shiftKey || keys.has("shift");
       keyboardState?.clear("pointer-navigation");
-      path = findPath(
-        position,
-        target,
-        room ? roomObstacles : obstacles,
-        room,
-        surfing,
-      );
+      path = findPath(position, target, blockers(), room, surfing);
       requestDraw();
       return target;
     }
@@ -1877,13 +1877,29 @@ export function createWorld(host, callbacks) {
       if (disposed) return;
       // All character sheets are loaded with the town; selection is immediate.
       character = selection.character;
-      outfit = selection.outfit;
+      if (selection.outfit && customLooks[character]?.enabled) {
+        customLooks = saveWardrobes({
+          ...customLooks,
+          [character]: { ...customLooks[character], enabled: false },
+        });
+      }
+      outfit = customLooks[character]?.enabled
+        ? customLooks[character].base
+        : selection.outfit;
       loading = false;
       publish();
       requestDraw();
     },
     setAction(value) {
       action = value;
+      requestDraw();
+    },
+    setCustomLook(value) {
+      const look = cleanLook(character, value);
+      customLooks = saveWardrobes({ ...customLooks, [character]: look });
+      cancelAbility();
+      outfit = look.enabled ? look.base : character === "masyn" ? room : null;
+      publish();
       requestDraw();
     },
     enter: changeRoom,
@@ -1969,7 +1985,8 @@ export function createWorld(host, callbacks) {
         direction = 0;
         if (room) {
           lastRoom = room;
-          if (character === "masyn") outfit = room;
+          if (character === "masyn" && !customLooks[character]?.enabled)
+            outfit = room;
         }
         scene.snapCamera(position);
         scene.resize(state());

@@ -21,7 +21,11 @@ function readBest() {
 }
 // A small self-contained arcade canvas. Opening the normal world dialog pauses
 // the town; closing this component releases its RAF, listeners and decoded art.
-export default function AxolotlGame({ character = "masyn", outfit = null }) {
+export default function AxolotlGame({
+  character = "masyn",
+  outfit = null,
+  customLook = null,
+}) {
   const canvas = useRef(null),
     controls = useRef({});
   const [status, setStatus] = useState({
@@ -142,6 +146,7 @@ export default function AxolotlGame({ character = "masyn", outfit = null }) {
       images,
       getRider: () => cache.get(asset),
       sheet: artwork[asset],
+      customLook,
       ratio,
     });
     function tick(time) {
@@ -164,7 +169,7 @@ export default function AxolotlGame({ character = "masyn", outfit = null }) {
       controls.current = {};
       cache.clear();
     };
-  }, [asset]);
+  }, [asset, customLook]);
   return (
     <div
       className="axolotl-game"

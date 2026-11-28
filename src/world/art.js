@@ -4,9 +4,11 @@ import beachArt from "./BeachArt.json";
 import { imageSource } from "./ImageSource";
 import manifest from "./spriteManifest.json";
 import spriteSheets from "./SpriteSheets.json";
+import climbArt from "./ClimbArt.json";
 import places from "./PlaceArt.json";
 import terrain from "./TerrainArt.json";
 import { spriteFrame } from "./animation";
+import { styledSpriteFrame } from "./WardrobePainter";
 const rawArtwork = {
   ...gameArt,
   "totoro-grove": {
@@ -25,6 +27,7 @@ const rawArtwork = {
   ...coastArt,
   ...manifest,
   ...spriteSheets,
+  ...climbArt,
   ...places,
   ...terrain.props,
   ...(terrain.ground
@@ -162,11 +165,26 @@ export function drawSprite(
   time,
   motion,
   pixelRatio = 1,
+  customLook = null,
 ) {
+  let frame = spriteFrame(sheet, direction, moving, time);
+  if (customLook) {
+    const styled = styledSpriteFrame(
+      image,
+      sheet,
+      frame,
+      customLook,
+      direction,
+    );
+    if (styled) {
+      image = styled.image;
+      sheet = styled.sheet;
+      frame = sheet.fixedFrame;
+    }
+  }
   const width = Math.round(
     (height * (sheet.cw || sheet.width)) / (sheet.ch || sheet.height),
   );
-  const frame = spriteFrame(sheet, direction, moving, time);
   const originY =
     sheet.baselines?.[frame.row * (sheet.columns || 4) + frame.column] ??
     sheet.footY;

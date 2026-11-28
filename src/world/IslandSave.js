@@ -11,6 +11,7 @@ import { buildings } from "./config";
 import { islandSecrets } from "./IslandJournal";
 import { glassFloats } from "./FloatHunt";
 import { bugHomes } from "./BugHomes";
+import { cleanWardrobes, wardrobeKey } from "./CustomWardrobe";
 
 const progressKey = "masyn-world-v1";
 const object = (v) => !!v && typeof v === "object" && !Array.isArray(v);
@@ -25,6 +26,7 @@ const count = (ids) => (v) => cleanCounts(v, ids);
 // This explicit registry deliberately excludes credentials, emulator saves and
 // unrelated browser data. A backup can write only these island-owned keys.
 export const saveRegistry = {
+  [wardrobeKey]: cleanWardrobes,
   [progressKey]: (v) => ({
     visited: unique(v?.visited, new Set(buildings.map((b) => b.id))),
     secrets: unique(v?.secrets, new Set(islandSecrets.map((s) => s.id))),

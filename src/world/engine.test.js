@@ -6,6 +6,7 @@ import { gaitTimeForSheet } from "./Gait";
 import sheets from "./SpriteSheets.json";
 import { runSpeed } from "./Movement";
 import { groveTree } from "./ForestGrove";
+import { wardrobeKey, readWardrobes } from "./CustomWardrobe";
 // The 2D game uses screen-aligned movement; no retired 3D projection is needed.
 const screenToWorld = (x, z) => ({
     x,
@@ -86,6 +87,34 @@ function frame(dt) {
   pending.clear();
   tasks.forEach((fn) => fn(clock));
 }
+test("custom wardrobe choices persist per family member, including across standard costume selection", async () => {
+  localStorage.removeItem(wardrobeKey);
+  const game = createWorld(document.createElement("div"), {});
+  try {
+    await Promise.resolve();
+    frame(16);
+    game.setCustomLook({ base: "resume", top: "fire", hat: "crown" });
+    frame(16);
+    expect(draws.at(-1).outfit).toBe("resume");
+    expect(draws.at(-1).customLooks.masyn.top).toBe("fire");
+    game.setCharacter("ezra");
+    game.setCustomLook({ top: "hunter", hair: "halfUp" });
+    frame(16);
+    expect(draws.at(-1).customLooks.ezra.hair).toBe("halfUp");
+    game.setCharacter("masyn");
+    frame(16);
+    expect(draws.at(-1).outfit).toBe("resume");
+    expect(readWardrobes().masyn.hat).toBe("crown");
+    game.setCharacter("outfit:skills");
+    frame(16);
+    expect(draws.at(-1).outfit).toBe("skills");
+    expect(readWardrobes().masyn.enabled).toBe(false);
+    expect(readWardrobes().ezra.enabled).toBe(true);
+  } finally {
+    game.dispose();
+    localStorage.removeItem(wardrobeKey);
+  }
+});
 // Keep the test's explicit frame driver while Jest advances fishing timeouts.
 function fishingClock() {
   jest.useFakeTimers();
@@ -1100,6 +1129,29 @@ test("the Lodge chests open the cartridge library", async () => {
     game.interact();
     expect(onEvent).toHaveBeenCalledWith(
       expect.objectContaining({ type: "room-arcade", id: "lodge-arcade" }),
+    );
+  } finally {
+    game.dispose();
+  }
+});
+
+test("the wardrobe opens from the wizard room using the normal interaction path", async () => {
+  const { wizardWardrobe } = require("./RoomInteractions");
+  const onEvent = jest.fn(),
+    game = createWorld(document.createElement("div"), { onEvent });
+  try {
+    await Promise.resolve();
+    frame(16);
+    await game.enter("resume");
+    mockScene.hit = () => wizardWardrobe;
+    mockScene.canvas.dispatchEvent(
+      new MouseEvent("pointerdown", { button: 0 }),
+    );
+    frame(0);
+    for (let i = 0; i < 120; i++) frame(50);
+    game.interact();
+    expect(onEvent).toHaveBeenCalledWith(
+      expect.objectContaining({ type: "room-wardrobe", id: "wizard-wardrobe" }),
     );
   } finally {
     game.dispose();

@@ -9,7 +9,7 @@ import {
 } from "./Shells";
 import { createBeachActivities, beachStations } from "./BeachActivities";
 import { isSand, shoreline } from "./Coast";
-import { beachSprites } from "./BeachScene";
+import { beachSprites, castleConstruction } from "./BeachScene";
 import { canStand, findPath, move } from "./navigation";
 import { obstacles } from "./config";
 import { isOcean } from "./TownLayout";
@@ -17,6 +17,22 @@ import { surfEntry } from "./Surf";
 import artwork from "./BeachArt.json";
 
 beforeEach(() => localStorage.clear());
+
+test("the sandcastle advances through all eight illustrated construction stages", () => {
+  for (let i = 0; i < 8; i++) {
+    const start = castleConstruction(i / 8);
+    expect(start.art).toBe(`castle-stage-${i}`);
+    expect(start.previous).toBe(i ? `castle-stage-${i - 1}` : null);
+    expect(start.reveal).toBe(0);
+    expect(castleConstruction((i + 0.5) / 8).reveal).toBeGreaterThan(0);
+    expect(castleConstruction((i + 0.9) / 8).reveal).toBe(1);
+  }
+  expect(castleConstruction(1)).toMatchObject({
+    art: "castle-stage-7",
+    reveal: 1,
+    previous: null,
+  });
+});
 
 test("all 20 floats have distinct published artwork and reachable hiding places", () => {
   expect(glassFloats).toHaveLength(20);
