@@ -7,7 +7,7 @@ export const playgroundActivities = {
   "picnic-table": "Sit at the Playground Table",
   trampoline: "Bounce on the Trampoline",
   "climbing-dome": "Climb the Dome",
-  "play-drums": "Play the Musical Drums",
+  basketball: "Shoot Hoops",
   roundabout: "Ride the Merry-Go-Round",
 };
 const ratios = {
@@ -16,7 +16,7 @@ const ratios = {
   seesaw: 303 / 166,
   "picnic-table": 256 / 237,
   trampoline: 256 / 144,
-  "play-drums": 208 / 160,
+  basketball: 208 / 160,
   "climbing-dome": 256 / 200,
 };
 const clamp = (t) => Math.max(0, Math.min(1, t));
@@ -51,8 +51,8 @@ export function seesawSeat(prop, side, tilt) {
     z: pivot.z - dx * Math.sin(tilt) + dz * Math.cos(tilt),
   };
 }
-export function swingSeat(prop, tilt) {
-  const seat = equipmentPoint(prop, 0.365, 0.775);
+export function swingSeat(prop, tilt, slot = 0) {
+  const seat = equipmentPoint(prop, 0.365 + slot * 0.335, 0.775);
   return {
     x: seat.x + Math.sin(tilt) * 0.08,
     z: seat.z + Math.sin(tilt) * 0.6 - (1 - Math.cos(tilt)) * prop.h * 0.62,
@@ -122,14 +122,31 @@ export function createPlayground() {
   let current = null;
   return {
     active: () => !!current,
-    start(prop, player, partner, time) {
+    start(prop, player, partner, time, { npc = false, slot = 0 } = {}) {
       if (current || !playgroundActivities[prop.id]) return false;
       current = {
         prop,
         origin: { ...player },
         partner,
         started: time,
+        npc,
+        slot,
         approach: prop.id === "playhouse" ? slideApproach(prop, player) : null,
+      };
+      return true;
+    },
+    trick(time, random = Math.random) {
+      if (
+        current?.prop.id !== "trampoline" ||
+        time - current.started < 1400 ||
+        (current.trick && time - current.trick.started < 950)
+      )
+        return false;
+      current.trick = {
+        started: time,
+        kind: ["backflip", "frontflip", "full"][
+          Math.min(2, Math.floor(random() * 3))
+        ],
       };
       return true;
     },
@@ -138,7 +155,7 @@ export function createPlayground() {
       current = null;
       return origin;
     },
-    snapshot(time) {
+    snapshot(time, sharedTime = time) {
       if (!current) return null;
       const { prop, origin, partner, started, approach } = current,
         age = Math.max(0, time - started),
@@ -157,6 +174,7 @@ export function createPlayground() {
         climbCycle = 0,
         celebrateTime = 0,
         lift = 0,
+        spinScale = 1,
         seatWeight = null,
         returnPath = null,
         returnDuration = 1000;
@@ -166,7 +184,7 @@ export function createPlayground() {
           0.42 *
           ease((age - 650) / 1100) *
           ease((8800 - age) / 1000);
-        point = swingSeat(prop, tilt);
+        point = swingSeat(prop, tilt, current.slot);
         seated = true;
         direction = 0;
         rotation = -Math.sin(tilt) * 0.1;
@@ -179,7 +197,7 @@ export function createPlayground() {
         point = seesawSeat(prop, -1, tilt);
         seated = true;
         direction = 2;
-        if (partner)
+        if (partner) {
           guest = {
             ...seesawSeat(prop, 1, tilt),
             direction: 6,
@@ -187,6 +205,28 @@ export function createPlayground() {
             lift: 0,
             anchor: "hips",
           };
+          if (Number.isFinite(partner.x) && Number.isFinite(partner.z)) {
+            const boarding = age < 650,
+              leaving = age > exitAt;
+            if (boarding || leaving) {
+              const t = boarding
+                ? ease(age / 650)
+                : 1 - ease((age - exitAt) / returnDuration);
+              guest = {
+                ...mix(partner, guest, t),
+                direction: movementDirection(
+                  guest.x - partner.x,
+                  guest.z - partner.z,
+                ),
+                seated: false,
+                moving: true,
+                anchor: "feet",
+                lift: 0,
+                stage: boarding ? "approaching" : "returning",
+              };
+            }
+          }
+        }
       } else if (prop.id === "playhouse") {
         const bottom = approach.at(-1),
           top = equipmentPoint(prop, 0.32, 0.51),
@@ -251,9 +291,44 @@ export function createPlayground() {
         point = equipmentPoint(prop, 0.26, 0.82);
         seated = true;
         direction = 2;
-      } else if (prop.id === "play-drums" || prop.id === "trampoline") {
-        const trampoline = prop.id === "trampoline";
-        const station = equipmentPoint(prop, 0.5, trampoline ? 0.67 : 1.12);
+      } else if (prop.id === "trampoline") {
+        const station = equipmentPoint(prop, 0.5, 0.49);
+        const front = equipmentPoint(prop, 0.5, 1.18);
+        const route = slideApproach(prop, origin).slice(0, -1).concat(front);
+        exitAt = current.npc ? 7600 : Infinity;
+        if (age < 850) {
+          point = followPath(route, age / 850);
+          direction = point.direction;
+          stage = "approaching";
+        } else if (age < 1400) {
+          const t = (age - 850) / 550;
+          point = mix(front, station, ease(t));
+          direction = 4;
+          lift = Math.sin(t * Math.PI) * 0.62;
+          stage = "mounting";
+        } else {
+          point = station;
+          direction = 0;
+          lift =
+            Math.abs(Math.sin((age - 1400) / 385)) *
+            0.8 *
+            ease((exitAt - age) / 500);
+          stage = "bouncing";
+          const trick = current.trick;
+          if (trick && time - trick.started < 950) {
+            const t = clamp((time - trick.started) / 950);
+            lift = Math.sin(t * Math.PI) * 1.35;
+            if (trick.kind === "full")
+              spinScale = 0.65 + 0.35 * Math.abs(Math.cos(t * Math.PI * 2));
+            else
+              rotation =
+                (trick.kind === "backflip" ? -1 : 1) * Math.PI * 2 * ease(t);
+            if (trick.kind === "full") direction = Math.round(t * 8) % 8;
+            crouch = true;
+          }
+        }
+      } else if (prop.id === "basketball") {
+        const station = equipmentPoint(prop, 0.5, 1.36);
         exitAt = 7600;
         if (age < 850) {
           point = mix(origin, station, ease(age / 850));
@@ -264,21 +339,18 @@ export function createPlayground() {
           stage = "approaching";
         } else {
           point = station;
-          direction = trampoline ? 0 : 4;
-          lift = trampoline
-            ? Math.abs(Math.sin((age - 850) / 385)) *
-              0.8 *
-              ease((exitAt - age) / 500)
-            : 0;
-          stage = trampoline ? "bouncing" : "drumming";
+          direction = 4;
+          lift =
+            Math.max(0, Math.sin(((age - 850) / 1800) * Math.PI * 2)) * 0.16;
+          stage = "shooting-hoops";
         }
       } else if (prop.id === "climbing-dome") {
         const rungs = [
           [0.48, 0.96],
-          [0.39, 0.79],
-          [0.56, 0.64],
-          [0.43, 0.48],
-          [0.54, 0.31],
+          [0.46, 0.79],
+          [0.53, 0.64],
+          [0.47, 0.48],
+          [0.52, 0.31],
           [0.5, 0.12],
         ].map(([u, v]) => equipmentPoint(prop, u, v));
         const foot = rungs[0],
@@ -315,14 +387,12 @@ export function createPlayground() {
           stage = "descending-net";
         }
       } else if (prop.id === "roundabout") {
-        const rideAge = Math.max(0, Math.min(age, exitAt) - 650);
-        // One complete revolution with a gentle start and finish. The idle
-        // carousel has the same seat alignment when the rider steps off.
-        const angle =
-          Math.PI / 2 + Math.PI * 2 * ease(rideAge / (exitAt - 650));
+        // Every occupied seat uses the same carousel clock and its own socket.
+        const angle = Math.PI / 2 + sharedTime * 0.00075;
+        const seatAngle = angle + (current.slot * Math.PI) / 2;
         point = {
-          x: prop.x + Math.cos(angle) * 1.05,
-          z: prop.z - 0.2 + Math.sin(angle) * 0.42,
+          x: prop.x + Math.cos(seatAngle) * 1.05,
+          z: prop.z - 0.2 + Math.sin(seatAngle) * 0.42,
         };
         direction = movementDirection(point.x - prop.x, point.z - prop.z + 0.2);
         seated = true;
@@ -356,6 +426,7 @@ export function createPlayground() {
         seated: seated && !returning,
         crouch: crouch && !returning,
         rotation,
+        spinScale,
         anchor: seated && !returning ? "hips" : "feet",
         seatWeight,
         moving: ["approaching", "platform", "returning", "landing"].includes(
@@ -374,6 +445,7 @@ export function createPlayground() {
         origin,
         elapsed: age,
         tilt,
+        slot: current.slot,
         player,
         partner,
         guest,
@@ -398,6 +470,7 @@ export function drawPlayground(
   const p = activity.prop,
     foot = at(p.x, p.z);
   if (p.id === "swings") {
+    const riders = activity.riders || [activity];
     const h = p.h * unit,
       w = (h * 294) / 258,
       left = foot.x - w / 2,
@@ -405,58 +478,67 @@ export function drawPlayground(
     ctx.save();
     ctx.beginPath();
     ctx.rect(left, top, w, h);
-    ctx.rect(left + w * 0.235, top + h * 0.17, w * 0.29, h * 0.675);
+    for (const ride of riders)
+      ctx.rect(
+        left + w * (0.235 + (ride.slot || 0) * 0.335),
+        top + h * 0.17,
+        w * 0.29,
+        h * 0.675,
+      );
     ctx.clip("evenodd");
     drawProp();
     ctx.restore();
-    const socket = swingSeat(p, activity.tilt);
-    const seat = at(socket.x, socket.z);
-    const a = equipmentPoint(p, 0.29, 0.145),
-      b = equipmentPoint(p, 0.475, 0.145);
-    const half = w * 0.105;
-    ctx.save();
-    for (const [anchor, side] of [
-      [a, -1],
-      [b, 1],
-    ]) {
-      const start = at(anchor.x, anchor.z),
-        end = { x: seat.x + side * half, y: seat.y };
-      ctx.strokeStyle = "#5a3f2b";
-      ctx.lineWidth = Math.max(2, unit * 0.058);
-      ctx.beginPath();
-      ctx.moveTo(start.x, start.y);
-      ctx.lineTo(end.x, end.y);
-      ctx.stroke();
-      ctx.strokeStyle = "#d9b97c";
-      ctx.lineWidth = Math.max(1, unit * 0.031);
-      ctx.stroke();
-      for (let t = 0.1; t < 1; t += 0.13) {
-        const x = start.x + (end.x - start.x) * t,
-          y = start.y + (end.y - start.y) * t;
-        ctx.fillStyle = "#f1cf89";
-        ctx.fillRect(
-          x - unit * 0.028,
-          y - unit * 0.018,
-          unit * 0.055,
-          unit * 0.035,
-        );
+    for (const ride of riders) {
+      const offset = (ride.slot || 0) * 0.335;
+      const socket = swingSeat(p, ride.tilt, ride.slot);
+      const seat = at(socket.x, socket.z);
+      const a = equipmentPoint(p, 0.29 + offset, 0.145),
+        b = equipmentPoint(p, 0.475 + offset, 0.145);
+      const half = w * 0.105;
+      ctx.save();
+      for (const [anchor, side] of [
+        [a, -1],
+        [b, 1],
+      ]) {
+        const start = at(anchor.x, anchor.z),
+          end = { x: seat.x + side * half, y: seat.y };
+        ctx.strokeStyle = "#5a3f2b";
+        ctx.lineWidth = Math.max(2, unit * 0.058);
+        ctx.beginPath();
+        ctx.moveTo(start.x, start.y);
+        ctx.lineTo(end.x, end.y);
+        ctx.stroke();
+        ctx.strokeStyle = "#d9b97c";
+        ctx.lineWidth = Math.max(1, unit * 0.031);
+        ctx.stroke();
+        for (let t = 0.1; t < 1; t += 0.13) {
+          const x = start.x + (end.x - start.x) * t,
+            y = start.y + (end.y - start.y) * t;
+          ctx.fillStyle = "#f1cf89";
+          ctx.fillRect(
+            x - unit * 0.028,
+            y - unit * 0.018,
+            unit * 0.055,
+            unit * 0.035,
+          );
+        }
       }
+      const img = image?.("town-swings");
+      if (img)
+        ctx.drawImage(
+          img,
+          img.width * (0.235 + offset),
+          img.height * 0.72,
+          img.width * 0.29,
+          img.height * 0.125,
+          seat.x - w * 0.145,
+          seat.y - h * 0.03,
+          w * 0.29,
+          h * 0.125,
+        );
+      drawPerson(ride.player, true, ride);
+      ctx.restore();
     }
-    const img = image?.("town-swings");
-    if (img)
-      ctx.drawImage(
-        img,
-        img.width * 0.235,
-        img.height * 0.72,
-        img.width * 0.29,
-        img.height * 0.125,
-        seat.x - w * 0.145,
-        seat.y - h * 0.03,
-        w * 0.29,
-        h * 0.125,
-      );
-    drawPerson(activity.player, true);
-    ctx.restore();
     return;
   }
   if (p.id === "seesaw") {
@@ -503,9 +585,12 @@ export function drawPlayground(
     return;
   }
   if (p.id === "roundabout") {
-    drawRoundabout(ctx, at, unit, p, activity.tilt, () =>
-      drawPerson(activity.player, true),
-    );
+    drawRoundabout(ctx, at, unit, p, activity.tilt, () => {
+      for (const ride of [...(activity.riders || [activity])].sort(
+        (a, b) => a.player.z - b.player.z,
+      ))
+        drawPerson(ride.player, true, ride);
+    });
     return;
   }
   // A visitor approaching the far side is behind the drawing, not standing
@@ -518,28 +603,29 @@ export function drawPlayground(
   if (behind) drawPerson(person, true);
   drawProp();
   if (!behind) drawPerson(person, true);
-  if (p.id === "play-drums" && activity.player.stage === "drumming") {
-    const beat = (activity.elapsed % 550) / 550;
-    const drum = equipmentPoint(
-      p,
-      0.27 + (Math.floor(activity.elapsed / 550) % 3) * 0.23,
-      0.41,
-    );
-    const position = at(drum.x, drum.z);
+  if (p.id === "basketball" && activity.player.stage === "shooting-hoops") {
+    const beat = ((activity.elapsed - 850) % 1800) / 1800;
+    const hand = at(person.x, person.z - 0.8),
+      rim = at(p.x, p.z - p.h * 0.61);
+    const t = Math.min(1, beat * 1.6),
+      position = {
+        x: hand.x + (rim.x - hand.x) * t,
+        y: hand.y + (rim.y - hand.y) * t - Math.sin(t * Math.PI) * unit * 1.05,
+      };
+    if (beat > 0.625) position.y += (beat - 0.625) * unit * 2.5;
     ctx.save();
-    ctx.globalAlpha = 1 - beat;
-    ctx.strokeStyle = "#fceab2";
-    ctx.lineWidth = Math.max(1, unit * 0.04);
+    ctx.fillStyle = "#dc863d";
+    ctx.strokeStyle = "#684127";
+    ctx.lineWidth = Math.max(1, unit * 0.035);
     ctx.beginPath();
-    ctx.ellipse(
-      position.x,
-      position.y,
-      unit * (0.18 + beat * 0.32),
-      unit * (0.08 + beat * 0.14),
-      0,
-      0,
-      Math.PI * 2,
-    );
+    ctx.arc(position.x, position.y, unit * 0.13, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(position.x - unit * 0.12, position.y);
+    ctx.lineTo(position.x + unit * 0.12, position.y);
+    ctx.moveTo(position.x, position.y - unit * 0.12);
+    ctx.lineTo(position.x, position.y + unit * 0.12);
     ctx.stroke();
     ctx.restore();
   }

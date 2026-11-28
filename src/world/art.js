@@ -4,6 +4,7 @@ import beachArt from "./BeachArt.json";
 import { imageSource } from "./ImageSource";
 import manifest from "./spriteManifest.json";
 import spriteSheets from "./SpriteSheets.json";
+import runPhases from "./RunPhases.json";
 import climbArt from "./ClimbArt.json";
 import places from "./PlaceArt.json";
 import terrain from "./TerrainArt.json";
@@ -48,6 +49,7 @@ export const artwork = Object.fromEntries(
     {
       ...sheet,
       id,
+      ...(runPhases[id] ? { stridePhase: runPhases[id] } : {}),
     },
   ]),
 );

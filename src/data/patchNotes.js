@@ -2,6 +2,19 @@
 // the preceding production commit, rather than fictional in-game release notes.
 const patchNotes = [
   {
+    version: "1.8.4",
+    date: "November 28, 2026",
+    previousCommit: "24d530964740decbd678c87d4a78b860ff43a211",
+    changes: [
+      "Expanded the Pokémon card machine and binder to 202 English physical TCG collections and 21,432 cataloged printings. Search by expansion, collect ten packs, and reveal fifty cards together without losing or duplicating rewards if you close the app.",
+      "The trampoline now stays active until you leave. Approach the mat from outside, hop on, then press Q or tap Trick for a backflip, frontflip, or full twist.",
+      "Replaced the musical drums with a basketball hoop and shooting interaction. The carousel and swings have shared seats for multiple riders, and NPC seesaw sessions require a partner. Occupied single-rider toys are no longer taken away from their riders.",
+      "Tightened net climbing's sideways movement, kept the skateboard deck visible during kickflips, and applied wardrobe appearance to the board rider.",
+      "Measured Masyn costume running poses against Everyday Hoodie and aligned confident lower-body phase matches without replacing or duplicating the 32 drawn frames in each direction.",
+      "Made creature-picker tiles expand for long species names, with consistent icon wells and a separate quantity line. Only the creature strip scrolls sideways.",
+    ],
+  },
+  {
     version: "1.8.3",
     date: "November 27, 2026",
     previousCommit: "9b6578a",

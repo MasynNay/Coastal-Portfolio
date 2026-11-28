@@ -301,26 +301,29 @@ export default function WorldMode() {
     [progress, setProgress] = useState(readProgress);
   // Saved unlocks seed the simulation once; new discoveries must not restart it.
   const initialSecrets = useRef(progress.secrets);
-  const ability =
-    status.character === "masyn" && status.outfit === "panem"
-      ? characterAbility(status.character, status.outfit, status.surfing)
-      : status.surfingBoard
-        ? status.surfTransitioning
-          ? null
-          : { label: "Trick", verb: "Do a surfing trick" }
-        : status.race
-          ? null
-          : (status.skateboarding && !status.skateReturning) ||
-              (["jetski", "boat"].includes(status.watercraft) &&
-                !status.waterReturning)
-            ? { label: "Trick", verb: "Do a riding trick" }
-            : status.watercraft || status.skateboarding
-              ? null
-              : characterAbility(
-                  status.character,
-                  status.outfit,
-                  status.surfing,
-                );
+  const ability = status.trampoline
+    ? { label: "Trick", verb: "Do a trampoline flip" }
+    : status.playground
+      ? null
+      : status.character === "masyn" && status.outfit === "panem"
+        ? characterAbility(status.character, status.outfit, status.surfing)
+        : status.surfingBoard
+          ? status.surfTransitioning
+            ? null
+            : { label: "Trick", verb: "Do a surfing trick" }
+          : status.race
+            ? null
+            : (status.skateboarding && !status.skateReturning) ||
+                (["jetski", "boat"].includes(status.watercraft) &&
+                  !status.waterReturning)
+              ? { label: "Trick", verb: "Do a riding trick" }
+              : status.watercraft || status.skateboarding
+                ? null
+                : characterAbility(
+                    status.character,
+                    status.outfit,
+                    status.surfing,
+                  );
   const announce = useCallback((message) => {
     setToast(message);
     clearTimeout(toastTimer.current);

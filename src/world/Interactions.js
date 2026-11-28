@@ -7,7 +7,7 @@ export function familyGreeting(character, person, random = Math.random) {
 export const propMessages = {
   trampoline: "A little bounce in the sunshine.",
   "climbing-dome": "Pick a route, hold on, and climb a little higher.",
-  "play-drums": "Tap out a little rhythm together.",
+  basketball: "Shoot a few hoops.",
   "picnic-table":
     "The perfect spot for a snack and a very serious playground meeting.",
   bonsai: "A quiet breath by the bonsai. There’s always room to keep growing.",

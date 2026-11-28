@@ -152,9 +152,8 @@ export function Terrariums({ caught, onRelease }) {
               }}
             >
               <CollectionIcon asset={s.art} label={s.name} />
-              <span>
-                {s.name} ×{caught[s.id]}
-              </span>
+              <span>{s.name}</span>
+              <small className="collection-picker-count">×{caught[s.id]}</small>
             </button>
           ))}
         </div>

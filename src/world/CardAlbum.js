@@ -87,7 +87,7 @@ export default function CardAlbum({ cards, renderCard }) {
       setSelected(visible[(index + step + visible.length) % visible.length].id);
   }
   const swipe = useCardSwipe(turn);
-  // Inspection is a separate screen, not another block above a 200-card grid.
+  // Inspection is a separate screen, not another block above the full grid.
   // Restore keyboard focus to the chosen slot when returning to the binder.
   useEffect(() => {
     if (selected) detail.current?.focus({ preventScroll: true });
@@ -181,7 +181,7 @@ export default function CardAlbum({ cards, renderCard }) {
         )}
       </div>
       <label className="card-search">
-        Find a Pokémon
+        Find a Card
         <input
           type="search"
           value={search}
@@ -250,7 +250,7 @@ export default function CardAlbum({ cards, renderCard }) {
                 setLimit(24);
               }}
             >
-              <option value="All">All Six Collections</option>
+              <option value="All">All Collections</option>
               {packs.map((p) => (
                 <option key={p.id} value={p.id}>
                   {p.name} · {p.cards.filter((c) => owned.has(c.id)).length}/

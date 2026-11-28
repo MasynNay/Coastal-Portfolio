@@ -477,7 +477,8 @@ export function createCanvasScene(host, invalidate = () => {}) {
     ctx.save();
     if (!entry.wake && ride?.deckFlip) {
       ctx.translate(p.x, p.y - unit * 0.15);
-      ctx.scale(1, Math.cos(ride.deckFlip));
+      const edge = Math.cos(ride.deckFlip);
+      ctx.scale(1, Math.sign(edge || 1) * Math.max(0.14, Math.abs(edge)));
       ctx.translate(-p.x, -p.y + unit * 0.15);
     }
     sprite(
@@ -510,7 +511,8 @@ export function createCanvasScene(host, invalidate = () => {}) {
         ride.direction,
         pose.moving,
         pose.time,
-        entry.wake ? 0.16 : 0.1,
+        entry.wake ? 0.16 : 0.13,
+        true,
       );
     }
     ctx.restore();
@@ -743,7 +745,9 @@ export function createCanvasScene(host, invalidate = () => {}) {
         if (
           r.id !== state.character &&
           r.id !== state.playground?.partner?.id &&
-          !state.npcPlaygrounds?.some((p) => p.resident.id === r.id) &&
+          !state.npcPlaygrounds?.some(
+            (p) => p.resident.id === r.id || p.partner?.id === r.id,
+          ) &&
           !r.room &&
           !r.hidden
         )
@@ -1029,12 +1033,17 @@ export function createCanvasScene(host, invalidate = () => {}) {
       }
     }
     const personUnit = unit;
-    const playgroundByArt = new Map(
-      [
-        ...(state.npcPlaygrounds || []),
-        ...(state.playground ? [state.playground] : []),
-      ].map((play) => ["town-" + play.id, play]),
-    );
+    const playgroundByArt = new Map();
+    for (const play of [
+      ...(state.npcPlaygrounds || []),
+      ...(state.playground ? [state.playground] : []),
+    ]) {
+      const key = "town-" + play.id;
+      if (["roundabout", "swings"].includes(play.id)) {
+        const riders = [...(playgroundByArt.get(key)?.riders || []), play];
+        playgroundByArt.set(key, { ...play, riders });
+      } else playgroundByArt.set(key, play);
+    }
     for (const a of sprites.sort((a, b) => {
       const depth = (p) => {
         if (p.sortZ !== undefined) return p.sortZ;
@@ -1068,8 +1077,8 @@ export function createCanvasScene(host, invalidate = () => {}) {
             unit,
             playgroundByArt.get(a.art),
             () => sprite(a.art, a.x, a.z, a.h, 0, false, state.worldTime),
-            (pose, player) => {
-              const play = playgroundByArt.get(a.art);
+            (pose, player, ride) => {
+              const play = ride || playgroundByArt.get(a.art);
               const actor = player
                 ? play.resident || { id: state.character, outfit: state.outfit }
                 : play.partner;
@@ -1094,7 +1103,7 @@ export function createCanvasScene(host, invalidate = () => {}) {
               const asset = activityAsset(
                 id,
                 outfit,
-                ["drumming", "bouncing"].includes(pose.stage)
+                ["shooting-hoops", "bouncing"].includes(pose.stage)
                   ? "board-trick"
                   : pose.crouch
                     ? "board-trick"
@@ -1105,9 +1114,12 @@ export function createCanvasScene(host, invalidate = () => {}) {
               );
               const ground = at(pose.x, pose.z);
               ctx.save();
-              ctx.translate(ground.x, ground.y);
+              const pivotY =
+                ground.y - (pose.lift + personHeight(id) * 0.5) * personUnit;
+              ctx.translate(ground.x, pivotY);
               ctx.rotate(pose.rotation || 0);
-              ctx.translate(-ground.x, -ground.y);
+              ctx.scale(pose.spinScale || 1, 1);
+              ctx.translate(-ground.x, -pivotY);
               sprite(
                 asset,
                 pose.x,
@@ -1117,10 +1129,10 @@ export function createCanvasScene(host, invalidate = () => {}) {
                     0.29,
                 personHeight(id),
                 pose.direction,
-                ["drumming", "bouncing"].includes(pose.stage) ||
+                ["shooting-hoops", "bouncing"].includes(pose.stage) ||
                   pose.crouch ||
                   !!pose.moving,
-                pose.stage === "drumming"
+                pose.stage === "shooting-hoops"
                   ? authoredFrameTime(
                       artwork[asset],
                       [3, 4, 5, 4][Math.floor(state.worldTime / 140) % 4],
@@ -1252,7 +1264,9 @@ export function createCanvasScene(host, invalidate = () => {}) {
     }
     // Equipment riders are rendered with their toys, not in the normal
     // resident list. Their nameplates still follow the actual seat or rung.
-    for (const play of playgroundByArt.values()) {
+    for (const play of [...playgroundByArt.values()].flatMap(
+      (p) => p.riders || [p],
+    )) {
       for (const [actor, pose] of [
         [play.resident?.id || state.character, play.player],
         [play.partner?.id, play.guest],

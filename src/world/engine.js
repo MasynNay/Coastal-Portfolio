@@ -372,7 +372,7 @@ export function createWorld(host, callbacks) {
     const playerPlay = playground.snapshot(worldTime);
     const npcPlaygrounds = room
       ? []
-      : npcPlaygroundsFor(people, playerPlay, character);
+      : npcPlaygroundsFor(people, playerPlay, character, worldTime);
     return {
       room,
       residents: people,
@@ -688,6 +688,7 @@ export function createWorld(host, callbacks) {
                                       : nearby()?.label || null,
       fishingPhase,
       playground: playground.active(),
+      trampoline: playground.snapshot(worldTime)?.id === "trampoline",
       interactionBusy: beachActivities.busy() || !!groveSession,
       surfingBoard: surfRide.active(),
       surfTransitioning: surfRide.active() && !surfRide.manual(),
@@ -902,6 +903,18 @@ export function createWorld(host, callbacks) {
       return;
     }
     if (duckTarget?.type === "playground") {
+      // A single-seat attraction is not vacated just because the player arrives.
+      const occupied = npcPlaygroundsFor(
+        worldResidents(),
+        null,
+        character,
+        worldTime,
+      );
+      if (
+        !["roundabout", "swings"].includes(duckTarget.id) &&
+        occupied.some((p) => p.id === duckTarget.id)
+      )
+        return;
       stop();
       cancelAbility();
       const partner =
@@ -913,9 +926,14 @@ export function createWorld(host, callbacks) {
                 !r.room &&
                 !r.outing &&
                 !r.surfing &&
-                !r.bike,
+                !r.bike &&
+                !r.toy &&
+                !occupied.some(
+                  (p) => p.resident.id === r.id || p.partner?.id === r.id,
+                ),
             )
           : null;
+      if (duckTarget.id === "seesaw" && !partner) return;
       if (playground.start(duckTarget, position, partner, worldTime)) {
         if (partner) guestPause.hold(partner.id, worldTime);
         publish();
@@ -1143,6 +1161,10 @@ export function createWorld(host, callbacks) {
   }
   function useAbility() {
     if (skySalute.active()) return;
+    if (playground.active()) {
+      if (!frozen && !loading && playground.trick(worldTime)) requestDraw();
+      return;
+    }
     if (
       !frozen &&
       !loading &&

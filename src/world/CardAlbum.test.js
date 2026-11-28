@@ -35,13 +35,13 @@ function change(node, value) {
 test("binder paginates the complete checklist and combines ownership, set and rarity filters", () => {
   const card = cardCatalog.find((c) => c.tier === "SIR");
   render({ owned: { ...card, quantity: 4 } });
-  expect(host.textContent).toContain("1 / 200 Collected");
+  expect(host.textContent).toContain(`1 / ${cardCatalog.length} Collected`);
   expect(host.querySelectorAll(".card-album-grid > button")).toHaveLength(24);
-  act(() => button("Show More Cards · 24 / 200").click());
+  act(() => button(`Show More Cards · 24 / ${cardCatalog.length}`).click());
   expect(host.querySelectorAll(".card-album-grid > button")).toHaveLength(48);
   act(() => button("Missing Cards").click());
   expect(host.querySelectorAll(".owned-card-slot")).toHaveLength(0);
-  expect(host.textContent).toContain("199 missing cards");
+  expect(host.textContent).toContain(`${cardCatalog.length - 1} missing cards`);
   const filters = host.querySelectorAll(".album-filters select");
   change(filters[0], card.setId);
   change(filters[1], "SIR");

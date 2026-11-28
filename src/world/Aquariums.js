@@ -73,9 +73,10 @@ export default function Aquariums({ caught, onRelease }) {
                 }}
               >
                 <CollectionIcon asset={f.art} label={f.name} />
-                <span>
-                  {f.name} ×{caught[f.id]}
-                </span>
+                <span>{f.name}</span>
+                <small className="collection-picker-count">
+                  ×{caught[f.id]}
+                </small>
               </button>
             ))}
           </div>

@@ -45,11 +45,13 @@ export function normalizeCardCollection(saved) {
   const p = saved.pending;
   const pending =
     Array.isArray(p?.cards) &&
-    p.cards.length === 5 &&
+    p.cards.length >= 5 &&
+    p.cards.length <= 50 &&
+    p.cards.length % 5 === 0 &&
     packs.some((pack) => pack.id === p.setId) &&
     Number.isInteger(p.index) &&
     p.index >= 0 &&
-    p.index < 5 &&
+    p.index < p.cards.length &&
     p.cards.every(
       (c) =>
         c &&
@@ -63,6 +65,7 @@ export function normalizeCardCollection(saved) {
           setId: p.setId,
           index: p.index,
           flipped: !!p.flipped,
+          quick: !!p.quick || p.cards.length > 5,
           cards: p.cards.map((c) => ({
             ...Object.values(cleanCards({ card: { ...c, quantity: 1 } }))[0],
             quantity: 1,
@@ -109,7 +112,30 @@ function read() {
 function save(value) {
   memory = null;
   try {
-    localStorage.setItem(key, JSON.stringify(value));
+    // Immutable catalog data is reconstructed on read, not duplicated in
+    // localStorage for each of the tens of thousands of possible printings.
+    const compact = (c) =>
+      cardsById[c.id]
+        ? {
+            id: c.id,
+            variant: c.variant,
+            quantity: c.quantity,
+            firstDiscovery: c.firstDiscovery,
+          }
+        : c;
+    localStorage.setItem(
+      key,
+      JSON.stringify({
+        ...value,
+        cards: Object.fromEntries(
+          Object.entries(value.cards).map(([id, c]) => [id, compact(c)]),
+        ),
+        pending: value.pending && {
+          ...value.pending,
+          cards: value.pending.cards.map(compact),
+        },
+      }),
+    );
   } catch {
     memory = value;
     /* The current visit remains playable if storage is full or private. */
@@ -117,34 +143,58 @@ function save(value) {
   window.dispatchEvent(new Event(event));
   return value;
 }
-export function collectPack(id) {
+export function collectPack(id, quantity = 1) {
   if (!packs.some((p) => p.id === id)) return false;
   const state = read(),
     count = state.packs[id] || 0;
   if (count >= 99) return false;
-  save({ ...state, packs: { ...state.packs, [id]: count + 1 } });
+  if (!Number.isInteger(quantity) || quantity < 1 || quantity > 10)
+    return false;
+  save({
+    ...state,
+    packs: { ...state.packs, [id]: Math.min(99, count + quantity) },
+  });
   return true;
 }
 // Consuming the sealed pack, awarding its five cards and recording the reveal
 // are one saved transaction. Closing midway cannot duplicate or lose rewards.
 export function ripOwnedPack(id, random = Math.random) {
+  return ripOwnedPacks(id, 1, random, false);
+}
+export function ripOwnedPacks(
+  id,
+  quantity,
+  random = Math.random,
+  quick = true,
+) {
   const state = read(),
     pack = packs.find((p) => p.id === id);
-  if (!pack || state.pending || !state.packs[id]) return null;
+  if (
+    !pack ||
+    state.pending ||
+    !Number.isInteger(quantity) ||
+    quantity < 1 ||
+    quantity > 10 ||
+    (state.packs[id] || 0) < quantity
+  )
+    return null;
   const known = new Set(Object.values(state.cards).map((c) => c.id));
-  const cards = openPack(pack, random).map((c) => ({
-      ...c,
-      firstDiscovery: !known.has(c.id),
-    })),
+  const cards = Array.from({ length: quantity }, () => openPack(pack, random))
+      .flat()
+      .map((c) => {
+        const firstDiscovery = !known.has(c.id);
+        known.add(c.id);
+        return { ...c, firstDiscovery };
+      }),
     album = { ...state.cards };
   cards.forEach((c) => {
     const id = cardKey(c);
     album[id] = { ...c, quantity: (album[id]?.quantity || 0) + 1 };
   });
-  const pending = { setId: id, cards, index: 0, flipped: false };
+  const pending = { setId: id, cards, index: 0, flipped: false, quick };
   save({
     ...state,
-    packs: { ...state.packs, [id]: state.packs[id] - 1 },
+    packs: { ...state.packs, [id]: state.packs[id] - quantity },
     cards: album,
     pending,
   });
@@ -161,7 +211,10 @@ export function nextCard() {
   if (!p.flipped) return revealCard();
   save({
     ...s,
-    pending: p.index >= 4 ? null : { ...p, index: p.index + 1, flipped: false },
+    pending:
+      p.index >= p.cards.length - 1
+        ? null
+        : { ...p, index: p.index + 1, flipped: false },
   });
 }
 export function finishPack() {

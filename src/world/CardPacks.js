@@ -5,6 +5,7 @@ import {
   collectPack,
   useCardCollection,
   ripOwnedPack,
+  ripOwnedPacks,
   revealCard,
   nextCard,
   finishPack,
@@ -24,7 +25,7 @@ export function PokemonCard({ card, quantity, large = false }) {
         className={`tcg-card ${large ? "is-large" : ""} ${card.holo || card.variant !== "Regular" ? "is-foil" : ""} ${isChase(card) ? "is-chase" : ""} tier-${card.tier.toLowerCase().replaceAll(" ", "-")}`}
       >
         <div className="tcg-card-face">
-          {failed ? (
+          {failed || !cardArt(card) ? (
             <div className="card-art-unavailable">
               <strong>{card.name}</strong>
               <span>
@@ -39,7 +40,7 @@ export function PokemonCard({ card, quantity, large = false }) {
               alt={`${card.name}, ${card.rarity}, ${card.pack} #${card.number}`}
               loading={large ? "eager" : "lazy"}
               onError={(e) => {
-                if (e.currentTarget.src !== cardArt(card))
+                if (cardArt(card) && e.currentTarget.src !== cardArt(card))
                   e.currentTarget.src = cardArt(card);
                 else setFailed(true);
               }}
@@ -103,7 +104,8 @@ export function PokemonCard({ card, quantity, large = false }) {
 export default function CardPacks({ onInventory, onBack }) {
   const state = useCardCollection(),
     [notice, setNotice] = useState(""),
-    [index, setIndex] = useState(0);
+    [index, setIndex] = useState(0),
+    [search, setSearch] = useState("");
   const pack = packs[index];
   function changePack(step) {
     setIndex((n) => (n + step + packs.length) % packs.length);
@@ -120,6 +122,35 @@ export default function CardPacks({ onInventory, onBack }) {
       <div className="card-shop-heading">
         <h3>Choose Your Next Discovery</h3>
         <p>Free packs. Five cards. Yours to keep.</p>
+      </div>
+      <div className="card-set-search">
+        <span>Find a Collection</span>
+        <input
+          aria-label="Search expansion name"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          placeholder="Search expansion name"
+        />
+        <select
+          aria-label="Choose expansion"
+          value={pack.id}
+          onChange={(e) => {
+            setIndex(packs.findIndex((p) => p.id === e.target.value));
+            setNotice("");
+          }}
+        >
+          {packs
+            .filter(
+              (p) =>
+                p.id === pack.id ||
+                p.name.toLowerCase().includes(search.toLowerCase()),
+            )
+            .map((p) => (
+              <option key={p.id} value={p.id}>
+                {p.name}
+              </option>
+            ))}
+        </select>
       </div>
       <div className="card-shop-feature" {...swipe}>
         <div className="card-shop-art">
@@ -145,27 +176,24 @@ export default function CardPacks({ onInventory, onBack }) {
           >
             Collect Pack
           </button>
+          <button
+            disabled={(state.packs[pack.id] || 0) >= 99}
+            onClick={() => {
+              if (collectPack(pack.id, 10))
+                setNotice(`${pack.name} packs added to your bag.`);
+            }}
+          >
+            Collect 10 Packs
+          </button>
         </div>
       </div>
       <div className="card-page-controls">
         <button onClick={() => changePack(-1)} aria-label="Previous collection">
           ←
         </button>
-        <div className="card-page-dots" aria-label="Choose a collection">
-          {packs.map((p, n) => (
-            <button
-              key={p.id}
-              aria-label={p.name}
-              aria-pressed={n === index}
-              onClick={() => {
-                setIndex(n);
-                setNotice("");
-              }}
-            >
-              <span />
-            </button>
-          ))}
-        </div>
+        <span>
+          {index + 1} / {packs.length}
+        </span>
         <button onClick={() => changePack(1)} aria-label="Next collection">
           →
         </button>
@@ -205,6 +233,13 @@ export function CardCollection({ onBack, onShop, initialTab = "packs" }) {
     if (next === "shop") onShop();
     else setTab(next);
   }
+  function fastOpen(id, quantity) {
+    if (ripOwnedPacks(id, quantity)) {
+      islandSound("tear");
+      setOpening(null);
+      setRevealing(true);
+    }
+  }
   return (
     <CardApp active={tab} state={state} onBack={onBack} onNavigate={navigate}>
       {tab === "album" ? (
@@ -214,6 +249,47 @@ export function CardCollection({ onBack, onShop, initialTab = "packs" }) {
             <PokemonCard card={card} quantity={card.quantity} large={large} />
           )}
         />
+      ) : pending && revealing && pending.quick ? (
+        <section className="quick-reveal" aria-label="Pack opening results">
+          <h3>{pending.cards.length} Cards Revealed</h3>
+          <p>
+            {pending.cards.filter((c) => c.firstDiscovery).length} new printings
+            · {pending.cards.filter(isChase).length} chase cards
+          </p>
+          <div className="quick-card-grid">
+            {pending.cards.map((card, i) => (
+              <div
+                key={`${card.id}-${i}`}
+                style={{ "--reveal-delay": `${Math.min(i, 12) * 45}ms` }}
+              >
+                <PokemonCard card={card} />
+                {card.firstDiscovery && (
+                  <span className="discovery-badge">New!</span>
+                )}
+              </div>
+            ))}
+          </div>
+          <div className="card-reveal-actions">
+            <button
+              className="world-primary"
+              onClick={() => {
+                finishPack();
+                setRevealing(false);
+                setTab("album");
+              }}
+            >
+              View Binder
+            </button>
+            <button
+              onClick={() => {
+                finishPack();
+                setRevealing(false);
+              }}
+            >
+              Open More Packs
+            </button>
+          </div>
+        </section>
       ) : pending && revealing ? (
         <div className="pack-reveal-stage">
           <button
@@ -307,22 +383,35 @@ export function CardCollection({ onBack, onShop, initialTab = "packs" }) {
               className="card-resume world-primary"
               onClick={() => setRevealing(true)}
             >
-              Resume Open Pack · Card {pending.index + 1} of 5
+              Resume Open Pack ·{" "}
+              {pending.quick
+                ? `${pending.cards.length} cards`
+                : `Card ${pending.index + 1} of 5`}
             </button>
           )}
           <div className="pack-bag-grid">
             {packs
               .filter((p) => state.packs[p.id] > 0)
               .map((p) => (
-                <button
-                  key={p.id}
-                  disabled={!!pending}
-                  onClick={() => setOpening(p.id)}
-                >
-                  <PackArtwork pack={p} />
-                  <strong>{p.name}</strong>
-                  <span>Open Pack · ×{state.packs[p.id]}</span>
-                </button>
+                <article key={p.id} className="pack-bag-item">
+                  <button disabled={!!pending} onClick={() => setOpening(p.id)}>
+                    <PackArtwork pack={p} />
+                    <strong>{p.name}</strong>
+                    <span>Open Pack · ×{state.packs[p.id]}</span>
+                  </button>
+                  <button
+                    disabled={!!pending}
+                    onClick={() => fastOpen(p.id, 1)}
+                  >
+                    Quick Open
+                  </button>
+                  <button
+                    disabled={!!pending || state.packs[p.id] < 10}
+                    onClick={() => fastOpen(p.id, 10)}
+                  >
+                    Open 10 Packs
+                  </button>
+                </article>
               ))}
           </div>
           {!Object.values(state.packs).some((n) => n > 0) && (
@@ -336,8 +425,9 @@ export function CardCollection({ onBack, onShop, initialTab = "packs" }) {
             <summary>About Your Collection</summary>
             <p>
               Saved on this device, including unfinished reveals. Free packs use
-              custom odds and curated checklists, not full retail sets. Card
-              artwork and catalog: TCGdex / The Pokémon Company.
+              custom odds and the English physical expansion catalog, not retail
+              booster odds. Card artwork and catalog: TCGdex / The Pokémon
+              Company.
             </p>
           </details>
         </div>

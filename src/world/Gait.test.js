@@ -10,6 +10,8 @@ import appearances from "./Appearances.json";
 import timing from "./Gait.json";
 import sheets from "./SpriteSheets.json";
 import { spriteFrame } from "./animation";
+import { artwork } from "./art";
+import runPhases from "./RunPhases.json";
 
 test("each outfit lands its own last step without moving the player or holding an action", () => {
   const sample = createFootfalls();
@@ -49,6 +51,22 @@ test("a running stride takes its intended real time instead of being accelerated
   // Keep a purposeful jog rather than the previous ~583 ms leg cycle.
   expect(runCycleMs).toBeGreaterThanOrEqual(850);
   expect(advanceGait(0, true)).toBe(0);
+});
+
+test("Masyn costume run cycles preserve all drawn poses while aligning footfall phase", () => {
+  for (const [asset, offsets] of Object.entries(runPhases)) {
+    const sheet = artwork[asset];
+    for (let direction = 0; direction < 8; direction++) {
+      const frames = Array.from({ length: sheet.cycleFrames }, (_, i) =>
+        spriteFrame(sheet, direction, true, (i + 0.1) * sheet.frameMs),
+      );
+      expect(new Set(frames.map((f) => f.column)).size).toBe(sheet.cycleFrames);
+      expect(frames[0].column).toBe(offsets[frames[0].row]);
+      expect(spriteFrame(sheet, direction, false, 0).column).toBe(
+        sheet.idleFrame,
+      );
+    }
+  }
 });
 
 test("every outfit keeps the same leading foot when switching between walk/run or a loading fallback", () => {

@@ -59,6 +59,26 @@ test("children have distinct starts and toy orders, not a shared loop", () => {
     ).toBeGreaterThan(3);
 });
 
+test("carousel riders share a clock without sharing a seat, and a seesaw has a partner", () => {
+  const update = createNpcPlaygrounds();
+  const people = [actor("ezra", "roundabout"), actor("fallyn", "roundabout")];
+  const rides = update(people, { id: "roundabout" }, "masyn", 2000);
+  expect(rides).toHaveLength(2);
+  expect(new Set(rides.map((p) => p.slot)).size).toBe(2);
+  expect(rides[0].tilt).toBe(rides[1].tilt);
+  const seesaw = createNpcPlaygrounds();
+  const pairPeople = [actor("ezra", "seesaw"), actor("fallyn", null)];
+  seesaw(pairPeople, null, "masyn", 0);
+  const pair = seesaw(
+    pairPeople.map((p) => ({ ...p, activityElapsed: 2000 })),
+    null,
+    "masyn",
+    2000,
+  );
+  expect(pair[0].partner.id).toBe("fallyn");
+  expect(pair[0].guest.direction).toBe(6);
+});
+
 test("land residents have breathing room even if two route stops coincide", () => {
   const people = [
     { id: "ezra", x: 0, z: 9 },

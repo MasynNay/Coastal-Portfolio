@@ -17,22 +17,30 @@ export function PackArtwork({ pack }) {
     >
       <span className="booster-crimp top" />
       <div className="booster-burst" />
-      <img
-        draggable={false}
-        className="booster-set-logo"
-        src={pack.logo}
-        alt=""
-        onError={(e) => {
-          e.currentTarget.hidden = true;
-        }}
-      />
-      <img
-        draggable={false}
-        className="pack-mascot"
-        src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pack.mascot}.png`}
-        alt=""
-      />
-      <strong className="booster-set-name">Trading Card Game</strong>
+      {pack.logo && (
+        <img
+          draggable={false}
+          className="booster-set-logo"
+          src={pack.logo}
+          alt=""
+          onError={(e) => {
+            e.currentTarget.hidden = true;
+          }}
+        />
+      )}
+      {pack.mascot ? (
+        <img
+          draggable={false}
+          className="pack-mascot"
+          src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pack.mascot}.png`}
+          alt=""
+        />
+      ) : (
+        <span className="booster-emblem" aria-hidden="true" />
+      )}
+      <strong className="booster-set-name">
+        {pack.logo ? "Trading Card Game" : pack.name}
+      </strong>
       <small>5 POKÉMON CARDS</small>
       <span className="booster-crimp bottom" />
     </div>

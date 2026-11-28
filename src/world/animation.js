@@ -97,7 +97,10 @@ export function spriteFrame(sheet, direction, moving, time) {
   const [row, flip] = sheet.directions?.[direction] || layout[direction];
   return {
     row,
-    column,
+    column:
+      moving && sheet.stridePhase
+        ? (column + (sheet.stridePhase[row] || 0)) % cycle
+        : column,
     flip: !!flip !== !!sheet.mirrorRows?.includes(row),
   };
 }
