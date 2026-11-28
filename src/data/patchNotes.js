@@ -2,6 +2,19 @@
 // the preceding production commit, rather than fictional in-game release notes.
 const patchNotes = [
   {
+    version: "1.8.1",
+    date: "November 27, 2026",
+    previousCommit: "b9d1c10",
+    comparisonRef: "e590e49fbf1eaaf1050ae4e81d047ca5aacb3226",
+    changes: [
+      "Expanded Windows Workspace with a centered Windows 11-style taskbar, Start menu, searchable pinned and alphabetical app lists, recently opened apps, a system tray, calendar, and Task View for restoring minimized windows.",
+      "Expanded Ubuntu Workspace with an Activities overview, searchable application grid, side launcher, GNOME-style top bar and distinct orange/plum wallpaper.",
+      "Expanded Mac Workspace with Spotlight app search, Go, View and Window menus, a live calendar and Control Center while retaining the floating dock and iMac presentation.",
+      "Added original system-specific wallpapers, live date and session widgets, and a featured-project shortcut. Quick Settings saves widget visibility, wallpaper motion and brightness on this device.",
+      "Kept all three styles connected to the same live portfolio apps and game sessions. Updated touch layouts and launcher-aware window dragging.",
+    ],
+  },
+  {
     version: "1.8.0",
     date: "November 27, 2026",
     previousCommit: "ef52ffe",
