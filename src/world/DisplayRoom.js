@@ -150,6 +150,7 @@ export default function DisplayRoom({ bugs, fish, shells, progress, onBack }) {
                         quantity={1}
                         paused={false}
                         aquatic={item.kind === "fish"}
+                        home={bugHomeFor(resident, homes)}
                       />
                     </div>
                   )}

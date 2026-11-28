@@ -226,7 +226,7 @@
 }
 .is-close .habitat-scenery,
 .is-close .tank-scenery {
-  transform: scale(1.08);
+  transform: none;
 }
 .habitat-spider,
 .is-close .habitat-spider {
@@ -767,7 +767,7 @@
 /* Bounded groups share one enclosure; scaling and lanes keep residents legible. */
 .habitat-residents {
   position: absolute;
-  inset: 12% 8% 12%;
+  inset: 0;
   pointer-events: none;
 }
 .habitat-resident {
@@ -775,24 +775,97 @@
   translate: -50% -50%;
   scale: var(--resident-scale);
   transform-origin: center;
+  width: min(22%, 126px);
+}
+.habitat-resident-body {
+  position: relative;
+  display: block;
+  transform-origin: 50% 96%;
   animation: var(--resident-motion, resident-hop) var(--resident-period, 4.8s)
     ease-in-out infinite;
   animation-delay: var(--resident-delay);
-  width: clamp(60px, 32%, 165px);
 }
 .habitat-resident .collection-sprite {
   width: 100%;
 }
 .is-aquatic .habitat-resident {
-  width: clamp(70px, 42%, 225px);
+  width: min(28%, 175px);
 }
 .is-close .habitat-resident {
-  width: clamp(80px, 42%, 215px);
+  width: min(23%, 170px);
 }
 .is-close .is-aquatic .habitat-resident {
-  width: clamp(90px, 55%, 275px);
+  width: min(29%, 205px);
 }
-.habitat-resident.is-paused {
+.habitat-resident[data-placement="surface"] {
+  translate: -50% -95%;
+  transform-origin: 50% 95%;
+}
+.habitat-resident[data-placement="surface"]::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: 17%;
+  right: 17%;
+  bottom: 4%;
+  height: 6%;
+  border-radius: 50%;
+  background: #1b201b65;
+  filter: blur(2px);
+}
+.habitat-resident[data-motion="perch"] {
+  --resident-motion: surface-perch;
+  --resident-period: 4.5s;
+}
+.habitat-resident[data-motion="perch-flight"] {
+  --resident-motion: surface-flight;
+  --resident-period: 9s;
+}
+.habitat-resident[data-motion="crawl"],
+.habitat-resident[data-motion="bottom"] {
+  --resident-motion: surface-crawl;
+  --resident-period: 6s;
+}
+@keyframes surface-perch {
+  0%,
+  100% {
+    transform: rotate(-2deg);
+  }
+  50% {
+    transform: rotate(2deg);
+  }
+}
+@keyframes surface-flight {
+  0%,
+  40%,
+  100% {
+    transform: translate(0, 0);
+  }
+  49% {
+    transform: translate(8%, -25%) rotate(8deg);
+  }
+  64% {
+    transform: translate(25%, -45%) rotate(-8deg);
+  }
+  80% {
+    transform: translate(-12%, -18%) rotate(3deg);
+  }
+  92% {
+    transform: translate(0, 0);
+  }
+}
+@keyframes surface-crawl {
+  0%,
+  15%,
+  100% {
+    transform: translateX(-4%);
+  }
+  48%,
+  64% {
+    transform: translateX(6%);
+  }
+}
+.habitat-resident.is-paused .habitat-resident-body {
   animation-play-state: paused;
 }
 .habitat-resident[data-motion="sway"] {
@@ -893,22 +966,30 @@
   }
 }
 @keyframes resident-swim {
-  0%,
-  100% {
-    transform: translate(-8px, 3px) rotate(-3deg);
+  0% {
+    transform: translate(-20%, 5%) rotate(-3deg) scaleX(-1);
   }
   24% {
-    transform: translate(-3px, -6px) rotate(-5deg);
+    transform: translate(-8%, -13%) rotate(-5deg) scaleX(-1);
+  }
+  49% {
+    transform: translate(20%, -8%) rotate(3deg) scaleX(-1);
   }
   50% {
-    transform: translate(8px, -4px) rotate(3deg);
+    transform: translate(20%, -8%) rotate(3deg) scaleX(1);
   }
   76% {
-    transform: translate(4px, 5px) rotate(5deg);
+    transform: translate(8%, 10%) rotate(5deg) scaleX(1);
+  }
+  99% {
+    transform: translate(-20%, 5%) rotate(-3deg) scaleX(1);
+  }
+  100% {
+    transform: translate(-20%, 5%) rotate(-3deg) scaleX(-1);
   }
 }
 @media (prefers-reduced-motion: reduce) {
-  .habitat-resident {
+  .habitat-resident-body {
     animation: none;
   }
 }
@@ -1053,7 +1134,7 @@
 .collection-picker button {
   flex: 0 0 112px;
   min-width: 112px;
-  height: 156px;
+  height: 132px;
   justify-content: flex-start;
   gap: 10px;
   padding: 12px 8px !important;
@@ -1076,6 +1157,55 @@
 }
 .collection-picker button > span:last-child {
   text-align: center;
+}
+.habitat-collection-heading {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  text-align: left;
+}
+.habitat-collection-heading strong {
+  font-size: 16px;
+  color: #dfebdc;
+}
+.habitat-collection-heading p {
+  margin: 0 0 8px;
+  color: #adcbc1;
+}
+.habitat-filters {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+  gap: 12px;
+  margin: 10px 0;
+  text-align: left;
+}
+.habitat-filters label {
+  display: grid;
+  gap: 5px;
+  font-size: 12px;
+  color: #c5d8d0;
+  min-width: 0;
+}
+.habitat-filters input,
+.habitat-filters select {
+  width: 100%;
+  min-width: 0;
+  border: 1px solid #aacbc64d;
+  border-radius: 8px;
+  background: #162b30;
+  color: #e5ede4;
+  padding: 10px;
+  font-size: 14px;
+}
+@media (max-width: 480px) {
+  .habitat-filters {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+  .collection-picker button {
+    flex-basis: 100px;
+    min-width: 100px;
+  }
 }
 .habitat-care {
   position: relative;

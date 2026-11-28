@@ -257,9 +257,9 @@ export const townProps = [
     w: 2.8,
     d: 0.9,
   },
-  { id: "tunnel", x: 13.8, z: -4.7, h: 1.7, w: 2.2, d: 0.8 },
+  { id: "trampoline", x: 13.8, z: -4.7, h: 1.65, w: 2.6, d: 1.4 },
   { id: "climbing-dome", x: 22.7, z: -4.8, h: 2.4, w: 2.6, d: 0.85 },
-  { id: "spring-rider", x: 16, z: 1, h: 1.6, w: 0.8, d: 0.65 },
+  { id: "play-drums", x: 16, z: 1, h: 1.55, w: 1.8, d: 0.65 },
   { id: "picnic-table", x: 21, z: -0.3, h: 2.2, w: 2.2, d: 1 },
 ];
 export const privateStreet = (b) =>

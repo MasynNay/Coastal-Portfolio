@@ -737,6 +737,7 @@ export function createCanvasScene(host, invalidate = () => {}) {
         if (
           r.id !== state.character &&
           r.id !== state.playground?.partner?.id &&
+          !state.npcPlaygrounds?.some((p) => p.resident.id === r.id) &&
           !r.room &&
           !r.hidden
         )
@@ -964,7 +965,7 @@ export function createCanvasScene(host, invalidate = () => {}) {
               : state.beach?.building
                 ? authoredFrameTime(
                     artwork[costume],
-                    [0, 1, 2, 1][Math.floor(state.worldTime / 230) % 4],
+                    [2, 3, 4, 5, 4, 3][Math.floor(state.worldTime / 155) % 6],
                   )
                 : cycling
                   ? state.bikeRide.time
@@ -1025,6 +1026,12 @@ export function createCanvasScene(host, invalidate = () => {}) {
       }
     }
     const personUnit = unit;
+    const playgroundByArt = new Map(
+      [
+        ...(state.npcPlaygrounds || []),
+        ...(state.playground ? [state.playground] : []),
+      ].map((play) => ["town-" + play.id, play]),
+    );
     for (const a of sprites.sort((a, b) => {
       const depth = (p) => {
         if (p.sortZ !== undefined) return p.sortZ;
@@ -1049,25 +1056,24 @@ export function createCanvasScene(host, invalidate = () => {}) {
             () => sprite(a.art, a.x, a.z, a.h),
             personHeight(state.character),
           );
-        else if (
-          a.art === "town-roundabout" &&
-          state.playground?.id !== "roundabout"
-        )
+        else if (a.art === "town-roundabout" && !playgroundByArt.has(a.art))
           drawRoundabout(ctx, at, unit, a, 0);
-        else if (state.playground && a.art === "town-" + state.playground.id)
+        else if (playgroundByArt.has(a.art))
           drawPlayground(
             ctx,
             at,
             unit,
-            state.playground,
+            playgroundByArt.get(a.art),
             () => sprite(a.art, a.x, a.z, a.h, 0, false, state.worldTime),
             (pose, player) => {
-              const id = player ? state.character : state.playground.partner.id;
-              const outfit = player
-                ? state.outfit
-                : state.playground.partner.outfit;
+              const play = playgroundByArt.get(a.art);
+              const actor = player
+                ? play.resident || { id: state.character, outfit: state.outfit }
+                : play.partner;
+              if (!actor) return;
+              const { id, outfit } = actor;
               if (pose.climbing || pose.celebrating) {
-                const base = characterAsset(id, outfit);
+                const base = activityAsset(id, outfit, "board-trick", artwork);
                 if (
                   drawClimber(
                     ctx,
@@ -1083,11 +1089,13 @@ export function createCanvasScene(host, invalidate = () => {}) {
               const asset = activityAsset(
                 id,
                 outfit,
-                pose.crouch
+                ["drumming", "bouncing"].includes(pose.stage)
                   ? "board-trick"
-                  : pose.seated
-                    ? "water-ride"
-                    : "walk",
+                  : pose.crouch
+                    ? "board-trick"
+                    : pose.seated
+                      ? "water-ride"
+                      : "walk",
                 artwork,
               );
               const ground = at(pose.x, pose.z);
@@ -1098,14 +1106,30 @@ export function createCanvasScene(host, invalidate = () => {}) {
               sprite(
                 asset,
                 pose.x,
-                pose.z + (pose.anchor === "hips" ? personHeight(id) * 0.29 : 0),
-                personHeight(id) * (pose.crouch ? 0.65 : 1),
+                pose.z +
+                  (pose.seatWeight ?? (pose.anchor === "hips" ? 1 : 0)) *
+                    personHeight(id) *
+                    0.29,
+                personHeight(id),
                 pose.direction,
-                pose.crouch || !!pose.moving,
-                pose.crouch
-                  ? authoredFrameTime(artwork[asset], 1)
-                  : state.worldTime,
+                ["drumming", "bouncing"].includes(pose.stage) ||
+                  pose.crouch ||
+                  !!pose.moving,
+                pose.stage === "drumming"
+                  ? authoredFrameTime(
+                      artwork[asset],
+                      [3, 4, 5, 4][Math.floor(state.worldTime / 140) % 4],
+                    )
+                  : pose.stage === "bouncing"
+                    ? authoredFrameTime(
+                        artwork[asset],
+                        Math.round(3 + Math.min(1, pose.lift / 0.8) * 3),
+                      )
+                    : pose.crouch
+                      ? authoredFrameTime(artwork[asset], 1)
+                      : state.worldTime,
                 pose.lift,
+                true,
               );
               ctx.restore();
             },
@@ -1115,7 +1139,23 @@ export function createCanvasScene(host, invalidate = () => {}) {
         else if (a.watercraft) drawWatercraft(a, state);
         else if (a.board) drawBoard(a, state);
         else if (a.surfboard) drawSurfer(a, state);
-        else {
+        else if (a.castleProgress != null) {
+          // Reveal a single anchored castle drawing from the foundation up.
+          // Each frame retains its exact silhouette and ground contact.
+          const base = at(a.x, a.z);
+          const revealHeight = a.h * unit * 1.1 * a.castleProgress;
+          ctx.save();
+          ctx.beginPath();
+          ctx.rect(
+            base.x - a.h * unit,
+            base.y - revealHeight,
+            a.h * unit * 2,
+            revealHeight + unit * 0.12,
+          );
+          ctx.clip();
+          sprite(a.art, a.x, a.z, a.h);
+          ctx.restore();
+        } else {
           const human = humanIds.has(a.id);
           const pose = human
             ? settleFootfall(a, artwork[a.art], state.worldTime)

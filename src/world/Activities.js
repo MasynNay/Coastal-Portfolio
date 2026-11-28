@@ -69,20 +69,56 @@ export function Terrariums({ caught, onRelease }) {
   const [homes, setHomes] = useState(readBugHomes);
   const { favorites, toggle } = useFavorites("bugs");
   const [onlyFavorites, setOnlyFavorites] = useState(false),
-    [sort, setSort] = useState("Name");
+    [sort, setSort] = useState("Name"),
+    [category, setCategory] = useState("All"),
+    [query, setQuery] = useState("");
+  const collected = terrariumSpecies.filter((s) => !!caught[s.id]);
+  const categories = [...new Set(collected.map((s) => s.category))].filter(
+    Boolean,
+  );
   const spiders = sortCreatures(
-    terrariumSpecies.filter(
-      (s) => !!caught[s.id] && (!onlyFavorites || favorites.includes(s.id)),
+    collected.filter(
+      (s) =>
+        (!onlyFavorites || favorites.includes(s.id)) &&
+        (category === "All" || s.category === category) &&
+        s.name.toLowerCase().includes(query.trim().toLowerCase()),
     ),
     sort,
   );
   const resident = spiders.find((s) => s.id === selected) || spiders[0];
   return (
     <div className="spider-home">
-      <p>
-        Each species has a home of its own. Swipe or scroll the creature strip
-        to choose one, then tap or click its habitat to look closer.
-      </p>
+      <div className="habitat-collection-heading">
+        <strong>
+          {collected.length} species <span>·</span>{" "}
+          {collected.reduce((sum, s) => sum + caught[s.id], 0)} residents
+        </strong>
+        <p>Choose a resident to visit its habitat.</p>
+      </div>
+      {!!collected.length && (
+        <div className="habitat-filters">
+          <label>
+            Find a resident
+            <input
+              type="search"
+              placeholder="Search by name"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+            />
+          </label>
+          <label>
+            Bug group
+            <select
+              value={category}
+              onChange={(e) => setCategory(e.target.value)}
+            >
+              {["All", ...categories].map((group) => (
+                <option key={group}>{group}</option>
+              ))}
+            </select>
+          </label>
+        </div>
+      )}
       <CollectionTools
         favorite={favorites.includes(resident?.id)}
         onFavorite={resident ? () => toggle(resident.id) : undefined}
@@ -92,16 +128,10 @@ export function Terrariums({ caught, onRelease }) {
         onSort={setSort}
       />
       <CollectingHelp kind="bugs" expanded={!Object.keys(caught).length} />
-      {spiders.some((s) => s.legacy) && (
-        <p className="activity-note">
-          Your earlier island discoveries are still here. The current field
-          guide has 100 species in each bug group.
-        </p>
-      )}
       {!spiders.length && (
         <div className="spider-empty">
-          {onlyFavorites
-            ? "No favorite residents in this collection yet."
+          {collected.length
+            ? "No residents match these filters."
             : "No residents yet. Your catches will appear here with their own habitats."}
         </div>
       )}
@@ -167,6 +197,7 @@ export function Terrariums({ caught, onRelease }) {
                 species={s}
                 quantity={caught[s.id]}
                 paused={paused}
+                home={bugHomeFor(s, homes)}
               />
 
               <span className="habitat-reflection" />

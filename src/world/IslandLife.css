@@ -234,7 +234,7 @@
 .world-dialog .display-habitat {
   position: relative;
   width: 100%;
-  height: 140px;
+  aspect-ratio: 3 / 2;
   border: 3px solid #d0e3dd88;
   border-radius: 10px;
   overflow: hidden;
@@ -247,7 +247,7 @@
   background-position: center;
 }
 .world-dialog .display-habitat .habitat-resident {
-  --resident-scale: 0.62 !important;
+  width: 25%;
 }
 .world-dialog .display-shelf > strong {
   display: block;

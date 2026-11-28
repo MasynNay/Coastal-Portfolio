@@ -1,33 +1,46 @@
-import { drawClimber } from "./PlaygroundPoses";
+import { climbingFrame, drawClimber } from "./PlaygroundPoses";
+import { activityAsset } from "./Wardrobe";
 import appearances from "./Appearances.json";
 import sheets from "./SpriteSheets.json";
-test("summit hands rise outside the head rather than crossing through the face, in every outfit", () => {
+
+test("climbing and celebrating render one complete full-size body cell for every costume", () => {
   for (const appearance of appearances) {
-    const sheet = sheets[appearance.asset];
-    if (!sheet) continue;
-    const ctx = {
-      save: jest.fn(),
-      restore: jest.fn(),
-      translate: jest.fn(),
-      scale: jest.fn(),
-      rotate: jest.fn(),
-      drawImage: jest.fn(),
-      fillText: jest.fn(),
-    };
-    expect(
-      drawClimber(ctx, {}, sheet, { x: 100, y: 200 }, 80, {
-        celebrating: true,
-        poseTime: 6000,
-      }),
-    ).toBe(true);
-    const left = ctx.rotate.mock.calls[2][0],
-      right = ctx.rotate.mock.calls[3][0];
-    expect(left).toBeGreaterThan(2);
-    expect(right).toBeLessThan(-2);
-    // A downward arm vector must rotate outward and upward on each side.
-    expect(-Math.sin(left)).toBeLessThan(0);
-    expect(Math.cos(left)).toBeLessThan(0);
-    expect(-Math.sin(right)).toBeGreaterThan(0);
-    expect(Math.cos(right)).toBeLessThan(0);
+    const sheet =
+      sheets[
+        activityAsset(
+          appearance.character,
+          appearance.id,
+          "board-trick",
+          sheets,
+        )
+      ];
+    for (const stage of ["climbing", "climbing-net", "summit"]) {
+      const ctx = {
+        save: jest.fn(),
+        restore: jest.fn(),
+        translate: jest.fn(),
+        scale: jest.fn(),
+        drawImage: jest.fn(),
+      };
+      expect(
+        drawClimber(ctx, {}, sheet, { x: 100, y: 200 }, 80, {
+          stage,
+          celebrating: stage === "summit",
+          poseTime: 6000,
+        }),
+      ).toBe(true);
+      expect(ctx.drawImage).toHaveBeenCalledTimes(1);
+      expect(ctx.scale.mock.calls[0][1]).toBe(80 / sheet.bodyHeight);
+    }
   }
+});
+test("reach and pull passes through multiple poses and the summit faces the viewer", () => {
+  const frames = Array.from({ length: 8 }, (_, i) =>
+    climbingFrame({ stage: "climbing-net", poseTime: i * 87.5 }),
+  );
+  expect(new Set(frames.map((f) => f.column)).size).toBeGreaterThan(4);
+  expect(frames.every((f) => f.direction === 4)).toBe(true);
+  expect(climbingFrame({ celebrating: true, poseTime: 6000 }).direction).toBe(
+    0,
+  );
 });

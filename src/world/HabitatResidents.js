@@ -1,6 +1,5 @@
 import CollectionSprite from "./CollectionSprite";
-import { residentLayout } from "./CollectionCounts";
-import { bugMotionStyle } from "./WildlifeMotion";
+import { habitatPlacement } from "./HabitatPlacement";
 // Species retain their rarity and base markings. Small hue differences distinguish
 // residents without turning common catches into rare discoveries.
 export default function HabitatResidents({
@@ -8,6 +7,7 @@ export default function HabitatResidents({
   quantity,
   paused,
   aquatic = false,
+  home = "terrarium",
 }) {
   return (
     <span
@@ -16,11 +16,12 @@ export default function HabitatResidents({
       }
       aria-label={`${quantity} ${species.name} residents`}
     >
-      {residentLayout(quantity).map((r, i) => (
+      {habitatPlacement(species, quantity, home, aquatic).map((r, i) => (
         <span
           key={i}
           className={"habitat-resident " + (paused ? "is-paused" : "")}
-          data-motion={aquatic ? "swim" : bugMotionStyle(species.category)}
+          data-placement={r.placement}
+          data-motion={r.motion}
           style={{
             left: r.left + "%",
             top: r.top + "%",
@@ -29,11 +30,13 @@ export default function HabitatResidents({
             filter: `hue-rotate(${r.hue}deg)`,
           }}
         >
-          <CollectionSprite
-            asset={species.art}
-            paused={paused}
-            label={`${species.name} ${i + 1}`}
-          />
+          <span className="habitat-resident-body">
+            <CollectionSprite
+              asset={species.art}
+              paused={paused}
+              label={`${species.name} ${i + 1}`}
+            />
+          </span>
         </span>
       ))}
     </span>

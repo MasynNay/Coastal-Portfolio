@@ -5,9 +5,9 @@ export const playgroundActivities = {
   swings: "Ride the Swings",
   seesaw: "Ride the Seesaw Together",
   "picnic-table": "Sit at the Playground Table",
-  tunnel: "Crawl Through the Tunnel",
+  trampoline: "Bounce on the Trampoline",
   "climbing-dome": "Climb the Dome",
-  "spring-rider": "Ride the Spring Rider",
+  "play-drums": "Play the Musical Drums",
   roundabout: "Ride the Merry-Go-Round",
 };
 const ratios = {
@@ -15,7 +15,8 @@ const ratios = {
   swings: 294 / 258,
   seesaw: 303 / 166,
   "picnic-table": 256 / 237,
-  tunnel: 256 / 165,
+  trampoline: 256 / 144,
+  "play-drums": 208 / 160,
   "climbing-dome": 256 / 200,
 };
 const clamp = (t) => Math.max(0, Math.min(1, t));
@@ -57,13 +58,64 @@ export function swingSeat(prop, tilt) {
     z: seat.z + Math.sin(tilt) * 0.6 - (1 - Math.cos(tilt)) * prop.h * 0.62,
   };
 }
+// Approach the slide along its outside edge and front apron. The ladder is the
+// only elevated route; the roof and chute are never part of a walking path.
+export function slideApproach(prop, origin) {
+  const apron = equipmentPoint(prop, -0.13, 1.12);
+  const side = equipmentPoint(prop, -0.13, -0.08);
+  const right = equipmentPoint(prop, 1.13, 1.12);
+  const back = equipmentPoint(prop, 1.13, -0.08);
+  const bottom = equipmentPoint(prop, 0.11, 0.96);
+  if (origin.z < apron.z - prop.h * 0.2) {
+    if (origin.x < prop.x) {
+      return origin.z < side.z
+        ? [origin, { x: side.x, z: origin.z }, side, apron, bottom]
+        : [origin, { x: side.x, z: origin.z }, apron, bottom];
+    }
+    return origin.z < back.z
+      ? [origin, { x: back.x, z: origin.z }, back, right, apron, bottom]
+      : [origin, { x: right.x, z: origin.z }, right, apron, bottom];
+  }
+  return [origin, { x: origin.x, z: apron.z }, apron, bottom];
+}
+function followPath(points, t) {
+  const lengths = points
+    .slice(1)
+    .map((p, i) => Math.hypot(p.x - points[i].x, p.z - points[i].z));
+  let distance = clamp(t) * lengths.reduce((sum, n) => sum + n, 0);
+  for (let i = 0; i < lengths.length; i++) {
+    if (distance <= lengths[i] || i === lengths.length - 1) {
+      const a = points[i],
+        b = points[i + 1];
+      return {
+        ...mix(a, b, lengths[i] ? clamp(distance / lengths[i]) : 1),
+        direction: movementDirection(b.x - a.x, b.z - a.z),
+      };
+    }
+    distance -= lengths[i];
+  }
+  return points[0];
+}
+const pathLength = (points) =>
+  points
+    .slice(1)
+    .reduce(
+      (sum, p, i) => sum + Math.hypot(p.x - points[i].x, p.z - points[i].z),
+      0,
+    );
 export function createPlayground() {
   let current = null;
   return {
     active: () => !!current,
     start(prop, player, partner, time) {
       if (current || !playgroundActivities[prop.id]) return false;
-      current = { prop, origin: { ...player }, partner, started: time };
+      current = {
+        prop,
+        origin: { ...player },
+        partner,
+        started: time,
+        approach: prop.id === "playhouse" ? slideApproach(prop, player) : null,
+      };
       return true;
     },
     stop() {
@@ -73,7 +125,7 @@ export function createPlayground() {
     },
     snapshot(time) {
       if (!current) return null;
-      const { prop, origin, partner, started } = current,
+      const { prop, origin, partner, started, approach } = current,
         age = Math.max(0, time - started),
         phase = age / 1000;
       let point = { x: prop.x, z: prop.z - 0.2 },
@@ -86,12 +138,16 @@ export function createPlayground() {
         exitAt = 8800,
         stage = "playing",
         climbing = false,
-        celebrating = false;
+        celebrating = false,
+        lift = 0,
+        seatWeight = null,
+        returnPath = null,
+        returnDuration = 1000;
       if (prop.id === "swings") {
         tilt =
           Math.sin(phase * 2.1) *
           0.42 *
-          ease(age / 1100) *
+          ease((age - 650) / 1100) *
           ease((8800 - age) / 1000);
         point = swingSeat(prop, tilt);
         seated = true;
@@ -115,27 +171,39 @@ export function createPlayground() {
             anchor: "hips",
           };
       } else if (prop.id === "playhouse") {
-        const bottom = equipmentPoint(prop, 0.11, 0.94),
-          top = equipmentPoint(prop, 0.34, 0.55),
+        const bottom = approach.at(-1),
+          top = equipmentPoint(prop, 0.32, 0.51),
           mouth = equipmentPoint(prop, 0.55, 0.53);
-        exitAt = 5900;
-        if (age < 800) {
-          point = mix(origin, bottom, ease(age / 800));
-          direction = movementDirection(
-            bottom.x - origin.x,
-            bottom.z - origin.z,
-          );
+        const approachTime = Math.min(
+          4300,
+          Math.max(900, pathLength(approach) * 240),
+        );
+        const climbEnd = approachTime + 2300,
+          platformEnd = climbEnd + 550;
+        const slideEnd = platformEnd + 1250;
+        exitAt = slideEnd + 600;
+        const landing = equipmentPoint(prop, 0.92, 1.03);
+        const front = equipmentPoint(prop, 1.13, 1.12);
+        returnPath = [landing, front, ...[...approach].reverse().slice(1)];
+        returnDuration = Math.min(
+          3200,
+          Math.max(1000, pathLength(returnPath) * 210),
+        );
+        if (age < approachTime) {
+          point = followPath(approach, age / approachTime);
+          direction = point.direction;
           stage = "approaching";
-        } else if (age < 3100) {
-          point = mix(bottom, top, (age - 800) / 2300);
-          direction = 4;
+        } else if (age < climbEnd) {
+          point = mix(bottom, top, (age - approachTime) / 2300);
+          direction = 3;
+          climbing = true;
           stage = "climbing";
-        } else if (age < 3650) {
-          point = mix(top, mouth, ease((age - 3100) / 550));
+        } else if (age < platformEnd) {
+          point = mix(top, mouth, ease((age - climbEnd) / 550));
           direction = 2;
           stage = "platform";
-        } else if (age < 4900) {
-          const t = ease((age - 3650) / 1250),
+        } else if (age < slideEnd) {
+          const t = ease((age - platformEnd) / 1250),
             a = equipmentPoint(prop, 0.55, 0.53),
             b = equipmentPoint(prop, 0.64, 0.8),
             c = equipmentPoint(prop, 0.88, 0.94);
@@ -144,10 +212,16 @@ export function createPlayground() {
             z: (1 - t) ** 2 * a.z + 2 * (1 - t) * t * b.z + t * t * c.z,
           };
           seated = true;
+          seatWeight =
+            ease((age - platformEnd) / 220) * ease((slideEnd - age) / 220);
           direction = 1;
           stage = "sliding";
         } else {
-          point = equipmentPoint(prop, 0.92, 1.03);
+          point = mix(
+            equipmentPoint(prop, 0.88, 0.94),
+            landing,
+            ease((age - slideEnd) / 600),
+          );
           direction = 1;
           stage = "landing";
         }
@@ -155,41 +229,38 @@ export function createPlayground() {
         point = equipmentPoint(prop, 0.26, 0.82);
         seated = true;
         direction = 2;
-      } else if (prop.id === "spring-rider") {
-        point = { x: prop.x, z: prop.z - 0.72 };
-        seated = true;
-        rotation = Math.sin(phase * 2.7) * 0.08;
-        tilt = rotation;
-        direction = 2;
-      } else if (prop.id === "tunnel") {
-        const outside = equipmentPoint(prop, -0.12, 0.88),
-          entry = equipmentPoint(prop, 0.22, 0.8),
-          exit = equipmentPoint(prop, 0.84, 0.83),
-          beyond = equipmentPoint(prop, 1.14, 0.94);
-        direction = 2;
-        exitAt = 5600;
-        if (age < 900) {
-          point = mix(origin, outside, ease(age / 900));
+      } else if (prop.id === "play-drums" || prop.id === "trampoline") {
+        const trampoline = prop.id === "trampoline";
+        const station = equipmentPoint(prop, 0.5, trampoline ? 0.67 : 1.12);
+        exitAt = 7600;
+        if (age < 850) {
+          point = mix(origin, station, ease(age / 850));
+          direction = movementDirection(
+            station.x - origin.x,
+            station.z - origin.z,
+          );
           stage = "approaching";
-        } else if (age < 2100) {
-          point = mix(outside, entry, ease((age - 900) / 1200));
-          crouch = true;
-          stage = "entering-tunnel";
-        } else if (age < 3900) {
-          point = mix(entry, exit, (age - 2100) / 1800);
-          crouch = true;
-          stage = "inside-tunnel";
-        } else if (age < 5100) {
-          point = mix(exit, beyond, ease((age - 3900) / 1200));
-          crouch = true;
-          stage = "exiting-tunnel";
         } else {
-          point = beyond;
-          stage = "landing";
+          point = station;
+          direction = trampoline ? 0 : 4;
+          lift = trampoline
+            ? Math.abs(Math.sin((age - 850) / 385)) *
+              0.8 *
+              ease((exitAt - age) / 500)
+            : 0;
+          stage = trampoline ? "bouncing" : "drumming";
         }
       } else if (prop.id === "climbing-dome") {
-        const foot = equipmentPoint(prop, 0.5, 0.97),
-          summit = equipmentPoint(prop, 0.5, 0.12);
+        const rungs = [
+          [0.48, 0.96],
+          [0.39, 0.79],
+          [0.56, 0.64],
+          [0.43, 0.48],
+          [0.54, 0.31],
+          [0.5, 0.12],
+        ].map(([u, v]) => equipmentPoint(prop, u, v));
+        const foot = rungs[0],
+          summit = rungs.at(-1);
         exitAt = 10000;
         if (age < 850) {
           point = mix(origin, foot, ease(age / 850));
@@ -202,7 +273,7 @@ export function createPlayground() {
               (Math.floor(step) +
                 ease(Math.max(0, ((step % 1) - 0.28) / 0.72))) /
               6;
-          point = mix(foot, summit, progress);
+          point = followPath(rungs, progress);
           direction = 4;
           climbing = true;
           stage = "climbing-net";
@@ -212,39 +283,58 @@ export function createPlayground() {
           celebrating = true;
           stage = "summit";
         } else {
-          point = mix(summit, foot, ease((age - 7550) / 2450));
+          point = followPath([...rungs].reverse(), ease((age - 7550) / 2450));
           direction = 4;
           climbing = true;
           stage = "descending-net";
         }
       } else if (prop.id === "roundabout") {
-        const angle = -Math.PI / 2 + phase * 1.25 * ease(age / 1600);
+        const rideAge = Math.max(0, Math.min(age, exitAt) - 650);
+        // One complete revolution with a gentle start and finish. The idle
+        // carousel has the same seat alignment when the rider steps off.
+        const angle =
+          Math.PI / 2 + Math.PI * 2 * ease(rideAge / (exitAt - 650));
         point = {
           x: prop.x + Math.cos(angle) * 1.05,
           z: prop.z - 0.2 + Math.sin(angle) * 0.42,
         };
-        direction = movementDirection(prop.x - point.x, prop.z - 0.2 - point.z);
+        direction = movementDirection(point.x - prop.x, point.z - prop.z + 0.2);
         seated = true;
         tilt = angle;
       }
       const returning = age > exitAt,
-        q = ease((age - exitAt) / 1000);
+        q = ease((age - exitAt) / returnDuration);
+      if (seatWeight === null)
+        seatWeight = seated
+          ? ease(age / 650) * ease((exitAt + 350 - age) / 350)
+          : 0;
       if (returning) {
         direction = movementDirection(origin.x - point.x, origin.z - point.z);
-        point = mix(point, origin, q);
+        if (returnPath) {
+          point = followPath(returnPath, q);
+          direction = point.direction;
+        } else point = mix(point, origin, q);
         stage = "returning";
       }
       // Boarding eases onto a seat; the slide already has its own approach path.
-      if (seated && age < 650) point = mix(origin, point, ease(age / 650));
+      if (seated && age < 650) {
+        direction = movementDirection(point.x - origin.x, point.z - origin.z);
+        point = mix(origin, point, ease(age / 650));
+        seated = false;
+        stage = "approaching";
+      }
       const player = {
         ...point,
-        lift: 0,
+        lift,
         direction,
         seated: seated && !returning,
         crouch: crouch && !returning,
         rotation,
         anchor: seated && !returning ? "hips" : "feet",
-        moving: (!seated && !climbing && !celebrating) || returning,
+        seatWeight,
+        moving: ["approaching", "platform", "returning", "landing"].includes(
+          stage,
+        ),
         climbing: climbing && !returning,
         celebrating: celebrating && !returning,
         poseTime: age,
@@ -259,7 +349,7 @@ export function createPlayground() {
         player,
         partner,
         guest,
-        done: age >= exitAt + 1000,
+        done: age >= exitAt + returnDuration,
       };
     },
   };
@@ -291,7 +381,8 @@ export function drawPlayground(
     ctx.clip("evenodd");
     drawProp();
     ctx.restore();
-    const seat = at(...[activity.player.x, activity.player.z]);
+    const socket = swingSeat(p, activity.tilt);
+    const seat = at(socket.x, socket.z);
     const a = equipmentPoint(p, 0.29, 0.145),
       b = equipmentPoint(p, 0.475, 0.145);
     const half = w * 0.105;
@@ -383,69 +474,50 @@ export function drawPlayground(
     if (activity.guest) drawPerson(activity.guest, false);
     return;
   }
-  if (p.id === "tunnel") {
-    const h = p.h * unit,
-      w = h * ratios.tunnel,
-      left = foot.x - w / 2,
-      top = foot.y - h;
-    // The wooden tube occludes the crawler. Only its two actual openings
-    // reveal the person; they do not crawl along the painted outside wall.
-    const portalX = (at(activity.player.x, activity.player.z).x - left) / w;
-    if (!activity.player.crouch || portalX < 0.08 || portalX > 1.03)
-      drawPerson(activity.player, true);
-    drawProp();
-    if (activity.player.crouch) {
-      ctx.save();
-      ctx.beginPath();
-      ctx.ellipse(
-        left + w * 0.22,
-        top + h * 0.55,
-        w * 0.072,
-        h * 0.245,
-        0,
-        0,
-        Math.PI * 2,
-      );
-      ctx.ellipse(
-        left + w * 0.835,
-        top + h * 0.585,
-        w * 0.073,
-        h * 0.255,
-        0,
-        0,
-        Math.PI * 2,
-      );
-      ctx.clip();
-      drawPerson(activity.player, true);
-      ctx.restore();
-    }
-    return;
-  }
   if (p.id === "roundabout") {
-    drawRoundabout(
-      ctx,
-      at,
-      unit,
-      p,
-      activity.tilt,
-      () => drawPerson(activity.player, true),
-      activity.player,
+    drawRoundabout(ctx, at, unit, p, activity.tilt, () =>
+      drawPerson(activity.player, true),
     );
     return;
   }
-  ctx.save();
-  if (p.id === "spring-rider") {
-    ctx.translate(foot.x, foot.y);
-    ctx.rotate(activity.tilt);
-    ctx.translate(-foot.x, -foot.y);
-  }
+  // A visitor approaching the far side is behind the drawing, not standing
+  // on its rooftop. The ladder/platform/slide poses are layered separately.
+  const person = activity.player;
+  const behind =
+    ["approaching", "returning"].includes(person.stage) &&
+    person.z < p.z - 0.15 &&
+    Math.abs(person.x - p.x) < (p.h * (ratios[p.id] || 1)) / 2;
+  if (behind) drawPerson(person, true);
   drawProp();
-  ctx.restore();
-  drawPerson(activity.player, true);
+  if (!behind) drawPerson(person, true);
+  if (p.id === "play-drums" && activity.player.stage === "drumming") {
+    const beat = (activity.elapsed % 550) / 550;
+    const drum = equipmentPoint(
+      p,
+      0.27 + (Math.floor(activity.elapsed / 550) % 3) * 0.23,
+      0.41,
+    );
+    const position = at(drum.x, drum.z);
+    ctx.save();
+    ctx.globalAlpha = 1 - beat;
+    ctx.strokeStyle = "#fceab2";
+    ctx.lineWidth = Math.max(1, unit * 0.04);
+    ctx.beginPath();
+    ctx.ellipse(
+      position.x,
+      position.y,
+      unit * (0.18 + beat * 0.32),
+      unit * (0.08 + beat * 0.14),
+      0,
+      0,
+      Math.PI * 2,
+    );
+    ctx.stroke();
+    ctx.restore();
+  }
   if (
     p.id === "playhouse" &&
-    activity.elapsed > 2100 &&
-    activity.elapsed < 4100
+    ["climbing", "platform"].includes(activity.player.stage)
   ) {
     const img = image?.("town-playhouse");
     if (img) {
@@ -475,7 +547,6 @@ export function drawRoundabout(
   prop,
   angle,
   drawRider = () => {},
-  rider = null,
 ) {
   const p = at(prop.x, prop.z - 0.2),
     rx = unit * 1.45,
@@ -516,8 +587,7 @@ export function drawRoundabout(
     ctx.lineWidth = unit * 0.095;
     ctx.beginPath();
     ctx.moveTo(s.x, s.y);
-    ctx.lineTo(s.x, s.y - unit * 0.68);
-    ctx.lineTo(p.x, p.y - unit * 0.88);
+    ctx.lineTo(s.x + (p.x - s.x) * 0.25, s.y - unit * 0.17);
     ctx.stroke();
     ctx.strokeStyle = "#e8bc63";
     ctx.lineWidth = unit * 0.045;
@@ -540,28 +610,29 @@ export function drawRoundabout(
   };
   const hub = () => {
     ctx.fillStyle = "#d2a45b";
-    ctx.fillRect(p.x - unit * 0.07, p.y - unit * 0.95, unit * 0.14, unit * 0.9);
+    ctx.fillRect(
+      p.x - unit * 0.12,
+      p.y - unit * 0.18,
+      unit * 0.24,
+      unit * 0.18,
+    );
     ctx.fillStyle = "#3caaa1";
     ctx.beginPath();
-    ctx.arc(p.x, p.y - unit * 0.96, unit * 0.13, 0, Math.PI * 2);
+    ctx.ellipse(
+      p.x,
+      p.y - unit * 0.18,
+      unit * 0.17,
+      unit * 0.09,
+      0,
+      0,
+      Math.PI * 2,
+    );
     ctx.fill();
   };
-  // Sort each support and the center post by the rider's actual seat depth.
-  // The center post used to be painted last, straight across a front rider.
-  const riderY = rider ? at(rider.x, rider.z).y : Infinity;
-  const parts = seats.map((seat) => ({
-    depth: seat.y,
-    draw: () => rail(seat),
-  }));
-  parts.push({ depth: p.y, draw: hub });
-  parts
-    .filter((part) => part.depth < riderY)
-    .sort((a, b) => a.depth - b.depth)
-    .forEach((part) => part.draw());
+  // Low hardware is always drawn first; no post or rail can cut through a
+  // rider as a depth comparison changes from one frame to another.
+  hub();
+  seats.forEach(rail);
   drawRider();
-  parts
-    .filter((part) => part.depth >= riderY)
-    .sort((a, b) => a.depth - b.depth)
-    .forEach((part) => part.draw());
   ctx.restore();
 }

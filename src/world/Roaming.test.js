@@ -58,7 +58,9 @@ test("walking NPCs stay slower than the player, and children spend most of their
     }
   }
   expect(Math.max(...speeds)).toBeLessThanOrEqual(npcWalkSpeed + 0.001);
-  expect(walkingSamples).toBeGreaterThan(500);
+  // With actual equipment visits the children spend more time playing,
+  // while ample samples still verify sustained walking at normal NPC speed.
+  expect(walkingSamples).toBeGreaterThan(400);
   Object.values(counts).forEach((count) => expect(count).toBeGreaterThan(350));
 });
 test("NPCs no longer change facing at every grid step or jump between cruising and rest", () => {

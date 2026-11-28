@@ -155,8 +155,10 @@ test("the slide follows its ladder and chute without a second elevation, and see
     expect(p.lift).toBe(0);
     expect(p.z).toBeGreaterThanOrEqual(equipmentPoint(slide, 0, 0.5).z - 0.01);
   }
-  expect(ride.snapshot(4000).player.stage).toBe("sliding");
-  expect(ride.snapshot(4000).player.anchor).toBe("hips");
+  const sliding = Array.from({ length: 80 }, (_, i) =>
+    ride.snapshot(i * 100),
+  ).find((p) => p.player.stage === "sliding");
+  expect(sliding.player.anchor).toBe("hips");
   const seesaw = townProps.find((p) => p.id === "seesaw"),
     play = createPlayground();
   play.start(seesaw, { x: 18, z: 5 }, { id: "ezra" }, 0);
@@ -177,9 +179,9 @@ test("the requested garden placements stay distinct and the unused western bench
   expect(box.z - home.z).toBeLessThan(4);
 });
 
-test("the net has distinct grip/pull and summit celebration phases; the tunnel crosses the actual mouths", () => {
+test("the net has distinct grip/pull and summit phases; the trampoline lifts a full-size rider", () => {
   const dome = townProps.find((p) => p.id === "climbing-dome"),
-    tunnel = townProps.find((p) => p.id === "tunnel"),
+    trampoline = townProps.find((p) => p.id === "trampoline"),
     play = createPlayground();
   play.start(dome, { x: dome.x, z: dome.z + 1 }, null, 0);
   const climbing = play.snapshot(2400),
@@ -190,11 +192,8 @@ test("the net has distinct grip/pull and summit celebration phases; the tunnel c
   expect(top.player.moving).toBe(false);
   expect(top.player.z).toBeLessThan(climbing.player.z);
   play.stop();
-  play.start(tunnel, { x: tunnel.x - 2, z: tunnel.z + 1 }, null, 0);
-  expect(play.snapshot(1800).player.stage).toBe("entering-tunnel");
-  expect(play.snapshot(3000).player.stage).toBe("inside-tunnel");
-  expect(play.snapshot(4500).player.stage).toBe("exiting-tunnel");
-  expect(play.snapshot(4500).player.x).toBeGreaterThan(
-    play.snapshot(1800).player.x,
-  );
+  play.start(trampoline, { x: trampoline.x - 2, z: trampoline.z + 1 }, null, 0);
+  expect(play.snapshot(1800).player.stage).toBe("bouncing");
+  expect(play.snapshot(1800).player.crouch).toBe(false);
+  expect(play.snapshot(1800).player.lift).toBeGreaterThan(0);
 });

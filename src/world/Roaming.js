@@ -1,6 +1,7 @@
 import { duckRoutine, gooseRoutine } from "./Ducks";
 import { npcCostume } from "./Heroes";
-import { residents, animals } from "./config";
+import { residents, animals, obstacles } from "./config";
+import { move } from "./navigation";
 import { movementDirection } from "./animation";
 import { walkSpeed } from "./Movement";
 import { pond } from "./TownLayout";
@@ -73,6 +74,8 @@ export function roamingPeople(time, clock = (id, t) => t) {
       moving: !segment.playing,
       direction: segment.direction,
       playing: segment.activity === "playground" && children.includes(r.id),
+      toy: segment.toy,
+      activityElapsed: local * 1000,
       activity: segment.activity,
       wantsBike: segment.bike,
       wantsOuting: segment.outing,
@@ -88,6 +91,40 @@ export function roamingPeople(time, clock = (id, t) => t) {
   });
 }
 const animalIndex = new Map(animals.map((a, i) => [a.id, i]));
+// Gentle local crowd avoidance supplements the distinct itineraries. Offsets
+// are collision checked with the same movement rules as the player, not a
+// teleport or a new route search. Preserve reserved outing and ride locations.
+export function separateResidents(people, controlled) {
+  const available = (p) =>
+    p.id !== controlled &&
+    !p.hidden &&
+    !p.room &&
+    !p.surfing &&
+    !p.bike &&
+    !p.outing &&
+    !p.action;
+  return people.map((person, index) => {
+    if (!available(person)) return person;
+    let dx = 0,
+      dz = 0;
+    for (let i = 0; i < people.length; i++) {
+      const other = people[i];
+      if (i === index || !available(other)) continue;
+      const x = person.x - other.x,
+        z = person.z - other.z;
+      const distance = Math.hypot(x, z);
+      if (distance >= 0.95) continue;
+      const force = (0.95 - distance) * 0.5;
+      dx += (distance > 0.015 ? x / distance : index < i ? -1 : 1) * force;
+      dz += (distance > 0.015 ? z / distance : 0) * force;
+    }
+    const length = Math.hypot(dx, dz);
+    if (!length) return person;
+    const scale = Math.min(1, 0.65 / length);
+    const point = move(person, dx * scale, dz * scale, obstacles, false);
+    return { ...person, x: point.x, z: point.z };
+  });
+}
 const ducks = animals.filter((a) => a.kind === "duck");
 const duckIndex = new Map(ducks.map((duck, i) => [duck.id, i]));
 const dogLapMs = 11200;

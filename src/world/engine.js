@@ -10,6 +10,7 @@ import { createRoomInteractions, isLoveOffering } from "./RoomInteractions";
 import { startWindSong } from "./WindStatue";
 import { createNoFace, noFaceInteraction } from "./NoFace";
 import { createPlayground, playgroundActivities } from "./Playground";
+import { createNpcPlaygrounds } from "./NpcPlaygrounds";
 import { restSpots, createRestSpots } from "./RestSpots";
 import { gameTitles } from "./games/GameLocations";
 import { createSurfRide, surfboard } from "./SurfRide";
@@ -59,7 +60,7 @@ import {
   leavingRoom,
 } from "./WorldLayout";
 import { flyDepartureMs, flyArrivalMs } from "./Fly";
-import { roamingPeople, roamingAnimals } from "./Roaming";
+import { roamingPeople, roamingAnimals, separateResidents } from "./Roaming";
 import { goosePair } from "./Ducks";
 import { createSkySalute } from "./Sky";
 import {
@@ -188,6 +189,7 @@ export function createWorld(host, callbacks) {
     shellSpawns = createShellSpawns(),
     beachActivities = createBeachActivities();
   const playground = createPlayground();
+  const npcPlaygroundsFor = createNpcPlaygrounds();
   const noFace = createNoFace();
   const dogPlay = createDogPlay(),
     duckPlay = createDuckPlay(),
@@ -335,26 +337,35 @@ export function createWorld(host, callbacks) {
   function worldResidents() {
     if (axolotlRace.active()) return axolotlRace.snapshot().racers;
     const effects = tricks.snapshot(worldTime);
-    return roamingPeople(worldTime, (id, t) =>
-      npcRides.actorTime(id, tricks.actorTime(id, guestPause.timeFor(id, t))),
-    ).map((a) => {
-      const resident = npcRides.decorate(
-        trickPose(
-          a,
-          effects.find((e) => e.id === a.id),
-        ),
-      );
-      // Borrowed residents cannot be assigned a bicycle or another interaction
-      // while they are wakeboarding behind the player's boat.
-      return resident.id === guestPause.id()
-        ? { ...resident, hidden: true }
-        : resident;
-    });
+    return separateResidents(
+      roamingPeople(worldTime, (id, t) =>
+        npcRides.actorTime(id, tricks.actorTime(id, guestPause.timeFor(id, t))),
+      ).map((a) => {
+        const resident = npcRides.decorate(
+          trickPose(
+            a,
+            effects.find((e) => e.id === a.id),
+          ),
+        );
+        // Borrowed residents cannot be assigned a bicycle or another interaction
+        // while they are wakeboarding behind the player's boat.
+        return resident.id === guestPause.id()
+          ? { ...resident, hidden: true }
+          : resident;
+      }),
+      character,
+    );
   }
   function state() {
+    const people = worldResidents();
+    const playerPlay = playground.snapshot(worldTime);
+    const npcPlaygrounds = room
+      ? []
+      : npcPlaygroundsFor(people, playerPlay, character);
     return {
       room,
-      residents: worldResidents(),
+      residents: people,
+      npcPlaygrounds,
       oceanPraise: room ? null : oceanPraise.snapshot(worldTime),
       skateRide: skateRide.snapshot(),
       surfRide: surfRide.snapshot(),
@@ -365,7 +376,7 @@ export function createWorld(host, callbacks) {
       npcTricks: tricks.snapshot(worldTime),
       night: room ? 0 : tricks.night(worldTime),
       animals: worldAnimals(),
-      playground: playground.snapshot(worldTime),
+      playground: playerPlay,
       noFace: noFace.snapshot(worldTime),
       dogPlay: dogPlay.snapshot(),
       duckPlay: duckPlay.snapshot(),
@@ -588,6 +599,20 @@ export function createWorld(host, callbacks) {
     ];
   }
   function nearby() {
+    // A passing resident should not steal a nearby equipment interaction.
+    const priority = (p) =>
+      [
+        "skateboard",
+        "watercraft",
+        "surfboard",
+        "bike",
+        "playground",
+        "race",
+      ].includes(p.type) && p.distance < 2.1
+        ? 2
+        : ["duck", "dog"].includes(p.type) && p.distance < 1.8
+          ? 1
+          : 0;
     return points()
       .map((p) => ({
         ...p,
@@ -596,12 +621,7 @@ export function createWorld(host, callbacks) {
       .filter(
         (p) => p.distance < (closeInteractionTypes.has(p.type) ? 1.65 : 2.45),
       )
-      .sort(
-        (a, b) =>
-          Number(["duck", "dog"].includes(b.type) && b.distance < 1.8) -
-            Number(["duck", "dog"].includes(a.type) && a.distance < 1.8) ||
-          a.distance - b.distance,
-      )[0];
+      .sort((a, b) => priority(b) - priority(a) || a.distance - b.distance)[0];
   }
   function shore() {
     return !room && !surfing && !waterRide.active()

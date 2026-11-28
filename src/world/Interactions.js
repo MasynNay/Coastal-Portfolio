@@ -5,9 +5,9 @@ export function familyGreeting(character, person, random = Math.random) {
   return Math.floor(random() * 20) === 0 ? "encounter" : "affection";
 }
 export const propMessages = {
-  tunnel: "A little adventure through the tunnel. Watch your head!",
+  trampoline: "A little bounce in the sunshine.",
   "climbing-dome": "Pick a route, hold on, and climb a little higher.",
-  "spring-rider": "One small seahorse, a whole ocean of imagination.",
+  "play-drums": "Tap out a little rhythm together.",
   "picnic-table":
     "The perfect spot for a snack and a very serious playground meeting.",
   bonsai: "A quiet breath by the bonsai. There’s always room to keep growing.",

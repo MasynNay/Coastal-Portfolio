@@ -88,11 +88,12 @@ export function beachSprites(state) {
   const progress = state.beach?.castle || 0;
   const building = state.beach?.building;
   return [
-    ...(progress > 0.07
+    ...(progress > 0
       ? [
           {
             ...beachStations[0],
-            art: `castle-stage-${Math.min(7, Math.floor(progress * 8))}`,
+            art: "castle-stage-7",
+            castleProgress: progress,
             h: 3.15,
           },
         ]
@@ -123,14 +124,21 @@ export function drawBeachActivities(ctx, at, unit, state, sprite) {
   if (!activity) return;
   if (activity.building) {
     const site = beachStations[0],
-      t = state.worldTime / 250;
+      t = (state.worldTime - activity.building.started) / 1000;
     sprite("beach-bucket", site.x + 1.2, site.z + 0.5, 0.9, 0, false, 0);
     ctx.save();
-    ctx.fillStyle = "#e1bc7a";
-    for (let i = 0; i < 9; i++) {
+    // Each short shower travels from the builder toward the current top of
+    // the structure. No unrelated particles orbit the completed castle.
+    ctx.fillStyle = "#d5ad6c";
+    for (let i = 0; i < 5; i++) {
+      const flight = (t * 2.4 + i * 0.09) % 1;
+      ctx.globalAlpha = Math.sin(Math.PI * flight) * 0.85;
       const p = at(
-        site.x + 0.7 + Math.sin(t + i) * 0.35,
-        site.z - 0.15 - Math.abs(Math.sin(t + i * 0.7)) * 0.55,
+        site.x + 0.8 - flight * 0.64 + i * 0.03,
+        site.z -
+          0.15 -
+          activity.building.progress * 2.65 * flight -
+          Math.sin(Math.PI * flight) * 0.35,
       );
       ctx.beginPath();
       ctx.ellipse(

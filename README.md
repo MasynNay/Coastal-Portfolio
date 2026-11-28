@@ -28,15 +28,15 @@ SO THAT the experience feels personal and gives me something to discover.
 
 ## What Changed
 
-| Original portfolio | Coastal Portfolio |
-| --- | --- |
-| Space-themed scrolling page | Dark glass layout with ocean accents |
-| Skills carousel | Grouped skills, including infrastructure, automation and AI workflows |
-| Earlier career details | Shared current experience, achievements and Resume information |
-| External project links | Project previews and local demos for MixStream, TypeNinja and SemiSnitch |
-| Hidden arcade | Pocket Arcade with cartridge selectors, plus a Mac Games app |
-| One presentation | Website, Mac Mode and Game Mode sharing the same professional content |
-| Static navigation | A coastal town with rooms, characters, pets, collectibles and activities |
+| Original portfolio          | Coastal Portfolio                                                        |
+| --------------------------- | ------------------------------------------------------------------------ |
+| Space-themed scrolling page | Dark glass layout with ocean accents                                     |
+| Skills carousel             | Grouped skills, including infrastructure, automation and AI workflows    |
+| Earlier career details      | Shared current experience, achievements and Resume information           |
+| External project links      | Project previews and local demos for MixStream, TypeNinja and SemiSnitch |
+| Hidden arcade               | Pocket Arcade with cartridge selectors, plus a Mac Games app             |
+| One presentation            | Website, Mac Mode and Game Mode sharing the same professional content    |
+| Static navigation           | A coastal town with rooms, characters, pets, collectibles and activities |
 
 Mac Mode includes independent app windows, a live wallpaper, a photo slideshow, games and a TypeNinja typing test. Game Mode uses Canvas 2D, with family characters, costumes, duck flights, axolotl surfing, fishing, bikes, boats, wakeboarding, a skateboard and beach activities, including a directional animated dragon kite and seven-second sandcastle construction. The game canvas follows display density up to 2x, bounded to eight megapixels. Pixel-art sprites and UI previews use crisp sampling; the camera and touch input continue to use CSS coordinates.
 
@@ -99,8 +99,8 @@ For directory responsibilities, sprite artwork, photo imports, formatting and ga
 
 ## Application Demonstration
 
-| Website | Mac Mode | Game Mode |
-| --- | --- | --- |
+| Website                             | Mac Mode                      | Game Mode                          |
+| ----------------------------------- | ----------------------------- | ---------------------------------- |
 | ![Main portfolio](docs/Website.jpg) | ![Mac Mode](docs/MacMode.jpg) | ![Coastal island](docs/Island.jpg) |
 
 The earlier portfolio keeps its original branding and project screenshots, so it can be compared with this redesign.
@@ -137,5 +137,9 @@ Mac retains its floating dock and left-side window controls. Windows uses a bott
 The Profile app introduces Masyn without the earlier casual greeting, ASCII uses its own flower icon, and Games puts Island Arcade before the Game Boy Advance library.
 
 Each Workspace now has its own functional shell. Windows offers Start, search, pinned and alphabetical app lists, recent apps, Task View and the taskbar calendar. Ubuntu offers Activities, an application grid and a GNOME-style launcher. Mac offers Spotlight, Go/View/Window shortcuts and Control Center. The panels launch or restore the existing React app windows; they do not emulate or administer a real operating system. Quick Settings controls local wallpaper brightness, motion and desktop widget visibility. Custom wallpaper and bezel preferences continue to work across computer styles.
+
+## Playground and creature habitats
+
+The playground includes a trampoline and musical drums alongside the slide, seesaw, swings, climbing dome, picnic table and carousel. Equipment movement uses separate approach, ride and exit poses. Family residents have individual itineraries and reserve available equipment; player interactions take priority. Terrariums now support search and bug-group filtering. Household habitats share placement coordinates with the display room, with creature motion grounded on the surfaces of the actual enclosure artwork.
 
 Release checks: `npm run format:check`, `npm run lint`, `npm run check:project`, `CI=true npm test -- --watchAll=false --runInBand`, and `npm run build`.

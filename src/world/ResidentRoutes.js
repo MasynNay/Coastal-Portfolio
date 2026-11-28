@@ -2,7 +2,8 @@ import { obstacles, buildings } from "./config";
 import { canStand, findPath } from "./navigation";
 import { clearLine, smoothPath } from "./Paths";
 import { doorArrival, doorPosition } from "./WorldLayout";
-import { pond } from "./TownLayout";
+import { pond, townProps } from "./TownLayout";
+import { playgroundActivities } from "./Playground";
 import { npcWalkSpeed } from "./Movement";
 import { movementDirection } from "./animation";
 import { bikes } from "./Bikes";
@@ -22,14 +23,16 @@ export const residentOutingStops = {
 };
 
 export const children = ["ezra", "fallyn", "fitzgerald"];
-const playground = [
-  [12, -6],
-  [24, -6],
-  [25, 3.5],
-  [20.5, 3.8],
-  [15.5, 3.7],
-  [11.7, 3.5],
-];
+const playground = townProps.filter((p) => playgroundActivities[p.id]);
+// A different starting point and equipment order for every family member.
+// Choose an actual walkable approach, not the center of the equipment.
+function toyApproach(prop) {
+  return [
+    { x: prop.x, z: prop.z + 1.4 },
+    { x: prop.x - 1.8, z: prop.z + 0.8 },
+    { x: prop.x + 1.8, z: prop.z + 0.8 },
+  ].find((p) => canStand(p.x, p.z, obstacles));
+}
 const townStops = [
   [-25, -11],
   [-8, -11],
@@ -73,7 +76,14 @@ export function createResidentRoute(id, variant, seed) {
   const index = ["masyn", "mi-shell", ...children].indexOf(id),
     child = children.includes(id);
   const random = randomSource(seed + index * 1103 + variant * 10007);
-  const home = child ? { x: 12, z: -6 } : { x: -4, z: 9 };
+  const homes = [
+    { x: -4, z: 9 },
+    { x: -6, z: 9 },
+    { x: 12, z: -6 },
+    { x: 24, z: -6 },
+    { x: 25, z: 3.5 },
+  ];
+  const home = homes[index] || homes[0];
   let cursor = { ...home },
     duration = 0,
     walked = 0,
@@ -124,6 +134,7 @@ export function createResidentRoute(id, variant, seed) {
       target = null,
       bike = null,
       outing = null,
+      toy = null,
     } = {},
   ) {
     if (target)
@@ -142,6 +153,7 @@ export function createResidentRoute(id, variant, seed) {
       target,
       bike,
       outing,
+      toy,
     });
     duration += seconds;
   }
@@ -158,16 +170,28 @@ export function createResidentRoute(id, variant, seed) {
   };
   if (child) {
     // Long playground visits are a preference, not a boundary around the kids.
-    for (let lap = 0; lap < 3; lap++) {
-      for (const p of playground) {
-        if (walk({ x: p[0], z: p[1] }))
+    for (let lap = 0; lap < 2; lap++) {
+      // Rotate the visit order independently; each child starts at a
+      // different part of the playground and changes toys between laps.
+      const shift = (index * 3 + lap * 2 + variant) % playground.length;
+      const order = Array.from(
+        { length: playground.length },
+        (_, i) => playground[(shift + i * 3) % playground.length],
+      );
+      for (const prop of order) {
+        const destination = toyApproach(prop);
+        if (destination && walk(destination))
           // Leave time to play even when a longer safe path goes around a home.
-          rest(12 + random() * 3, { activity: "playground" });
+          rest(13 + random() * 2, { activity: "playground", toy: prop.id });
       }
       if (lap === 0) visitOuting();
     }
   } else {
     visitOuting();
+    const prop = playground[(index + variant * 3) % playground.length];
+    const destination = toyApproach(prop);
+    if (destination && walk(destination))
+      rest(14, { activity: "playground", toy: prop.id });
     for (let n = 0; n < 5; n++)
       stopAt(townStops[Math.floor(random() * townStops.length)]);
   }

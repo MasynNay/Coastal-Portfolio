@@ -695,6 +695,10 @@ export default function WorldMode() {
           )}
           <button
             className="world-interact"
+            type="button"
+            onPointerDown={(event) => {
+              if (status.playground) event.stopPropagation();
+            }}
             disabled={
               !status.playground &&
               (!status.prompt ||
@@ -702,11 +706,13 @@ export default function WorldMode() {
                 status.interactionBusy ||
                 status.surfingBoard)
             }
-            onClick={() =>
-              status.playground
-                ? engine.current?.leavePlayground()
-                : engine.current?.interact()
-            }
+            onClick={(event) => {
+              event.stopPropagation();
+              // Cancel the ride directly; never fall through to a new
+              // interaction if the ride ends just as the button is tapped.
+              if (status.playground) engine.current?.leavePlayground();
+              else engine.current?.interact();
+            }}
           >
             <kbd>
               {["building", "exit"].includes(status.promptType) ? "Walk" : "E"}

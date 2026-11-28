@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="144" viewBox="0 0 256 144">
+  <defs>
+    <linearGradient id="rim" x2="0" y2="1"><stop stop-color="#64c7ad"/><stop offset=".48" stop-color="#238e88"/><stop offset="1" stop-color="#164b53"/></linearGradient>
+    <linearGradient id="mat" x2="0" y2="1"><stop stop-color="#485d61"/><stop offset="1" stop-color="#162d38"/></linearGradient>
+    <pattern id="weave" width="5" height="5" patternUnits="userSpaceOnUse"><path d="M0 0H5M0 0V5" stroke="#91b1ae" stroke-opacity=".17" stroke-width=".7"/></pattern>
+  </defs>
+  <ellipse cx="128" cy="121" rx="116" ry="17" fill="#244037" opacity=".27"/>
+  <g stroke="#4d4335" stroke-width="3" stroke-linejoin="round" fill="#a9a193">
+    <path d="M36 76l-7 43 11 4 16-40zM200 82l16 41 11-4-7-43zM111 96l5 35h13l6-35z"/>
+  </g>
+  <g stroke="#523b29" stroke-width="3">
+    <ellipse cx="128" cy="82" rx="117" ry="46" fill="#176569"/>
+    <ellipse cx="128" cy="67" rx="118" ry="49" fill="url(#rim)"/>
+    <ellipse cx="128" cy="67" rx="99" ry="35" fill="#c2ad7c"/>
+    <ellipse cx="128" cy="67" rx="91" ry="30" fill="url(#mat)"/>
+    <ellipse cx="128" cy="67" rx="89" ry="29" fill="url(#weave)" stroke="none"/>
+  </g>
+  <path d="M16 65c10-33 63-49 112-47 56 0 101 16 112 47" fill="none" stroke="#a5e3c2" stroke-width="3"/>
+  <path d="M24 95q104 42 208 0" fill="none" stroke="#133e49" stroke-width="4"/>
+  <g fill="#e2bb72" stroke="#76502b" stroke-width="1.5"><circle cx="32" cy="86" r="4"/><circle cx="224" cy="86" r="4"/><circle cx="83" cy="108" r="4"/><circle cx="173" cy="108" r="4"/></g>
+</svg>
