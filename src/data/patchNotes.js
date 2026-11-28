@@ -2,6 +2,20 @@
 // the preceding production commit, rather than fictional in-game release notes.
 const patchNotes = [
   {
+    version: "1.8.2",
+    date: "November 27, 2026",
+    previousCommit: "a58eb71",
+    comparisonRef: "d9957396202e41640de06f5b4552d22ef464ac47",
+    changes: [
+      "Replaced the playground tunnel and spring rider with a full-size trampoline and musical drums.",
+      "Reworked the slide to approach from outside the equipment, climb the ladder, cross the platform and descend the chute in separate phases. Net climbing now follows rope junctions and uses complete costume poses rather than overlapping limb cutouts.",
+      "Separated swing hardware from boarding/exit movement and removed the carousel's intersecting center pole. Kept the Leave the Playground Ride control enabled with direct cancellation.",
+      "Gave family NPCs distinct itinerary starts and toy orders, shared equipment reservations with player priority, and collision-checked crowd spacing on land.",
+      "Changed the seven-second sandcastle build to reveal its finished artwork continuously from the foundation up.",
+      "Streamlined Terrariums with species search, group filtering and more compact collection cards. Residents rest on habitat-specific branches, shelves and soil; flying insects return to perches, bottom-dwellers use the aquarium floor, and swimming residents have broader directional paths.",
+    ],
+  },
+  {
     version: "1.8.1",
     date: "November 27, 2026",
     previousCommit: "b9d1c10",
