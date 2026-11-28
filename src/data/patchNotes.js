@@ -2,6 +2,24 @@
 // the preceding production commit, rather than fictional in-game release notes.
 const patchNotes = [
   {
+    version: "1.8.0",
+    date: "November 27, 2026",
+    previousCommit: "ef52ffe",
+    comparisonRef: "4ed02405ded35bcd72ca1f8702d87e7ef9736581",
+    changes: [
+      "Renamed Mac Mode to Workspace and added saved Mac, Windows, and Ubuntu computer styles. Each changes window controls, system-menu identity, launcher layout, and monitor presentation while retaining open apps and appearance choices.",
+      "Renamed the About Masyn app to Profile, replaced its casual greeting with Masyn Nay, gave ASCII its own flower icon, and grouped Island Arcade games before Game Boy Advance cartridges.",
+      "Removed the redundant Before this redesign footer link and replaced the Skills introduction with a practical description of the tools and skills demonstrated by the portfolio.",
+      "Added an Island Passport with home stamps, lifetime collection milestones, favorite finds, and links to the existing discoveries-and-secrets journal.",
+      "Added a six-slot personal display room for owned cards, aquariums, terrariums, and seashells. Shelves can be rearranged; home visits and bug discoveries unlock additional room styles.",
+      "Added saved favorites and name/rarity sorting for bugs, aquatic life, and cards, plus first-discovery badges and optional rare-card reveal chimes.",
+      "Added downloadable island save backups and a preview-and-confirm restore flow. Backups include collections, discovery history, unopened packs, unfinished card reveals, favorites, display layouts, and island arcade best scores; emulator saves remain separate.",
+      "Added opt-in ocean ambience, surface-aware footsteps, discovery sounds, and pack-opening effects, with saved volume controls and automatic audio suspension in hidden tabs.",
+      "Stopped brief movement pauses from rewinding the player's walking/running stride and added a Character Motion Studio for comparing the shipped outfits in eight directions at slow or normal speed.",
+      "Added evidence-based project stories for Anything Plays, Mother Goose Tumbling, and TypeNinja, distinguishing preserved client work and group contributions. Updated Anything Plays to its public 3.3 release.",
+    ],
+  },
+  {
     version: "1.7.1",
     date: "November 22, 2026",
     previousCommit: "26ec3ab",
