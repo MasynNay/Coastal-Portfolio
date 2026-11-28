@@ -136,4 +136,6 @@ Mac retains its floating dock and left-side window controls. Windows uses a bott
 
 The Profile app introduces Masyn without the earlier casual greeting, ASCII uses its own flower icon, and Games puts Island Arcade before the Game Boy Advance library.
 
+Each Workspace now has its own functional shell. Windows offers Start, search, pinned and alphabetical app lists, recent apps, Task View and the taskbar calendar. Ubuntu offers Activities, an application grid and a GNOME-style launcher. Mac offers Spotlight, Go/View/Window shortcuts and Control Center. The panels launch or restore the existing React app windows; they do not emulate or administer a real operating system. Quick Settings controls local wallpaper brightness, motion and desktop widget visibility. Custom wallpaper and bezel preferences continue to work across computer styles.
+
 Release checks: `npm run format:check`, `npm run lint`, `npm run check:project`, `CI=true npm test -- --watchAll=false --runInBand`, and `npm run build`.

@@ -1,4 +1,12 @@
-import { SystemIcon, workspaceSystems } from "./WorkspaceSystem";
+import { SystemIcon } from "./WorkspaceSystem";
+import WorkspacePanel, {
+  AppGlyph,
+  ChromeButton,
+  StartButton,
+  SystemWallpaper,
+  WorkspaceTray,
+  WorkspaceWidgets,
+} from "./WorkspaceChrome";
 import { links } from "../data/links";
 import BrandMark from "../components/BrandMark";
 import { useEffect, useRef, useState } from "react";
@@ -11,12 +19,12 @@ import {
   Envelope,
   ArrowLeft,
   Github,
-  Wifi,
-  BatteryFull,
   Controller,
   Images,
   Keyboard,
   Flower1,
+  Search,
+  LayoutWtf,
 } from "react-bootstrap-icons";
 import { Projects } from "../components/Projects";
 import { Contact } from "../components/Contact";
@@ -36,6 +44,7 @@ import useWindowDrag from "../hooks/useWindowDrag";
 import "./glass.css";
 import "./desktop.css";
 import "./Workspace.css";
+import "./WorkspaceChrome.css";
 
 const apps = [
   { id: "about", title: "Profile", Icon: Person, color: "blue" },
@@ -55,6 +64,9 @@ export function DesktopPortfolio() {
   const [aboutMac, setAboutMac] = useState(false);
   const [appearanceOpen, setAppearanceOpen] = useState(false);
   const [appearance, setAppearance] = useState(readAppearance);
+  const [shellPanel, setShellPanel] = useState(null);
+  const [recent, setRecent] = useState([]);
+  const system = appearance.system || "mac";
   const systemButton = useRef(null);
   const [now, setNow] = useState(new Date());
   const dockButtons = useRef({});
@@ -77,8 +89,33 @@ export function DesktopPortfolio() {
   }
 
   function openApp(id) {
+    setRecent((current) =>
+      [id, ...current.filter((item) => item !== id)].slice(0, 6),
+    );
     openWindow({ id });
   }
+
+  function changeAppearance(next) {
+    setAppearance(next);
+    saveAppearance(next);
+  }
+
+  function restoreWindow(id) {
+    setWindows((current) =>
+      current.map((w) =>
+        w.id === id ? { ...w, minimized: false, layer: nextLayer(current) } : w,
+      ),
+    );
+    setActive(id);
+  }
+
+  function showDesktop() {
+    setWindows((current) => current.map((w) => ({ ...w, minimized: true })));
+    setActive("");
+  }
+
+  const togglePanel = (panel) =>
+    setShellPanel((current) => (current === panel ? null : panel));
 
   function openGame(game) {
     const id = `game-${game.id}`;
@@ -116,10 +153,14 @@ export function DesktopPortfolio() {
   return (
     <div
       className="desktop-studio"
-      data-system={appearance.system || "mac"}
+      data-system={system}
+      data-motion={appearance.motion !== false}
       data-wallpaper={appearance.wallpaper}
       data-bezel={appearance.bezel}
-      style={appearanceStyle(appearance)}
+      style={{
+        ...appearanceStyle(appearance),
+        "--workspace-brightness": appearance.brightness ?? 1,
+      }}
     >
       {/* The physical frame surrounds the existing interactive desktop; app coordinates stay inside its screen. */}
       <div className="imac-computer">
@@ -135,28 +176,51 @@ export function DesktopPortfolio() {
                   onAppearance={() => setAppearanceOpen(true)}
                 />
               )}
-              <strong>
-                {workspaceSystems[appearance.system || "mac"].computer}
-              </strong>
-              <span className="desktop-menu-caption">
-                Explore. Open. Discover.
-              </span>
+              {system === "ubuntu" ? (
+                <ChromeButton
+                  label="Open Activities"
+                  onClick={() => togglePanel("windows")}
+                  expanded={shellPanel === "windows"}
+                >
+                  Activities
+                </ChromeButton>
+              ) : (
+                <strong>
+                  {apps.find((app) => app.id === active)?.title || "Finder"}
+                </strong>
+              )}
+              {system === "mac" && (
+                <nav
+                  className="workspace-mac-menus"
+                  aria-label="Mac application menus"
+                >
+                  <ChromeButton
+                    label="Open Applications"
+                    onClick={() => togglePanel("launch")}
+                  >
+                    Go
+                  </ChromeButton>
+                  <ChromeButton
+                    label="Open Windows"
+                    onClick={() => togglePanel("windows")}
+                  >
+                    Window
+                  </ChromeButton>
+                  <ChromeButton
+                    label="Customize Workspace"
+                    onClick={() => setAppearanceOpen(true)}
+                  >
+                    View
+                  </ChromeButton>
+                </nav>
+              )}
               <div className="desktop-menu-right">
-                <Wifi aria-hidden="true" />
-                <BatteryFull aria-hidden="true" />
-                <time dateTime={now.toISOString()}>
-                  {now.toLocaleDateString(undefined, {
-                    weekday: "short",
-                    month: "short",
-                    day: "numeric",
-                  })}{" "}
-                  <span>
-                    {now.toLocaleTimeString(undefined, {
-                      hour: "numeric",
-                      minute: "2-digit",
-                    })}
-                  </span>
-                </time>
+                <WorkspaceTray
+                  now={now}
+                  system={system}
+                  onOpen={togglePanel}
+                  panel={shellPanel}
+                />
               </div>
             </header>
             <main
@@ -164,19 +228,20 @@ export function DesktopPortfolio() {
               aria-label="Interactive portfolio desktop"
             >
               <div className="desktop-wallpaper" aria-hidden="true">
-                <span>
-                  Think differently.
-                  <br />
-                  <em>Build personally.</em>
-                </span>
+                {appearance.wallpaper === "ocean" && (
+                  <SystemWallpaper system={system} />
+                )}
                 <div className="desktop-wallpaper-loop" />
+                <div className="workspace-wallpaper-dim" />
               </div>
               <div className="desktop-shortcuts">
                 {apps
-                  .filter((app) => ["projects", "resume"].includes(app.id))
+                  .filter((app) =>
+                    ["projects", "resume", "about"].includes(app.id),
+                  )
                   .map((app) => (
                     <button key={app.id} onClick={() => openApp(app.id)}>
-                      <app.Icon aria-hidden="true" />
+                      <AppGlyph app={app} />
                       <span>{app.title}</span>
                     </button>
                   ))}
@@ -185,6 +250,15 @@ export function DesktopPortfolio() {
                   <span>GitHub ↗</span>
                 </a>
               </div>
+              {appearance.widgets !== false && (
+                <WorkspaceWidgets
+                  system={system}
+                  now={now}
+                  windows={windows}
+                  onOpen={togglePanel}
+                  onApp={openApp}
+                />
+              )}
               {windows.map((window) => (
                 <DesktopWindow
                   key={window.id}
@@ -293,21 +367,40 @@ export function DesktopPortfolio() {
               ))}
               {windows.every((window) => window.minimized) && (
                 <div className="desktop-empty">
-                  <p>Click an icon on the dock to try it out!</p>
+                  <p>
+                    {system === "windows"
+                      ? "Open Start to explore the portfolio."
+                      : system === "ubuntu"
+                        ? "Open Applications to explore the portfolio."
+                        : "Click an icon on the dock to try it out!"}
+                  </p>
                 </div>
               )}
             </main>
-            {appearance.system && appearance.system !== "mac" && (
-              <div className="workspace-system-launcher">
-                <MacMenu
-                  system={appearance.system}
-                  buttonRef={systemButton}
-                  onAbout={() => setAboutMac(true)}
-                  onAppearance={() => setAppearanceOpen(true)}
-                />
-              </div>
-            )}
             <nav className="desktop-dock" aria-label="Portfolio apps">
+              {system !== "mac" && (
+                <StartButton
+                  system={system}
+                  onClick={() => togglePanel("launch")}
+                  expanded={shellPanel === "launch"}
+                />
+              )}
+              {system === "windows" && (
+                <>
+                  <ChromeButton
+                    label="Search applications"
+                    Icon={Search}
+                    onClick={() => togglePanel("search")}
+                    expanded={shellPanel === "search"}
+                  />
+                  <ChromeButton
+                    label="Task View"
+                    Icon={LayoutWtf}
+                    onClick={() => togglePanel("windows")}
+                    expanded={shellPanel === "windows"}
+                  />
+                </>
+              )}
               {apps.map((app) => (
                 <button
                   key={app.id}
@@ -324,9 +417,7 @@ export function DesktopPortfolio() {
                   }
                 >
                   <span className="dock-tooltip">{app.title}</span>
-                  <span className={`desktop-app-icon icon-${app.color}`}>
-                    <app.Icon aria-hidden="true" />
-                  </span>
+                  <AppGlyph app={app} />
                   <i />
                 </button>
               ))}
@@ -338,15 +429,47 @@ export function DesktopPortfolio() {
                 </span>
               </Link>
             </nav>
+            {system === "windows" && (
+              <div className="workspace-windows-tray">
+                <WorkspaceTray
+                  now={now}
+                  system={system}
+                  onOpen={togglePanel}
+                  panel={shellPanel}
+                />
+                <ChromeButton
+                  label="Show desktop"
+                  className="workspace-peek"
+                  onClick={showDesktop}
+                />
+              </div>
+            )}
+            {shellPanel && (
+              <WorkspacePanel
+                key={`${system}-${shellPanel}`}
+                panel={shellPanel}
+                system={system}
+                apps={apps}
+                windows={windows}
+                appearance={appearance}
+                now={now}
+                recent={recent}
+                onClose={() => setShellPanel(null)}
+                onApp={openApp}
+                onWindow={restoreWindow}
+                onAppearance={() => setAppearanceOpen(true)}
+                onChange={changeAppearance}
+                onAbout={() => setAboutMac(true)}
+                onShowDesktop={showDesktop}
+                onPanel={setShellPanel}
+              />
+            )}
             {appearanceOpen && (
               <MacAppearance
                 value={appearance}
                 returnFocusRef={systemButton}
                 onClose={() => setAppearanceOpen(false)}
-                onChange={(next) => {
-                  setAppearance(next);
-                  saveAppearance(next);
-                }}
+                onChange={changeAppearance}
               />
             )}
             {aboutMac && (

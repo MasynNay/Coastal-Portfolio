@@ -8,7 +8,7 @@ const preferenceKey = "masyn-mac-appearance";
 // only needs one entry. Keep the IDs stable for saved preferences.
 const wallpapers = {
   ocean: {
-    name: "Coastal folds",
+    name: "System Default",
     paint: "linear-gradient(155deg, #6ea9a6, #214a65)",
   },
   dusk: {
@@ -88,6 +88,9 @@ export const defaultAppearance = {
   system: "mac",
   wallpaper: "ocean",
   bezel: "silver",
+  motion: true,
+  brightness: 1,
+  widgets: true,
 };
 
 export function appearanceStyle({ wallpaper, bezel }) {
@@ -105,6 +108,11 @@ export function readAppearance() {
       system: Object.hasOwn(workspaceSystems, saved?.system)
         ? saved.system
         : "mac",
+      motion: saved?.motion !== false,
+      widgets: saved?.widgets !== false,
+      brightness: Number.isFinite(saved?.brightness)
+        ? Math.max(0.35, Math.min(1, saved.brightness))
+        : 1,
       wallpaper: Object.hasOwn(wallpapers, saved?.wallpaper)
         ? saved.wallpaper
         : defaultAppearance.wallpaper,

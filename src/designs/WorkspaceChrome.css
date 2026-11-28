@@ -1,0 +1,888 @@
+/* The same app windows live inside three distinct desktop shells. Shell
+   popovers have their own scroll area and stay within the physical monitor. */
+.desktop-studio {
+  --chrome-accent: #a9d9c8;
+  --chrome-panel: #202c32;
+}
+.desktop-studio[data-system="windows"] {
+  --chrome-accent: #7bb9ff;
+  --chrome-panel: #20252e;
+  font-family: "Segoe UI", system-ui, sans-serif;
+}
+.desktop-studio[data-system="ubuntu"] {
+  --chrome-accent: #f09a68;
+  --chrome-panel: #302a32;
+  font-family: Ubuntu, system-ui, sans-serif;
+}
+.desktop-studio[data-system="windows"] .desktop-site {
+  font-family: "Segoe UI", system-ui, sans-serif;
+}
+.desktop-studio[data-system="ubuntu"] .desktop-site {
+  font-family: Ubuntu, system-ui, sans-serif;
+}
+.desktop-wallpaper .workspace-wallpaper-dim {
+  position: absolute;
+  inset: 0;
+  background: #000;
+  opacity: calc(1 - var(--workspace-brightness, 1));
+  z-index: 5;
+  pointer-events: none;
+}
+.desktop-studio[data-motion="false"] .desktop-wallpaper *,
+.desktop-studio[data-motion="false"] .desktop-wallpaper::before,
+.desktop-studio[data-motion="false"] .desktop-wallpaper::after {
+  animation: none !important;
+}
+.workspace-system-wallpaper {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.desktop-studio[data-wallpaper="ocean"][data-system="windows"]
+  .desktop-workspace {
+  background: radial-gradient(ellipse at 56% 30%, #204d8e, #071b42 82%);
+}
+.desktop-studio[data-wallpaper="ocean"][data-system="ubuntu"]
+  .desktop-workspace {
+  background: linear-gradient(145deg, #27132c, #632046 60%, #be482a);
+}
+.desktop-studio:not([data-system="mac"]) .desktop-wallpaper::before,
+.desktop-studio:not([data-system="mac"]) .desktop-wallpaper::after,
+.desktop-studio:not([data-system="mac"]) .desktop-wallpaper-loop {
+  display: none;
+}
+.workspace-bloom {
+  animation: workspace-bloom-drift 24s ease-in-out infinite alternate;
+  transform-origin: center;
+}
+@keyframes workspace-bloom-drift {
+  to {
+    transform: translate(50px, 10px) scale(1.03);
+  }
+}
+.desktop-studio[data-system="windows"] .desktop-menubar {
+  display: none;
+}
+.desktop-studio[data-system="windows"] .desktop-workspace {
+  height: 100%;
+}
+.desktop-studio[data-system="windows"] .desktop-dock {
+  height: 62px;
+  gap: 5px;
+  padding: 6px 165px;
+  background: rgba(25, 31, 43, 0.94);
+  backdrop-filter: blur(24px);
+}
+.desktop-studio[data-system="windows"] .desktop-dock .desktop-app-icon {
+  width: 35px;
+  height: 35px;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  border-radius: 7px;
+}
+.desktop-studio[data-system="windows"] .desktop-dock .desktop-app-icon svg {
+  width: 28px;
+  height: 28px;
+  color: #b9d9ff;
+  filter: drop-shadow(0 2px 2px #0005);
+}
+.desktop-studio[data-system="windows"] .desktop-dock .icon-folder svg {
+  color: #ffd37f;
+}
+.desktop-studio[data-system="windows"] .desktop-dock .icon-paper svg {
+  color: #e5f3ff;
+}
+.desktop-studio[data-system="windows"] .desktop-dock .icon-ascii svg {
+  color: #eeb3db;
+}
+.desktop-studio[data-system="windows"]
+  .desktop-dock
+  > button[aria-pressed="true"] {
+  background: #b9d7ff1b;
+  border-radius: 7px;
+}
+.desktop-studio[data-system="windows"] .desktop-dock button.app-running > i {
+  background: #a5c6ef;
+  width: 13px;
+  height: 3px;
+  border-radius: 3px;
+}
+.desktop-studio[data-system="windows"]
+  .desktop-dock
+  button[aria-pressed="true"]
+  > i {
+  width: 18px;
+  background: var(--chrome-accent);
+}
+.desktop-studio[data-system="windows"] .desktop-shortcuts {
+  left: 16px;
+  right: auto;
+  top: 16px;
+  gap: 8px;
+}
+.desktop-shortcuts .desktop-app-icon {
+  width: 48px;
+  height: 48px;
+}
+.desktop-shortcuts .desktop-app-icon svg {
+  width: 29px;
+  height: 29px;
+}
+.desktop-studio[data-system="windows"] .desktop-window.window-maximized {
+  top: 0;
+  left: 0;
+  width: 100% !important;
+  height: calc(100% - 62px) !important;
+  border-radius: 0;
+}
+.desktop-studio[data-system="windows"] .desktop-window-titlebar {
+  background: #252a34;
+}
+.desktop-studio[data-system="windows"] .desktop-window-controls .window-expand {
+  font-size: 0;
+}
+.desktop-studio[data-system="windows"]
+  .desktop-window-controls
+  .window-expand::before {
+  content: "";
+  width: 11px;
+  height: 10px;
+  border: 1px solid currentColor;
+  border-radius: 1px;
+}
+.desktop-studio[data-system="windows"]
+  .desktop-window-controls
+  .window-expand[aria-pressed="true"]::before {
+  box-shadow:
+    2px -2px 0 -1px #252a34,
+    3px -3px 0 0 currentColor;
+}
+.desktop-studio[data-system="ubuntu"] .desktop-menubar {
+  height: 34px;
+  background: #201923;
+  padding-inline: 12px;
+}
+.desktop-studio[data-system="ubuntu"] .desktop-workspace {
+  height: calc(100% - 34px);
+}
+.desktop-studio[data-system="ubuntu"] .desktop-dock {
+  top: 34px;
+  padding: 10px 5px;
+  width: 62px;
+}
+.desktop-studio[data-system="ubuntu"] .desktop-dock .workspace-start {
+  order: 99;
+  margin-top: auto;
+}
+.desktop-studio[data-system="ubuntu"] .desktop-dock button.app-running > i {
+  background: #e98353;
+}
+.desktop-studio[data-system="ubuntu"] .desktop-shortcuts {
+  left: auto;
+  right: 20px;
+}
+.desktop-studio[data-system="ubuntu"] .desktop-window.window-maximized {
+  left: 68px;
+  width: calc(100% - 74px) !important;
+  height: calc(100% - 16px) !important;
+}
+.desktop-studio[data-system="mac"] .desktop-menubar {
+  height: 34px;
+  background: #18383d83;
+  gap: 12px;
+}
+.desktop-studio[data-system="mac"] .desktop-workspace {
+  height: calc(100% - 34px);
+}
+.workspace-mac-menus {
+  display: flex;
+  gap: 2px;
+  align-items: center;
+}
+.workspace-tray {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+.workspace-chrome-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  min-width: 32px;
+  min-height: 32px;
+  border: 0;
+  background: transparent;
+  color: #f0f3f5;
+  border-radius: 7px;
+  padding: 5px 10px;
+  line-height: 1.2;
+  font-size: 13px;
+  white-space: nowrap;
+}
+.workspace-chrome-button:is(:hover, [aria-expanded="true"]) {
+  background: #ffffff20;
+}
+.workspace-chrome-button svg {
+  width: 18px;
+  height: 18px;
+}
+.desktop-dock > .workspace-chrome-button {
+  flex: none;
+  align-self: center;
+  width: 40px;
+  min-height: 44px;
+  padding: 4px;
+}
+.desktop-dock > .workspace-start {
+  color: var(--chrome-accent);
+}
+.workspace-start svg {
+  width: 25px;
+  height: 25px;
+}
+.workspace-tray-clock {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-variant-numeric: tabular-nums;
+}
+.workspace-tray-clock time,
+.workspace-tray-clock small {
+  display: block !important;
+  font-size: 12px;
+  letter-spacing: 0;
+}
+.workspace-windows-tray {
+  display: flex;
+  position: absolute;
+  right: 3px;
+  bottom: 0;
+  height: 62px;
+  align-items: center;
+  background: #191f2b;
+  z-index: 212;
+}
+.workspace-windows-tray .workspace-tray-clock {
+  flex-direction: column;
+  gap: 3px;
+}
+.workspace-windows-tray .workspace-peek {
+  min-width: 10px;
+  width: 10px;
+  padding: 0;
+  height: 100%;
+  border-left: 1px solid #ffffff20;
+  border-radius: 0;
+}
+.workspace-panel-backdrop {
+  position: absolute;
+  inset: 0;
+  z-index: 360;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #1018203b;
+}
+.workspace-shell-panel {
+  color: #eff2f5;
+  width: min(570px, calc(100% - 24px));
+  max-height: calc(100% - 94px);
+  overflow: auto;
+  overscroll-behavior: contain;
+  background: var(--chrome-panel);
+  border: 1px solid #ffffff26;
+  border-radius: 16px;
+  box-shadow: 0 20px 64px #0009;
+  padding: 22px;
+  outline: none;
+  scrollbar-width: thin;
+  animation: workspace-panel-in 0.18s ease-out;
+}
+@keyframes workspace-panel-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.workspace-shell-panel header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+.workspace-shell-panel header small {
+  font-size: 11px;
+  letter-spacing: 1.7px;
+  color: var(--chrome-accent);
+}
+.workspace-shell-panel h2 {
+  font-weight: 600;
+  font-size: 25px;
+  margin: 4px 0 0;
+}
+.workspace-shell-panel h3 {
+  font-size: 15px;
+  font-weight: 650;
+  margin: 18px 0 10px;
+}
+.workspace-shell-panel p {
+  font-size: 14px;
+  line-height: 1.5;
+  color: #cad2da;
+}
+.workspace-shell-panel button,
+.workspace-shell-panel a {
+  color: inherit;
+  background: #ffffff09;
+  border: 1px solid transparent;
+  border-radius: 9px;
+  min-height: 44px;
+  padding: 8px 12px;
+  font-size: 14px;
+}
+.workspace-shell-panel button:hover,
+.workspace-shell-panel a:hover {
+  background: #ffffff15;
+  border-color: #ffffff24;
+}
+.workspace-shell-panel button[aria-pressed="true"] {
+  background: color-mix(in srgb, var(--chrome-accent) 24%, transparent);
+  border-color: var(--chrome-accent);
+}
+.workspace-panel-close {
+  display: grid;
+  place-items: center;
+  min-width: 44px;
+}
+.workspace-search {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #111921;
+  border: 1px solid #56616d;
+  border-bottom: 2px solid var(--chrome-accent);
+  border-radius: 8px;
+  padding: 7px 12px;
+}
+.workspace-search input {
+  width: 100%;
+  min-width: 0;
+  height: 36px;
+  font-size: 16px;
+  color: #fff;
+  background: transparent;
+  border: 0;
+  outline: none;
+}
+.workspace-search input::placeholder {
+  color: #a8b7c4;
+}
+.workspace-launch-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 7px;
+}
+.workspace-launch-grid button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-width: 0;
+  text-align: center;
+  padding: 12px 4px;
+  background: transparent;
+}
+.workspace-launch-grid .desktop-app-icon {
+  width: 46px;
+  height: 46px;
+}
+.workspace-launch-grid button > span:last-child {
+  font-size: 12px;
+  overflow-wrap: anywhere;
+}
+.workspace-recent {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+.workspace-recent button {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  text-align: left;
+  min-width: 0;
+}
+.workspace-recent .desktop-app-icon {
+  width: 34px;
+  height: 34px;
+  flex: none;
+}
+.workspace-recent small {
+  display: block;
+  color: #b6c3d1;
+  font-size: 11px;
+}
+.workspace-panel-footer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin: 18px -22px -22px;
+  padding: 13px 22px;
+  background: #0002;
+  border-top: 1px solid #ffffff13;
+}
+.workspace-panel-footer > span {
+  margin-right: auto;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+}
+.workspace-panel-footer > span svg {
+  width: 25px;
+  height: 25px;
+}
+.workspace-panel-footer button,
+.workspace-panel-footer a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.desktop-studio[data-system="windows"]
+  .workspace-panel-backdrop:is(.panel-launch, .panel-search) {
+  align-items: flex-end;
+  padding-bottom: 72px;
+}
+.desktop-studio[data-system="ubuntu"]
+  .workspace-shell-panel:is(.shell-launch, .shell-windows) {
+  width: min(850px, calc(100% - 90px));
+  background: #28232def;
+}
+.desktop-studio[data-system="ubuntu"] .workspace-launch-grid {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 14px;
+}
+.desktop-studio[data-system="ubuntu"] .workspace-launch-grid .desktop-app-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 16px;
+}
+.desktop-studio[data-system="mac"] .shell-search {
+  width: min(600px, calc(100% - 24px));
+  background: #243238ef;
+}
+.desktop-studio[data-system="mac"] .shell-search .workspace-launch-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+.workspace-panel-backdrop:is(.panel-quick, .panel-calendar) {
+  align-items: flex-start;
+  justify-content: flex-end;
+  padding: 42px 12px 0;
+}
+.workspace-shell-panel:is(.shell-quick, .shell-calendar) {
+  width: min(370px, 100%);
+}
+.desktop-studio[data-system="windows"]
+  .workspace-panel-backdrop:is(.panel-quick, .panel-calendar) {
+  align-items: flex-end;
+  padding: 0 12px 72px;
+}
+.workspace-quick-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+.workspace-quick-grid button {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 9px;
+  text-align: left;
+  padding: 12px;
+  min-height: 82px;
+}
+.workspace-quick-grid svg {
+  width: 22px;
+  height: 22px;
+}
+.workspace-brightness {
+  display: block;
+  margin: 20px 0;
+  font-size: 14px;
+}
+.workspace-brightness input {
+  display: block;
+  width: 100%;
+  accent-color: var(--chrome-accent);
+  margin-top: 10px;
+}
+.workspace-quick-info {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  padding: 12px;
+  border-radius: 9px;
+  background: #ffffff0a;
+  font-size: 14px;
+}
+.workspace-calendar-day {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--chrome-accent);
+  font-size: 15px;
+}
+.workspace-calendar-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 14px 0;
+}
+.workspace-calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 3px;
+  text-align: center;
+}
+.workspace-calendar-grid span,
+.workspace-calendar-grid small {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  font-size: 13px;
+}
+.workspace-calendar-grid small {
+  color: #a8b5bd;
+}
+.workspace-calendar-grid span[data-today="true"] {
+  background: var(--chrome-accent);
+  color: #15252e;
+  font-weight: bold;
+}
+.workspace-calendar-today {
+  width: 100%;
+  margin-top: 12px;
+}
+.workspace-running-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin: 16px 0;
+}
+.workspace-mini-window {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  aspect-ratio: 4/3;
+  border: 1px solid #ffffff24;
+  border-top: 8px solid #ffffff22;
+  border-radius: 7px;
+  background: #101e29;
+  font-size: 12px;
+}
+.workspace-mini-window .desktop-app-icon {
+  width: 36px;
+  height: 36px;
+}
+.workspace-running-grid small {
+  color: #b2bfca;
+}
+.workspace-launch-heading,
+.workspace-overview-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+.workspace-overview-actions {
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+.workspace-launch-heading button {
+  min-height: 36px;
+  font-size: 12px;
+}
+.workspace-widgets {
+  position: absolute;
+  z-index: 1;
+  left: 24px;
+  top: 24px;
+  width: 230px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+.workspace-widgets > button {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  align-items: flex-start;
+  text-align: left;
+  color: #f2f5f7;
+  background: #182b3d95;
+  border: 1px solid #e5f3ff33;
+  box-shadow: 0 8px 20px #0003;
+  backdrop-filter: blur(22px);
+  border-radius: 19px;
+  padding: 15px;
+  overflow: hidden;
+}
+.workspace-widgets > button:hover {
+  background: #304656c9;
+}
+.workspace-date-widget small {
+  font-size: 13px;
+  color: #e8c3bc;
+}
+.workspace-date-widget strong {
+  font-size: 47px;
+  line-height: 1;
+  font-weight: 500;
+  letter-spacing: -2px;
+}
+.workspace-date-widget span {
+  font-size: 13px;
+}
+.workspace-widget-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--chrome-accent);
+}
+.workspace-feature-widget strong {
+  font-size: 19px;
+  font-weight: 650;
+}
+.workspace-feature-widget > span:not(.workspace-widget-eyebrow) {
+  font-size: 12px;
+  line-height: 1.4;
+  color: #d1dfe9;
+}
+.workspace-feature-widget img {
+  display: block;
+  width: 100%;
+  height: 93px;
+  object-fit: cover;
+  object-position: center;
+  border: 1px solid #ffffff27;
+  border-radius: 9px;
+  margin-top: 6px;
+}
+.workspace-widgets > .workspace-session-widget {
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+}
+.workspace-session-widget > svg {
+  width: 24px;
+  height: 24px;
+  color: var(--chrome-accent);
+}
+.workspace-session-widget small {
+  display: block;
+  color: #c3d1d8;
+  font-size: 11px;
+}
+.desktop-studio[data-system="windows"] .workspace-widgets {
+  left: auto;
+  right: 22px;
+}
+.desktop-studio[data-system="windows"] .workspace-widgets > button {
+  background: #202a3bcc;
+  border-radius: 12px;
+}
+.desktop-studio[data-system="ubuntu"] .workspace-widgets {
+  left: 82px;
+}
+.desktop-studio[data-system="ubuntu"] .workspace-widgets > button {
+  background: #2d2134bc;
+  border-radius: 12px;
+  border-color: #e5c2d12e;
+}
+.desktop-studio[data-system="ubuntu"] .desktop-app-icon.icon-folder {
+  background: linear-gradient(145deg, #f4a66a, #c15e35);
+}
+.desktop-studio[data-system="ubuntu"] .desktop-app-icon.icon-blue {
+  background: linear-gradient(145deg, #9c79b6, #594267);
+}
+.desktop-studio[data-system="ubuntu"] .desktop-app-icon.icon-ascii {
+  background: linear-gradient(145deg, #8da94e, #456344);
+}
+.desktop-studio[data-system="ubuntu"]
+  .desktop-menubar
+  .desktop-menu-right
+  .workspace-tray-clock {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.desktop-studio[data-system="ubuntu"] .desktop-menubar .workspace-tray {
+  height: 100%;
+}
+.desktop-studio[data-system="windows"] .imac-screen-shell {
+  border-radius: 9px 9px 0 0;
+  padding: 10px 9px 9px;
+}
+.desktop-studio[data-system="windows"] .imac-camera {
+  top: 3px;
+  width: 4px;
+  height: 4px;
+}
+.desktop-studio[data-system="ubuntu"] .imac-screen-shell {
+  border-radius: 13px 13px 0 0;
+  padding: 13px 10px 10px;
+}
+.desktop-studio:is([data-system="windows"], [data-system="ubuntu"])
+  .imac-screen-shell
+  .desktop-site {
+  height: calc(100dvh - 75px);
+}
+@media (max-height: 650px) {
+  .workspace-feature-widget img {
+    height: 64px;
+  }
+  .workspace-session-widget {
+    display: none !important;
+  }
+}
+@media (max-width: 820px) {
+  .workspace-widgets {
+    display: none;
+  }
+}
+@media (max-width: 1150px) {
+  .desktop-studio[data-system="windows"] .desktop-dock {
+    justify-content: flex-start;
+    overflow-x: auto;
+    padding-right: 8px;
+    max-width: calc(100% - 138px);
+    padding-left: 8px;
+  }
+  .desktop-studio[data-system="windows"] .workspace-windows-tray {
+    width: 138px;
+    justify-content: flex-end;
+  }
+  .desktop-studio[data-system="windows"]
+    .workspace-windows-tray
+    .workspace-chrome-button {
+    padding: 4px 6px;
+  }
+}
+@media (min-width: 821px) {
+  .desktop-studio[data-system="windows"] .desktop-empty {
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+  }
+  .desktop-studio[data-system="mac"] .desktop-empty {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .desktop-studio[data-system="ubuntu"] .desktop-empty {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+@media (max-width: 420px) {
+  .desktop-studio[data-system="mac"]
+    .workspace-tray
+    .workspace-chrome-button[aria-label="Quick Settings"]
+    svg:last-child,
+  .desktop-studio[data-system="ubuntu"]
+    .workspace-tray
+    .workspace-chrome-button[aria-label="Quick Settings"]
+    svg:last-child {
+    display: none;
+  }
+  .desktop-studio[data-system="ubuntu"] .desktop-menubar .workspace-tray-clock {
+    position: static;
+    transform: none;
+  }
+}
+@media (max-width: 720px) {
+  .desktop-studio[data-system="ubuntu"] .desktop-dock {
+    top: auto;
+    bottom: 8px;
+    width: auto;
+    padding: 8px;
+  }
+  .desktop-studio[data-system="ubuntu"] .desktop-dock .workspace-start {
+    order: -1;
+    margin: 0;
+  }
+  .desktop-studio[data-system="ubuntu"] .desktop-window.window-maximized {
+    left: 10px;
+    width: calc(100% - 20px) !important;
+    height: calc(100% - 105px) !important;
+  }
+  .desktop-studio[data-system="ubuntu"]
+    .workspace-shell-panel:is(.shell-launch, .shell-windows) {
+    width: calc(100% - 24px);
+  }
+  .workspace-mac-menus {
+    display: none;
+  }
+  .desktop-studio[data-system="mac"] .desktop-menubar {
+    padding: 0 7px;
+    gap: 5px;
+    height: 44px;
+  }
+  .desktop-studio[data-system="mac"] .desktop-workspace {
+    height: calc(100% - 44px);
+  }
+  .desktop-studio[data-system="ubuntu"] .desktop-menubar {
+    height: 44px;
+  }
+  .desktop-studio[data-system="ubuntu"] .desktop-workspace {
+    height: calc(100% - 44px);
+  }
+  .workspace-tray .workspace-chrome-button {
+    min-height: 44px;
+    padding-inline: 7px;
+  }
+  .workspace-tray-clock small {
+    display: none !important;
+  }
+  .workspace-shell-panel {
+    padding: 15px;
+    max-height: calc(100% - 70px);
+  }
+  .workspace-launch-grid,
+  .desktop-studio[data-system="ubuntu"] .workspace-launch-grid,
+  .desktop-studio[data-system="mac"] .shell-search .workspace-launch-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 5px;
+  }
+  .workspace-recent,
+  .workspace-running-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .workspace-panel-footer {
+    margin: 15px -15px -15px;
+    padding: 12px 15px;
+  }
+  .workspace-panel-backdrop:is(.panel-quick, .panel-calendar) {
+    padding-top: 48px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .workspace-shell-panel,
+  .workspace-bloom {
+    animation: none;
+  }
+}

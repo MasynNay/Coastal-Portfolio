@@ -182,27 +182,6 @@
 .desktop-studio[data-system="ubuntu"] .desktop-window {
   max-width: calc(100% - 90px);
 }
-.workspace-system-launcher .mac-system {
-  align-self: center;
-}
-.workspace-system-launcher .mac-system-toggle {
-  width: 44px;
-  height: 44px;
-  color: #dbe8f5;
-}
-.workspace-system-launcher .mac-system-menu {
-  top: auto;
-  bottom: 64px;
-  left: 0;
-  z-index: 500;
-}
-.desktop-studio[data-system="ubuntu"]
-  .workspace-system-launcher
-  .mac-system-menu {
-  top: 0;
-  bottom: auto;
-  left: 62px;
-}
 @media (max-width: 720px) {
   .desktop-studio[data-system="ubuntu"] .desktop-dock {
     top: auto;
@@ -238,50 +217,5 @@
   .desktop-studio[data-system="ubuntu"] .desktop-window-controls button {
     width: 44px;
     height: 44px;
-  }
-  .desktop-studio .workspace-system-launcher .mac-system {
-    position: static;
-  }
-  .desktop-studio .workspace-system-launcher .mac-system-menu {
-    position: fixed;
-    left: 8px;
-    bottom: 76px;
-    max-width: calc(100vw - 32px);
-  }
-}
-
-/* Keep launch menus outside the scrolling dock so mobile overflow cannot clip them. */
-.workspace-system-launcher {
-  position: absolute;
-  left: 14px;
-  bottom: 10px;
-  z-index: 300;
-}
-.desktop-studio[data-system="ubuntu"] .workspace-system-launcher {
-  top: 48px;
-  bottom: auto;
-  left: 6px;
-}
-.desktop-studio[data-system="ubuntu"] .desktop-dock {
-  padding-top: 64px;
-}
-@media (max-width: 720px) {
-  .desktop-studio[data-system="ubuntu"] .workspace-system-launcher {
-    top: auto;
-    bottom: 15px;
-    left: 12px;
-  }
-  .desktop-studio[data-system="windows"] .desktop-dock,
-  .desktop-studio[data-system="ubuntu"] .desktop-dock {
-    padding-left: 64px;
-    padding-top: 8px;
-  }
-  .desktop-studio .workspace-system-launcher .mac-system-menu {
-    position: absolute;
-    top: auto;
-    left: 0;
-    bottom: 60px;
-    min-width: 230px;
-    max-width: calc(100vw - 32px);
   }
 }

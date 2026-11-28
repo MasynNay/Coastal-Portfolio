@@ -18,6 +18,7 @@ export default function useWindowDrag(windowRef, disabled = false) {
     const scaleY = workspace.height / (area.offsetHeight || workspace.height);
     const dock = node.closest(".desktop-site")?.querySelector(".desktop-dock");
     const dockBounds = dock?.getBoundingClientRect();
+    const sideDock = dockBounds && dockBounds.width < dockBounds.height;
     // A side launcher does not consume the bottom of the workspace.
     const dockTop =
       dockBounds && !(dockBounds.width < dockBounds.height)
@@ -32,6 +33,9 @@ export default function useWindowDrag(windowRef, disabled = false) {
       y: (bounds.top - workspace.top) / scaleY,
       scaleX,
       scaleY,
+      minX: sideDock
+        ? Math.max(8, (dockBounds.right - workspace.left) / scaleX + 8)
+        : 8,
       maxX: Math.max(8, (workspace.width - bounds.width) / scaleX - 8),
       maxY: Math.max(8, bottom - bounds.height / scaleY - 8),
     };
@@ -41,7 +45,10 @@ export default function useWindowDrag(windowRef, disabled = false) {
     (x, y, bounds = geometry()) => {
       if (!bounds) return;
       const next = {
-        x: Math.max(8, Math.min(x, bounds.maxX)),
+        x: Math.max(
+          Math.min(bounds.minX, bounds.maxX),
+          Math.min(x, bounds.maxX),
+        ),
         y: Math.max(8, Math.min(y, bounds.maxY)),
       };
       setPosition((previous) =>

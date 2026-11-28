@@ -13,6 +13,7 @@ jest.mock("../ascii/AsciiStudio", () => ({ active }) => (
 let host, root;
 beforeEach(() => {
   global.IS_REACT_ACT_ENVIRONMENT = true;
+  localStorage.removeItem("masyn-mac-appearance");
   host = document.createElement("div");
   document.body.appendChild(host);
   root = createRoot(host);
@@ -249,4 +250,116 @@ test("workspace switches Mac, Windows and Ubuntu without closing apps and keeps 
       JSON.parse(localStorage.getItem("masyn-mac-appearance")).system,
     ).toBe(system.toLowerCase());
   }
+});
+
+function chooseWorkspace(name) {
+  act(() => host.querySelector('[aria-label="Open system menu"]').click());
+  act(() =>
+    [...host.querySelectorAll('[role="menuitem"]')]
+      .find((b) => b.textContent === "Customize Workspace…")
+      .click(),
+  );
+  act(() =>
+    [...host.querySelectorAll(".workspace-os-picker button")]
+      .find((b) => b.textContent === name)
+      .click(),
+  );
+  act(() => host.querySelector('[aria-label="Close Appearance"]').click());
+}
+
+test("Windows Start opens pinned apps, searches and restores a minimized app from Task View", () => {
+  chooseWorkspace("Windows");
+  act(() => host.querySelector('[aria-label="Open Start"]').click());
+  let panel = host.querySelector('[role="dialog"][aria-label="Start"]');
+  expect(panel.querySelectorAll(".workspace-launch-grid button")).toHaveLength(
+    9,
+  );
+  const all = [...panel.querySelectorAll("button")].find(
+    (b) => b.textContent === "All Apps",
+  );
+  act(() => all.click());
+  expect(panel.querySelector(".workspace-launch-heading h3").textContent).toBe(
+    "All Apps",
+  );
+  const input = panel.querySelector("input");
+  act(() => {
+    Object.getOwnPropertyDescriptor(
+      HTMLInputElement.prototype,
+      "value",
+    ).set.call(input, "Typing");
+    input.dispatchEvent(new Event("input", { bubbles: true }));
+  });
+  expect(panel.querySelectorAll(".workspace-launch-grid button")).toHaveLength(
+    1,
+  );
+  act(() => panel.querySelector(".workspace-launch-grid button").click());
+  const app = host.querySelector('[role="dialog"][aria-label="Typing Test"]');
+  expect(app).not.toBeNull();
+  act(() => app.querySelector('[aria-label="Minimize Typing Test"]').click());
+  expect(app.hidden).toBe(true);
+  act(() => host.querySelector('[aria-label="Task View"]').click());
+  panel = host.querySelector('[role="dialog"][aria-label="Window Overview"]');
+  expect(panel.textContent).toContain("Minimized");
+  act(() => panel.querySelector(".workspace-running-grid button").click());
+  expect(app.hidden).toBe(false);
+});
+
+test("Ubuntu Activities leads to the application grid and settings persist without replacing the desktop apps", () => {
+  chooseWorkspace("Ubuntu");
+  act(() => host.querySelector('[aria-label="Open Activities"]').click());
+  const overview = host.querySelector(
+    '[role="dialog"][aria-label="Activities"]',
+  );
+  act(() =>
+    [...overview.querySelectorAll("button")]
+      .find((b) => b.textContent === "Show Applications")
+      .click(),
+  );
+  expect(
+    host.querySelector('[role="dialog"][aria-label="Applications"]'),
+  ).not.toBeNull();
+  act(() => host.querySelector('[aria-label="Close Applications"]').click());
+  act(() => host.querySelector('[aria-label="Quick Settings"]').click());
+  const settings = host.querySelector(
+    '[role="dialog"][aria-label="Quick Settings"]',
+  );
+  act(() =>
+    [...settings.querySelectorAll("button")]
+      .find((b) => b.textContent.includes("Wallpaper Motion"))
+      .click(),
+  );
+  expect(host.querySelector(".desktop-studio").dataset.motion).toBe("false");
+  act(() =>
+    [...settings.querySelectorAll("button")]
+      .find((b) => b.textContent.includes("Desktop Widgets"))
+      .click(),
+  );
+  expect(host.querySelector(".workspace-widgets")).toBeNull();
+  expect(JSON.parse(localStorage.getItem("masyn-mac-appearance")).widgets).toBe(
+    false,
+  );
+});
+
+test("Mac Spotlight and calendar have independent working controls", () => {
+  act(() => host.querySelector('[aria-label="Spotlight Search"]').click());
+  const spotlight = host.querySelector(
+    '[role="dialog"][aria-label="Spotlight"]',
+  );
+  act(() =>
+    [...spotlight.querySelectorAll(".workspace-launch-grid button")]
+      .find((b) => b.textContent === "ASCII")
+      .click(),
+  );
+  expect(
+    host.querySelector('[role="dialog"][aria-label="ASCII"]'),
+  ).not.toBeNull();
+  act(() => host.querySelector('[aria-label="Open Calendar"]').click());
+  const calendar = host.querySelector('[role="dialog"][aria-label="Calendar"]');
+  const heading = calendar.querySelector(".workspace-calendar-heading strong");
+  const initial = heading.textContent;
+  act(() => calendar.querySelector('[aria-label="Next month"]').click());
+  expect(heading.textContent).not.toBe(initial);
+  act(() => calendar.querySelector(".workspace-calendar-today").click());
+  expect(heading.textContent).toBe(initial);
+  expect(calendar.querySelectorAll('[data-today="true"]')).toHaveLength(1);
 });
