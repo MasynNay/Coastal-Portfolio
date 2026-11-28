@@ -180,7 +180,6 @@
   left: 90px;
 }
 .desktop-studio[data-system="ubuntu"] .desktop-window {
-  margin-left: 60px;
   max-width: calc(100% - 90px);
 }
 .workspace-system-launcher .mac-system {
@@ -220,7 +219,6 @@
     padding: 8px;
   }
   .desktop-studio[data-system="ubuntu"] .desktop-window {
-    margin-left: 0;
     max-width: calc(100% - 16px);
   }
   .desktop-studio[data-system="ubuntu"] .desktop-shortcuts {
