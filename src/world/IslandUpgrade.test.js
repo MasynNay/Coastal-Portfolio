@@ -66,7 +66,9 @@ test("each of six packs has five cards, a guaranteed rare slot, and real names",
       expect(pack.ids).toContain(c.id);
       expect(c.name).toBeTruthy();
     });
-    expect(["Common", "Uncommon"]).not.toContain(openPack(pack, () => 0)[4].tier);
+    expect(["Common", "Uncommon"]).not.toContain(
+      openPack(pack, () => 0)[4].tier,
+    );
   }
 });
 test("hand sockets scale with each actor and rotate with wakeboard tricks", () => {

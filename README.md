@@ -135,3 +135,5 @@ The experience previously called Mac Mode is now **Workspace**. Open its system 
 Mac retains its floating dock and left-side window controls. Windows uses a bottom taskbar and right-side window controls; Ubuntu uses a side launcher on wider screens and a touch-friendly bottom launcher on phones. Window dragging continues to use the same bounded pointer/keyboard implementation. The existing `/design/desktop` address remains available for bookmarks.
 
 The Profile app introduces Masyn without the earlier casual greeting, ASCII uses its own flower icon, and Games puts Island Arcade before the Game Boy Advance library.
+
+Release checks: `npm run format:check`, `npm run lint`, `npm run check:project`, `CI=true npm test -- --watchAll=false --runInBand`, and `npm run build`.
